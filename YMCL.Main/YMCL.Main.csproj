@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <PublishSingleFile>true</PublishSingleFile>
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
@@ -9,18 +9,29 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
-
-
+  <ItemGroup>
+    <None Remove="Public\Assets\Harmony.otf" />
+    <None Remove="Public\Assets\Harmony.ttf" />
+    <None Remove="Public\Assets\MiSans-Regular.otf" />
+    <None Remove="Public\Assets\MiSans-Thin.otf" />
+    <None Remove="Public\Assets\MiSans.otf" />
+    <None Remove="Public\Assets\MiSans.ttf" />
+    <None Remove="Public\Assets\MiSans1.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Public\Assets\MiSans-Regular.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.1.0-beta2" />
+    <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.1.0-beta2" />
     <PackageReference Include="Avalonia.Desktop" Version="11.1.0-beta2" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.0-beta2" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.0-beta2" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.0-beta2" />
     <PackageReference Include="FluentAvaloniaUI" Version="2.1.0-preview5" />
-    <PackageReference Include="Irihi.Ursa" Version="0.3.0-beta20240518" />
-    <PackageReference Include="Irihi.Ursa.Themes.Semi" Version="0.3.0-beta20240518" />
-    <PackageReference Include="Semi.Avalonia" Version="11.1.0-beta2" />
   </ItemGroup>
 </Project>

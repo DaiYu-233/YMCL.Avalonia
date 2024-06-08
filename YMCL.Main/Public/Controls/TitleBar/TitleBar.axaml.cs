@@ -15,6 +15,16 @@ public partial class TitleBar : UserControl
         MaximizeButton.Click += MaximizeButton_Click;
         MinimizeButton.Click += MinimizeButton_Click;
         MoveDragArea.PointerPressed += MoveDragArea_PointerPressed;
+        Loaded += (_, _) => { TitleText.Text = Title; };
+    }
+
+    public static readonly StyledProperty<string> TitleProperty =
+        AvaloniaProperty.Register<TitleBar, string>(nameof(Title), defaultValue: "Default Title");
+
+    public string Title
+    {
+        get => GetValue(TitleProperty);
+        set => SetValue(TitleProperty, value);
     }
 
     private void MoveDragArea_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)

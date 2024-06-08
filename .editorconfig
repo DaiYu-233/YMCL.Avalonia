@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+dotnet_diagnostic.CS8600.severity = suggestion
+dotnet_diagnostic.CS8602.severity = suggestion

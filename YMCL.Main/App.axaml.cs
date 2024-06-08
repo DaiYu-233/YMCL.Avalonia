@@ -1,6 +1,8 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace YMCL.Main
 {
@@ -10,12 +12,11 @@ namespace YMCL.Main
         {
             AvaloniaXamlLoader.Load(this);
         }
-
         public override void OnFrameworkInitializationCompleted()
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new InitializationWindow();
+                desktop.MainWindow = new Views.Initialize.InitializeWindow();
             }
 
             base.OnFrameworkInitializationCompleted();

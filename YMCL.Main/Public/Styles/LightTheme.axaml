@@ -1,8 +1,8 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	<SolidColorBrush x:Key="1x" Color="#FFE9F6FF"/>
-	<SolidColorBrush x:Key="2x" Color="#f6fafd"/>
-	<SolidColorBrush x:Key="TextColor" Color="#333333"/>
-	<SolidColorBrush x:Key="TitleBarColor" Color="#e7f5ff"/>
-	<SolidColorBrush x:Key="ThemeColor" Color="#00a0e9"/>
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="1x" Color="#FFE9F6FF" />
+    <SolidColorBrush x:Key="2x" Color="#f6fafd" />
+    <SolidColorBrush x:Key="TextColor" Color="#333333" />
+    <SolidColorBrush x:Key="TitleBarColor" Color="#e7f5ff" />
+    <SolidColorBrush x:Key="ThemeColor" Color="#00a0e9" />
+    <SolidColorBrush x:Key="GrayColor" Color="#bfbfc4" />
 </ResourceDictionary>

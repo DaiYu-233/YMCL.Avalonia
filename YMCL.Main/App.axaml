@@ -2,8 +2,8 @@
     x:Class="YMCL.Main.App"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:fa="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
     xmlns:sty="using:FluentAvalonia.Styling"
-    xmlns:u-semi="https://irihi.tech/ursa/themes/semi"
     RequestedThemeVariant="Default">
     <!--  "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options.  -->
     <Application.Resources>
@@ -14,10 +14,12 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
+    <Application.Resources>
+        <FontFamily x:Key="Font">avares://YMCL.Main/Public/Assets#MiSans</FontFamily>
+    </Application.Resources>
 
     <Application.Styles>
         <StyleInclude Source="/Public/Styles/Style.axaml" />
-        <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
-        <u-semi:SemiTheme Locale="zh-CN" />
+		<sty:FluentAvaloniaTheme />
     </Application.Styles>
 </Application>

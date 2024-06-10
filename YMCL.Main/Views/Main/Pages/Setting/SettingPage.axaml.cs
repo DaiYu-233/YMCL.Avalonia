@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Platform.Storage;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,17 @@ namespace YMCL.Main.Views.Main.Pages.Setting
 {
     public partial class SettingPage : UserControl
     {
-        List<string> minecraftFolders = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath));
+        Pages.Launch.LaunchSettingPage launchSettingPage = new();
         public SettingPage()
         {
             InitializeComponent();
+            ControlProperty();
             BindingEvent();
+        }
+
+        private void ControlProperty()
+        {
+            FrameView.Content = launchSettingPage;
         }
 
         private void BindingEvent()
@@ -21,7 +28,6 @@ namespace YMCL.Main.Views.Main.Pages.Setting
             Loaded += (s, e) =>
             {
                 Method.MarginAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
-                MinecraftFolderComboBox.ItemsSource = minecraftFolders;
             };
         }
     }

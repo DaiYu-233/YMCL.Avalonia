@@ -2,6 +2,7 @@
 using Avalonia.Animation;
 using Avalonia.Animation.Easings;
 using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Styling;
@@ -85,6 +86,19 @@ namespace YMCL.Main.Public
                 }
                 control.Margin = new Thickness(tl, tt, tr, tb);
             }
+        }
+        public static void Toast(string msg, NotificationType type = NotificationType.Information, bool time = true, string title = "Yu Minecraft Launcher")
+        {
+            var showTitle = Const.AppTitle;
+            if (!string.IsNullOrEmpty(title))
+            {
+                showTitle = title;
+            }
+            if (time)
+            {
+                showTitle += $" - {DateTime.Now.ToString("HH:mm:ss")}";
+            }
+            Const.notification.Show(new Notification(showTitle, msg, type));
         }
     }
 }

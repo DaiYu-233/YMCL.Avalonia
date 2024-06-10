@@ -23,7 +23,7 @@
         <Color x:Key="SystemAccentColorDark2">#000</Color>
         <Color x:Key="SystemAccentColorDark3">#000</Color>
         <FontFamily x:Key="Font">avares://YMCL.Main/Public/Assets#MiSans</FontFamily>
-        <FontWeight x:Key="FontWeight">Bold</FontWeight>
+        <!-- <FontWeight x:Key="FontWeight">Bold</FontWeight> -->
     </Application.Resources>
 
     <Application.Styles>

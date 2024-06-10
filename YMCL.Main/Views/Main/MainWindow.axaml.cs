@@ -12,11 +12,11 @@ namespace YMCL.Main.Views.Main;
 
 public partial class MainWindow : Window
 {
-    Pages.Download.DownloadPage downloadPage = new();
-    Pages.Launch.LaunchPage launchPage = new();
-    Pages.More.MorePage morePage = new();
-    Pages.Music.MusicPage musicPage = new();
-    Pages.Setting.SettingPage settingPage = new();
+    readonly Pages.Download.DownloadPage downloadPage = new();
+    readonly Pages.Launch.LaunchPage launchPage = new();
+    readonly Pages.More.MorePage morePage = new();
+    readonly Pages.Music.MusicPage musicPage = new();
+    readonly Pages.Setting.SettingPage settingPage = new();
 
     public MainWindow()
     {
@@ -62,8 +62,8 @@ public partial class MainWindow : Window
         };
         Nav.SelectionChanged += (s, e) =>
         {
-            var item = (s as NavigationView).SelectedItem;
-            var tag = (item as NavigationViewItem).Tag;
+            var item = ((NavigationView)s!).SelectedItem!;
+            var tag = ((NavigationViewItem)item).Tag;
             switch (tag)
             {
                 case "Launch":

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace YMCL.Main.Public.Classes
 {
-    internal class Setting
+    public class Setting
     {
+        #pragma warning disable CS8618 
+        public string Language { get; set; } = "zh-CN";
+        public string MinecraftFolder { get; set; }
     }
 }

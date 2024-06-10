@@ -2,3 +2,6 @@
 
 dotnet_diagnostic.CS8600.severity = suggestion
 dotnet_diagnostic.CS8602.severity = suggestion
+
+# CS8601: 引用类型赋值可能为 null。
+dotnet_diagnostic.CS8601.severity = suggestion

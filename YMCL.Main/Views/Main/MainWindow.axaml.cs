@@ -2,6 +2,8 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
+using FluentAvalonia.UI.Controls;
+using System;
 using System.Linq;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
@@ -10,14 +12,16 @@ namespace YMCL.Main.Views.Main;
 
 public partial class MainWindow : Window
 {
+    Pages.Download.DownloadPage downloadPage = new();
+    Pages.Launch.LaunchPage launchPage = new();
+    Pages.More.MorePage morePage = new();
+    Pages.Music.MusicPage musicPage = new();
+    Pages.Setting.SettingPage settingPage = new();
+
     public MainWindow()
     {
         InitializeComponent();
-        EventBinding();
-    }
-    private void EventBinding()
-    {
-        Loaded += (s, e) =>
+        Loaded += (_, _) =>
         {
             if (Const.Platform != Platform.Windows)
             {
@@ -30,7 +34,13 @@ public partial class MainWindow : Window
                 WindowState = WindowState.Maximized;
                 WindowState = WindowState.Normal;
             }
+            EventBinding();
+            FrameView.Content = launchPage;
+            Title = Const.UserDataRootPath;
         };
+    }
+    private void EventBinding()
+    {
         TitleText.PointerPressed += (s, e) =>
         {
             BeginMoveDrag(e);
@@ -48,6 +58,29 @@ public partial class MainWindow : Window
                         Root.Margin = new Thickness(20);
                         break;
                 }
+            }
+        };
+        Nav.SelectionChanged += (s, e) =>
+        {
+            var item = (s as NavigationView).SelectedItem;
+            var tag = (item as NavigationViewItem).Tag;
+            switch (tag)
+            {
+                case "Launch":
+                    launchPage.Root.IsVisible = false;
+                    FrameView.Content = launchPage; break;
+                case "Setting":
+                    settingPage.Root.IsVisible = false;
+                    FrameView.Content = settingPage; break;
+                case "Download":
+                    downloadPage.Root.IsVisible = false;
+                    FrameView.Content = downloadPage; break;
+                case "Music":
+                    musicPage.Root.IsVisible = false;
+                    FrameView.Content = musicPage; break;
+                case "More":
+                    morePage.Root.IsVisible = false;
+                    FrameView.Content = morePage; break;
             }
         };
     }

@@ -15,11 +15,19 @@
         </ResourceDictionary>
     </Application.Resources>
     <Application.Resources>
+        <Color x:Key="SystemAccentColor">#000</Color>
+        <Color x:Key="SystemAccentColorLight1">#000</Color>
+        <Color x:Key="SystemAccentColorLight2">#000</Color>
+        <Color x:Key="SystemAccentColorLight3">#000</Color>
+        <Color x:Key="SystemAccentColorDark1">#000</Color>
+        <Color x:Key="SystemAccentColorDark2">#000</Color>
+        <Color x:Key="SystemAccentColorDark3">#000</Color>
         <FontFamily x:Key="Font">avares://YMCL.Main/Public/Assets#MiSans</FontFamily>
+        <FontWeight x:Key="FontWeight">Bold</FontWeight>
     </Application.Resources>
 
     <Application.Styles>
         <StyleInclude Source="/Public/Styles/Style.axaml" />
-		<sty:FluentAvaloniaTheme />
+        <sty:FluentAvaloniaTheme />
     </Application.Styles>
 </Application>

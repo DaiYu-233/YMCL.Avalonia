@@ -34,7 +34,8 @@
                 <uc:TitleBar
                     Name="TitleBar"
                     Title=""
-                    DockPanel.Dock="Top" />
+                    DockPanel.Dock="Top"
+                    IsCloseBtnExitApp="True" />
                 <Border
                     Margin="0"
                     Background="White"
@@ -43,8 +44,9 @@
                     CornerRadius="0,0,8,8">
                     <DockPanel>
                         <ui:NavigationView
+                            x:Name="Nav"
                             AlwaysShowHeader="False"
-                            Background="{DynamicResource 1x}"
+                            Background="{DynamicResource TitleBarColor}"
                             IsBackButtonVisible="False"
                             IsBackEnabled="False"
                             IsPaneToggleButtonVisible="False"
@@ -54,7 +56,10 @@
                             PaneDisplayMode="Left"
                             SelectionFollowsFocus="False">
                             <ui:NavigationView.MenuItems>
-                                <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="SamplePage1">
+                                <ui:NavigationViewItem
+                                    FontFamily="{DynamicResource Font}"
+                                    IsSelected="True"
+                                    Tag="Launch">
                                     <DockPanel>
                                         <Image Width="16" Height="16">
                                             <Image.Source>
@@ -76,7 +81,7 @@
                                             Text=" 启动" />
                                     </DockPanel>
                                 </ui:NavigationViewItem>
-                                <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="SamplePage1">
+                                <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="Setting">
                                     <DockPanel>
                                         <Image Width="16" Height="16">
                                             <Image.Source>
@@ -98,7 +103,7 @@
                                             Text=" 设置" />
                                     </DockPanel>
                                 </ui:NavigationViewItem>
-                                <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="SamplePage1">
+                                <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="Download">
                                     <DockPanel>
                                         <Image Width="16" Height="16">
                                             <Image.Source>
@@ -120,7 +125,7 @@
                                             Text=" 下载" />
                                     </DockPanel>
                                 </ui:NavigationViewItem>
-                                <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="SamplePage1">
+                                <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="Music">
                                     <DockPanel>
                                         <Image
                                             Width="16"
@@ -145,7 +150,7 @@
                                             Text=" 音乐" />
                                     </DockPanel>
                                 </ui:NavigationViewItem>
-                                <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="SamplePage1">
+                                <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="More">
                                     <DockPanel>
                                         <Image Width="16" Height="16">
                                             <Image.Source>
@@ -168,13 +173,14 @@
                                     </DockPanel>
                                 </ui:NavigationViewItem>
                             </ui:NavigationView.MenuItems>
+                            <ui:Frame Background="{DynamicResource 2x}" Name="FrameView" />
                         </ui:NavigationView>
                     </DockPanel>
                 </Border>
             </DockPanel>
             <TextBlock
                 x:Name="TitleText"
-                Margin="7,7,0,0"
+                Margin="5,5,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 FontFamily="{DynamicResource Font}"

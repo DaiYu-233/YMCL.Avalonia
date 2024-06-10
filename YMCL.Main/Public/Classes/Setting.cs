@@ -6,5 +6,7 @@ using System.Threading.Tasks;
 
 namespace YMCL.Main.Public.Classes
 {
-    
+    internal class Setting
+    {
+    }
 }

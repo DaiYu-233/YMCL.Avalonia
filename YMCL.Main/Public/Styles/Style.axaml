@@ -7,9 +7,7 @@
             <!--  Add Controls for Previewer Here  -->
         </Border>
     </Design.PreviewWith>
-
     <!--  Add Styles Here  -->
-
     <Style Selector="Button.icon-button">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Cursor" Value="Hand" />
@@ -34,6 +32,4 @@
             </ControlTemplate>
         </Setter>
     </Style>
-
-
 </Styles>

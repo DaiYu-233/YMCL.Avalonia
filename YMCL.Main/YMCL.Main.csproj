@@ -8,6 +8,17 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <ApplicationIcon>Public\Assets\YMCL-Icon.ico</ApplicationIcon>
+    <SignAssembly>False</SignAssembly>
+    <Title>YMCL</Title>
+    <Company></Company>
+    <Authors>DaiYu | http://daiyu.fun</Authors>
+    <Product>Yu Minecraft Launcher</Product>
+    <Description>Yu Minecraft Launcher</Description>
+    <Copyright>DaiYu | http://daiyu.fun</Copyright>
+    <PackageProjectUrl>http://ymcl.daiyu.fun</PackageProjectUrl>
+    <PackageIcon>YMCL-Icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/DaiYu-233/YMCL.Avalonia</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Public\Assets\Harmony.otf" />
@@ -17,21 +28,36 @@
     <None Remove="Public\Assets\MiSans.otf" />
     <None Remove="Public\Assets\MiSans.ttf" />
     <None Remove="Public\Assets\MiSans1.otf" />
+    <None Remove="Public\Assets\YMCL-Icon.ico" />
+    <None Remove="Public\Assets\YMCL-Icon.svg" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Include="Public\Assets\MiSans-Regular.otf" />
+    <AvaloniaResource Include="Public\Assets\YMCL-Icon.ico" />
+    <AvaloniaResource Include="Public\Assets\YMCL-Icon.png" />
+    <AvaloniaResource Include="Public\Assets\YMCL-Icon.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Public\Assets\YMCL-Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.1.0-beta2" />
-    <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.1.0-beta2" />
     <PackageReference Include="Avalonia.Desktop" Version="11.1.0-beta2" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.0-beta2" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.0-beta2" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.0-beta2" />
     <PackageReference Include="FluentAvaloniaUI" Version="2.1.0-preview5" />
+    <PackageReference Include="MinecraftLaunch" Version="3.1.0-preview03" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Public\Assets\YMCL-Icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 </Project>

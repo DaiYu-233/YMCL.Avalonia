@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.VisualTree;
+using System;
 
 namespace YMCL.Main.Public.Controls;
 
@@ -20,11 +21,18 @@ public partial class TitleBar : UserControl
 
     public static readonly StyledProperty<string> TitleProperty =
         AvaloniaProperty.Register<TitleBar, string>(nameof(Title), defaultValue: "Default Title");
+    public static readonly StyledProperty<bool> IsCloseBtnExitAppProperty =
+        AvaloniaProperty.Register<TitleBar, bool>(nameof(IsCloseBtnExitApp), defaultValue: false);
 
     public string Title
     {
         get => GetValue(TitleProperty);
         set => SetValue(TitleProperty, value);
+    }
+    public bool IsCloseBtnExitApp
+    {
+        get => GetValue(IsCloseBtnExitAppProperty);
+        set => SetValue(IsCloseBtnExitAppProperty, value);
     }
 
     private void MoveDragArea_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
@@ -78,10 +86,17 @@ public partial class TitleBar : UserControl
         var button = sender as Button;
         if (button != null)
         {
-            var window = button.GetVisualRoot() as Window;
-            if (window != null)
+            if(IsCloseBtnExitApp)
             {
-                window.Close();
+                Environment.Exit(0);
+            }
+            else
+            {
+                var window = button.GetVisualRoot() as Window;
+                if (window != null)
+                {
+                    window.Close();
+                }
             }
         }
     }

@@ -30,7 +30,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
         {
             Loaded += (s, e) =>
             {
-                Method.MarginAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
+                Method.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
             };
             AddMinecraftFolderBtn.Click += async (s, e) =>
             {
@@ -50,18 +50,18 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                                 MinecraftFolderComboBox.Items.Add(folder);
                             });
                             MinecraftFolderComboBox.SelectedIndex = MinecraftFolderComboBox.ItemCount - 1;
-                            Method.Toast(MainLang.SuccessAdd + "£º" + item.Path, NotificationType.Success);
+                            Method.Toast(MainLang.SuccessAdd + "£º" + item.Path, Const.MainNotification, NotificationType.Success);
                         }
                         else
                         {
-                            Method.Toast(MainLang.TheItemAlreadyExist, NotificationType.Error);
+                            Method.Toast(MainLang.TheItemAlreadyExist, Const.MainNotification, NotificationType.Error);
                         }
                     }
                     else
                     {
                         if (!string.IsNullOrEmpty(item.Path))
                         {
-                            Method.Toast(MainLang.NeedToSelectMinecraftFolder, NotificationType.Error);
+                            Method.Toast(MainLang.NeedToSelectMinecraftFolder, Const.MainNotification, NotificationType.Error);
                         }
                     }
                 }
@@ -76,11 +76,11 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
             {
                 var path = (string)MinecraftFolderComboBox.SelectedItem;
                 minecraftFolders.RemoveAt(MinecraftFolderComboBox.SelectedIndex);
-                Method.Toast(MainLang.SuccessRemove + "£º" + path, NotificationType.Success);
+                Method.Toast(MainLang.SuccessRemove + "£º" + path, Const.MainNotification, NotificationType.Success);
                 if (minecraftFolders.Count == 0)
                 {
                     minecraftFolders.Add(Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft"));
-                    Method.Toast(Public.Langs.MainLang.SuccessAdd + "£º" + Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft"), NotificationType.Success);
+                    Method.Toast(Public.Langs.MainLang.SuccessAdd + "£º" + Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft"), Const.MainNotification, NotificationType.Success);
                 }
                 MinecraftFolderComboBox.Items.Clear();
                 minecraftFolders.ForEach(folder =>
@@ -134,7 +134,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                 });
                 JavaComboBox.SelectedIndex = 0;
                 File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
-                Method.Toast($"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}£º{successAddCount}\n{MainLang.RepeatItem}£º{repeatJavaCount}", NotificationType.Success);
+                Method.Toast($"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}£º{successAddCount}\n{MainLang.RepeatItem}£º{repeatJavaCount}", Const.MainNotification, NotificationType.Success);
             };
             ManualAddBtn.Click += async (s, e) =>
             {
@@ -144,13 +144,13 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                     var javaInfo = JavaUtil.GetJavaInfo(java.Path);
                     if (javaInfo == null && !string.IsNullOrEmpty(java.Path))
                     {
-                        Method.Toast(MainLang.TheJavaIsError, NotificationType.Error);
+                        Method.Toast(MainLang.TheJavaIsError, Const.MainNotification, NotificationType.Error);
                     }
                     else
                     {
                         if (javas.Contains(javaInfo))
                         {
-                            Method.Toast(MainLang.TheItemAlreadyExist, NotificationType.Error);
+                            Method.Toast(MainLang.TheItemAlreadyExist, Const.MainNotification, NotificationType.Error);
                         }
                         else
                         {
@@ -172,8 +172,15 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                 JavaComboBox.IsVisible = false;
                 JavaComboBox.IsVisible = true;
                 var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
-                setting.Java = JavaComboBox.SelectedItem as JavaEntry;
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting));
+                if (JavaComboBox.SelectedIndex == 0)
+                {
+                    setting.Java = new JavaEntry() { JavaPath = "Auto", JavaVersion = "All" };
+                }
+                else
+                {
+                    setting.Java = JavaComboBox.SelectedItem as JavaEntry;
+                }
+                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             };
         }
 
@@ -197,7 +204,14 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
             {
                 JavaComboBox.Items.Add(java);
             });
-            JavaComboBox.SelectedItem = setting.Java;
+            if (setting.Java == new JavaEntry() { JavaPath = "Auto", JavaVersion = "All" })
+            {
+                JavaComboBox.SelectedIndex = 0;
+            }
+            else
+            {
+                JavaComboBox.SelectedItem = setting.Java;
+            }
         }
     }
 }

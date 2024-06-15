@@ -27,7 +27,6 @@
                 DockPanel.Dock="Top">
                 <ui:NavigationView
                     x:Name="Nav"
-                    Margin="0,-3,0,0"
                     AlwaysShowHeader="False"
                     Background="{DynamicResource TitleBarColor}"
                     IsBackButtonVisible="False"

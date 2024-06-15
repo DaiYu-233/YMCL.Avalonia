@@ -14,5 +14,6 @@ namespace YMCL.Main.Public.Classes
         public string MinecraftFolder { get; set; }
         public OpenFileWay OpenFileWay { get; set; }
         public JavaEntry Java { get; set; } = Const.AutoJava;
+        public int AccountSelectionIndex { get; set; }
     }
 }

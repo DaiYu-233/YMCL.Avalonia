@@ -183,4 +183,13 @@
   <data name="ManualInput" xml:space="preserve">
     <value>手動輸入</value>
   </data>
+  <data name="YggdrasilServerUrlIsEmpty" xml:space="preserve">
+    <value>驗證伺服器不可為空</value>
+  </data>
+  <data name="YggdrasilPasswordIsEmpty" xml:space="preserve">
+    <value>密碼不可為空</value>
+  </data>
+  <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
+    <value>信箱不可為空</value>
+  </data>
 </root>

@@ -7,12 +7,14 @@ using Avalonia.Controls.Shapes;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
 using Avalonia.Styling;
 using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,7 +27,6 @@ namespace YMCL.Main.Public
 {
     public class Method
     {
-        public static bool isPrimaryButtonClick = false;
         public static void SetAccentColor(Color color)
         {
             Application.Current.Resources["SystemAccentColor"] = color;
@@ -78,7 +79,7 @@ namespace YMCL.Main.Public
                 directoryInfo.Create();
             }
         }
-        public static void MarginAnimation((double, double, double, double) original, (double, double, double, double) target, TimeSpan time, Control control, bool visibility = false)
+        public static void PageLoadAnimation((double, double, double, double) original, (double, double, double, double) target, TimeSpan time, Control control, bool visibility = false)
         {
             var (ol, ot, or, ob) = original;
             var (tl, tt, tr, tb) = target;
@@ -87,20 +88,28 @@ namespace YMCL.Main.Public
             {
                 control.Transitions.Clear();
                 control.Margin = new Thickness(ol, ot, or, ob);
+                control.Opacity = 0;
                 control.Transitions.Add(new ThicknessTransition
                 {
                     Duration = time,
                     Easing = new SineEaseInOut(),
                     Property = Avalonia.Layout.Layoutable.MarginProperty
                 });
+                control.Transitions.Add(new DoubleTransition
+                {
+                    Duration = time,
+                    Easing = new SineEaseInOut(),
+                    Property = Visual.OpacityProperty
+                });
                 if (visibility)
                 {
                     control.IsVisible = true;
                 }
                 control.Margin = new Thickness(tl, tt, tr, tb);
+                control.Opacity = 1;
             }
         }
-        public static void Toast(string msg, NotificationType type = NotificationType.Information, bool time = true, string title = "Yu Minecraft Launcher")
+        public static void Toast(string msg, WindowNotificationManager notification, NotificationType type = NotificationType.Information, bool time = true, string title = "Yu Minecraft Launcher")
         {
             var showTitle = Const.AppTitle;
             if (!string.IsNullOrEmpty(title))
@@ -111,11 +120,11 @@ namespace YMCL.Main.Public
             {
                 showTitle += $" - {DateTime.Now.ToString("HH:mm:ss")}";
             }
-            Const.notification.Show(new Notification(showTitle, msg, type));
+            notification.Show(new Notification(showTitle, msg, type));
         }
         public static async Task<List<FolderInfo>> OpenFolderPicker(TopLevel topLevel = null, FolderPickerOpenOptions options = null)
         {
-            isPrimaryButtonClick = false;
+            var isPrimaryButtonClick = false;
             var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
             if (setting.OpenFileWay == OpenFileWay.FileSelectWindow)
             {
@@ -156,7 +165,7 @@ namespace YMCL.Main.Public
                 var path = textBox.Text;
                 if (!Directory.Exists(path) && isPrimaryButtonClick)
                 {
-                    Toast(MainLang.FolderNotExist, NotificationType.Error);
+                    Toast(MainLang.FolderNotExist, Const.MainNotification, NotificationType.Error);
                     return null;
                 }
                 var folder = Path.GetFileName(path);
@@ -166,7 +175,7 @@ namespace YMCL.Main.Public
         }
         public static async Task<List<FileInfo>> OpenFilePicker(TopLevel topLevel = null, FilePickerOpenOptions options = null)
         {
-            isPrimaryButtonClick = false;
+            var isPrimaryButtonClick = false;
             var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
             if (setting.OpenFileWay == OpenFileWay.FileSelectWindow)
             {
@@ -211,7 +220,7 @@ namespace YMCL.Main.Public
                 var path = textBox.Text;
                 if (!File.Exists(path) && isPrimaryButtonClick)
                 {
-                    Toast(MainLang.FileNotExist, NotificationType.Error);
+                    Toast(MainLang.FileNotExist, Const.MainNotification, NotificationType.Error);
                     return null;
                 }
                 var fullName = Path.GetFileName(path);
@@ -220,6 +229,114 @@ namespace YMCL.Main.Public
                 var list = new List<FileInfo>() { new FileInfo() { Name = name, Path = path, FullName = fullName, Extension = extension } };
                 return list;
             }
+        }
+        public static string GetTimeStamp()
+        {
+            TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return Convert.ToInt64(ts.TotalSeconds).ToString();//精确到秒
+        }
+        public static Bitmap Base64ToBitmap(string base64)
+        {
+            byte[] imageBytes = Convert.FromBase64String(base64);
+            using (var ms = new MemoryStream(imageBytes))
+            {
+                var bitmap = new Bitmap(ms);
+                return bitmap;
+            }
+        }
+        public static string BytesToBase64(byte[] imageBytes)
+        {
+            string base64String = Convert.ToBase64String(imageBytes);
+            return base64String;
+        }
+        public static object RunCodeByString(string code, object[] args = null, string[] dlls = null)
+        {
+            //Nuget Microsoft.CodeAnalysis.CSharp
+            //Type type = null;
+            //SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(code);
+            //CSharpCompilation cSharpCompilation = CSharpCompilation.Create("CustomAssembly")
+            //    .WithOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary))
+            //    .AddReferences(MetadataReference.CreateFromFile(typeof(object).Assembly.Location))
+            //    .AddSyntaxTrees(syntaxTree);
+            //if (dlls != null)
+            //{
+            //    foreach (string dll in dlls)
+            //    {
+            //        if (!string.IsNullOrEmpty(dll))
+            //        {
+            //            cSharpCompilation.AddReferences(MetadataReference.CreateFromFile(dll));
+            //        }
+            //    }
+            //}
+            //MemoryStream memoryStream = new MemoryStream();
+            //EmitResult emitResult = cSharpCompilation.Emit(memoryStream);
+            //if (emitResult.Success)
+            //{
+            //    memoryStream.Seek(0, SeekOrigin.Begin);
+            //    Assembly assembly = AssemblyLoadContext.Default.LoadFromStream(memoryStream);
+            //    type = assembly.GetType("YMCLRunner");
+            //}
+            //else
+            //{
+            //    var str = string.Empty;
+            //    foreach (var item in emitResult.Diagnostics)
+            //    {
+            //        str += $"----> {item}\n";
+            //    }
+            //    MessageBoxX.Show($"\n{LangHelper.Current.GetText("ComPileCSharpError")}\n\n{str}", "Yu Minecraft Launcher");
+            //    type = null;
+            //}
+            //if (type != null)
+            //{
+            //    object? obj = Activator.CreateInstance(type);
+            //    MethodInfo? methodInfo = type.GetMethod("Main");
+            //    object? result = methodInfo.Invoke(obj, args);
+            //    //MessageBoxX.Show($"Result: {result}");
+            //    return result;
+            //}
+            return null;
+        }
+        public static string MsToTime(double ms)//转换为分秒格式
+        {
+            int minute = 0;
+            int second = 0;
+            second = (int)(ms / 1000);
+
+            string secondStr = string.Empty;
+            string minuteStr = string.Empty;
+
+            if (second > 60)
+            {
+                minute = second / 60;
+                second = second % 60;
+            }
+
+            secondStr = second < 10 ? $"0{second}" : $"{second}";
+            minuteStr = minute < 10 ? $"0{minute}" : $"{minute}";
+
+            return $"{minuteStr}:{secondStr}";
+        }
+        public static string FormatNumberWithWanYi(string numberStr)
+        {
+            // 先转换为decimal，确保精度  
+            decimal number = decimal.Parse(numberStr, CultureInfo.InvariantCulture);
+
+            if (number < 10000) // 小于万位，直接返回  
+            {
+                return number.ToString("N0", CultureInfo.InvariantCulture);
+            }
+            else if (number < 100000000) // 小于亿位，转换为万位  
+            {
+                return (number / 10000).ToString("N2") + "万";
+            }
+            else // 大于等于亿位，转换为亿位  
+            {
+                return (number / 100000000).ToString("N2") + "亿";
+            }
+        }
+        public static void ShowShortException(string msg, Exception ex)
+        {
+            Toast($"{msg}\n{ex.Message}", Const.MainNotification, NotificationType.Error);
         }
     }
 }

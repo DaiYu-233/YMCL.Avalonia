@@ -183,4 +183,13 @@
   <data name="ManualInput" xml:space="preserve">
     <value>Введите вручную</value>
   </data>
+  <data name="YggdrasilServerUrlIsEmpty" xml:space="preserve">
+    <value>Сервер верификации не может быть пустым</value>
+  </data>
+  <data name="YggdrasilPasswordIsEmpty" xml:space="preserve">
+    <value>Пароль не может быть пустым</value>
+  </data>
+  <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
+    <value>Адрес электронной почты не может быть пустым</value>
+  </data>
 </root>

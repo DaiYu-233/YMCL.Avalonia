@@ -183,4 +183,13 @@
   <data name="ManualInput" xml:space="preserve">
     <value>手動入力</value>
   </data>
+  <data name="YggdrasilServerUrlIsEmpty" xml:space="preserve">
+    <value>検証サーバーを空にすることはできません</value>
+  </data>
+  <data name="YggdrasilPasswordIsEmpty" xml:space="preserve">
+    <value>パスワードを空にすることはできません</value>
+  </data>
+  <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
+    <value>メールアドレスを空にすることはできません</value>
+  </data>
 </root>

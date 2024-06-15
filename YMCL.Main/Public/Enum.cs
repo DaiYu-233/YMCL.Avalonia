@@ -18,4 +18,10 @@
         FileSelectWindow,
         ManualInput
     }
+    public enum AccountType
+    {
+        Offline,
+        Microsoft,
+        ThirdParty
+    }
 }

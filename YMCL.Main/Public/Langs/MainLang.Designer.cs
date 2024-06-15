@@ -61,11 +61,38 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 账户名称不可为空 的本地化字符串。
+        /// </summary>
+        public static string AccountNameCannotBeNull {
+            get {
+                return ResourceManager.GetString("AccountNameCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 账户密码 的本地化字符串。
+        /// </summary>
+        public static string AccountPassword {
+            get {
+                return ResourceManager.GetString("AccountPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 添加文件夹 的本地化字符串。
         /// </summary>
         public static string AddFolder {
             get {
                 return ResourceManager.GetString("AddFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 添加新账户 的本地化字符串。
+        /// </summary>
+        public static string AddNewAccount {
+            get {
+                return ResourceManager.GetString("AddNewAccount", resourceCulture);
             }
         }
         
@@ -88,11 +115,29 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 复制代码并打开浏览器 的本地化字符串。
+        /// </summary>
+        public static string CopyCodeAndOPenBrowser {
+            get {
+                return ResourceManager.GetString("CopyCodeAndOPenBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 删除选中项 的本地化字符串。
         /// </summary>
         public static string DelSeletedItem {
             get {
                 return ResourceManager.GetString("DelSeletedItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 邮箱地址 的本地化字符串。
+        /// </summary>
+        public static string EmailAddress {
+            get {
+                return ResourceManager.GetString("EmailAddress", resourceCulture);
             }
         }
         
@@ -120,6 +165,15 @@ namespace YMCL.Main.Public.Langs {
         public static string FolderNotExist {
             get {
                 return ResourceManager.GetString("FolderNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 输入账户名称 的本地化字符串。
+        /// </summary>
+        public static string InputAccountName {
+            get {
+                return ResourceManager.GetString("InputAccountName", resourceCulture);
             }
         }
         
@@ -160,6 +214,24 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 加载中... 的本地化字符串。
+        /// </summary>
+        public static string Loading {
+            get {
+                return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 登录失败 的本地化字符串。
+        /// </summary>
+        public static string LoginFail {
+            get {
+                return ResourceManager.GetString("LoginFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 手动添加 的本地化字符串。
         /// </summary>
         public static string ManualAdd {
@@ -174,6 +246,15 @@ namespace YMCL.Main.Public.Langs {
         public static string ManualInput {
             get {
                 return ResourceManager.GetString("ManualInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 微软登录 的本地化字符串。
+        /// </summary>
+        public static string MicrosoftLogin {
+            get {
+                return ResourceManager.GetString("MicrosoftLogin", resourceCulture);
             }
         }
         
@@ -259,6 +340,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 离线登录 的本地化字符串。
+        /// </summary>
+        public static string OfflineLogin {
+            get {
+                return ResourceManager.GetString("OfflineLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 确定 的本地化字符串。
         /// </summary>
         public static string Ok {
@@ -291,6 +381,15 @@ namespace YMCL.Main.Public.Langs {
         public static string ScanJavaSuccess {
             get {
                 return ResourceManager.GetString("ScanJavaSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 选择账户类型 的本地化字符串。
+        /// </summary>
+        public static string SelectAccountType {
+            get {
+                return ResourceManager.GetString("SelectAccountType", resourceCulture);
             }
         }
         
@@ -345,6 +444,79 @@ namespace YMCL.Main.Public.Langs {
         public static string TheJavaIsError {
             get {
                 return ResourceManager.GetString("TheJavaIsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 第三方登录 的本地化字符串。
+        /// </summary>
+        public static string ThirdPartyLogin {
+            get {
+                return ResourceManager.GetString("ThirdPartyLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 验证代码 的本地化字符串。
+        /// </summary>
+        public static string VerificationCode {
+            get {
+                return ResourceManager.GetString("VerificationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 验证服务器 的本地化字符串。
+        /// </summary>
+        public static string VerificationServer {
+            get {
+                return ResourceManager.GetString("VerificationServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正在验证账户 的本地化字符串。
+        /// </summary>
+        public static string VerifyingAccount {
+            get {
+                return ResourceManager.GetString("VerifyingAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正在等待微软账户验证完成
+        ///跳转至浏览器完成验证 的本地化字符串。
+        /// </summary>
+        public static string WaitForMicrosoftVerification {
+            get {
+                return ResourceManager.GetString("WaitForMicrosoftVerification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 邮箱不可为空 的本地化字符串。
+        /// </summary>
+        public static string YggdrasilEmailIsEmpty {
+            get {
+                return ResourceManager.GetString("YggdrasilEmailIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 密码不可为空 的本地化字符串。
+        /// </summary>
+        public static string YggdrasilPasswordIsEmpty {
+            get {
+                return ResourceManager.GetString("YggdrasilPasswordIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 验证服务器不可为空 的本地化字符串。
+        /// </summary>
+        public static string YggdrasilServerUrlIsEmpty {
+            get {
+                return ResourceManager.GetString("YggdrasilServerUrlIsEmpty", resourceCulture);
             }
         }
     }

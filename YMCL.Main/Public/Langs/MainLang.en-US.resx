@@ -183,4 +183,13 @@
   <data name="ManualInput" xml:space="preserve">
     <value>Manual input</value>
   </data>
+  <data name="YggdrasilServerUrlIsEmpty" xml:space="preserve">
+    <value>Verification server cannot be empty</value>
+  </data>
+  <data name="YggdrasilPasswordIsEmpty" xml:space="preserve">
+    <value>Password cannot be empty</value>
+  </data>
+  <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
+    <value>Email cannot be empty</value>
+  </data>
 </root>

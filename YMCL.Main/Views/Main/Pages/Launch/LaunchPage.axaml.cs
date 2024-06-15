@@ -19,7 +19,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
         {
             Loaded += (s, e) =>
             {
-                Method.MarginAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
+                Method.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
             };
         }
     }

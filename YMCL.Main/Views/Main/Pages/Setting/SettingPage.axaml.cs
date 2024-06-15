@@ -30,17 +30,20 @@ namespace YMCL.Main.Views.Main.Pages.Setting
         {
             Loaded += (s, e) =>
             {
-                Method.MarginAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
+                Method.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
             };
             Nav.SelectionChanged += (s, e) =>
             {
                 switch (((NavigationViewItem)((NavigationView)s!).SelectedItem!).Tag)
                 {
                     case "launch":
+                        launchSettingPage.Root.IsVisible = false;
                         FrameView.Content = launchSettingPage; break;
                     case "launcher":
+                        launcherSettingPage.Root.IsVisible = false;
                         FrameView.Content = launcherSettingPage; break;
                     case "account":
+                        accountSettingPage.Root.IsVisible = false;
                         FrameView.Content = accountSettingPage; break;
                 }
             };

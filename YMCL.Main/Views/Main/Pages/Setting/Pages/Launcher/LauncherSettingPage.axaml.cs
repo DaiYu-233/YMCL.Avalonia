@@ -19,7 +19,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
         {
             Loaded += (s, e) =>
             {
-                Method.MarginAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
+                Method.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
             };
             OpenFileWayComboBox.SelectionChanged += (s, e) =>
             {

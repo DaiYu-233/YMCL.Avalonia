@@ -36,7 +36,6 @@ public partial class MainWindow : Window
             }
             EventBinding();
             FrameView.Content = launchPage;
-            Title = Const.UserDataRootPath;
         };
     }
     private void EventBinding()
@@ -62,9 +61,7 @@ public partial class MainWindow : Window
         };
         Nav.SelectionChanged += (s, e) =>
         {
-            var item = ((NavigationView)s!).SelectedItem!;
-            var tag = ((NavigationViewItem)item).Tag;
-            switch (tag)
+            switch (((NavigationViewItem)((NavigationView)s!).SelectedItem!).Tag)
             {
                 case "Launch":
                     launchPage.Root.IsVisible = false;

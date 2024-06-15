@@ -3,16 +3,29 @@ using Avalonia.Animation;
 using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
+using Avalonia.Controls.Shapes;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using Avalonia.Platform.Storage;
 using Avalonia.Styling;
+using FluentAvalonia.UI.Controls;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using YMCL.Main.Public.Classes;
+using YMCL.Main.Public.Langs;
+using FileInfo = YMCL.Main.Public.Classes.FileInfo;
+using Path = System.IO.Path;
 
 namespace YMCL.Main.Public
 {
     public class Method
     {
+        public static bool isPrimaryButtonClick = false;
         public static void SetAccentColor(Color color)
         {
             Application.Current.Resources["SystemAccentColor"] = color;
@@ -99,6 +112,114 @@ namespace YMCL.Main.Public
                 showTitle += $" - {DateTime.Now.ToString("HH:mm:ss")}";
             }
             Const.notification.Show(new Notification(showTitle, msg, type));
+        }
+        public static async Task<List<FolderInfo>> OpenFolderPicker(TopLevel topLevel = null, FolderPickerOpenOptions options = null)
+        {
+            isPrimaryButtonClick = false;
+            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (setting.OpenFileWay == OpenFileWay.FileSelectWindow)
+            {
+                if (options != null && topLevel != null)
+                {
+                    var storageProvider = topLevel!.StorageProvider;
+                    var result = await storageProvider.OpenFolderPickerAsync(options);
+                    var list = new List<FolderInfo>();
+                    result.ToList().ForEach(item =>
+                    {
+                        list.Add(new FolderInfo() { Name = item.Name, Path = item.Path.LocalPath });
+                    });
+                    return list;
+                }
+                else
+                {
+                    new Exception("ParameterIsNull");
+                    return null;
+                }
+            }
+            else
+            {
+                var textBox = new TextBox() { FontFamily = (FontFamily)Application.Current.Resources["Font"], TextWrapping = TextWrapping.Wrap };
+                ContentDialog dialog = new()
+                {
+                    FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                    Title = MainLang.InputFolderPath,
+                    PrimaryButtonText = MainLang.Ok,
+                    CloseButtonText = MainLang.Cancel,
+                    DefaultButton = ContentDialogButton.Primary,
+                    Content = textBox
+                };
+                dialog.PrimaryButtonClick += (_, _) =>
+                {
+                    isPrimaryButtonClick = true;
+                };
+                var result = await dialog.ShowAsync();
+                var path = textBox.Text;
+                if (!Directory.Exists(path) && isPrimaryButtonClick)
+                {
+                    Toast(MainLang.FolderNotExist, NotificationType.Error);
+                    return null;
+                }
+                var folder = Path.GetFileName(path);
+                var list = new List<FolderInfo>() { new FolderInfo() { Name = folder, Path = path } };
+                return list;
+            }
+        }
+        public static async Task<List<FileInfo>> OpenFilePicker(TopLevel topLevel = null, FilePickerOpenOptions options = null)
+        {
+            isPrimaryButtonClick = false;
+            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (setting.OpenFileWay == OpenFileWay.FileSelectWindow)
+            {
+                if (options != null && topLevel != null)
+                {
+                    var storageProvider = topLevel!.StorageProvider;
+                    var result = await storageProvider.OpenFilePickerAsync(options);
+                    var list = new List<FileInfo>();
+                    result.ToList().ForEach(item =>
+                    {
+                        var path = item.Path.LocalPath;
+                        var fullName = Path.GetFileName(path);
+                        var name = Path.GetFileNameWithoutExtension(fullName);
+                        var extension = Path.GetExtension(fullName);
+                        list.Add(new FileInfo() { Name = name, Path = path, FullName = fullName, Extension = extension });
+                    });
+                    return list;
+                }
+                else
+                {
+                    new Exception("ParameterIsNull");
+                    return null;
+                }
+            }
+            else
+            {
+                var textBox = new TextBox() { FontFamily = (FontFamily)Application.Current.Resources["Font"], TextWrapping = TextWrapping.Wrap };
+                ContentDialog dialog = new()
+                {
+                    FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                    Title = MainLang.InputFilePath,
+                    PrimaryButtonText = MainLang.Ok,
+                    CloseButtonText = MainLang.Cancel,
+                    DefaultButton = ContentDialogButton.Primary,
+                    Content = textBox
+                };
+                dialog.PrimaryButtonClick += (_, _) =>
+                {
+                    isPrimaryButtonClick = true;
+                };
+                var result = await dialog.ShowAsync();
+                var path = textBox.Text;
+                if (!File.Exists(path) && isPrimaryButtonClick)
+                {
+                    Toast(MainLang.FileNotExist, NotificationType.Error);
+                    return null;
+                }
+                var fullName = Path.GetFileName(path);
+                var name = Path.GetFileNameWithoutExtension(fullName);
+                var extension = Path.GetExtension(fullName);
+                var list = new List<FileInfo>() { new FileInfo() { Name = name, Path = path, FullName = fullName, Extension = extension } };
+                return list;
+            }
         }
     }
 }

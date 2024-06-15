@@ -1,18 +1,24 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
+using Avalonia.Data;
 using Avalonia.Platform.Storage;
+using MinecraftLaunch.Classes.Models.Game;
+using MinecraftLaunch.Components.Fetcher;
+using MinecraftLaunch.Utilities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using YMCL.Main.Public;
+using YMCL.Main.Public.Langs;
 
 namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
 {
     public partial class LaunchSettingPage : UserControl
     {
         List<string> minecraftFolders = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath))!;
+        List<JavaEntry> javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath))!;
         public LaunchSettingPage()
         {
             InitializeComponent();
@@ -28,21 +34,15 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
             };
             AddMinecraftFolderBtn.Click += async (s, e) =>
             {
-                var topLevel = TopLevel.GetTopLevel(this);
-                var storageProvider = topLevel!.StorageProvider;
-                var result = await storageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions()
-                {
-                    AllowMultiple = false,
-                    Title = Public.Langs.MainLang.SelectMinecraftFolder
-                });
+                var result = await Method.OpenFolderPicker(TopLevel.GetTopLevel(this)!, new FolderPickerOpenOptions() { AllowMultiple = false, Title = MainLang.SelectMinecraftFolder });
                 if (result != null && result.Count > 0)
                 {
                     var item = result[0];
                     if (item.Name == ".minecraft")
                     {
-                        if (!minecraftFolders.Contains(item.Path.AbsolutePath))
+                        if (!minecraftFolders.Contains(item.Path))
                         {
-                            minecraftFolders.Add(item.Path.AbsolutePath);
+                            minecraftFolders.Add(item.Path);
                             File.WriteAllText(Const.MinecraftFolderDataPath, JsonConvert.SerializeObject(minecraftFolders, Formatting.Indented));
                             MinecraftFolderComboBox.Items.Clear();
                             minecraftFolders.ForEach(folder =>
@@ -50,16 +50,19 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                                 MinecraftFolderComboBox.Items.Add(folder);
                             });
                             MinecraftFolderComboBox.SelectedIndex = MinecraftFolderComboBox.ItemCount - 1;
-                            Method.Toast(Public.Langs.MainLang.SuccessAdd + "£º" + item.Path.AbsolutePath, NotificationType.Success);
+                            Method.Toast(MainLang.SuccessAdd + "£º" + item.Path, NotificationType.Success);
                         }
                         else
                         {
-                            Method.Toast(Public.Langs.MainLang.TheItemAlreadyExist, NotificationType.Error);
+                            Method.Toast(MainLang.TheItemAlreadyExist, NotificationType.Error);
                         }
                     }
                     else
                     {
-                        Method.Toast(Public.Langs.MainLang.NeedToSelectMinecraftFolder, NotificationType.Error);
+                        if (!string.IsNullOrEmpty(item.Path))
+                        {
+                            Method.Toast(MainLang.NeedToSelectMinecraftFolder, NotificationType.Error);
+                        }
                     }
                 }
             };
@@ -73,7 +76,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
             {
                 var path = (string)MinecraftFolderComboBox.SelectedItem;
                 minecraftFolders.RemoveAt(MinecraftFolderComboBox.SelectedIndex);
-                Method.Toast(Public.Langs.MainLang.SuccessRemove + "£º" + path, NotificationType.Success);
+                Method.Toast(MainLang.SuccessRemove + "£º" + path, NotificationType.Success);
                 if (minecraftFolders.Count == 0)
                 {
                     minecraftFolders.Add(Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft"));
@@ -87,6 +90,91 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                 MinecraftFolderComboBox.SelectedIndex = MinecraftFolderComboBox.ItemCount - 1;
                 File.WriteAllText(Const.MinecraftFolderDataPath, JsonConvert.SerializeObject(minecraftFolders, Formatting.Indented));
             };
+            AutoScanBtn.Click += async (s, e) =>
+            {
+                JavaFetcher javaFetcher = new JavaFetcher();
+                var javaList = await javaFetcher.FetchAsync();
+                var repeatJava = string.Empty;
+                var successAddJava = string.Empty;
+                var repeatJavaCount = 0;
+                var successAddCount = 0;
+                foreach (JavaEntry java in javaList)
+                {
+                    if (!javas.Contains(java))
+                    {
+                        if (successAddCount == 0)
+                        {
+                            successAddJava += java.JavaPath;
+                        }
+                        else
+                        {
+                            successAddJava += "\n" + java.JavaPath;
+                        }
+                        javas.Add(java);
+                        successAddCount++;
+                    }
+                    else
+                    {
+                        if (repeatJavaCount == 0)
+                        {
+                            repeatJava += java.JavaPath;
+                        }
+                        else
+                        {
+                            repeatJava += "\n" + java.JavaPath;
+                        }
+                        repeatJavaCount++;
+                    }
+                }
+                JavaComboBox.Items.Clear();
+                JavaComboBox.Items.Add(new JavaEntry() { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "All" });
+                javas.ForEach(java =>
+                {
+                    JavaComboBox.Items.Add(java);
+                });
+                JavaComboBox.SelectedIndex = 0;
+                File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
+                Method.Toast($"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}£º{successAddCount}\n{MainLang.RepeatItem}£º{repeatJavaCount}", NotificationType.Success);
+            };
+            ManualAddBtn.Click += async (s, e) =>
+            {
+                var list = await Method.OpenFilePicker(TopLevel.GetTopLevel(this)!, new FilePickerOpenOptions() { AllowMultiple = false, Title = MainLang.SelectJava });
+                list.ForEach(java =>
+                {
+                    var javaInfo = JavaUtil.GetJavaInfo(java.Path);
+                    if (javaInfo == null && !string.IsNullOrEmpty(java.Path))
+                    {
+                        Method.Toast(MainLang.TheJavaIsError, NotificationType.Error);
+                    }
+                    else
+                    {
+                        if (javas.Contains(javaInfo))
+                        {
+                            Method.Toast(MainLang.TheItemAlreadyExist, NotificationType.Error);
+                        }
+                        else
+                        {
+                            javas.Add(javaInfo);
+                        }
+                    }
+                });
+                JavaComboBox.Items.Clear();
+                JavaComboBox.Items.Add(new JavaEntry() { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "All" });
+                javas.ForEach(java =>
+                {
+                    JavaComboBox.Items.Add(java);
+                });
+                JavaComboBox.SelectedIndex = 0;
+                File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
+            };
+            JavaComboBox.SelectionChanged += (s, e) =>
+            {
+                JavaComboBox.IsVisible = false;
+                JavaComboBox.IsVisible = true;
+                var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                setting.Java = JavaComboBox.SelectedItem as JavaEntry;
+                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting));
+            };
         }
 
         private void ControlProperty()
@@ -96,7 +184,20 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
             {
                 MinecraftFolderComboBox.Items.Add(folder);
             });
-            MinecraftFolderComboBox.SelectedItem = setting.MinecraftFolder;
+            if (!MinecraftFolderComboBox.Items.Contains(setting.MinecraftFolder))
+            {
+                MinecraftFolderComboBox.SelectedIndex = 0;
+            }
+            else
+            {
+                MinecraftFolderComboBox.SelectedItem = setting.MinecraftFolder;
+            }
+            JavaComboBox.Items.Add(new JavaEntry() { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "All" });
+            javas.ForEach(java =>
+            {
+                JavaComboBox.Items.Add(java);
+            });
+            JavaComboBox.SelectedItem = setting.Java;
         }
     }
 }

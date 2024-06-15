@@ -157,6 +157,30 @@
     <value>This item already exists</value>
   </data>
   <data name="SuccessRemove" xml:space="preserve">
-    <value>Delete succeeded</value>
+    <value>Removed successfully</value>
+  </data>
+  <data name="AutoScan" xml:space="preserve">
+    <value>Automatic Scan</value>
+  </data>
+  <data name="LetYMCLChooseJava" xml:space="preserve">
+    <value>Let YMCL choose the right Java</value>
+  </data>
+  <data name="ScanJavaSuccess" xml:space="preserve">
+    <value>Scanning Java succeeded</value>
+  </data>
+  <data name="RepeatItem" xml:space="preserve">
+    <value>Repeating event</value>
+  </data>
+  <data name="NavLauncher" xml:space="preserve">
+    <value> Launcher</value>
+  </data>
+  <data name="OpenFileWay" xml:space="preserve">
+    <value>How to open a file</value>
+  </data>
+  <data name="FileSelectWindow" xml:space="preserve">
+    <value>File Selection Window</value>
+  </data>
+  <data name="ManualInput" xml:space="preserve">
+    <value>Manual input</value>
   </data>
 </root>

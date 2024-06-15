@@ -70,11 +70,74 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 自动扫描 的本地化字符串。
+        /// </summary>
+        public static string AutoScan {
+            get {
+                return ResourceManager.GetString("AutoScan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 取消 的本地化字符串。
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 删除选中项 的本地化字符串。
         /// </summary>
         public static string DelSeletedItem {
             get {
                 return ResourceManager.GetString("DelSeletedItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 文件不存在 的本地化字符串。
+        /// </summary>
+        public static string FileNotExist {
+            get {
+                return ResourceManager.GetString("FileNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 文件选择窗口 的本地化字符串。
+        /// </summary>
+        public static string FileSelectWindow {
+            get {
+                return ResourceManager.GetString("FileSelectWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 文件夹不存在 的本地化字符串。
+        /// </summary>
+        public static string FolderNotExist {
+            get {
+                return ResourceManager.GetString("FolderNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 输入文件路径 的本地化字符串。
+        /// </summary>
+        public static string InputFilePath {
+            get {
+                return ResourceManager.GetString("InputFilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 输入文件夹路径 的本地化字符串。
+        /// </summary>
+        public static string InputFolderPath {
+            get {
+                return ResourceManager.GetString("InputFolderPath", resourceCulture);
             }
         }
         
@@ -88,11 +151,47 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 让YMCL选择合适的Java 的本地化字符串。
+        /// </summary>
+        public static string LetYMCLChooseJava {
+            get {
+                return ResourceManager.GetString("LetYMCLChooseJava", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 手动添加 的本地化字符串。
+        /// </summary>
+        public static string ManualAdd {
+            get {
+                return ResourceManager.GetString("ManualAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 手动输入 的本地化字符串。
+        /// </summary>
+        public static string ManualInput {
+            get {
+                return ResourceManager.GetString("ManualInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Minecraft文件夹 的本地化字符串。
         /// </summary>
         public static string MinecraftFolder {
             get {
                 return ResourceManager.GetString("MinecraftFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  账户 的本地化字符串。
+        /// </summary>
+        public static string NavAccount {
+            get {
+                return ResourceManager.GetString("NavAccount", resourceCulture);
             }
         }
         
@@ -111,6 +210,15 @@ namespace YMCL.Main.Public.Langs {
         public static string NavLaunch {
             get {
                 return ResourceManager.GetString("NavLaunch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  启动器 的本地化字符串。
+        /// </summary>
+        public static string NavLauncher {
+            get {
+                return ResourceManager.GetString("NavLauncher", resourceCulture);
             }
         }
         
@@ -151,6 +259,51 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 确定 的本地化字符串。
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 打开文件方式 的本地化字符串。
+        /// </summary>
+        public static string OpenFileWay {
+            get {
+                return ResourceManager.GetString("OpenFileWay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 重复的项目 的本地化字符串。
+        /// </summary>
+        public static string RepeatItem {
+            get {
+                return ResourceManager.GetString("RepeatItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 扫描Java成功 的本地化字符串。
+        /// </summary>
+        public static string ScanJavaSuccess {
+            get {
+                return ResourceManager.GetString("ScanJavaSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 选择Java 的本地化字符串。
+        /// </summary>
+        public static string SelectJava {
+            get {
+                return ResourceManager.GetString("SelectJava", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 选择&apos;.minecraft&apos;文件夹 的本地化字符串。
         /// </summary>
         public static string SelectMinecraftFolder {
@@ -169,7 +322,7 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
-        ///   查找类似 删除成功 的本地化字符串。
+        ///   查找类似 移除成功 的本地化字符串。
         /// </summary>
         public static string SuccessRemove {
             get {
@@ -183,6 +336,15 @@ namespace YMCL.Main.Public.Langs {
         public static string TheItemAlreadyExist {
             get {
                 return ResourceManager.GetString("TheItemAlreadyExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Java不正确 的本地化字符串。
+        /// </summary>
+        public static string TheJavaIsError {
+            get {
+                return ResourceManager.GetString("TheJavaIsError", resourceCulture);
             }
         }
     }

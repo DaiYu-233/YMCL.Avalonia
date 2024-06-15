@@ -137,6 +137,60 @@
     <value>已存在此项目</value>
   </data>
   <data name="SuccessRemove" xml:space="preserve">
-    <value>删除成功</value>
+    <value>移除成功</value>
+  </data>
+  <data name="AutoScan" xml:space="preserve">
+    <value>自动扫描</value>
+  </data>
+  <data name="LetYMCLChooseJava" xml:space="preserve">
+    <value>让YMCL选择合适的Java</value>
+  </data>
+  <data name="ScanJavaSuccess" xml:space="preserve">
+    <value>扫描Java成功</value>
+  </data>
+  <data name="RepeatItem" xml:space="preserve">
+    <value>重复的项目</value>
+  </data>
+  <data name="NavLauncher" xml:space="preserve">
+    <value> 启动器</value>
+  </data>
+  <data name="OpenFileWay" xml:space="preserve">
+    <value>打开文件方式</value>
+  </data>
+  <data name="FileSelectWindow" xml:space="preserve">
+    <value>文件选择窗口</value>
+  </data>
+  <data name="ManualInput" xml:space="preserve">
+    <value>手动输入</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="InputFolderPath" xml:space="preserve">
+    <value>输入文件夹路径</value>
+  </data>
+  <data name="FolderNotExist" xml:space="preserve">
+    <value>文件夹不存在</value>
+  </data>
+  <data name="InputFilePath" xml:space="preserve">
+    <value>输入文件路径</value>
+  </data>
+  <data name="FileNotExist" xml:space="preserve">
+    <value>文件不存在</value>
+  </data>
+  <data name="ManualAdd" xml:space="preserve">
+    <value>手动添加</value>
+  </data>
+  <data name="SelectJava" xml:space="preserve">
+    <value>选择Java</value>
+  </data>
+  <data name="TheJavaIsError" xml:space="preserve">
+    <value>Java不正确</value>
+  </data>
+  <data name="NavAccount" xml:space="preserve">
+    <value> 账户</value>
   </data>
 </root>

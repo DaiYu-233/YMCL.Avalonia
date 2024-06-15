@@ -159,4 +159,28 @@
   <data name="SuccessRemove" xml:space="preserve">
     <value>Удаление выполнено успешно</value>
   </data>
+  <data name="AutoScan" xml:space="preserve">
+    <value>Автоматическое сканирование</value>
+  </data>
+  <data name="LetYMCLChooseJava" xml:space="preserve">
+    <value>Пусть YMCL выберет правильную Java</value>
+  </data>
+  <data name="ScanJavaSuccess" xml:space="preserve">
+    <value>Сканирование Java выполнено успешно</value>
+  </data>
+  <data name="RepeatItem" xml:space="preserve">
+    <value>Дублировать элемент</value>
+  </data>
+  <data name="NavLauncher" xml:space="preserve">
+    <value> Пусковая установка</value>
+  </data>
+  <data name="OpenFileWay" xml:space="preserve">
+    <value>Как открыть файл</value>
+  </data>
+  <data name="FileSelectWindow" xml:space="preserve">
+    <value>Окно выбора файла</value>
+  </data>
+  <data name="ManualInput" xml:space="preserve">
+    <value>Введите вручную</value>
+  </data>
 </root>

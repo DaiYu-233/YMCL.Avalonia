@@ -12,7 +12,7 @@ namespace YMCL.Main.Public.Langs
         {
             #pragma warning disable CS0219 
             #pragma warning disable IDE0059 
-            var a = "添加文件夹";
+            var a = "让YMCL选择合适的Java";
         }
     }
 }

@@ -157,6 +157,30 @@
     <value>このアイテムはすでに存在します</value>
   </data>
   <data name="SuccessRemove" xml:space="preserve">
-    <value>削除成功</value>
+    <value>削除に成功しました</value>
+  </data>
+  <data name="AutoScan" xml:space="preserve">
+    <value>自動スキャン</value>
+  </data>
+  <data name="LetYMCLChooseJava" xml:space="preserve">
+    <value>YMCLに適切なJavaを選ばせましょう</value>
+  </data>
+  <data name="ScanJavaSuccess" xml:space="preserve">
+    <value>Javaのスキャンに成功しました</value>
+  </data>
+  <data name="RepeatItem" xml:space="preserve">
+    <value>アイテムが重複しています</value>
+  </data>
+  <data name="NavLauncher" xml:space="preserve">
+    <value> ランチャー</value>
+  </data>
+  <data name="OpenFileWay" xml:space="preserve">
+    <value>ファイルを開く方法</value>
+  </data>
+  <data name="FileSelectWindow" xml:space="preserve">
+    <value>ファイル選択ウィンドウ</value>
+  </data>
+  <data name="ManualInput" xml:space="preserve">
+    <value>手動入力</value>
   </data>
 </root>

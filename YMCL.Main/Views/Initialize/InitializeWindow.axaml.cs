@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using Avalonia.Media;
+using MinecraftLaunch.Classes.Models.Game;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,9 +17,10 @@ namespace YMCL.Main.Views.Initialize
     {
         private void Init()
         {
+            Method.CreateFolder(Const.UserDataRootPath);
             if (!File.Exists(Const.SettingDataPath))
             {
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(new Public.Classes.Setting()));
+                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(new Public.Classes.Setting(),Formatting.Indented));
             }
             if (!File.Exists(Const.MinecraftFolderDataPath) || JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath)).Count == 0)
             {
@@ -26,13 +28,16 @@ namespace YMCL.Main.Views.Initialize
                 File.WriteAllText(Const.MinecraftFolderDataPath, JsonConvert.SerializeObject(new List<string>() { Path.Combine(Process.GetCurrentProcess().MainModule.FileName, ".minecraft") }, Formatting.Indented));
                 var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
                 setting.MinecraftFolder = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft");
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting));
+                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            }
+            if (!File.Exists(Const.JavaDataPath))
+            {
+                File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(new List<JavaEntry>(), Formatting.Indented));
             }
 
             Const.notification = new WindowNotificationManager(GetTopLevel(Const.Window.main)) { MaxItems = 5, Position = NotificationPosition.BottomRight, /*FontFamily = (FontFamily)Application.Current.Resources["Font"]*/ };
             Method.SetAccentColor(Color.Parse("#0dc0a5"));
             Method.ToggleTheme(Public.Theme.Light);
-            Method.CreateFolder(Const.UserDataRootPath);
         }
 
         public InitializeWindow()

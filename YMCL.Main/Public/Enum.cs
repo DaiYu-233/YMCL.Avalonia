@@ -13,4 +13,9 @@
         Light,
         Dark
     }
+    public enum OpenFileWay
+    {
+        FileSelectWindow,
+        ManualInput
+    }
 }

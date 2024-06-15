@@ -159,4 +159,28 @@
   <data name="SuccessRemove" xml:space="preserve">
     <value>刪除成功</value>
   </data>
+  <data name="AutoScan" xml:space="preserve">
+    <value>自動掃描</value>
+  </data>
+  <data name="LetYMCLChooseJava" xml:space="preserve">
+    <value>讓YMCL選擇合適的Java</value>
+  </data>
+  <data name="ScanJavaSuccess" xml:space="preserve">
+    <value>掃描Java成功</value>
+  </data>
+  <data name="RepeatItem" xml:space="preserve">
+    <value>重複的項目</value>
+  </data>
+  <data name="NavLauncher" xml:space="preserve">
+    <value> 啟動器</value>
+  </data>
+  <data name="OpenFileWay" xml:space="preserve">
+    <value>開啟檔案方式</value>
+  </data>
+  <data name="FileSelectWindow" xml:space="preserve">
+    <value>文件選擇視窗</value>
+  </data>
+  <data name="ManualInput" xml:space="preserve">
+    <value>手動輸入</value>
+  </data>
 </root>

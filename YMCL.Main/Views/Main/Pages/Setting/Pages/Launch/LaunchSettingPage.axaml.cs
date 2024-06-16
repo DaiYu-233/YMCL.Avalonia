@@ -2,8 +2,10 @@ using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using Avalonia.Data;
 using Avalonia.Platform.Storage;
+using MinecraftLaunch.Classes.Interfaces;
 using MinecraftLaunch.Classes.Models.Game;
 using MinecraftLaunch.Components.Fetcher;
+using MinecraftLaunch.Components.Resolver;
 using MinecraftLaunch.Utilities;
 using Newtonsoft.Json;
 using System;
@@ -19,6 +21,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
     {
         List<string> minecraftFolders = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath))!;
         List<JavaEntry> javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath))!;
+        bool _firstLoad = true;
         public LaunchSettingPage()
         {
             InitializeComponent();
@@ -31,6 +34,29 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
             Loaded += (s, e) =>
             {
                 Method.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
+                var totalMemory = Method.GetTotalMemory(Const.Platform);
+                var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                if (_firstLoad)
+                {
+                    _firstLoad = false;
+                    if (totalMemory != 0)
+                    {
+                        MaxMemSlider.Maximum = totalMemory / 1024;
+                    }
+                    else
+                    {
+                        MaxMemSlider.Maximum = 65536;
+                    }
+                    MaxMemSlider.Value = setting.MaxMem;
+                }
+                if (setting.MinecraftFolder == null || !minecraftFolders.Contains(setting.MinecraftFolder))
+                {
+                    MinecraftFolderComboBox.SelectedIndex = 0;
+                }
+                else
+                {
+                    MinecraftFolderComboBox.SelectedItem = setting.MinecraftFolder;
+                }
             };
             AddMinecraftFolderBtn.Click += async (s, e) =>
             {
@@ -50,18 +76,18 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                                 MinecraftFolderComboBox.Items.Add(folder);
                             });
                             MinecraftFolderComboBox.SelectedIndex = MinecraftFolderComboBox.ItemCount - 1;
-                            Method.Toast(MainLang.SuccessAdd + "£º" + item.Path, Const.MainNotification, NotificationType.Success);
+                            Method.Toast(MainLang.SuccessAdd + "£º" + item.Path, Const.Notification.main, NotificationType.Success);
                         }
                         else
                         {
-                            Method.Toast(MainLang.TheItemAlreadyExist, Const.MainNotification, NotificationType.Error);
+                            Method.Toast(MainLang.TheItemAlreadyExist, Const.Notification.main, NotificationType.Error);
                         }
                     }
                     else
                     {
                         if (!string.IsNullOrEmpty(item.Path))
                         {
-                            Method.Toast(MainLang.NeedToSelectMinecraftFolder, Const.MainNotification, NotificationType.Error);
+                            Method.Toast(MainLang.NeedToSelectMinecraftFolder, Const.Notification.main, NotificationType.Error);
                         }
                     }
                 }
@@ -76,11 +102,11 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
             {
                 var path = (string)MinecraftFolderComboBox.SelectedItem;
                 minecraftFolders.RemoveAt(MinecraftFolderComboBox.SelectedIndex);
-                Method.Toast(MainLang.SuccessRemove + "£º" + path, Const.MainNotification, NotificationType.Success);
+                Method.Toast(MainLang.SuccessRemove + "£º" + path, Const.Notification.main, NotificationType.Success);
                 if (minecraftFolders.Count == 0)
                 {
                     minecraftFolders.Add(Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft"));
-                    Method.Toast(Public.Langs.MainLang.SuccessAdd + "£º" + Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft"), Const.MainNotification, NotificationType.Success);
+                    Method.Toast(Public.Langs.MainLang.SuccessAdd + "£º" + Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft"), Const.Notification.main, NotificationType.Success);
                 }
                 MinecraftFolderComboBox.Items.Clear();
                 minecraftFolders.ForEach(folder =>
@@ -134,7 +160,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                 });
                 JavaComboBox.SelectedIndex = 0;
                 File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
-                Method.Toast($"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}£º{successAddCount}\n{MainLang.RepeatItem}£º{repeatJavaCount}", Const.MainNotification, NotificationType.Success);
+                Method.Toast($"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}£º{successAddCount}\n{MainLang.RepeatItem}£º{repeatJavaCount}", Const.Notification.main, NotificationType.Success);
             };
             ManualAddBtn.Click += async (s, e) =>
             {
@@ -144,13 +170,13 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                     var javaInfo = JavaUtil.GetJavaInfo(java.Path);
                     if (javaInfo == null && !string.IsNullOrEmpty(java.Path))
                     {
-                        Method.Toast(MainLang.TheJavaIsError, Const.MainNotification, NotificationType.Error);
+                        Method.Toast(MainLang.TheJavaIsError, Const.Notification.main, NotificationType.Error);
                     }
                     else
                     {
                         if (javas.Contains(javaInfo))
                         {
-                            Method.Toast(MainLang.TheItemAlreadyExist, Const.MainNotification, NotificationType.Error);
+                            Method.Toast(MainLang.TheItemAlreadyExist, Const.Notification.main, NotificationType.Error);
                         }
                         else
                         {
@@ -182,6 +208,16 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                 }
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             };
+            MaxMemSlider.ValueChanged += (s, e) =>
+            {
+                MaxMemText.Text = $"{Math.Round(MaxMemSlider.Value)}M";
+                var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                if (setting.MaxMem != MaxMemSlider.Value)
+                {
+                    setting.MaxMem = Math.Round(MaxMemSlider.Value);
+                    File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                }
+            };
         }
 
         private void ControlProperty()
@@ -191,14 +227,6 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
             {
                 MinecraftFolderComboBox.Items.Add(folder);
             });
-            if (!MinecraftFolderComboBox.Items.Contains(setting.MinecraftFolder))
-            {
-                MinecraftFolderComboBox.SelectedIndex = 0;
-            }
-            else
-            {
-                MinecraftFolderComboBox.SelectedItem = setting.MinecraftFolder;
-            }
             JavaComboBox.Items.Add(new JavaEntry() { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "All" });
             javas.ForEach(java =>
             {

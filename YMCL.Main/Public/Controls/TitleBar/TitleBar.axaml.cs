@@ -16,13 +16,24 @@ public partial class TitleBar : UserControl
         MaximizeButton.Click += MaximizeButton_Click;
         MinimizeButton.Click += MinimizeButton_Click;
         MoveDragArea.PointerPressed += MoveDragArea_PointerPressed;
-        Loaded += (_, _) => { TitleText.Text = Title; };
+        Loaded += (_, _) =>
+        {
+            TitleText.Text = Title;
+            if (!IsCloseBtnShow)
+            {
+                CloseButton.IsVisible = false;
+                MaximizeButton.Margin = new Thickness(0, 0, -5, 0);
+                MinimizeButton.Margin = new Thickness(0, 0, 21, 0);
+            };
+        };
     }
 
     public static readonly StyledProperty<string> TitleProperty =
         AvaloniaProperty.Register<TitleBar, string>(nameof(Title), defaultValue: "Default Title");
     public static readonly StyledProperty<bool> IsCloseBtnExitAppProperty =
         AvaloniaProperty.Register<TitleBar, bool>(nameof(IsCloseBtnExitApp), defaultValue: false);
+    public static readonly StyledProperty<bool> IsCloseBtnShowProperty =
+        AvaloniaProperty.Register<TitleBar, bool>(nameof(IsCloseBtnShow), defaultValue: true);
 
     public string Title
     {
@@ -33,6 +44,11 @@ public partial class TitleBar : UserControl
     {
         get => GetValue(IsCloseBtnExitAppProperty);
         set => SetValue(IsCloseBtnExitAppProperty, value);
+    }
+    public bool IsCloseBtnShow
+    {
+        get => GetValue(IsCloseBtnShowProperty);
+        set => SetValue(IsCloseBtnShowProperty, value);
     }
 
     private void MoveDragArea_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
@@ -86,7 +102,7 @@ public partial class TitleBar : UserControl
         var button = sender as Button;
         if (button != null)
         {
-            if(IsCloseBtnExitApp)
+            if (IsCloseBtnExitApp)
             {
                 Environment.Exit(0);
             }

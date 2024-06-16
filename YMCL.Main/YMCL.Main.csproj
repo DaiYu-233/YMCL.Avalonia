@@ -21,6 +21,7 @@
     <RepositoryUrl>https://github.com/DaiYu-233/YMCL.Avalonia</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Public\Assets\Font.ttc" />
     <None Remove="Public\Assets\Harmony.otf" />
     <None Remove="Public\Assets\Harmony.ttf" />
     <None Remove="Public\Assets\MiSans-Regular.otf" />
@@ -54,6 +55,7 @@
     <PackageReference Include="MinecraftLaunch" Version="3.1.0-preview03" />
     <PackageReference Include="MinecraftLaunch.Skin" Version="1.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Management" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Public\Langs\MainLang.Designer.cs">

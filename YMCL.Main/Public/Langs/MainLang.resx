@@ -251,4 +251,76 @@
   <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
     <value>邮箱不可为空</value>
   </data>
+  <data name="NavPersonalize" xml:space="preserve">
+    <value> 个性化</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="ColorMode" xml:space="preserve">
+    <value>色彩模式</value>
+  </data>
+  <data name="FollowSystem" xml:space="preserve">
+    <value>跟随系统</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="MaxMem" xml:space="preserve">
+    <value>最大内存</value>
+  </data>
+  <data name="CannotOpenBrowser" xml:space="preserve">
+    <value>无法打开浏览器</value>
+  </data>
+  <data name="ManualOpen" xml:space="preserve">
+    <value>手动打开</value>
+  </data>
+  <data name="CopyUrlAndManualOpen" xml:space="preserve">
+    <value>复制以下链接并粘贴至浏览器</value>
+  </data>
+  <data name="VersionList" xml:space="preserve">
+    <value>版本列表</value>
+  </data>
+  <data name="VersionSetting" xml:space="preserve">
+    <value>版本设置</value>
+  </data>
+  <data name="LaunchGame" xml:space="preserve">
+    <value>启动游戏</value>
+  </data>
+  <data name="NoChooseGame" xml:space="preserve">
+    <value>未选择游戏</value>
+  </data>
+  <data name="ReturnWithIcon" xml:space="preserve">
+    <value>← 返回</value>
+  </data>
+  <data name="CreateGameEntryFail" xml:space="preserve">
+    <value>创建游戏实例失败</value>
+  </data>
+  <data name="NoChooseGameOrCannotFindGame" xml:space="preserve">
+    <value>未选择游戏或无法找到游戏</value>
+  </data>
+  <data name="AccountError" xml:space="preserve">
+    <value>账户错误</value>
+  </data>
+  <data name="LaunchProgress" xml:space="preserve">
+    <value>启动进度</value>
+  </data>
+  <data name="BuildLaunchConfigFail" xml:space="preserve">
+    <value>构建启动配置失败</value>
+  </data>
+  <data name="GameExited" xml:space="preserve">
+    <value>游戏已退出</value>
+  </data>
+  <data name="WaitForGameWindowAppear" xml:space="preserve">
+    <value>等待游戏窗口出现</value>
+  </data>
+  <data name="LaunchFinish" xml:space="preserve">
+    <value>启动完成</value>
+  </data>
+  <data name="LaunchFail" xml:space="preserve">
+    <value>启动失败</value>
+  </data>
 </root>

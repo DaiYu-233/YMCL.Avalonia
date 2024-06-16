@@ -15,5 +15,9 @@ namespace YMCL.Main.Public.Classes
         public OpenFileWay OpenFileWay { get; set; }
         public JavaEntry Java { get; set; } = Const.AutoJava;
         public int AccountSelectionIndex { get; set; }
+        public Theme Theme { get; set; } = Theme.Light;
+        public double MaxMem { get; set; } = 1024;
+        public string Version { get; set; } 
+        public bool EnableIndependencyCore { get; set; } = true;
     }
 }

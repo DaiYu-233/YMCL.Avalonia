@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
+using YMCL.Main.Public.Controls.WindowTask;
 
 namespace YMCL.Main.Views.Main;
 

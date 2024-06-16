@@ -2,17 +2,174 @@
     x:Class="YMCL.Main.Views.Main.Pages.Launch.LaunchPage"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:class="clr-namespace:YMCL.Main.Public.Classes;assembly=YMCL.Main"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ml="clr-namespace:MinecraftLaunch.Classes.Models.Game;assembly=MinecraftLaunch"
+    xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
+    xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Border x:Name="Root" >
-		<Border.Transitions>
-			<Transitions>
-				<ThicknessTransition Duration="0:0:0.45" Property="Margin"/>
-			</Transitions>
-		</Border.Transitions>
-        <TextBlock Text="Launch" />
+    <Border x:Name="Root">
+        <Border.Transitions>
+            <Transitions>
+                <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
+            </Transitions>
+        </Border.Transitions>
+        <Grid>
+            <DockPanel>
+                <Border
+                    MinWidth="240"
+                    MaxWidth="280"
+                    Margin="10"
+                    Padding="10"
+                    HorizontalAlignment="Right"
+                    Background="{DynamicResource 1x}"
+                    ClipToBounds="True"
+                    CornerRadius="5"
+                    DockPanel.Dock="Right">
+                    <DockPanel>
+                        <DockPanel
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Bottom"
+                            DockPanel.Dock="Bottom">
+                            <ComboBox
+                                Name="AccountComboBox"
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Stretch"
+                                DockPanel.Dock="Top"
+                                FontFamily="{DynamicResource Font}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate DataType="class:AccountInfo">
+                                        <TextBlock>
+                                            <Run Text="[" />
+                                            <Run Text="{Binding AccountType}" />
+                                            <Run Text="]" />
+                                            <Run Text="{Binding Name}" />
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <DockPanel
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                DockPanel.Dock="Top">
+                                <Button
+                                    Name="LaunchBtn"
+                                    Width="{Binding $parent.Bounds.Width}"
+                                    Margin="0,0,0,5"
+                                    HorizontalContentAlignment="Stretch"
+                                    DockPanel.Dock="Top">
+                                    <StackPanel>
+                                        <TextBlock
+                                            Margin="0,3,0,0"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontFamily="{DynamicResource Font}"
+                                            FontSize="14"
+                                            Text="{x:Static properties:MainLang.LaunchGame}" />
+                                        <TextBlock
+                                            x:Name="GameCoreText"
+                                            Margin="0,2,0,3"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontFamily="{DynamicResource Font}"
+                                            FontSize="12"
+                                            Text="{x:Static properties:MainLang.NoChooseGame}"
+                                            TextAlignment="Center"
+                                            TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </Button>
+                                <UniformGrid
+                                    Height="34"
+                                    Columns="2"
+                                    DockPanel.Dock="Bottom"
+                                    Rows="1">
+                                    <Button
+                                        Name="VersionListBtn"
+                                        Margin="0,0,3.25,0"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        Content="{x:Static properties:MainLang.VersionList}"
+                                        FontFamily="{DynamicResource Font}" />
+                                    <Button
+                                        Name="VersionSettingBtn"
+                                        Margin="3.25,0,0,0"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        Content="{x:Static properties:MainLang.VersionSetting}"
+                                        FontFamily="{DynamicResource Font}" />
+                                </UniformGrid>
+                            </DockPanel>
+                        </DockPanel>
+                        <Border
+                            Width="90"
+                            Height="90"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="{DynamicResource 2x}"
+                            ClipToBounds="True"
+                            CornerRadius="5"
+                            DockPanel.Dock="Top">
+                            <Image Name="Head" />
+                        </Border>
+                    </DockPanel>
+                </Border>
+            </DockPanel>
+            <Border
+                Name="VersionListRoot"
+                Margin="10,10,10,10"
+                Padding="10"
+                Background="{DynamicResource 1x}"
+                IsVisible="False">
+                <Border.Transitions>
+                    <Transitions>
+                        <ThicknessTransition Property="Margin" Duration="0:0:0.20" />
+                    </Transitions>
+                </Border.Transitions>
+                <DockPanel>
+                    <DockPanel VerticalAlignment="Top" DockPanel.Dock="Top">
+                        <Button
+                            Name="CloseVersionListBtn"
+                            Content="{x:Static properties:MainLang.ReturnWithIcon}"
+                            FontFamily="{DynamicResource Font}" />
+                        <ComboBox
+                            Name="MinecraftFolderComboBox"
+                            Margin="5,0,0,0"
+                            HorizontalAlignment="Stretch"
+                            FontFamily="{DynamicResource Font}" />
+                    </DockPanel>
+                    <ListBox
+                        Name="VersionListView"
+                        Margin="0,5,0,0"
+                        FontFamily="{DynamicResource Font}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="ml:GameEntry">
+                                <StackPanel Margin="0,3,0,3">
+                                    <TextBlock FontFamily="{DynamicResource Font}" Text="{Binding Id}" />
+                                    <TextBlock
+                                        Margin="0,-4,0,0"
+                                        FontFamily="{DynamicResource Font}"
+                                        FontSize="12"
+                                        Foreground="{DynamicResource GrayColor}">
+                                        <Run Text="{Binding Type}" />
+                                        <Run Text=" " />
+                                        <Run Text="{Binding Version}" />
+                                        <Run Text=" " />
+                                        <Run Text="{Binding MainLoaderType}" />
+                                        <Run Text=" " />
+                                        <Run Text="Java" />
+                                        <Run Text="{Binding JavaVersion}" />
+                                        <Run Text=" " />
+                                        <Run Text="{Binding MainClass}" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </Border>
+        </Grid>
     </Border>
 </UserControl>

@@ -52,13 +52,13 @@
                                                 Margin="0,0,0,0"
                                                 FontFamily="{DynamicResource Font}"
                                                 FontSize="11"
-                                                Foreground="{DynamicResource Gray}"
+                                                Foreground="{DynamicResource GrayColor}"
                                                 Text="{Binding AccountType}" />
                                             <TextBlock
                                                 Margin="5,0,0,0"
                                                 FontFamily="{DynamicResource Font}"
                                                 FontSize="11"
-                                                Foreground="{DynamicResource Gray}"
+                                                Foreground="{DynamicResource GrayColor}"
                                                 Text="{Binding AddTime}" />
                                         </StackPanel>
                                     </Grid>

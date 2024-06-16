@@ -9,7 +9,7 @@
     }
     public enum Theme
     {
-        System,
+        //System,
         Light,
         Dark
     }

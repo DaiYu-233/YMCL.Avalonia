@@ -6,13 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using YMCL.Main.Public;
+using YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize;
 
 namespace YMCL.Main.Views.Main.Pages.Setting
 {
     public partial class SettingPage : UserControl
     {
         Pages.Launch.LaunchSettingPage launchSettingPage = new();
-        Pages.Launcher.LauncherSettingPage launcherSettingPage = new();
+        PersonalizeSettingPage personalizeSettingPage = new();
         Pages.Account.AccountSettingPage accountSettingPage = new();
         public SettingPage()
         {
@@ -39,9 +40,9 @@ namespace YMCL.Main.Views.Main.Pages.Setting
                     case "launch":
                         launchSettingPage.Root.IsVisible = false;
                         FrameView.Content = launchSettingPage; break;
-                    case "launcher":
-                        launcherSettingPage.Root.IsVisible = false;
-                        FrameView.Content = launcherSettingPage; break;
+                    case "personalize":
+                        personalizeSettingPage.Root.IsVisible = false;
+                        FrameView.Content = personalizeSettingPage; break;
                     case "account":
                         accountSettingPage.Root.IsVisible = false;
                         FrameView.Content = accountSettingPage; break;

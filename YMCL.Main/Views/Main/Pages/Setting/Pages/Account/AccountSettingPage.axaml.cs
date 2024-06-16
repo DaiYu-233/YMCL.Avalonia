@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Langs;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using AccountType = YMCL.Main.Public.AccountType;
 
 namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
@@ -31,6 +32,17 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
             Loaded += (s, e) =>
             {
                 Method.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
+                var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                if (setting.AccountSelectionIndex + 1 <= AccountsListView.Items.Count)
+                {
+                    AccountsListView.SelectedIndex = setting.AccountSelectionIndex;
+                }
+                else
+                {
+                    AccountsListView.SelectedItem = AccountsListView.Items[0];
+                    setting.AccountSelectionIndex = 0;
+                    File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                }
             };
             AddAccountBtn.Click += async (s, e) =>
             {
@@ -87,12 +99,13 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                                 }
                                 else
                                 {
-                                    Method.Toast(MainLang.AccountNameCannotBeNull, Const.MainNotification, Avalonia.Controls.Notifications.NotificationType.Error);
+                                    Method.Toast(MainLang.AccountNameCannotBeNull, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                                 }
                             }
                             break;
                         case 1:
                             var verificationUrl = string.Empty;
+                            var verificationCode = string.Empty;
                             MicrosoftAccount userProfile = null;
                             var textBlock = new TextBlock() { FontFamily = (FontFamily)Application.Current.Resources["Font"], TextWrapping = TextWrapping.Wrap, Text = MainLang.Loading, HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center, FontSize = 16 };
                             ContentDialog microsoftDialog = new()
@@ -100,10 +113,12 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                                 FontFamily = (FontFamily)Application.Current.Resources["Font"],
                                 Title = MainLang.VerificationCode,
                                 PrimaryButtonText = MainLang.CopyCodeAndOPenBrowser,
+                                SecondaryButtonText = MainLang.CannotOpenBrowser,
                                 CloseButtonText = MainLang.Cancel,
                                 DefaultButton = ContentDialogButton.Primary,
                                 Content = textBlock,
-                                IsPrimaryButtonEnabled = false
+                                IsPrimaryButtonEnabled = false,
+                                IsSecondaryButtonEnabled = false
                             };
                             MicrosoftAuthenticator authenticator = new(Const.AzureClientId, true);
                             microsoftDialog.PrimaryButtonClick += async (_, _) =>
@@ -112,7 +127,29 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                                 await clipboard.SetTextAsync(textBlock.Text);
                                 var launcher = TopLevel.GetTopLevel(this).Launcher;
                                 await launcher.LaunchUriAsync(new Uri(verificationUrl));
-                                Method.Toast(MainLang.WaitForMicrosoftVerification, Const.MainNotification, Avalonia.Controls.Notifications.NotificationType.Information);
+                                Method.Toast(MainLang.WaitForMicrosoftVerification, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Information);
+                            };
+                            microsoftDialog.SecondaryButtonClick += (_, _) =>
+                            {
+                                var urlBox = new TextBox() { FontFamily = (FontFamily)Application.Current.Resources["Font"], TextWrapping = TextWrapping.Wrap, IsReadOnly = true };
+                                var tip = new TextBlock() { FontFamily = (FontFamily)Application.Current.Resources["Font"], FontSize = 14, Text = MainLang.CopyUrlAndManualOpen };
+                                var codeBox = new TextBox() { FontFamily = (FontFamily)Application.Current.Resources["Font"], TextWrapping = TextWrapping.Wrap, IsReadOnly = true, Text = verificationCode };
+                                var codeTip = new TextBlock() { FontFamily = (FontFamily)Application.Current.Resources["Font"], FontSize = 14, Text = MainLang.VerificationCode };
+                                var stackPanel = new StackPanel() { Spacing = 10 };
+                                stackPanel.Children.Add(tip);
+                                stackPanel.Children.Add(urlBox);
+                                stackPanel.Children.Add(codeTip);
+                                stackPanel.Children.Add(codeBox);
+                                ContentDialog urlDialog = new()
+                                {
+                                    FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                                    Title = MainLang.ManualOpen,
+                                    PrimaryButtonText = MainLang.Ok,
+                                    DefaultButton = ContentDialogButton.Primary,
+                                    Content = stackPanel
+                                };
+                                urlBox.Text = verificationUrl;
+                                _ = urlDialog.ShowAsync();
                             };
                             _ = microsoftDialog.ShowAsync();
                             try
@@ -121,17 +158,20 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                                 {
                                     textBlock.Text = device.UserCode;
                                     verificationUrl = device.VerificationUrl;
+                                    verificationCode = device.UserCode;
                                     microsoftDialog.IsPrimaryButtonEnabled = true;
+                                    microsoftDialog.IsSecondaryButtonEnabled = true;
                                 });
                                 userProfile = await authenticator.AuthenticateAsync();
                             }
                             catch (Exception ex)
                             {
                                 Method.ShowShortException(MainLang.LoginFail, ex);
+                                return;
                             }
                             try
                             {
-                                Method.Toast(MainLang.VerifyingAccount, Const.MainNotification);
+                                Method.Toast(MainLang.VerifyingAccount, Const.Notification.main);
                                 MinecraftLaunch.Skin.Class.Fetchers.MicrosoftSkinFetcher skinFetcher = new(userProfile.Uuid.ToString());
                                 var bytes = await skinFetcher.GetSkinAsync();
                                 DateTime now = DateTime.Now;
@@ -268,17 +308,17 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                 var reInput = false;
                 if (string.IsNullOrEmpty(server) && string.IsNullOrWhiteSpace(server))
                 {
-                    Method.Toast(MainLang.YggdrasilServerUrlIsEmpty, Const.MainNotification, Avalonia.Controls.Notifications.NotificationType.Error);
+                    Method.Toast(MainLang.YggdrasilServerUrlIsEmpty, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                     reInput = true;
                 }
                 if (string.IsNullOrEmpty(email) && string.IsNullOrWhiteSpace(email))
                 {
-                    Method.Toast(MainLang.YggdrasilEmailIsEmpty, Const.MainNotification, Avalonia.Controls.Notifications.NotificationType.Error);
+                    Method.Toast(MainLang.YggdrasilEmailIsEmpty, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                     reInput = true;
                 }
                 if (string.IsNullOrEmpty(password) && string.IsNullOrWhiteSpace(password))
                 {
-                    Method.Toast(MainLang.YggdrasilPasswordIsEmpty, Const.MainNotification, Avalonia.Controls.Notifications.NotificationType.Error);
+                    Method.Toast(MainLang.YggdrasilPasswordIsEmpty, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                     reInput = true;
                 }
                 if (reInput)
@@ -291,7 +331,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                     try
                     {
                         YggdrasilAuthenticator authenticator = new(server, email, password);
-                        Method.Toast(MainLang.VerifyingAccount, Const.MainNotification);
+                        Method.Toast(MainLang.VerifyingAccount, Const.Notification.main);
                         yggdrasilAccounts = await authenticator.AuthenticateAsync();
                     }
                     catch (Exception ex)

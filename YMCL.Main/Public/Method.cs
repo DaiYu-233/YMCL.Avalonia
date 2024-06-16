@@ -14,9 +14,11 @@ using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Threading.Tasks;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Langs;
@@ -62,7 +64,7 @@ namespace YMCL.Main.Public
             {
                 var rd = (AvaloniaXamlLoader.Load(new Uri("avares://YMCL.Main/Public/Styles/LightTheme.axaml")) as ResourceDictionary)!;
                 Application.Current!.Resources.MergedDictionaries.Add(rd);
-                Application.Current.RequestedThemeVariant = Avalonia.Styling.ThemeVariant.Light;
+                Application.Current.RequestedThemeVariant = ThemeVariant.Light;
             }
             else if (theme == Theme.Dark)
             {
@@ -165,7 +167,7 @@ namespace YMCL.Main.Public
                 var path = textBox.Text;
                 if (!Directory.Exists(path) && isPrimaryButtonClick)
                 {
-                    Toast(MainLang.FolderNotExist, Const.MainNotification, NotificationType.Error);
+                    Toast(MainLang.FolderNotExist, Const.Notification.main, NotificationType.Error);
                     return null;
                 }
                 var folder = Path.GetFileName(path);
@@ -220,7 +222,7 @@ namespace YMCL.Main.Public
                 var path = textBox.Text;
                 if (!File.Exists(path) && isPrimaryButtonClick)
                 {
-                    Toast(MainLang.FileNotExist, Const.MainNotification, NotificationType.Error);
+                    Toast(MainLang.FileNotExist, Const.Notification.main, NotificationType.Error);
                     return null;
                 }
                 var fullName = Path.GetFileName(path);
@@ -336,7 +338,76 @@ namespace YMCL.Main.Public
         }
         public static void ShowShortException(string msg, Exception ex)
         {
-            Toast($"{msg}\n{ex.Message}", Const.MainNotification, NotificationType.Error);
+            Toast($"{msg}\n{ex.Message}", Const.Notification.main, NotificationType.Error);
+        }
+        public static void RestartApp()
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                UseShellExecute = true,
+                WorkingDirectory = Environment.CurrentDirectory,
+                FileName = Process.GetCurrentProcess().MainModule.FileName!
+            };
+            Process.Start(startInfo);
+            Environment.Exit(0);
+        }
+        public static double GetTotalMemory(Platform platform)
+        {
+            if (platform == Platform.Windows)
+            {
+                try
+                {
+                    long totalMemory = 0;
+                    using (var searcher = new ManagementObjectSearcher("select TotalVisibleMemorySize from Win32_OperatingSystem"))
+                    {
+                        foreach (ManagementObject share in searcher.Get())
+                        {
+                            totalMemory = Convert.ToInt64(share["TotalVisibleMemorySize"]);
+                        }
+                    }
+                    
+                    Console.WriteLine("系统最大内存: " + totalMemory);
+                    
+                    return totalMemory;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("获取系统内存信息时发生错误: " + ex.Message);
+                    return 0;
+                }
+            }
+            else if (platform == Platform.Linux)
+            {
+                // 尝试读取 /proc/meminfo 文件  
+                try
+                {
+                    string meminfo = File.ReadAllText("/proc/meminfo");
+
+                    // 使用 LINQ 查询来找到 "MemTotal" 行  
+                    var memTotalLine = meminfo.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
+                        .FirstOrDefault(line => line.StartsWith("MemTotal:"));
+
+                    // 如果找到 MemTotal 行，解析其值  
+                    if (memTotalLine != null)
+                    {
+                        // 提取 MemTotal 后面的数字，并转换为长整型  
+                        string memTotalValueStr = memTotalLine.Split(':')[1].Trim().Split(' ')[0];
+                        long memTotalValue = long.Parse(memTotalValueStr);
+
+                        return memTotalValue;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error reading /proc/meminfo: " + ex.Message);
+                    return 0;
+                }
+            }
+            return 0;
         }
     }
 }

@@ -23,13 +23,13 @@ namespace YMCL.Main.Views.Initialize
             Method.CreateFolder(Const.UserDataRootPath);
             if (!File.Exists(Const.SettingDataPath))
             {
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(new Public.Classes.Setting(), Formatting.Indented));
+                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(new Setting(), Formatting.Indented));
             }
             if (!File.Exists(Const.MinecraftFolderDataPath) || JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath)).Count == 0)
             {
                 Method.CreateFolder(Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft"));
                 File.WriteAllText(Const.MinecraftFolderDataPath, JsonConvert.SerializeObject(new List<string>() { Path.Combine(Process.GetCurrentProcess().MainModule.FileName, ".minecraft") }, Formatting.Indented));
-                var setting1 = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                var setting1 = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
                 setting1.MinecraftFolder = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft");
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting1, Formatting.Indented));
             }
@@ -51,16 +51,23 @@ namespace YMCL.Main.Views.Initialize
                 LangHelper.Current.ChangedCulture(setting.Language);
             }
 
-            Const.MainNotification = new WindowNotificationManager(GetTopLevel(Const.Window.main)) { MaxItems = 5, Position = NotificationPosition.BottomRight, /*FontFamily = (FontFamily)Application.Current.Resources["Font"]*/ };
+            Const.Notification.main = new WindowNotificationManager(GetTopLevel(Const.Window.main)) { MaxItems = 5, Position = NotificationPosition.BottomRight, /*FontFamily = (FontFamily)Application.Current.Resources["Font"]*/ };
             Method.SetAccentColor(Color.Parse("#0dc0a5"));
-            Method.ToggleTheme(Public.Theme.Light);
+            if (setting.Theme == Public.Theme.Light)
+            {
+                Method.ToggleTheme(Public.Theme.Light);
+            }
+            else if (setting.Theme == Public.Theme.Dark)
+            {
+                Method.ToggleTheme(Public.Theme.Dark);
+            }
         }
 
         public InitializeWindow()
         {
-            InitializeComponent();
             Init();
             DetectPlatform();
+            InitializeComponent();
             Const.Window.main.Show();
             Loaded += (_, _) =>
             {

@@ -175,9 +175,9 @@
                                     </DockPanel>
                                 </ui:NavigationViewItem>
                             </ui:NavigationView.MenuItems>
-							<Border ClipToBounds="True" CornerRadius="8">
-								<ui:Frame Name="FrameView" Background="{DynamicResource 2x}" />
-							</Border>
+                            <Border ClipToBounds="True" CornerRadius="8">
+                                <ui:Frame Name="FrameView" Background="{DynamicResource 2x}" />
+                            </Border>
                         </ui:NavigationView>
                     </DockPanel>
                 </Border>

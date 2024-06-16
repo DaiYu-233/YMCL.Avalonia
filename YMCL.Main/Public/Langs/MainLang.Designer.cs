@@ -61,6 +61,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 账户错误 的本地化字符串。
+        /// </summary>
+        public static string AccountError {
+            get {
+                return ResourceManager.GetString("AccountError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 账户名称不可为空 的本地化字符串。
         /// </summary>
         public static string AccountNameCannotBeNull {
@@ -106,6 +115,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 构建启动配置失败 的本地化字符串。
+        /// </summary>
+        public static string BuildLaunchConfigFail {
+            get {
+                return ResourceManager.GetString("BuildLaunchConfigFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 取消 的本地化字符串。
         /// </summary>
         public static string Cancel {
@@ -115,11 +133,56 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 无法打开浏览器 的本地化字符串。
+        /// </summary>
+        public static string CannotOpenBrowser {
+            get {
+                return ResourceManager.GetString("CannotOpenBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 色彩模式 的本地化字符串。
+        /// </summary>
+        public static string ColorMode {
+            get {
+                return ResourceManager.GetString("ColorMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 复制代码并打开浏览器 的本地化字符串。
         /// </summary>
         public static string CopyCodeAndOPenBrowser {
             get {
                 return ResourceManager.GetString("CopyCodeAndOPenBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 复制以下链接并粘贴至浏览器 的本地化字符串。
+        /// </summary>
+        public static string CopyUrlAndManualOpen {
+            get {
+                return ResourceManager.GetString("CopyUrlAndManualOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 创建游戏实例失败 的本地化字符串。
+        /// </summary>
+        public static string CreateGameEntryFail {
+            get {
+                return ResourceManager.GetString("CreateGameEntryFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 深色 的本地化字符串。
+        /// </summary>
+        public static string Dark {
+            get {
+                return ResourceManager.GetString("Dark", resourceCulture);
             }
         }
         
@@ -169,6 +232,24 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 跟随系统 的本地化字符串。
+        /// </summary>
+        public static string FollowSystem {
+            get {
+                return ResourceManager.GetString("FollowSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 游戏已退出 的本地化字符串。
+        /// </summary>
+        public static string GameExited {
+            get {
+                return ResourceManager.GetString("GameExited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 输入账户名称 的本地化字符串。
         /// </summary>
         public static string InputAccountName {
@@ -196,6 +277,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 语言 的本地化字符串。
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 启动 的本地化字符串。
         /// </summary>
         public static string Launch {
@@ -205,11 +295,56 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 启动失败 的本地化字符串。
+        /// </summary>
+        public static string LaunchFail {
+            get {
+                return ResourceManager.GetString("LaunchFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启动完成 的本地化字符串。
+        /// </summary>
+        public static string LaunchFinish {
+            get {
+                return ResourceManager.GetString("LaunchFinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启动游戏 的本地化字符串。
+        /// </summary>
+        public static string LaunchGame {
+            get {
+                return ResourceManager.GetString("LaunchGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启动进度 的本地化字符串。
+        /// </summary>
+        public static string LaunchProgress {
+            get {
+                return ResourceManager.GetString("LaunchProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 让YMCL选择合适的Java 的本地化字符串。
         /// </summary>
         public static string LetYMCLChooseJava {
             get {
                 return ResourceManager.GetString("LetYMCLChooseJava", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 浅色 的本地化字符串。
+        /// </summary>
+        public static string Light {
+            get {
+                return ResourceManager.GetString("Light", resourceCulture);
             }
         }
         
@@ -246,6 +381,24 @@ namespace YMCL.Main.Public.Langs {
         public static string ManualInput {
             get {
                 return ResourceManager.GetString("ManualInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 手动打开 的本地化字符串。
+        /// </summary>
+        public static string ManualOpen {
+            get {
+                return ResourceManager.GetString("ManualOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 最大内存 的本地化字符串。
+        /// </summary>
+        public static string MaxMem {
+            get {
+                return ResourceManager.GetString("MaxMem", resourceCulture);
             }
         }
         
@@ -322,6 +475,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似  个性化 的本地化字符串。
+        /// </summary>
+        public static string NavPersonalize {
+            get {
+                return ResourceManager.GetString("NavPersonalize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似  设置 的本地化字符串。
         /// </summary>
         public static string NavSetting {
@@ -336,6 +498,24 @@ namespace YMCL.Main.Public.Langs {
         public static string NeedToSelectMinecraftFolder {
             get {
                 return ResourceManager.GetString("NeedToSelectMinecraftFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未选择游戏 的本地化字符串。
+        /// </summary>
+        public static string NoChooseGame {
+            get {
+                return ResourceManager.GetString("NoChooseGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未选择游戏或无法找到游戏 的本地化字符串。
+        /// </summary>
+        public static string NoChooseGameOrCannotFindGame {
+            get {
+                return ResourceManager.GetString("NoChooseGameOrCannotFindGame", resourceCulture);
             }
         }
         
@@ -372,6 +552,15 @@ namespace YMCL.Main.Public.Langs {
         public static string RepeatItem {
             get {
                 return ResourceManager.GetString("RepeatItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ← 返回 的本地化字符串。
+        /// </summary>
+        public static string ReturnWithIcon {
+            get {
+                return ResourceManager.GetString("ReturnWithIcon", resourceCulture);
             }
         }
         
@@ -480,6 +669,33 @@ namespace YMCL.Main.Public.Langs {
         public static string VerifyingAccount {
             get {
                 return ResourceManager.GetString("VerifyingAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 版本列表 的本地化字符串。
+        /// </summary>
+        public static string VersionList {
+            get {
+                return ResourceManager.GetString("VersionList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 版本设置 的本地化字符串。
+        /// </summary>
+        public static string VersionSetting {
+            get {
+                return ResourceManager.GetString("VersionSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 等待游戏窗口出现 的本地化字符串。
+        /// </summary>
+        public static string WaitForGameWindowAppear {
+            get {
+                return ResourceManager.GetString("WaitForGameWindowAppear", resourceCulture);
             }
         }
         

@@ -106,11 +106,38 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 所有版本 的本地化字符串。
+        /// </summary>
+        public static string AllVersion {
+            get {
+                return ResourceManager.GetString("AllVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 自动安装 的本地化字符串。
+        /// </summary>
+        public static string AutoInstall {
+            get {
+                return ResourceManager.GetString("AutoInstall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 自动扫描 的本地化字符串。
         /// </summary>
         public static string AutoScan {
             get {
                 return ResourceManager.GetString("AutoScan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 开始安装 的本地化字符串。
+        /// </summary>
+        public static string BeginInstall {
+            get {
+                return ResourceManager.GetString("BeginInstall", resourceCulture);
             }
         }
         
@@ -160,7 +187,7 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
-        ///   查找类似 复制以下链接并粘贴至浏览器 的本地化字符串。
+        ///   查找类似 Ctrl + C 复制以下链接并粘贴至浏览器 的本地化字符串。
         /// </summary>
         public static string CopyUrlAndManualOpen {
             get {
@@ -250,6 +277,24 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 获取失败 的本地化字符串。
+        /// </summary>
+        public static string GetFail {
+            get {
+                return ResourceManager.GetString("GetFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 获取可安装列表失败 的本地化字符串。
+        /// </summary>
+        public static string GetInstallableVersionFail {
+            get {
+                return ResourceManager.GetString("GetInstallableVersionFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 输入账户名称 的本地化字符串。
         /// </summary>
         public static string InputAccountName {
@@ -277,11 +322,29 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 安装预览 的本地化字符串。
+        /// </summary>
+        public static string InstallPreview {
+            get {
+                return ResourceManager.GetString("InstallPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 语言 的本地化字符串。
         /// </summary>
         public static string Language {
             get {
                 return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 最新版本 的本地化字符串。
+        /// </summary>
+        public static string LatestVersion {
+            get {
+                return ResourceManager.GetString("LatestVersion", resourceCulture);
             }
         }
         
@@ -421,6 +484,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 Minecrat发生崩溃 的本地化字符串。
+        /// </summary>
+        public static string MineratCrashed {
+            get {
+                return ResourceManager.GetString("MineratCrashed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似  账户 的本地化字符串。
         /// </summary>
         public static string NavAccount {
@@ -502,6 +574,24 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 无附加安装 的本地化字符串。
+        /// </summary>
+        public static string NoAdditionalInstall {
+            get {
+                return ResourceManager.GetString("NoAdditionalInstall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 无可用项目 的本地化字符串。
+        /// </summary>
+        public static string NoAvailableItem {
+            get {
+                return ResourceManager.GetString("NoAvailableItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 未选择游戏 的本地化字符串。
         /// </summary>
         public static string NoChooseGame {
@@ -538,11 +628,56 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 远古版本 的本地化字符串。
+        /// </summary>
+        public static string OldVersion {
+            get {
+                return ResourceManager.GetString("OldVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 打开文件方式 的本地化字符串。
         /// </summary>
         public static string OpenFileWay {
             get {
                 return ResourceManager.GetString("OpenFileWay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 打开文件夹 的本地化字符串。
+        /// </summary>
+        public static string OpenFolder {
+            get {
+                return ResourceManager.GetString("OpenFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 预览版本 的本地化字符串。
+        /// </summary>
+        public static string PreviewVersion {
+            get {
+                return ResourceManager.GetString("PreviewVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正式版本 的本地化字符串。
+        /// </summary>
+        public static string ReleaseVersion {
+            get {
+                return ResourceManager.GetString("ReleaseVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 重新加载 的本地化字符串。
+        /// </summary>
+        public static string Reload {
+            get {
+                return ResourceManager.GetString("Reload", resourceCulture);
             }
         }
         
@@ -570,6 +705,15 @@ namespace YMCL.Main.Public.Langs {
         public static string ScanJavaSuccess {
             get {
                 return ResourceManager.GetString("ScanJavaSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 搜索关键词... 的本地化字符串。
+        /// </summary>
+        public static string SearchKeyword {
+            get {
+                return ResourceManager.GetString("SearchKeyword", resourceCulture);
             }
         }
         
@@ -646,6 +790,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 用户数据文件夹 的本地化字符串。
+        /// </summary>
+        public static string UserDataFolder {
+            get {
+                return ResourceManager.GetString("UserDataFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 验证代码 的本地化字符串。
         /// </summary>
         public static string VerificationCode {
@@ -687,6 +840,15 @@ namespace YMCL.Main.Public.Langs {
         public static string VersionSetting {
             get {
                 return ResourceManager.GetString("VersionSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 查看更新内容 的本地化字符串。
+        /// </summary>
+        public static string ViewUpdatedContent {
+            get {
+                return ResourceManager.GetString("ViewUpdatedContent", resourceCulture);
             }
         }
         

@@ -279,7 +279,7 @@
     <value>手动打开</value>
   </data>
   <data name="CopyUrlAndManualOpen" xml:space="preserve">
-    <value>复制以下链接并粘贴至浏览器</value>
+    <value>Ctrl + C 复制以下链接并粘贴至浏览器</value>
   </data>
   <data name="VersionList" xml:space="preserve">
     <value>版本列表</value>
@@ -322,5 +322,59 @@
   </data>
   <data name="LaunchFail" xml:space="preserve">
     <value>启动失败</value>
+  </data>
+  <data name="UserDataFolder" xml:space="preserve">
+    <value>用户数据文件夹</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>打开文件夹</value>
+  </data>
+  <data name="AutoInstall" xml:space="preserve">
+    <value>自动安装</value>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>最新版本</value>
+  </data>
+  <data name="PreviewVersion" xml:space="preserve">
+    <value>预览版本</value>
+  </data>
+  <data name="ReleaseVersion" xml:space="preserve">
+    <value>正式版本</value>
+  </data>
+  <data name="GetInstallableVersionFail" xml:space="preserve">
+    <value>获取可安装列表失败</value>
+  </data>
+  <data name="OldVersion" xml:space="preserve">
+    <value>远古版本</value>
+  </data>
+  <data name="AllVersion" xml:space="preserve">
+    <value>所有版本</value>
+  </data>
+  <data name="SearchKeyword" xml:space="preserve">
+    <value>搜索关键词...</value>
+  </data>
+  <data name="InstallPreview" xml:space="preserve">
+    <value>安装预览</value>
+  </data>
+  <data name="NoAdditionalInstall" xml:space="preserve">
+    <value>无附加安装</value>
+  </data>
+  <data name="BeginInstall" xml:space="preserve">
+    <value>开始安装</value>
+  </data>
+  <data name="ViewUpdatedContent" xml:space="preserve">
+    <value>查看更新内容</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>重新加载</value>
+  </data>
+  <data name="GetFail" xml:space="preserve">
+    <value>获取失败</value>
+  </data>
+  <data name="NoAvailableItem" xml:space="preserve">
+    <value>无可用项目</value>
+  </data>
+  <data name="MineratCrashed" xml:space="preserve">
+    <value>Minecrat发生崩溃</value>
   </data>
 </root>

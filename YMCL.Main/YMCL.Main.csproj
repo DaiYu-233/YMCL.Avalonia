@@ -21,27 +21,6 @@
     <RepositoryUrl>https://github.com/DaiYu-233/YMCL.Avalonia</RepositoryUrl>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Public\Assets\Font.ttc" />
-    <None Remove="Public\Assets\Harmony.otf" />
-    <None Remove="Public\Assets\Harmony.ttf" />
-    <None Remove="Public\Assets\MiSans-Regular.otf" />
-    <None Remove="Public\Assets\MiSans-Thin.otf" />
-    <None Remove="Public\Assets\MiSans.otf" />
-    <None Remove="Public\Assets\MiSans.ttf" />
-    <None Remove="Public\Assets\MiSans1.otf" />
-    <None Remove="Public\Assets\YMCL-Icon.ico" />
-    <None Remove="Public\Assets\YMCL-Icon.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AvaloniaResource Include="Public\Assets\MiSans-Regular.otf" />
-    <AvaloniaResource Include="Public\Assets\YMCL-Icon.ico" />
-    <AvaloniaResource Include="Public\Assets\YMCL-Icon.png" />
-    <AvaloniaResource Include="Public\Assets\YMCL-Icon.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Public\Assets\YMCL-Icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +42,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>MainLang.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\Main\Pages\Download\Pages\AutoInstall\AutoInstallPage.axaml.cs">
+      <DependentUpon>AutoInstallPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Public\Langs\MainLang.resx">
@@ -71,7 +54,29 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Update="Public\Assets\YMCL-Icon.png">
+    <AvaloniaResource Remove="Public\Assets\YMCL-Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Remove="Public\Assets\YMCL-Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Public\Assets\MiSans-Regular.otf" />
+    <None Remove="Public\Assets\TitleBar-Icon.png" />
+    <None Remove="Public\Assets\Transparent-Icon.png" />
+    <None Remove="Public\Assets\YCML-Icon.ico" />
+    <None Remove="Public\Assets\YMCL-Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Public\Assets\MiSans-Regular.otf" />
+    <AvaloniaResource Include="Public\Assets\TitleBar-Icon.png" />
+    <AvaloniaResource Include="Public\Assets\Transparent-Icon.png" />
+    <AvaloniaResource Include="Public\Assets\YMCL-Icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </AvaloniaResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Public\Assets\YCML-Icon.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

@@ -4,11 +4,18 @@ using System;
 using YMCL.Main.Public.Langs;
 using Avalonia;
 using YMCL.Main.Views.Main.Pages.Launch;
+using System.Collections.Concurrent;
+using System.Timers;
+using Avalonia.Threading;
 
 namespace YMCL.Main.Public.Controls.WindowTask
 {
     public partial class WindowTask : Window
     {
+        private readonly Timer _debounceTimer;
+        private readonly ConcurrentQueue<string> _textQueue = new ConcurrentQueue<string>();
+        private bool _isUpdating;
+        public bool isFinish = false;
         public WindowTask(string name, bool valueProgress = true)
         {
             InitializeComponent();
@@ -19,7 +26,10 @@ namespace YMCL.Main.Public.Controls.WindowTask
             }
             Closing += (s, e) =>
             {
-                e.Cancel = true;
+                if (!isFinish)
+                {
+                    e.Cancel = true;
+                }
             };
             Loaded += (_, _) =>
             {
@@ -35,23 +45,52 @@ namespace YMCL.Main.Public.Controls.WindowTask
                     WindowState = WindowState.Normal;
                 }
             };
+
+            _debounceTimer = new Timer(500); // 设置防抖时间间隔为0.5秒  
+            _debounceTimer.Elapsed += DebounceTimerElapsed;
+            _debounceTimer.AutoReset = false; // 不自动重置，以便我们可以控制何时再次启动它  
+
             Show();
             Activate();
         }
-        public void UpdateTextProgress(string text, bool time = true)
+
+        //public void Finish()
+        //{
+        //    isFinish = true;
+        //}
+        
+        public void UpdateTextProgress(string text, bool includeTime = true)
         {
-            DateTime now = DateTime.Now;
-            if (time)
+            _textQueue.Enqueue(GetTextToAdd(text, includeTime));
+
+            if (!_isUpdating)
             {
-                ProgressTextBox.Text += $"[{now.ToString("HH:mm:ss")}] {text}\n";
+                _isUpdating = true;
+                _debounceTimer.Start();
             }
-            else
+        }
+
+        private string GetTextToAdd(string text, bool includeTime)
+        {
+            return includeTime ? $"[{DateTime.Now.ToString("HH:mm:ss")}] {text}\n" : $"{text}\n";
+        }
+
+        private void DebounceTimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            _isUpdating = false;
+
+            string combinedText = string.Empty;
+            while (_textQueue.TryDequeue(out string textToAdd))
             {
-                ProgressTextBox.Text += $"{text}\n";
+                combinedText += textToAdd;
             }
-            ProgressTextBox.Focus();
-            ProgressTextBox.CaretIndex = ProgressTextBox.Text.Length;
-            //ProgressTextBox.ScrollToLine((int)ProgressTextBox.LineHeight);
+
+            Dispatcher.UIThread.Post(() =>
+            {
+                ProgressTextBox.Text += combinedText;
+                ProgressTextBox.Focus();
+                ProgressTextBox.CaretIndex = ProgressTextBox.Text.Length;
+            });
         }
         public void UpdateValueProgress(double progress)
         {

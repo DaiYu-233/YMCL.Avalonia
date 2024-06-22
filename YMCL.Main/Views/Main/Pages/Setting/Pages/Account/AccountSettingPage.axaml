@@ -16,7 +16,6 @@
                 <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
             </Transitions>
         </Border.Transitions>
-        <ScrollViewer>
             <StackPanel Margin="10" Spacing="10">
                 <DockPanel>
                     <Button
@@ -68,6 +67,5 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </StackPanel>
-        </ScrollViewer>
     </Border>
 </UserControl>

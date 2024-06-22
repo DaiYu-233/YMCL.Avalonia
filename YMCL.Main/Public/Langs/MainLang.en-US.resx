@@ -192,4 +192,155 @@
   <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
     <value>Email cannot be empty</value>
   </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="InputFolderPath" xml:space="preserve">
+    <value>Type the folder path</value>
+  </data>
+  <data name="FolderNotExist" xml:space="preserve">
+    <value>Folder does not exist</value>
+  </data>
+  <data name="InputFilePath" xml:space="preserve">
+    <value>input file path</value>
+  </data>
+  <data name="FileNotExist" xml:space="preserve">
+    <value>File does not exist</value>
+  </data>
+  <data name="ManualAdd" xml:space="preserve">
+    <value>added manually</value>
+  </data>
+  <data name="SelectJava" xml:space="preserve">
+    <value>Choose Java</value>
+  </data>
+  <data name="TheJavaIsError" xml:space="preserve">
+    <value>Java is incorrect</value>
+  </data>
+  <data name="NavAccount" xml:space="preserve">
+    <value> Account</value>
+  </data>
+  <data name="AddNewAccount" xml:space="preserve">
+    <value>Add New Account</value>
+  </data>
+  <data name="OfflineLogin" xml:space="preserve">
+    <value>Log in offline</value>
+  </data>
+  <data name="MicrosoftLogin" xml:space="preserve">
+    <value>Microsoft Login</value>
+  </data>
+  <data name="ThirdPartyLogin" xml:space="preserve">
+    <value>The third party signin</value>
+  </data>
+  <data name="SelectAccountType" xml:space="preserve">
+    <value>Choose account type</value>
+  </data>
+  <data name="AccountNameCannotBeNull" xml:space="preserve">
+    <value>Account name cannot be empty</value>
+  </data>
+  <data name="InputAccountName" xml:space="preserve">
+    <value>Enter Account Name</value>
+  </data>
+  <data name="VerificationCode" xml:space="preserve">
+    <value>Verification code</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="WaitForMicrosoftVerification" xml:space="preserve">
+    <value>Waiting for Microsoft account verification to complete
+Jump to the browser to complete verification</value>
+  </data>
+  <data name="LoginFail" xml:space="preserve">
+    <value>Login failed</value>
+  </data>
+  <data name="VerifyingAccount" xml:space="preserve">
+    <value>Verifying account</value>
+  </data>
+  <data name="VerificationServer" xml:space="preserve">
+    <value>Validation Server</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="AccountPassword" xml:space="preserve">
+    <value>Account Password</value>
+  </data>
+  <data name="NavPersonalize" xml:space="preserve">
+    <value> Customization</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="FollowSystem" xml:space="preserve">
+    <value>Follow the system</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="MaxMem" xml:space="preserve">
+    <value>Maximum memory</value>
+  </data>
+  <data name="CannotOpenBrowser" xml:space="preserve">
+    <value>Unable to open browser</value>
+  </data>
+  <data name="ManualOpen" xml:space="preserve">
+    <value>Hand Open</value>
+  </data>
+  <data name="VersionList" xml:space="preserve">
+    <value>version list</value>
+  </data>
+  <data name="VersionSetting" xml:space="preserve">
+    <value>Version Settings</value>
+  </data>
+  <data name="LaunchGame" xml:space="preserve">
+    <value>Start System</value>
+  </data>
+  <data name="NoChooseGame" xml:space="preserve">
+    <value>No game selected</value>
+  </data>
+  <data name="ReturnWithIcon" xml:space="preserve">
+    <value>← Go back</value>
+  </data>
+  <data name="CreateGameEntryFail" xml:space="preserve">
+    <value>Failed to create game instance</value>
+  </data>
+  <data name="NoChooseGameOrCannotFindGame" xml:space="preserve">
+    <value>No game selected or could not be found</value>
+  </data>
+  <data name="AccountError" xml:space="preserve">
+    <value>Account Error</value>
+  </data>
+  <data name="LaunchProgress" xml:space="preserve">
+    <value>Startup</value>
+  </data>
+  <data name="BuildLaunchConfigFail" xml:space="preserve">
+    <value>Failed to build startup configuration</value>
+  </data>
+  <data name="GameExited" xml:space="preserve">
+    <value>Game exited</value>
+  </data>
+  <data name="WaitForGameWindowAppear" xml:space="preserve">
+    <value>Wait for the game window to appear</value>
+  </data>
+  <data name="LaunchFinish" xml:space="preserve">
+    <value>Startup complete</value>
+  </data>
+  <data name="LaunchFail" xml:space="preserve">
+    <value>Start failure</value>
+  </data>
+  <data name="CopyCodeAndOPenBrowser" xml:space="preserve">
+    <value>Copy the code and open your browser</value>
+  </data>
+  <data name="ColorMode" xml:space="preserve">
+    <value>Color mode</value>
+  </data>
+  <data name="CopyUrlAndManualOpen" xml:space="preserve">
+    <value>Ctrl + C Copy and paste the following link into your browser</value>
+  </data>
 </root>

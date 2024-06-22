@@ -105,8 +105,9 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                 Method.Toast(MainLang.SuccessRemove + "£º" + path, Const.Notification.main, NotificationType.Success);
                 if (minecraftFolders.Count == 0)
                 {
-                    minecraftFolders.Add(Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft"));
-                    Method.Toast(Public.Langs.MainLang.SuccessAdd + "£º" + Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft"), Const.Notification.main, NotificationType.Success);
+                    var a = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft");
+                    minecraftFolders.Add(a);
+                    Method.Toast(MainLang.SuccessAdd + "£º" + a, Const.Notification.main, NotificationType.Success);
                 }
                 MinecraftFolderComboBox.Items.Clear();
                 minecraftFolders.ForEach(folder =>
@@ -227,6 +228,11 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
             {
                 MinecraftFolderComboBox.Items.Add(folder);
             });
+            if (javas.Contains(null))
+            {
+                javas.RemoveAll(item => item == null);
+                File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
+            }
             JavaComboBox.Items.Add(new JavaEntry() { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "All" });
             javas.ForEach(java =>
             {

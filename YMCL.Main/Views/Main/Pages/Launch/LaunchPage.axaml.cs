@@ -29,6 +29,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
     {
         List<string> minecraftFolders = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath));
         bool _firstOpenVersionList = true;
+        bool _updatingMcFolder = false;
         public LaunchPage()
         {
             InitializeComponent();
@@ -60,31 +61,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                 {
                     MinecraftFolderComboBox.SelectedItem = setting.MinecraftFolder;
                 }
-                IGameResolver gameResolver = new GameResolver(setting.MinecraftFolder);
-                var list = gameResolver.GetGameEntitys();
-                VersionListView.Items.Clear();
-                var index = 0;
-                var a = 0;
-                foreach (var version in list)
-                {
-                    VersionListView.Items.Add(version);
-                    if (setting.Version != null && version.Id == setting.Version)
-                    {
-                        index = a;
-                    }
-                    a++;
-                }
-                if (setting.Version != null)
-                {
-                    VersionListView.SelectedIndex = index;
-                }
-                else
-                {
-                    if (!VersionListView.Items.Contains(setting.Version) && VersionListView.Items.Count > 0)
-                    {
-                        VersionListView.SelectedIndex = 0;
-                    }
-                }
+                LoadVersions();
             };
             AccountComboBox.SelectionChanged += (s, e) =>
             {
@@ -111,16 +88,16 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                 }
                 setting.MinecraftFolder = MinecraftFolderComboBox.SelectedItem.ToString();
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                _updatingMcFolder = true;
+                LoadVersions();
             };
-            VersionListBtn.Click += async (s, e) =>
+            VersionListBtn.Click += (s, e) =>
             {
                 if (_firstOpenVersionList)
                 {
                     VersionListRoot.Margin = new Avalonia.Thickness(Root.Bounds.Width, 10, -1 * Root.Bounds.Width, 10);
-                    await Task.Delay(200);
                     VersionListRoot.IsVisible = true;
                     _firstOpenVersionList = false;
-                    await Task.Delay(200);
                     VersionListRoot.Margin = new Avalonia.Thickness(10);
                 }
                 else
@@ -134,6 +111,11 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             };
             VersionListView.SelectionChanged += async (s, e) =>
             {
+                if (_updatingMcFolder)
+                {
+                    _updatingMcFolder = false;
+                    return;
+                }
                 if (VersionListView.SelectedItem != null)
                 {
                     var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
@@ -145,6 +127,35 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                 VersionListRoot.Margin = new Avalonia.Thickness(Root.Bounds.Width, 10, -1 * Root.Bounds.Width, 10);
             };
             LaunchBtn.Click += (s, e) => { _ = LaunchAsync(); };
+        }
+        void LoadVersions()
+        {
+            var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+            IGameResolver gameResolver = new GameResolver(setting.MinecraftFolder);
+            var list = gameResolver.GetGameEntitys();
+            VersionListView.Items.Clear();
+            var index = 0;
+            var a = 0;
+            foreach (var version in list)
+            {
+                VersionListView.Items.Add(version);
+                if (setting.Version != null && version.Id == setting.Version)
+                {
+                    index = a;
+                }
+                a++;
+            }
+            if (setting.Version != null)
+            {
+                VersionListView.SelectedIndex = index;
+            }
+            else
+            {
+                if (!VersionListView.Items.Contains(setting.Version) && VersionListView.Items.Count > 0)
+                {
+                    VersionListView.SelectedIndex = 0;
+                }
+            }
         }
         void LoadAccounts()
         {
@@ -353,7 +364,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                 return;
             }
 
-            Method.Toast($"java:{l_javaPath},mem:{l_maxMem},core:{l_enableIndependencyCore},mcPath:{l_mcPath}",Const.Notification.main);
+            Method.Toast($"java:{l_javaPath},mem:{l_maxMem},core:{l_enableIndependencyCore},mcPath:{l_mcPath}", Const.Notification.main);
 
             Launcher launcher = new(gameResolver, config);
 
@@ -370,20 +381,26 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                             Dispatcher.UIThread.InvokeAsync(() =>
                             {
                                 Method.Toast($"{MainLang.GameExited}£º{args.ExitCode}", Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Information);
-                                task.Hide();
-                                Const.Window.main.Focus();
 
-                                //if (args.ExitCode == 1)
-                                //{
-                                //    var crashAnalyzer = new GameCrashAnalyzer(version, aloneCore);
-                                //    var reports = crashAnalyzer.AnalysisLogs();
-                                //    var msg = string.Empty;
-                                //    foreach (var report in reports)
-                                //    {
-                                //        msg += $"\n{report.CrashCauses}";
-                                //    }
-                                //    MessageBoxX.Show($"{MainLang.MinecraftCrash}\n{msg}", "Yu Minecraft Launcher");
-                                //}
+                                if (args.ExitCode == 0)
+                                {
+                                    task.Hide();
+                                    Const.Window.main.Focus();
+                                }
+                                else
+                                {
+                                    //var crashAnalyzer = new GameCrashAnalyzer(version, aloneCore);
+                                    //var reports = crashAnalyzer.AnalysisLogs();
+                                    //var msg = string.Empty;
+                                    //foreach (var report in reports)
+                                    //{
+                                    //    msg += $"\n{report.CrashCauses}";
+                                    //}
+                                    //MessageBoxX.Show($"{MainLang.MinecraftCrash}\n{msg}", "Yu Minecraft Launcher");
+
+                                    task.UpdateTextProgress($"YMCL ---> {MainLang.MineratCrashed}");
+                                    task.isFinish=true;
+                                }
                             });
                         };
                         watcher.OutputLogReceived += async (_, args) =>
@@ -415,7 +432,6 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                     });
                 }
             });
-            task.Hide();
             LaunchBtn.IsEnabled = true;
         }
     }

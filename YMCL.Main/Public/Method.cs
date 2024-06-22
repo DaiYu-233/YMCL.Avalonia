@@ -81,10 +81,12 @@ namespace YMCL.Main.Public
                 directoryInfo.Create();
             }
         }
-        public static void PageLoadAnimation((double, double, double, double) original, (double, double, double, double) target, TimeSpan time, Control control, bool visibility = false)
+        public static async void PageLoadAnimation((double, double, double, double) original, (double, double, double, double) target, TimeSpan time, Control control, bool visibility = false)
         {
             var (ol, ot, or, ob) = original;
             var (tl, tt, tr, tb) = target;
+
+            var transitions = control.Transitions;
 
             if (control != null && control.Transitions != null)
             {
@@ -109,6 +111,8 @@ namespace YMCL.Main.Public
                 }
                 control.Margin = new Thickness(tl, tt, tr, tb);
                 control.Opacity = 1;
+                await Task.Delay(time);
+                control.Transitions = transitions;
             }
         }
         public static void Toast(string msg, WindowNotificationManager notification, NotificationType type = NotificationType.Information, bool time = true, string title = "Yu Minecraft Launcher")
@@ -408,6 +412,33 @@ namespace YMCL.Main.Public
                 }
             }
             return 0;
+        }
+        public static double GetDirectoryLength(string dirPath)
+        {
+            //判断给定的路径是否存在,如果不存在则退出
+            if (!Directory.Exists(dirPath))
+                return 0;
+            double len = 0;
+
+            //定义一个DirectoryInfo对象
+            DirectoryInfo di = new DirectoryInfo(dirPath);
+
+            //通过GetFiles方法,获取di目录中的所有文件的大小
+            foreach (var fi in di.GetFiles())
+            {
+                len += fi.Length;
+            }
+
+            //获取di中所有的文件夹,并存到一个新的对象数组中,以进行递归
+            DirectoryInfo[] dis = di.GetDirectories();
+            if (dis.Length > 0)
+            {
+                for (int i = 0; i < dis.Length; i++)
+                {
+                    len += GetDirectoryLength(dis[i].FullName);
+                }
+            }
+            return len;
         }
     }
 }

@@ -192,4 +192,155 @@
   <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
     <value>メールアドレスを空にすることはできません</value>
   </data>
+  <data name="Ok" xml:space="preserve">
+    <value>確認</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="InputFolderPath" xml:space="preserve">
+    <value>フォルダパスを入力してください</value>
+  </data>
+  <data name="FolderNotExist" xml:space="preserve">
+    <value>ディレクトリはありません</value>
+  </data>
+  <data name="InputFilePath" xml:space="preserve">
+    <value>ファイルパスを入力してください</value>
+  </data>
+  <data name="FileNotExist" xml:space="preserve">
+    <value>ファイルが存在しません。ローカルファイルの場所を確認してください</value>
+  </data>
+  <data name="ManualAdd" xml:space="preserve">
+    <value>手動で追加してください</value>
+  </data>
+  <data name="SelectJava" xml:space="preserve">
+    <value>Javaを選択してください</value>
+  </data>
+  <data name="TheJavaIsError" xml:space="preserve">
+    <value>Javaが正しくありません</value>
+  </data>
+  <data name="NavAccount" xml:space="preserve">
+    <value> アカウント</value>
+  </data>
+  <data name="AddNewAccount" xml:space="preserve">
+    <value>新しいアカウントを追加</value>
+  </data>
+  <data name="OfflineLogin" xml:space="preserve">
+    <value>オフラインでログイン</value>
+  </data>
+  <data name="MicrosoftLogin" xml:space="preserve">
+    <value>Microsoftログイン</value>
+  </data>
+  <data name="ThirdPartyLogin" xml:space="preserve">
+    <value>サードパーティのログイン</value>
+  </data>
+  <data name="SelectAccountType" xml:space="preserve">
+    <value>アカウントの種類を選択してください</value>
+  </data>
+  <data name="AccountNameCannotBeNull" xml:space="preserve">
+    <value>アカウント名を空白にすることはできません</value>
+  </data>
+  <data name="InputAccountName" xml:space="preserve">
+    <value>アカウント名を入力してください</value>
+  </data>
+  <data name="VerificationCode" xml:space="preserve">
+    <value>コードを確認してください</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>読み込み中...</value>
+  </data>
+  <data name="WaitForMicrosoftVerification" xml:space="preserve">
+    <value>Microsoftアカウントの認証が完了するのを待っています
+ブラウザに移動して認証を完了してください</value>
+  </data>
+  <data name="LoginFail" xml:space="preserve">
+    <value>ログイン失敗</value>
+  </data>
+  <data name="VerifyingAccount" xml:space="preserve">
+    <value>アカウントを認証しています</value>
+  </data>
+  <data name="VerificationServer" xml:space="preserve">
+    <value>認証サーバー</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>メールアドレス</value>
+  </data>
+  <data name="AccountPassword" xml:space="preserve">
+    <value>アカウントパスワード</value>
+  </data>
+  <data name="NavPersonalize" xml:space="preserve">
+    <value> パーソナライズ</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>言語</value>
+  </data>
+  <data name="ColorMode" xml:space="preserve">
+    <value>カラーモード</value>
+  </data>
+  <data name="FollowSystem" xml:space="preserve">
+    <value>システムに従う</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>ライト</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>深い色合い</value>
+  </data>
+  <data name="MaxMem" xml:space="preserve">
+    <value>最大メモリ</value>
+  </data>
+  <data name="CannotOpenBrowser" xml:space="preserve">
+    <value>ブラウザを開けません</value>
+  </data>
+  <data name="ManualOpen" xml:space="preserve">
+    <value>手動で開きます</value>
+  </data>
+  <data name="VersionList" xml:space="preserve">
+    <value>バージョンリスト</value>
+  </data>
+  <data name="VersionSetting" xml:space="preserve">
+    <value>バージョン設定</value>
+  </data>
+  <data name="LaunchGame" xml:space="preserve">
+    <value>ゲームを起動してください</value>
+  </data>
+  <data name="NoChooseGame" xml:space="preserve">
+    <value>ゲームが選択されていません</value>
+  </data>
+  <data name="ReturnWithIcon" xml:space="preserve">
+    <value>← 戻る</value>
+  </data>
+  <data name="CreateGameEntryFail" xml:space="preserve">
+    <value>ゲームインスタンスの作成に失敗しました</value>
+  </data>
+  <data name="NoChooseGameOrCannotFindGame" xml:space="preserve">
+    <value>ゲームが選択されていないか、見つかりませんでした</value>
+  </data>
+  <data name="AccountError" xml:space="preserve">
+    <value>アカウントエラー</value>
+  </data>
+  <data name="LaunchProgress" xml:space="preserve">
+    <value>ローンチの進行状況</value>
+  </data>
+  <data name="BuildLaunchConfigFail" xml:space="preserve">
+    <value>スタートアップ構成の構築に失敗しました</value>
+  </data>
+  <data name="GameExited" xml:space="preserve">
+    <value>ゲームが終了しました</value>
+  </data>
+  <data name="WaitForGameWindowAppear" xml:space="preserve">
+    <value>ゲームウィンドウが表示されるまでお待ちください</value>
+  </data>
+  <data name="LaunchFinish" xml:space="preserve">
+    <value>スタートアップが完了しました</value>
+  </data>
+  <data name="LaunchFail" xml:space="preserve">
+    <value>起動に失敗しました</value>
+  </data>
+  <data name="CopyCodeAndOPenBrowser" xml:space="preserve">
+    <value>コードをコピーしてブラウザを開きます</value>
+  </data>
+  <data name="CopyUrlAndManualOpen" xml:space="preserve">
+    <value>Ctrl + C 次のリンクをコピーしてブラウザに貼り付けてください</value>
+  </data>
 </root>

@@ -27,10 +27,10 @@ public partial class MainWindow : Window
             if (Const.Platform != Platform.Windows)
             {
                 TitleBar.IsVisible = false;
-                TitleText.IsVisible = false;
+                TitleRoot.IsVisible = false;
                 Root.CornerRadius = new CornerRadius(0, 0, 8, 8);
             }
-            else
+            else 
             {
                 WindowState = WindowState.Maximized;
                 WindowState = WindowState.Normal;

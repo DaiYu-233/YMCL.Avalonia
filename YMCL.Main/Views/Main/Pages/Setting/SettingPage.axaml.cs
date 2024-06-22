@@ -15,6 +15,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting
         Pages.Launch.LaunchSettingPage launchSettingPage = new();
         PersonalizeSettingPage personalizeSettingPage = new();
         Pages.Account.AccountSettingPage accountSettingPage = new();
+        Pages.Launcher.LauncherSettingPage launcherSettingPage = new();
         public SettingPage()
         {
             InitializeComponent();
@@ -46,6 +47,9 @@ namespace YMCL.Main.Views.Main.Pages.Setting
                     case "account":
                         accountSettingPage.Root.IsVisible = false;
                         FrameView.Content = accountSettingPage; break;
+                    case "launcher":
+                        launcherSettingPage.Root.IsVisible = false;
+                        FrameView.Content = launcherSettingPage; break;
                 }
             };
         }

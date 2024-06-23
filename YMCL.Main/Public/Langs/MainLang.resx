@@ -377,4 +377,25 @@
   <data name="MineratCrashed" xml:space="preserve">
     <value>Minecrat发生崩溃</value>
   </data>
+  <data name="TheVersionNameWillBeRenamedTo" xml:space="preserve">
+    <value>版本名称将被重命名为：</value>
+  </data>
+  <data name="IncludeSpecialWord" xml:space="preserve">
+    <value>包含特殊字符</value>
+  </data>
+  <data name="FolderAlreadyExists" xml:space="preserve">
+    <value>文件夹已存在</value>
+  </data>
+  <data name="InstallFail" xml:space="preserve">
+    <value>安装失败</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>安装</value>
+  </data>
+  <data name="InstallFinish" xml:space="preserve">
+    <value>安装完成</value>
+  </data>
+  <data name="CannotFandRightJava" xml:space="preserve">
+    <value>无法找到合适Java</value>
+  </data>
 </root>

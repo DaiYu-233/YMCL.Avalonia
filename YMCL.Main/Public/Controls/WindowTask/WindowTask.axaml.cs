@@ -20,6 +20,7 @@ namespace YMCL.Main.Public.Controls.WindowTask
         {
             InitializeComponent();
             TitleText.Text = name;
+            Title = name;
             if (!valueProgress)
             {
                 ValueProgressRoot.IsVisible = false;
@@ -38,6 +39,7 @@ namespace YMCL.Main.Public.Controls.WindowTask
                     TitleBar.IsVisible = false;
                     TitleText.IsVisible = false;
                     Root.CornerRadius = new CornerRadius(0, 0, 8, 8);
+                    ValueProgressRoot.Margin = new Thickness(10, 10, 10, 5);
                 }
                 else
                 {
@@ -58,7 +60,10 @@ namespace YMCL.Main.Public.Controls.WindowTask
         //{
         //    isFinish = true;
         //}
-        
+        public void Finish()
+        {
+            isFinish = true;
+        }
         public void UpdateTextProgress(string text, bool includeTime = true)
         {
             _textQueue.Enqueue(GetTextToAdd(text, includeTime));
@@ -75,7 +80,7 @@ namespace YMCL.Main.Public.Controls.WindowTask
             return includeTime ? $"[{DateTime.Now.ToString("HH:mm:ss")}] {text}\n" : $"{text}\n";
         }
 
-        private void DebounceTimerElapsed(object sender, ElapsedEventArgs e)
+        private void DebounceTimerElapsed(object? sender, ElapsedEventArgs e)
         {
             _isUpdating = false;
 
@@ -104,6 +109,7 @@ namespace YMCL.Main.Public.Controls.WindowTask
         public void UpdateTitle(string title)
         {
             TitleText.Text = title;
+            Title = title;
         }
     }
 }

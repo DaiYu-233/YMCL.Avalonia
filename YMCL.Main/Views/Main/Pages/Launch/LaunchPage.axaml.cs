@@ -265,6 +265,10 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                 {
                     l_javaPath = setting.Java.JavaPath;
                 }
+                if (l_javaPath == MainLang.LetYMCLChooseJava)
+                {
+                    Method.Toast(MainLang.CannotFandRightJava, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error); return;
+                }
             }
             else
             {
@@ -281,7 +285,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             l_enableIndependencyCore = setting.EnableIndependencyCore;
 
             var task = new WindowTask(MainLang.LaunchProgress, false);
-            task.UpdateTextProgress("---> YMCL", false);
+            task.UpdateTextProgress("-----> YMCL", false);
             task.UpdateTextProgress(MainLang.VerifyingAccount);
 
             var accountData = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath))[setting.AccountSelectionIndex];
@@ -380,7 +384,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                         {
                             Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Method.Toast($"{MainLang.GameExited}£º{args.ExitCode}", Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Information);
+                                Method.Toast($"{MainLang.GameExited}ï¼š{args.ExitCode}", Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Information);
 
                                 if (args.ExitCode == 0)
                                 {
@@ -398,8 +402,9 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                                     //}
                                     //MessageBoxX.Show($"{MainLang.MinecraftCrash}\n{msg}", "Yu Minecraft Launcher");
 
-                                    task.UpdateTextProgress($"YMCL ---> {MainLang.MineratCrashed}");
-                                    task.isFinish=true;
+                                    task.UpdateTextProgress(string.Empty, false);
+                                    task.UpdateTextProgress($"YMCL -----> {MainLang.MineratCrashed}");
+                                    task.isFinish = true;
                                 }
                             });
                         };

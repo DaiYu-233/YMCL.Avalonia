@@ -7,7 +7,6 @@
     xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
     xmlns:uc="clr-namespace:YMCL.Main.Public.Controls"
     xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
-    Title="WindowTask"
     Width="700"
     Height="420"
     ExtendClientAreaChromeHints="NoChrome"
@@ -77,7 +76,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 FontFamily="{DynamicResource Font}"
-                FontSize="16" />
+                FontSize="14" />
         </Grid>
     </Border>
 </Window>

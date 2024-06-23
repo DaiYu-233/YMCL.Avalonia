@@ -160,6 +160,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 无法找到合适Java 的本地化字符串。
+        /// </summary>
+        public static string CannotFandRightJava {
+            get {
+                return ResourceManager.GetString("CannotFandRightJava", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 无法打开浏览器 的本地化字符串。
         /// </summary>
         public static string CannotOpenBrowser {
@@ -250,6 +259,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 文件夹已存在 的本地化字符串。
+        /// </summary>
+        public static string FolderAlreadyExists {
+            get {
+                return ResourceManager.GetString("FolderAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 文件夹不存在 的本地化字符串。
         /// </summary>
         public static string FolderNotExist {
@@ -295,6 +313,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 包含特殊字符 的本地化字符串。
+        /// </summary>
+        public static string IncludeSpecialWord {
+            get {
+                return ResourceManager.GetString("IncludeSpecialWord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 输入账户名称 的本地化字符串。
         /// </summary>
         public static string InputAccountName {
@@ -318,6 +345,33 @@ namespace YMCL.Main.Public.Langs {
         public static string InputFolderPath {
             get {
                 return ResourceManager.GetString("InputFolderPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 安装 的本地化字符串。
+        /// </summary>
+        public static string Install {
+            get {
+                return ResourceManager.GetString("Install", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 安装失败 的本地化字符串。
+        /// </summary>
+        public static string InstallFail {
+            get {
+                return ResourceManager.GetString("InstallFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 安装完成 的本地化字符串。
+        /// </summary>
+        public static string InstallFinish {
+            get {
+                return ResourceManager.GetString("InstallFinish", resourceCulture);
             }
         }
         
@@ -777,6 +831,15 @@ namespace YMCL.Main.Public.Langs {
         public static string TheJavaIsError {
             get {
                 return ResourceManager.GetString("TheJavaIsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 版本名称将被重命名为： 的本地化字符串。
+        /// </summary>
+        public static string TheVersionNameWillBeRenamedTo {
+            get {
+                return ResourceManager.GetString("TheVersionNameWillBeRenamedTo", resourceCulture);
             }
         }
         

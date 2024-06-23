@@ -24,7 +24,7 @@
                 Margin="10,0,10,10"
                 Spacing="10">
                 <ui:InfoBar
-                    Name="LoadnstallableVersionListErrorInfoBar"
+                    Name="LoadInstallableVersionListErrorInfoBar"
                     DockPanel.Dock="Top"
                     FontWeight="Light"
                     IsClosable="False"
@@ -312,7 +312,7 @@
                     </Expander>
                 </Border>
             </StackPanel>
-            <DockPanel Name="InstallPreviewRoot" IsVisible="True">
+            <DockPanel Name="InstallPreviewRoot" IsVisible="False">
                 <Border
                     Margin="10,10,10,10"
                     VerticalAlignment="Stretch"
@@ -354,6 +354,15 @@
                                             Content="{x:Static properties:MainLang.BeginInstall}" />
                                     </DockPanel>
                                 </DockPanel>
+                                <TextBlock
+                                    Name="CustomIdWarning"
+                                    Margin="1,5,0,0"
+                                    DockPanel.Dock="Bottom"
+                                    FontSize="12"
+                                    Foreground="Red">
+                                    <Run Text="{x:Static properties:MainLang.TheVersionNameWillBeRenamedTo}" />
+                                    <Run Name="CustomIdWarningText" />
+                                </TextBlock>
                                 <TextBox Name="InstallPreviewIdTextBox" DockPanel.Dock="Bottom" />
                             </DockPanel>
                         </Border>

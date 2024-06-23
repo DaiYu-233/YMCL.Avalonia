@@ -175,13 +175,13 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                     }
                     else
                     {
-                        if (javas.Contains(javaInfo))
+                        if (javas.Contains(javaInfo!))
                         {
                             Method.Toast(MainLang.TheItemAlreadyExist, Const.Notification.main, NotificationType.Error);
                         }
                         else
                         {
-                            javas.Add(javaInfo);
+                            javas.Add(javaInfo!);
                         }
                     }
                 });

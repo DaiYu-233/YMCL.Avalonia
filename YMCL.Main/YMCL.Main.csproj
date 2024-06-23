@@ -46,6 +46,7 @@
       <DependentUpon>AutoInstallPage.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Remove="Public\Langs\LangHelperBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Public\Langs\MainLang.resx">

@@ -15,73 +15,96 @@
                 <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
             </Transitions>
         </Border.Transitions>
-            <StackPanel Margin="10" Spacing="10">
-                <Border
-                    Padding="6.5"
-                    Background="{DynamicResource 1x}"
-                    CornerRadius="5">
-                    <DockPanel>
-                        <TextBlock
-                            Margin="10,0,20,0"
-                            VerticalAlignment="Center"
-                            FontFamily="{DynamicResource Font}"
-                            FontSize="14"
-                            Text="{x:Static properties:MainLang.Language}" />
-                        <ComboBox
-                            x:Name="LanguageComboBox"
-                            HorizontalAlignment="Stretch"
-                            DockPanel.Dock="Left"
-                            FontFamily="{DynamicResource Font}" />
-                    </DockPanel>
-                </Border>
-                <Border
-                    Padding="6.5"
-                    Background="{DynamicResource 1x}"
-                    CornerRadius="5">
-                    <DockPanel>
-                        <TextBlock
-                            Margin="10,0,20,0"
-                            VerticalAlignment="Center"
-                            FontFamily="{DynamicResource Font}"
-                            FontSize="14"
-                            Text="{x:Static properties:MainLang.OpenFileWay}" />
-                        <ComboBox
-                            x:Name="OpenFileWayComboBox"
-                            HorizontalAlignment="Stretch"
-                            DockPanel.Dock="Left"
-                            FontFamily="{DynamicResource Font}"
-                            SelectedIndex="0">
-                            <ComboBox.Items>
-                                <ComboBoxItem Content="{x:Static properties:MainLang.FileSelectWindow}" />
-                                <ComboBoxItem Content="{x:Static properties:MainLang.ManualInput}" />
-                            </ComboBox.Items>
-                        </ComboBox>
-                    </DockPanel>
-                </Border>
-                <Border
-                    Padding="6.5"
-                    Background="{DynamicResource 1x}"
-                    CornerRadius="5">
-                    <DockPanel>
-                        <TextBlock
-                            Margin="10,0,20,0"
-                            VerticalAlignment="Center"
-                            FontFamily="{DynamicResource Font}"
-                            FontSize="14"
-                            Text="{x:Static properties:MainLang.ColorMode}" />
-                        <ComboBox
-                            x:Name="ThemeComboBox"
-                            HorizontalAlignment="Stretch"
-                            DockPanel.Dock="Left"
-                            FontFamily="{DynamicResource Font}">
-                            <ComboBox.Items>
-                                <!-- <ComboBoxItem Content="{x:Static properties:MainLang.FollowSystem}" /> -->
-                                <ComboBoxItem Content="{x:Static properties:MainLang.Light}" />
-                                <ComboBoxItem Content="{x:Static properties:MainLang.Dark}" />
-                            </ComboBox.Items>
-                        </ComboBox>
-                    </DockPanel>
-                </Border>
-            </StackPanel>
+        <StackPanel Margin="10" Spacing="10">
+            <Border
+                Padding="6.5"
+                Background="{DynamicResource 1x}"
+                CornerRadius="5">
+                <DockPanel>
+                    <TextBlock
+                        Margin="10,0,20,0"
+                        VerticalAlignment="Center"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="14"
+                        Text="{x:Static properties:MainLang.Language}" />
+                    <ComboBox
+                        x:Name="LanguageComboBox"
+                        HorizontalAlignment="Stretch"
+                        DockPanel.Dock="Left"
+                        FontFamily="{DynamicResource Font}" />
+                </DockPanel>
+            </Border>
+            <Border
+                Padding="6.5"
+                Background="{DynamicResource 1x}"
+                CornerRadius="5">
+                <DockPanel>
+                    <TextBlock
+                        Margin="10,0,20,0"
+                        VerticalAlignment="Center"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="14"
+                        Text="{x:Static properties:MainLang.OpenFileWay}" />
+                    <ComboBox
+                        x:Name="OpenFileWayComboBox"
+                        HorizontalAlignment="Stretch"
+                        DockPanel.Dock="Left"
+                        FontFamily="{DynamicResource Font}"
+                        SelectedIndex="0">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="{x:Static properties:MainLang.FileSelectWindow}" />
+                            <ComboBoxItem Content="{x:Static properties:MainLang.ManualInput}" />
+                        </ComboBox.Items>
+                    </ComboBox>
+                </DockPanel>
+            </Border>
+            <Border
+                Padding="6.5"
+                Background="{DynamicResource 1x}"
+                CornerRadius="5">
+                <DockPanel>
+                    <TextBlock
+                        Margin="10,0,20,0"
+                        VerticalAlignment="Center"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="14"
+                        Text="{x:Static properties:MainLang.ColorMode}" />
+                    <ComboBox
+                        x:Name="ThemeComboBox"
+                        HorizontalAlignment="Stretch"
+                        DockPanel.Dock="Left"
+                        FontFamily="{DynamicResource Font}">
+                        <ComboBox.Items>
+                            <!-- <ComboBoxItem Content="{x:Static properties:MainLang.FollowSystem}" /> -->
+                            <ComboBoxItem Content="{x:Static properties:MainLang.Light}" />
+                            <ComboBoxItem Content="{x:Static properties:MainLang.Dark}" />
+                        </ComboBox.Items>
+                    </ComboBox>
+                </DockPanel>
+            </Border>
+            <Border
+                Padding="6.5"
+                Background="{DynamicResource 1x}"
+                CornerRadius="5">
+                <DockPanel>
+                    <TextBlock
+                        Margin="10,0,20,0"
+                        VerticalAlignment="Center"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="14"
+                        Text="{x:Static properties:MainLang.WindowTitleBarStyle}" />
+                    <ComboBox
+                        x:Name="WindowTitleBarStyleComboBox"
+                        HorizontalAlignment="Stretch"
+                        DockPanel.Dock="Left"
+                        FontFamily="{DynamicResource Font}">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="System" />
+                            <ComboBoxItem Content="Ymcl" />
+                        </ComboBox.Items>
+                    </ComboBox>
+                </DockPanel>
+            </Border>
+        </StackPanel>
     </Border>
 </UserControl>

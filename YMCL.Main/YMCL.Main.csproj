@@ -66,6 +66,7 @@
     <None Remove="Public\Assets\Transparent-Icon.png" />
     <None Remove="Public\Assets\YCML-Icon.ico" />
     <None Remove="Public\Assets\YMCL-Icon.png" />
+    <None Remove="Public\Texts\DateTime.txt" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Include="Public\Assets\MiSans-Regular.otf" />
@@ -75,6 +76,9 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </AvaloniaResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Public\Texts\DateTime.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Public\Assets\YCML-Icon.png">

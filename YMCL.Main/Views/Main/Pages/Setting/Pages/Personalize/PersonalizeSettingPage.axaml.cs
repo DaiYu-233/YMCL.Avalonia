@@ -1,14 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Avalonia;
+using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Media;
+using Avalonia.Platform;
+using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json;
 using YMCL.Main.Public;
+using YMCL.Main.Public.Langs;
 
 namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
 {
     public partial class PersonalizeSettingPage : UserControl
     {
+        bool _firstLoad = true;
         public PersonalizeSettingPage()
         {
             InitializeComponent();
@@ -21,6 +28,89 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
             Loaded += (s, e) =>
             {
                 Method.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
+                if (_firstLoad)
+                {
+                    _firstLoad = false;
+                    var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                    WindowTitleBarStyleComboBox.SelectedIndex = setting.WindowTitleBarStyle == WindowTitleBarStyle.System ? 0 : 1;
+                }
+            };
+            WindowTitleBarStyleComboBox.SelectionChanged += async (_, _) =>
+            {
+                var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                if ((WindowTitleBarStyleComboBox.SelectedIndex == 0 && setting.WindowTitleBarStyle == WindowTitleBarStyle.System) || (WindowTitleBarStyleComboBox.SelectedIndex == 1 && setting.WindowTitleBarStyle == WindowTitleBarStyle.Ymcl)) return;
+                setting.WindowTitleBarStyle = WindowTitleBarStyleComboBox.SelectedIndex == 0 ? WindowTitleBarStyle.System : WindowTitleBarStyle.Ymcl;
+                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                switch (setting.WindowTitleBarStyle)
+                {
+                    case WindowTitleBarStyle.Unset:
+                        await Task.Delay(350);
+                        Const.Window.main.TitleBar.IsVisible = false;
+                        Const.Window.main.TitleRoot.IsVisible = false;
+                        Const.Window.main.Root.CornerRadius = new CornerRadius(0, 0, 8, 8);
+                        Const.Window.main.ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.Default;
+                        Const.Window.main.ExtendClientAreaToDecorationsHint = false;
+                        var comboBox = new ComboBox()
+                        {
+                            FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                            HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Stretch
+                        };
+                        comboBox.Items.Add("System");
+                        comboBox.Items.Add("Ymcl");
+                        comboBox.SelectedIndex = 0;
+                        ContentDialog dialog = new()
+                        {
+                            FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                            Title = MainLang.WindowTitleBarStyle,
+                            PrimaryButtonText = MainLang.Ok,
+                            DefaultButton = ContentDialogButton.Primary,
+                            Content = comboBox
+                        };
+                        comboBox.SelectionChanged += (_, _) =>
+                        {
+                            if (comboBox.SelectedIndex == 0)
+                            {
+                                Const.Window.main.TitleBar.IsVisible = false;
+                                Const.Window.main.TitleRoot.IsVisible = false;
+                                Const.Window.main.Root.CornerRadius = new CornerRadius(0, 0, 8, 8);
+                                Const.Window.main.ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.Default;
+                                Const.Window.main.ExtendClientAreaToDecorationsHint = false;
+                            }
+                            else
+                            {
+                                Const.Window.main.TitleBar.IsVisible = true;
+                                Const.Window.main.TitleRoot.IsVisible = true;
+                                Const.Window.main.Root.CornerRadius = new CornerRadius(8);
+                                Const.Window.main.WindowState = WindowState.Maximized;
+                                Const.Window.main.WindowState = WindowState.Normal;
+                                Const.Window.main.ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
+                                Const.Window.main.ExtendClientAreaToDecorationsHint = true;
+                            }
+                        };
+                        dialog.PrimaryButtonClick += (_, _) =>
+                        {
+                            setting.WindowTitleBarStyle = comboBox.SelectedIndex == 0 ? WindowTitleBarStyle.System : WindowTitleBarStyle.Ymcl;
+                            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                        };
+                        await dialog.ShowAsync();
+                        break;
+                    case WindowTitleBarStyle.System:
+                        Const.Window.main.TitleBar.IsVisible = false;
+                        Const.Window.main.TitleRoot.IsVisible = false;
+                        Const.Window.main.Root.CornerRadius = new CornerRadius(0, 0, 8, 8);
+                        Const.Window.main.ExtendClientAreaChromeHints = Avalonia.Platform.ExtendClientAreaChromeHints.Default;
+                        Const.Window.main.ExtendClientAreaToDecorationsHint = false;
+                        break;
+                    case WindowTitleBarStyle.Ymcl:
+                        Const.Window.main.TitleBar.IsVisible = true;
+                        Const.Window.main.TitleRoot.IsVisible = true;
+                        Const.Window.main.Root.CornerRadius = new CornerRadius(8);
+                        Const.Window.main.WindowState = WindowState.Maximized;
+                        Const.Window.main.WindowState = WindowState.Normal;
+                        Const.Window.main.ExtendClientAreaChromeHints = Avalonia.Platform.ExtendClientAreaChromeHints.NoChrome;
+                        Const.Window.main.ExtendClientAreaToDecorationsHint = true;
+                        break;
+                }
             };
             OpenFileWayComboBox.SelectionChanged += (s, e) =>
             {

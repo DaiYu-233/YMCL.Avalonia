@@ -1124,6 +1124,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 窗口标题栏样式 的本地化字符串。
+        /// </summary>
+        public static string WindowTitleBarStyle {
+            get {
+                return ResourceManager.GetString("WindowTitleBarStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 邮箱不可为空 的本地化字符串。
         /// </summary>
         public static string YggdrasilEmailIsEmpty {

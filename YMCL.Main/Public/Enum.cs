@@ -30,4 +30,10 @@
         Off,
         On
     }
+    public enum WindowTitleBarStyle
+    {
+        Unset,
+        System,
+        Ymcl
+    }
 }

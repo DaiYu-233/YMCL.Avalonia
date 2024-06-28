@@ -32,9 +32,24 @@ namespace YMCL.Main.Public.Controls.WindowTask
                     e.Cancel = true;
                 }
             };
+            PropertyChanged += (s, e) =>
+            {
+                if (Const.Window.main.titleBarStyle == WindowTitleBarStyle.Ymcl && e.Property.Name == nameof(WindowState))
+                {
+                    switch (WindowState)
+                    {
+                        case WindowState.Normal:
+                            Root.Margin = new Thickness(0);
+                            break;
+                        case WindowState.Maximized:
+                            Root.Margin = new Thickness(20);
+                            break;
+                    }
+                }
+            };
             Loaded += (_, _) =>
             {
-                if (Const.Platform != Platform.Windows)
+                if (Const.Window.main.titleBarStyle == WindowTitleBarStyle.System)
                 {
                     TitleBar.IsVisible = false;
                     TitleText.IsVisible = false;

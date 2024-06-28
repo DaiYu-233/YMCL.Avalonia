@@ -461,4 +461,7 @@
   <data name="MoveToRecycleBin" xml:space="preserve">
     <value>移动到回收站</value>
   </data>
+  <data name="WindowTitleBarStyle" xml:space="preserve">
+    <value>窗口标题栏样式</value>
+  </data>
 </root>

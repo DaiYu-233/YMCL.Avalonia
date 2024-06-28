@@ -11,21 +11,10 @@
     Title="Yu Minecraft Launcher"
     MinWidth="800"
     MinHeight="450"
-    ExtendClientAreaChromeHints="NoChrome"
-    ExtendClientAreaToDecorationsHint="True"
     FontWeight="{DynamicResource FontWeight}"
     IsHitTestVisible="True"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Window.Styles>
-        <Style Selector="Window">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <SolidColorBrush Opacity="0" Color="White" />
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Styles>
     <Border
         x:Name="Root"
         Background="{DynamicResource 1x}"

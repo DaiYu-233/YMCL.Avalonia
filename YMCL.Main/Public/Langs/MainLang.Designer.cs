@@ -124,6 +124,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 自动加入服务器 的本地化字符串。
+        /// </summary>
+        public static string AutoJoinServer {
+            get {
+                return ResourceManager.GetString("AutoJoinServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 自动扫描 的本地化字符串。
         /// </summary>
         public static string AutoScan {
@@ -225,9 +234,36 @@ namespace YMCL.Main.Public.Langs {
         /// <summary>
         ///   查找类似 删除选中项 的本地化字符串。
         /// </summary>
+        public static string DeleteSelect {
+            get {
+                return ResourceManager.GetString("DeleteSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 删除选中项 的本地化字符串。
+        /// </summary>
         public static string DelSeletedItem {
             get {
                 return ResourceManager.GetString("DelSeletedItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 全不选 的本地化字符串。
+        /// </summary>
+        public static string DeselectAll {
+            get {
+                return ResourceManager.GetString("DeselectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 禁用选中项 的本地化字符串。
+        /// </summary>
+        public static string DisableSelect {
+            get {
+                return ResourceManager.GetString("DisableSelect", resourceCulture);
             }
         }
         
@@ -237,6 +273,24 @@ namespace YMCL.Main.Public.Langs {
         public static string EmailAddress {
             get {
                 return ResourceManager.GetString("EmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启用独立核心 的本地化字符串。
+        /// </summary>
+        public static string EnableIndependencyCore {
+            get {
+                return ResourceManager.GetString("EnableIndependencyCore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启用选中项 的本地化字符串。
+        /// </summary>
+        public static string EnableSelect {
+            get {
+                return ResourceManager.GetString("EnableSelect", resourceCulture);
             }
         }
         
@@ -547,6 +601,33 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 模组 的本地化字符串。
+        /// </summary>
+        public static string Mod {
+            get {
+                return ResourceManager.GetString("Mod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 模组文件夹 的本地化字符串。
+        /// </summary>
+        public static string ModsFolder {
+            get {
+                return ResourceManager.GetString("ModsFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 移动到回收站 的本地化字符串。
+        /// </summary>
+        public static string MoveToRecycleBin {
+            get {
+                return ResourceManager.GetString("MoveToRecycleBin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似  账户 的本地化字符串。
         /// </summary>
         public static string NavAccount {
@@ -664,6 +745,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 关闭 的本地化字符串。
+        /// </summary>
+        public static string Off {
+            get {
+                return ResourceManager.GetString("Off", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 离线登录 的本地化字符串。
         /// </summary>
         public static string OfflineLogin {
@@ -691,6 +781,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 开启 的本地化字符串。
+        /// </summary>
+        public static string On {
+            get {
+                return ResourceManager.GetString("On", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 打开文件方式 的本地化字符串。
         /// </summary>
         public static string OpenFileWay {
@@ -709,11 +808,29 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 概览 的本地化字符串。
+        /// </summary>
+        public static string Overview {
+            get {
+                return ResourceManager.GetString("Overview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 预览版本 的本地化字符串。
         /// </summary>
         public static string PreviewVersion {
             get {
                 return ResourceManager.GetString("PreviewVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 刷新 的本地化字符串。
+        /// </summary>
+        public static string Refresh {
+            get {
+                return ResourceManager.GetString("Refresh", resourceCulture);
             }
         }
         
@@ -745,11 +862,29 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 资源包文件夹 的本地化字符串。
+        /// </summary>
+        public static string ResourcepacksFolder {
+            get {
+                return ResourceManager.GetString("ResourcepacksFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 ← 返回 的本地化字符串。
         /// </summary>
         public static string ReturnWithIcon {
             get {
                 return ResourceManager.GetString("ReturnWithIcon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 存档文件夹 的本地化字符串。
+        /// </summary>
+        public static string SavesFolder {
+            get {
+                return ResourceManager.GetString("SavesFolder", resourceCulture);
             }
         }
         
@@ -781,6 +916,24 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 全选 的本地化字符串。
+        /// </summary>
+        public static string SelectAll {
+            get {
+                return ResourceManager.GetString("SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 已选择项目： 的本地化字符串。
+        /// </summary>
+        public static string SelectedItem {
+            get {
+                return ResourceManager.GetString("SelectedItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 选择Java 的本地化字符串。
         /// </summary>
         public static string SelectJava {
@@ -795,6 +948,24 @@ namespace YMCL.Main.Public.Langs {
         public static string SelectMinecraftFolder {
             get {
                 return ResourceManager.GetString("SelectMinecraftFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 设置 的本地化字符串。
+        /// </summary>
+        public static string Setting {
+            get {
+                return ResourceManager.GetString("Setting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 光影包文件夹 的本地化字符串。
+        /// </summary>
+        public static string ShaderpacksFolder {
+            get {
+                return ResourceManager.GetString("ShaderpacksFolder", resourceCulture);
             }
         }
         
@@ -853,6 +1024,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 使用全局设置 的本地化字符串。
+        /// </summary>
+        public static string UseGlobalSetting {
+            get {
+                return ResourceManager.GetString("UseGlobalSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 用户数据文件夹 的本地化字符串。
         /// </summary>
         public static string UserDataFolder {
@@ -885,6 +1065,15 @@ namespace YMCL.Main.Public.Langs {
         public static string VerifyingAccount {
             get {
                 return ResourceManager.GetString("VerifyingAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 版本文件夹 的本地化字符串。
+        /// </summary>
+        public static string VersionFolder {
+            get {
+                return ResourceManager.GetString("VersionFolder", resourceCulture);
             }
         }
         

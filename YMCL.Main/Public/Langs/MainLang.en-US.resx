@@ -343,4 +343,139 @@ Jump to the browser to complete verification</value>
   <data name="CopyUrlAndManualOpen" xml:space="preserve">
     <value>Ctrl + C Copy and paste the following link into your browser</value>
   </data>
+  <data name="UserDataFolder" xml:space="preserve">
+    <value>User Data Folder</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Open Folder</value>
+  </data>
+  <data name="AutoInstall" xml:space="preserve">
+    <value>Automated Installation</value>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>Latest Version</value>
+  </data>
+  <data name="PreviewVersion" xml:space="preserve">
+    <value>Pre release version</value>
+  </data>
+  <data name="ReleaseVersion" xml:space="preserve">
+    <value>Release version</value>
+  </data>
+  <data name="GetInstallableVersionFail" xml:space="preserve">
+    <value>Failed to get installable list</value>
+  </data>
+  <data name="OldVersion" xml:space="preserve">
+    <value>Ancient Version</value>
+  </data>
+  <data name="AllVersion" xml:space="preserve">
+    <value>All Builds</value>
+  </data>
+  <data name="SearchKeyword" xml:space="preserve">
+    <value>Keywords Search...</value>
+  </data>
+  <data name="InstallPreview" xml:space="preserve">
+    <value>Install Preview</value>
+  </data>
+  <data name="NoAdditionalInstall" xml:space="preserve">
+    <value>No additional installation</value>
+  </data>
+  <data name="BeginInstall" xml:space="preserve">
+    <value>Start Install</value>
+  </data>
+  <data name="ViewUpdatedContent" xml:space="preserve">
+    <value>What's New</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Reloading</value>
+  </data>
+  <data name="GetFail" xml:space="preserve">
+    <value>Access failed</value>
+  </data>
+  <data name="NoAvailableItem" xml:space="preserve">
+    <value>no available items</value>
+  </data>
+  <data name="MineratCrashed" xml:space="preserve">
+    <value>Minecrat crashed</value>
+  </data>
+  <data name="TheVersionNameWillBeRenamedTo" xml:space="preserve">
+    <value>Version name will be renamed to:</value>
+  </data>
+  <data name="IncludeSpecialWord" xml:space="preserve">
+    <value>Contains Special Characters</value>
+  </data>
+  <data name="FolderAlreadyExists" xml:space="preserve">
+    <value>Folder already exists</value>
+  </data>
+  <data name="InstallFail" xml:space="preserve">
+    <value>Installation failled</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Installation</value>
+  </data>
+  <data name="InstallFinish" xml:space="preserve">
+    <value>Installation finished</value>
+  </data>
+  <data name="CannotFandRightJava" xml:space="preserve">
+    <value>Couldn't find the right Java</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Mod" xml:space="preserve">
+    <value>Module</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SavesFolder" xml:space="preserve">
+    <value>Archive Folder</value>
+  </data>
+  <data name="ModsFolder" xml:space="preserve">
+    <value>Module Folder</value>
+  </data>
+  <data name="ResourcepacksFolder" xml:space="preserve">
+    <value>Resource Pack Folder</value>
+  </data>
+  <data name="ShaderpacksFolder" xml:space="preserve">
+    <value>Light Pack Folder</value>
+  </data>
+  <data name="VersionFolder" xml:space="preserve">
+    <value>Version Folder</value>
+  </data>
+  <data name="EnableIndependencyCore" xml:space="preserve">
+    <value>Enable standalone cores</value>
+  </data>
+  <data name="UseGlobalSetting" xml:space="preserve">
+    <value>Use Global settings</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="AutoJoinServer" xml:space="preserve">
+    <value>Automatically join the server</value>
+  </data>
+  <data name="EnableSelect" xml:space="preserve">
+    <value>Enable Checked</value>
+  </data>
+  <data name="DisableSelect" xml:space="preserve">
+    <value>Disable Selected</value>
+  </data>
+  <data name="DeleteSelect" xml:space="preserve">
+    <value>Delete Selected</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="DeselectAll" xml:space="preserve">
+    <value>Deselect all</value>
+  </data>
+  <data name="SelectedItem" xml:space="preserve">
+    <value>Selected items:</value>
+  </data>
 </root>

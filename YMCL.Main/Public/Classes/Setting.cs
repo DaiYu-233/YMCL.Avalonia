@@ -20,4 +20,11 @@ namespace YMCL.Main.Public.Classes
         public string Version { get; set; } 
         public bool EnableIndependencyCore { get; set; } = true;
     }
+    public class VersionSetting
+    {
+        public VersionSettingEnableIndependencyCore EnableIndependencyCore { get; set; } = VersionSettingEnableIndependencyCore.Global;
+        public JavaEntry Java { get; set; } = new JavaEntry() { JavaPath = "Global" };
+        public double MaxMem { get; set; } = -1; // -1 = Global
+        public string AutoJoinServerIp { get; set; } = "";
+    }
 }

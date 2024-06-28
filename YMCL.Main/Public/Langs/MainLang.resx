@@ -398,4 +398,67 @@
   <data name="CannotFandRightJava" xml:space="preserve">
     <value>无法找到合适Java</value>
   </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Mod" xml:space="preserve">
+    <value>模组</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>概览</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="SavesFolder" xml:space="preserve">
+    <value>存档文件夹</value>
+  </data>
+  <data name="ModsFolder" xml:space="preserve">
+    <value>模组文件夹</value>
+  </data>
+  <data name="ResourcepacksFolder" xml:space="preserve">
+    <value>资源包文件夹</value>
+  </data>
+  <data name="ShaderpacksFolder" xml:space="preserve">
+    <value>光影包文件夹</value>
+  </data>
+  <data name="VersionFolder" xml:space="preserve">
+    <value>版本文件夹</value>
+  </data>
+  <data name="EnableIndependencyCore" xml:space="preserve">
+    <value>启用独立核心</value>
+  </data>
+  <data name="UseGlobalSetting" xml:space="preserve">
+    <value>使用全局设置</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>开启</value>
+  </data>
+  <data name="AutoJoinServer" xml:space="preserve">
+    <value>自动加入服务器</value>
+  </data>
+  <data name="EnableSelect" xml:space="preserve">
+    <value>启用选中项</value>
+  </data>
+  <data name="DisableSelect" xml:space="preserve">
+    <value>禁用选中项</value>
+  </data>
+  <data name="DeleteSelect" xml:space="preserve">
+    <value>删除选中项</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>全选</value>
+  </data>
+  <data name="DeselectAll" xml:space="preserve">
+    <value>全不选</value>
+  </data>
+  <data name="SelectedItem" xml:space="preserve">
+    <value>已选择项目：</value>
+  </data>
+  <data name="MoveToRecycleBin" xml:space="preserve">
+    <value>移动到回收站</value>
+  </data>
 </root>

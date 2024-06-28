@@ -24,7 +24,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
 {
     public partial class AutoInstallPage : UserControl
     {
-        public ObservableCollection<VersionManifestEntry> versionManifestEntriesObservableCollection = new();
+        public ObservableCollection<VersionManifestEntry> versionManifestEntries = new();
         bool _firstLoad = true;
         bool latestRelease = false;
         bool latestSnapshot = false;
@@ -84,7 +84,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
             };
             AllVersionSearchBox.TextChanged += (_, _) =>
             {
-                var filteredItems = versionManifestEntriesObservableCollection.Where(item => item.Id.Contains(AllVersionSearchBox.Text!, StringComparison.OrdinalIgnoreCase)).ToList();
+                var filteredItems = versionManifestEntries.Where(item => item.Id.Contains(AllVersionSearchBox.Text!, StringComparison.OrdinalIgnoreCase)).ToList();
                 AllVersionListView.Items.Clear();
                 filteredItems.ForEach(version =>
                 {
@@ -140,7 +140,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         foreach (var item in vanlliaList)
                         {
                             AllVersionListView.Items.Add(item);
-                            versionManifestEntriesObservableCollection.Add(item);
+                            versionManifestEntries.Add(item);
                             if (item.Type == "release")
                             {
                                 ReleaseVersionListView.Items.Add(item);

@@ -343,4 +343,139 @@
   <data name="CopyUrlAndManualOpen" xml:space="preserve">
     <value>Ctrl + C Скопируйте и вставьте следующую ссылку в браузер</value>
   </data>
+  <data name="UserDataFolder" xml:space="preserve">
+    <value>Папка данных пользователя</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Открыть папку</value>
+  </data>
+  <data name="AutoInstall" xml:space="preserve">
+    <value>Автоматическая установка</value>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>Последняя версия</value>
+  </data>
+  <data name="PreviewVersion" xml:space="preserve">
+    <value>Предварительная версия</value>
+  </data>
+  <data name="ReleaseVersion" xml:space="preserve">
+    <value>Официальный релиз</value>
+  </data>
+  <data name="GetInstallableVersionFail" xml:space="preserve">
+    <value>Не удалось получить список для установки</value>
+  </data>
+  <data name="OldVersion" xml:space="preserve">
+    <value>Древняя версия</value>
+  </data>
+  <data name="AllVersion" xml:space="preserve">
+    <value>Все версии</value>
+  </data>
+  <data name="SearchKeyword" xml:space="preserve">
+    <value>Поиск по ключевым словам...</value>
+  </data>
+  <data name="InstallPreview" xml:space="preserve">
+    <value>Установите предварительный просмотр</value>
+  </data>
+  <data name="NoAdditionalInstall" xml:space="preserve">
+    <value>Никакой дополнительной установки</value>
+  </data>
+  <data name="BeginInstall" xml:space="preserve">
+    <value>Начать установку</value>
+  </data>
+  <data name="ViewUpdatedContent" xml:space="preserve">
+    <value>Посмотрите, что нового</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Перезагрузить</value>
+  </data>
+  <data name="GetFail" xml:space="preserve">
+    <value>Не удалось получить</value>
+  </data>
+  <data name="NoAvailableItem" xml:space="preserve">
+    <value>Нет доступных товаров</value>
+  </data>
+  <data name="MineratCrashed" xml:space="preserve">
+    <value>Минекрат разбился</value>
+  </data>
+  <data name="TheVersionNameWillBeRenamedTo" xml:space="preserve">
+    <value>Название версии будет переименовано в:</value>
+  </data>
+  <data name="IncludeSpecialWord" xml:space="preserve">
+    <value>Содержит специальных персонажей</value>
+  </data>
+  <data name="FolderAlreadyExists" xml:space="preserve">
+    <value>Папка уже существует</value>
+  </data>
+  <data name="InstallFail" xml:space="preserve">
+    <value>Ошибка установки</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Установка</value>
+  </data>
+  <data name="InstallFinish" xml:space="preserve">
+    <value>Установка завершена</value>
+  </data>
+  <data name="CannotFandRightJava" xml:space="preserve">
+    <value>Не удалось найти нужную Java</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="Mod" xml:space="preserve">
+    <value>Моды</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Обзор</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="SavesFolder" xml:space="preserve">
+    <value>Архивировать папку</value>
+  </data>
+  <data name="ModsFolder" xml:space="preserve">
+    <value>Папка модуля</value>
+  </data>
+  <data name="ResourcepacksFolder" xml:space="preserve">
+    <value>Папка пакета ресурсов</value>
+  </data>
+  <data name="ShaderpacksFolder" xml:space="preserve">
+    <value>Папка Light Pack</value>
+  </data>
+  <data name="VersionFolder" xml:space="preserve">
+    <value>Папка версий</value>
+  </data>
+  <data name="EnableIndependencyCore" xml:space="preserve">
+    <value>Включите автономные ядра</value>
+  </data>
+  <data name="UseGlobalSetting" xml:space="preserve">
+    <value>Использовать общие настройки</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>закрыть</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>включать</value>
+  </data>
+  <data name="AutoJoinServer" xml:space="preserve">
+    <value>Автоматически присоединяться к серверу</value>
+  </data>
+  <data name="EnableSelect" xml:space="preserve">
+    <value>Включить Проверено</value>
+  </data>
+  <data name="DisableSelect" xml:space="preserve">
+    <value>Отключить выбранное</value>
+  </data>
+  <data name="DeleteSelect" xml:space="preserve">
+    <value>Удалить выбранное</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Выбрать всё</value>
+  </data>
+  <data name="DeselectAll" xml:space="preserve">
+    <value>Не выбирайте ни одного</value>
+  </data>
+  <data name="SelectedItem" xml:space="preserve">
+    <value>Выбранные элементы:</value>
+  </data>
 </root>

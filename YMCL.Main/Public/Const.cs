@@ -35,5 +35,6 @@ namespace YMCL.Main.Public
         public static string MinecraftFolderDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.MinecraftFolder.DaiYu");
         public static string JavaDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.Java.DaiYu");
         public static string AccountDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.Account.DaiYu");
+        public static string VersionSettingFileName { get; } = "YMCLSetting.DaiYu";
     }
 }

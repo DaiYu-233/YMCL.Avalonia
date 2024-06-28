@@ -343,4 +343,139 @@
   <data name="CopyUrlAndManualOpen" xml:space="preserve">
     <value>Ctrl + C 複製以下連結並貼上到瀏覽器</value>
   </data>
+  <data name="UserDataFolder" xml:space="preserve">
+    <value>使用者資料夾</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>打開資料夾</value>
+  </data>
+  <data name="AutoInstall" xml:space="preserve">
+    <value>自動安裝</value>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>最新版本</value>
+  </data>
+  <data name="PreviewVersion" xml:space="preserve">
+    <value>預覽版本</value>
+  </data>
+  <data name="ReleaseVersion" xml:space="preserve">
+    <value>正式版本</value>
+  </data>
+  <data name="GetInstallableVersionFail" xml:space="preserve">
+    <value>取得可安裝清單失敗</value>
+  </data>
+  <data name="OldVersion" xml:space="preserve">
+    <value>遠古版</value>
+  </data>
+  <data name="AllVersion" xml:space="preserve">
+    <value>所有版本</value>
+  </data>
+  <data name="SearchKeyword" xml:space="preserve">
+    <value>搜尋關鍵字...</value>
+  </data>
+  <data name="InstallPreview" xml:space="preserve">
+    <value>安裝預覽</value>
+  </data>
+  <data name="NoAdditionalInstall" xml:space="preserve">
+    <value>無附加安裝</value>
+  </data>
+  <data name="BeginInstall" xml:space="preserve">
+    <value>開始安裝</value>
+  </data>
+  <data name="ViewUpdatedContent" xml:space="preserve">
+    <value>查看更新內容</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>重新加載</value>
+  </data>
+  <data name="GetFail" xml:space="preserve">
+    <value>取得失敗</value>
+  </data>
+  <data name="NoAvailableItem" xml:space="preserve">
+    <value>無可用項目</value>
+  </data>
+  <data name="MineratCrashed" xml:space="preserve">
+    <value>Minecrat發生崩潰</value>
+  </data>
+  <data name="TheVersionNameWillBeRenamedTo" xml:space="preserve">
+    <value>版本名稱將被重新命名為：</value>
+  </data>
+  <data name="IncludeSpecialWord" xml:space="preserve">
+    <value>包含特殊字元</value>
+  </data>
+  <data name="FolderAlreadyExists" xml:space="preserve">
+    <value>資料夾已存在</value>
+  </data>
+  <data name="InstallFail" xml:space="preserve">
+    <value>安裝失敗</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>安裝</value>
+  </data>
+  <data name="InstallFinish" xml:space="preserve">
+    <value>安裝完成</value>
+  </data>
+  <data name="CannotFandRightJava" xml:space="preserve">
+    <value>無法找到合適Java</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Mod" xml:space="preserve">
+    <value>模組</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>概述</value>
+  </data>
+  <data name="Setting" xml:space="preserve">
+    <value>設置</value>
+  </data>
+  <data name="SavesFolder" xml:space="preserve">
+    <value>存檔資料夾</value>
+  </data>
+  <data name="ModsFolder" xml:space="preserve">
+    <value>模組資料夾</value>
+  </data>
+  <data name="ResourcepacksFolder" xml:space="preserve">
+    <value>資源包資料夾</value>
+  </data>
+  <data name="ShaderpacksFolder" xml:space="preserve">
+    <value>光影包資料夾</value>
+  </data>
+  <data name="VersionFolder" xml:space="preserve">
+    <value>版本資料夾</value>
+  </data>
+  <data name="EnableIndependencyCore" xml:space="preserve">
+    <value>啟用獨立核心</value>
+  </data>
+  <data name="UseGlobalSetting" xml:space="preserve">
+    <value>使用全域設定</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>關閉</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>開啟</value>
+  </data>
+  <data name="AutoJoinServer" xml:space="preserve">
+    <value>自動加入伺服器</value>
+  </data>
+  <data name="EnableSelect" xml:space="preserve">
+    <value>啟用選取項目</value>
+  </data>
+  <data name="DisableSelect" xml:space="preserve">
+    <value>停用選取項目</value>
+  </data>
+  <data name="DeleteSelect" xml:space="preserve">
+    <value>刪除選取項目</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>全選</value>
+  </data>
+  <data name="DeselectAll" xml:space="preserve">
+    <value>全不選</value>
+  </data>
+  <data name="SelectedItem" xml:space="preserve">
+    <value>已選擇項目：</value>
+  </data>
 </root>

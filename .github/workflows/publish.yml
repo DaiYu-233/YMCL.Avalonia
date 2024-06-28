@@ -1,0 +1,55 @@
+name: Publish
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "**" ]
+  
+jobs:
+  main:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Time
+      id: date
+      run: |
+        echo "date=$(date +'%Y-%m-%d.%H-%M-%S')" >> $GITHUB_OUTPUT
+        echo "$(date +'%Y.%m.%d.%H.%M')" > ./YMCL.Main/Public/Texts/DateTime.txt
+        echo "title=$(date +'%Y.%m.%d.%H.%M')" >> $GITHUB_OUTPUT
+      shell: bash
+    - name: Build
+      run: |
+        dotnet publish YMCL.Main/YMCL.Main.csproj -r win-x86 --self-contained false
+        dotnet publish YMCL.Main/YMCL.Main.csproj -r win-x64 --self-contained false
+        dotnet publish YMCL.Main/YMCL.Main.csproj -r osx-x64 --self-contained false
+        dotnet publish YMCL.Main/YMCL.Main.csproj -r osx-arm64 --self-contained false
+        dotnet publish YMCL.Main/YMCL.Main.csproj -r linux-x64 --self-contained false
+        dotnet publish YMCL.Main/YMCL.Main.csproj -r linux-arm --self-contained false
+        dotnet publish YMCL.Main/YMCL.Main.csproj -r linux-arm64 --self-contained false
+    - name: Rename
+      run: |
+        mv ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.win.x86.exe
+        mv ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.win.x64.exe
+        mv ./YMCL.Main/bin/Release/net8.0-windows/osx-x64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/osx-x64/publish/YMCL.Main.osx.x64
+        mv ./YMCL.Main/bin/Release/net8.0-windows/osx-arm64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/osx-arm64/publish/YMCL.Main.osx.arm64
+        mv ./YMCL.Main/bin/Release/net8.0-windows/linux-x64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/linux-x64/publish/YMCL.Main.linux.x64
+        mv ./YMCL.Main/bin/Release/net8.0-windows/linux-arm/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/linux-arm/publish/YMCL.Main.linux.arm
+        mv ./YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main.linux.arm64
+    - name: Publish
+      uses: marvinpinto/action-automatic-releases@latest
+      with:
+        repo_token: "${{ secrets.TOKEN }}"
+        title: "v${{ steps.date.outputs.title }}"
+        automatic_release_tag: "AutoRelease-${{ steps.date.outputs.date }}"
+        prerelease: true
+        files: |
+          YMCL.Main/bin/Release/net8.0-windows/osx-arm64/publish/YMCL.Main.osx.arm64
+          YMCL.Main/bin/Release/net8.0-windows/osx-x64/publish/YMCL.Main.osx.x64
+          YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main.linux.arm64
+          YMCL.Main/bin/Release/net8.0-windows/linux-arm/publish/YMCL.Main.linux.arm
+          YMCL.Main/bin/Release/net8.0-windows/linux-x64/publish/YMCL.Main.linux.x64
+          YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.win.x86.exe
+          YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.win.x64.exe
+        

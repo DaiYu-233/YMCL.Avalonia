@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!-- 
+	
+	  Html By 呆鱼！
+
+	 -->
+
+<head>
+  <meta name="keywords" content="YMCL,ymcl,Yu Minecraft Launcher,呆鱼,Minecraft Launcher,我的世界启动器" />
+  <meta name="description" content="Yu Minecraft Launcher(YMCL)官网!" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="./Assets/img/YMCL-Icon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="./Assets/web/style.css" />
+  <title>Yu Minecraft Launcher · YMCL</title>
+  <script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+  <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+  <script src="./Assets/web/script.js"></script>
+</head>
+
+<body>
+  <header>
+    <top>
+      <div id="LogoBar">
+        <a href="/"><img src="./Assets/img/YMCL-Icon.ico" id="Logo" alt="Logo" /></a>
+        <linkbutton onclick="window.location='/'">Yu Minecraft Launcher</linkbutton>
+      </div>
+      <nav id="PCNav">
+        <linkbutton onclick="window.open('https://support.qq.com/products/542108/faqs-more/')">常见问题</linkbutton>
+        <linkbutton onclick="window.open('https://support.qq.com/products/542108/')">意见反馈</linkbutton>
+        <linkbutton onclick="window.open('https://github.com/DaiYu-233/YMCL.Avalonia')">浏览源代码</linkbutton>
+      </nav>
+      <nav id="MobileNav">
+        <linkbutton id="SideNavButton" onclick="TrunSideNav()">菜单</linkbutton>
+      </nav>
+    </top>
+    <menu id="SideNav">
+      <linkbutton onclick="window.open('https://support.qq.com/products/542108/faqs-more/')">常见问题</linkbutton>
+      <linkbutton onclick="window.open('https://support.qq.com/products/542108/')">意见反馈</linkbutton>
+      <linkbutton onclick="window.open('https://github.com/DaiYu-233/YMCL.Avalonia')">浏览源代码</linkbutton>
+    </menu>
+  </header>
+  <main>
+    <div>
+      <label>
+        Yu Minecraft Launcher
+        <button type="button" id="DownloadButton"
+          onclick="window.open('https://github.com/DaiYu-233/YMCL.Avalonia/releases')">立即下载</button>
+      </label>
+      <img src="./Assets/img/YMCL-Icon.svg" alt="logo" id="BigLogo" />
+    </div>
+  </main>
+  <article id="PlayArea">
+    <div id="ShowArea">
+      <div id="FunctionContainer">
+        <card>
+          <label>扁平化 UI</label>
+          <img src="https://pic.daiyu.fun/pic/2024/202402051555157.png" alt="FunctionPicture" />
+        </card>
+        <card>
+          <label>Java 深度扫描</label>
+          <img src="https://pic.daiyu.fun/pic/2024/202402051555887.png" alt="FunctionPicture" />
+        </card>
+        <card>
+          <label>多语言支持</label>
+          <img src="https://pic.daiyu.fun/pic/2024/202402051556055.png" alt="FunctionPicture" />
+        </card>
+        <card>
+          <label>开放源代码</label>
+          <img src="https://pic.daiyu.fun/pic/2024/202402051556674.png" alt="FunctionPicture" />
+        </card>
+        <card>
+          <label>多账户管理</label>
+          <img src="https://pic.daiyu.fun/pic/2024/202402051556510.png" alt="FunctionPicture" />
+        </card>
+      </div>
+    </div>
+  </article>
+  <function>
+    <h1>外部启动</h1>
+    <description>
+      <p>Yu Minecraft Launcher 支持使用 URL Schemes 从外部启动。</p>
+      <p>通过自定义某些参数可以实现导入启动器设置、一键安装整合包等操作。</p>
+      <p>点击<a href="javascript:" onclick="Launch()"> 此处 </a>启动 Yu Minecraft Launcher。</p>
+      <div class="InputBox">
+        <input type="text" value="" id="Args" required="required" />
+        <span>参数</span><i></i>
+      </div>
+    </description>
+  </function>
+  <function>
+    <h1>开放源代码</h1>
+    <description>
+      <p>Yu Minecraft Launcher 根据 GPLv3 协议开放源代码，开放且自由。</p>
+      <p>访问 GitHub 仓库 以获得详细信息，可以在这里看到YMCL的代码。</p>
+      <a href="javascript:window.open('https://github.com/DaiYu-233/YMCL.Avalonia')"><img src="https://github-stats.ubrong.com/api/pin/?username=DaiYu-233&repo=YMCL.Avalonia&" alt="GitHub"
+        style="cursor: pointer;margin-top: 20px;" /></a>
+    </description>
+  </function>
+  <function>
+    <h1>捐赠</h1>
+    <description>
+      <a href="https://afdian.net/a/DaiYu_" style="color: #49b1f5">https://afdian.net/a/DaiYu_</a>
+      <p>Yu Minecraft Launcher 是一个免费、跨平台、开源的 Minecraft 启动器。</p>
+      <a href="http://afdian.net/a/DaiYu_" target="_blank" rel="noopener noreferrer">
+        <img src="https://pic.daiyu.fun/pic/2024/202402051558473.png" alt="pic" />
+      </a>
+      </div>
+    </description>
+  </function>
+  <footer>
+    <a href="https://icp.gov.moe/?keyword=20235012" target="_blank">萌ICP备20235012号</a>
+    <p>
+      ©2023 - 2024 By
+      <a onclick="window.open('https://daiyu.fun')">DaiYu</a>
+    </p>
+  </footer>
+  </section>
+  <script>
+    var height = 0.35 * document.querySelector("body > main").clientHeight + document.querySelector("#FunctionContainer").offsetLeft + document.querySelector("#FunctionContainer").scrollWidth + "px"; 
+  </script>
+</body>
+
+</html>

@@ -89,12 +89,15 @@ namespace YMCL.Main.Public.Controls.WindowTask
                 _debounceTimer.Start();
             }
         }
-
+        public void Destory()
+        {
+            Finish();
+            Close();
+        }
         private string GetTextToAdd(string text, bool includeTime)
         {
             return includeTime ? $"[{DateTime.Now.ToString("HH:mm:ss")}] {text}\n" : $"{text}\n";
         }
-
         private void DebounceTimerElapsed(object? sender, ElapsedEventArgs e)
         {
             _isUpdating = false;

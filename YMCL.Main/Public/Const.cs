@@ -37,5 +37,6 @@ namespace YMCL.Main.Public
         public static string CustomHomePageXamlDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.CustomHomePageXaml.DaiYu");
         public static string AccountDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.Account.DaiYu");
         public static string VersionSettingFileName { get; } = "YMCLSetting.DaiYu";
+        public static string GithubUpdateApiUrl { get; } = "https://api.github.com/repos/DaiYu-233/YMCL.Avalonia/releases?per_page=1";
     }
 }

@@ -19,6 +19,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Management;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Langs;
@@ -442,7 +443,7 @@ namespace YMCL.Main.Public
         }
         public static async Task<ContentDialogResult> ShowDialogAsync(string title = "Title", string msg = "Content", Control p_content = null, string b_primary = null, string b_cancel = null, string b_secondary = null)
         {
-            var content = p_content == null ? new TextBlock() { FontFamily = (FontFamily)Application.Current.Resources["Font"], Text = msg } : p_content;
+            var content = p_content == null ? new TextBox() { TextWrapping = TextWrapping.Wrap, IsReadOnly = true, FontFamily = (FontFamily)Application.Current.Resources["Font"], Text = msg } : p_content;
             var dialog = new ContentDialog()
             {
                 PrimaryButtonText = b_primary,
@@ -460,6 +461,54 @@ namespace YMCL.Main.Public
         {
             var textBox = new TextBox() { FontFamily = (FontFamily)Application.Current.Resources["Font"], TextWrapping = TextWrapping.Wrap, Text = $"{msg} - {ex.Message}\n\n{ex}", HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center, IsReadOnly = true };
             await ShowDialogAsync(MainLang.GetException, p_content: textBox, b_primary: MainLang.Ok);
+        }
+        public static string GetCurrentPlatformAndArchitecture()
+        {
+            // 检测操作系统  
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                // 检测架构  
+                if (RuntimeInformation.ProcessArchitecture == Architecture.X64)
+                {
+                    return "win-x64";
+                }
+                else if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
+                {
+                    return "win-x86";
+                }
+                // 其他的 Windows 架构可能也需要处理（比如 ARM）  
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                if (RuntimeInformation.ProcessArchitecture == Architecture.X64)
+                {
+                    return "osx-x64";
+                }
+                // 注意：OSX 上的 ARM 架构可能需要特定检测，因为目前可能是 Apple Silicon (M1/M2)  
+                else if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64)
+                {
+                    return "osx-arm64";
+                }
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                if (RuntimeInformation.ProcessArchitecture == Architecture.X64)
+                {
+                    return "linux-x64";
+                }
+                else if (RuntimeInformation.ProcessArchitecture == Architecture.Arm)
+                {
+                    return "linux-arm"; // 注意：这里应该是 linux-arm 而不是 liux-arm  
+                }
+                else if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64)
+                {
+                    return "linux-arm64";
+                }
+            }
+            // 其他操作系统可能需要额外处理  
+
+            // 如果没有匹配项，返回未知或默认字符串  
+            return "unknown";
         }
     }
 }

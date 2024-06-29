@@ -482,4 +482,34 @@
   <data name="CustomHomePageSourceCodeError" xml:space="preserve">
     <value>自定义主页面源代码错误</value>
   </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="ChooseArchitecture" xml:space="preserve">
+    <value>选择平台</value>
+  </data>
+  <data name="CheckUpdateFail" xml:space="preserve">
+    <value>检查更新失败</value>
+  </data>
+  <data name="FoundNewVersion" xml:space="preserve">
+    <value>发现新版本</value>
+  </data>
+  <data name="GetUpdateUrl" xml:space="preserve">
+    <value>获取更新统一资源定位器</value>
+  </data>
+  <data name="BeginDownload" xml:space="preserve">
+    <value>开始下载</value>
+  </data>
+  <data name="UpdateFail" xml:space="preserve">
+    <value>更新失败</value>
+  </data>
+  <data name="ThisArchitectureCannotAutoUpdate" xml:space="preserve">
+    <value>此平台不支持自动更新，打开以下路径手动替换</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="DownloadFinish" xml:space="preserve">
+    <value>下载完成</value>
+  </data>
 </root>

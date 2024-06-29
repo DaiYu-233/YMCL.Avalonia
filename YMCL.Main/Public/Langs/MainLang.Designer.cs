@@ -142,6 +142,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 开始下载 的本地化字符串。
+        /// </summary>
+        public static string BeginDownload {
+            get {
+                return ResourceManager.GetString("BeginDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 开始安装 的本地化字符串。
         /// </summary>
         public static string BeginInstall {
@@ -183,6 +192,33 @@ namespace YMCL.Main.Public.Langs {
         public static string CannotOpenBrowser {
             get {
                 return ResourceManager.GetString("CannotOpenBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 检查更新 的本地化字符串。
+        /// </summary>
+        public static string CheckUpdate {
+            get {
+                return ResourceManager.GetString("CheckUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 检查更新失败 的本地化字符串。
+        /// </summary>
+        public static string CheckUpdateFail {
+            get {
+                return ResourceManager.GetString("CheckUpdateFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 选择平台 的本地化字符串。
+        /// </summary>
+        public static string ChooseArchitecture {
+            get {
+                return ResourceManager.GetString("ChooseArchitecture", resourceCulture);
             }
         }
         
@@ -286,6 +322,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 下载完成 的本地化字符串。
+        /// </summary>
+        public static string DownloadFinish {
+            get {
+                return ResourceManager.GetString("DownloadFinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 编辑 的本地化字符串。
         /// </summary>
         public static string Edit {
@@ -367,6 +412,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 发现新版本 的本地化字符串。
+        /// </summary>
+        public static string FoundNewVersion {
+            get {
+                return ResourceManager.GetString("FoundNewVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 游戏已退出 的本地化字符串。
         /// </summary>
         public static string GameExited {
@@ -399,6 +453,15 @@ namespace YMCL.Main.Public.Langs {
         public static string GetInstallableVersionFail {
             get {
                 return ResourceManager.GetString("GetInstallableVersionFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 获取更新统一资源定位器 的本地化字符串。
+        /// </summary>
+        public static string GetUpdateUrl {
+            get {
+                return ResourceManager.GetString("GetUpdateUrl", resourceCulture);
             }
         }
         
@@ -1069,11 +1132,38 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 此平台不支持自动更新，打开以下路径手动替换 的本地化字符串。
+        /// </summary>
+        public static string ThisArchitectureCannotAutoUpdate {
+            get {
+                return ResourceManager.GetString("ThisArchitectureCannotAutoUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 未处理的异常 的本地化字符串。
         /// </summary>
         public static string UnhandledException {
             get {
                 return ResourceManager.GetString("UnhandledException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 更新 的本地化字符串。
+        /// </summary>
+        public static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 更新失败 的本地化字符串。
+        /// </summary>
+        public static string UpdateFail {
+            get {
+                return ResourceManager.GetString("UpdateFail", resourceCulture);
             }
         }
         

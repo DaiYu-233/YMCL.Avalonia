@@ -70,6 +70,8 @@
     <None Remove="Public\Assets\Transparent-Icon.png" />
     <None Remove="Public\Assets\YCML-Icon.ico" />
     <None Remove="Public\Assets\YMCL-Icon.png" />
+    <None Remove="Public\Bins\YMCL.Update.Helper.linux" />
+    <None Remove="Public\Bins\YMCL.Update.Helper.win.exe" />
     <None Remove="Public\Texts\DateTime.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +84,8 @@
     </AvaloniaResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Public\Bins\YMCL.Update.Helper.linux" />
+    <EmbeddedResource Include="Public\Bins\YMCL.Update.Helper.win.exe" />
     <EmbeddedResource Include="Public\Texts\CustomHomePageDefault.axaml" />
     <EmbeddedResource Include="Public\Texts\DateTime.txt" />
   </ItemGroup>

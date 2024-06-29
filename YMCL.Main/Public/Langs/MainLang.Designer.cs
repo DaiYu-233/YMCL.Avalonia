@@ -223,6 +223,24 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 自定义主页面 的本地化字符串。
+        /// </summary>
+        public static string CustomHomePage {
+            get {
+                return ResourceManager.GetString("CustomHomePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 自定义主页面源代码错误 的本地化字符串。
+        /// </summary>
+        public static string CustomHomePageSourceCodeError {
+            get {
+                return ResourceManager.GetString("CustomHomePageSourceCodeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 深色 的本地化字符串。
         /// </summary>
         public static string Dark {
@@ -264,6 +282,15 @@ namespace YMCL.Main.Public.Langs {
         public static string DisableSelect {
             get {
                 return ResourceManager.GetString("DisableSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 编辑 的本地化字符串。
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
@@ -345,6 +372,15 @@ namespace YMCL.Main.Public.Langs {
         public static string GameExited {
             get {
                 return ResourceManager.GetString("GameExited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 发生异常 的本地化字符串。
+        /// </summary>
+        public static string GetException {
+            get {
+                return ResourceManager.GetString("GetException", resourceCulture);
             }
         }
         
@@ -525,6 +561,15 @@ namespace YMCL.Main.Public.Langs {
         public static string Loading {
             get {
                 return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 本地源代码 的本地化字符串。
+        /// </summary>
+        public static string LocalSourceCode {
+            get {
+                return ResourceManager.GetString("LocalSourceCode", resourceCulture);
             }
         }
         
@@ -1020,6 +1065,15 @@ namespace YMCL.Main.Public.Langs {
         public static string ThirdPartyLogin {
             get {
                 return ResourceManager.GetString("ThirdPartyLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未处理的异常 的本地化字符串。
+        /// </summary>
+        public static string UnhandledException {
+            get {
+                return ResourceManager.GetString("UnhandledException", resourceCulture);
             }
         }
         

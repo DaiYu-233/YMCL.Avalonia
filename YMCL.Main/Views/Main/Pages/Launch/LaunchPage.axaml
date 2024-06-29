@@ -118,6 +118,11 @@
                         </Border>
                     </DockPanel>
                 </Border>
+                <Border
+                    Name="CustomPageRoot"
+                    Margin="10,10,0,10"
+                    ClipToBounds="True"
+                    CornerRadius="5" />
             </DockPanel>
             <Border
                 Name="VersionListRoot"

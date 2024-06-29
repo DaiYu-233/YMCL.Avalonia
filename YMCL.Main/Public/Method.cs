@@ -456,5 +456,10 @@ namespace YMCL.Main.Public
             var result = await dialog.ShowAsync();
             return result;
         }
+        public static async void ShowLongException(string msg, Exception ex)
+        {
+            var textBox = new TextBox() { FontFamily = (FontFamily)Application.Current.Resources["Font"], TextWrapping = TextWrapping.Wrap, Text = $"{msg} - {ex.Message}\n\n{ex}", HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center, IsReadOnly = true };
+            await ShowDialogAsync(MainLang.GetException, p_content: textBox, b_primary: MainLang.Ok);
+        }
     }
 }

@@ -20,6 +20,7 @@ namespace YMCL.Main.Public.Classes
         public string Version { get; set; } 
         public bool EnableIndependencyCore { get; set; } = true;
         public WindowTitleBarStyle WindowTitleBarStyle { get; set; } = WindowTitleBarStyle.Unset;
+        public CustomHomePageWay CustomHomePage { get; set; } = CustomHomePageWay.None;
     }
     public class VersionSetting
     {

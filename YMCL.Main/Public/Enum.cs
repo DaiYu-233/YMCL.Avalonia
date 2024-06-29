@@ -36,4 +36,10 @@
         System,
         Ymcl
     }
+    public enum CustomHomePageWay
+    {
+        None,
+        Local,
+        Network
+    }
 }

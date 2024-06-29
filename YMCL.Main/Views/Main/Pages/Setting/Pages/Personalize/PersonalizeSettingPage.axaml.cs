@@ -10,6 +10,7 @@ using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Langs;
+using Avalonia.Platform.Storage;
 
 namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
 {
@@ -34,6 +35,22 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
                     var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
                     WindowTitleBarStyleComboBox.SelectedIndex = setting.WindowTitleBarStyle == WindowTitleBarStyle.System ? 0 : 1;
                 }
+            };
+            CustomHomePageComboBox.SelectionChanged += (s, e) =>
+            {
+                var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                EditCustomHomePageBtn.IsVisible = CustomHomePageComboBox.SelectedIndex == 1 ? true : false;
+                if (CustomHomePageComboBox.SelectedIndex != (int)setting.CustomHomePage)
+                {
+                    setting.CustomHomePage = (CustomHomePageWay)CustomHomePageComboBox.SelectedIndex;
+                    File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                    Method.RestartApp();
+                }
+            };
+            EditCustomHomePageBtn.Click += (s, e) =>
+            {
+                var launcher = TopLevel.GetTopLevel(this).Launcher;
+                launcher.LaunchFileInfoAsync(new FileInfo(Const.CustomHomePageXamlDataPath));
             };
             WindowTitleBarStyleComboBox.SelectionChanged += async (_, _) =>
             {
@@ -164,6 +181,8 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
             ThemeComboBox.SelectedIndex = (int)setting.Theme;
+            CustomHomePageComboBox.SelectedIndex = (int)setting.CustomHomePage;
+            EditCustomHomePageBtn.IsVisible = CustomHomePageComboBox.SelectedIndex == 1 ? true : false;
         }
     }
 }

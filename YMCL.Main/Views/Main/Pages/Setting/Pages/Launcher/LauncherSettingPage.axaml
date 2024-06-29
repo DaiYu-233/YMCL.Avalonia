@@ -10,12 +10,13 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Border x:Name="Root" CornerRadius="8">
-        <Border.Transitions>
-            <Transitions>
-                <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
-            </Transitions>
-        </Border.Transitions>
+    <ScrollViewer>
+        <Border x:Name="Root" CornerRadius="8">
+            <Border.Transitions>
+                <Transitions>
+                    <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
+                </Transitions>
+            </Border.Transitions>
             <StackPanel Margin="10" Spacing="10">
                 <Border
                     Padding="6.5"
@@ -77,5 +78,6 @@
                     </StackPanel>
                 </Border>
             </StackPanel>
-    </Border>
+        </Border>
+    </ScrollViewer>
 </UserControl>

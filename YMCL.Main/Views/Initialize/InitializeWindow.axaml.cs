@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
@@ -40,6 +41,17 @@ namespace YMCL.Main.Views.Initialize
             if (!File.Exists(Const.AccountDataPath))
             {
                 File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(new List<AccountInfo>() { new AccountInfo { Name = "Steve", AccountType = AccountType.Offline, AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz") } }, Formatting.Indented));
+            }
+            if (!File.Exists(Const.CustomHomePageXamlDataPath))
+            {
+                string resourceName = "YMCL.Main.Public.Texts.CustomHomePageDefault.axaml";
+                Assembly _assembly = Assembly.GetExecutingAssembly();
+                Stream stream = _assembly.GetManifestResourceStream(resourceName);
+                using (StreamReader reader = new StreamReader(stream!))
+                {
+                    string result = reader.ReadToEnd();
+                    File.WriteAllText(Const.CustomHomePageXamlDataPath, result);
+                }
             }
             var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
             if (setting.Language == null || setting.Language == "zh-CN")

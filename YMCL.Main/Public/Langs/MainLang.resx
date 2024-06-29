@@ -464,4 +464,22 @@
   <data name="WindowTitleBarStyle" xml:space="preserve">
     <value>窗口标题栏样式</value>
   </data>
+  <data name="GetException" xml:space="preserve">
+    <value>发生异常</value>
+  </data>
+  <data name="UnhandledException" xml:space="preserve">
+    <value>未处理的异常</value>
+  </data>
+  <data name="CustomHomePage" xml:space="preserve">
+    <value>自定义主页面</value>
+  </data>
+  <data name="LocalSourceCode" xml:space="preserve">
+    <value>本地源代码</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="CustomHomePageSourceCodeError" xml:space="preserve">
+    <value>自定义主页面源代码错误</value>
+  </data>
 </root>

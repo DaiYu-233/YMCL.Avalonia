@@ -1,12 +1,14 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
@@ -102,6 +104,18 @@ public partial class MainWindow : Window
                     ExtendClientAreaChromeHints = Avalonia.Platform.ExtendClientAreaChromeHints.NoChrome;
                     ExtendClientAreaToDecorationsHint = true;
                     break;
+            }
+            if (setting.CustomHomePage == CustomHomePageWay.Local)
+            {
+                try
+                {
+                    var c = (Control)AvaloniaRuntimeXamlLoader.Load(File.ReadAllText(Const.CustomHomePageXamlDataPath));
+                    launchPage.CustomPageRoot.Child = c;
+                }
+                catch (Exception ex)
+                {
+                    Method.ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
+                }
             }
         };
     }

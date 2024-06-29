@@ -478,4 +478,70 @@ Jump to the browser to complete verification</value>
   <data name="SelectedItem" xml:space="preserve">
     <value>Selected items:</value>
   </data>
+  <data name="OpenSourceProjectUsageTable" xml:space="preserve">
+    <value>Open Source Project Usage Sheet</value>
+  </data>
+  <data name="GPL3Text" xml:space="preserve">
+    <value>The YMCL is open source under the GPL-3.0 protocol. It can be modified and distributed, but the mark of the original work must not be deleted. The modified work must also be open-sourced under the GPL</value>
+  </data>
+  <data name="MoveToRecycleBin" xml:space="preserve">
+    <value>Move to trash</value>
+  </data>
+  <data name="WindowTitleBarStyle" xml:space="preserve">
+    <value>Window title bar style</value>
+  </data>
+  <data name="GetException" xml:space="preserve">
+    <value>An exception occurs</value>
+  </data>
+  <data name="UnhandledException" xml:space="preserve">
+    <value>Unhandled exception</value>
+  </data>
+  <data name="CustomHomePage" xml:space="preserve">
+    <value>Custom Home Page</value>
+  </data>
+  <data name="LocalSourceCode" xml:space="preserve">
+    <value>Local source code</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="CustomHomePageSourceCodeError" xml:space="preserve">
+    <value>Custom main page source code error</value>
+  </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="ChooseArchitecture" xml:space="preserve">
+    <value>Select platform</value>
+  </data>
+  <data name="CheckUpdateFail" xml:space="preserve">
+    <value>Unable to check for updates</value>
+  </data>
+  <data name="FoundNewVersion" xml:space="preserve">
+    <value>Detect a newer version</value>
+  </data>
+  <data name="GetUpdateUrl" xml:space="preserve">
+    <value>Get Updated Uniform Resource Locator</value>
+  </data>
+  <data name="BeginDownload" xml:space="preserve">
+    <value>Start Download</value>
+  </data>
+  <data name="UpdateFail" xml:space="preserve">
+    <value>Update Failed</value>
+  </data>
+  <data name="ThisArchitectureCannotAutoUpdate" xml:space="preserve">
+    <value>This platform does not support automatic updates, open the following path to manually replace it</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Updated</value>
+  </data>
+  <data name="DownloadFinish" xml:space="preserve">
+    <value>Download completed</value>
+  </data>
+  <data name="CurrentlyTheLatestVersion" xml:space="preserve">
+    <value>The current version is up to date</value>
+  </data>
+  <data name="ShowGameOutput" xml:space="preserve">
+    <value>Show Game Output</value>
+  </data>
 </root>

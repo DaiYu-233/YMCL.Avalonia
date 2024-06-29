@@ -19,6 +19,7 @@ namespace YMCL.Main.Public.Classes
         public double MaxMem { get; set; } = 1024;
         public string Version { get; set; } 
         public bool EnableIndependencyCore { get; set; } = true;
+        public bool ShowGameOutput { get; set; } = true;
         public WindowTitleBarStyle WindowTitleBarStyle { get; set; } = WindowTitleBarStyle.Unset;
         public CustomHomePageWay CustomHomePage { get; set; } = CustomHomePageWay.None;
     }

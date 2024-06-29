@@ -67,6 +67,15 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                     File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
                 }
             };
+            ShowGameOutputSwitch.Click += (s, e) =>
+            {
+                var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                if (ShowGameOutputSwitch.IsChecked != setting.ShowGameOutput)
+                {
+                    setting.ShowGameOutput = (bool)ShowGameOutputSwitch.IsChecked!;
+                    File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                }
+            };
             AddMinecraftFolderBtn.Click += async (s, e) =>
             {
                 var result = await Method.OpenFolderPicker(TopLevel.GetTopLevel(this)!, new FolderPickerOpenOptions() { AllowMultiple = false, Title = MainLang.SelectMinecraftFolder });
@@ -238,6 +247,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                 MinecraftFolderComboBox.Items.Add(folder);
             });
             IndependencyCoreSwitch.IsChecked = setting.EnableIndependencyCore;
+            ShowGameOutputSwitch.IsChecked = setting.ShowGameOutput;
             if (javas.Contains(null))
             {
                 javas.RemoveAll(item => item == null);

@@ -56,7 +56,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
             using (StreamReader reader = new StreamReader(stream!))
             {
                 string result = reader.ReadToEnd();
-                Version.Text = $"v{result}";
+                Version.Text = $"v{result.Trim()}";
             }
         }
         private async Task CheckUpdateAsync()
@@ -297,7 +297,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
                 }
                 else
                 {
-
+                    Method.Toast(MainLang.CurrentlyTheLatestVersion, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Information);
                 }
             }
             catch (Exception ex)

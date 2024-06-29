@@ -259,6 +259,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 当前是最新版本 的本地化字符串。
+        /// </summary>
+        public static string CurrentlyTheLatestVersion {
+            get {
+                return ResourceManager.GetString("CurrentlyTheLatestVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 自定义主页面 的本地化字符串。
         /// </summary>
         public static string CustomHomePage {
@@ -462,6 +471,15 @@ namespace YMCL.Main.Public.Langs {
         public static string GetUpdateUrl {
             get {
                 return ResourceManager.GetString("GetUpdateUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 YMCL 以 GPL-3.0 协议开放源代码，可以修改且分发，但不得删除原作品的标记，修改后的作品必须也采用 GPL 协议进行开源 的本地化字符串。
+        /// </summary>
+        public static string GPL3Text {
+            get {
+                return ResourceManager.GetString("GPL3Text", resourceCulture);
             }
         }
         
@@ -916,6 +934,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 开源项目使用表 的本地化字符串。
+        /// </summary>
+        public static string OpenSourceProjectUsageTable {
+            get {
+                return ResourceManager.GetString("OpenSourceProjectUsageTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 概览 的本地化字符串。
         /// </summary>
         public static string Overview {
@@ -1074,6 +1101,15 @@ namespace YMCL.Main.Public.Langs {
         public static string ShaderpacksFolder {
             get {
                 return ResourceManager.GetString("ShaderpacksFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 显示游戏输出 的本地化字符串。
+        /// </summary>
+        public static string ShowGameOutput {
+            get {
+                return ResourceManager.GetString("ShowGameOutput", resourceCulture);
             }
         }
         

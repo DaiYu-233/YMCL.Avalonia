@@ -53,6 +53,8 @@ namespace YMCL.Main.Public.Controls.WindowTask
                 {
                     TitleBar.IsVisible = false;
                     TitleText.IsVisible = false;
+                    ExtendClientAreaChromeHints = (Avalonia.Platform.ExtendClientAreaChromeHints)2;
+                    ExtendClientAreaToDecorationsHint = false;
                     Root.CornerRadius = new CornerRadius(0, 0, 8, 8);
                     ValueProgressRoot.Margin = new Thickness(10, 10, 10, 5);
                 }

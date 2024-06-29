@@ -478,4 +478,70 @@
   <data name="SelectedItem" xml:space="preserve">
     <value>已選擇項目：</value>
   </data>
+  <data name="OpenSourceProjectUsageTable" xml:space="preserve">
+    <value>開源項目使用表</value>
+  </data>
+  <data name="GPL3Text" xml:space="preserve">
+    <value>YMCL 以GPL-3.0 協議開放原始碼，可以修改且分發，但不得刪除原作品的標記，修改後的作品必須也採用GPL 協定進行開源</value>
+  </data>
+  <data name="MoveToRecycleBin" xml:space="preserve">
+    <value>移動到回收站</value>
+  </data>
+  <data name="WindowTitleBarStyle" xml:space="preserve">
+    <value>視窗標題欄樣式</value>
+  </data>
+  <data name="GetException" xml:space="preserve">
+    <value>發生異常</value>
+  </data>
+  <data name="UnhandledException" xml:space="preserve">
+    <value>未處理的異常</value>
+  </data>
+  <data name="CustomHomePage" xml:space="preserve">
+    <value>自訂主頁面</value>
+  </data>
+  <data name="LocalSourceCode" xml:space="preserve">
+    <value>本地原始碼</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>編輯</value>
+  </data>
+  <data name="CustomHomePageSourceCodeError" xml:space="preserve">
+    <value>自訂主頁面原始碼錯誤</value>
+  </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>檢查更新</value>
+  </data>
+  <data name="ChooseArchitecture" xml:space="preserve">
+    <value>選擇平台</value>
+  </data>
+  <data name="CheckUpdateFail" xml:space="preserve">
+    <value>檢查更新失敗</value>
+  </data>
+  <data name="FoundNewVersion" xml:space="preserve">
+    <value>發現新版本</value>
+  </data>
+  <data name="GetUpdateUrl" xml:space="preserve">
+    <value>取得更新統一資源定位器</value>
+  </data>
+  <data name="BeginDownload" xml:space="preserve">
+    <value>開始下載</value>
+  </data>
+  <data name="UpdateFail" xml:space="preserve">
+    <value>更新失敗</value>
+  </data>
+  <data name="ThisArchitectureCannotAutoUpdate" xml:space="preserve">
+    <value>此平台不支援自動更新，開啟以下路徑手動替換</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="DownloadFinish" xml:space="preserve">
+    <value>下載完成</value>
+  </data>
+  <data name="CurrentlyTheLatestVersion" xml:space="preserve">
+    <value>目前是最新版本</value>
+  </data>
+  <data name="ShowGameOutput" xml:space="preserve">
+    <value>顯示遊戲輸出</value>
+  </data>
 </root>

@@ -478,4 +478,70 @@
   <data name="SelectedItem" xml:space="preserve">
     <value>選択したアイテム：</value>
   </data>
+  <data name="OpenSourceProjectUsageTable" xml:space="preserve">
+    <value>オープンソースプロジェクト使用シート</value>
+  </data>
+  <data name="GPL3Text" xml:space="preserve">
+    <value>YMCLはGPL-3.0プロトコルの下でオープンソースです。変更および配布することはできますが、元の作品のマークは削除してはなりません。変更された作品もGPLの下でオープンソースでなければなりません</value>
+  </data>
+  <data name="MoveToRecycleBin" xml:space="preserve">
+    <value>ゴミ箱に移動</value>
+  </data>
+  <data name="WindowTitleBarStyle" xml:space="preserve">
+    <value>ウィンドウタイトルバーのスタイル</value>
+  </data>
+  <data name="GetException" xml:space="preserve">
+    <value>異常があります</value>
+  </data>
+  <data name="UnhandledException" xml:space="preserve">
+    <value>未処理の例外</value>
+  </data>
+  <data name="CustomHomePage" xml:space="preserve">
+    <value>メインページをカスタマイズしましょう</value>
+  </data>
+  <data name="LocalSourceCode" xml:space="preserve">
+    <value>ローカルソースコード</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>編集</value>
+  </data>
+  <data name="CustomHomePageSourceCodeError" xml:space="preserve">
+    <value>カスタムメインページソースコードエラー</value>
+  </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>アップデートを確認する</value>
+  </data>
+  <data name="ChooseArchitecture" xml:space="preserve">
+    <value>プラットフォームを選択してください</value>
+  </data>
+  <data name="CheckUpdateFail" xml:space="preserve">
+    <value>アップデートの確認に失敗しました</value>
+  </data>
+  <data name="FoundNewVersion" xml:space="preserve">
+    <value>新しいバージョンを発見する</value>
+  </data>
+  <data name="GetUpdateUrl" xml:space="preserve">
+    <value>更新された統一資源ロケーターをゲット</value>
+  </data>
+  <data name="BeginDownload" xml:space="preserve">
+    <value>ダウンロードを開始してください</value>
+  </data>
+  <data name="UpdateFail" xml:space="preserve">
+    <value>更新に失敗しました</value>
+  </data>
+  <data name="ThisArchitectureCannotAutoUpdate" xml:space="preserve">
+    <value>このプラットフォームは自動更新をサポートしていません。次のパスを開いて手動で交換してください</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="DownloadFinish" xml:space="preserve">
+    <value>ダウンロードが完了しました</value>
+  </data>
+  <data name="CurrentlyTheLatestVersion" xml:space="preserve">
+    <value>現在のバージョンは最新です</value>
+  </data>
+  <data name="ShowGameOutput" xml:space="preserve">
+    <value>ゲーム出力を表示</value>
+  </data>
 </root>

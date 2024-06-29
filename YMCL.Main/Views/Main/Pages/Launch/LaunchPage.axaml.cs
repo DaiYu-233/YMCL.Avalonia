@@ -883,20 +883,33 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                         watcher.OutputLogReceived += async (_, args) =>
                         {
                             Debug.WriteLine(args.Log);
-                            await Dispatcher.UIThread.InvokeAsync(() =>
+                            if (setting.ShowGameOutput)
                             {
-                                task.UpdateTextProgress(args.Original, false);
-                            });
+                                await Dispatcher.UIThread.InvokeAsync(() =>
+                                {
+                                    task.UpdateTextProgress(args.Original, false);
+                                });
+                            }
                         };
 
                         await Dispatcher.UIThread.InvokeAsync(() =>
                         {
                             task.UpdateTextProgress(MainLang.WaitForGameWindowAppear);
-                            task.UpdateTextProgress("\n", false);
-                            task.UpdateTextProgress("-----> JvmOutputLog", false);
+                            if (setting.ShowGameOutput)
+                            {
+                                task.UpdateTextProgress("\n", false);
+                                task.UpdateTextProgress("-----> JvmOutputLog", false);
+                            }
                             Method.Toast(MainLang.LaunchFinish, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Success);
                         });
-
+                        _ = Task.Run(async () =>
+                        {
+                            watcher.Process.WaitForInputIdle();
+                            await Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                task.Hide();
+                            });
+                        });
                     });
                 }
                 catch (Exception ex)

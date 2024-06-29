@@ -478,4 +478,70 @@
   <data name="SelectedItem" xml:space="preserve">
     <value>Выбранные элементы:</value>
   </data>
+  <data name="OpenSourceProjectUsageTable" xml:space="preserve">
+    <value>Лист использования проекта с открытым исходным кодом</value>
+  </data>
+  <data name="GPL3Text" xml:space="preserve">
+    <value>YMCL является открытым исходным кодом под протоколом GPL-3.0. Он может быть изменен и распространен, но знак оригинальной работы не должен быть удален. Измененная работа также должна быть с открытым исходным кодом под GPL</value>
+  </data>
+  <data name="MoveToRecycleBin" xml:space="preserve">
+    <value>Переместить в корзину</value>
+  </data>
+  <data name="WindowTitleBarStyle" xml:space="preserve">
+    <value>Стиль строки заголовка окна</value>
+  </data>
+  <data name="GetException" xml:space="preserve">
+    <value>Что-то пошло не так</value>
+  </data>
+  <data name="UnhandledException" xml:space="preserve">
+    <value>Необработанное исключение</value>
+  </data>
+  <data name="CustomHomePage" xml:space="preserve">
+    <value>Настройте главную страницу</value>
+  </data>
+  <data name="LocalSourceCode" xml:space="preserve">
+    <value>Локальный исходный код</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Редактировать</value>
+  </data>
+  <data name="CustomHomePageSourceCodeError" xml:space="preserve">
+    <value>Ошибка исходного кода пользовательской главной страницы</value>
+  </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>Проверить обновления</value>
+  </data>
+  <data name="ChooseArchitecture" xml:space="preserve">
+    <value>Выберите площадку</value>
+  </data>
+  <data name="CheckUpdateFail" xml:space="preserve">
+    <value>Не удалось проверить наличие обновлений</value>
+  </data>
+  <data name="FoundNewVersion" xml:space="preserve">
+    <value>Откройте для себя новые версии</value>
+  </data>
+  <data name="GetUpdateUrl" xml:space="preserve">
+    <value>Получите обновленный унифицированный локатор ресурсов</value>
+  </data>
+  <data name="BeginDownload" xml:space="preserve">
+    <value>Начать загрузку</value>
+  </data>
+  <data name="UpdateFail" xml:space="preserve">
+    <value>Ошибка обновления</value>
+  </data>
+  <data name="ThisArchitectureCannotAutoUpdate" xml:space="preserve">
+    <value>Эта платформа не поддерживает автоматические обновления, откройте следующий путь, чтобы заменить ее вручную</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="DownloadFinish" xml:space="preserve">
+    <value>Загрузка завершена</value>
+  </data>
+  <data name="CurrentlyTheLatestVersion" xml:space="preserve">
+    <value>Текущая версия обновлена</value>
+  </data>
+  <data name="ShowGameOutput" xml:space="preserve">
+    <value>Показать результат игры</value>
+  </data>
 </root>

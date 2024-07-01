@@ -64,8 +64,9 @@ namespace YMCL.Main.Public
                 control.Transitions = transitions;
             }
         }
-        public static void Toast(string msg, WindowNotificationManager notification, NotificationType type = NotificationType.Information, bool time = true, string title = "Yu Minecraft Launcher")
+        public static void Toast(string msg, WindowNotificationManager p_notification = null, NotificationType type = NotificationType.Information, bool time = true, string title = "Yu Minecraft Launcher")
         {
+            var notification = p_notification == null ? Const.Notification.main : p_notification;
             var showTitle = Const.AppTitle;
             if (!string.IsNullOrEmpty(title))
             {

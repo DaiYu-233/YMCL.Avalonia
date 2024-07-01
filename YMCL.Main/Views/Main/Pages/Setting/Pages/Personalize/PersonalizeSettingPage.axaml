@@ -83,6 +83,22 @@
                 </DockPanel>
             </Border>
             <Border
+                Name="ColorPickerRoot"
+                Padding="6.5"
+                Background="{DynamicResource 1x}"
+                CornerRadius="5">
+                <DockPanel>
+                    <TextBlock
+                        Name="ColorPickerLabel"
+                        Margin="10,0,20,0"
+                        VerticalAlignment="Center"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="14"
+                        Text="{x:Static properties:MainLang.ThemeColor}" />
+                    <ColorPicker Name="ColorPicker" HorizontalAlignment="Right" />
+                </DockPanel>
+            </Border>
+            <Border
                 Padding="6.5"
                 Background="{DynamicResource 1x}"
                 CornerRadius="5">

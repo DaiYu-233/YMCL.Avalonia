@@ -88,11 +88,29 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 激活Windows/Office 的本地化字符串。
+        /// </summary>
+        public static string ActivateWinOffice {
+            get {
+                return ResourceManager.GetString("ActivateWinOffice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 添加文件夹 的本地化字符串。
         /// </summary>
         public static string AddFolder {
             get {
                 return ResourceManager.GetString("AddFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 添加音频文件 的本地化字符串。
+        /// </summary>
+        public static string AddLocalSong {
+            get {
+                return ResourceManager.GetString("AddLocalSong", resourceCulture);
             }
         }
         
@@ -174,6 +192,24 @@ namespace YMCL.Main.Public.Langs {
         public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 取消激活Windows 的本地化字符串。
+        /// </summary>
+        public static string CancelActivateWin {
+            get {
+                return ResourceManager.GetString("CancelActivateWin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 此操作会移除Windows激活状态，导致Windows个性化等功能不可用，是否继续？ 的本地化字符串。
+        /// </summary>
+        public static string CancelActivateWinTip {
+            get {
+                return ResourceManager.GetString("CancelActivateWinTip", resourceCulture);
             }
         }
         
@@ -376,6 +412,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 调用Api时出错 的本地化字符串。
+        /// </summary>
+        public static string ErrorCallingApi {
+            get {
+                return ResourceManager.GetString("ErrorCallingApi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 文件不存在 的本地化字符串。
         /// </summary>
         public static string FileNotExist {
@@ -493,6 +538,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 初始化音频库失败 的本地化字符串。
+        /// </summary>
+        public static string InitAudioLibraryFail {
+            get {
+                return ResourceManager.GetString("InitAudioLibraryFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 输入账户名称 的本地化字符串。
         /// </summary>
         public static string InputAccountName {
@@ -552,6 +606,18 @@ namespace YMCL.Main.Public.Langs {
         public static string InstallPreview {
             get {
                 return ResourceManager.GetString("InstallPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 尝试执行：
+        ///
+        ///sudo apt install libvlc-dev
+        ///sudo apt install vlc 的本地化字符串。
+        /// </summary>
+        public static string InstallVlcTip {
+            get {
+                return ResourceManager.GetString("InstallVlcTip", resourceCulture);
             }
         }
         
@@ -642,6 +708,15 @@ namespace YMCL.Main.Public.Langs {
         public static string Loading {
             get {
                 return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 加载更多 的本地化字符串。
+        /// </summary>
+        public static string LoadMore {
+            get {
+                return ResourceManager.GetString("LoadMore", resourceCulture);
             }
         }
         
@@ -1015,6 +1090,33 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 运行 的本地化字符串。
+        /// </summary>
+        public static string Run {
+            get {
+                return ResourceManager.GetString("Run", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 运行激活 的本地化字符串。
+        /// </summary>
+        public static string RunActivate {
+            get {
+                return ResourceManager.GetString("RunActivate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 运行命令失败 的本地化字符串。
+        /// </summary>
+        public static string RunCommandFail {
+            get {
+                return ResourceManager.GetString("RunCommandFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 存档文件夹 的本地化字符串。
         /// </summary>
         public static string SavesFolder {
@@ -1033,11 +1135,29 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 搜索 的本地化字符串。
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 搜索关键词... 的本地化字符串。
         /// </summary>
         public static string SearchKeyword {
             get {
                 return ResourceManager.GetString("SearchKeyword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 搜索无结果 的本地化字符串。
+        /// </summary>
+        public static string SearchNoResult {
+            get {
+                return ResourceManager.GetString("SearchNoResult", resourceCulture);
             }
         }
         
@@ -1083,6 +1203,15 @@ namespace YMCL.Main.Public.Langs {
         public static string SelectMinecraftFolder {
             get {
                 return ResourceManager.GetString("SelectMinecraftFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 选择音频文件 的本地化字符串。
+        /// </summary>
+        public static string SelectMusicFile {
+            get {
+                return ResourceManager.GetString("SelectMusicFile", resourceCulture);
             }
         }
         
@@ -1150,6 +1279,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 主题色 的本地化字符串。
+        /// </summary>
+        public static string ThemeColor {
+            get {
+                return ResourceManager.GetString("ThemeColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 版本名称将被重命名为： 的本地化字符串。
         /// </summary>
         public static string TheVersionNameWillBeRenamedTo {
@@ -1173,6 +1311,42 @@ namespace YMCL.Main.Public.Langs {
         public static string ThisArchitectureCannotAutoUpdate {
             get {
                 return ResourceManager.GetString("ThisArchitectureCannotAutoUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 此功能正在开发中 的本地化字符串。
+        /// </summary>
+        public static string ThisFeatureIsCurrentlyUnderDevelopment {
+            get {
+                return ResourceManager.GetString("ThisFeatureIsCurrentlyUnderDevelopment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 该功能仅支持Windows10以上，低于此版本系统不保证激活成功 的本地化字符串。
+        /// </summary>
+        public static string ThisFeatureOnlySupportsWindows10AndAbove {
+            get {
+                return ResourceManager.GetString("ThisFeatureOnlySupportsWindows10AndAbove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 该功能仅支持Windows平台 的本地化字符串。
+        /// </summary>
+        public static string ThisFeatureOnlySupportsWindowsPlatform {
+            get {
+                return ResourceManager.GetString("ThisFeatureOnlySupportsWindowsPlatform", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 百宝箱 的本地化字符串。
+        /// </summary>
+        public static string TreasureBox {
+            get {
+                return ResourceManager.GetString("TreasureBox", resourceCulture);
             }
         }
         

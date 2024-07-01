@@ -11,6 +11,9 @@ using Newtonsoft.Json;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Langs;
 using Avalonia.Platform.Storage;
+using System.Threading;
+using Avalonia.Threading;
+using System.Diagnostics;
 
 namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
 {
@@ -26,7 +29,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
 
         private void BindingEvent()
         {
-            Loaded += (s, e) =>
+            Loaded += async (s, e) =>
             {
                 Method.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
                 if (_firstLoad)
@@ -35,6 +38,12 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
                     var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
                     WindowTitleBarStyleComboBox.SelectedIndex = setting.WindowTitleBarStyle == WindowTitleBarStyle.System ? 0 : 1;
                 }
+                await Task.Delay(20);
+                ColorPicker.Width = ColorPickerRoot.Bounds.Width - 2 * 6.5 - ColorPickerLabel.Bounds.Width - 30;
+            };
+            SizeChanged += (s, e) =>
+            {
+                ColorPicker.Width = ColorPickerRoot.Bounds.Width - 2 * 6.5 - ColorPickerLabel.Bounds.Width - 30;
             };
             CustomHomePageComboBox.SelectionChanged += (s, e) =>
             {
@@ -46,6 +55,17 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
                     File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
                     Method.RestartApp();
                 }
+            };
+            ColorPicker.ColorChanged += (s, e) =>
+            {
+                var color = ColorPicker.Color;
+                var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                if (setting.AccentColor != color)
+                {
+                    setting.AccentColor = color;
+                    File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                }
+                Method.SetAccentColor(color);
             };
             EditCustomHomePageBtn.Click += (s, e) =>
             {
@@ -183,6 +203,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
             ThemeComboBox.SelectedIndex = (int)setting.Theme;
             CustomHomePageComboBox.SelectedIndex = (int)setting.CustomHomePage;
             EditCustomHomePageBtn.IsVisible = CustomHomePageComboBox.SelectedIndex == 1 ? true : false;
+            ColorPicker.Color = setting.AccentColor;
         }
     }
 }

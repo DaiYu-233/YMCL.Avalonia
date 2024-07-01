@@ -34,9 +34,11 @@ namespace YMCL.Main.Public
         public static string SettingDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.Setting.DaiYu");
         public static string MinecraftFolderDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.MinecraftFolder.DaiYu");
         public static string JavaDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.Java.DaiYu");
+        public static string PlayerDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.Player.DaiYu");
         public static string CustomHomePageXamlDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.CustomHomePageXaml.DaiYu");
         public static string AccountDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.Account.DaiYu");
         public static string VersionSettingFileName { get; } = "YMCLSetting.DaiYu";
         public static string GithubUpdateApiUrl { get; } = "https://api.github.com/repos/DaiYu-233/YMCL.Avalonia/releases?per_page=1";
+        public static string MusicApiUrl { get; } = "https://music.api.daiyu.fun/"; 
     }
 }

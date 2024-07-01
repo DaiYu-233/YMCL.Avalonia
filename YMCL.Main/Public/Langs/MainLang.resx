@@ -524,4 +524,64 @@
   <data name="ShowGameOutput" xml:space="preserve">
     <value>显示游戏输出</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="LoadMore" xml:space="preserve">
+    <value>加载更多</value>
+  </data>
+  <data name="ErrorCallingApi" xml:space="preserve">
+    <value>调用Api时出错</value>
+  </data>
+  <data name="SearchNoResult" xml:space="preserve">
+    <value>搜索无结果</value>
+  </data>
+  <data name="AddLocalSong" xml:space="preserve">
+    <value>添加音频文件</value>
+  </data>
+  <data name="SelectMusicFile" xml:space="preserve">
+    <value>选择音频文件</value>
+  </data>
+  <data name="ThemeColor" xml:space="preserve">
+    <value>主题色</value>
+  </data>
+  <data name="InitAudioLibraryFail" xml:space="preserve">
+    <value>初始化音频库失败</value>
+  </data>
+  <data name="InstallVlcTip" xml:space="preserve">
+    <value>尝试执行：
+
+sudo apt install libvlc-dev
+sudo apt install vlc</value>
+  </data>
+  <data name="ThisFeatureIsCurrentlyUnderDevelopment" xml:space="preserve">
+    <value>此功能正在开发中</value>
+  </data>
+  <data name="TreasureBox" xml:space="preserve">
+    <value>百宝箱</value>
+  </data>
+  <data name="ActivateWinOffice" xml:space="preserve">
+    <value>激活Windows/Office</value>
+  </data>
+  <data name="Run" xml:space="preserve">
+    <value>运行</value>
+  </data>
+  <data name="ThisFeatureOnlySupportsWindowsPlatform" xml:space="preserve">
+    <value>该功能仅支持Windows平台</value>
+  </data>
+  <data name="RunCommandFail" xml:space="preserve">
+    <value>运行命令失败</value>
+  </data>
+  <data name="RunActivate" xml:space="preserve">
+    <value>运行激活</value>
+  </data>
+  <data name="CancelActivateWin" xml:space="preserve">
+    <value>取消激活Windows</value>
+  </data>
+  <data name="CancelActivateWinTip" xml:space="preserve">
+    <value>此操作会移除Windows激活状态，导致Windows个性化等功能不可用，是否继续？</value>
+  </data>
+  <data name="ThisFeatureOnlySupportsWindows10AndAbove" xml:space="preserve">
+    <value>该功能仅支持Windows10以上，低于此版本系统不保证激活成功</value>
+  </data>
 </root>

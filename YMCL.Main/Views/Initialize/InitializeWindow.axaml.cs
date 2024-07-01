@@ -46,6 +46,10 @@ namespace YMCL.Main.Views.Initialize
             {
                 File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(new List<JavaEntry>(), Formatting.Indented));
             }
+            if (!File.Exists(Const.PlayerDataPath))
+            {
+                File.WriteAllText(Const.PlayerDataPath, JsonConvert.SerializeObject(new List<PlaySongListViewItemEntry>(), Formatting.Indented));
+            }
             if (!File.Exists(Const.AccountDataPath))
             {
                 File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(new List<AccountInfo>() { new AccountInfo { Name = "Steve", AccountType = AccountType.Offline, AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz") } }, Formatting.Indented));
@@ -72,7 +76,7 @@ namespace YMCL.Main.Views.Initialize
             }
 
             Const.Notification.main = new WindowNotificationManager(GetTopLevel(Const.Window.main)) { MaxItems = 5, Position = NotificationPosition.BottomRight, /*FontFamily = (FontFamily)Application.Current.Resources["Font"]*/ };
-            Method.SetAccentColor(Color.Parse("#0dc0a5"));
+            Method.SetAccentColor(setting.AccentColor);
             if (setting.Theme == Public.Theme.Light)
             {
                 Method.ToggleTheme(Public.Theme.Light);

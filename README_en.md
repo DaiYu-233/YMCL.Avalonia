@@ -6,7 +6,7 @@
 
 # ⛏️ Yu Minecraft Launcher 🐳
 
-[简体中文](https://github.com/Blessing-Studio/WonderLab.Override/blob/master/README.md) | English
+[简体中文](https://github.com/DaiYu-233/YMCL.Avalonia/blob/main/README.md) | English
 
 Free, Cross-Platform, Fully-Open-Source Minecraft Launcher
 

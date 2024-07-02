@@ -6,7 +6,7 @@
 
 # ⛏️ Yu Minecraft Launcher 🐳
 
-简体中文 | [English](https://github.com/DaiYu-233/YMCL.Avalonia/blob/master/README_en.md)
+简体中文 | [English](https://github.com/DaiYu-233/YMCL.Avalonia/blob/main/README_en.md)
 
 免费、跨平台、完全开源的 Minecraft 启动器
 

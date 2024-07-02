@@ -32,6 +32,7 @@
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.0-rc1" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.0-rc1" />
+    <PackageReference Include="CurseForge.APIClient" Version="2.2.0" />
     <PackageReference Include="FluentAvaloniaUI" Version="2.1.0-preview6" />
     <PackageReference Include="MinecraftLaunch" Version="3.1.0-preview03" />
     <PackageReference Include="MinecraftLaunch.Skin" Version="1.0.1" />

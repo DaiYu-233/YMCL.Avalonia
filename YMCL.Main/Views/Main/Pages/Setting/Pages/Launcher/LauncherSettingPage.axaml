@@ -477,7 +477,7 @@
                                     FontFamily="{DynamicResource Font}"
                                     FontSize="18"
                                     Foreground="{DynamicResource TextColor}"
-                                    Text="GPL-3.0" />
+                                    Text="Apache License" />
                             </Grid>
                             <TextBlock
                                 Margin="2,3,10,0"

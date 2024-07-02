@@ -481,9 +481,6 @@ Jump to the browser to complete verification</value>
   <data name="OpenSourceProjectUsageTable" xml:space="preserve">
     <value>Open Source Project Usage Sheet</value>
   </data>
-  <data name="GPL3Text" xml:space="preserve">
-    <value>The YMCL is open source under the GPL-3.0 protocol. It can be modified and distributed, but the mark of the original work must not be deleted. The modified work must also be open-sourced under the GPL</value>
-  </data>
   <data name="MoveToRecycleBin" xml:space="preserve">
     <value>Move to trash</value>
   </data>

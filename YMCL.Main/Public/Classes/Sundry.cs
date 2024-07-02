@@ -1,7 +1,11 @@
 ﻿#pragma warning disable CS8618
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
-using MinecraftLaunch.Classes.Models.Game;
+using CurseForge.APIClient.Models.Files;
+using CurseForge.APIClient.Models.Mods;
+using CurseForge.APIClient.Models;
+using System.Collections.Generic;
+using System;
 
 namespace YMCL.Main.Public.Classes
 {
@@ -35,5 +39,65 @@ namespace YMCL.Main.Public.Classes
         public string Name { get; set; }
         public string File { get; set; }
         public TextDecorationCollection Decorations { get; set; }
+    }
+    public class SearchModListViewItemEntry
+    {
+        public int Id { get; set; }
+        public int GameId { get; set; }
+        public string Name { get; set; }
+        public string Slug { get; set; }
+        public ModLinks Links { get; set; }
+        public string Summary { get; set; }
+        public ModStatus Status { get; set; }
+        public double DownloadCount { get; set; }
+        public bool IsFeatured { get; set; }
+        public int PrimaryCategoryId { get; set; }
+        public List<Category> Categories { get; set; } = new List<Category>();
+        public int? ClassId { get; set; }
+        public List<ModAuthor> Authors { get; set; } = new List<ModAuthor>();
+        public ModAsset Logo { get; set; }
+        public List<ModAsset> Screenshots { get; set; } = new List<ModAsset>();
+        public int MainFileId { get; set; }
+        public List<File> LatestFiles { get; set; } = new List<File>();
+        public List<FileIndex> LatestFilesIndexes { get; set; } = new List<FileIndex>();
+        public DateTimeOffset DateCreated { get; set; }
+        public DateTimeOffset DateModified { get; set; }
+        public DateTimeOffset DateReleased { get; set; }
+        public bool? AllowModDistribution { get; set; }
+        public int GamePopularityRank { get; set; }
+        public bool IsAvailable { get; set; }
+        public int ThumbsUpCount { get; set; }
+        public string StringDownloadCount { get; set; }
+        public string StringDateTime { get; set; }
+        public ModSource ModSource { get; set; }
+
+        public SearchModListViewItemEntry(Mod mod)
+        {
+            Id = mod.Id;
+            GameId = mod.GameId;
+            Name = mod.Name;
+            Slug = mod.Slug;
+            Links = mod.Links;
+            Summary = mod.Summary;
+            Status = mod.Status;
+            DownloadCount = mod.DownloadCount;
+            IsFeatured = mod.IsFeatured;
+            PrimaryCategoryId = mod.PrimaryCategoryId;
+            Categories = mod.Categories;
+            ClassId = mod.ClassId;
+            Authors = mod.Authors;
+            Logo = mod.Logo;
+            Screenshots = mod.Screenshots;
+            MainFileId = mod.MainFileId;
+            LatestFiles = mod.LatestFiles;
+            LatestFilesIndexes = mod.LatestFilesIndexes;
+            DateCreated = mod.DateCreated;
+            DateModified = mod.DateModified;
+            DateReleased = mod.DateReleased;
+            AllowModDistribution = mod.AllowModDistribution;
+            GamePopularityRank = mod.GamePopularityRank;
+            IsAvailable = mod.IsAvailable;
+            ThumbsUpCount = mod.ThumbsUpCount;
+        }
     }
 }

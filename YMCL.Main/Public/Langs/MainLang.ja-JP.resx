@@ -481,9 +481,6 @@
   <data name="OpenSourceProjectUsageTable" xml:space="preserve">
     <value>オープンソースプロジェクト使用シート</value>
   </data>
-  <data name="GPL3Text" xml:space="preserve">
-    <value>YMCLはGPL-3.0プロトコルの下でオープンソースです。変更および配布することはできますが、元の作品のマークは削除してはなりません。変更された作品もGPLの下でオープンソースでなければなりません</value>
-  </data>
   <data name="MoveToRecycleBin" xml:space="preserve">
     <value>ゴミ箱に移動</value>
   </data>

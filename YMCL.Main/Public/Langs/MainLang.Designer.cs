@@ -133,6 +133,24 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 任意加载器 的本地化字符串。
+        /// </summary>
+        public static string AnyModLoader {
+            get {
+                return ResourceManager.GetString("AnyModLoader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 所有来源 的本地化字符串。
+        /// </summary>
+        public static string AnySource {
+            get {
+                return ResourceManager.GetString("AnySource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 自动安装 的本地化字符串。
         /// </summary>
         public static string AutoInstall {
@@ -484,6 +502,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 游戏版本 的本地化字符串。
+        /// </summary>
+        public static string GameVersion {
+            get {
+                return ResourceManager.GetString("GameVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 发生异常 的本地化字符串。
         /// </summary>
         public static string GetException {
@@ -520,7 +547,7 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
-        ///   查找类似 YMCL 以 GPL-3.0 协议开放源代码，可以修改且分发，但不得删除原作品的标记，修改后的作品必须也采用 GPL 协议进行开源 的本地化字符串。
+        ///   查找类似 YMCL 以 Apache License 协议开放源代码，可以修改且分发，但软件必须包含原始代码的版权声明和许可声明，以及一个包含许可信息的通知文件。 的本地化字符串。
         /// </summary>
         public static string GPL3Text {
             get {
@@ -811,6 +838,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 模组名称 的本地化字符串。
+        /// </summary>
+        public static string ModName {
+            get {
+                return ResourceManager.GetString("ModName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 模组文件夹 的本地化字符串。
         /// </summary>
         public static string ModsFolder {
@@ -1023,6 +1059,15 @@ namespace YMCL.Main.Public.Langs {
         public static string Overview {
             get {
                 return ResourceManager.GetString("Overview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 播放列表 的本地化字符串。
+        /// </summary>
+        public static string PlayList {
+            get {
+                return ResourceManager.GetString("PlayList", resourceCulture);
             }
         }
         

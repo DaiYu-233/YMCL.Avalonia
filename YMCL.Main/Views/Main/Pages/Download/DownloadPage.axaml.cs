@@ -12,6 +12,7 @@ namespace YMCL.Main.Views.Main.Pages.Download
     public partial class DownloadPage : UserControl
     {
         Pages.AutoInstall.AutoInstallPage autoInstallPage = new();
+        Pages.Mod.Mod modPage = new();
         public DownloadPage()
         {
             InitializeComponent();
@@ -34,9 +35,12 @@ namespace YMCL.Main.Views.Main.Pages.Download
             {
                 switch (((NavigationViewItem)((NavigationView)s!).SelectedItem!).Tag)
                 {
-                    case "launch":
+                    case "auto":
                         autoInstallPage.Root.IsVisible = false;
                         FrameView.Content = autoInstallPage; break;
+                    case "mod":
+                        modPage.Root.IsVisible = false;
+                        FrameView.Content = modPage; break;
                 }
             };
         }

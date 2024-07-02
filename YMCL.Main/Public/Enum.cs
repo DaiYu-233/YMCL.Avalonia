@@ -42,4 +42,18 @@
         Local,
         Network
     }
+    public enum DaiYuLoaderType
+    {
+        Any,
+        Forge,
+        NeoForge,
+        Fabric,
+        Quilt,
+        LiteLoader
+    }
+    public enum ModSource
+    {
+        Modrinth,
+        CurseForge,
+    }
 }

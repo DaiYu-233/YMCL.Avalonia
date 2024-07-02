@@ -44,7 +44,7 @@ namespace YMCL.Main.Views.Main.Pages.Music
                 if (_firstLoad)
                 {
                     _firstLoad = false;
-                    _ = Method.ShowDialogAsync(msg: MainLang.ThisFeatureIsCurrentlyUnderDevelopment, b_primary: MainLang.Ok);
+                    //_ = Method.ShowDialogAsync(msg: MainLang.ThisFeatureIsCurrentlyUnderDevelopment, b_primary: MainLang.Ok);
                     try
                     {
                         //_libVLC = new LibVLC();
@@ -65,6 +65,28 @@ namespace YMCL.Main.Views.Main.Pages.Music
                     var list = JsonConvert.DeserializeObject<List<PlaySongListViewItemEntry>>(File.ReadAllText(Const.PlayerDataPath));
                     list.ForEach(list => { playSongList.Add(list); PlayListView.Items.Add(list); });
                 }
+            };
+            UpSong.Click += (s, e) =>
+            {
+                var index = PlayListView.SelectedIndex;
+                var count = PlayListView.Items.Count;
+                if (index == 0) return;
+                var item = PlayListView.SelectedItem;
+                if (item == null) return;
+                PlayListView.Items.Remove(item);
+                PlayListView.Items.Insert(index - 1, item);
+                PlayListView.SelectedItem = item;
+            };
+            DownSong.Click += (s, e) =>
+            {
+                var index = PlayListView.SelectedIndex;
+                var count = PlayListView.Items.Count;
+                if (index == count - 1) return;
+                var item = PlayListView.SelectedItem;
+                if (item == null) return;
+                PlayListView.Items.Remove(item);
+                PlayListView.Items.Insert(index + 1, item);
+                PlayListView.SelectedItem = item;
             };
             SearchBox.KeyDown += (s, e) =>
             {
@@ -128,7 +150,7 @@ namespace YMCL.Main.Views.Main.Pages.Music
             string _theLastLocalSong = string.Empty;
             AddLocalSong.Click += async (s, e) =>
             {
-                var files = await Method.OpenFilePicker(TopLevel.GetTopLevel(this)!, new FilePickerOpenOptions() { AllowMultiple = false, Title = MainLang.SelectMusicFile });
+                var files = await Method.OpenFilePicker(TopLevel.GetTopLevel(this)!, new FilePickerOpenOptions() { AllowMultiple = true, Title = MainLang.SelectMusicFile });
                 if (files == null) return;
                 foreach (var file in files)
                 {
@@ -339,6 +361,7 @@ namespace YMCL.Main.Views.Main.Pages.Music
         }
         async void PlaySong(PlaySongListViewItemEntry entry)
         {
+            if (entry == null) return;
             SongName.Text = entry.SongName;
             SongAuthors.Text = entry.Authors;
             try

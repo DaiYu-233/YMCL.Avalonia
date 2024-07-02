@@ -10,8 +10,10 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
 using Avalonia.Styling;
+using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,6 +21,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Management;
+using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using YMCL.Main.Public.Classes;
@@ -324,24 +327,6 @@ namespace YMCL.Main.Public
 
             return $"{minuteStr}:{secondStr}";
         }
-        public static string FormatNumberWithWanYi(string numberStr)
-        {
-            // 先转换为decimal，确保精度  
-            decimal number = decimal.Parse(numberStr, CultureInfo.InvariantCulture);
-
-            if (number < 10000) // 小于万位，直接返回  
-            {
-                return number.ToString("N0", CultureInfo.InvariantCulture);
-            }
-            else if (number < 100000000) // 小于亿位，转换为万位  
-            {
-                return (number / 10000).ToString("N2") + "万";
-            }
-            else // 大于等于亿位，转换为亿位  
-            {
-                return (number / 100000000).ToString("N2") + "亿";
-            }
-        }
         public static void ShowShortException(string msg, Exception ex)
         {
             Toast($"{msg}\n{ex.Message}", Const.Notification.main, NotificationType.Error);
@@ -510,6 +495,37 @@ namespace YMCL.Main.Public
 
             // 如果没有匹配项，返回未知或默认字符串  
             return "unknown";
+        }
+        public static async Task<Bitmap> LoadImageFromUrlAsync(string url)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    byte[] imageData = await client.GetByteArrayAsync(url);
+                    using (var stream = new MemoryStream(imageData))
+                    {
+                        var bitmap = new Bitmap(stream);
+                        return bitmap;
+                    }
+                }
+            }
+            catch { return null; }
+        }
+        public static string ConvertToWanOrYi(double number)
+        {
+            if (number < 7500)
+            {
+                return number.ToString();
+            }
+            else if (number < 100000000)
+            {
+                return $"{Math.Round((double)number / 10000, 1)}万";
+            }
+            else
+            {
+                return $"{Math.Round((double)number / 100000000, 1)}亿";
+            }
         }
     }
 }

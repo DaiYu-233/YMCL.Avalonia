@@ -481,9 +481,6 @@
   <data name="OpenSourceProjectUsageTable" xml:space="preserve">
     <value>Лист использования проекта с открытым исходным кодом</value>
   </data>
-  <data name="GPL3Text" xml:space="preserve">
-    <value>YMCL является открытым исходным кодом под протоколом GPL-3.0. Он может быть изменен и распространен, но знак оригинальной работы не должен быть удален. Измененная работа также должна быть с открытым исходным кодом под GPL</value>
-  </data>
   <data name="MoveToRecycleBin" xml:space="preserve">
     <value>Переместить в корзину</value>
   </data>

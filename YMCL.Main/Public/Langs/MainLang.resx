@@ -519,7 +519,7 @@
     <value>开源项目使用表</value>
   </data>
   <data name="GPL3Text" xml:space="preserve">
-    <value>YMCL 以 GPL-3.0 协议开放源代码，可以修改且分发，但不得删除原作品的标记，修改后的作品必须也采用 GPL 协议进行开源</value>
+    <value>YMCL 以 Apache License 协议开放源代码，可以修改且分发，但软件必须包含原始代码的版权声明和许可声明，以及一个包含许可信息的通知文件。</value>
   </data>
   <data name="ShowGameOutput" xml:space="preserve">
     <value>显示游戏输出</value>
@@ -583,5 +583,20 @@ sudo apt install vlc</value>
   </data>
   <data name="ThisFeatureOnlySupportsWindows10AndAbove" xml:space="preserve">
     <value>该功能仅支持Windows10以上，低于此版本系统不保证激活成功</value>
+  </data>
+  <data name="PlayList" xml:space="preserve">
+    <value>播放列表</value>
+  </data>
+  <data name="ModName" xml:space="preserve">
+    <value>模组名称</value>
+  </data>
+  <data name="GameVersion" xml:space="preserve">
+    <value>游戏版本</value>
+  </data>
+  <data name="AnyModLoader" xml:space="preserve">
+    <value>任意加载器</value>
+  </data>
+  <data name="AnySource" xml:space="preserve">
+    <value>所有来源</value>
   </data>
 </root>

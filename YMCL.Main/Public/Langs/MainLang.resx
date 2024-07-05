@@ -632,4 +632,13 @@ sudo apt install vlc</value>
   <data name="ModifyFail" xml:space="preserve">
     <value>修改失败</value>
   </data>
+  <data name="IfInstallBedRock" xml:space="preserve">
+    <value>如未安装基岩版则无法启动</value>
+  </data>
+  <data name="BedRockVersion" xml:space="preserve">
+    <value>基岩版</value>
+  </data>
+  <data name="CannotOpenBedRockSetting" xml:space="preserve">
+    <value>无法打开基岩版设置</value>
+  </data>
 </root>

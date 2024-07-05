@@ -178,6 +178,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 基岩版 的本地化字符串。
+        /// </summary>
+        public static string BedRockVersion {
+            get {
+                return ResourceManager.GetString("BedRockVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 开始下载 的本地化字符串。
         /// </summary>
         public static string BeginDownload {
@@ -237,6 +246,15 @@ namespace YMCL.Main.Public.Langs {
         public static string CannotFandRightJava {
             get {
                 return ResourceManager.GetString("CannotFandRightJava", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 无法打开基岩版设置 的本地化字符串。
+        /// </summary>
+        public static string CannotOpenBedRockSetting {
+            get {
+                return ResourceManager.GetString("CannotOpenBedRockSetting", resourceCulture);
             }
         }
         
@@ -570,6 +588,15 @@ namespace YMCL.Main.Public.Langs {
         public static string GPL3Text {
             get {
                 return ResourceManager.GetString("GPL3Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 如未安装基岩版则无法启动 的本地化字符串。
+        /// </summary>
+        public static string IfInstallBedRock {
+            get {
+                return ResourceManager.GetString("IfInstallBedRock", resourceCulture);
             }
         }
         

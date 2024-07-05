@@ -18,6 +18,7 @@ using MinecraftLaunch.Components.Authenticator;
 using MinecraftLaunch.Components.Launcher;
 using MinecraftLaunch.Components.Resolver;
 using MinecraftLaunch.Utilities;
+using NAudio.SoundFont;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -134,6 +135,11 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                 if (VersionListView.SelectedItem != null)
                 {
                     var entry = VersionListView.SelectedItem as GameEntry;
+                    if (entry.Type == "BedRock")
+                    {
+                        Method.Ui.Toast(MainLang.CannotOpenBedRockSetting);
+                        return;
+                    }
                     if (entry != null)
                     {
                         if (_firstOpenVersionSetting)
@@ -175,12 +181,20 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                     if (_changeUpdatingMcFolder)
                     {
                         _updatingMcFolder = true;
+                        _changeUpdatingMcFolder = false;
                     }
                     if (VersionListView.SelectedItem != null)
                     {
                         var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
-                        setting.Version = (VersionListView.SelectedItem as GameEntry).Id;
                         GameCoreText.Text = (VersionListView.SelectedItem as GameEntry).Id;
+                        if (VersionListView.SelectedIndex == 0)
+                        {
+                            setting.Version = "BedRock";
+                        }
+                        else
+                        {
+                            setting.Version = (VersionListView.SelectedItem as GameEntry).Id;
+                        }
                         File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
                     }
                     Task.Delay(200);
@@ -190,7 +204,22 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                     }
                 }
             };
-            LaunchBtn.Click += (s, e) => { _ = LaunchAsync(); };
+            LaunchBtn.Click += (s, e) =>
+            {
+                if (VersionListView.SelectedItem != null)
+                {
+                    if (VersionListView.SelectedIndex == 0)
+                    {
+                        var launcher = TopLevel.GetTopLevel(this).Launcher;
+                        launcher.LaunchUriAsync(new Uri("minecraft://play"));
+                        Method.Ui.Toast(MainLang.LaunchFinish, type: Avalonia.Controls.Notifications.NotificationType.Success);
+                    }
+                    else
+                    {
+                        _ = LaunchAsync();
+                    }
+                }
+            };
             OpenSelectedMinecraftFolderBtn.Click += (s, e) =>
             {
                 var launcher = TopLevel.GetTopLevel(this).Launcher;
@@ -369,6 +398,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             VersionListView.Items.Clear();
             var index = 0;
             var a = 0;
+            VersionListView.Items.Add(new GameEntry { Id = MainLang.BedRockVersion, Type = "BedRock", MainClass = MainLang.IfInstallBedRock });
             foreach (var version in list)
             {
                 VersionListView.Items.Add(version);
@@ -377,6 +407,14 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                     index = a;
                 }
                 a++;
+            }
+            if (setting.Version == "BedRock")
+            {
+                index = 0;
+            }
+            else
+            {
+                index++;
             }
             if (setting.Version != null)
             {
@@ -504,6 +542,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
         }
         void LoadVersionSettingUI(GameEntry entry)
         {
+            if (entry.Type == "BedRock") return;
             OverviewVersionId.Text = entry.Id;
             OverviewVersionInfo.Text = $"{entry.MainLoaderType}  {entry.Version}  Java{entry.JavaVersion}";
 

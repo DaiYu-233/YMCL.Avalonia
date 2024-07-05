@@ -11,7 +11,9 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
 using Avalonia.Styling;
 using Avalonia.Threading;
+using CurseForge.APIClient.Models.Files;
 using FluentAvalonia.UI.Controls;
+using Flurl;
 using Newtonsoft.Json;
 using SkiaSharp;
 using System;
@@ -21,11 +23,14 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Management;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Langs;
+using File = System.IO.File;
 using FileInfo = YMCL.Main.Public.Classes.FileInfo;
 using Path = System.IO.Path;
 
@@ -198,8 +203,9 @@ namespace YMCL.Main.Public
                     return list;
                 }
             }
-            public static async Task<List<FileInfo>> OpenFilePicker(TopLevel topLevel = null, FilePickerOpenOptions options = null)
+            public static async Task<List<FileInfo>> OpenFilePicker(TopLevel topLevel = null, FilePickerOpenOptions options = null,string p_title = null)
             {
+                var title = p_title == null ? MainLang.InputFilePath : p_title;
                 var isPrimaryButtonClick = false;
                 var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
                 if (setting.OpenFileWay == OpenFileWay.FileSelectWindow)
@@ -231,7 +237,7 @@ namespace YMCL.Main.Public
                     ContentDialog dialog = new()
                     {
                         FontFamily = (FontFamily)Application.Current.Resources["Font"],
-                        Title = MainLang.InputFilePath,
+                        Title = title,
                         PrimaryButtonText = MainLang.Ok,
                         CloseButtonText = MainLang.Cancel,
                         DefaultButton = ContentDialogButton.Primary,
@@ -313,6 +319,50 @@ namespace YMCL.Main.Public
                 {
                     DirectoryInfo directoryInfo = new DirectoryInfo(path);
                     directoryInfo.Create();
+                }
+            }
+            public static async Task<bool> UploadMicrosoftSkin(string skinpath, string uuid, string model, string accessToken)
+            {
+                try
+                {
+                    using (var client = new HttpClient())
+                    {
+                        // 设置Authorization头部  
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+                        // 创建multipart/form-data内容  
+                        using (var formData = new MultipartFormDataContent())
+                        {
+                            // 添加model部分  
+                            formData.Add(new StringContent(model), "model");
+
+                            // 添加file部分  
+                            var fileStream = System.IO.File.OpenRead(skinpath);
+                            var fileContent = new StreamContent(fileStream);
+                            fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/png");
+                            formData.Add(fileContent, "file", Path.GetFileName(skinpath));
+
+                            // 发送PUT请求  
+                            var response = await client.PutAsync($"https://api.mojang.com/user/profile/{uuid}/skin", formData);
+
+                            // 检查响应状态  
+                            if (response.IsSuccessStatusCode)
+                            {
+                                Method.Ui.Toast(MainLang.ModifySuccess);
+                                return true;
+                            }
+                            else
+                            {
+                                Method.Ui.Toast(MainLang.ModifyFail);
+                                return false;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Ui.ShowShortException(MainLang.ModifyFail, ex);
+                    return false;
                 }
             }
         }

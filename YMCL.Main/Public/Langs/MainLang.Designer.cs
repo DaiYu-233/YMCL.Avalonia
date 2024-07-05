@@ -619,6 +619,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 输入皮肤文件路径 的本地化字符串。
+        /// </summary>
+        public static string InputSkinFilePath {
+            get {
+                return ResourceManager.GetString("InputSkinFilePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 安装 的本地化字符串。
         /// </summary>
         public static string Install {
@@ -861,6 +870,33 @@ namespace YMCL.Main.Public.Langs {
         public static string Mod {
             get {
                 return ResourceManager.GetString("Mod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 修改失败 的本地化字符串。
+        /// </summary>
+        public static string ModifyFail {
+            get {
+                return ResourceManager.GetString("ModifyFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 修改皮肤(微软) 的本地化字符串。
+        /// </summary>
+        public static string ModifyMicrosoftSkin {
+            get {
+                return ResourceManager.GetString("ModifyMicrosoftSkin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 修改成功 的本地化字符串。
+        /// </summary>
+        public static string ModifySuccess {
+            get {
+                return ResourceManager.GetString("ModifySuccess", resourceCulture);
             }
         }
         
@@ -1117,6 +1153,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 刷新皮肤(微软) 的本地化字符串。
+        /// </summary>
+        public static string RefreshMicrosoftSkin {
+            get {
+                return ResourceManager.GetString("RefreshMicrosoftSkin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 正式版本 的本地化字符串。
         /// </summary>
         public static string ReleaseVersion {
@@ -1297,6 +1342,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 选择皮肤文件 的本地化字符串。
+        /// </summary>
+        public static string SelectSkinFile {
+            get {
+                return ResourceManager.GetString("SelectSkinFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 设置 的本地化字符串。
         /// </summary>
         public static string Setting {
@@ -1320,6 +1374,15 @@ namespace YMCL.Main.Public.Langs {
         public static string ShowGameOutput {
             get {
                 return ResourceManager.GetString("ShowGameOutput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 皮肤模型 的本地化字符串。
+        /// </summary>
+        public static string SkinModel {
+            get {
+                return ResourceManager.GetString("SkinModel", resourceCulture);
             }
         }
         

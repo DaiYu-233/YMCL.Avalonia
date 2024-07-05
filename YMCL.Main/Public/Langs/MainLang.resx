@@ -611,4 +611,25 @@ sudo apt install vlc</value>
   <data name="MatchingVersion" xml:space="preserve">
     <value>匹配的版本</value>
   </data>
+  <data name="ModifyMicrosoftSkin" xml:space="preserve">
+    <value>修改皮肤(微软)</value>
+  </data>
+  <data name="SkinModel" xml:space="preserve">
+    <value>皮肤模型</value>
+  </data>
+  <data name="InputSkinFilePath" xml:space="preserve">
+    <value>输入皮肤文件路径</value>
+  </data>
+  <data name="SelectSkinFile" xml:space="preserve">
+    <value>选择皮肤文件</value>
+  </data>
+  <data name="RefreshMicrosoftSkin" xml:space="preserve">
+    <value>刷新皮肤(微软)</value>
+  </data>
+  <data name="ModifySuccess" xml:space="preserve">
+    <value>修改成功</value>
+  </data>
+  <data name="ModifyFail" xml:space="preserve">
+    <value>修改失败</value>
+  </data>
 </root>

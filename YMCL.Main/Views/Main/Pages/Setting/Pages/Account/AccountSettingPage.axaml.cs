@@ -1,11 +1,14 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Platform;
+using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using MinecraftLaunch.Classes.Models.Auth;
 using MinecraftLaunch.Components.Authenticator;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,6 +45,43 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                     AccountsListView.SelectedItem = AccountsListView.Items[0];
                     setting.AccountSelectionIndex = 0;
                     File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                }
+                try
+                {
+                    if (AccountsListView.SelectedItem != null)
+                    {
+                        var isMicrosoftAccount = (AccountsListView.SelectedItem as AccountInfo).AccountType == AccountType.Microsoft;
+                        ModifyMicrosoftSkinBtn.IsEnabled = isMicrosoftAccount ? true : false;
+                        RefreshMicrosoftSkinBtn.IsEnabled = isMicrosoftAccount ? true : false;
+                    }
+                }
+                catch { }
+            };
+            ModifyMicrosoftSkinBtn.Click += async (s, e) =>
+            {
+                var comboBox = new ComboBox()
+                {
+                    FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                    HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Stretch
+                };
+                comboBox.Items.Add("Steve");
+                comboBox.Items.Add("Alex");
+                comboBox.SelectedIndex = 0;
+                var dialog = await Method.Ui.ShowDialogAsync(MainLang.SkinModel, p_content: comboBox, b_primary: MainLang.Ok);
+                if (dialog == ContentDialogResult.Primary)
+                {
+                    if (AccountsListView.SelectedItem == null) return;
+                    var account = AccountsListView.SelectedItem as AccountInfo;
+                    var list = await Method.IO.OpenFilePicker(TopLevel.GetTopLevel(this)!, new FilePickerOpenOptions() { AllowMultiple = false, Title = MainLang.SelectSkinFile }, MainLang.InputSkinFilePath);
+                    if (list == null || list[0].Path == null) return;
+                    if (account.AccountType != AccountType.Microsoft) return;
+                    JObject jsonObject = JObject.Parse(account.Data!);
+                    Method.Ui.Toast(MainLang.Loading);
+                    var result = await Method.IO.UploadMicrosoftSkin(list[0].Path, jsonObject["Uuid"].ToString(), comboBox.SelectedIndex == 0 ? "" : "slim", jsonObject["AccessToken"].ToString());
+                    if (result)
+                    {
+                        RefreshSelectedAccountSkin();
+                    }
                 }
             };
             AddAccountBtn.Click += async (s, e) =>
@@ -200,6 +240,10 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                     }
                 }
             };
+            RefreshMicrosoftSkinBtn.Click += (_, _) =>
+            {
+                RefreshSelectedAccountSkin();
+            };
             DelSeletedAccountBtn.Click += (_, _) =>
             {
                 accounts.RemoveAt(AccountsListView.SelectedIndex);
@@ -218,6 +262,16 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
             };
             AccountsListView.SelectionChanged += (_, _) =>
             {
+                try
+                {
+                    if (AccountsListView.SelectedItem != null)
+                    {
+                        var isMicrosoftAccount = (AccountsListView.SelectedItem as AccountInfo).AccountType == AccountType.Microsoft;
+                        ModifyMicrosoftSkinBtn.IsEnabled = isMicrosoftAccount ? true : false;
+                        RefreshMicrosoftSkinBtn.IsEnabled = isMicrosoftAccount ? true : false;
+                    }
+                }
+                catch { }
                 var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
                 setting.AccountSelectionIndex = AccountsListView.SelectedIndex;
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
@@ -386,6 +440,22 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                     }
                 }
             }
+        }
+        async void RefreshSelectedAccountSkin()
+        {
+            if (AccountsListView.SelectedItem == null) return;
+            var account = (AccountInfo)AccountsListView.SelectedItem;
+            var index = AccountsListView.SelectedIndex;
+            if (account.AccountType != AccountType.Microsoft) return;
+            JObject jsonObject = JObject.Parse(account.Data!);
+            MinecraftLaunch.Skin.Class.Fetchers.MicrosoftSkinFetcher skinFetcher = new(jsonObject["Uuid"].ToString());
+            var bytes = await skinFetcher.GetSkinAsync();
+            DateTime now = DateTime.Now;
+            account.Skin = Method.Value.BytesToBase64(bytes);
+            account.Bitmap = null;
+            accounts[index] = account;
+            File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
+            LoadAccounts();
         }
     }
 }

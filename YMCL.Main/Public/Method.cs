@@ -189,6 +189,58 @@ namespace YMCL.Main.Public
                 return list;
             }
         }
+        public static async Task<string> SaveFilePicker(TopLevel topLevel = null, FilePickerSaveOptions options = null)
+        {
+            var isPrimaryButtonClick = false;
+            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (setting.OpenFileWay == OpenFileWay.FileSelectWindow)
+            {
+                if (options != null && topLevel != null)
+                {
+                    var storageProvider = topLevel!.StorageProvider;
+                    var result = await storageProvider.SaveFilePickerAsync(options);
+                    if( result != null)
+                    {
+                        return result.TryGetLocalPath();
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    new Exception("ParameterIsNull");
+                    return null;
+                }
+            }
+            else
+            {
+                var textBox = new TextBox() { FontFamily = (FontFamily)Application.Current.Resources["Font"], TextWrapping = TextWrapping.Wrap };
+                ContentDialog dialog = new()
+                {
+                    FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                    Title = MainLang.InputFilePath,
+                    PrimaryButtonText = MainLang.Ok,
+                    CloseButtonText = MainLang.Cancel,
+                    DefaultButton = ContentDialogButton.Primary,
+                    Content = textBox
+                };
+                dialog.PrimaryButtonClick += (_, _) =>
+                {
+                    isPrimaryButtonClick = true;
+                };
+                var result = await dialog.ShowAsync();
+                var path = textBox.Text;
+                if (!Directory.Exists(Path.GetDirectoryName(path)) && isPrimaryButtonClick)
+                {
+                    Toast(MainLang.FolderNotExist, Const.Notification.main, NotificationType.Error);
+                    return null;
+                }
+                return path;
+            }
+
+        }
         public static void SetAccentColor(Color color)
         {
             Application.Current.Resources["SystemAccentColor"] = color;

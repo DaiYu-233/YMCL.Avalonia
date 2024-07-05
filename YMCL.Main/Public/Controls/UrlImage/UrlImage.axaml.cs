@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
+using System.Threading.Tasks;
 
 namespace YMCL.Main.Public.Controls
 {
@@ -24,6 +25,15 @@ namespace YMCL.Main.Public.Controls
                 {
                     Img.Source = bitmap;
                 }
+            }
+        }
+
+        public async Task RefreshImgAsync()
+        {
+            var bitmap = await Method.LoadImageFromUrlAsync(Url);
+            if (bitmap != null)
+            {
+                Img.Source = bitmap;
             }
         }
 

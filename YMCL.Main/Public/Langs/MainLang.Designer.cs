@@ -385,6 +385,24 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 下载 的本地化字符串。
+        /// </summary>
+        public static string Download {
+            get {
+                return ResourceManager.GetString("Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 下载失败 的本地化字符串。
+        /// </summary>
+        public static string DownloadFail {
+            get {
+                return ResourceManager.GetString("DownloadFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 下载完成 的本地化字符串。
         /// </summary>
         public static string DownloadFinish {
@@ -793,6 +811,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 匹配的版本 的本地化字符串。
+        /// </summary>
+        public static string MatchingVersion {
+            get {
+                return ResourceManager.GetString("MatchingVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 最大内存 的本地化字符串。
         /// </summary>
         public static string MaxMem {
@@ -1158,6 +1185,15 @@ namespace YMCL.Main.Public.Langs {
         public static string RunCommandFail {
             get {
                 return ResourceManager.GetString("RunCommandFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 保存文件 的本地化字符串。
+        /// </summary>
+        public static string SaveFile {
+            get {
+                return ResourceManager.GetString("SaveFile", resourceCulture);
             }
         }
         

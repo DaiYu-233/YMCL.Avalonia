@@ -599,4 +599,16 @@ sudo apt install vlc</value>
   <data name="AnySource" xml:space="preserve">
     <value>所有来源</value>
   </data>
+  <data name="Download" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="SaveFile" xml:space="preserve">
+    <value>保存文件</value>
+  </data>
+  <data name="DownloadFail" xml:space="preserve">
+    <value>下载失败</value>
+  </data>
+  <data name="MatchingVersion" xml:space="preserve">
+    <value>匹配的版本</value>
+  </data>
 </root>

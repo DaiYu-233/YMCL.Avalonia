@@ -6,6 +6,8 @@ using CurseForge.APIClient.Models.Mods;
 using CurseForge.APIClient.Models;
 using System.Collections.Generic;
 using System;
+using CurseForge.APIClient.Models.Games;
+using Newtonsoft.Json;
 
 namespace YMCL.Main.Public.Classes
 {
@@ -98,6 +100,99 @@ namespace YMCL.Main.Public.Classes
             GamePopularityRank = mod.GamePopularityRank;
             IsAvailable = mod.IsAvailable;
             ThumbsUpCount = mod.ThumbsUpCount;
+        }
+        
+    }
+    public class ModFileListViewItemEntry
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        public int GameId { get; set; }
+
+        public int ModId { get; set; }
+
+        public bool IsAvailable { get; set; }
+
+        public string DisplayName { get; set; }
+
+        public string FileName { get; set; }
+
+        public FileReleaseType ReleaseType { get; set; }
+
+        public FileStatus FileStatus { get; set; }
+
+        public List<FileHash> Hashes { get; set; } = new List<FileHash>();
+
+
+        public DateTimeOffset FileDate { get; set; }
+
+        public long FileLength { get; set; }
+
+        public long? FileSizeOnDisk { get; set; }
+
+        public long DownloadCount { get; set; }
+
+        public string DownloadUrl { get; set; }
+
+        public List<string> GameVersions { get; set; } = new List<string>();
+
+
+        public List<SortableGameVersion> SortableGameVersions { get; set; } = new List<SortableGameVersion>();
+
+
+        public List<FileDependency> Dependencies { get; set; } = new List<FileDependency>();
+
+
+        public bool? ExposeAsAlternative { get; set; }
+
+        public int? ParentProjectFileId { get; set; }
+
+        public int? AlternateFileId { get; set; }
+
+        public bool? IsServerPack { get; set; }
+
+        public int? ServerPackFileId { get; set; }
+
+        public bool? IsEarlyAccessContent { get; set; }
+
+        public DateTimeOffset? EarlyAccessEndDate { get; set; }
+
+        public long FileFingerprint { get; set; }
+
+        public List<FileModule> Modules { get; set; } = new List<FileModule>();
+
+        public string StringDownloadCount { get; set; }
+        public string StringDateTime { get; set; }
+        public string Loader { get; set; }
+
+        public ModFileListViewItemEntry(File file)
+        {
+            Id = file.Id;
+            GameId = file.GameId;
+            IsAvailable = file.IsAvailable;
+            DisplayName = file.DisplayName;
+            FileName = file.FileName;
+            ReleaseType = file.ReleaseType;
+            FileStatus = file.FileStatus;
+            Hashes = file.Hashes;
+            FileDate = file.FileDate;
+            FileLength = file.FileLength;
+            FileSizeOnDisk = file.FileSizeOnDisk;
+            DownloadCount = file.DownloadCount;
+            DownloadUrl = file.DownloadUrl;
+            GameVersions = file.GameVersions;
+            SortableGameVersions = file.SortableGameVersions;
+            Dependencies = file.Dependencies;
+            ExposeAsAlternative = file.ExposeAsAlternative;
+            ParentProjectFileId = file.ParentProjectFileId;
+            AlternateFileId = file.AlternateFileId;
+            IsServerPack = file.IsServerPack;
+            ServerPackFileId = file.ServerPackFileId;
+            IsEarlyAccessContent = file.IsEarlyAccessContent;
+            EarlyAccessEndDate = file.EarlyAccessEndDate;
+            FileFingerprint = file.FileFingerprint;
+            Modules = file.Modules;
         }
     }
 }

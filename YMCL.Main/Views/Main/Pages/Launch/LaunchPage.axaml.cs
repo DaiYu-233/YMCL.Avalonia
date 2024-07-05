@@ -86,7 +86,6 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                 }
                 LoadVersions();
             };
-
             AccountComboBox.SelectionChanged += (s, e) =>
             {
                 AccountComboBox.IsVisible = false;

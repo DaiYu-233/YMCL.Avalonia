@@ -75,7 +75,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
         {
             Loaded += (_, _) =>
             {
-                Method.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
+                Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
             };
             ModNameTextBox.KeyDown += (_, e) =>
             {
@@ -148,7 +148,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                     }
                     catch (Exception ex)
                     {
-                        Method.ShowShortException(MainLang.ErrorCallingApi, ex);
+                        Method.Ui.ShowShortException(MainLang.ErrorCallingApi, ex);
                         shouldReturn = true;
                         break;
                     }
@@ -185,7 +185,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                         if (file.GameVersions[0].ToString() == mcVersion)
                         {
                             var item = new ModFileListViewItemEntry(file);
-                            item.StringDownloadCount = Method.ConvertToWanOrYi(file.DownloadCount);
+                            item.StringDownloadCount = Method.Value.ConvertToWanOrYi(file.DownloadCount);
                             DateTime localDateTime = file.FileDate.DateTime.ToLocalTime();
                             string formattedDateTime = localDateTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
                             item.StringDateTime = formattedDateTime;
@@ -213,7 +213,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                             if (file.GameVersions[0].ToString() == mcVersion)
                             {
                                 var item = new ModFileListViewItemEntry(file);
-                                item.StringDownloadCount = Method.ConvertToWanOrYi(file.DownloadCount);
+                                item.StringDownloadCount = Method.Value.ConvertToWanOrYi(file.DownloadCount);
                                 DateTime localDateTime = file.FileDate.DateTime.ToLocalTime();
                                 string formattedDateTime = localDateTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
                                 item.StringDateTime = formattedDateTime;
@@ -264,7 +264,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                     mods.Data.ForEach(mod =>
                     {
                         var entry = new SearchModListViewItemEntry(mod);
-                        entry.StringDownloadCount = Method.ConvertToWanOrYi(mod.DownloadCount);
+                        entry.StringDownloadCount = Method.Value.ConvertToWanOrYi(mod.DownloadCount);
                         DateTime localDateTime = mod.DateReleased.DateTime.ToLocalTime();
                         string formattedDateTime = localDateTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
                         entry.StringDateTime = formattedDateTime;
@@ -277,7 +277,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                     LoadMoreBtn.IsVisible = true;
                     if (mods.Data.Count == 0)
                     {
-                        Method.Toast(MainLang.SearchNoResult);
+                        Method.Ui.Toast(MainLang.SearchNoResult);
                         LoadMoreBtn.IsVisible = false;
                     }
                 }
@@ -287,7 +287,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                     SearchBtn.IsEnabled = true;
                     Loading.IsVisible = false;
                     LoadMoreBtn.IsVisible = false;
-                    Method.ShowShortException(MainLang.ErrorCallingApi, ex);
+                    Method.Ui.ShowShortException(MainLang.ErrorCallingApi, ex);
                     return;
                 }
             };
@@ -300,7 +300,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
             {
                 var item = sender.SelectedItem as ModFileListViewItemEntry;
                 sender.SelectedIndex = -1;
-                var path = await Method.SaveFilePicker(TopLevel.GetTopLevel(this)!, new Avalonia.Platform.Storage.FilePickerSaveOptions
+                var path = await Method.IO.SaveFilePicker(TopLevel.GetTopLevel(this)!, new Avalonia.Platform.Storage.FilePickerSaveOptions
                 {
                     SuggestedFileName = item.DisplayName,
                     DefaultExtension = "jar",
@@ -308,7 +308,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                     Title = MainLang.SaveFile
                 });
                 if (path == null) return;
-                Method.Toast($"{MainLang.BeginDownload}£º{item.DisplayName}");
+                Method.Ui.Toast($"{MainLang.BeginDownload}£º{item.DisplayName}");
                 try
                 {
                     using (HttpClient client = new HttpClient())
@@ -324,11 +324,11 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                             }
                         }
                     }
-                    Method.Toast($"{MainLang.DownloadFinish}£º{item.DisplayName}",type:Avalonia.Controls.Notifications.NotificationType.Success);
+                    Method.Ui.Toast($"{MainLang.DownloadFinish}£º{item.DisplayName}",type:Avalonia.Controls.Notifications.NotificationType.Success);
                 }
                 catch (HttpRequestException ex)
                 {
-                    Method.ShowShortException($"{MainLang.DownloadFail}£º{item.DisplayName}", ex);
+                    Method.Ui.ShowShortException($"{MainLang.DownloadFail}£º{item.DisplayName}", ex);
                 }
             }
         }
@@ -369,7 +369,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                 mods.Data.ForEach(mod =>
                 {
                     var entry = new SearchModListViewItemEntry(mod);
-                    entry.StringDownloadCount = Method.ConvertToWanOrYi(mod.DownloadCount);
+                    entry.StringDownloadCount = Method.Value.ConvertToWanOrYi(mod.DownloadCount);
                     DateTime localDateTime = mod.DateReleased.DateTime.ToLocalTime();
                     string formattedDateTime = localDateTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
                     entry.StringDateTime = formattedDateTime;
@@ -382,7 +382,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                 LoadMoreBtn.IsVisible = true;
                 if (mods.Data.Count == 0)
                 {
-                    Method.Toast(MainLang.SearchNoResult);
+                    Method.Ui.Toast(MainLang.SearchNoResult);
                     LoadMoreBtn.IsVisible = false;
                 }
             }
@@ -392,7 +392,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                 SearchBtn.IsEnabled = true;
                 Loading.IsVisible = false;
                 LoadMoreBtn.IsVisible = false;
-                Method.ShowShortException(MainLang.ErrorCallingApi, ex);
+                Method.Ui.ShowShortException(MainLang.ErrorCallingApi, ex);
                 return;
             }
         }

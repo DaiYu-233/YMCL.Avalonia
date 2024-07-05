@@ -20,7 +20,7 @@ namespace YMCL.Main.Public.Controls
             if (_firstLoad)
             {
                 _firstLoad = false;
-                var bitmap = await Method.LoadImageFromUrlAsync(Url);
+                var bitmap = await Method.Value.LoadImageFromUrlAsync(Url);
                 if (bitmap != null)
                 {
                     Img.Source = bitmap;
@@ -30,7 +30,7 @@ namespace YMCL.Main.Public.Controls
 
         public async Task RefreshImgAsync()
         {
-            var bitmap = await Method.LoadImageFromUrlAsync(Url);
+            var bitmap = await Method.Value.LoadImageFromUrlAsync(Url);
             if (bitmap != null)
             {
                 Img.Source = bitmap;

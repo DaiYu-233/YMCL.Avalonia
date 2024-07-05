@@ -31,7 +31,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
         {
             Loaded += async (s, e) =>
             {
-                Method.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
+                Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
                 if (_firstLoad)
                 {
                     _firstLoad = false;
@@ -53,7 +53,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
                 {
                     setting.CustomHomePage = (CustomHomePageWay)CustomHomePageComboBox.SelectedIndex;
                     File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
-                    Method.RestartApp();
+                    Method.Ui.RestartApp();
                 }
             };
             ColorPicker.ColorChanged += (s, e) =>
@@ -65,7 +65,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
                     setting.AccentColor = color;
                     File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
                 }
-                Method.SetAccentColor(color);
+                Method.Ui.SetAccentColor(color);
             };
             EditCustomHomePageBtn.Click += (s, e) =>
             {
@@ -162,7 +162,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
                 {
                     setting.Language = LanguageComboBox.SelectedItem.ToString().Split(' ')[0];
                     File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
-                    Method.RestartApp();
+                    Method.Ui.RestartApp();
                 }
             };
             ThemeComboBox.SelectionChanged += (_, _) =>
@@ -173,7 +173,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
                     setting.Theme = (Theme)ThemeComboBox.SelectedIndex;
                     File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
                 }
-                Method.RestartApp();
+                Method.Ui.RestartApp();
             };
         }
 

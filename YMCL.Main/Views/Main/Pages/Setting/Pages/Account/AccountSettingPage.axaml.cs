@@ -31,7 +31,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
         {
             Loaded += (s, e) =>
             {
-                Method.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
+                Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
                 var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
                 if (setting.AccountSelectionIndex + 1 <= AccountsListView.Items.Count)
                 {
@@ -99,7 +99,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                                 }
                                 else
                                 {
-                                    Method.Toast(MainLang.AccountNameCannotBeNull, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                                    Method.Ui.Toast(MainLang.AccountNameCannotBeNull, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                                 }
                             }
                             break;
@@ -127,7 +127,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                                 await clipboard.SetTextAsync(textBlock.Text);
                                 var launcher = TopLevel.GetTopLevel(this).Launcher;
                                 await launcher.LaunchUriAsync(new Uri(verificationUrl));
-                                Method.Toast(MainLang.WaitForMicrosoftVerification, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Information);
+                                Method.Ui.Toast(MainLang.WaitForMicrosoftVerification, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Information);
                             };
                             microsoftDialog.SecondaryButtonClick += (_, _) =>
                             {
@@ -166,12 +166,12 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                             }
                             catch (Exception ex)
                             {
-                                Method.ShowShortException(MainLang.LoginFail, ex);
+                                Method.Ui.ShowShortException(MainLang.LoginFail, ex);
                                 return;
                             }
                             try
                             {
-                                Method.Toast(MainLang.VerifyingAccount, Const.Notification.main);
+                                Method.Ui.Toast(MainLang.VerifyingAccount, Const.Notification.main);
                                 MinecraftLaunch.Skin.Class.Fetchers.MicrosoftSkinFetcher skinFetcher = new(userProfile.Uuid.ToString());
                                 var bytes = await skinFetcher.GetSkinAsync();
                                 DateTime now = DateTime.Now;
@@ -181,7 +181,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                                     AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
                                     Data = JsonConvert.SerializeObject(userProfile, formatting: Formatting.Indented),
                                     Name = userProfile.Name,
-                                    Skin = Method.BytesToBase64(bytes)
+                                    Skin = Method.Value.BytesToBase64(bytes)
                                 });
 
                                 File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
@@ -191,7 +191,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                             }
                             catch (Exception ex)
                             {
-                                Method.ShowShortException(MainLang.LoginFail, ex);
+                                Method.Ui.ShowShortException(MainLang.LoginFail, ex);
                             }
                             break;
                         case 2:
@@ -237,14 +237,14 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
             {
                 MinecraftLaunch.Skin.SkinResolver SkinResolver = new(Convert.FromBase64String(x.Skin));
                 var bytes = MinecraftLaunch.Skin.ImageHelper.ConvertToByteArray(SkinResolver.CropSkinHeadBitmap());
-                var skin = Method.BytesToBase64(bytes);
+                var skin = Method.Value.BytesToBase64(bytes);
                 AccountsListView.Items.Add(new AccountInfo
                 {
                     Name = x.Name,
                     AccountType = x.AccountType,
                     AddTime = x.AddTime,
                     Data = x.Data,
-                    Bitmap = Method.Base64ToBitmap(skin)
+                    Bitmap = Method.Value.Base64ToBitmap(skin)
                 });
             });
 
@@ -308,17 +308,17 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                 var reInput = false;
                 if (string.IsNullOrEmpty(server) && string.IsNullOrWhiteSpace(server))
                 {
-                    Method.Toast(MainLang.YggdrasilServerUrlIsEmpty, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                    Method.Ui.Toast(MainLang.YggdrasilServerUrlIsEmpty, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                     reInput = true;
                 }
                 if (string.IsNullOrEmpty(email) && string.IsNullOrWhiteSpace(email))
                 {
-                    Method.Toast(MainLang.YggdrasilEmailIsEmpty, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                    Method.Ui.Toast(MainLang.YggdrasilEmailIsEmpty, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                     reInput = true;
                 }
                 if (string.IsNullOrEmpty(password) && string.IsNullOrWhiteSpace(password))
                 {
-                    Method.Toast(MainLang.YggdrasilPasswordIsEmpty, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                    Method.Ui.Toast(MainLang.YggdrasilPasswordIsEmpty, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                     reInput = true;
                 }
                 if (reInput)
@@ -331,12 +331,12 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                     try
                     {
                         YggdrasilAuthenticator authenticator = new(server, email, password);
-                        Method.Toast(MainLang.VerifyingAccount, Const.Notification.main);
+                        Method.Ui.Toast(MainLang.VerifyingAccount, Const.Notification.main);
                         yggdrasilAccounts = await authenticator.AuthenticateAsync();
                     }
                     catch (Exception ex)
                     {
-                        Method.ShowShortException(MainLang.LoginFail, ex);
+                        Method.Ui.ShowShortException(MainLang.LoginFail, ex);
                         return;
                     }
                     try
@@ -356,7 +356,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                                         AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
                                         Data = JsonConvert.SerializeObject(account, formatting: Formatting.Indented),
                                         Name = account.Name,
-                                        Skin = Method.BytesToBase64(bytes)
+                                        Skin = Method.Value.BytesToBase64(bytes)
                                     });
                                 });
                             }
@@ -382,7 +382,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account
                     }
                     catch (Exception ex)
                     {
-                        Method.ShowShortException(MainLang.LoginFail, ex);
+                        Method.Ui.ShowShortException(MainLang.LoginFail, ex);
                     }
                 }
             }

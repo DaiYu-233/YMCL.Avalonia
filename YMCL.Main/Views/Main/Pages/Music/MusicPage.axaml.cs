@@ -40,11 +40,11 @@ namespace YMCL.Main.Views.Main.Pages.Music
         {
             Loaded += (s, e) =>
             {
-                Method.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
+                Method.Ui.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
                 if (_firstLoad)
                 {
                     _firstLoad = false;
-                    //_ = Method.ShowDialogAsync(msg: MainLang.ThisFeatureIsCurrentlyUnderDevelopment, b_primary: MainLang.Ok);
+                    //_ = Method.Ui.ShowDialogAsync(msg: MainLang.ThisFeatureIsCurrentlyUnderDevelopment, b_primary: MainLang.Ok);
                     try
                     {
                         //_libVLC = new LibVLC();
@@ -55,11 +55,11 @@ namespace YMCL.Main.Views.Main.Pages.Music
                     {
                         if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                         {
-                            _ = Method.ShowDialogAsync(MainLang.InitAudioLibraryFail, MainLang.InstallVlcTip, b_primary: MainLang.Ok);
+                            _ = Method.Ui.ShowDialogAsync(MainLang.InitAudioLibraryFail, MainLang.InstallVlcTip, b_primary: MainLang.Ok);
                         }
                         else
                         {
-                            Method.ShowLongException(MainLang.InitAudioLibraryFail, ex);
+                            Method.Ui.ShowLongException(MainLang.InitAudioLibraryFail, ex);
                         }
                     }
                     var list = JsonConvert.DeserializeObject<List<PlaySongListViewItemEntry>>(File.ReadAllText(Const.PlayerDataPath));
@@ -150,7 +150,7 @@ namespace YMCL.Main.Views.Main.Pages.Music
             string _theLastLocalSong = string.Empty;
             AddLocalSong.Click += async (s, e) =>
             {
-                var files = await Method.OpenFilePicker(TopLevel.GetTopLevel(this)!, new FilePickerOpenOptions() { AllowMultiple = true, Title = MainLang.SelectMusicFile });
+                var files = await Method.IO.OpenFilePicker(TopLevel.GetTopLevel(this)!, new FilePickerOpenOptions() { AllowMultiple = true, Title = MainLang.SelectMusicFile });
                 if (files == null) return;
                 foreach (var file in files)
                 {
@@ -158,7 +158,7 @@ namespace YMCL.Main.Views.Main.Pages.Music
                     _theLastLocalSong = file.Path;
                     using (var reader = new MediaFoundationReader(file.Path))
                     {
-                        var time = Method.MsToTime(reader.TotalTime.TotalMilliseconds);
+                        var time = Method.Value.MsToTime(reader.TotalTime.TotalMilliseconds);
                         var song = new PlaySongListViewItemEntry()
                         {
                             DisplayDuration = time,
@@ -245,7 +245,7 @@ namespace YMCL.Main.Views.Main.Pages.Music
             {
                 SearchBox.IsEnabled = true;
                 SearchBtn.IsEnabled = true;
-                Method.ShowShortException(MainLang.ErrorCallingApi, ex);
+                Method.Ui.ShowShortException(MainLang.ErrorCallingApi, ex);
                 Loading.IsVisible = false;
                 return;
             }
@@ -269,18 +269,18 @@ namespace YMCL.Main.Views.Main.Pages.Music
                             Authors = authors,
                             Img = song.al.picUrl,
                             Duration = song.dt,
-                            DisplayDuration = Method.MsToTime(Convert.ToInt32(song.dt))
+                            DisplayDuration = Method.Value.MsToTime(Convert.ToInt32(song.dt))
                         });
                     }
                 }
                 else
                 {
-                    Method.Toast(MainLang.SearchNoResult);
+                    Method.Ui.Toast(MainLang.SearchNoResult);
                 }
             }
             else
             {
-                Method.Toast(MainLang.SearchNoResult, type: Avalonia.Controls.Notifications.NotificationType.Error);
+                Method.Ui.Toast(MainLang.SearchNoResult, type: Avalonia.Controls.Notifications.NotificationType.Error);
             }
             if (SearchSongListView.Items.Count > 0)
             {
@@ -314,7 +314,7 @@ namespace YMCL.Main.Views.Main.Pages.Music
                 SearchBtn.IsEnabled = true;
                 Loading.IsVisible = false;
                 LoadMoreBtn.IsVisible = true;
-                Method.ShowShortException(MainLang.ErrorCallingApi, ex);
+                Method.Ui.ShowShortException(MainLang.ErrorCallingApi, ex);
                 return;
             }
             var obj = JsonConvert.DeserializeObject<SearchSongEntry.Root>(json);
@@ -337,18 +337,18 @@ namespace YMCL.Main.Views.Main.Pages.Music
                             Authors = authors,
                             Duration = song.dt,
                             Img = song.al.picUrl,
-                            DisplayDuration = Method.MsToTime(Convert.ToInt32(song.dt))
+                            DisplayDuration = Method.Value.MsToTime(Convert.ToInt32(song.dt))
                         });
                     }
                 }
                 else
                 {
-                    Method.Toast(MainLang.SearchNoResult);
+                    Method.Ui.Toast(MainLang.SearchNoResult);
                 }
             }
             else
             {
-                Method.Toast(MainLang.SearchNoResult, type: Avalonia.Controls.Notifications.NotificationType.Error);
+                Method.Ui.Toast(MainLang.SearchNoResult, type: Avalonia.Controls.Notifications.NotificationType.Error);
             }
             if (SearchSongListView.Items.Count > 0)
             {

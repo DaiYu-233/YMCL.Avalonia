@@ -33,8 +33,8 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
         {
             Loaded += (s, e) =>
             {
-                Method.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
-                var totalMemory = Method.GetTotalMemory(Const.Platform);
+                Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
+                var totalMemory = Method.Value.GetTotalMemory(Const.Platform);
                 var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
                 if (_firstLoad)
                 {
@@ -78,7 +78,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
             };
             AddMinecraftFolderBtn.Click += async (s, e) =>
             {
-                var result = await Method.OpenFolderPicker(TopLevel.GetTopLevel(this)!, new FolderPickerOpenOptions() { AllowMultiple = false, Title = MainLang.SelectMinecraftFolder });
+                var result = await Method.IO.OpenFolderPicker(TopLevel.GetTopLevel(this)!, new FolderPickerOpenOptions() { AllowMultiple = false, Title = MainLang.SelectMinecraftFolder });
                 if (result != null && result.Count > 0)
                 {
                     var item = result[0];
@@ -94,18 +94,18 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                                 MinecraftFolderComboBox.Items.Add(folder);
                             });
                             MinecraftFolderComboBox.SelectedIndex = MinecraftFolderComboBox.ItemCount - 1;
-                            Method.Toast(MainLang.SuccessAdd + "£º" + item.Path, Const.Notification.main, NotificationType.Success);
+                            Method.Ui.Toast(MainLang.SuccessAdd + "£º" + item.Path, Const.Notification.main, NotificationType.Success);
                         }
                         else
                         {
-                            Method.Toast(MainLang.TheItemAlreadyExist, Const.Notification.main, NotificationType.Error);
+                            Method.Ui.Toast(MainLang.TheItemAlreadyExist, Const.Notification.main, NotificationType.Error);
                         }
                     }
                     else
                     {
                         if (!string.IsNullOrEmpty(item.Path))
                         {
-                            Method.Toast(MainLang.NeedToSelectMinecraftFolder, Const.Notification.main, NotificationType.Error);
+                            Method.Ui.Toast(MainLang.NeedToSelectMinecraftFolder, Const.Notification.main, NotificationType.Error);
                         }
                     }
                 }
@@ -120,12 +120,12 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
             {
                 var path = (string)MinecraftFolderComboBox.SelectedItem;
                 minecraftFolders.RemoveAt(MinecraftFolderComboBox.SelectedIndex);
-                Method.Toast(MainLang.SuccessRemove + "£º" + path, Const.Notification.main, NotificationType.Success);
+                Method.Ui.Toast(MainLang.SuccessRemove + "£º" + path, Const.Notification.main, NotificationType.Success);
                 if (minecraftFolders.Count == 0)
                 {
                     var a = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft");
                     minecraftFolders.Add(a);
-                    Method.Toast(MainLang.SuccessAdd + "£º" + a, Const.Notification.main, NotificationType.Success);
+                    Method.Ui.Toast(MainLang.SuccessAdd + "£º" + a, Const.Notification.main, NotificationType.Success);
                 }
                 MinecraftFolderComboBox.Items.Clear();
                 minecraftFolders.ForEach(folder =>
@@ -179,23 +179,23 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                 });
                 JavaComboBox.SelectedIndex = 0;
                 File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
-                Method.Toast($"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}£º{successAddCount}\n{MainLang.RepeatItem}£º{repeatJavaCount}", Const.Notification.main, NotificationType.Success);
+                Method.Ui.Toast($"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}£º{successAddCount}\n{MainLang.RepeatItem}£º{repeatJavaCount}", Const.Notification.main, NotificationType.Success);
             };
             ManualAddBtn.Click += async (s, e) =>
             {
-                var list = await Method.OpenFilePicker(TopLevel.GetTopLevel(this)!, new FilePickerOpenOptions() { AllowMultiple = false, Title = MainLang.SelectJava });
+                var list = await Method.IO.OpenFilePicker(TopLevel.GetTopLevel(this)!, new FilePickerOpenOptions() { AllowMultiple = false, Title = MainLang.SelectJava });
                 list.ForEach(java =>
                 {
                     var javaInfo = JavaUtil.GetJavaInfo(java.Path);
                     if (javaInfo == null && !string.IsNullOrEmpty(java.Path))
                     {
-                        Method.Toast(MainLang.TheJavaIsError, Const.Notification.main, NotificationType.Error);
+                        Method.Ui.Toast(MainLang.TheJavaIsError, Const.Notification.main, NotificationType.Error);
                     }
                     else
                     {
                         if (javas.Contains(javaInfo!))
                         {
-                            Method.Toast(MainLang.TheItemAlreadyExist, Const.Notification.main, NotificationType.Error);
+                            Method.Ui.Toast(MainLang.TheItemAlreadyExist, Const.Notification.main, NotificationType.Error);
                         }
                         else
                         {

@@ -29,7 +29,7 @@ namespace YMCL.Main.Views.Main.Pages.Download
         {
             Loaded += (s, e) =>
             {
-                Method.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
+                Method.Ui.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
             };
             Nav.SelectionChanged += (s, e) =>
             {

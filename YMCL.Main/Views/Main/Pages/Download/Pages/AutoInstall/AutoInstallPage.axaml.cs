@@ -38,7 +38,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
         {
             Loaded += (_, _) =>
             {
-                Method.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
+                Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
                 if (_firstLoad)
                 {
                     _firstLoad = false;
@@ -175,7 +175,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
             }
             catch (Exception ex)
             {
-                Method.ShowShortException(MainLang.GetInstallableVersionFail, ex);
+                Method.Ui.ShowShortException(MainLang.GetInstallableVersionFail, ex);
                 LoadInstallableVersionListErrorInfoBar.IsOpen = true;
                 LoadInstallableVersionListErrorInfoBar.Margin = new Avalonia.Thickness(0, 10, 0, 0);
             }
@@ -220,7 +220,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                 {
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        Method.ShowShortException($"{MainLang.GetFail}：OptiFine", ex);
+                        Method.Ui.ShowShortException($"{MainLang.GetFail}：OptiFine", ex);
                         OptiFineLoading.IsVisible = false;
                         NoOptifine.IsVisible = true;
                     });
@@ -248,7 +248,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                 {
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        Method.ShowShortException($"{MainLang.GetFail}：Forge", ex);
+                        Method.Ui.ShowShortException($"{MainLang.GetFail}：Forge", ex);
                         ForgeLoading.IsVisible = false;
                         NoForge.IsVisible = true;
                     });
@@ -276,7 +276,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                 {
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        Method.ShowShortException($"{MainLang.GetFail}：Quilt", ex);
+                        Method.Ui.ShowShortException($"{MainLang.GetFail}：Quilt", ex);
                         QuiltLoading.IsVisible = false;
                         NoQuilt.IsVisible = true;
                     });
@@ -304,7 +304,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                 {
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        Method.ShowShortException($"{MainLang.GetFail}：Fabric", ex);
+                        Method.Ui.ShowShortException($"{MainLang.GetFail}：Fabric", ex);
                         FabricLoading.IsVisible = false;
                         NoFabric.IsVisible = true;
                     });
@@ -492,7 +492,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
             var vanlliaInstaller = new VanlliaInstaller(resolver, versionId, MirrorDownloadManager.Bmcl);
             if (Directory.Exists(Path.Combine(setting.MinecraftFolder, "versions", customId)))
             {
-                Method.Toast($"{MainLang.FolderAlreadyExists}：{customId}", Const.Notification.main, NotificationType.Error);
+                Method.Ui.Toast($"{MainLang.FolderAlreadyExists}：{customId}", Const.Notification.main, NotificationType.Error);
                 return;
             }
 
@@ -522,7 +522,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                     {
                         await Dispatcher.UIThread.InvokeAsync(() =>
                         {
-                            Method.Toast($"{MainLang.InstallFail}：Vanllia - {versionId}", Const.Notification.main, NotificationType.Error);
+                            Method.Ui.Toast($"{MainLang.InstallFail}：Vanllia - {versionId}", Const.Notification.main, NotificationType.Error);
                         });
                         shouldReturn = true;
                     }
@@ -532,7 +532,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         {
                             await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Method.Toast($"{MainLang.InstallFinish}：Vanllia - {versionId}", Const.Notification.main, NotificationType.Success);
+                                Method.Ui.Toast($"{MainLang.InstallFinish}：Vanllia - {versionId}", Const.Notification.main, NotificationType.Success);
                             });
                         }
                     }
@@ -541,7 +541,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                 {
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        Method.ShowShortException($"{MainLang.InstallFail}：Vanllia - {versionId}", ex);
+                        Method.Ui.ShowShortException($"{MainLang.InstallFail}：Vanllia - {versionId}", ex);
                     });
                     shouldReturn = true;
                 }
@@ -558,7 +558,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath));
                         if (javas.Count <= 0)
                         {
-                            Method.Toast(MainLang.CannotFandRightJava, Const.Notification.main, NotificationType.Error);
+                            Method.Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, NotificationType.Error);
                             shouldReturn = true;
                         }
                         else
@@ -585,14 +585,14 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                             {
                                 await Dispatcher.UIThread.InvokeAsync(() =>
                                 {
-                                    Method.Toast($"{MainLang.InstallFinish}：Forge - {versionId}", Const.Notification.main, NotificationType.Success);
+                                    Method.Ui.Toast($"{MainLang.InstallFinish}：Forge - {versionId}", Const.Notification.main, NotificationType.Success);
                                 });
                             }
                             else
                             {
                                 await Dispatcher.UIThread.InvokeAsync(() =>
                                 {
-                                    Method.Toast($"{MainLang.InstallFail}：Forge - {customId}", Const.Notification.main, NotificationType.Error);
+                                    Method.Ui.Toast($"{MainLang.InstallFail}：Forge - {customId}", Const.Notification.main, NotificationType.Error);
                                 });
                                 shouldReturn = true;
                             }
@@ -602,7 +602,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                     {
                         await Dispatcher.UIThread.InvokeAsync(() =>
                         {
-                            Method.ShowShortException($"{MainLang.InstallFail}：Forge - {customId}", ex);
+                            Method.Ui.ShowShortException($"{MainLang.InstallFail}：Forge - {customId}", ex);
                         });
                         shouldReturn = true;
                     }
@@ -620,7 +620,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath));
                         if (javas.Count <= 0)
                         {
-                            Method.Toast(MainLang.CannotFandRightJava, Const.Notification.main, NotificationType.Error);
+                            Method.Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, NotificationType.Error);
                             shouldReturn = true;
                         }
                         else
@@ -647,14 +647,14 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                             {
                                 await Dispatcher.UIThread.InvokeAsync(() =>
                                 {
-                                    Method.Toast($"{MainLang.InstallFinish}：OptiFine - {versionId}", Const.Notification.main, NotificationType.Success);
+                                    Method.Ui.Toast($"{MainLang.InstallFinish}：OptiFine - {versionId}", Const.Notification.main, NotificationType.Success);
                                 });
                             }
                             else
                             {
                                 await Dispatcher.UIThread.InvokeAsync(() =>
                                 {
-                                    Method.Toast($"{MainLang.InstallFail}：OptiFine - {customId}", Const.Notification.main, NotificationType.Error);
+                                    Method.Ui.Toast($"{MainLang.InstallFail}：OptiFine - {customId}", Const.Notification.main, NotificationType.Error);
                                 });
                                 shouldReturn = true;
                             }
@@ -664,7 +664,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                     {
                         await Dispatcher.UIThread.InvokeAsync(() =>
                         {
-                            Method.ShowShortException($"{MainLang.InstallFail}：OptiFine - {customId}", ex);
+                            Method.Ui.ShowShortException($"{MainLang.InstallFail}：OptiFine - {customId}", ex);
                         });
                         shouldReturn = true;
                     }
@@ -701,14 +701,14 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         {
                             await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Method.Toast($"{MainLang.InstallFinish}：Fabric - {versionId}", Const.Notification.main, NotificationType.Success);
+                                Method.Ui.Toast($"{MainLang.InstallFinish}：Fabric - {versionId}", Const.Notification.main, NotificationType.Success);
                             });
                         }
                         else
                         {
                             await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Method.Toast($"{MainLang.InstallFail}：Fabric - {customId}", Const.Notification.main, NotificationType.Error);
+                                Method.Ui.Toast($"{MainLang.InstallFail}：Fabric - {customId}", Const.Notification.main, NotificationType.Error);
                             });
                             shouldReturn = true;
                         }
@@ -717,7 +717,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                     {
                         await Dispatcher.UIThread.InvokeAsync(() =>
                         {
-                            Method.ShowShortException($"{MainLang.InstallFail}：Fabric - {customId}", ex);
+                            Method.Ui.ShowShortException($"{MainLang.InstallFail}：Fabric - {customId}", ex);
                         });
                         shouldReturn = true;
                     }
@@ -754,14 +754,14 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         {
                             await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Method.Toast($"{MainLang.InstallFinish}：Quilt - {versionId}", Const.Notification.main, NotificationType.Success);
+                                Method.Ui.Toast($"{MainLang.InstallFinish}：Quilt - {versionId}", Const.Notification.main, NotificationType.Success);
                             });
                         }
                         else
                         {
                             await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Method.Toast($"{MainLang.InstallFail}：Quilt - {customId}", Const.Notification.main, NotificationType.Error);
+                                Method.Ui.Toast($"{MainLang.InstallFail}：Quilt - {customId}", Const.Notification.main, NotificationType.Error);
                             });
                             shouldReturn = true;
                         }
@@ -770,7 +770,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                     {
                         await Dispatcher.UIThread.InvokeAsync(() =>
                         {
-                            Method.ShowShortException($"{MainLang.InstallFail}：Quilt - {customId}", ex);
+                            Method.Ui.ShowShortException($"{MainLang.InstallFail}：Quilt - {customId}", ex);
                         });
                         shouldReturn = true;
                     }

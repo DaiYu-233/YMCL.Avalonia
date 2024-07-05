@@ -114,7 +114,7 @@ public partial class MainWindow : Window
                 }
                 catch (Exception ex)
                 {
-                    Method.ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
+                    Method.Ui.ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
                 }
             }
         };

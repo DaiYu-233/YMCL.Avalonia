@@ -21,7 +21,7 @@ namespace YMCL.Main.Views.Initialize
     {
         private void Init()
         {
-            Method.CreateFolder(Const.UserDataRootPath);
+            Method.IO.CreateFolder(Const.UserDataRootPath);
             if (!File.Exists(Const.SettingDataPath))
             {
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(new Setting(), Formatting.Indented));
@@ -36,7 +36,7 @@ namespace YMCL.Main.Views.Initialize
             }
             if (!File.Exists(Const.MinecraftFolderDataPath) || JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath)).Count == 0)
             {
-                Method.CreateFolder(Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft"));
+                Method.IO.CreateFolder(Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft"));
                 File.WriteAllText(Const.MinecraftFolderDataPath, JsonConvert.SerializeObject(new List<string>() { Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft") }, Formatting.Indented));
                 var setting1 = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
                 setting1.MinecraftFolder = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft");
@@ -76,14 +76,14 @@ namespace YMCL.Main.Views.Initialize
             }
 
             Const.Notification.main = new WindowNotificationManager(GetTopLevel(Const.Window.main)) { MaxItems = 5, Position = NotificationPosition.BottomRight, /*FontFamily = (FontFamily)Application.Current.Resources["Font"]*/ };
-            Method.SetAccentColor(setting.AccentColor);
+            Method.Ui.SetAccentColor(setting.AccentColor);
             if (setting.Theme == Public.Theme.Light)
             {
-                Method.ToggleTheme(Public.Theme.Light);
+                Method.Ui.ToggleTheme(Public.Theme.Light);
             }
             else if (setting.Theme == Public.Theme.Dark)
             {
-                Method.ToggleTheme(Public.Theme.Dark);
+                Method.Ui.ToggleTheme(Public.Theme.Dark);
             }
         }
 

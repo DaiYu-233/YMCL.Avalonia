@@ -59,7 +59,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
         {
             Loaded += (s, e) =>
             {
-                Method.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
+                Method.Ui.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
                 LoadAccounts();
                 minecraftFolders = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath));
                 MinecraftFolderComboBox.Items.Clear();
@@ -152,12 +152,12 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                     }
                     else
                     {
-                        Method.Toast(MainLang.NoChooseGameOrCannotFindGame, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                        Method.Ui.Toast(MainLang.NoChooseGameOrCannotFindGame, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                     }
                 }
                 else
                 {
-                    Method.Toast(MainLang.NoChooseGameOrCannotFindGame, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                    Method.Ui.Toast(MainLang.NoChooseGameOrCannotFindGame, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                 }
             };
             CloseVersionListBtn.Click += (s, e) =>
@@ -327,7 +327,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                     var mod = item as ModManageEntry;
                     text += $"• {Path.GetFileName(mod.File)}\n";
                 }
-                var dialog = await Method.ShowDialogAsync(MainLang.MoveToRecycleBin, text, b_cancel: MainLang.Cancel, b_primary: MainLang.Ok);
+                var dialog = await Method.Ui.ShowDialogAsync(MainLang.MoveToRecycleBin, text, b_cancel: MainLang.Cancel, b_primary: MainLang.Ok);
                 if (dialog == ContentDialogResult.Primary)
                 {
                     foreach (var item in mods)
@@ -355,7 +355,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             var tag = ((Button)sender).Tag.ToString();
             var entry = VersionListView.SelectedItem as GameEntry;
             var root = Path.GetDirectoryName(entry.JarPath);
-            Method.CreateFolder(Path.Combine(root!, tag!));
+            Method.IO.CreateFolder(Path.Combine(root!, tag!));
             var launcher = TopLevel.GetTopLevel(this).Launcher;
             launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(Path.Combine(root!, tag!)));
         }
@@ -401,14 +401,14 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             {
                 MinecraftLaunch.Skin.SkinResolver SkinResolver = new(Convert.FromBase64String(x.Skin));
                 var bytes = MinecraftLaunch.Skin.ImageHelper.ConvertToByteArray(SkinResolver.CropSkinHeadBitmap());
-                var skin = Method.BytesToBase64(bytes);
+                var skin = Method.Value.BytesToBase64(bytes);
                 AccountComboBox.Items.Add(new AccountInfo
                 {
                     Name = x.Name,
                     AccountType = x.AccountType,
                     AddTime = x.AddTime,
                     Data = x.Data,
-                    Bitmap = Method.Base64ToBitmap(skin)
+                    Bitmap = Method.Value.Base64ToBitmap(skin)
                 });
             });
 
@@ -509,7 +509,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
 
             if (entry == null)
             {
-                Method.Toast(MainLang.NoChooseGameOrCannotFindGame, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                Method.Ui.Toast(MainLang.NoChooseGameOrCannotFindGame, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                 return;
             }
             var filePath = Path.Combine(Path.GetDirectoryName(entry.JarPath)!, Const.VersionSettingFileName);
@@ -554,7 +554,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                 JavaComboBox.SelectedItem = versionSetting.Java;
             }
 
-            var totalMemory = Method.GetTotalMemory(Const.Platform);
+            var totalMemory = Method.Value.GetTotalMemory(Const.Platform);
             if (totalMemory != 0)
             {
                 SliderBox.Maximum = totalMemory / 1024;
@@ -582,7 +582,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
         {
             if (entry == null)
             {
-                Method.Toast(MainLang.NoChooseGameOrCannotFindGame, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                Method.Ui.Toast(MainLang.NoChooseGameOrCannotFindGame, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                 return null;
             }
             var filePath = Path.Combine(Path.GetDirectoryName(entry.JarPath)!, Const.VersionSettingFileName);
@@ -615,7 +615,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                 }
                 else
                 {
-                    Method.Toast(MainLang.NoChooseGameOrCannotFindGame, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                    Method.Ui.Toast(MainLang.NoChooseGameOrCannotFindGame, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                     LaunchBtn.IsEnabled = true;
                     return;
                 }
@@ -637,7 +637,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             if (gameEntry == null)
             {
                 LaunchBtn.IsEnabled = true;
-                Method.Toast(MainLang.CreateGameEntryFail, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                Method.Ui.Toast(MainLang.CreateGameEntryFail, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                 return;
             }
             var versionSetting = GetVersionSetting(gameEntry);
@@ -656,7 +656,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                     }
                     if (l_javaPath == MainLang.LetYMCLChooseJava)
                     {
-                        Method.Toast(MainLang.CannotFandRightJava, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error); LaunchBtn.IsEnabled = true; return;
+                        Method.Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error); LaunchBtn.IsEnabled = true; return;
                     }
                 }
                 else
@@ -673,7 +673,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                     if (l_javaPath == MainLang.LetYMCLChooseJava)
                     {
                         LaunchBtn.IsEnabled = true;
-                        Method.Toast(MainLang.CannotFandRightJava, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error); return;
+                        Method.Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error); return;
                     }
                 }
             }
@@ -761,7 +761,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             var accountData = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath))[setting.AccountSelectionIndex];
             if (accountData == null)
             {
-                Method.Toast(MainLang.AccountError, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                Method.Ui.Toast(MainLang.AccountError, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                 LaunchBtn.IsEnabled = true;
                 task.Hide();
                 return;
@@ -776,7 +776,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                     }
                     else
                     {
-                        Method.Toast(MainLang.AccountError, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                        Method.Ui.Toast(MainLang.AccountError, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                         LaunchBtn.IsEnabled = true;
                         task.Hide();
                         return;
@@ -791,7 +791,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                     }
                     catch (Exception ex)
                     {
-                        Method.ShowShortException(MainLang.LoginFail, ex);
+                        Method.Ui.ShowShortException(MainLang.LoginFail, ex);
                         LaunchBtn.IsEnabled = true;
                         task.Hide();
                         return;
@@ -803,7 +803,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             }
             if (account == null)
             {
-                Method.Toast(MainLang.AccountError, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                Method.Ui.Toast(MainLang.AccountError, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                 LaunchBtn.IsEnabled = true;
                 task.Hide();
                 return;
@@ -814,7 +814,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             string.IsNullOrEmpty(l_javaPath) ||
             l_maxMem == -1)
             {
-                Method.Toast(MainLang.BuildLaunchConfigFail, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                Method.Ui.Toast(MainLang.BuildLaunchConfigFail, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                 LaunchBtn.IsEnabled = true;
                 task.Hide();
                 return;
@@ -833,13 +833,13 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             };
             if (config == null)
             {
-                Method.Toast(MainLang.BuildLaunchConfigFail, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                Method.Ui.Toast(MainLang.BuildLaunchConfigFail, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                 LaunchBtn.IsEnabled = true;
                 task.Hide();
                 return;
             }
 
-            Method.Toast($"java:{l_javaPath},mem:{l_maxMem},core:{l_enableIndependencyCore},mcPath:{l_mcPath}", Const.Notification.main);
+            Method.Ui.Toast($"java:{l_javaPath},mem:{l_maxMem},core:{l_enableIndependencyCore},mcPath:{l_mcPath}", Const.Notification.main);
 
             Launcher launcher = new(gameResolver, config);
 
@@ -855,7 +855,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                         {
                             Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Method.Toast($"{MainLang.GameExited}：{args.ExitCode}", Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Information);
+                                Method.Ui.Toast($"{MainLang.GameExited}：{args.ExitCode}", Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Information);
 
                                 if (args.ExitCode == 0)
                                 {
@@ -899,7 +899,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                                 task.UpdateTextProgress("\n", false);
                                 task.UpdateTextProgress("-----> JvmOutputLog", false);
                             }
-                            Method.Toast(MainLang.LaunchFinish, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Success);
+                            Method.Ui.Toast(MainLang.LaunchFinish, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Success);
                         });
                         _ = Task.Run(async () =>
                         {
@@ -915,7 +915,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                 {
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        Method.ShowShortException(MainLang.LaunchFail, ex);
+                        Method.Ui.ShowShortException(MainLang.LaunchFail, ex);
                         LaunchBtn.IsEnabled = true;
                         task.Hide();
                     });

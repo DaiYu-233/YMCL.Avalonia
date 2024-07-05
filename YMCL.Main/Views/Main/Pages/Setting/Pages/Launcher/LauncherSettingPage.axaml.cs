@@ -33,7 +33,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
         {
             Loaded += (s, e) =>
             {
-                Method.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
+                Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
             };
             OpenUserDataFolderBtn.Click += async (s, e) =>
             {
@@ -48,7 +48,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
         private void ControlProperty()
         {
             UserDataFolderPath.Text = Const.UserDataRootPath;
-            var userDataSize = Math.Round(Method.GetDirectoryLength(Const.UserDataRootPath) / 1024, 2) >= 512 ? $"{Math.Round(Method.GetDirectoryLength(Const.UserDataRootPath) / 1024 / 1024, 2)} Mib" : $"{Math.Round(Method.GetDirectoryLength(Const.UserDataRootPath) / 1024, 2)} Kib";
+            var userDataSize = Math.Round(Method.Value.GetDirectoryLength(Const.UserDataRootPath) / 1024, 2) >= 512 ? $"{Math.Round(Method.Value.GetDirectoryLength(Const.UserDataRootPath) / 1024 / 1024, 2)} Mib" : $"{Math.Round(Method.Value.GetDirectoryLength(Const.UserDataRootPath) / 1024, 2)} Kib";
             UserDataSize.Text = userDataSize;
             string resourceName = "YMCL.Main.Public.Texts.DateTime.txt";
             Assembly _assembly = Assembly.GetExecutingAssembly();
@@ -70,7 +70,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
             ring.Width = 17;
             #endregion
             var url = string.Empty;
-            string architecture = Method.GetCurrentPlatformAndArchitecture();
+            string architecture = Method.Value.GetCurrentPlatformAndArchitecture();
             try
             {
                 HttpClient httpClient = new HttpClient();
@@ -80,7 +80,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
                 var localVersion = Version.Text;
                 if (apiVersion != localVersion)
                 {
-                    var dialog = await Method.ShowDialogAsync(MainLang.FoundNewVersion, $"{apiVersion!}\n\n{(string)githubApiJson[0]["html_url"]}", b_cancel: MainLang.Cancel, b_primary: MainLang.Ok);
+                    var dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion, $"{apiVersion!}\n\n{(string)githubApiJson[0]["html_url"]}", b_cancel: MainLang.Cancel, b_primary: MainLang.Ok);
                     if (dialog == ContentDialogResult.Primary)
                     {
                         var task = new WindowTask(MainLang.CheckUpdate, true);
@@ -266,7 +266,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
                                     //}
                                     else
                                     {
-                                        var dialog1 = await Method.ShowDialogAsync(MainLang.Update, $"{MainLang.ThisArchitectureCannotAutoUpdate}£º{Path.Combine(Const.UserDataRootPath, saveFile)}", b_cancel: MainLang.Cancel, b_primary: MainLang.Ok);
+                                        var dialog1 = await Method.Ui.ShowDialogAsync(MainLang.Update, $"{MainLang.ThisArchitectureCannotAutoUpdate}£º{Path.Combine(Const.UserDataRootPath, saveFile)}", b_cancel: MainLang.Cancel, b_primary: MainLang.Ok);
                                         if (dialog1 == ContentDialogResult.Primary)
                                         {
                                             var launcher = TopLevel.GetTopLevel(this).Launcher;
@@ -279,7 +279,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
                             }
                             catch (Exception ex)
                             {
-                                Method.ShowShortException(MainLang.UpdateFail, ex);
+                                Method.Ui.ShowShortException(MainLang.UpdateFail, ex);
                             }
                         }
                         else
@@ -297,12 +297,12 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
                 }
                 else
                 {
-                    Method.Toast(MainLang.CurrentlyTheLatestVersion, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Information);
+                    Method.Ui.Toast(MainLang.CurrentlyTheLatestVersion, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Information);
                 }
             }
             catch (Exception ex)
             {
-                Method.ShowLongException(MainLang.CheckUpdateFail, ex);
+                Method.Ui.ShowLongException(MainLang.CheckUpdateFail, ex);
             }
         }
     }

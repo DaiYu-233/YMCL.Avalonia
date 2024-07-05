@@ -35,7 +35,7 @@ namespace YMCL.Main
         {
             try
             {
-                Method.ShowLongException(MainLang.UnhandledException, e.Exception);
+                Method.Ui.ShowLongException(MainLang.UnhandledException, e.Exception);
             }
             finally
             {
@@ -48,7 +48,7 @@ namespace YMCL.Main
             try
             {
                 var textBox = new TextBox() { FontFamily = (FontFamily)Current.Resources["Font"], TextWrapping = TextWrapping.Wrap, Text = $"{MainLang.UnhandledException}\n\n{e.ExceptionObject}", IsReadOnly = true, HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center };
-                await Method.ShowDialogAsync(MainLang.GetException, p_content: textBox, b_primary: MainLang.Ok);
+                await Method.Ui.ShowDialogAsync(MainLang.GetException, p_content: textBox, b_primary: MainLang.Ok);
             }
             catch { }
         }

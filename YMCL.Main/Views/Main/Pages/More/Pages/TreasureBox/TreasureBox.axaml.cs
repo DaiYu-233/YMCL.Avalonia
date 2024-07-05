@@ -20,13 +20,13 @@ namespace YMCL.Main.Views.Main.Pages.More.Pages.TreasureBox
         {
             Loaded += (_, _) =>
             {
-                Method.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
+                Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
             };
             ActivateBtn.Click += (sender, e) =>
             {
                 if (Const.Platform != Platform.Windows)
                 {
-                    Method.Toast(MainLang.ThisFeatureOnlySupportsWindowsPlatform, type: Avalonia.Controls.Notifications.NotificationType.Error);
+                    Method.Ui.Toast(MainLang.ThisFeatureOnlySupportsWindowsPlatform, type: Avalonia.Controls.Notifications.NotificationType.Error);
                 }
                 else
                 {
@@ -34,7 +34,7 @@ namespace YMCL.Main.Views.Main.Pages.More.Pages.TreasureBox
                     {
                         if (Environment.OSVersion.Version.Major < 10)
                         {
-                            Method.Toast(MainLang.ThisFeatureOnlySupportsWindows10AndAbove, type: Avalonia.Controls.Notifications.NotificationType.Warning);
+                            Method.Ui.Toast(MainLang.ThisFeatureOnlySupportsWindows10AndAbove, type: Avalonia.Controls.Notifications.NotificationType.Warning);
                         }
                         var process = new Process();
                         process.StartInfo.FileName = @"powershell.exe";
@@ -44,7 +44,7 @@ namespace YMCL.Main.Views.Main.Pages.More.Pages.TreasureBox
                     }
                     catch (Exception ex)
                     {
-                        Method.ShowLongException(MainLang.RunCommandFail, ex);
+                        Method.Ui.ShowLongException(MainLang.RunCommandFail, ex);
                     }
                 }
             };
@@ -52,13 +52,13 @@ namespace YMCL.Main.Views.Main.Pages.More.Pages.TreasureBox
             {
                 if (Const.Platform != Platform.Windows)
                 {
-                    Method.Toast(MainLang.ThisFeatureOnlySupportsWindowsPlatform, type: Avalonia.Controls.Notifications.NotificationType.Error);
+                    Method.Ui.Toast(MainLang.ThisFeatureOnlySupportsWindowsPlatform, type: Avalonia.Controls.Notifications.NotificationType.Error);
                 }
                 else
                 {
                     try
                     {
-                        var tip = await Method.ShowDialogAsync(MainLang.CancelActivateWin,MainLang.CancelActivateWinTip, b_primary: MainLang.Ok, b_secondary: MainLang.Cancel);
+                        var tip = await Method.Ui.ShowDialogAsync(MainLang.CancelActivateWin,MainLang.CancelActivateWinTip, b_primary: MainLang.Ok, b_secondary: MainLang.Cancel);
                         if (tip == ContentDialogResult.Primary)
                         {
                             string str = "slmgr -upk";
@@ -80,7 +80,7 @@ namespace YMCL.Main.Views.Main.Pages.More.Pages.TreasureBox
                     }
                     catch (Exception ex)
                     {
-                        Method.ShowLongException(MainLang.RunCommandFail, ex);
+                        Method.Ui.ShowLongException(MainLang.RunCommandFail, ex);
                     }
                 }
             };

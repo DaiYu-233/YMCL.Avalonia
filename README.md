@@ -22,6 +22,8 @@ Yu Minecraft Launcher 是一个跨平台 Minecraft 启动器，支持 Windows，
 
 Ymcl 支持 Mod 管理, 游戏自定义, 游戏自动安装 (Forge,Fabric, Quilt, OptiFine), 界面自定义等功能。<del>甚至可以激活 Windows !</del>
 
+Ymcl 使用 **Apache License 2.0** 开放源代码，此协议要求**在修改和分发软件时保留原始的版权声明、许可证声明和免责声明**；允许用户自由地使用、修改、复制和分发Apache许可的软件，无论是用于商业用途还是非商业用途；允许用户以不同的许可证发布修改后的产品或衍生品，但未做修改的那部分必须保留Apache许可证；Apache许可证没有提供任何形式的保证，用户对使用软件所造成的任何损害负有全部责任。
+
 ## 平台支持情况
 
 |       | Windows | Linux | Mac OS |

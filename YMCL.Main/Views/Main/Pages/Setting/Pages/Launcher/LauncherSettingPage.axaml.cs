@@ -86,37 +86,94 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
                         var task = new WindowTask(MainLang.CheckUpdate, true);
                         task.UpdateTextProgress(MainLang.CheckUpdate);
                         JArray assets = (JArray)githubApiJson[0]["assets"];
-                        foreach (JObject asset in assets)
+
+                        bool isAloneProgram = false;
+                        string resourceName = "YMCL.Main.Public.Texts.IsAloneProgram.txt";
+                        Assembly _assembly = Assembly.GetExecutingAssembly();
+                        Stream stream = _assembly.GetManifestResourceStream(resourceName);
+                        using (StreamReader reader = new StreamReader(stream!))
                         {
-                            string name = (string)asset["name"];
-                            string browser_download_url = (string)asset["browser_download_url"];
-                            if (name == "YMCL.Main.linux.arm" && architecture == "linux-arm")
+                            string result = reader.ReadToEnd();
+                            if (string.IsNullOrEmpty(result))
                             {
-                                url = browser_download_url;
+                                isAloneProgram = false;
                             }
-                            else if (name == "YMCL.Main.linux.arm64" && architecture == "linux-arm64")
+                            else
                             {
-                                url = browser_download_url;
+                                isAloneProgram = true;
                             }
-                            else if (name == "YMCL.Main.linux.x64" && architecture == "linux-x64")
+                        }
+
+                        if (!isAloneProgram)
+                        {
+                            foreach (JObject asset in assets)
                             {
-                                url = browser_download_url;
+                                string name = (string)asset["name"];
+                                string browser_download_url = (string)asset["browser_download_url"];
+                                if (name == "YMCL.Main.linux.arm" && architecture == "linux-arm")
+                                {
+                                    url = browser_download_url;
+                                }
+                                else if (name == "YMCL.Main.linux.arm64" && architecture == "linux-arm64")
+                                {
+                                    url = browser_download_url;
+                                }
+                                else if (name == "YMCL.Main.linux.x64" && architecture == "linux-x64")
+                                {
+                                    url = browser_download_url;
+                                }
+                                else if (name == "YMCL.Main.osx.x64" && architecture == "osx-x64")
+                                {
+                                    url = browser_download_url;
+                                }
+                                else if (name == "YMCL.Main.osx.arm64" && architecture == "osx-arm64")
+                                {
+                                    url = browser_download_url;
+                                }
+                                else if (name == "YMCL.Main.win.x64.exe" && architecture == "win-x64")
+                                {
+                                    url = browser_download_url;
+                                }
+                                else if (name == "YMCL.Main.win.x86.exe" && architecture == "win-x86")
+                                {
+                                    url = browser_download_url;
+                                }
                             }
-                            else if (name == "YMCL.Main.osx.x64" && architecture == "osx-x64")
+                        }
+                        else
+                        {
+                            foreach (JObject asset in assets)
                             {
-                                url = browser_download_url;
-                            }
-                            else if (name == "YMCL.Main.osx.arm64" && architecture == "osx-arm64")
-                            {
-                                url = browser_download_url;
-                            }
-                            else if (name == "YMCL.Main.win.x64.exe" && architecture == "win-x64")
-                            {
-                                url = browser_download_url;
-                            }
-                            else if (name == "YMCL.Main.win.x86.exe" && architecture == "win-x86")
-                            {
-                                url = browser_download_url;
+                                string name = (string)asset["name"];
+                                string browser_download_url = (string)asset["browser_download_url"];
+                                if (name == "YMCL.Main.alone.linux.arm" && architecture == "linux-arm")
+                                {
+                                    url = browser_download_url;
+                                }
+                                else if (name == "YMCL.Main.alone.linux.arm64" && architecture == "linux-arm64")
+                                {
+                                    url = browser_download_url;
+                                }
+                                else if (name == "YMCL.Main.alone.linux.x64" && architecture == "linux-x64")
+                                {
+                                    url = browser_download_url;
+                                }
+                                else if (name == "YMCL.Main.alone.osx.x64" && architecture == "osx-x64")
+                                {
+                                    url = browser_download_url;
+                                }
+                                else if (name == "YMCL.Main.alone.osx.arm64" && architecture == "osx-arm64")
+                                {
+                                    url = browser_download_url;
+                                }
+                                else if (name == "YMCL.Main.alone.win.x64.exe" && architecture == "win-x64")
+                                {
+                                    url = browser_download_url;
+                                }
+                                else if (name == "YMCL.Main.alone.win.x86.exe" && architecture == "win-x86")
+                                {
+                                    url = browser_download_url;
+                                }
                             }
                         }
                         if (url == null)
@@ -222,9 +279,9 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
                                     task.UpdateTextProgress($"{MainLang.DownloadFinish}", true);
                                     if (architecture == "win-x86" || architecture == "win-x64")
                                     {
-                                        string resourceName = "YMCL.Main.Public.Bins.YMCL.Update.Helper.win.exe";
+                                        string resourceName1 = "YMCL.Main.Public.Bins.YMCL.Update.Helper.win.exe";
                                         Assembly assembly = Assembly.GetExecutingAssembly();
-                                        using (Stream resourceStream = assembly.GetManifestResourceStream(resourceName))
+                                        using (Stream resourceStream = assembly.GetManifestResourceStream(resourceName1))
                                         {
                                             string outputFilePath = Path.Combine(Const.UserDataRootPath, "YMCL.Update.Helper.win.exe");
                                             using (FileStream fileStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write))

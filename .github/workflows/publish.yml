@@ -39,6 +39,7 @@ jobs:
         mv ./YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main.linux.arm64
     - name: Build-Independence
       run: |
+        echo "True" > ./YMCL.Main/Public/Texts/IsAloneProgram.txt
         dotnet publish YMCL.Main/YMCL.Main.csproj -r win-x86 --self-contained true
         dotnet publish YMCL.Main/YMCL.Main.csproj -r win-x64 --self-contained true
         dotnet publish YMCL.Main/YMCL.Main.csproj -r osx-x64 --self-contained true

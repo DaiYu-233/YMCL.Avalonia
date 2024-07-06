@@ -76,6 +76,7 @@
     <None Remove="Public\Bins\YMCL.Update.Helper.linux" />
     <None Remove="Public\Bins\YMCL.Update.Helper.win.exe" />
     <None Remove="Public\Texts\DateTime.txt" />
+    <None Remove="Public\Texts\IsAloneProgram.txt" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Include="Public\Assets\MiSans-Regular.otf" />
@@ -91,6 +92,7 @@
     <EmbeddedResource Include="Public\Bins\YMCL.Update.Helper.win.exe" />
     <EmbeddedResource Include="Public\Texts\CustomHomePageDefault.axaml" />
     <EmbeddedResource Include="Public\Texts\DateTime.txt" />
+    <EmbeddedResource Include="Public\Texts\IsAloneProgram.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Public\Assets\YCML-Icon.png">

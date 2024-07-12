@@ -313,7 +313,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                 {
                     using (HttpClient client = new HttpClient())
                     {
-                        using (HttpResponseMessage response = await client.GetAsync(item.DownloadUrl, HttpCompletionOption.ResponseHeadersRead))
+                        using (HttpResponseMessage response = await client.GetAsync(item.DownloadUrl.Replace("edge.forgecdn.net", "mediafilez.forgecdn.net"), HttpCompletionOption.ResponseHeadersRead))
                         {
                             response.EnsureSuccessStatusCode();
 

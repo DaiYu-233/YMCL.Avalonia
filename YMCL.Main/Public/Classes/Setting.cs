@@ -12,7 +12,7 @@ namespace YMCL.Main.Public.Classes
     public class Setting
     {
         public Avalonia.Media.Color AccentColor { get; set; } = Avalonia.Media.Color.FromRgb(22, 233, 184);
-        public string Language { get; set; } = "zh-CN";
+        public string Language { get; set; } = "Unset";
         public string MinecraftFolder { get; set; }
         public OpenFileWay OpenFileWay { get; set; }
         public JavaEntry Java { get; set; } = Const.AutoJava;

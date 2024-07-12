@@ -125,17 +125,13 @@ namespace YMCL.Main.Public
                 if (theme == Theme.Light)
                 {
                     var rd = (AvaloniaXamlLoader.Load(new Uri("avares://YMCL.Main/Public/Styles/LightTheme.axaml")) as ResourceDictionary)!;
-                    var rd1 = (AvaloniaXamlLoader.Load(new Uri("avares://Semi.Avalonia/Themes/Light/NotificationCard.axaml")) as ResourceDictionary)!;
                     Application.Current!.Resources.MergedDictionaries.Add(rd);
-                    //Application.Current!.Resources.MergedDictionaries.Add(rd1);
                     Application.Current.RequestedThemeVariant = ThemeVariant.Light;
                 }
                 else if (theme == Theme.Dark)
                 {
                     var rd = (AvaloniaXamlLoader.Load(new Uri("avares://YMCL.Main/Public/Styles/DarkTheme.axaml")) as ResourceDictionary)!;
-                    var rd1 = (AvaloniaXamlLoader.Load(new Uri("avares://Semi.Avalonia/Themes/Dark/NotificationCard.axaml")) as ResourceDictionary)!;
                     Application.Current!.Resources.MergedDictionaries.Add(rd);
-                    //Application.Current!.Resources.MergedDictionaries.Add(rd1);
                     Application.Current.RequestedThemeVariant = ThemeVariant.Dark;
                 }
             }

@@ -650,4 +650,22 @@ sudo apt install vlc</value>
   <data name="UpgradeToAdministratorPrivilegesTip" xml:space="preserve">
     <value>执行操作需要提升至管理员权限，点击确定以管理员权限重启程序</value>
   </data>
+  <data name="ChooseLanguage" xml:space="preserve">
+    <value>选择语言/Choose Language</value>
+  </data>
+  <data name="zh_CN" xml:space="preserve">
+    <value>简体中文</value>
+  </data>
+  <data name="zh_Hant" xml:space="preserve">
+    <value>繁體中文</value>
+  </data>
+  <data name="en_US" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="ja_JP" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="ru_RU" xml:space="preserve">
+    <value>Русский язык</value>
+  </data>
 </root>

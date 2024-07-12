@@ -23,8 +23,7 @@
         </ResourceDictionary>
     </Application.Resources>
     <Application.Styles>
-        <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
-        <sty:FluentAvaloniaTheme />
+		<sty:FluentAvaloniaTheme />
         <StyleInclude Source="/Public/Styles/Style.axaml" />
     </Application.Styles>
 </Application>

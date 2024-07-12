@@ -31,7 +31,14 @@ namespace YMCL.Main.Public.Langs
 
         public void ChangedCulture(string name)
         {
-            MainLang.Culture = CultureInfo.GetCultureInfo(name);
+            if (name == "" || name == null || name == "Unset")
+            {
+                MainLang.Culture = CultureInfo.GetCultureInfo("zh-CN");
+            }
+            else
+            {
+                MainLang.Culture = CultureInfo.GetCultureInfo(name);
+            }
             this.RaisePropertyChanged("Resources");
         }
 

@@ -16,151 +16,153 @@
                 <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
             </Transitions>
         </Border.Transitions>
-        <StackPanel Margin="10" Spacing="10">
-            <Border
-                Padding="6.5"
-                Background="{DynamicResource 1x}"
-                CornerRadius="5">
-                <DockPanel>
-                    <TextBlock
-                        Margin="10,0,20,0"
-                        VerticalAlignment="Center"
-                        FontFamily="{DynamicResource Font}"
-                        FontSize="14"
-                        Text="{x:Static properties:MainLang.MinecraftFolder}" />
-                    <Button
-                        x:Name="DelSeletedMinecraftFolderBtn"
-                        Margin="6.5,0,0,0"
-                        Content="{x:Static properties:MainLang.DelSeletedItem}"
-                        DockPanel.Dock="Right"
-                        FontFamily="{DynamicResource Font}" />
-                    <Button
-                        x:Name="AddMinecraftFolderBtn"
-                        Margin="6.5,0,0,0"
-                        Content="{x:Static properties:MainLang.AddFolder}"
-                        DockPanel.Dock="Right"
-                        FontFamily="{DynamicResource Font}" />
-                    <ComboBox
-                        x:Name="MinecraftFolderComboBox"
-                        HorizontalAlignment="Stretch"
-                        DockPanel.Dock="Left"
-                        FontFamily="{DynamicResource Font}" />
-                </DockPanel>
-            </Border>
-            <Border
-                Padding="6.5"
-                Background="{DynamicResource 1x}"
-                CornerRadius="5">
-                <DockPanel>
-                    <TextBlock
-                        Margin="10,0,20,0"
-                        VerticalAlignment="Center"
-                        FontFamily="{DynamicResource Font}"
-                        FontSize="14"
-                        Text="Java" />
-                    <Button
-                        x:Name="AutoScanBtn"
-                        Margin="6.5,0,0,0"
-                        Content="{x:Static properties:MainLang.AutoScan}"
-                        DockPanel.Dock="Right"
-                        FontFamily="{DynamicResource Font}" />
-                    <Button
-                        x:Name="ManualAddBtn"
-                        Margin="6.5,0,0,0"
-                        Content="{x:Static properties:MainLang.ManualAdd}"
-                        DockPanel.Dock="Right"
-                        FontFamily="{DynamicResource Font}" />
-                    <ComboBox
-                        Name="JavaComboBox"
-                        HorizontalAlignment="Stretch"
-                        DockPanel.Dock="Left"
-                        FontFamily="{DynamicResource Font}"
-                        SelectedIndex="0">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate DataType="ml:JavaEntry">
-                                <TextBlock>
-                                    <Run Text="[ Java" />
-                                    <Run Text="{Binding JavaVersion}" />
-                                    <Run Text="]" />
-                                    <Run Text="{Binding JavaPath}" />
-                                </TextBlock>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                </DockPanel>
-            </Border>
-            <Border
-                Height="40"
-                Padding="6.5"
-                Background="{DynamicResource 1x}"
-                CornerRadius="5">
-                <DockPanel>
-                    <TextBlock
-                        Margin="10,0,20,0"
-                        VerticalAlignment="Center"
-                        FontFamily="{DynamicResource Font}"
-                        FontSize="14"
-                        Text="{x:Static properties:MainLang.MaxMem}" />
-                    <TextBlock
-                        Name="MaxMemText"
-                        Width="65"
-                        Margin="6.5,0,6.5,0"
-                        VerticalAlignment="Center"
-                        DockPanel.Dock="Right"
-                        FontFamily="{DynamicResource Font}"
-                        FontSize="14"
-                        Text="∞"
-                        TextAlignment="Center" />
-                    <Slider
-                        Name="MaxMemSlider"
-                        Height="35"
-                        Margin="0,-10,0,0" />
-                </DockPanel>
-            </Border>
-            <Border
-                Height="40"
-                Padding="6.5"
-                Background="{DynamicResource 1x}"
-                CornerRadius="5">
-                <DockPanel>
-                    <TextBlock
-                        Margin="10,0,20,0"
-                        VerticalAlignment="Center"
-                        FontFamily="{DynamicResource Font}"
-                        FontSize="14"
-                        Text="{x:Static properties:MainLang.EnableIndependencyCore}" />
-                    <ToggleSwitch
-                        Name="IndependencyCoreSwitch"
-                        Height="40"
-                        Margin="0,-10,10,0"
-                        HorizontalAlignment="Right"
-                        FontFamily="{DynamicResource Font}"
-                        OffContent="{x:Static properties:MainLang.Off}"
-                        OnContent="{x:Static properties:MainLang.On}" />
-                </DockPanel>
-            </Border>
-            <Border
-                Height="40"
-                Padding="6.5"
-                Background="{DynamicResource 1x}"
-                CornerRadius="5">
-                <DockPanel>
-                    <TextBlock
-                        Margin="10,0,20,0"
-                        VerticalAlignment="Center"
-                        FontFamily="{DynamicResource Font}"
-                        FontSize="14"
-                        Text="{x:Static properties:MainLang.ShowGameOutput}" />
-                    <ToggleSwitch
-                        Name="ShowGameOutputSwitch"
-                        Height="40"
-                        Margin="0,-10,10,0"
-                        HorizontalAlignment="Right"
-                        FontFamily="{DynamicResource Font}"
-                        OffContent="{x:Static properties:MainLang.Off}"
-                        OnContent="{x:Static properties:MainLang.On}" />
-                </DockPanel>
-            </Border>
-        </StackPanel>
+        <ScrollViewer>
+            <StackPanel Margin="10" Spacing="10">
+                <Border
+                    Padding="6.5"
+                    Background="{DynamicResource 1x}"
+                    CornerRadius="5">
+                    <DockPanel>
+                        <TextBlock
+                            Margin="10,0,20,0"
+                            VerticalAlignment="Center"
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="14"
+                            Text="{x:Static properties:MainLang.MinecraftFolder}" />
+                        <Button
+                            x:Name="DelSeletedMinecraftFolderBtn"
+                            Margin="6.5,0,0,0"
+                            Content="{x:Static properties:MainLang.DelSeletedItem}"
+                            DockPanel.Dock="Right"
+                            FontFamily="{DynamicResource Font}" />
+                        <Button
+                            x:Name="AddMinecraftFolderBtn"
+                            Margin="6.5,0,0,0"
+                            Content="{x:Static properties:MainLang.AddFolder}"
+                            DockPanel.Dock="Right"
+                            FontFamily="{DynamicResource Font}" />
+                        <ComboBox
+                            x:Name="MinecraftFolderComboBox"
+                            HorizontalAlignment="Stretch"
+                            DockPanel.Dock="Left"
+                            FontFamily="{DynamicResource Font}" />
+                    </DockPanel>
+                </Border>
+                <Border
+                    Padding="6.5"
+                    Background="{DynamicResource 1x}"
+                    CornerRadius="5">
+                    <DockPanel>
+                        <TextBlock
+                            Margin="10,0,20,0"
+                            VerticalAlignment="Center"
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="14"
+                            Text="Java" />
+                        <Button
+                            x:Name="AutoScanBtn"
+                            Margin="6.5,0,0,0"
+                            Content="{x:Static properties:MainLang.AutoScan}"
+                            DockPanel.Dock="Right"
+                            FontFamily="{DynamicResource Font}" />
+                        <Button
+                            x:Name="ManualAddBtn"
+                            Margin="6.5,0,0,0"
+                            Content="{x:Static properties:MainLang.ManualAdd}"
+                            DockPanel.Dock="Right"
+                            FontFamily="{DynamicResource Font}" />
+                        <ComboBox
+                            Name="JavaComboBox"
+                            HorizontalAlignment="Stretch"
+                            DockPanel.Dock="Left"
+                            FontFamily="{DynamicResource Font}"
+                            SelectedIndex="0">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate DataType="ml:JavaEntry">
+                                    <TextBlock>
+                                        <Run Text="[ Java" />
+                                        <Run Text="{Binding JavaVersion}" />
+                                        <Run Text="]" />
+                                        <Run Text="{Binding JavaPath}" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </DockPanel>
+                </Border>
+                <Border
+                    Height="40"
+                    Padding="6.5"
+                    Background="{DynamicResource 1x}"
+                    CornerRadius="5">
+                    <DockPanel>
+                        <TextBlock
+                            Margin="10,0,20,0"
+                            VerticalAlignment="Center"
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="14"
+                            Text="{x:Static properties:MainLang.MaxMem}" />
+                        <TextBlock
+                            Name="MaxMemText"
+                            Width="65"
+                            Margin="6.5,0,6.5,0"
+                            VerticalAlignment="Center"
+                            DockPanel.Dock="Right"
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="14"
+                            Text="∞"
+                            TextAlignment="Center" />
+                        <Slider
+                            Name="MaxMemSlider"
+                            Height="35"
+                            Margin="0,-10,0,0" />
+                    </DockPanel>
+                </Border>
+                <Border
+                    Height="40"
+                    Padding="6.5"
+                    Background="{DynamicResource 1x}"
+                    CornerRadius="5">
+                    <DockPanel>
+                        <TextBlock
+                            Margin="10,0,20,0"
+                            VerticalAlignment="Center"
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="14"
+                            Text="{x:Static properties:MainLang.EnableIndependencyCore}" />
+                        <ToggleSwitch
+                            Name="IndependencyCoreSwitch"
+                            Height="40"
+                            Margin="0,-10,10,0"
+                            HorizontalAlignment="Right"
+                            FontFamily="{DynamicResource Font}"
+                            OffContent="{x:Static properties:MainLang.Off}"
+                            OnContent="{x:Static properties:MainLang.On}" />
+                    </DockPanel>
+                </Border>
+                <Border
+                    Height="40"
+                    Padding="6.5"
+                    Background="{DynamicResource 1x}"
+                    CornerRadius="5">
+                    <DockPanel>
+                        <TextBlock
+                            Margin="10,0,20,0"
+                            VerticalAlignment="Center"
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="14"
+                            Text="{x:Static properties:MainLang.ShowGameOutput}" />
+                        <ToggleSwitch
+                            Name="ShowGameOutputSwitch"
+                            Height="40"
+                            Margin="0,-10,10,0"
+                            HorizontalAlignment="Right"
+                            FontFamily="{DynamicResource Font}"
+                            OffContent="{x:Static properties:MainLang.Off}"
+                            OnContent="{x:Static properties:MainLang.On}" />
+                    </DockPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
     </Border>
 </UserControl>

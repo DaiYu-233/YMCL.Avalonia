@@ -541,4 +541,22 @@
   <data name="ShowGameOutput" xml:space="preserve">
     <value>ゲーム出力を表示</value>
   </data>
+  <data name="zh_CN" xml:space="preserve">
+    <value>简体中文</value>
+  </data>
+  <data name="zh_Hant" xml:space="preserve">
+    <value>繁體中文</value>
+  </data>
+  <data name="en_US" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="ja_JP" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="ru_RU" xml:space="preserve">
+    <value>Русский язык</value>
+  </data>
+  <data name="ChooseLanguage" xml:space="preserve">
+    <value>选择语言/Choose Language</value>
+  </data>
 </root>

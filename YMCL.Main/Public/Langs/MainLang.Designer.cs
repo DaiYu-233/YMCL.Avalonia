@@ -295,6 +295,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 选择语言/Choose Language 的本地化字符串。
+        /// </summary>
+        public static string ChooseLanguage {
+            get {
+                return ResourceManager.GetString("ChooseLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 色彩模式 的本地化字符串。
         /// </summary>
         public static string ColorMode {
@@ -444,6 +453,15 @@ namespace YMCL.Main.Public.Langs {
         public static string EmailAddress {
             get {
                 return ResourceManager.GetString("EmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 English 的本地化字符串。
+        /// </summary>
+        public static string en_US {
+            get {
+                return ResourceManager.GetString("en_US", resourceCulture);
             }
         }
         
@@ -699,6 +717,15 @@ namespace YMCL.Main.Public.Langs {
         public static string InstallVlcTip {
             get {
                 return ResourceManager.GetString("InstallVlcTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 日本語 的本地化字符串。
+        /// </summary>
+        public static string ja_JP {
+            get {
+                return ResourceManager.GetString("ja_JP", resourceCulture);
             }
         }
         
@@ -1234,6 +1261,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 Русский язык 的本地化字符串。
+        /// </summary>
+        public static string ru_RU {
+            get {
+                return ResourceManager.GetString("ru_RU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 运行 的本地化字符串。
         /// </summary>
         public static string Run {
@@ -1708,6 +1744,24 @@ namespace YMCL.Main.Public.Langs {
         public static string YggdrasilServerUrlIsEmpty {
             get {
                 return ResourceManager.GetString("YggdrasilServerUrlIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 简体中文 的本地化字符串。
+        /// </summary>
+        public static string zh_CN {
+            get {
+                return ResourceManager.GetString("zh_CN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 繁體中文 的本地化字符串。
+        /// </summary>
+        public static string zh_Hant {
+            get {
+                return ResourceManager.GetString("zh_Hant", resourceCulture);
             }
         }
     }

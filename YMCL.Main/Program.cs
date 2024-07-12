@@ -1,4 +1,5 @@
 ﻿using Avalonia;
+using Avalonia.Dialogs;
 using System;
 
 namespace YMCL.Main
@@ -17,6 +18,7 @@ namespace YMCL.Main
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
+                .UseManagedSystemDialogs()
                 .WithInterFont()
                 .LogToTrace();
     }

@@ -27,6 +27,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Langs;
@@ -124,19 +125,53 @@ namespace YMCL.Main.Public
                 if (theme == Theme.Light)
                 {
                     var rd = (AvaloniaXamlLoader.Load(new Uri("avares://YMCL.Main/Public/Styles/LightTheme.axaml")) as ResourceDictionary)!;
+                    var rd1 = (AvaloniaXamlLoader.Load(new Uri("avares://Semi.Avalonia/Themes/Light/NotificationCard.axaml")) as ResourceDictionary)!;
                     Application.Current!.Resources.MergedDictionaries.Add(rd);
+                    //Application.Current!.Resources.MergedDictionaries.Add(rd1);
                     Application.Current.RequestedThemeVariant = ThemeVariant.Light;
                 }
                 else if (theme == Theme.Dark)
                 {
                     var rd = (AvaloniaXamlLoader.Load(new Uri("avares://YMCL.Main/Public/Styles/DarkTheme.axaml")) as ResourceDictionary)!;
+                    var rd1 = (AvaloniaXamlLoader.Load(new Uri("avares://Semi.Avalonia/Themes/Dark/NotificationCard.axaml")) as ResourceDictionary)!;
                     Application.Current!.Resources.MergedDictionaries.Add(rd);
-                    Application.Current.RequestedThemeVariant = Avalonia.Styling.ThemeVariant.Dark;
+                    //Application.Current!.Resources.MergedDictionaries.Add(rd1);
+                    Application.Current.RequestedThemeVariant = ThemeVariant.Dark;
                 }
             }
             public static void ShowShortException(string msg, Exception ex)
             {
                 Toast($"{msg}\n{ex.Message}", Const.Notification.main, NotificationType.Error);
+            }
+            public static async Task<bool> UpgradeToAdministratorPrivilegesAsync()
+            {
+                WindowsIdentity identity = WindowsIdentity.GetCurrent();
+                WindowsPrincipal principal = new WindowsPrincipal(identity);
+                if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
+                {
+                    var result = await ShowDialogAsync(MainLang.UpgradeToAdministratorPrivileges, MainLang.UpgradeToAdministratorPrivilegesTip, b_primary: MainLang.Ok, b_secondary: MainLang.Cancel);
+                    if (result == ContentDialogResult.Primary)
+                    {
+                        ProcessStartInfo startInfo = new ProcessStartInfo
+                        {
+                            UseShellExecute = true,
+                            WorkingDirectory = Environment.CurrentDirectory,
+                            FileName = Process.GetCurrentProcess().MainModule.FileName!,
+                            Verb = "runas"
+                        };
+                        Process.Start(startInfo);
+                        Environment.Exit(0);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
             }
             public static void RestartApp()
             {
@@ -203,7 +238,7 @@ namespace YMCL.Main.Public
                     return list;
                 }
             }
-            public static async Task<List<FileInfo>> OpenFilePicker(TopLevel topLevel = null, FilePickerOpenOptions options = null,string p_title = null)
+            public static async Task<List<FileInfo>> OpenFilePicker(TopLevel topLevel = null, FilePickerOpenOptions options = null, string p_title = null)
             {
                 var title = p_title == null ? MainLang.InputFilePath : p_title;
                 var isPrimaryButtonClick = false;
@@ -533,7 +568,7 @@ namespace YMCL.Main.Public
                     {
                         return "osx-x64";
                     }
-                    // 注意：OSX 上的 ARM 架构可能需要特定检测，因为目前可能是 Apple Silicon (M1/M2)  
+                    // 注意: OSX 上的 ARM 架构可能需要特定检测，因为目前可能是 Apple Silicon (M1/M2)  
                     else if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64)
                     {
                         return "osx-arm64";
@@ -547,7 +582,7 @@ namespace YMCL.Main.Public
                     }
                     else if (RuntimeInformation.ProcessArchitecture == Architecture.Arm)
                     {
-                        return "linux-arm"; // 注意：这里应该是 linux-arm 而不是 liux-arm  
+                        return "linux-arm"; // 注意: 这里应该是 linux-arm 而不是 liux-arm  
                     }
                     else if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64)
                     {

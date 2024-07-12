@@ -4,10 +4,12 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using FluentAvalonia.UI.Controls;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using YMCL.Main.Public;
@@ -115,6 +117,44 @@ public partial class MainWindow : Window
                 catch (Exception ex)
                 {
                     Method.Ui.ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
+                }
+            }
+            if (!setting.AlreadyWrittenIntoTheUrlScheme)
+            {
+                switch (Const.Platform)
+                {
+                    case Platform.Windows:
+                        await Method.Ui.UpgradeToAdministratorPrivilegesAsync();
+                        Method.IO.CreateFolder("C:\\ProgramData\\DaiYu.Platform.YMCL");
+                        var bat = "set /p ymcl=<%USERPROFILE%\\AppData\\Roaming\\DaiYu.Platform.YMCL\\YMCL.AppPath.DaiYu\r\necho %ymcl%\r\necho %1\r\nstart %ymcl% %1";
+                        var path = "C:\\ProgramData\\DaiYu.Platform.YMCL\\launch.bat";
+                        File.WriteAllText(path, bat);
+                        try { Registry.ClassesRoot.DeleteSubKey("YMCL"); } catch { }
+                        try
+                        {
+                            RegistryKey keyRoot = Registry.ClassesRoot.CreateSubKey("YMCL", true);
+                            keyRoot.SetValue("", "Yu Minecraft Launcher");
+                            keyRoot.SetValue("URL Protocol", path);
+                            RegistryKey registryKeya = Registry.ClassesRoot.OpenSubKey("YMCL", true).CreateSubKey("DefaultIcon");
+                            registryKeya.SetValue("", path);
+                            RegistryKey registryKeyb = Registry.ClassesRoot.OpenSubKey("YMCL", true).CreateSubKey(@"shell\open\command");
+                            registryKeyb.SetValue("", $"\"{path}\" \"%1\"");
+
+                            string resourceName = "YMCL.Main.Public.Bins.YMCL.Starter.win.exe";
+                            Assembly assembly = Assembly.GetExecutingAssembly();
+                            using (Stream resourceStream = assembly.GetManifestResourceStream(resourceName))
+                            {
+                                string outputFilePath = "C:\\Windows\\ymcl.exe";
+                                using (FileStream fileStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write))
+                                {
+                                    resourceStream.CopyTo(fileStream);
+                                }
+                            }
+                            setting.AlreadyWrittenIntoTheUrlScheme = true;
+                            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                        }
+                        catch { }
+                        break;
                 }
             }
         };

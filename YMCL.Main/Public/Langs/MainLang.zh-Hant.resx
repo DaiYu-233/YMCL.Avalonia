@@ -398,7 +398,7 @@
     <value>Minecrat發生崩潰</value>
   </data>
   <data name="TheVersionNameWillBeRenamedTo" xml:space="preserve">
-    <value>版本名稱將被重新命名為：</value>
+    <value>版本名稱將被重新命名為: </value>
   </data>
   <data name="IncludeSpecialWord" xml:space="preserve">
     <value>包含特殊字元</value>
@@ -476,7 +476,7 @@
     <value>全不選</value>
   </data>
   <data name="SelectedItem" xml:space="preserve">
-    <value>已選擇項目：</value>
+    <value>已選擇項目: </value>
   </data>
   <data name="OpenSourceProjectUsageTable" xml:space="preserve">
     <value>開源項目使用表</value>

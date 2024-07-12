@@ -22,7 +22,7 @@ namespace YMCL.Main.Views.Main.Pages.More.Pages.TreasureBox
             {
                 Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
             };
-            ActivateBtn.Click += (sender, e) =>
+            ActivateBtn.Click += async (sender, e) =>
             {
                 if (Const.Platform != Platform.Windows)
                 {
@@ -36,11 +36,14 @@ namespace YMCL.Main.Views.Main.Pages.More.Pages.TreasureBox
                         {
                             Method.Ui.Toast(MainLang.ThisFeatureOnlySupportsWindows10AndAbove, type: Avalonia.Controls.Notifications.NotificationType.Warning);
                         }
-                        var process = new Process();
-                        process.StartInfo.FileName = @"powershell.exe";
-                        process.StartInfo.Arguments = "irm https://get.activated.win | iex";
-                        process.StartInfo.Verb = "runas";
-                        process.Start();
+                        if (await Method.Ui.UpgradeToAdministratorPrivilegesAsync())
+                        {
+                            var process = new Process();
+                            process.StartInfo.FileName = @"powershell.exe";
+                            process.StartInfo.Arguments = "irm https://get.activated.win | iex";
+                            process.StartInfo.Verb = "runas";
+                            process.Start();
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -58,8 +61,8 @@ namespace YMCL.Main.Views.Main.Pages.More.Pages.TreasureBox
                 {
                     try
                     {
-                        var tip = await Method.Ui.ShowDialogAsync(MainLang.CancelActivateWin,MainLang.CancelActivateWinTip, b_primary: MainLang.Ok, b_secondary: MainLang.Cancel);
-                        if (tip == ContentDialogResult.Primary)
+                        var tip = await Method.Ui.ShowDialogAsync(MainLang.CancelActivateWin, MainLang.CancelActivateWinTip, b_primary: MainLang.Ok, b_secondary: MainLang.Cancel);
+                        if (tip == ContentDialogResult.Primary && await Method.Ui.UpgradeToAdministratorPrivilegesAsync())
                         {
                             string str = "slmgr -upk";
                             Process p = new();

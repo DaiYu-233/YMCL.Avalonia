@@ -220,7 +220,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                 {
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        Method.Ui.ShowShortException($"{MainLang.GetFail}：OptiFine", ex);
+                        Method.Ui.ShowShortException($"{MainLang.GetFail}: OptiFine", ex);
                         OptiFineLoading.IsVisible = false;
                         NoOptifine.IsVisible = true;
                     });
@@ -248,7 +248,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                 {
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        Method.Ui.ShowShortException($"{MainLang.GetFail}：Forge", ex);
+                        Method.Ui.ShowShortException($"{MainLang.GetFail}: Forge", ex);
                         ForgeLoading.IsVisible = false;
                         NoForge.IsVisible = true;
                     });
@@ -276,7 +276,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                 {
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        Method.Ui.ShowShortException($"{MainLang.GetFail}：Quilt", ex);
+                        Method.Ui.ShowShortException($"{MainLang.GetFail}: Quilt", ex);
                         QuiltLoading.IsVisible = false;
                         NoQuilt.IsVisible = true;
                     });
@@ -304,7 +304,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                 {
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        Method.Ui.ShowShortException($"{MainLang.GetFail}：Fabric", ex);
+                        Method.Ui.ShowShortException($"{MainLang.GetFail}: Fabric", ex);
                         FabricLoading.IsVisible = false;
                         NoFabric.IsVisible = true;
                     });
@@ -492,14 +492,14 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
             var vanlliaInstaller = new VanlliaInstaller(resolver, versionId, MirrorDownloadManager.Bmcl);
             if (Directory.Exists(Path.Combine(setting.MinecraftFolder, "versions", customId)))
             {
-                Method.Ui.Toast($"{MainLang.FolderAlreadyExists}：{customId}", Const.Notification.main, NotificationType.Error);
+                Method.Ui.Toast($"{MainLang.FolderAlreadyExists}: {customId}", Const.Notification.main, NotificationType.Error);
                 return;
             }
 
             InstallPreviewRoot.IsVisible = false;
             InstallableVersionListRoot.IsVisible = true;
 
-            var task = new WindowTask($"{MainLang.Install}：Vanllia - {versionId}", true);
+            var task = new WindowTask($"{MainLang.Install}: Vanllia - {versionId}", true);
             task.UpdateTextProgress("-----> Vanllia");
 
             //Vanllia
@@ -522,7 +522,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                     {
                         await Dispatcher.UIThread.InvokeAsync(() =>
                         {
-                            Method.Ui.Toast($"{MainLang.InstallFail}：Vanllia - {versionId}", Const.Notification.main, NotificationType.Error);
+                            Method.Ui.Toast($"{MainLang.InstallFail}: Vanllia - {versionId}", Const.Notification.main, NotificationType.Error);
                         });
                         shouldReturn = true;
                     }
@@ -532,7 +532,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         {
                             await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Method.Ui.Toast($"{MainLang.InstallFinish}：Vanllia - {versionId}", Const.Notification.main, NotificationType.Success);
+                                Method.Ui.Toast($"{MainLang.InstallFinish}: Vanllia - {versionId}", Const.Notification.main, NotificationType.Success);
                             });
                         }
                     }
@@ -541,7 +541,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                 {
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        Method.Ui.ShowShortException($"{MainLang.InstallFail}：Vanllia - {versionId}", ex);
+                        Method.Ui.ShowShortException($"{MainLang.InstallFail}: Vanllia - {versionId}", ex);
                     });
                     shouldReturn = true;
                 }
@@ -567,7 +567,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                             var forgeInstaller = new ForgeInstaller(game, forgeInstallEntry, javas[0].JavaPath, customId, MirrorDownloadManager.Bmcl);
                             await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                task.UpdateTitle($"{MainLang.Install}：Forge - {versionId}");
+                                task.UpdateTitle($"{MainLang.Install}: Forge - {versionId}");
                                 task.UpdateTextProgress("-----> Forge", false);
                             });
                             forgeInstaller.ProgressChanged += (_, x) =>
@@ -585,14 +585,14 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                             {
                                 await Dispatcher.UIThread.InvokeAsync(() =>
                                 {
-                                    Method.Ui.Toast($"{MainLang.InstallFinish}：Forge - {versionId}", Const.Notification.main, NotificationType.Success);
+                                    Method.Ui.Toast($"{MainLang.InstallFinish}: Forge - {versionId}", Const.Notification.main, NotificationType.Success);
                                 });
                             }
                             else
                             {
                                 await Dispatcher.UIThread.InvokeAsync(() =>
                                 {
-                                    Method.Ui.Toast($"{MainLang.InstallFail}：Forge - {customId}", Const.Notification.main, NotificationType.Error);
+                                    Method.Ui.Toast($"{MainLang.InstallFail}: Forge - {customId}", Const.Notification.main, NotificationType.Error);
                                 });
                                 shouldReturn = true;
                             }
@@ -602,7 +602,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                     {
                         await Dispatcher.UIThread.InvokeAsync(() =>
                         {
-                            Method.Ui.ShowShortException($"{MainLang.InstallFail}：Forge - {customId}", ex);
+                            Method.Ui.ShowShortException($"{MainLang.InstallFail}: Forge - {customId}", ex);
                         });
                         shouldReturn = true;
                     }
@@ -629,7 +629,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                             var optifineInstaller = new OptifineInstaller(game, optiFineInstallEntity, javas[0].JavaPath, customId, MirrorDownloadManager.Bmcl);
                             await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                task.UpdateTitle($"{MainLang.Install}：OptiFine - {versionId}");
+                                task.UpdateTitle($"{MainLang.Install}: OptiFine - {versionId}");
                                 task.UpdateTextProgress("-----> OptiFine", false);
                             });
                             optifineInstaller.ProgressChanged += (_, x) =>
@@ -647,14 +647,14 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                             {
                                 await Dispatcher.UIThread.InvokeAsync(() =>
                                 {
-                                    Method.Ui.Toast($"{MainLang.InstallFinish}：OptiFine - {versionId}", Const.Notification.main, NotificationType.Success);
+                                    Method.Ui.Toast($"{MainLang.InstallFinish}: OptiFine - {versionId}", Const.Notification.main, NotificationType.Success);
                                 });
                             }
                             else
                             {
                                 await Dispatcher.UIThread.InvokeAsync(() =>
                                 {
-                                    Method.Ui.Toast($"{MainLang.InstallFail}：OptiFine - {customId}", Const.Notification.main, NotificationType.Error);
+                                    Method.Ui.Toast($"{MainLang.InstallFail}: OptiFine - {customId}", Const.Notification.main, NotificationType.Error);
                                 });
                                 shouldReturn = true;
                             }
@@ -664,7 +664,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                     {
                         await Dispatcher.UIThread.InvokeAsync(() =>
                         {
-                            Method.Ui.ShowShortException($"{MainLang.InstallFail}：OptiFine - {customId}", ex);
+                            Method.Ui.ShowShortException($"{MainLang.InstallFail}: OptiFine - {customId}", ex);
                         });
                         shouldReturn = true;
                     }
@@ -683,7 +683,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         var fabricInstaller = new FabricInstaller(game, fabricBuildEntry, customId, MirrorDownloadManager.Bmcl);
                         await Dispatcher.UIThread.InvokeAsync(() =>
                         {
-                            task.UpdateTitle($"{MainLang.Install}：Fabric - {versionId}");
+                            task.UpdateTitle($"{MainLang.Install}: Fabric - {versionId}");
                             task.UpdateTextProgress("-----> Fabric", false);
                         });
                         fabricInstaller.ProgressChanged += (_, x) =>
@@ -701,14 +701,14 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         {
                             await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Method.Ui.Toast($"{MainLang.InstallFinish}：Fabric - {versionId}", Const.Notification.main, NotificationType.Success);
+                                Method.Ui.Toast($"{MainLang.InstallFinish}: Fabric - {versionId}", Const.Notification.main, NotificationType.Success);
                             });
                         }
                         else
                         {
                             await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Method.Ui.Toast($"{MainLang.InstallFail}：Fabric - {customId}", Const.Notification.main, NotificationType.Error);
+                                Method.Ui.Toast($"{MainLang.InstallFail}: Fabric - {customId}", Const.Notification.main, NotificationType.Error);
                             });
                             shouldReturn = true;
                         }
@@ -717,7 +717,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                     {
                         await Dispatcher.UIThread.InvokeAsync(() =>
                         {
-                            Method.Ui.ShowShortException($"{MainLang.InstallFail}：Fabric - {customId}", ex);
+                            Method.Ui.ShowShortException($"{MainLang.InstallFail}: Fabric - {customId}", ex);
                         });
                         shouldReturn = true;
                     }
@@ -736,7 +736,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         var quiltInstaller = new QuiltInstaller(game, quiltBuildEntry, customId, MirrorDownloadManager.Bmcl);
                         await Dispatcher.UIThread.InvokeAsync(() =>
                         {
-                            task.UpdateTitle($"{MainLang.Install}：Quilt - {versionId}");
+                            task.UpdateTitle($"{MainLang.Install}: Quilt - {versionId}");
                             task.UpdateTextProgress("-----> Quilt", false);
                         });
                         quiltInstaller.ProgressChanged += (_, x) =>
@@ -754,14 +754,14 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                         {
                             await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Method.Ui.Toast($"{MainLang.InstallFinish}：Quilt - {versionId}", Const.Notification.main, NotificationType.Success);
+                                Method.Ui.Toast($"{MainLang.InstallFinish}: Quilt - {versionId}", Const.Notification.main, NotificationType.Success);
                             });
                         }
                         else
                         {
                             await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Method.Ui.Toast($"{MainLang.InstallFail}：Quilt - {customId}", Const.Notification.main, NotificationType.Error);
+                                Method.Ui.Toast($"{MainLang.InstallFail}: Quilt - {customId}", Const.Notification.main, NotificationType.Error);
                             });
                             shouldReturn = true;
                         }
@@ -770,7 +770,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
                     {
                         await Dispatcher.UIThread.InvokeAsync(() =>
                         {
-                            Method.Ui.ShowShortException($"{MainLang.InstallFail}：Quilt - {customId}", ex);
+                            Method.Ui.ShowShortException($"{MainLang.InstallFail}: Quilt - {customId}", ex);
                         });
                         shouldReturn = true;
                     }

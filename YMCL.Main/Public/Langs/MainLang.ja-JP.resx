@@ -476,7 +476,7 @@
     <value>何も選択しないでください</value>
   </data>
   <data name="SelectedItem" xml:space="preserve">
-    <value>選択したアイテム：</value>
+    <value>選択したアイテム: </value>
   </data>
   <data name="OpenSourceProjectUsageTable" xml:space="preserve">
     <value>オープンソースプロジェクト使用シート</value>

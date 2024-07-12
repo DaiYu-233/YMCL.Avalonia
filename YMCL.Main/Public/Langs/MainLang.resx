@@ -378,7 +378,7 @@
     <value>Minecrat发生崩溃</value>
   </data>
   <data name="TheVersionNameWillBeRenamedTo" xml:space="preserve">
-    <value>版本名称将被重命名为：</value>
+    <value>版本名称将被重命名为: </value>
   </data>
   <data name="IncludeSpecialWord" xml:space="preserve">
     <value>包含特殊字符</value>
@@ -456,7 +456,7 @@
     <value>全不选</value>
   </data>
   <data name="SelectedItem" xml:space="preserve">
-    <value>已选择项目：</value>
+    <value>已选择项目: </value>
   </data>
   <data name="MoveToRecycleBin" xml:space="preserve">
     <value>移动到回收站</value>
@@ -549,7 +549,7 @@
     <value>初始化音频库失败</value>
   </data>
   <data name="InstallVlcTip" xml:space="preserve">
-    <value>尝试执行：
+    <value>尝试执行: 
 
 sudo apt install libvlc-dev
 sudo apt install vlc</value>
@@ -640,5 +640,14 @@ sudo apt install vlc</value>
   </data>
   <data name="CannotOpenBedRockSetting" xml:space="preserve">
     <value>无法打开基岩版设置</value>
+  </data>
+  <data name="UpgradeToAdministratorPrivileges" xml:space="preserve">
+    <value>提升至管理员权限</value>
+  </data>
+  <data name="UpgradeToAdministratorPrivilegesFail" xml:space="preserve">
+    <value>提升至管理员权限失败</value>
+  </data>
+  <data name="UpgradeToAdministratorPrivilegesTip" xml:space="preserve">
+    <value>执行操作需要提升至管理员权限，点击确定以管理员权限重启程序</value>
   </data>
 </root>

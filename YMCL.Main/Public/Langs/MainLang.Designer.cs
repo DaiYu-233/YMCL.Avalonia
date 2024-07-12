@@ -691,7 +691,7 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
-        ///   查找类似 尝试执行：
+        ///   查找类似 尝试执行: 
         ///
         ///sudo apt install libvlc-dev
         ///sudo apt install vlc 的本地化字符串。
@@ -1333,7 +1333,7 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
-        ///   查找类似 已选择项目： 的本地化字符串。
+        ///   查找类似 已选择项目:  的本地化字符串。
         /// </summary>
         public static string SelectedItem {
             get {
@@ -1459,7 +1459,7 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
-        ///   查找类似 版本名称将被重命名为： 的本地化字符串。
+        ///   查找类似 版本名称将被重命名为:  的本地化字符串。
         /// </summary>
         public static string TheVersionNameWillBeRenamedTo {
             get {
@@ -1545,6 +1545,33 @@ namespace YMCL.Main.Public.Langs {
         public static string UpdateFail {
             get {
                 return ResourceManager.GetString("UpdateFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 提升至管理员权限 的本地化字符串。
+        /// </summary>
+        public static string UpgradeToAdministratorPrivileges {
+            get {
+                return ResourceManager.GetString("UpgradeToAdministratorPrivileges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 提升至管理员权限失败 的本地化字符串。
+        /// </summary>
+        public static string UpgradeToAdministratorPrivilegesFail {
+            get {
+                return ResourceManager.GetString("UpgradeToAdministratorPrivilegesFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 执行操作需要提升至管理员权限，点击确定以管理员权限重启程序 的本地化字符串。
+        /// </summary>
+        public static string UpgradeToAdministratorPrivilegesTip {
+            get {
+                return ResourceManager.GetString("UpgradeToAdministratorPrivilegesTip", resourceCulture);
             }
         }
         

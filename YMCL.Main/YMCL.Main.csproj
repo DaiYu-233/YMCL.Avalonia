@@ -24,20 +24,21 @@
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.1.0-rc1" />
-    <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.1.0-rc1" />
-    <PackageReference Include="Avalonia.Desktop" Version="11.1.0-rc1" />
-    <PackageReference Include="Avalonia.Markup.Xaml.Loader" Version="11.1.0-rc1" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.0-rc1" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.0-rc1" />
+    <PackageReference Include="Avalonia" Version="11.1.0-rc2" />
+    <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.1.0-rc2" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.1.0-rc2" />
+    <PackageReference Include="Avalonia.Markup.Xaml.Loader" Version="11.1.0-rc2" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.0-rc2" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.0-rc2" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.0-rc1" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.0-rc2" />
     <PackageReference Include="CurseForge.APIClient" Version="2.2.0" />
     <PackageReference Include="FluentAvaloniaUI" Version="2.1.0-preview6" />
-    <PackageReference Include="MinecraftLaunch" Version="3.1.0-preview03" />
+    <PackageReference Include="MinecraftLaunch" Version="3.1.0-preview04" />
     <PackageReference Include="MinecraftLaunch.Skin" Version="1.0.1" />
     <PackageReference Include="NAudio.Wasapi" Version="2.2.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Semi.Avalonia" Version="11.1.0-rc2" />
     <PackageReference Include="System.Management" Version="9.0.0-preview.5.24306.7" />
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +74,7 @@
     <None Remove="Public\Assets\Transparent-Icon.png" />
     <None Remove="Public\Assets\YCML-Icon.ico" />
     <None Remove="Public\Assets\YMCL-Icon.png" />
+    <None Remove="Public\Bins\YMCL.Starter.win.exe" />
     <None Remove="Public\Bins\YMCL.Update.Helper.linux" />
     <None Remove="Public\Bins\YMCL.Update.Helper.win.exe" />
     <None Remove="Public\Texts\DateTime.txt" />
@@ -88,6 +90,7 @@
     </AvaloniaResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Public\Bins\YMCL.Starter.win.exe" />
     <EmbeddedResource Include="Public\Bins\YMCL.Update.Helper.linux" />
     <EmbeddedResource Include="Public\Bins\YMCL.Update.Helper.win.exe" />
     <EmbeddedResource Include="Public\Texts\CustomHomePageDefault.axaml" />

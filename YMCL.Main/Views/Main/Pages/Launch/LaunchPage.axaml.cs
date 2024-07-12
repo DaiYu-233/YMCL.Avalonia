@@ -894,7 +894,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                         {
                             Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Method.Ui.Toast($"{MainLang.GameExited}：{args.ExitCode}", Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Information);
+                                Method.Ui.Toast($"{MainLang.GameExited}: {args.ExitCode}", Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Information);
 
                                 if (args.ExitCode == 0)
                                 {

@@ -34,6 +34,14 @@ namespace YMCL.Main.Views.Initialize
             {
                 File.Delete(Path.Combine(Const.UserDataRootPath, "YMCL.Update.Helper.linux"));
             }
+            if (File.Exists(Path.Combine(Const.UserDataRootPath, "Update.exe")))
+            {
+                File.Delete(Path.Combine(Const.UserDataRootPath, "Update.exe"));
+            }
+            if (File.Exists(Path.Combine(Const.UserDataRootPath, "Update")))
+            {
+                File.Delete(Path.Combine(Const.UserDataRootPath, "Update"));
+            }
             if (!File.Exists(Const.MinecraftFolderDataPath) || JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath)).Count == 0)
             {
                 Method.IO.CreateFolder(Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft"));
@@ -65,6 +73,7 @@ namespace YMCL.Main.Views.Initialize
                     File.WriteAllText(Const.CustomHomePageXamlDataPath, result);
                 }
             }
+            File.WriteAllText(Const.AppPathDataPath, Process.GetCurrentProcess().MainModule.FileName!);
             var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
             if (setting.Language == null || setting.Language == "zh-CN")
             {
@@ -75,7 +84,7 @@ namespace YMCL.Main.Views.Initialize
                 LangHelper.Current.ChangedCulture(setting.Language);
             }
 
-            Const.Notification.main = new WindowNotificationManager(GetTopLevel(Const.Window.main)) { MaxItems = 5, Position = NotificationPosition.BottomRight, /*FontFamily = (FontFamily)Application.Current.Resources["Font"]*/ };
+            Const.Notification.main = new WindowNotificationManager(GetTopLevel(Const.Window.main)) { MaxItems = 3, Position = NotificationPosition.BottomRight, /*FontFamily = (FontFamily)Application.Current.Resources["Font"]*/ };
             Method.Ui.SetAccentColor(setting.AccentColor);
             if (setting.Theme == Public.Theme.Light)
             {

@@ -254,12 +254,16 @@
                                             </Image>
                                         </Border>
                                         <StackPanel Margin="6.5,0,0,0">
-                                            <TextBlock FontSize="16" Text="Yu Minecraft Launcher" />
+                                            <TextBlock 
+                                                FontSize="16"
+                                                Text="Yu Minecraft Launcher"
+                                                TextDecorations="{x:Null}" />
                                             <TextBlock
                                                 Margin="1,0,0,0"
                                                 FontSize="13"
                                                 Foreground="{DynamicResource TextColor}"
-                                                Text="ymcl.daiyu.fun" />
+                                                Text="ymcl.daiyu.fun"
+                                                TextDecorations="{x:Null}" />
                                         </StackPanel>
                                     </DockPanel>
                                 </Border>
@@ -317,9 +321,9 @@
                                             </Image>
                                         </Border>
                                         <StackPanel Margin="6.5,0,0,0">
-                                            <TextBlock FontSize="16" Text="Afdian" />
+                                            <TextBlock TextDecorations="{x:Null}" FontSize="16" Text="Afdian" />
                                             <TextBlock
-                                                FontSize="13"
+                                                FontSize="13" TextDecorations="{x:Null}"
                                                 Foreground="{DynamicResource TextColor}"
                                                 Text="afdian.net/a/DaiYu_" />
                                         </StackPanel>
@@ -382,9 +386,9 @@
                                             </Image>
                                         </Border>
                                         <StackPanel Margin="6.5,0,0,0">
-                                            <TextBlock FontSize="16" Text=".NET Core 8.0" />
+                                            <TextBlock TextDecorations="{x:Null}" FontSize="16" Text=".NET Core 8.0" />
                                             <TextBlock
-                                                Margin="2,0,0,0"
+                                                Margin="2,0,0,0" TextDecorations="{x:Null}"
                                                 FontSize="13"
                                                 Foreground="{DynamicResource TextColor}"
                                                 Text="dotnet.microsoft.com" />
@@ -437,9 +441,9 @@
                                             </Image>
                                         </Border>
                                         <StackPanel Margin="6.5,0,0,0">
-                                            <TextBlock FontSize="16" Text=" AvaloniaUi" />
+                                            <TextBlock TextDecorations="{x:Null}" FontSize="16" Text=" AvaloniaUi" />
                                             <TextBlock
-                                                Margin="2,0,0,0"
+                                                Margin="2,0,0,0" TextDecorations="{x:Null}"
                                                 FontSize="13"
                                                 Foreground="{DynamicResource TextColor}"
                                                 Text="docs.avaloniaui.net" />
@@ -470,7 +474,7 @@
                                         </DrawingImage>
                                     </Image.Source>
                                 </Image>
-                                <TextBlock
+                                <TextBlock TextDecorations="{x:Null}"
                                     Margin="30,0,0,0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
@@ -479,7 +483,7 @@
                                     Foreground="{DynamicResource TextColor}"
                                     Text="Apache License" />
                             </Grid>
-                            <TextBlock
+                            <TextBlock TextDecorations="{x:Null}"
                                 Margin="2,3,10,0"
                                 DockPanel.Dock="Bottom"
                                 FontFamily="{DynamicResource Font}"
@@ -499,13 +503,13 @@
                                 Text="{x:Static properties:MainLang.OpenSourceProjectUsageTable}" />
                             <WrapPanel Margin="5,25,5,0">
                                 <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/Fody/Costura">
-                                    <TextBlock Foreground="{DynamicResource SystemAccentColor}" Text=" Costura.Fody " />
+                                    <TextBlock TextDecorations="{x:Null}" Foreground="{DynamicResource SystemAccentColor}" Text=" Costura.Fody " />
                                 </HyperlinkButton>
                                 <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/Blessing-Studio/MinecraftLaunch">
-                                    <TextBlock Foreground="{DynamicResource SystemAccentColor}" Text=" MinecraftLaunch " />
+                                    <TextBlock TextDecorations="{x:Null}" Foreground="{DynamicResource SystemAccentColor}" Text=" MinecraftLaunch " />
                                 </HyperlinkButton>
                                 <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://www.newtonsoft.com/json">
-                                    <TextBlock Foreground="{DynamicResource SystemAccentColor}" Text=" Newtonsoft.Json " />
+                                    <TextBlock TextDecorations="{x:Null}" Foreground="{DynamicResource SystemAccentColor}" Text=" Newtonsoft.Json " />
                                 </HyperlinkButton>
                             </WrapPanel>
                         </Grid>

@@ -177,7 +177,7 @@
                             HorizontalAlignment="Center"
                             Classes="accent"
                             IsVisible="False">
-                            <TextBlock FontFamily="{DynamicResource Font}">
+                            <TextBlock TextDecorations="{x:Null}" FontFamily="{DynamicResource Font}">
                                 <Run Text="→" />
                                 <Run Text="{x:Static properties:MainLang.LoadMore}" />
                                 <Run Text="←" />

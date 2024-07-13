@@ -308,7 +308,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                     Title = MainLang.SaveFile
                 });
                 if (path == null) return;
-                Method.Ui.Toast($"{MainLang.BeginDownload}£º{item.DisplayName}");
+                Method.Ui.Toast($"{MainLang.BeginDownload}: {item.DisplayName}");
                 try
                 {
                     using (HttpClient client = new HttpClient())
@@ -324,11 +324,11 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                             }
                         }
                     }
-                    Method.Ui.Toast($"{MainLang.DownloadFinish}£º{item.DisplayName}",type:Avalonia.Controls.Notifications.NotificationType.Success);
+                    Method.Ui.Toast($"{MainLang.DownloadFinish}: {item.DisplayName}",type:Avalonia.Controls.Notifications.NotificationType.Success);
                 }
                 catch (HttpRequestException ex)
                 {
-                    Method.Ui.ShowShortException($"{MainLang.DownloadFail}£º{item.DisplayName}", ex);
+                    Method.Ui.ShowShortException($"{MainLang.DownloadFail}: {item.DisplayName}", ex);
                 }
             }
         }

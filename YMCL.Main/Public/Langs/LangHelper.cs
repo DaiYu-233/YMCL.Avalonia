@@ -42,7 +42,7 @@ namespace YMCL.Main.Public.Langs
             this.RaisePropertyChanged("Resources");
         }
 
-        public string GetText(string name, string culture = "")
+        public static string GetText(string name, string culture = "")
         {
             var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
             CultureInfo cultureInfo;

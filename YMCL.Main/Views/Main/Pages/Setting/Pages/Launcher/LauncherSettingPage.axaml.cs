@@ -236,9 +236,9 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
                         }
                         if (url != null)
                         {
-                            task.UpdateTextProgress($"{MainLang.GetUpdateUrl}£º{url}", true);
+                            task.UpdateTextProgress($"{MainLang.GetUpdateUrl}: {url}", true);
                             var saveFile = Const.Platform == Platform.Windows ? "Update.exe" : "Update";
-                            task.UpdateTextProgress($"{MainLang.BeginDownload}£º{Path.Combine(Const.UserDataRootPath, saveFile)}", true);
+                            task.UpdateTextProgress($"{MainLang.BeginDownload}: {Path.Combine(Const.UserDataRootPath, saveFile)}", true);
                             try
                             {
                                 //url = "http://127.0.0.1:5500/a.file";
@@ -294,7 +294,8 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
                                             UseShellExecute = true,
                                             WorkingDirectory = Environment.CurrentDirectory,
                                             FileName = Path.Combine(Const.UserDataRootPath, "YMCL.Update.Helper.win.exe"),
-                                            Arguments = $"{Path.Combine(Const.UserDataRootPath, saveFile)} {Process.GetCurrentProcess().MainModule.FileName}"
+                                            Arguments = $"{Path.Combine(Const.UserDataRootPath, saveFile)} {Process.GetCurrentProcess().MainModule.FileName}",
+                                            Verb = "runas"
                                         };
                                         Process.Start(startInfo);
                                         Environment.Exit(0);
@@ -323,7 +324,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
                                     //}
                                     else
                                     {
-                                        var dialog1 = await Method.Ui.ShowDialogAsync(MainLang.Update, $"{MainLang.ThisArchitectureCannotAutoUpdate}£º{Path.Combine(Const.UserDataRootPath, saveFile)}", b_cancel: MainLang.Cancel, b_primary: MainLang.Ok);
+                                        var dialog1 = await Method.Ui.ShowDialogAsync(MainLang.Update, $"{MainLang.ThisArchitectureCannotAutoUpdate}: {Path.Combine(Const.UserDataRootPath, saveFile)}", b_cancel: MainLang.Cancel, b_primary: MainLang.Ok);
                                         if (dialog1 == ContentDialogResult.Primary)
                                         {
                                             var launcher = TopLevel.GetTopLevel(this).Launcher;

@@ -14,6 +14,14 @@ using Avalonia.Threading;
 using CurseForge.APIClient.Models.Files;
 using FluentAvalonia.UI.Controls;
 using Flurl;
+using MinecraftLaunch.Classes.Interfaces;
+using MinecraftLaunch.Classes.Models.Auth;
+using MinecraftLaunch.Classes.Models.Game;
+using MinecraftLaunch.Classes.Models.Launch;
+using MinecraftLaunch.Components.Authenticator;
+using MinecraftLaunch.Components.Launcher;
+using MinecraftLaunch.Components.Resolver;
+using MinecraftLaunch.Utilities;
 using Newtonsoft.Json;
 using SkiaSharp;
 using System;
@@ -30,6 +38,7 @@ using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using YMCL.Main.Public.Classes;
+using YMCL.Main.Public.Controls.WindowTask;
 using YMCL.Main.Public.Langs;
 using File = System.IO.File;
 using FileInfo = YMCL.Main.Public.Classes.FileInfo;
@@ -89,9 +98,10 @@ namespace YMCL.Main.Public
                 }
                 notification.Show(new Notification(showTitle, msg, type));
             }
-            public static async Task<ContentDialogResult> ShowDialogAsync(string title = "Title", string msg = "Content", Control p_content = null, string b_primary = null, string b_cancel = null, string b_secondary = null)
+            public static async Task<ContentDialogResult> ShowDialogAsync(string title = "Title", string msg = "Content", Control p_content = null, string b_primary = null, string b_cancel = null, string b_secondary = null, Window p_window = null)
             {
                 var content = p_content == null ? new TextBox() { TextWrapping = TextWrapping.Wrap, IsReadOnly = true, FontFamily = (FontFamily)Application.Current.Resources["Font"], Text = msg } : p_content;
+                var window = p_window == null ? Const.Window.main : p_window;
                 var dialog = new ContentDialog()
                 {
                     PrimaryButtonText = b_primary,
@@ -102,7 +112,7 @@ namespace YMCL.Main.Public
                     FontFamily = (FontFamily)Application.Current.Resources["Font"],
                     Title = title
                 };
-                var result = await dialog.ShowAsync();
+                var result = await dialog.ShowAsync(window);
                 return result;
             }
             public static async void ShowLongException(string msg, Exception ex)
@@ -344,14 +354,6 @@ namespace YMCL.Main.Public
                 }
 
             }
-            public static void CreateFolder(string path)
-            {
-                if (!Directory.Exists(path))
-                {
-                    DirectoryInfo directoryInfo = new DirectoryInfo(path);
-                    directoryInfo.Create();
-                }
-            }
             public static async Task<bool> UploadMicrosoftSkin(string skinpath, string uuid, string model, string accessToken)
             {
                 try
@@ -396,6 +398,23 @@ namespace YMCL.Main.Public
                     return false;
                 }
             }
+            public static FileInfo GetFileInfoFromPath(string path)
+            {
+                if (!File.Exists(path)) return null;
+                var fullName = Path.GetFileName(path);
+                var name = Path.GetFileNameWithoutExtension(fullName);
+                var extension = Path.GetExtension(fullName);
+                return new FileInfo() { Name = name, Path = path, FullName = fullName, Extension = extension };
+            }
+            public static void CreateFolder(string path)
+            {
+                if (!Directory.Exists(path))
+                {
+                    DirectoryInfo directoryInfo = new DirectoryInfo(path);
+                    directoryInfo.Create();
+                }
+            }
+
         }
         public static class Value
         {
@@ -620,6 +639,360 @@ namespace YMCL.Main.Public
                 {
                     return $"{Math.Round((double)number / 100000000, 1)}亿";
                 }
+            }
+        }
+        public static class Mc
+        {
+            public static VersionSetting GetVersionSetting(GameEntry entry)
+            {
+                if (entry == null)
+                {
+                    Method.Ui.Toast(MainLang.NoChooseGameOrCannotFindGame, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                    return null;
+                }
+                var filePath = Path.Combine(Path.GetDirectoryName(entry.JarPath)!, Const.VersionSettingFileName);
+                if (!File.Exists(filePath))
+                {
+                    File.WriteAllText(filePath, JsonConvert.SerializeObject(new VersionSetting(), Formatting.Indented));
+                }
+                var versionSetting = JsonConvert.DeserializeObject<VersionSetting>(File.ReadAllText(filePath));
+                return versionSetting;
+            }
+            public static async Task LaunchAsync(string p_id = "", string p_javaPath = "", string p_mcPath = "", double p_maxMem = -1, string p_enableIndependencyCore = "unset", string p_fullUrl = "")
+            {
+
+                Const.Window.main.launchPage.LaunchBtn.IsEnabled = false;
+                GameEntry gameEntry = null;
+                Account account = null;
+                var l_id = string.Empty;
+                var l_ip = string.Empty;
+                var l_port = 25565;
+                var l_javaPath = string.Empty;
+                var l_mcPath = string.Empty;
+                double l_maxMem = -1;
+                var l_enableIndependencyCore = true;
+
+                var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                if (string.IsNullOrEmpty(p_id))
+                {
+                    if ((Const.Window.main.launchPage.VersionListView.SelectedItem as GameEntry) != null)
+                    {
+                        l_id = (Const.Window.main.launchPage.VersionListView.SelectedItem as GameEntry).Id;
+                    }
+                    else
+                    {
+                        Method.Ui.Toast(MainLang.NoChooseGameOrCannotFindGame, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                        Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+                        return;
+                    }
+                }
+                else
+                {
+                    l_id = p_id;
+                }
+                if (string.IsNullOrEmpty(p_mcPath))
+                {
+                    l_mcPath = setting.MinecraftFolder;
+                }
+                else
+                {
+                    l_mcPath = p_mcPath;
+                }
+                IGameResolver gameResolver = new GameResolver(l_mcPath);
+                gameEntry = gameResolver.GetGameEntity(l_id);
+                if (gameEntry == null)
+                {
+                    Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+                    Method.Ui.Toast(MainLang.CreateGameEntryFail, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                    return;
+                }
+                var versionSetting = GetVersionSetting(gameEntry);
+                var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath));
+                if(javas.Count == 0)
+                {
+                    Method.Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error); Const.Window.main.launchPage.LaunchBtn.IsEnabled = true; return;
+                }
+                if (string.IsNullOrEmpty(p_javaPath))
+                {
+                    if (versionSetting.Java.JavaPath == "Global")
+                    {
+                        if (setting.Java.JavaPath == "Auto")
+                        {
+                            var javaEntry = JavaUtil.GetCurrentJava(JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath))!, gameEntry);
+                            l_javaPath = javaEntry.JavaPath;
+                        }
+                        else
+                        {
+                            l_javaPath = setting.Java.JavaPath;
+                        }
+                        if (l_javaPath == "Auto")
+                        {
+                            Method.Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error); Const.Window.main.launchPage.LaunchBtn.IsEnabled = true; return;
+                        }
+                    }
+                    else
+                    {
+                        if (versionSetting.Java.JavaPath == "Auto")
+                        {
+                            var javaEntry = JavaUtil.GetCurrentJava(JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath))!, gameEntry);
+                            l_javaPath = javaEntry.JavaPath;
+                        }
+                        else
+                        {
+                            l_javaPath = versionSetting.Java.JavaPath;
+                        }
+                        if (l_javaPath == "Auto")
+                        {
+                            Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+                            Method.Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error); return;
+                        }
+                    }
+                }
+                else
+                {
+                    l_javaPath = p_javaPath;
+                }
+                if (p_maxMem == -1)
+                {
+                    if (versionSetting.MaxMem == -1)
+                    {
+                        l_maxMem = setting.MaxMem;
+                    }
+                    else
+                    {
+                        l_maxMem = versionSetting.MaxMem;
+                    }
+                }
+                else
+                {
+                    l_maxMem = p_maxMem;
+                }
+                if (p_enableIndependencyCore == "unset")
+                {
+                    if (versionSetting.EnableIndependencyCore == VersionSettingEnableIndependencyCore.Global)
+                    {
+                        l_enableIndependencyCore = setting.EnableIndependencyCore;
+                    }
+                    else
+                    {
+                        if (versionSetting.EnableIndependencyCore == VersionSettingEnableIndependencyCore.Off)
+                        {
+                            l_enableIndependencyCore = false;
+                        }
+                    }
+                }
+                else
+                {
+                    if (p_enableIndependencyCore == "false" || p_enableIndependencyCore == "False")
+                    {
+                        l_enableIndependencyCore = true;
+                    }
+                    else
+                    {
+                        l_enableIndependencyCore = false;
+                    }
+                }
+
+                if (string.IsNullOrEmpty(p_fullUrl))
+                {
+                    if (!string.IsNullOrEmpty(versionSetting.AutoJoinServerIp))
+                    {
+                        if (versionSetting.AutoJoinServerIp.Contains(':'))
+                        {
+                            var arr = versionSetting.AutoJoinServerIp.Split(':');
+                            l_ip = arr[0];
+                            l_port = Convert.ToInt16(arr[1]);
+                        }
+                        else
+                        {
+                            l_ip = versionSetting.AutoJoinServerIp;
+                            l_port = 25565;
+                        }
+                    }
+                }
+                else
+                {
+                    if (p_fullUrl.Contains(':'))
+                    {
+                        var arr = p_fullUrl.Split(':');
+                        l_ip = arr[0];
+                        l_port = Convert.ToInt16(arr[1]);
+                    }
+                    else
+                    {
+                        l_ip = versionSetting.AutoJoinServerIp;
+                        l_port = 25565;
+                    }
+                }
+
+                var task = new WindowTask(MainLang.LaunchProgress, false);
+                task.UpdateTextProgress("-----> YMCL", false);
+                task.UpdateTextProgress(MainLang.VerifyingAccount);
+
+                var accountData = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath))[setting.AccountSelectionIndex];
+                if (accountData == null)
+                {
+                    Method.Ui.Toast(MainLang.AccountError, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                    Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+                    task.Hide();
+                    return;
+                }
+                switch (accountData.AccountType)
+                {
+                    case AccountType.Offline:
+                        if (!string.IsNullOrEmpty(accountData.Name))
+                        {
+                            OfflineAuthenticator authenticator1 = new(accountData.Name);
+                            account = authenticator1.Authenticate();
+                        }
+                        else
+                        {
+                            Method.Ui.Toast(MainLang.AccountError, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                            Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+                            task.Hide();
+                            return;
+                        }
+                        break;
+                    case AccountType.Microsoft:
+                        var profile = JsonConvert.DeserializeObject<MicrosoftAccount>(accountData.Data!);
+                        MicrosoftAuthenticator authenticator2 = new(profile, Const.AzureClientId, true);
+                        try
+                        {
+                            account = await authenticator2.AuthenticateAsync();
+                        }
+                        catch (Exception ex)
+                        {
+                            Method.Ui.ShowShortException(MainLang.LoginFail, ex);
+                            Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+                            task.Hide();
+                            return;
+                        }
+                        break;
+                    case AccountType.ThirdParty:
+                        account = JsonConvert.DeserializeObject<YggdrasilAccount>(accountData.Data!);
+                        break;
+                }
+                if (account == null)
+                {
+                    Method.Ui.Toast(MainLang.AccountError, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                    Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+                    task.Hide();
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(l_id) ||
+                string.IsNullOrEmpty(l_mcPath) ||
+                string.IsNullOrEmpty(l_javaPath) ||
+                l_maxMem == -1)
+                {
+                    Method.Ui.Toast(MainLang.BuildLaunchConfigFail, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                    Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+                    task.Hide();
+                    return;
+                }
+
+                var config = new LaunchConfig
+                {
+                    Account = account,
+                    JvmConfig = new JvmConfig(l_javaPath)
+                    {
+                        MaxMemory = Convert.ToInt32(l_maxMem)
+                    },
+                    IsEnableIndependencyCore = l_enableIndependencyCore,
+                    LauncherName = "YMCL",
+                    ServerConfig = new ServerConfig(l_port, l_ip)
+                };
+                if (config == null)
+                {
+                    Method.Ui.Toast(MainLang.BuildLaunchConfigFail, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
+                    Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+                    task.Hide();
+                    return;
+                }
+
+                Method.Ui.Toast($"java:{l_javaPath},mem:{l_maxMem},core:{l_enableIndependencyCore},mcPath:{l_mcPath}", Const.Notification.main);
+
+                Launcher launcher = new(gameResolver, config);
+
+                await Task.Run(async () =>
+                {
+                    try
+                    {
+                        await Dispatcher.UIThread.InvokeAsync(async () =>
+                        {
+                            var watcher = await launcher.LaunchAsync(l_id);
+
+                            watcher.Exited += (_, args) =>
+                            {
+                                Dispatcher.UIThread.InvokeAsync(() =>
+                                {
+                                    Method.Ui.Toast($"{MainLang.GameExited}: {args.ExitCode}", Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Information);
+
+                                    if (args.ExitCode == 0)
+                                    {
+                                        task.Hide();
+                                        Const.Window.main.Focus();
+                                    }
+                                    else
+                                    {
+                                        //var crashAnalyzer = new GameCrashAnalyzer(version, aloneCore);
+                                        //var reports = crashAnalyzer.AnalysisLogs();
+                                        //var msg = string.Empty;
+                                        //foreach (var report in reports)
+                                        //{
+                                        //    msg += $"\n{report.CrashCauses}";
+                                        //}
+                                        //MessageBoxX.Show($"{MainLang.MinecraftCrash}\n{msg}", "Yu Minecraft Launcher");
+
+                                        task.UpdateTextProgress(string.Empty, false);
+                                        task.UpdateTextProgress($"YMCL -----> {MainLang.MineratCrashed}");
+                                        task.isFinish = true;
+                                    }
+                                });
+                            };
+                            watcher.OutputLogReceived += async (_, args) =>
+                            {
+                                Debug.WriteLine(args.Log);
+                                if (setting.ShowGameOutput)
+                                {
+                                    await Dispatcher.UIThread.InvokeAsync(() =>
+                                    {
+                                        task.UpdateTextProgress(args.Original, false);
+                                    });
+                                }
+                            };
+
+                            await Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                task.UpdateTextProgress(MainLang.WaitForGameWindowAppear);
+                                if (setting.ShowGameOutput)
+                                {
+                                    task.UpdateTextProgress("\n", false);
+                                    task.UpdateTextProgress("-----> JvmOutputLog", false);
+                                }
+                                Method.Ui.Toast(MainLang.LaunchFinish, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Success);
+                            });
+                            _ = Task.Run(async () =>
+                            {
+                                watcher.Process.WaitForInputIdle();
+                                await Dispatcher.UIThread.InvokeAsync(() =>
+                                {
+                                    task.Hide();
+                                });
+                            });
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        await Dispatcher.UIThread.InvokeAsync(() =>
+                        {
+                            Method.Ui.ShowShortException(MainLang.LaunchFail, ex);
+                            Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+                            task.Hide();
+                        });
+                    }
+                });
+                Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
             }
         }
     }

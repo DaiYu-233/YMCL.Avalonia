@@ -21,7 +21,7 @@ namespace YMCL.Main.Views.Main.Pages.Music
 {
     public partial class MusicPage : UserControl
     {
-        List<PlaySongListViewItemEntry> playSongList = new();
+        public List<PlaySongListViewItemEntry> playSongList = new();
 
         //private LibVLC _libVLC;
         //private MediaPlayer _mediaPlayer;
@@ -44,7 +44,7 @@ namespace YMCL.Main.Views.Main.Pages.Music
                 if (_firstLoad)
                 {
                     _firstLoad = false;
-                    //_ = Method.Ui.ShowDialogAsync(msg: MainLang.ThisFeatureIsCurrentlyUnderDevelopment, b_primary: MainLang.Ok);
+                    Method.Ui.Toast(MainLang.ThisFeatureIsCurrentlyUnderDevelopment);
                     try
                     {
                         //_libVLC = new LibVLC();
@@ -172,9 +172,9 @@ namespace YMCL.Main.Views.Main.Pages.Music
                         playSongList.Add(song);
                         PlayListView.Items.Add(song);
                     }
-                    File.WriteAllText(Const.PlayerDataPath, JsonConvert.SerializeObject(playSongList, Formatting.Indented));
-                    PlayListView.SelectedIndex = PlayListView.Items.Count - 1;
                 }
+                File.WriteAllText(Const.PlayerDataPath, JsonConvert.SerializeObject(playSongList, Formatting.Indented));
+                PlayListView.SelectedIndex = PlayListView.Items.Count - 1;
             };
             PlayBtn.PointerPressed += (s, e) =>
             {

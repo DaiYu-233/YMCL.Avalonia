@@ -11,6 +11,7 @@
     Title="Yu Minecraft Launcher"
     MinWidth="450"
     MinHeight="310"
+    DragDrop.AllowDrop="True"
     FontWeight="{DynamicResource FontWeight}"
     IsHitTestVisible="True"
     SystemDecorations="None"
@@ -198,6 +199,16 @@
                     FontSize="16"
                     Text=" Yu Minecraft Launcher" />
             </DockPanel>
+            <ui:InfoBar
+                Name="DragTip"
+                Margin="155,10,10,10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                FontFamily="{DynamicResource Font}"
+                IsClosable="False"
+                IsOpen="False"
+                Message="{x:Static properties:MainLang.ReleaseTheMouseAndLetYmclProcessThisFile}"
+                Severity="Success" />
         </Grid>
     </Border>
 </Window>

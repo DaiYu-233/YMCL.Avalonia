@@ -94,7 +94,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                                 MinecraftFolderComboBox.Items.Add(folder);
                             });
                             MinecraftFolderComboBox.SelectedIndex = MinecraftFolderComboBox.ItemCount - 1;
-                            Method.Ui.Toast(MainLang.SuccessAdd + "£º" + item.Path, Const.Notification.main, NotificationType.Success);
+                            Method.Ui.Toast(MainLang.SuccessAdd + ": " + item.Path, Const.Notification.main, NotificationType.Success);
                         }
                         else
                         {
@@ -120,12 +120,12 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
             {
                 var path = (string)MinecraftFolderComboBox.SelectedItem;
                 minecraftFolders.RemoveAt(MinecraftFolderComboBox.SelectedIndex);
-                Method.Ui.Toast(MainLang.SuccessRemove + "£º" + path, Const.Notification.main, NotificationType.Success);
+                Method.Ui.Toast(MainLang.SuccessRemove + ": " + path, Const.Notification.main, NotificationType.Success);
                 if (minecraftFolders.Count == 0)
                 {
                     var a = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft");
                     minecraftFolders.Add(a);
-                    Method.Ui.Toast(MainLang.SuccessAdd + "£º" + a, Const.Notification.main, NotificationType.Success);
+                    Method.Ui.Toast(MainLang.SuccessAdd + ": " + a, Const.Notification.main, NotificationType.Success);
                 }
                 MinecraftFolderComboBox.Items.Clear();
                 minecraftFolders.ForEach(folder =>
@@ -179,7 +179,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                 });
                 JavaComboBox.SelectedIndex = 0;
                 File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
-                Method.Ui.Toast($"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}£º{successAddCount}\n{MainLang.RepeatItem}£º{repeatJavaCount}", Const.Notification.main, NotificationType.Success);
+                Method.Ui.Toast($"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}: {successAddCount}\n{MainLang.RepeatItem}: {repeatJavaCount}", Const.Notification.main, NotificationType.Success);
             };
             ManualAddBtn.Click += async (s, e) =>
             {

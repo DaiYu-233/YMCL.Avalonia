@@ -124,6 +124,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 将以下文件作为模组添加至当前版本 的本地化字符串。
+        /// </summary>
+        public static string AddTheFollowingFilesAsModsToTheCurrentVersion {
+            get {
+                return ResourceManager.GetString("AddTheFollowingFilesAsModsToTheCurrentVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 所有版本 的本地化字符串。
         /// </summary>
         public static string AllVersion {
@@ -1216,6 +1225,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 释放鼠标让YMCL处理此文件 的本地化字符串。
+        /// </summary>
+        public static string ReleaseTheMouseAndLetYmclProcessThisFile {
+            get {
+                return ResourceManager.GetString("ReleaseTheMouseAndLetYmclProcessThisFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 正式版本 的本地化字符串。
         /// </summary>
         public static string ReleaseVersion {
@@ -1558,11 +1576,29 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 无法为基岩版添加模组 的本地化字符串。
+        /// </summary>
+        public static string UnableToAddModsForBedrockEdition {
+            get {
+                return ResourceManager.GetString("UnableToAddModsForBedrockEdition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 未处理的异常 的本地化字符串。
         /// </summary>
         public static string UnhandledException {
             get {
                 return ResourceManager.GetString("UnhandledException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 不支持的文件类型 的本地化字符串。
+        /// </summary>
+        public static string UnsupportedFileType {
+            get {
+                return ResourceManager.GetString("UnsupportedFileType", resourceCulture);
             }
         }
         

@@ -398,7 +398,7 @@
     <value>Минекрат разбился</value>
   </data>
   <data name="TheVersionNameWillBeRenamedTo" xml:space="preserve">
-    <value>Название версии будет переименовано в:</value>
+    <value>Название версии будет переименовано в: </value>
   </data>
   <data name="IncludeSpecialWord" xml:space="preserve">
     <value>Содержит специальных персонажей</value>
@@ -476,7 +476,7 @@
     <value>Не выбирайте ни одного</value>
   </data>
   <data name="SelectedItem" xml:space="preserve">
-    <value>Выбранные элементы:</value>
+    <value>Выбранные элементы: </value>
   </data>
   <data name="OpenSourceProjectUsageTable" xml:space="preserve">
     <value>Лист использования проекта с открытым исходным кодом</value>
@@ -558,5 +558,149 @@
   </data>
   <data name="ChooseLanguage" xml:space="preserve">
     <value>选择语言/Choose Language</value>
+  </data>
+  <data name="GPL3Text" xml:space="preserve">
+    <value>Лицензия YMCL является открытым исходным кодом по лицензии Apache и может быть изменена и распространена, но программное обеспечение должно содержать уведомления об авторских правах и лицензиях для исходного кода, а также файл уведомлений, содержащий информацию о лицензии.</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>поиск</value>
+  </data>
+  <data name="LoadMore" xml:space="preserve">
+    <value>Загрузи больше</value>
+  </data>
+  <data name="ErrorCallingApi" xml:space="preserve">
+    <value>Ошибка при вызове Api</value>
+  </data>
+  <data name="SearchNoResult" xml:space="preserve">
+    <value>Нет результатов для поиска</value>
+  </data>
+  <data name="AddLocalSong" xml:space="preserve">
+    <value>Добавьте аудиофайлы</value>
+  </data>
+  <data name="SelectMusicFile" xml:space="preserve">
+    <value>Выберите аудиофайл</value>
+  </data>
+  <data name="ThemeColor" xml:space="preserve">
+    <value>Цвет темы</value>
+  </data>
+  <data name="InitAudioLibraryFail" xml:space="preserve">
+    <value>Не удалось инициализировать аудио библиотеку</value>
+  </data>
+  <data name="InstallVlcTip" xml:space="preserve">
+    <value>Попытка выполнения: 
+
+sudo apt install libvlc-dev
+sudo apt install vlc</value>
+  </data>
+  <data name="ThisFeatureIsCurrentlyUnderDevelopment" xml:space="preserve">
+    <value>Эта функция находится в разработке</value>
+  </data>
+  <data name="TreasureBox" xml:space="preserve">
+    <value>Сундук с сокровищами</value>
+  </data>
+  <data name="ActivateWinOffice" xml:space="preserve">
+    <value>Активируйте Windows/Office</value>
+  </data>
+  <data name="Run" xml:space="preserve">
+    <value>Работа</value>
+  </data>
+  <data name="ThisFeatureOnlySupportsWindowsPlatform" xml:space="preserve">
+    <value>Эта функция доступна только в Windows</value>
+  </data>
+  <data name="RunCommandFail" xml:space="preserve">
+    <value>Не удалось запустить команду</value>
+  </data>
+  <data name="RunActivate" xml:space="preserve">
+    <value>Запустите активацию</value>
+  </data>
+  <data name="CancelActivateWin" xml:space="preserve">
+    <value>Деактивируйте Windows</value>
+  </data>
+  <data name="CancelActivateWinTip" xml:space="preserve">
+    <value>Это действие удалит состояние активации Windows, сделав недоступными такие функции, как персонализация Windows. Продолжить?</value>
+  </data>
+  <data name="ThisFeatureOnlySupportsWindows10AndAbove" xml:space="preserve">
+    <value>Эта функция поддерживает только Windows 10 и выше, и системы ниже этой версии не гарантируют успешной активации</value>
+  </data>
+  <data name="PlayList" xml:space="preserve">
+    <value>Воспроизвести список</value>
+  </data>
+  <data name="ModName" xml:space="preserve">
+    <value>Название модуля</value>
+  </data>
+  <data name="GameVersion" xml:space="preserve">
+    <value>Версия игры</value>
+  </data>
+  <data name="AnyModLoader" xml:space="preserve">
+    <value>Любой погрузчик</value>
+  </data>
+  <data name="AnySource" xml:space="preserve">
+    <value>Все источники</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Загрузить</value>
+  </data>
+  <data name="SaveFile" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="DownloadFail" xml:space="preserve">
+    <value>Загрузка не удалась</value>
+  </data>
+  <data name="MatchingVersion" xml:space="preserve">
+    <value>Соответствующая версия</value>
+  </data>
+  <data name="ModifyMicrosoftSkin" xml:space="preserve">
+    <value>Microsoft</value>
+  </data>
+  <data name="SkinModel" xml:space="preserve">
+    <value>Модель кожи</value>
+  </data>
+  <data name="InputSkinFilePath" xml:space="preserve">
+    <value>Введите путь к файлу скина</value>
+  </data>
+  <data name="SelectSkinFile" xml:space="preserve">
+    <value>Выберите файл скина</value>
+  </data>
+  <data name="RefreshMicrosoftSkin" xml:space="preserve">
+    <value>Microsoft</value>
+  </data>
+  <data name="ModifySuccess" xml:space="preserve">
+    <value>Модификация прошла успешно</value>
+  </data>
+  <data name="ModifyFail" xml:space="preserve">
+    <value>Ошибка изменения</value>
+  </data>
+  <data name="IfInstallBedRock" xml:space="preserve">
+    <value>Если версия коренной породы не установлена, она не запустится</value>
+  </data>
+  <data name="BedRockVersion" xml:space="preserve">
+    <value>Bedrock Edition</value>
+  </data>
+  <data name="CannotOpenBedRockSetting" xml:space="preserve">
+    <value>Не удалось открыть настройки коренной породы</value>
+  </data>
+  <data name="UpgradeToAdministratorPrivileges" xml:space="preserve">
+    <value>Обновите до прав администратора</value>
+  </data>
+  <data name="UpgradeToAdministratorPrivilegesFail" xml:space="preserve">
+    <value>Не удалось обновить права администратора</value>
+  </data>
+  <data name="UpgradeToAdministratorPrivilegesTip" xml:space="preserve">
+    <value>Для выполнения операции необходимо обновить права администратора. Нажмите кнопку ОК, чтобы перезапустить программу с правами администратора</value>
+  </data>
+  <data name="ReleaseTheMouseAndLetYmclProcessThisFile" xml:space="preserve">
+    <value>Отпустите мышь, чтобы YMCL обработал этот файл</value>
+  </data>
+  <data name="UnableToAddModsForBedrockEdition" xml:space="preserve">
+    <value>Модули не могут быть добавлены в Bedrock Edition</value>
+  </data>
+  <data name="AddTheFollowingFilesAsModsToTheCurrentVersion" xml:space="preserve">
+    <value>Добавьте следующие файлы в качестве модуля в текущую версию</value>
+  </data>
+  <data name="UnsupportedFileType" xml:space="preserve">
+    <value>Неподдерживаемый тип файла</value>
+  </data>
+  <data name="InstallTheFollowingFilesAsAnIntegrationPackageCurseforgeFormat" xml:space="preserve">
+    <value>Установите следующие файлы в качестве пакета интеграции (формат CurseForge)</value>
   </data>
 </root>

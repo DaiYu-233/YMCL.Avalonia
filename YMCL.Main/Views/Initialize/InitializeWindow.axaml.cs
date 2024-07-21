@@ -29,7 +29,7 @@ namespace YMCL.Main.Views.Initialize
         public WindowTitleBarStyle titleBarStyle;
         private void Init()
         {
-            Method.IO.CreateFolder(Const.UserDataRootPath);
+            Method.IO.TryCreateFolder(Const.UserDataRootPath);
             if (!File.Exists(Const.SettingDataPath))
             {
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(new Setting(), Formatting.Indented));
@@ -52,7 +52,7 @@ namespace YMCL.Main.Views.Initialize
             }
             if (!File.Exists(Const.MinecraftFolderDataPath) || JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath)).Count == 0)
             {
-                Method.IO.CreateFolder(Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft"));
+                Method.IO.TryCreateFolder(Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft"));
                 File.WriteAllText(Const.MinecraftFolderDataPath, JsonConvert.SerializeObject(new List<string>() { Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft") }, Formatting.Indented));
                 var setting1 = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
                 setting1.MinecraftFolder = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft");
@@ -102,7 +102,7 @@ namespace YMCL.Main.Views.Initialize
                 LangHelper.Current.ChangedCulture(setting.Language);
             }
 
-            Const.Notification.main = new WindowNotificationManager(GetTopLevel(Const.Window.main)) { MaxItems = 3, Position = NotificationPosition.BottomRight, /*FontFamily = (FontFamily)Application.Current.Resources["Font"]*/ };
+            Const.Notification.main = new WindowNotificationManager(GetTopLevel(Const.Window.main)) { MaxItems = 3, Position = NotificationPosition.BottomRight /*FontFamily = (FontFamily)Application.Current.Resources["Font"]*/ };
             Method.Ui.SetAccentColor(setting.AccentColor);
             if (setting.Theme == Public.Theme.Light)
             {
@@ -237,8 +237,8 @@ namespace YMCL.Main.Views.Initialize
                     WindowsPrincipal principal = new WindowsPrincipal(identity);
                     if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
                     { Show(); }
-                    await Method.Ui.UpgradeToAdministratorPrivilegesAsync();
-                    Method.IO.CreateFolder("C:\\ProgramData\\DaiYu.Platform.YMCL");
+                    await Method.Ui.UpgradeToAdministratorPrivilegesAsync(Const.Window.initialize);
+                    Method.IO.TryCreateFolder("C:\\ProgramData\\DaiYu.Platform.YMCL");
                     var bat = "set /p ymcl=<%USERPROFILE%\\AppData\\Roaming\\DaiYu.Platform.YMCL\\YMCL.AppPath.DaiYu\r\necho %ymcl%\r\necho %1\r\nstart %ymcl% %1";
                     var path = "C:\\ProgramData\\DaiYu.Platform.YMCL\\launch.bat";
                     File.WriteAllText(path, bat);
@@ -281,10 +281,11 @@ namespace YMCL.Main.Views.Initialize
             }
 
             Const.Window.main.LoadWindow();
-            Close();
+            Hide();
         }
         protected override void OnLoaded(RoutedEventArgs e)
         {
+            Hide();
             base.OnLoaded(e);
             Hide();
             SystemDecorations = SystemDecorations.Full;

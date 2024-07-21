@@ -18,7 +18,7 @@ namespace YMCL.Main
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
-                .UseManagedSystemDialogs()
+                //.UseManagedSystemDialogs()
                 .WithInterFont()
                 .LogToTrace();
     }

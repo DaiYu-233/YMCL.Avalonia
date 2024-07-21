@@ -11,8 +11,8 @@ namespace YMCL.Main.Views.Main.Pages.Download
 {
     public partial class DownloadPage : UserControl
     {
-        Pages.AutoInstall.AutoInstallPage autoInstallPage = new();
-        Pages.Mod.Mod modPage = new();
+        public Pages.AutoInstall.AutoInstallPage autoInstallPage = new();
+        public Pages.Mod.Mod modPage = new();
         public DownloadPage()
         {
             InitializeComponent();

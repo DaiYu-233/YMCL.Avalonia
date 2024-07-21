@@ -29,7 +29,7 @@
         Background="{DynamicResource 1x}"
         ClipToBounds="True"
         CornerRadius="8">
-        <Grid>
+        <Grid x:Name="RootGrid">
             <DockPanel>
                 <uc:TitleBar
                     Name="TitleBar"

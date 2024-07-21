@@ -398,7 +398,7 @@
     <value>マインクラットが墜落しました</value>
   </data>
   <data name="TheVersionNameWillBeRenamedTo" xml:space="preserve">
-    <value>バージョン名は次の名前に変更されます:</value>
+    <value>バージョン名は次の名前に変更されます: </value>
   </data>
   <data name="IncludeSpecialWord" xml:space="preserve">
     <value>スペシャルキャラクター入り</value>
@@ -558,5 +558,149 @@
   </data>
   <data name="ChooseLanguage" xml:space="preserve">
     <value>选择语言/Choose Language</value>
+  </data>
+  <data name="GPL3Text" xml:space="preserve">
+    <value>YMCLはApacheライセンスの下でオープンソースであり、変更および配布することができますが、ソフトウェアには元のコードの著作権およびライセンス通知、およびライセンス情報を含む通知ファイルが含まれている必要があります。</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>検索</value>
+  </data>
+  <data name="LoadMore" xml:space="preserve">
+    <value>もっと読み込む</value>
+  </data>
+  <data name="ErrorCallingApi" xml:space="preserve">
+    <value>Apiの呼び出し中にエラーが発生しました</value>
+  </data>
+  <data name="SearchNoResult" xml:space="preserve">
+    <value>結果が見つかりません</value>
+  </data>
+  <data name="AddLocalSong" xml:space="preserve">
+    <value>オーディオファイルを追加</value>
+  </data>
+  <data name="SelectMusicFile" xml:space="preserve">
+    <value>オーディオファイルを選択してください</value>
+  </data>
+  <data name="ThemeColor" xml:space="preserve">
+    <value>テーマカラー</value>
+  </data>
+  <data name="InitAudioLibraryFail" xml:space="preserve">
+    <value>オーディオライブラリの初期化に失敗しました</value>
+  </data>
+  <data name="InstallVlcTip" xml:space="preserve">
+    <value>実行を試みます： 
+
+sudo apt install libvlc - dev
+sudo apt install vlc</value>
+  </data>
+  <data name="ThisFeatureIsCurrentlyUnderDevelopment" xml:space="preserve">
+    <value>この機能は開発中です</value>
+  </data>
+  <data name="TreasureBox" xml:space="preserve">
+    <value>宝箱</value>
+  </data>
+  <data name="ActivateWinOffice" xml:space="preserve">
+    <value>Windows/Officeを有効にしてください</value>
+  </data>
+  <data name="Run" xml:space="preserve">
+    <value>実行</value>
+  </data>
+  <data name="ThisFeatureOnlySupportsWindowsPlatform" xml:space="preserve">
+    <value>この機能はWindowsでのみ利用できます</value>
+  </data>
+  <data name="RunCommandFail" xml:space="preserve">
+    <value>コマンドの実行に失敗しました</value>
+  </data>
+  <data name="RunActivate" xml:space="preserve">
+    <value>アクティベーションを実行</value>
+  </data>
+  <data name="CancelActivateWin" xml:space="preserve">
+    <value>Windowsを無効にしてください</value>
+  </data>
+  <data name="CancelActivateWinTip" xml:space="preserve">
+    <value>このアクションを実行すると、Windowsのアクティベーションステータスが削除され、Windowsのパーソナライゼーションなどの機能が使用できなくなります。続行しますか？</value>
+  </data>
+  <data name="ThisFeatureOnlySupportsWindows10AndAbove" xml:space="preserve">
+    <value>この機能はWindows 10以降のみをサポートしており、このバージョンよりも前のシステムが正常にアクティベートされることは保証されていません</value>
+  </data>
+  <data name="PlayList" xml:space="preserve">
+    <value>放映リスト</value>
+  </data>
+  <data name="ModName" xml:space="preserve">
+    <value>モジュール名</value>
+  </data>
+  <data name="GameVersion" xml:space="preserve">
+    <value>ゲームバージョン</value>
+  </data>
+  <data name="AnyModLoader" xml:space="preserve">
+    <value>任意のローダー</value>
+  </data>
+  <data name="AnySource" xml:space="preserve">
+    <value>すべての情報源</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>ダウンロード</value>
+  </data>
+  <data name="SaveFile" xml:space="preserve">
+    <value>ファイルを保存</value>
+  </data>
+  <data name="DownloadFail" xml:space="preserve">
+    <value>ダウンロード失敗</value>
+  </data>
+  <data name="MatchingVersion" xml:space="preserve">
+    <value>バージョンが一致しています</value>
+  </data>
+  <data name="ModifyMicrosoftSkin" xml:space="preserve">
+    <value>マイクロソフト</value>
+  </data>
+  <data name="SkinModel" xml:space="preserve">
+    <value>スキンモデル</value>
+  </data>
+  <data name="InputSkinFilePath" xml:space="preserve">
+    <value>スキンファイルのパスを入力してください</value>
+  </data>
+  <data name="SelectSkinFile" xml:space="preserve">
+    <value>スキンファイルを選択してください</value>
+  </data>
+  <data name="RefreshMicrosoftSkin" xml:space="preserve">
+    <value>マイクロソフト</value>
+  </data>
+  <data name="ModifySuccess" xml:space="preserve">
+    <value>正常に変更されました</value>
+  </data>
+  <data name="ModifyFail" xml:space="preserve">
+    <value>編集に失敗しました</value>
+  </data>
+  <data name="IfInstallBedRock" xml:space="preserve">
+    <value>基盤バージョンがインストールされていない場合、起動しません</value>
+  </data>
+  <data name="BedRockVersion" xml:space="preserve">
+    <value>岩盤エディション</value>
+  </data>
+  <data name="CannotOpenBedRockSetting" xml:space="preserve">
+    <value>岩盤設定を開けませんでした</value>
+  </data>
+  <data name="UpgradeToAdministratorPrivileges" xml:space="preserve">
+    <value>管理者権限にアップグレード</value>
+  </data>
+  <data name="UpgradeToAdministratorPrivilegesFail" xml:space="preserve">
+    <value>管理者権限へのアップグレードに失敗しました</value>
+  </data>
+  <data name="UpgradeToAdministratorPrivilegesTip" xml:space="preserve">
+    <value>操作を実行するには、管理者権限にアップグレードする必要があります。[OK]をクリックして、管理者権限でプログラムを再起動します</value>
+  </data>
+  <data name="ReleaseTheMouseAndLetYmclProcessThisFile" xml:space="preserve">
+    <value>マウスを離して、YMCLがこのファイルを処理できるようにします</value>
+  </data>
+  <data name="UnableToAddModsForBedrockEdition" xml:space="preserve">
+    <value>モジュールをBedrock Editionに追加することはできません</value>
+  </data>
+  <data name="AddTheFollowingFilesAsModsToTheCurrentVersion" xml:space="preserve">
+    <value>次のファイルをモジュールとして現在のバージョンに追加します</value>
+  </data>
+  <data name="UnsupportedFileType" xml:space="preserve">
+    <value>サポートされていないファイルタイプです</value>
+  </data>
+  <data name="InstallTheFollowingFilesAsAnIntegrationPackageCurseforgeFormat" xml:space="preserve">
+    <value>以下のファイルを統合パッケージ（ CurseForge形式）としてインストールしてください</value>
   </data>
 </root>

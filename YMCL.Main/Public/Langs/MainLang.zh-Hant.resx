@@ -482,7 +482,7 @@
     <value>開源項目使用表</value>
   </data>
   <data name="GPL3Text" xml:space="preserve">
-    <value>YMCL 以GPL-3.0 協議開放原始碼，可以修改且分發，但不得刪除原作品的標記，修改後的作品必須也採用GPL 協定進行開源</value>
+    <value>YMCL 以GPL-3.0 協議開放原始碼，可以修改且分發，但不得刪除原作品的標記，修改後的作品必須也採用GPL 協定進行開源。</value>
   </data>
   <data name="MoveToRecycleBin" xml:space="preserve">
     <value>移動到回收站</value>
@@ -561,5 +561,146 @@
   </data>
   <data name="ChooseLanguage" xml:space="preserve">
     <value>选择语言/Choose Language</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>搜尋</value>
+  </data>
+  <data name="LoadMore" xml:space="preserve">
+    <value>載入更多</value>
+  </data>
+  <data name="ErrorCallingApi" xml:space="preserve">
+    <value>呼叫Api時發生錯誤</value>
+  </data>
+  <data name="SearchNoResult" xml:space="preserve">
+    <value>搜尋無結果</value>
+  </data>
+  <data name="AddLocalSong" xml:space="preserve">
+    <value>新增音訊檔案</value>
+  </data>
+  <data name="SelectMusicFile" xml:space="preserve">
+    <value>選擇音訊檔案</value>
+  </data>
+  <data name="ThemeColor" xml:space="preserve">
+    <value>主題色</value>
+  </data>
+  <data name="InitAudioLibraryFail" xml:space="preserve">
+    <value>初始化音訊庫失敗</value>
+  </data>
+  <data name="InstallVlcTip" xml:space="preserve">
+    <value>嘗試執行: 
+
+sudo apt install libvlc-dev
+sudo apt install vlc</value>
+  </data>
+  <data name="ThisFeatureIsCurrentlyUnderDevelopment" xml:space="preserve">
+    <value>此功能正在開發中</value>
+  </data>
+  <data name="TreasureBox" xml:space="preserve">
+    <value>百寶箱</value>
+  </data>
+  <data name="ActivateWinOffice" xml:space="preserve">
+    <value>激活Windows/Office</value>
+  </data>
+  <data name="Run" xml:space="preserve">
+    <value>運行</value>
+  </data>
+  <data name="ThisFeatureOnlySupportsWindowsPlatform" xml:space="preserve">
+    <value>此功能僅支援Windows平台</value>
+  </data>
+  <data name="RunCommandFail" xml:space="preserve">
+    <value>運行命令失敗</value>
+  </data>
+  <data name="RunActivate" xml:space="preserve">
+    <value>運行激活</value>
+  </data>
+  <data name="CancelActivateWin" xml:space="preserve">
+    <value>取消激活Windows</value>
+  </data>
+  <data name="CancelActivateWinTip" xml:space="preserve">
+    <value>此操作會移除Windows啟動狀態，導致Windows個人化等功能無法使用，是否繼續？</value>
+  </data>
+  <data name="ThisFeatureOnlySupportsWindows10AndAbove" xml:space="preserve">
+    <value>此功能僅支援Windows10以上，低於此版本系統不保證啟動成功</value>
+  </data>
+  <data name="PlayList" xml:space="preserve">
+    <value>播放清單</value>
+  </data>
+  <data name="ModName" xml:space="preserve">
+    <value>模組名稱</value>
+  </data>
+  <data name="GameVersion" xml:space="preserve">
+    <value>遊戲版本</value>
+  </data>
+  <data name="AnyModLoader" xml:space="preserve">
+    <value>任意載入器</value>
+  </data>
+  <data name="AnySource" xml:space="preserve">
+    <value>所有來源</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>下載</value>
+  </data>
+  <data name="SaveFile" xml:space="preserve">
+    <value>保存檔案</value>
+  </data>
+  <data name="DownloadFail" xml:space="preserve">
+    <value>下載失敗</value>
+  </data>
+  <data name="MatchingVersion" xml:space="preserve">
+    <value>匹配的版本</value>
+  </data>
+  <data name="ModifyMicrosoftSkin" xml:space="preserve">
+    <value>修改皮膚(微軟)</value>
+  </data>
+  <data name="SkinModel" xml:space="preserve">
+    <value>皮膚模型</value>
+  </data>
+  <data name="InputSkinFilePath" xml:space="preserve">
+    <value>輸入皮膚檔路徑</value>
+  </data>
+  <data name="SelectSkinFile" xml:space="preserve">
+    <value>選擇皮膚檔案</value>
+  </data>
+  <data name="RefreshMicrosoftSkin" xml:space="preserve">
+    <value>刷新皮膚(微軟)</value>
+  </data>
+  <data name="ModifySuccess" xml:space="preserve">
+    <value>修改成功</value>
+  </data>
+  <data name="ModifyFail" xml:space="preserve">
+    <value>修改失敗</value>
+  </data>
+  <data name="IfInstallBedRock" xml:space="preserve">
+    <value>如未安裝基岩版則無法啟動</value>
+  </data>
+  <data name="BedRockVersion" xml:space="preserve">
+    <value>基岩版</value>
+  </data>
+  <data name="CannotOpenBedRockSetting" xml:space="preserve">
+    <value>無法打開基岩版設定</value>
+  </data>
+  <data name="UpgradeToAdministratorPrivileges" xml:space="preserve">
+    <value>提升至管理員權限</value>
+  </data>
+  <data name="UpgradeToAdministratorPrivilegesFail" xml:space="preserve">
+    <value>提升至管理員權限失敗</value>
+  </data>
+  <data name="UpgradeToAdministratorPrivilegesTip" xml:space="preserve">
+    <value>執行操作需要提升至管理員權限，點選確定以管理員權限重新啟動程式</value>
+  </data>
+  <data name="ReleaseTheMouseAndLetYmclProcessThisFile" xml:space="preserve">
+    <value>釋放滑鼠讓YMCL處理此檔案</value>
+  </data>
+  <data name="UnableToAddModsForBedrockEdition" xml:space="preserve">
+    <value>無法為基岩版添加模組</value>
+  </data>
+  <data name="AddTheFollowingFilesAsModsToTheCurrentVersion" xml:space="preserve">
+    <value>將以下文件作為模組新增至目前版本</value>
+  </data>
+  <data name="UnsupportedFileType" xml:space="preserve">
+    <value>不支援的文件類型</value>
+  </data>
+  <data name="InstallTheFollowingFilesAsAnIntegrationPackageCurseforgeFormat" xml:space="preserve">
+    <value>將下列檔案作為整合包(CurseForge格式)安裝</value>
   </data>
 </root>

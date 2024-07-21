@@ -123,7 +123,9 @@ public partial class MainWindow : Window
                 ExtendClientAreaToDecorationsHint = true;
                 break;
         }
-        Show();
+        Const.Window.initialize.Close();
+        Const.Window.main.Show();
+
         if (setting.CustomHomePage == CustomHomePageWay.Local)
         {
             try
@@ -208,7 +210,7 @@ public partial class MainWindow : Window
             var result = await Method.Ui.ShowDialogAsync(MainLang.AddTheFollowingFilesAsModsToTheCurrentVersion + "?", text, b_cancel: MainLang.Cancel, b_primary: MainLang.Ok);
             if (result == ContentDialogResult.Primary)
             {
-                Method.IO.CreateFolder(Path.Combine(Path.GetDirectoryName(entry.JarPath)!, "mods"));
+                Method.IO.TryCreateFolder(Path.Combine(Path.GetDirectoryName(entry.JarPath)!, "mods"));
                 jarFile.ForEach(jar =>
                 {
                     File.Copy(jar.Path, Path.Combine(Path.GetDirectoryName(entry.JarPath)!, "mods", jar.FullName), true);
@@ -218,7 +220,28 @@ public partial class MainWindow : Window
         }
         if (zipFile.Count > 0)
         {
-
+            Nav.SelectedItem = Nav.MenuItems[0];
+            var text = string.Empty;
+            zipFile.ForEach(zip =>
+            {
+                text += $"{zip.FullName}\n";
+            });
+            var result = await Method.Ui.ShowDialogAsync(MainLang.InstallTheFollowingFilesAsAnIntegrationPackageCurseforgeFormat + "?", text, b_cancel: MainLang.Cancel, b_primary: MainLang.Ok);
+            if (result == ContentDialogResult.Primary)
+            {
+                foreach (var file in zipFile)
+                {
+                   var importResult = await Method.Mc.ImportModPack(file.Path);
+                    if (!importResult)
+                    {
+                        Method.Ui.Toast($"{MainLang.ImportFailed}: {file.FullName}", type: Avalonia.Controls.Notifications.NotificationType.Error);
+                    }
+                    else
+                    {
+                        Method.Ui.Toast($"{MainLang.ImportSuccess}: {file.FullName}", type: Avalonia.Controls.Notifications.NotificationType.Success);
+                    }
+                }
+            }
         }
         if (audioFile.Count > 0)
         {

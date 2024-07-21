@@ -3,17 +3,13 @@ using Avalonia.Animation;
 using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
-using Avalonia.Controls.Shapes;
-using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
 using Avalonia.Styling;
 using Avalonia.Threading;
-using CurseForge.APIClient.Models.Files;
 using FluentAvalonia.UI.Controls;
-using Flurl;
 using MinecraftLaunch.Classes.Interfaces;
 using MinecraftLaunch.Classes.Models.Auth;
 using MinecraftLaunch.Classes.Models.Game;
@@ -23,15 +19,13 @@ using MinecraftLaunch.Components.Launcher;
 using MinecraftLaunch.Components.Resolver;
 using MinecraftLaunch.Utilities;
 using Newtonsoft.Json;
-using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Management;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
@@ -40,9 +34,19 @@ using System.Threading.Tasks;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Controls.WindowTask;
 using YMCL.Main.Public.Langs;
+using MinecraftLaunch;
+
 using File = System.IO.File;
 using FileInfo = YMCL.Main.Public.Classes.FileInfo;
 using Path = System.IO.Path;
+using MinecraftLaunch.Components.Installer;
+using MinecraftLaunch.Classes.Models.Install;
+using System.Text.RegularExpressions;
+using MinecraftLaunch.Components.Analyzer;
+using CurseForge.APIClient;
+using System.Threading;
+using Flurl;
+using CurseForge.APIClient.Models.Files;
 
 namespace YMCL.Main.Public
 {
@@ -149,13 +153,14 @@ namespace YMCL.Main.Public
             {
                 Toast($"{msg}\n{ex.Message}", Const.Notification.main, NotificationType.Error);
             }
-            public static async Task<bool> UpgradeToAdministratorPrivilegesAsync()
+            public static async Task<bool> UpgradeToAdministratorPrivilegesAsync(Window p_window = null)
             {
                 WindowsIdentity identity = WindowsIdentity.GetCurrent();
                 WindowsPrincipal principal = new WindowsPrincipal(identity);
+                var windwo = p_window == null ? Const.Window.main : p_window;
                 if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
                 {
-                    var result = await ShowDialogAsync(MainLang.UpgradeToAdministratorPrivileges, MainLang.UpgradeToAdministratorPrivilegesTip, b_primary: MainLang.Ok, b_secondary: MainLang.Cancel);
+                    var result = await ShowDialogAsync(MainLang.UpgradeToAdministratorPrivileges, MainLang.UpgradeToAdministratorPrivilegesTip, b_primary: MainLang.Ok, b_secondary: MainLang.Cancel, p_window: windwo);
                     if (result == ContentDialogResult.Primary)
                     {
                         ProcessStartInfo startInfo = new ProcessStartInfo
@@ -406,7 +411,39 @@ namespace YMCL.Main.Public
                 var extension = Path.GetExtension(fullName);
                 return new FileInfo() { Name = name, Path = path, FullName = fullName, Extension = extension };
             }
-            public static void CreateFolder(string path)
+            public static void CopyDirectory(string sourceDir, string destinationDir)
+            {
+                // 确保目标目录不存在时创建它  
+                IO.TryCreateFolder(destinationDir);
+
+                // 获取源目录中的所有文件和子目录  
+                foreach (var dirPath in Directory.GetDirectories(sourceDir, "*", SearchOption.AllDirectories))
+                {
+                    // 获取目录名称（不包含路径）  
+                    var dirName = Path.GetFileName(dirPath);
+
+                    // 在目标目录中创建相同的目录结构  
+                    var destDirPath = Path.Combine(destinationDir, dirName);
+                    Directory.CreateDirectory(destDirPath);
+                }
+
+                // 复制文件  
+                foreach (var newPath in Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories))
+                {
+                    // 获取文件的名称（不包含路径）  
+                    var fileName = Path.GetFileName(newPath);
+
+                    // 构建目标路径  
+                    var destPath = newPath.Replace(sourceDir, destinationDir);
+
+                    // 确保目标文件的目录存在  
+                    IO.TryCreateFolder(Path.GetDirectoryName(destPath)!);
+
+                    // 复制文件  
+                    File.Copy(newPath, destPath, true);
+                }
+            }
+            public static void TryCreateFolder(string path)
             {
                 if (!Directory.Exists(path))
                 {
@@ -658,7 +695,322 @@ namespace YMCL.Main.Public
                 var versionSetting = JsonConvert.DeserializeObject<VersionSetting>(File.ReadAllText(filePath));
                 return versionSetting;
             }
-            public static async Task LaunchAsync(string p_id = "", string p_javaPath = "", string p_mcPath = "", double p_maxMem = -1, string p_enableIndependencyCore = "unset", string p_fullUrl = "")
+            public static async Task<bool> InstallClientAsync(string versionId, string customId = null, ForgeInstallEntry forgeInstallEntry = null, FabricBuildEntry fabricBuildEntry = null, QuiltBuildEntry quiltBuildEntry = null, OptiFineInstallEntity optiFineInstallEntity = null, WindowTask p_task = null, bool closeTask = true)
+            {
+                var shouldReturn = false;
+                Regex regex = new Regex(@"[\\/:*?""<>|]");
+                MatchCollection matches = regex.Matches(customId);
+                if (matches.Count > 0)
+                {
+                    var str = string.Empty;
+                    foreach (Match match in matches)
+                    {
+                        str += match.Value;
+                    }
+
+                    return false;
+                }
+
+                var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                var resolver = new GameResolver(setting.MinecraftFolder);
+                var vanlliaInstaller = new VanlliaInstaller(resolver, versionId, MirrorDownloadManager.Bmcl);
+                if (Directory.Exists(Path.Combine(setting.MinecraftFolder, "versions", customId)))
+                {
+                    Method.Ui.Toast($"{MainLang.FolderAlreadyExists}: {customId}", Const.Notification.main, NotificationType.Error);
+                    return false;
+                }
+
+                Const.Window.main.downloadPage.autoInstallPage.InstallPreviewRoot.IsVisible = false;
+                Const.Window.main.downloadPage.autoInstallPage.InstallableVersionListRoot.IsVisible = true;
+
+                var task = p_task == null ? new WindowTask($"{MainLang.Install}: Vanllia - {versionId}", true) : p_task;
+                task.UpdateTextProgress("-----> Vanllia", false);
+
+                //Vanllia
+                await Task.Run(async () =>
+                {
+                    try
+                    {
+                        vanlliaInstaller.ProgressChanged += (_, x) =>
+                        {
+                            Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                task.UpdateTextProgress(x.ProgressStatus);
+                                task.UpdateValueProgress(x.Progress * 100);
+                            });
+                        };
+
+                        var result = await vanlliaInstaller.InstallAsync();
+
+                        if (!result)
+                        {
+                            await Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                Method.Ui.Toast($"{MainLang.InstallFail}: Vanllia - {versionId}", Const.Notification.main, NotificationType.Error);
+                            });
+                            shouldReturn = true;
+                        }
+                        else
+                        {
+                            if (forgeInstallEntry == null && quiltBuildEntry == null && fabricBuildEntry == null)
+                            {
+                                await Dispatcher.UIThread.InvokeAsync(() =>
+                                {
+                                    Method.Ui.Toast($"{MainLang.InstallFinish}: Vanllia - {versionId}", Const.Notification.main, NotificationType.Success);
+                                });
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await Dispatcher.UIThread.InvokeAsync(() =>
+                        {
+                            Method.Ui.ShowShortException($"{MainLang.InstallFail}: Vanllia - {versionId}", ex);
+                        });
+                        shouldReturn = true;
+                    }
+                });
+                if (shouldReturn) { return false; }
+
+                //Forge
+                if (forgeInstallEntry != null)
+                {
+                    await Task.Run(async () =>
+                    {
+                        try
+                        {
+                            var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath));
+                            if (javas.Count <= 0)
+                            {
+                                Method.Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, NotificationType.Error);
+                                shouldReturn = true;
+                            }
+                            else
+                            {
+                                var game = resolver.GetGameEntity(versionId);
+                                var forgeInstaller = new ForgeInstaller(game, forgeInstallEntry, javas[0].JavaPath, customId, MirrorDownloadManager.Bmcl);
+                                await Dispatcher.UIThread.InvokeAsync(() =>
+                                {
+                                    task.UpdateTitle($"{MainLang.Install}: Forge - {versionId}");
+                                    task.UpdateTextProgress("-----> Forge", false);
+                                });
+                                forgeInstaller.ProgressChanged += (_, x) =>
+                                {
+                                    Dispatcher.UIThread.InvokeAsync(() =>
+                                    {
+                                        task.UpdateTextProgress(x.ProgressStatus);
+                                        task.UpdateValueProgress(x.Progress * 100);
+                                    });
+                                };
+
+                                var result = await forgeInstaller.InstallAsync();
+
+                                if (result)
+                                {
+                                    await Dispatcher.UIThread.InvokeAsync(() =>
+                                    {
+                                        Method.Ui.Toast($"{MainLang.InstallFinish}: Forge - {versionId}", Const.Notification.main, NotificationType.Success);
+                                    });
+                                }
+                                else
+                                {
+                                    await Dispatcher.UIThread.InvokeAsync(() =>
+                                    {
+                                        Method.Ui.Toast($"{MainLang.InstallFail}: Forge - {customId}", Const.Notification.main, NotificationType.Error);
+                                    });
+                                    shouldReturn = true;
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            await Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                Method.Ui.ShowShortException($"{MainLang.InstallFail}: Forge - {customId}", ex);
+                            });
+                            shouldReturn = true;
+                        }
+                    });
+                    if (shouldReturn) { return false; }
+                }
+
+                //OptiFine
+                if (optiFineInstallEntity != null)
+                {
+                    await Task.Run(async () =>
+                    {
+                        try
+                        {
+                            var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath));
+                            if (javas.Count <= 0)
+                            {
+                                Method.Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, NotificationType.Error);
+                                shouldReturn = true;
+                            }
+                            else
+                            {
+                                var game = resolver.GetGameEntity(versionId);
+                                var optifineInstaller = new OptifineInstaller(game, optiFineInstallEntity, javas[0].JavaPath, customId, MirrorDownloadManager.Bmcl);
+                                await Dispatcher.UIThread.InvokeAsync(() =>
+                                {
+                                    task.UpdateTitle($"{MainLang.Install}: OptiFine - {versionId}");
+                                    task.UpdateTextProgress("-----> OptiFine", false);
+                                });
+                                optifineInstaller.ProgressChanged += (_, x) =>
+                                {
+                                    Dispatcher.UIThread.InvokeAsync(() =>
+                                    {
+                                        task.UpdateTextProgress(x.ProgressStatus);
+                                        task.UpdateValueProgress(x.Progress * 100);
+                                    });
+                                };
+
+                                var result = await optifineInstaller.InstallAsync();
+
+                                if (result)
+                                {
+                                    await Dispatcher.UIThread.InvokeAsync(() =>
+                                    {
+                                        Method.Ui.Toast($"{MainLang.InstallFinish}: OptiFine - {versionId}", Const.Notification.main, NotificationType.Success);
+                                    });
+                                }
+                                else
+                                {
+                                    await Dispatcher.UIThread.InvokeAsync(() =>
+                                    {
+                                        Method.Ui.Toast($"{MainLang.InstallFail}: OptiFine - {customId}", Const.Notification.main, NotificationType.Error);
+                                    });
+                                    shouldReturn = true;
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            await Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                Method.Ui.ShowShortException($"{MainLang.InstallFail}: OptiFine - {customId}", ex);
+                            });
+                            shouldReturn = true;
+                        }
+                    });
+                    if (shouldReturn) { return false; }
+                }
+
+                //Fabric
+                if (fabricBuildEntry != null)
+                {
+                    await Task.Run(async () =>
+                    {
+                        try
+                        {
+                            var game = resolver.GetGameEntity(versionId);
+                            var fabricInstaller = new FabricInstaller(game, fabricBuildEntry, customId, MirrorDownloadManager.Bmcl);
+                            await Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                task.UpdateTitle($"{MainLang.Install}: Fabric - {versionId}");
+                                task.UpdateTextProgress("-----> Fabric", false);
+                            });
+                            fabricInstaller.ProgressChanged += (_, x) =>
+                            {
+                                Dispatcher.UIThread.InvokeAsync(() =>
+                                {
+                                    task.UpdateTextProgress(x.ProgressStatus);
+                                    task.UpdateValueProgress(x.Progress * 100);
+                                });
+                            };
+
+                            var result = await fabricInstaller.InstallAsync();
+
+                            if (result)
+                            {
+                                await Dispatcher.UIThread.InvokeAsync(() =>
+                                {
+                                    Method.Ui.Toast($"{MainLang.InstallFinish}: Fabric - {versionId}", Const.Notification.main, NotificationType.Success);
+                                });
+                            }
+                            else
+                            {
+                                await Dispatcher.UIThread.InvokeAsync(() =>
+                                {
+                                    Method.Ui.Toast($"{MainLang.InstallFail}: Fabric - {customId}", Const.Notification.main, NotificationType.Error);
+                                });
+                                shouldReturn = true;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            await Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                Method.Ui.ShowShortException($"{MainLang.InstallFail}: Fabric - {customId}", ex);
+                            });
+                            shouldReturn = true;
+                        }
+                    });
+                    if (shouldReturn) { return false; }
+                }
+
+                //Quilt
+                if (quiltBuildEntry != null)
+                {
+                    await Task.Run(async () =>
+                    {
+                        try
+                        {
+                            var game = resolver.GetGameEntity(versionId);
+                            var quiltInstaller = new QuiltInstaller(game, quiltBuildEntry, customId, MirrorDownloadManager.Bmcl);
+                            await Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                task.UpdateTitle($"{MainLang.Install}: Quilt - {versionId}");
+                                task.UpdateTextProgress("-----> Quilt", false);
+                            });
+                            quiltInstaller.ProgressChanged += (_, x) =>
+                            {
+                                Dispatcher.UIThread.InvokeAsync(() =>
+                                {
+                                    task.UpdateTextProgress(x.ProgressStatus);
+                                    task.UpdateValueProgress(x.Progress * 100);
+                                });
+                            };
+
+                            var result = await quiltInstaller.InstallAsync();
+
+                            if (result)
+                            {
+                                await Dispatcher.UIThread.InvokeAsync(() =>
+                                {
+                                    Method.Ui.Toast($"{MainLang.InstallFinish}: Quilt - {versionId}", Const.Notification.main, NotificationType.Success);
+                                });
+                            }
+                            else
+                            {
+                                await Dispatcher.UIThread.InvokeAsync(() =>
+                                {
+                                    Method.Ui.Toast($"{MainLang.InstallFail}: Quilt - {customId}", Const.Notification.main, NotificationType.Error);
+                                });
+                                shouldReturn = true;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            await Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                Method.Ui.ShowShortException($"{MainLang.InstallFail}: Quilt - {customId}", ex);
+                            });
+                            shouldReturn = true;
+                        }
+                    });
+                    if (shouldReturn) { return false; }
+                }
+
+                Const.Window.main.Activate();
+                if (closeTask)
+                {
+                    task.Finish();
+                    task.Hide();
+                }
+                return true;
+            }
+            public static async Task<bool> LaunchClientAsync(string p_id = "", string p_javaPath = "", string p_mcPath = "", double p_maxMem = -1, string p_enableIndependencyCore = "unset", string p_fullUrl = "")
             {
 
                 Const.Window.main.launchPage.LaunchBtn.IsEnabled = false;
@@ -683,7 +1035,7 @@ namespace YMCL.Main.Public
                     {
                         Method.Ui.Toast(MainLang.NoChooseGameOrCannotFindGame, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                         Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
-                        return;
+                        return false;
                     }
                 }
                 else
@@ -704,13 +1056,13 @@ namespace YMCL.Main.Public
                 {
                     Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                     Method.Ui.Toast(MainLang.CreateGameEntryFail, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
-                    return;
+                    return false;
                 }
                 var versionSetting = GetVersionSetting(gameEntry);
                 var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath));
-                if(javas.Count == 0)
+                if (javas.Count == 0)
                 {
-                    Method.Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error); Const.Window.main.launchPage.LaunchBtn.IsEnabled = true; return;
+                    Method.Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error); Const.Window.main.launchPage.LaunchBtn.IsEnabled = true; return false;
                 }
                 if (string.IsNullOrEmpty(p_javaPath))
                 {
@@ -727,7 +1079,7 @@ namespace YMCL.Main.Public
                         }
                         if (l_javaPath == "Auto")
                         {
-                            Method.Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error); Const.Window.main.launchPage.LaunchBtn.IsEnabled = true; return;
+                            Method.Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error); Const.Window.main.launchPage.LaunchBtn.IsEnabled = true; return false;
                         }
                     }
                     else
@@ -744,7 +1096,7 @@ namespace YMCL.Main.Public
                         if (l_javaPath == "Auto")
                         {
                             Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
-                            Method.Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error); return;
+                            Method.Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error); return false;
                         }
                     }
                 }
@@ -835,7 +1187,7 @@ namespace YMCL.Main.Public
                     Method.Ui.Toast(MainLang.AccountError, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                     Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                     task.Hide();
-                    return;
+                    return false;
                 }
                 switch (accountData.AccountType)
                 {
@@ -850,7 +1202,7 @@ namespace YMCL.Main.Public
                             Method.Ui.Toast(MainLang.AccountError, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                             Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                             task.Hide();
-                            return;
+                            return false;
                         }
                         break;
                     case AccountType.Microsoft:
@@ -865,7 +1217,7 @@ namespace YMCL.Main.Public
                             Method.Ui.ShowShortException(MainLang.LoginFail, ex);
                             Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                             task.Hide();
-                            return;
+                            return false;
                         }
                         break;
                     case AccountType.ThirdParty:
@@ -877,7 +1229,7 @@ namespace YMCL.Main.Public
                     Method.Ui.Toast(MainLang.AccountError, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                     Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                     task.Hide();
-                    return;
+                    return false;
                 }
 
                 if (string.IsNullOrEmpty(l_id) ||
@@ -888,7 +1240,7 @@ namespace YMCL.Main.Public
                     Method.Ui.Toast(MainLang.BuildLaunchConfigFail, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                     Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                     task.Hide();
-                    return;
+                    return false;
                 }
 
                 var config = new LaunchConfig
@@ -907,7 +1259,7 @@ namespace YMCL.Main.Public
                     Method.Ui.Toast(MainLang.BuildLaunchConfigFail, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                     Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                     task.Hide();
-                    return;
+                    return false;
                 }
 
                 Method.Ui.Toast($"java:{l_javaPath},mem:{l_maxMem},core:{l_enableIndependencyCore},mcPath:{l_mcPath}", Const.Notification.main);
@@ -922,31 +1274,48 @@ namespace YMCL.Main.Public
                         {
                             var watcher = await launcher.LaunchAsync(l_id);
 
-                            watcher.Exited += (_, args) =>
+                            watcher.Exited += async (_, args) =>
                             {
-                                Dispatcher.UIThread.InvokeAsync(() =>
+                                await Dispatcher.UIThread.InvokeAsync(async () =>
                                 {
-                                    Method.Ui.Toast($"{MainLang.GameExited}: {args.ExitCode}", Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Information);
+                                    Method.Ui.Toast($"{MainLang.GameExited}: {args.ExitCode}", Const.Notification.main, NotificationType.Information);
 
                                     if (args.ExitCode == 0)
                                     {
+                                        await Task.Delay(2000);
                                         task.Hide();
                                         Const.Window.main.Focus();
                                     }
                                     else
                                     {
-                                        //var crashAnalyzer = new GameCrashAnalyzer(version, aloneCore);
-                                        //var reports = crashAnalyzer.AnalysisLogs();
-                                        //var msg = string.Empty;
-                                        //foreach (var report in reports)
-                                        //{
-                                        //    msg += $"\n{report.CrashCauses}";
-                                        //}
-                                        //MessageBoxX.Show($"{MainLang.MinecraftCrash}\n{msg}", "Yu Minecraft Launcher");
+                                        var crashAnalyzer = new GameCrashAnalyzer(gameEntry, l_enableIndependencyCore);
+                                        var reports = crashAnalyzer.AnalysisLogs();
+                                        var msg = string.Empty;
+                                        try
+                                        {
+                                            if (reports == null || reports.Count() == 0)
+                                            {
+                                                msg = MainLang.NoCrashInfo;
+                                            }
+                                            else
+                                            {
+                                                foreach (var report in reports)
+                                                {
+                                                    msg += $"\n{report.CrashCauses}";
+                                                }
+                                            }
+                                        }
+                                        catch
+                                        {
+                                            msg = MainLang.NoCrashInfo;
+                                        }
 
                                         task.UpdateTextProgress(string.Empty, false);
                                         task.UpdateTextProgress($"YMCL -----> {MainLang.MineratCrashed}");
                                         task.isFinish = true;
+
+                                        var dialogResult = await Method.Ui.ShowDialogAsync(MainLang.MineratCrashed, msg, b_primary: MainLang.Ok);
+                                        task.Hide();
                                     }
                                 });
                             };
@@ -975,10 +1344,13 @@ namespace YMCL.Main.Public
                             _ = Task.Run(async () =>
                             {
                                 watcher.Process.WaitForInputIdle();
-                                await Dispatcher.UIThread.InvokeAsync(() =>
+                                if (!setting.ShowGameOutput)
                                 {
-                                    task.Hide();
-                                });
+                                    await Dispatcher.UIThread.InvokeAsync(() =>
+                                    {
+                                        task.Hide();
+                                    });
+                                }
                             });
                         });
                     }
@@ -993,6 +1365,253 @@ namespace YMCL.Main.Public
                     }
                 });
                 Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+                return true;
+            }
+            public static async Task<bool> ImportModPack(string path)
+            {
+                var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+                var customId = string.Empty;
+                while (true)
+                {
+                    var textBox = new TextBox() { TextWrapping = TextWrapping.Wrap, FontFamily = (FontFamily)Application.Current.Resources["Font"], Text = Path.GetFileNameWithoutExtension(path) };
+                    var dialog = new ContentDialog()
+                    {
+                        PrimaryButtonText = MainLang.Ok,
+                        Content = textBox,
+                        DefaultButton = ContentDialogButton.Primary,
+                        CloseButtonText = MainLang.Cancel,
+                        FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                        Title = $"{MainLang.Install} - {Path.GetFileName(path)}"
+                    };
+                    var dialogResult = await dialog.ShowAsync(Const.Window.main);
+                    if (dialogResult == ContentDialogResult.Primary)
+                    {
+                        if (Directory.Exists(Path.Combine(setting.MinecraftFolder, "versions", textBox.Text)))
+                        {
+                            Method.Ui.Toast($"{MainLang.FolderAlreadyExists}: {textBox.Text}", Const.Notification.main, NotificationType.Error);
+                        }
+                        else
+                        {
+                            customId = textBox.Text;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+                var task = new WindowTask($"{MainLang.Unzip} - {Path.GetFileName(path)}");
+
+                IO.TryCreateFolder(Path.Combine(setting.MinecraftFolder, "YMCLTemp"));
+                var unzipDirectory = Path.Combine(setting.MinecraftFolder, "YMCLTemp", Path.GetFileNameWithoutExtension(path));//确定临时整合包的路径
+                task.UpdateTextProgress(MainLang.UnzipingModPack);
+                task.UpdateValueProgress(50);
+                await Task.Run(() =>
+                {
+                    ZipFile.ExtractToDirectory(path/*Zip文件路径*/, unzipDirectory/*要解压到的目录*/, true);
+                });
+                task.UpdateValueProgress(100);
+                task.UpdateTextProgress(MainLang.FinsihUnzipModPack);
+                task.UpdateTextProgress(MainLang.GetModPackInfo);
+                var json = File.ReadAllText(Path.Combine(unzipDirectory, "manifest.json"));//read json
+                var info = JsonConvert.DeserializeObject<ModPackEntry.Root>(json);
+                task.UpdateTextProgress($"{MainLang.ModPackInfo}:\n    Name : \t\t\t{info.name}\n    Author : \t\t\t{info.author}\n    Version : \t\t\t{info.version}\n    McVersion : \t\t\t{info.minecraft.version}\n    Loader : \t\t\t{info.minecraft.modLoaders[0].id}");
+                task.UpdateTitle($"{MainLang.Install} - {Path.GetFileName(path)}");
+                var loaders = info.minecraft.modLoaders[0].id.Split('-');
+                bool result = false;
+                if (loaders[0] == "forge")// 0 加载器类型 1 版本
+                {
+                    var forges = (await ForgeInstaller.EnumerableFromVersionAsync(info.minecraft.version)).ToList();
+                    ForgeInstallEntry enrty = null;
+                    foreach (var forge in forges)
+                    {
+                        if (forge.ForgeVersion == loaders[1])
+                        {
+                            enrty = forge;
+                            break;
+                        }
+                    }
+                    if (enrty == null)
+                    {
+                        return false;
+                    }
+                    result = await InstallClientAsync(info.minecraft.version, customId: customId, p_task: task, forgeInstallEntry: enrty, closeTask: false);
+                }
+                else if (loaders[0] == "fabric")
+                {
+                    var fabrics = (await FabricInstaller.EnumerableFromVersionAsync(info.minecraft.version)).ToList();
+                    FabricBuildEntry enrty = null;
+                    foreach (var fabric in fabrics)
+                    {
+                        if (fabric.BuildVersion == loaders[1])
+                        {
+                            enrty = fabric;
+                            break;
+                        }
+                    }
+                    if (enrty == null)
+                    {
+                        return false;
+                    }
+                    result = await InstallClientAsync(info.minecraft.version, customId: customId, p_task: task, fabricBuildEntry: enrty, closeTask: false);
+                }
+                else
+                {
+                    return false;
+                }
+                if (!result) { return false; }
+                task.Activate();
+
+                SemaphoreSlim semaphore = new SemaphoreSlim(20); // 允许同时运行的下载任务数  
+                int completedDownloads = 0; // 已完成下载的文件数量  
+                int successDownloads = 0; // 成功下载的文件数量
+                int totalDownloads = info.files.Count; // 总下载文件数量  
+                ApiClient cfApiClient = new(Const.CurseForgeApiKey); // 创建一个CurseForge API 客户端
+                var tasks = new List<Task>(); // 创建一个任务列表来存储下载任务
+                var errors = new List<string>(); // 创建一个列表来存储下载错误
+
+                if (info.files.Count > 0)
+                {
+                    task.UpdateTitle(MainLang.DownloadModPackMod);
+                    task.UpdateTextProgress(MainLang.DownloadModPackMod);
+                    info.files.ForEach(file =>
+                    {
+                        tasks.Add(GetAndDownloadMod(file.projectID, file.fileID));
+                    });
+                    await Task.WhenAll(tasks);
+
+                    task.UpdateTextProgress($"", false);
+                    task.UpdateTextProgress($"{MainLang.TotalNumberOfMod}: {totalDownloads}");
+                    task.UpdateTextProgress($"{MainLang.DownloadSuccess}: {successDownloads}");
+                    var text = string.Empty;
+                    errors.ForEach(error => text += error + "\n");
+                    task.UpdateTextProgress($"{MainLang.DownloadFail} ({totalDownloads - successDownloads}): \n{text}");
+
+                    var index = 1;
+                    var replaceUrl = true;
+                    while (true)
+                    {
+                        if (index > 7)
+                        {
+                            break;
+                        }
+                        task.UpdateTextProgress($"", false);
+                        task.UpdateTextProgress(MainLang.DownloadFailedFileAgain + $": {index}");
+                        var redownload = errors;
+                        totalDownloads = redownload.Count;
+                        tasks.Clear();
+                        successDownloads = 0;
+                        redownload.ForEach(file =>
+                        {
+                            var dl = file;
+                            if (replaceUrl)
+                            {
+                                dl = dl.Replace("mediafilez.forgecdn.net", "edge.forgecdn.net");
+                            }
+                            tasks.Add(GetAndDownloadMod(url: dl));
+                        });
+                        if (replaceUrl)
+                        {
+                            replaceUrl = false;
+                        }
+                        else
+                        {
+                            replaceUrl = true;
+                        }
+                        errors.Clear();
+                        await Task.WhenAll(tasks);
+                        task.UpdateTextProgress($"{MainLang.TotalNumberOfMod}: {redownload.Count}");
+                        task.UpdateTextProgress($"{MainLang.DownloadSuccess}: {successDownloads}");
+                        text = string.Empty;
+                        errors.ForEach(error => text += error + "\n");
+                        task.UpdateTextProgress($"{MainLang.DownloadFail} ({redownload.Count - successDownloads}): \n{text}");
+                        if (errors.Count == 0)
+                        {
+                            break;
+                        }
+                        index++;
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(info.overrides))
+                {
+                    task.UpdateTitle(MainLang.OverrideModPack);
+                    IO.CopyDirectory(Path.Combine(unzipDirectory, info.overrides), Path.Combine(setting.MinecraftFolder, "versions", customId));
+                }
+
+                async Task GetAndDownloadMod(int projectId = -1, int fileId = -1, string url = null)
+                {
+                    await semaphore.WaitAsync(); // 等待进入信号量 
+                    string modFileDownloadUrl = string.Empty;
+                    string fileName = string.Empty;
+                    try
+                    {
+                        if (url == null)
+                        {
+                            modFileDownloadUrl = (await cfApiClient.GetModFileDownloadUrlAsync(projectId, fileId)).Data.Replace("edge.forgecdn.net", "mediafilez.forgecdn.net");
+                        }
+                        else
+                        {
+                            modFileDownloadUrl = url;
+                        }
+
+                        var saveDirectory = Path.Combine(setting.MinecraftFolder, "versions", customId, "mods");
+                        Method.IO.TryCreateFolder(saveDirectory);
+                        if (string.IsNullOrEmpty(modFileDownloadUrl))
+                        {
+                            throw new Exception("Failed to get download URL");
+                        }
+                        else
+                        {
+                            Uri uri = new Uri(modFileDownloadUrl);
+                            fileName = Path.GetFileName(uri.AbsolutePath);
+                            var savePath = Path.Combine(saveDirectory, fileName);
+
+                            // 使用HttpClient下载文件  
+                            using (HttpClient client = new HttpClient())
+                            {
+                                // 发送GET请求获取文件流  
+                                HttpResponseMessage response = await client.GetAsync(modFileDownloadUrl, HttpCompletionOption.ResponseHeadersRead);
+                                response.EnsureSuccessStatusCode(); // 确保HTTP成功状态值  
+
+                                // 读取响应内容并保存到文件  
+                                using (Stream contentStream = await response.Content.ReadAsStreamAsync(), fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
+                                {
+                                    // 写入文件  
+                                    await contentStream.CopyToAsync(fileStream);
+                                }
+                                successDownloads++;
+                            }
+                            // 更新已完成下载的文件数量  
+                            Interlocked.Increment(ref completedDownloads);
+
+                            // 打印进度
+                            Dispatcher.UIThread.Invoke(() =>
+                            {
+                                task.UpdateValueProgress((double)(completedDownloads / (double)totalDownloads * 100));
+                                task.UpdateTextProgress($"{MainLang.DownloadFinish}: {fileName}");
+                            });
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Interlocked.Increment(ref completedDownloads);
+                        Dispatcher.UIThread.Invoke(() =>
+                        {
+                            task.UpdateValueProgress((double)(completedDownloads / (double)totalDownloads * 100));
+                            task.UpdateTextProgress($"{MainLang.DownloadFail}: {fileName}");
+                        });
+                        errors.Add(modFileDownloadUrl);
+                    }
+                    finally
+                    {
+                        semaphore.Release(); // 释放信号量  
+                    }
+                }
+                task.Destory();
+                return true;
             }
         }
     }

@@ -439,11 +439,38 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 重新下载失败文件 的本地化字符串。
+        /// </summary>
+        public static string DownloadFailedFileAgain {
+            get {
+                return ResourceManager.GetString("DownloadFailedFileAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 下载完成 的本地化字符串。
         /// </summary>
         public static string DownloadFinish {
             get {
                 return ResourceManager.GetString("DownloadFinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 下载整合包模组 的本地化字符串。
+        /// </summary>
+        public static string DownloadModPackMod {
+            get {
+                return ResourceManager.GetString("DownloadModPackMod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 下载成功 的本地化字符串。
+        /// </summary>
+        public static string DownloadSuccess {
+            get {
+                return ResourceManager.GetString("DownloadSuccess", resourceCulture);
             }
         }
         
@@ -516,6 +543,15 @@ namespace YMCL.Main.Public.Langs {
         public static string FileSelectWindow {
             get {
                 return ResourceManager.GetString("FileSelectWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 解压整合包完成 的本地化字符串。
+        /// </summary>
+        public static string FinsihUnzipModPack {
+            get {
+                return ResourceManager.GetString("FinsihUnzipModPack", resourceCulture);
             }
         }
         
@@ -601,6 +637,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 获取整合包信息 的本地化字符串。
+        /// </summary>
+        public static string GetModPackInfo {
+            get {
+                return ResourceManager.GetString("GetModPackInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 获取更新统一资源定位器 的本地化字符串。
         /// </summary>
         public static string GetUpdateUrl {
@@ -624,6 +669,24 @@ namespace YMCL.Main.Public.Langs {
         public static string IfInstallBedRock {
             get {
                 return ResourceManager.GetString("IfInstallBedRock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 导入失败 的本地化字符串。
+        /// </summary>
+        public static string ImportFailed {
+            get {
+                return ResourceManager.GetString("ImportFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 导入成功 的本地化字符串。
+        /// </summary>
+        public static string ImportSuccess {
+            get {
+                return ResourceManager.GetString("ImportSuccess", resourceCulture);
             }
         }
         
@@ -714,6 +777,15 @@ namespace YMCL.Main.Public.Langs {
         public static string InstallPreview {
             get {
                 return ResourceManager.GetString("InstallPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 将以下文件作为整合包(CurseForge格式)安装 的本地化字符串。
+        /// </summary>
+        public static string InstallTheFollowingFilesAsAnIntegrationPackageCurseforgeFormat {
+            get {
+                return ResourceManager.GetString("InstallTheFollowingFilesAsAnIntegrationPackageCurseforgeFormat", resourceCulture);
             }
         }
         
@@ -973,6 +1045,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 整合包信息 的本地化字符串。
+        /// </summary>
+        public static string ModPackInfo {
+            get {
+                return ResourceManager.GetString("ModPackInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 模组文件夹 的本地化字符串。
         /// </summary>
         public static string ModsFolder {
@@ -1108,6 +1189,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 无崩溃信息 的本地化字符串。
+        /// </summary>
+        public static string NoCrashInfo {
+            get {
+                return ResourceManager.GetString("NoCrashInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 关闭 的本地化字符串。
         /// </summary>
         public static string Off {
@@ -1176,6 +1266,15 @@ namespace YMCL.Main.Public.Langs {
         public static string OpenSourceProjectUsageTable {
             get {
                 return ResourceManager.GetString("OpenSourceProjectUsageTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 覆盖整合包 的本地化字符串。
+        /// </summary>
+        public static string OverrideModPack {
+            get {
+                return ResourceManager.GetString("OverrideModPack", resourceCulture);
             }
         }
         
@@ -1567,6 +1666,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 模组总数量 的本地化字符串。
+        /// </summary>
+        public static string TotalNumberOfMod {
+            get {
+                return ResourceManager.GetString("TotalNumberOfMod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 百宝箱 的本地化字符串。
         /// </summary>
         public static string TreasureBox {
@@ -1599,6 +1707,24 @@ namespace YMCL.Main.Public.Langs {
         public static string UnsupportedFileType {
             get {
                 return ResourceManager.GetString("UnsupportedFileType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 解压 的本地化字符串。
+        /// </summary>
+        public static string Unzip {
+            get {
+                return ResourceManager.GetString("Unzip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正在解压整合包 的本地化字符串。
+        /// </summary>
+        public static string UnzipingModPack {
+            get {
+                return ResourceManager.GetString("UnzipingModPack", resourceCulture);
             }
         }
         

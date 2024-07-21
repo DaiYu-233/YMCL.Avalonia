@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using YMCL.Main.Public.Langs;
+using YMCL.Main.Views.Initialize;
 using YMCL.Main.Views.Main;
 
 namespace YMCL.Main.Public
@@ -20,6 +21,7 @@ namespace YMCL.Main.Public
     {
         public class Window
         {
+            public static InitializeWindow initialize = new InitializeWindow();
             public static MainWindow main = new MainWindow();
         }
         public class Notification

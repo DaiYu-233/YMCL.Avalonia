@@ -118,6 +118,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             };
             VersionListBtn.Click += (s, e) =>
             {
+                LoadVersions();
                 _shouldCloseVersuionList = true;
                 if (_firstOpenVersionList)
                 {
@@ -211,7 +212,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                     }
                     else
                     {
-                        _ = Method.Mc.LaunchAsync();
+                        _ = Method.Mc.LaunchClientAsync();
                     }
                 }
             };
@@ -379,7 +380,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
             var tag = ((Button)sender).Tag.ToString();
             var entry = VersionListView.SelectedItem as GameEntry;
             var root = Path.GetDirectoryName(entry.JarPath);
-            Method.IO.CreateFolder(Path.Combine(root!, tag!));
+            Method.IO.TryCreateFolder(Path.Combine(root!, tag!));
             var launcher = TopLevel.GetTopLevel(this).Launcher;
             launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(Path.Combine(root!, tag!)));
         }

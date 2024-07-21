@@ -680,4 +680,46 @@ sudo apt install vlc</value>
   <data name="UnsupportedFileType" xml:space="preserve">
     <value>不支持的文件类型</value>
   </data>
+  <data name="InstallTheFollowingFilesAsAnIntegrationPackageCurseforgeFormat" xml:space="preserve">
+    <value>将以下文件作为整合包(CurseForge格式)安装</value>
+  </data>
+  <data name="Unzip" xml:space="preserve">
+    <value>解压</value>
+  </data>
+  <data name="UnzipingModPack" xml:space="preserve">
+    <value>正在解压整合包</value>
+  </data>
+  <data name="FinsihUnzipModPack" xml:space="preserve">
+    <value>解压整合包完成</value>
+  </data>
+  <data name="GetModPackInfo" xml:space="preserve">
+    <value>获取整合包信息</value>
+  </data>
+  <data name="ModPackInfo" xml:space="preserve">
+    <value>整合包信息</value>
+  </data>
+  <data name="ImportFailed" xml:space="preserve">
+    <value>导入失败</value>
+  </data>
+  <data name="ImportSuccess" xml:space="preserve">
+    <value>导入成功</value>
+  </data>
+  <data name="NoCrashInfo" xml:space="preserve">
+    <value>无崩溃信息</value>
+  </data>
+  <data name="DownloadModPackMod" xml:space="preserve">
+    <value>下载整合包模组</value>
+  </data>
+  <data name="TotalNumberOfMod" xml:space="preserve">
+    <value>模组总数量</value>
+  </data>
+  <data name="DownloadSuccess" xml:space="preserve">
+    <value>下载成功</value>
+  </data>
+  <data name="OverrideModPack" xml:space="preserve">
+    <value>覆盖整合包</value>
+  </data>
+  <data name="DownloadFailedFileAgain" xml:space="preserve">
+    <value>重新下载失败文件</value>
+  </data>
 </root>

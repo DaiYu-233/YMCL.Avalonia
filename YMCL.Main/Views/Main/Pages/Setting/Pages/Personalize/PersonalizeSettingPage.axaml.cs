@@ -181,7 +181,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
         {
             var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
             OpenFileWayComboBox.SelectedIndex = (int)setting.OpenFileWay;
-            var langs = new List<string>() { "zh-CN", "zh-Hant", "en-US", "ja-JP", "ru-RU" };
+            var langs = new List<string>() { $"zh-CN {MainLang.zh_CN}", $"zh-Hant {MainLang.zh_Hant}", $"en-US {MainLang.en_US}", $"ja-JP {MainLang.ja_JP}", $"ru-RU {MainLang.ru_RU}" };
             langs.ForEach(lang =>
             {
                 LanguageComboBox.Items.Add(lang);
@@ -196,8 +196,8 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize
             });
             if (setting.Language == null || setting.Language == string.Empty)
             {
-                LanguageComboBox.SelectedItem = "zh-CN";
-                setting.Language = "zh-CN";
+                LanguageComboBox.SelectedItem = $"zh-CN";
+                setting.Language = $"zh-CN";
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
             ThemeComboBox.SelectedIndex = (int)setting.Theme;

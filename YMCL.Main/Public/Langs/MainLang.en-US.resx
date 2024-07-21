@@ -398,7 +398,7 @@ Jump to the browser to complete verification</value>
     <value>Minecrat crashed</value>
   </data>
   <data name="TheVersionNameWillBeRenamedTo" xml:space="preserve">
-    <value>Version name will be renamed to:</value>
+    <value>Version name will be renamed to: </value>
   </data>
   <data name="IncludeSpecialWord" xml:space="preserve">
     <value>Contains Special Characters</value>
@@ -476,7 +476,7 @@ Jump to the browser to complete verification</value>
     <value>Deselect all</value>
   </data>
   <data name="SelectedItem" xml:space="preserve">
-    <value>Selected items:</value>
+    <value>Selected items: </value>
   </data>
   <data name="OpenSourceProjectUsageTable" xml:space="preserve">
     <value>Open Source Project Usage Sheet</value>
@@ -558,5 +558,149 @@ Jump to the browser to complete verification</value>
   </data>
   <data name="ChooseLanguage" xml:space="preserve">
     <value>选择语言/Choose Language</value>
+  </data>
+  <data name="GPL3Text" xml:space="preserve">
+    <value>The YMCL is open source under the Apache License and may be modified and distributed, but the software must contain the copyright and license notices for the original code, as well as a notification file containing the license information.</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="LoadMore" xml:space="preserve">
+    <value>Load More</value>
+  </data>
+  <data name="ErrorCallingApi" xml:space="preserve">
+    <value>Error calling Api</value>
+  </data>
+  <data name="SearchNoResult" xml:space="preserve">
+    <value>No result found</value>
+  </data>
+  <data name="AddLocalSong" xml:space="preserve">
+    <value>Add Audio File</value>
+  </data>
+  <data name="SelectMusicFile" xml:space="preserve">
+    <value>Choose an Audio File</value>
+  </data>
+  <data name="ThemeColor" xml:space="preserve">
+    <value>Theme color</value>
+  </data>
+  <data name="InitAudioLibraryFail" xml:space="preserve">
+    <value>Failed to initialize audio library</value>
+  </data>
+  <data name="InstallVlcTip" xml:space="preserve">
+    <value>Attempt to execute: 
+
+sudo apt install libvlc-dev
+sudo apt install vlc</value>
+  </data>
+  <data name="ThisFeatureIsCurrentlyUnderDevelopment" xml:space="preserve">
+    <value>This feature is in development</value>
+  </data>
+  <data name="TreasureBox" xml:space="preserve">
+    <value>Treasure chest</value>
+  </data>
+  <data name="ActivateWinOffice" xml:space="preserve">
+    <value>Activate Windows/Office</value>
+  </data>
+  <data name="Run" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="ThisFeatureOnlySupportsWindowsPlatform" xml:space="preserve">
+    <value>This feature is only available on Windows</value>
+  </data>
+  <data name="RunCommandFail" xml:space="preserve">
+    <value>Failed to run command</value>
+  </data>
+  <data name="RunActivate" xml:space="preserve">
+    <value>Run activation</value>
+  </data>
+  <data name="CancelActivateWin" xml:space="preserve">
+    <value>Deactivate Windows</value>
+  </data>
+  <data name="CancelActivateWinTip" xml:space="preserve">
+    <value>This action will remove Windows activation status, making features such as Windows personalization unavailable. Do you want to continue?</value>
+  </data>
+  <data name="ThisFeatureOnlySupportsWindows10AndAbove" xml:space="preserve">
+    <value>This feature only supports Windows 10 and above, and systems below this version are not guaranteed to be activated successfully</value>
+  </data>
+  <data name="PlayList" xml:space="preserve">
+    <value>Playlist</value>
+  </data>
+  <data name="ModName" xml:space="preserve">
+    <value>Module name</value>
+  </data>
+  <data name="GameVersion" xml:space="preserve">
+    <value>Game version</value>
+  </data>
+  <data name="AnyModLoader" xml:space="preserve">
+    <value>Any loader</value>
+  </data>
+  <data name="AnySource" xml:space="preserve">
+    <value>All sources</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="SaveFile" xml:space="preserve">
+    <value>Save the file</value>
+  </data>
+  <data name="DownloadFail" xml:space="preserve">
+    <value>Download failed</value>
+  </data>
+  <data name="MatchingVersion" xml:space="preserve">
+    <value>Matching version</value>
+  </data>
+  <data name="ModifyMicrosoftSkin" xml:space="preserve">
+    <value>Modify Skin (Microsoft)</value>
+  </data>
+  <data name="SkinModel" xml:space="preserve">
+    <value>Skin model</value>
+  </data>
+  <data name="InputSkinFilePath" xml:space="preserve">
+    <value>Enter skin file path</value>
+  </data>
+  <data name="SelectSkinFile" xml:space="preserve">
+    <value>Select skin file</value>
+  </data>
+  <data name="RefreshMicrosoftSkin" xml:space="preserve">
+    <value>Refresh Skin (Microsoft)</value>
+  </data>
+  <data name="ModifySuccess" xml:space="preserve">
+    <value>modified</value>
+  </data>
+  <data name="ModifyFail" xml:space="preserve">
+    <value>Modify failed</value>
+  </data>
+  <data name="IfInstallBedRock" xml:space="preserve">
+    <value>If the bedrock version is not installed, it will not start</value>
+  </data>
+  <data name="BedRockVersion" xml:space="preserve">
+    <value>Bedrock Edition</value>
+  </data>
+  <data name="CannotOpenBedRockSetting" xml:space="preserve">
+    <value>Could not open bedrock settings</value>
+  </data>
+  <data name="UpgradeToAdministratorPrivileges" xml:space="preserve">
+    <value>Upgrade to Admin Permissions</value>
+  </data>
+  <data name="UpgradeToAdministratorPrivilegesFail" xml:space="preserve">
+    <value>Failed to upgrade to admin permissions</value>
+  </data>
+  <data name="UpgradeToAdministratorPrivilegesTip" xml:space="preserve">
+    <value>To perform the operation, you need to upgrade to administrator privileges. Click OK to restart the program with administrator privileges</value>
+  </data>
+  <data name="ReleaseTheMouseAndLetYmclProcessThisFile" xml:space="preserve">
+    <value>Release the mouse to let YMCL process this file</value>
+  </data>
+  <data name="UnableToAddModsForBedrockEdition" xml:space="preserve">
+    <value>Modules cannot be added to the Bedrock Edition</value>
+  </data>
+  <data name="AddTheFollowingFilesAsModsToTheCurrentVersion" xml:space="preserve">
+    <value>Add the following files as a module to the current version</value>
+  </data>
+  <data name="UnsupportedFileType" xml:space="preserve">
+    <value>File type not supported</value>
+  </data>
+  <data name="InstallTheFollowingFilesAsAnIntegrationPackageCurseforgeFormat" xml:space="preserve">
+    <value>Install the following files as an integration package (CurseForge format)</value>
   </data>
 </root>

@@ -7,6 +7,8 @@ using YMCL.Main.Views.Main.Pages.Launch;
 using System.Collections.Concurrent;
 using System.Timers;
 using Avalonia.Threading;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace YMCL.Main.Public.Controls.WindowTask
 {
@@ -49,14 +51,15 @@ namespace YMCL.Main.Public.Controls.WindowTask
             };
             Loaded += (_, _) =>
             {
-                if (Const.Window.main.titleBarStyle == WindowTitleBarStyle.System)
+                var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                if (setting.WindowTitleBarStyle == WindowTitleBarStyle.System)
                 {
                     TitleBar.IsVisible = false;
                     TitleText.IsVisible = false;
                     ExtendClientAreaChromeHints = (Avalonia.Platform.ExtendClientAreaChromeHints)2;
                     ExtendClientAreaToDecorationsHint = false;
                     Root.CornerRadius = new CornerRadius(0, 0, 8, 8);
-                    ValueProgressRoot.Margin = new Thickness(10, 10, 10, 5);
+                    RootGrid.Margin = new Thickness(0, 10, 0, 0);
                 }
                 else
                 {

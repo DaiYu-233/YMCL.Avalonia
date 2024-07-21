@@ -356,10 +356,14 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
                 else
                 {
                     Method.Ui.Toast(MainLang.CurrentlyTheLatestVersion, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Information);
+                    CheckUpdateBtn.IsEnabled = true;
+                    CheckUpdateBtn.Content = MainLang.CheckUpdate;
                 }
             }
             catch (Exception ex)
             {
+                CheckUpdateBtn.IsEnabled = true;
+                CheckUpdateBtn.Content = MainLang.CheckUpdate;
                 Method.Ui.ShowLongException(MainLang.CheckUpdateFail, ex);
             }
         }

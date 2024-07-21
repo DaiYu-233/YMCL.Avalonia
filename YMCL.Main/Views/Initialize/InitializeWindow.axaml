@@ -9,7 +9,7 @@
     Title="Yu Minecraft Launcher"
     Width="680"
     Height="370"
-    MinWidth="680" SystemDecorations="None"
+    MinWidth="680"
     MinHeight="370"
     d:DesignHeight="0"
     d:DesignWidth="0"
@@ -17,6 +17,7 @@
     FontWeight="{DynamicResource FontWeight}"
     IsHitTestVisible="True"
     IsVisible="True"
+    SystemDecorations="None"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.Styles>
@@ -49,11 +50,12 @@
                                 Text="{x:Static properties:MainLang.ChooseLanguage}" />
                             <Button
                                 Name="IdentifyLanguageBtn"
+                                Width="100"
                                 Margin="15"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Bottom"
                                 Classes="accent"
-                                Content="✓ →>> Next 下一步"
+                                Content="→"
                                 DockPanel.Dock="Bottom" />
                             <WrapPanel
                                 Name="Langs"

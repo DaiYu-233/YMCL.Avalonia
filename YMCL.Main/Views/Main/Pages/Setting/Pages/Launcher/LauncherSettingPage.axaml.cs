@@ -110,23 +110,23 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
                             {
                                 string name = (string)asset["name"];
                                 string browser_download_url = (string)asset["browser_download_url"];
-                                if (name == "YMCL.Main.linux.arm" && architecture == "linux-arm")
+                                if (name == "YMCL.Main.linux.arm.bin" && architecture == "linux-arm")
                                 {
                                     url = browser_download_url;
                                 }
-                                else if (name == "YMCL.Main.linux.arm64" && architecture == "linux-arm64")
+                                else if (name == "YMCL.Main.linux.arm64.bin" && architecture == "linux-arm64")
                                 {
                                     url = browser_download_url;
                                 }
-                                else if (name == "YMCL.Main.linux.x64" && architecture == "linux-x64")
+                                else if (name == "YMCL.Main.linux.x64.bin" && architecture == "linux-x64")
                                 {
                                     url = browser_download_url;
                                 }
-                                else if (name == "YMCL.Main.osx.x64" && architecture == "osx-x64")
+                                else if (name == "YMCL.Main.osx.x64.bin" && architecture == "osx-x64")
                                 {
                                     url = browser_download_url;
                                 }
-                                else if (name == "YMCL.Main.osx.arm64" && architecture == "osx-arm64")
+                                else if (name == "YMCL.Main.osx.arm64.bin" && architecture == "osx-arm64")
                                 {
                                     url = browser_download_url;
                                 }
@@ -146,23 +146,23 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
                             {
                                 string name = (string)asset["name"];
                                 string browser_download_url = (string)asset["browser_download_url"];
-                                if (name == "YMCL.Main.alone.linux.arm" && architecture == "linux-arm")
+                                if (name == "YMCL.Main.alone.linux.arm.bin" && architecture == "linux-arm")
                                 {
                                     url = browser_download_url;
                                 }
-                                else if (name == "YMCL.Main.alone.linux.arm64" && architecture == "linux-arm64")
+                                else if (name == "YMCL.Main.alone.linux.arm64.bin" && architecture == "linux-arm64")
                                 {
                                     url = browser_download_url;
                                 }
-                                else if (name == "YMCL.Main.alone.linux.x64" && architecture == "linux-x64")
+                                else if (name == "YMCL.Main.alone.linux.x64.bin" && architecture == "linux-x64")
                                 {
                                     url = browser_download_url;
                                 }
-                                else if (name == "YMCL.Main.alone.osx.x64" && architecture == "osx-x64")
+                                else if (name == "YMCL.Main.alone.osx.x64.bin" && architecture == "osx-x64")
                                 {
                                     url = browser_download_url;
                                 }
-                                else if (name == "YMCL.Main.alone.osx.arm64" && architecture == "osx-arm64")
+                                else if (name == "YMCL.Main.alone.osx.arm64.bin" && architecture == "osx-arm64")
                                 {
                                     url = browser_download_url;
                                 }
@@ -200,39 +200,79 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher
                                 Content = comboBox
                             };
                             await dialog1.ShowAsync();
-                            foreach (JObject asset in assets)
+                            if (!isAloneProgram)
                             {
-                                string name = (string)asset["name"];
-                                string browser_download_url = (string)asset["browser_download_url"];
-                                if (name == "YMCL.Main.linux.arm" && comboBox.SelectedItem.ToString() == "linux-arm")
+                                foreach (JObject asset in assets)
                                 {
-                                    url = browser_download_url;
-                                }
-                                else if (name == "YMCL.Main.linux.arm64" && comboBox.SelectedItem.ToString() == "linux-arm64")
-                                {
-                                    url = browser_download_url;
-                                }
-                                else if (name == "YMCL.Main.linux.x64" && comboBox.SelectedItem.ToString() == "linux-x64")
-                                {
-                                    url = browser_download_url;
-                                }
-                                else if (name == "YMCL.Main.osx.x64" && comboBox.SelectedItem.ToString() == "osx-x64")
-                                {
-                                    url = browser_download_url;
-                                }
-                                else if (name == "YMCL.Main.osx.arm64" && comboBox.SelectedItem.ToString() == "osx-arm64")
-                                {
-                                    url = browser_download_url;
-                                }
-                                else if (name == "YMCL.Main.win.x64.exe" && comboBox.SelectedItem.ToString() == "win-x64")
-                                {
-                                    url = browser_download_url;
-                                }
-                                else if (name == "YMCL.Main.win.x86.exe" && comboBox.SelectedItem.ToString() == "win-x86")
-                                {
-                                    url = browser_download_url;
+                                    string name = (string)asset["name"];
+                                    string browser_download_url = (string)asset["browser_download_url"];
+                                    if (name == "YMCL.Main.alone.linux.arm.bin" && comboBox.SelectedItem.ToString() == "linux-arm")
+                                    {
+                                        url = browser_download_url;
+                                    }
+                                    else if (name == "YMCL.Main.alone.linux.arm64.bin" && comboBox.SelectedItem.ToString() == "linux-arm64")
+                                    {
+                                        url = browser_download_url;
+                                    }
+                                    else if (name == "YMCL.Main.alone.linux.x64.bin" && comboBox.SelectedItem.ToString() == "linux-x64")
+                                    {
+                                        url = browser_download_url;
+                                    }
+                                    else if (name == "YMCL.Main.alone.osx.x64.bin" && comboBox.SelectedItem.ToString() == "osx-x64")
+                                    {
+                                        url = browser_download_url;
+                                    }
+                                    else if (name == "YMCL.Main.alone.osx.arm64.bin" && comboBox.SelectedItem.ToString() == "osx-arm64")
+                                    {
+                                        url = browser_download_url;
+                                    }
+                                    else if (name == "YMCL.Main.alone.win.x64.exe" && comboBox.SelectedItem.ToString() == "win-x64")
+                                    {
+                                        url = browser_download_url;
+                                    }
+                                    else if (name == "YMCL.Main.alone.win.x86.exe" && comboBox.SelectedItem.ToString() == "win-x86")
+                                    {
+                                        url = browser_download_url;
+                                    }
                                 }
                             }
+                            else
+                            {
+                                foreach (JObject asset in assets)
+                                {
+                                    string name = (string)asset["name"];
+                                    string browser_download_url = (string)asset["browser_download_url"];
+                                    if (name == "YMCL.Main.linux.arm.bin" && comboBox.SelectedItem.ToString() == "linux-arm")
+                                    {
+                                        url = browser_download_url;
+                                    }
+                                    else if (name == "YMCL.Main.linux.arm64.bin" && comboBox.SelectedItem.ToString() == "linux-arm64")
+                                    {
+                                        url = browser_download_url;
+                                    }
+                                    else if (name == "YMCL.Main.linux.x64.bin" && comboBox.SelectedItem.ToString() == "linux-x64")
+                                    {
+                                        url = browser_download_url;
+                                    }
+                                    else if (name == "YMCL.Main.osx.x64.bin" && comboBox.SelectedItem.ToString() == "osx-x64")
+                                    {
+                                        url = browser_download_url;
+                                    }
+                                    else if (name == "YMCL.Main.osx.arm64.bin" && comboBox.SelectedItem.ToString() == "osx-arm64")
+                                    {
+                                        url = browser_download_url;
+                                    }
+                                    else if (name == "YMCL.Main.win.x64.exe" && comboBox.SelectedItem.ToString() == "win-x64")
+                                    {
+                                        url = browser_download_url;
+                                    }
+                                    else if (name == "YMCL.Main.win.x86.exe" && comboBox.SelectedItem.ToString() == "win-x86")
+                                    {
+                                        url = browser_download_url;
+                                    }
+                                }
+                            }
+                                
                         }
                         if (url != null)
                         {

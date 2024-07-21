@@ -32,11 +32,11 @@ jobs:
       run: |
         mv ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.win.x86.exe
         mv ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.win.x64.exe
-        mv ./YMCL.Main/bin/Release/net8.0-windows/osx-x64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/osx-x64/publish/YMCL.Main.osx.x64
-        mv ./YMCL.Main/bin/Release/net8.0-windows/osx-arm64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/osx-arm64/publish/YMCL.Main.osx.arm64
-        mv ./YMCL.Main/bin/Release/net8.0-windows/linux-x64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/linux-x64/publish/YMCL.Main.linux.x64
-        mv ./YMCL.Main/bin/Release/net8.0-windows/linux-arm/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/linux-arm/publish/YMCL.Main.linux.arm
-        mv ./YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main.linux.arm64
+        mv ./YMCL.Main/bin/Release/net8.0-windows/osx-x64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/osx-x64/publish/YMCL.Main.osx.x64.bin
+        mv ./YMCL.Main/bin/Release/net8.0-windows/osx-arm64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/osx-arm64/publish/YMCL.Main.osx.arm64.bin
+        mv ./YMCL.Main/bin/Release/net8.0-windows/linux-x64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/linux-x64/publish/YMCL.Main.linux.x64.bin
+        mv ./YMCL.Main/bin/Release/net8.0-windows/linux-arm/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/linux-arm/publish/YMCL.Main.linux.arm.bin
+        mv ./YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main.linux.arm64.bin
     - name: Build-Independence
       run: |
         echo "True" > ./YMCL.Main/Public/Texts/IsAloneProgram.txt
@@ -51,11 +51,11 @@ jobs:
       run: |
         mv ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.alone.win.x86.exe
         mv ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.alone.win.x64.exe
-        mv ./YMCL.Main/bin/Release/net8.0-windows/osx-x64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/osx-x64/publish/YMCL.Main.alone.osx.x64
-        mv ./YMCL.Main/bin/Release/net8.0-windows/osx-arm64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/osx-arm64/publish/YMCL.Main.alone.osx.arm64
-        mv ./YMCL.Main/bin/Release/net8.0-windows/linux-x64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/linux-x64/publish/YMCL.Main.alone.linux.x64
-        mv ./YMCL.Main/bin/Release/net8.0-windows/linux-arm/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/linux-arm/publish/YMCL.Main.alone.linux.arm
-        mv ./YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main.alone.linux.arm64
+        mv ./YMCL.Main/bin/Release/net8.0-windows/osx-x64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/osx-x64/publish/YMCL.Main.alone.osx.x64.bin
+        mv ./YMCL.Main/bin/Release/net8.0-windows/osx-arm64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/osx-arm64/publish/YMCL.Main.alone.osx.arm64.bin
+        mv ./YMCL.Main/bin/Release/net8.0-windows/linux-x64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/linux-x64/publish/YMCL.Main.alone.linux.x64.bin
+        mv ./YMCL.Main/bin/Release/net8.0-windows/linux-arm/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/linux-arm/publish/YMCL.Main.alone.linux.arm.bin
+        mv ./YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main.alone.linux.arm64.bin
     - name: Publish
       uses: marvinpinto/action-automatic-releases@latest
       with:
@@ -64,18 +64,18 @@ jobs:
         automatic_release_tag: "AutoRelease-${{ steps.date.outputs.date }}"
         prerelease: true
         files: |
-          YMCL.Main/bin/Release/net8.0-windows/osx-arm64/publish/YMCL.Main.osx.arm64
-          YMCL.Main/bin/Release/net8.0-windows/osx-x64/publish/YMCL.Main.osx.x64
-          YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main.linux.arm64
-          YMCL.Main/bin/Release/net8.0-windows/linux-arm/publish/YMCL.Main.linux.arm
-          YMCL.Main/bin/Release/net8.0-windows/linux-x64/publish/YMCL.Main.linux.x64
+          YMCL.Main/bin/Release/net8.0-windows/osx-arm64/publish/YMCL.Main.osx.arm64.bin
+          YMCL.Main/bin/Release/net8.0-windows/osx-x64/publish/YMCL.Main.osx.x64.bin
+          YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main.linux.arm64.bin
+          YMCL.Main/bin/Release/net8.0-windows/linux-arm/publish/YMCL.Main.linux.arm.bin
+          YMCL.Main/bin/Release/net8.0-windows/linux-x64/publish/YMCL.Main.linux.x64.bin
           YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.win.x86.exe
           YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.win.x64.exe
-          YMCL.Main/bin/Release/net8.0-windows/osx-arm64/publish/YMCL.Main.alone.osx.arm64
-          YMCL.Main/bin/Release/net8.0-windows/osx-x64/publish/YMCL.Main.alone.osx.x64
-          YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main.alone.linux.arm64
-          YMCL.Main/bin/Release/net8.0-windows/linux-arm/publish/YMCL.Main.alone.linux.arm
-          YMCL.Main/bin/Release/net8.0-windows/linux-x64/publish/YMCL.Main.alone.linux.x64
+          YMCL.Main/bin/Release/net8.0-windows/osx-arm64/publish/YMCL.Main.alone.osx.arm64.bin
+          YMCL.Main/bin/Release/net8.0-windows/osx-x64/publish/YMCL.Main.alone.osx.x64.bin
+          YMCL.Main/bin/Release/net8.0-windows/linux-arm64/publish/YMCL.Main.alone.linux.arm64.bin
+          YMCL.Main/bin/Release/net8.0-windows/linux-arm/publish/YMCL.Main.alone.linux.arm.bin
+          YMCL.Main/bin/Release/net8.0-windows/linux-x64/publish/YMCL.Main.alone.linux.x64.bin
           YMCL.Main/bin/Release/net8.0-windows/win-x86/publish/YMCL.Main.alone.win.x86.exe
           YMCL.Main/bin/Release/net8.0-windows/win-x64/publish/YMCL.Main.alone.win.x64.exe
         

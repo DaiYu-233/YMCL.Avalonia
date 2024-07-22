@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>E:\YMCL.Avalonia\YMCL.Main\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>E:\#Yu Minecraft Launcher\YMCL.Avalonia\YMCL.Main\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
     <ActiveDebugProfile>YMCL.Main</ActiveDebugProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

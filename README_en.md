@@ -80,6 +80,11 @@ sudo apt-get update && \
 
 </details>
 
+## Plugin Development Document
+
+简体中文 → https://github.com/DaiYu-233/YMCL.Avalonia/tree/main/YMCL.Plugin/Doc.md
+English → https://github.com/DaiYu-233/YMCL.Avalonia/tree/main/YMCL.Plugin/Doc_en.md
+
 ## Open-Source Project Usage
 
 **[Costura.Fody](https://github.com/Fody/Costura)**  **[MinecraftLaunch](https://github.com/Blessing-Studio/MinecraftLaunch)**  **[Newtonsoft.Json](https://www.newtonsoft.com/json)** 

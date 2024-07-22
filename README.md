@@ -85,6 +85,7 @@ sudo apt-get update && \
 ## 插件开发文档
 
 简体中文 → https://github.com/DaiYu-233/YMCL.Avalonia/tree/main/YMCL.Plugin/Doc.md
+
 English → https://github.com/DaiYu-233/YMCL.Avalonia/tree/main/YMCL.Plugin/Doc_en.md
 
 ## 开源项目使用

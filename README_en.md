@@ -83,6 +83,7 @@ sudo apt-get update && \
 ## Plugin Development Document
 
 简体中文 → https://github.com/DaiYu-233/YMCL.Avalonia/tree/main/YMCL.Plugin/Doc.md
+
 English → https://github.com/DaiYu-233/YMCL.Avalonia/tree/main/YMCL.Plugin/Doc_en.md
 
 ## Open-Source Project Usage

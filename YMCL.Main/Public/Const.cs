@@ -17,7 +17,7 @@ using YMCL.Main.Views.Main;
 
 namespace YMCL.Main.Public
 {
-    internal class Const
+    public class Const
     {
         public class Window
         {
@@ -40,6 +40,8 @@ namespace YMCL.Main.Public
         public static string PlayerDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.Player.DaiYu");
         public static string CustomHomePageXamlDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.CustomHomePageXaml.DaiYu");
         public static string AccountDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.Account.DaiYu");
+        public static string PluginDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.Plugin.DaiYu");
+        public static string PluginFolderPath { get; } = Path.Combine(UserDataRootPath, "Plugin");
         public static string VersionSettingFileName { get; } = "YMCLSetting.DaiYu";
         public static string GithubUpdateApiUrl { get; } = "https://api.github.com/repos/DaiYu-233/YMCL.Avalonia/releases?per_page=1";
         public static string MusicApiUrl { get; } = "https://music.api.daiyu.fun/";

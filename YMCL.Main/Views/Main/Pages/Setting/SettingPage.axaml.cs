@@ -6,16 +6,17 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using YMCL.Main.Public;
-using YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize;
 
 namespace YMCL.Main.Views.Main.Pages.Setting
 {
     public partial class SettingPage : UserControl
     {
-        Pages.Launch.LaunchSettingPage launchSettingPage = new();
-        PersonalizeSettingPage personalizeSettingPage = new();
-        Pages.Account.AccountSettingPage accountSettingPage = new();
-        Pages.Launcher.LauncherSettingPage launcherSettingPage = new();
+        public Pages.Launch.LaunchSettingPage launchSettingPage = new();
+        public Pages.Personalize.PersonalizeSettingPage personalizeSettingPage = new();
+        public Pages.Account.AccountSettingPage accountSettingPage = new();
+        public Pages.Launcher.LauncherSettingPage launcherSettingPage = new();
+        public Pages.Plugin.PluginSettingPage pluginSettingPage = new();
+
         public SettingPage()
         {
             InitializeComponent();
@@ -50,6 +51,9 @@ namespace YMCL.Main.Views.Main.Pages.Setting
                     case "launcher":
                         launcherSettingPage.Root.IsVisible = false;
                         FrameView.Content = launcherSettingPage; break;
+                    case "plugin":
+                        pluginSettingPage.Root.IsVisible = false;
+                        FrameView.Content = pluginSettingPage; break;
                 }
             };
         }

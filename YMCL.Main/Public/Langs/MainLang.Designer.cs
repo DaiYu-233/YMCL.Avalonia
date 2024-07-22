@@ -160,6 +160,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 作者 的本地化字符串。
+        /// </summary>
+        public static string Author {
+            get {
+                return ResourceManager.GetString("Author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 自动安装 的本地化字符串。
         /// </summary>
         public static string AutoInstall {
@@ -403,11 +412,29 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 描述 的本地化字符串。
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 全不选 的本地化字符串。
         /// </summary>
         public static string DeselectAll {
             get {
                 return ResourceManager.GetString("DeselectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 禁用所有 的本地化字符串。
+        /// </summary>
+        public static string DisableAll {
+            get {
+                return ResourceManager.GetString("DisableAll", resourceCulture);
             }
         }
         
@@ -498,6 +525,15 @@ namespace YMCL.Main.Public.Langs {
         public static string en_US {
             get {
                 return ResourceManager.GetString("en_US", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 启用所有 的本地化字符串。
+        /// </summary>
+        public static string EnableAll {
+            get {
+                return ResourceManager.GetString("EnableAll", resourceCulture);
             }
         }
         
@@ -1144,6 +1180,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 需要重启YMCL 的本地化字符串。
+        /// </summary>
+        public static string NeedRestartApp {
+            get {
+                return ResourceManager.GetString("NeedRestartApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 需选择&apos;.minecraft&apos;文件夹 的本地化字符串。
         /// </summary>
         public static string NeedToSelectMinecraftFolder {
@@ -1293,6 +1338,15 @@ namespace YMCL.Main.Public.Langs {
         public static string PlayList {
             get {
                 return ResourceManager.GetString("PlayList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件 的本地化字符串。
+        /// </summary>
+        public static string Plugin {
+            get {
+                return ResourceManager.GetString("Plugin", resourceCulture);
             }
         }
         
@@ -1815,6 +1869,15 @@ namespace YMCL.Main.Public.Langs {
         public static string VerifyingAccount {
             get {
                 return ResourceManager.GetString("VerifyingAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 版本 的本地化字符串。
+        /// </summary>
+        public static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
             }
         }
         

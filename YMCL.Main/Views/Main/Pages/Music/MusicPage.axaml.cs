@@ -22,11 +22,6 @@ namespace YMCL.Main.Views.Main.Pages.Music
     public partial class MusicPage : UserControl
     {
         public List<PlaySongListViewItemEntry> playSongList = new();
-
-        //private LibVLC _libVLC;
-        //private MediaPlayer _mediaPlayer;
-        private Timer _timer;
-
         string keyword = string.Empty;
         private bool _isPlaying = false;
         bool _firstLoad = true;
@@ -103,7 +98,7 @@ namespace YMCL.Main.Views.Main.Pages.Music
                 keyword = SearchBox.Text;
                 _ = SearchForListViewAsync(keyword!, page);
             };
-            LoadMoreBtn.Click += async (s, e) =>
+            LoadMoreBtn.Click += (s, e) =>
             {
                 _ = LoadMoreAsync();
             };
@@ -193,7 +188,7 @@ namespace YMCL.Main.Views.Main.Pages.Music
             PlayListView.SelectionChanged += (s, e) =>
             {
                 var song = (PlaySongListViewItemEntry)PlayListView.SelectedItem;
-                PlaySong(song);
+                PlaySong(song!);
             };
         }
         private void PlayerEvent()

@@ -30,6 +30,7 @@ namespace YMCL.Main.Views.Initialize
         private void Init()
         {
             Method.IO.TryCreateFolder(Const.UserDataRootPath);
+            Method.IO.TryCreateFolder(Const.PluginFolderPath);
             if (!File.Exists(Const.SettingDataPath))
             {
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(new Setting(), Formatting.Indented));
@@ -62,6 +63,10 @@ namespace YMCL.Main.Views.Initialize
             {
                 File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(new List<JavaEntry>(), Formatting.Indented));
             }
+            if (!File.Exists(Const.PluginDataPath))
+            {
+                File.WriteAllText(Const.PluginDataPath, JsonConvert.SerializeObject(new List<string>(), Formatting.Indented));
+            }
             if (!File.Exists(Const.PlayerDataPath))
             {
                 File.WriteAllText(Const.PlayerDataPath, JsonConvert.SerializeObject(new List<PlaySongListViewItemEntry>(), Formatting.Indented));
@@ -90,7 +95,7 @@ namespace YMCL.Main.Views.Initialize
                 UseShellExecute = false,
                 CreateNoWindow = true
             };
-            if (Const.Platform == Platform.Linux) using (Process process = Process.Start(startInfo)) ;
+            if (Const.Platform == Platform.Linux) { using (Process process = Process.Start(startInfo)) ; }
 
             var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
             if (setting.Language == null || setting.Language == "zh-CN")

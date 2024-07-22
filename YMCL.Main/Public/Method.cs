@@ -1595,7 +1595,7 @@ namespace YMCL.Main.Public
                             });
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         Interlocked.Increment(ref completedDownloads);
                         Dispatcher.UIThread.Invoke(() =>

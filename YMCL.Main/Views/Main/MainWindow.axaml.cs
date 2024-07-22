@@ -138,6 +138,8 @@ public partial class MainWindow : Window
                 Method.Ui.ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
             }
         }
+
+        settingPage.pluginSettingPage.LoadPlugin();
     }
     public async void HandleDrop(object sender, DragEventArgs e)
     {

@@ -722,4 +722,25 @@ sudo apt install vlc</value>
   <data name="DownloadFailedFileAgain" xml:space="preserve">
     <value>重新下载失败文件</value>
   </data>
+  <data name="Plugin" xml:space="preserve">
+    <value>插件</value>
+  </data>
+  <data name="EnableAll" xml:space="preserve">
+    <value>启用所有</value>
+  </data>
+  <data name="DisableAll" xml:space="preserve">
+    <value>禁用所有</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>作者</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="NeedRestartApp" xml:space="preserve">
+    <value>需要重启YMCL</value>
+  </data>
 </root>

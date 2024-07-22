@@ -12,44 +12,51 @@ dotnet build YMCL.Main/YMCL.Main.csproj
 
 ## 3. Write plugins
 
-Go to `YMCL Plugin\Plugin.cs`   source file
-
-Modify plugin information
+Redirects to `YMCL Plugin\Plugin.cs` source file
 
 ```csharp
-public PluginInfo GetPluginInformation()
+using Avalonia.Controls;
+using YMCL.Main.Public;
+using static YMCL.Main.Public.Plugin;
+
+namespace YMCL.Plugin_Test  //Plugin namespace
 {
-    //PluginInfo
-    return new PluginInfo()
+    public class Plugin_DaiYu : IPlugin //"Plugin_DaiYu" is the plugin class name
     {
-        Author="DaiYu",//plugin author
-        Name="Test Plugin",//plugin name
-        Version="1.3.0",//plugin version
-        Description="Plugin Description",//plugin description
-        Time=new DATE (1970, 1, 1, 0, 0, 0)//The release time of the plugin
+        public PluginInfo GetPluginInformation()
+        {
+            //PluginInfo
+            return new PluginInfo()
+            {
+                Author="DaiYu",//plugin author
+                Name="Test Plugin",//plugin name
+                Version="1.3.0",//plugin version
+                Description = "This A Plugin of YMCL.",//Plugin Description
+                Time=new DATE (1970, 1, 1, 0, 0, 0)//Plugin release time
+            };
+        }
+
+        public void Dispose()
+        {
+            //PluginBehavior
+            //In this example, change the display text of the "Version List" button on the main interface to "Plugin Test". The specific method can be found by browsing the source code
+            var a = Const.Window.main.launchPage.GetControl<Button>(name:"VersionListBtn");
+            a.Content = "Plugin Test";
+        }
     };
 }
 ```
 
-Write plugin behavior
-
-```csharp
-public void Dispose()
-{
-    //PluginBehavior
-    //In this example, change the display text of the "Version List" button on the main interface to "Plugin Test". The specific method can be found by browsing the source code
-    var a = Const.Window.main.launchPage.GetControl<Button>(name:"VersionListBtn");
-    a.Content = "Plugin Test";
-}
-```
-
-## 4. Building plugins
+## 4.  Building plugins
 
 ````bash
 dotnet build YMCL.Plugin/YMCL.Plugin.csproj
 ````
 
 Output result: `YMCL.Plugin/bin/Debug/net8.0/YMCL.Plugin.dll`
+
+Rename the plugin binary file to `plugin-namespace.plugin-class-name.dll` (mandatory)
+The plugin compiled in the above code should be renamed as `YMCL.Plugin_Test.Plugin_DaiYu.dll`
 
 The plugin has been developed and can be distributed to users for use
 

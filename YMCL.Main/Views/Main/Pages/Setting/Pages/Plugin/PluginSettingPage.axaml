@@ -19,7 +19,7 @@
         </Border.Transitions>
         <ScrollViewer>
             <DockPanel>
-                <Border
+                <Border IsVisible="False"
                     Margin="15,10,10,0"
                     VerticalAlignment="Top"
                     Background="Transparent"

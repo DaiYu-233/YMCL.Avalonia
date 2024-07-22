@@ -1,9 +1,12 @@
 using Avalonia.Controls;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using YMCL.Main.Public.Langs;
+using static YMCL.Main.Public.Plugin;
 
 namespace YMCL.Main.Public.Controls
 {
@@ -14,15 +17,21 @@ namespace YMCL.Main.Public.Controls
             InitializeComponent();
             PluginSwitch.Click += (_, _) =>
             {
-                Method.Ui.Toast(MainLang.NeedRestartApp, type: Avalonia.Controls.Notifications.NotificationType.Warning);
+                Assembly asm = Assembly.LoadFrom(PluginPath.Text!);
+                var manifestModuleName = asm.ManifestModule.ScopeName;
+                var a = Path.GetFileNameWithoutExtension(PluginPath.Text!);
+                Type type = asm.GetType(a);
+                var instance = Activator.CreateInstance(type!) as IPlugin;
                 var list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.PluginDataPath));
                 if (PluginSwitch.IsChecked == true)
                 {
                     list.Add(PluginPath.Text!);
+                    instance.OnEnable();
                 }
                 else
                 {
                     list.Remove(PluginPath.Text!);
+                    instance.OnDisable();
                 }
                 File.WriteAllText(Const.PluginDataPath, JsonConvert.SerializeObject(list, Formatting.Indented));
             };

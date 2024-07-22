@@ -75,7 +75,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Plugin
                 if (list.Contains(item.FullName))
                 {
                     control.PluginSwitch.IsChecked = true;
-                    instance.Dispose();
+                    instance.OnLoad();
                 }
                 instance = null;
 

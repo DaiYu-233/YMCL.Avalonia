@@ -16,9 +16,24 @@ namespace YMCL.Main.Public
             public string Description { set; get; } = "A Plugin of YMCL";
             public DateTime Time { set; get; } = DateTime.Now;
         }
-        public interface IPlugin : IDisposable
+        public interface IPlugin
         {
             PluginInfo GetPluginInformation();
+
+            /// <summary>
+            /// 当插件加载时
+            /// </summary>
+            public void OnLoad();
+            /// <summary>
+            /// 当插件启用时
+            /// </summary>
+            /// <returns></returns>
+            public void OnEnable();
+            /// <summary>
+            /// 当插件卸载时
+            /// </summary>
+            public void OnDisable();
+
         }
     }
 }

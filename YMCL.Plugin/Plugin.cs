@@ -19,9 +19,22 @@ namespace YMCL.Plugin_Test
             };
         }
 
-        public async void Dispose()
+        public void OnDisable()
+        {
+            //When the plugin switch is turned off
+            Method.Ui.Toast("Plugin Off");
+        }
+
+        public void OnEnable()
+        {
+            //When the plugin switch is turned on
+            Method.Ui.Toast("Plugin On");
+        }
+
+        public void OnLoad()
         {
             //PluginBehavior
+            //When the app startup and the plugin is enabled
             var a = Const.Window.main.launchPage.GetControl<Button>(name:"VersionListBtn");
             a.Content = "Plugin Test";
         }

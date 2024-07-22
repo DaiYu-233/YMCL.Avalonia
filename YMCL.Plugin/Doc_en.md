@@ -36,12 +36,22 @@ namespace YMCL.Plugin_Test  //Plugin namespace
             };
         }
 
-        public void Dispose()
+        public void OnLoad()
         {
             //PluginBehavior
             //In this example, change the display text of the "Version List" button on the main interface to "Plugin Test". The specific method can be found by browsing the source code
             var a = Const.Window.main.launchPage.GetControl<Button>(name:"VersionListBtn");
             a.Content = "Plugin Test";
+        }
+        
+        public void OnDisable()
+        {
+            //When the plugin switch is turned off
+        }
+
+        public void OnEnable()
+        {
+            //When the plugin switch is turned on
         }
     };
 }

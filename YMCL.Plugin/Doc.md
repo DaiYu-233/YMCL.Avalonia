@@ -37,13 +37,23 @@ namespace YMCL.Plugin_Test  //插件命名空间
             };
         }
 
-        public void Dispose()
+        public void OnLoad()
         {
             //PluginBehavior
             //插件行为
             //在这个例子中把主界面的"版本列表按钮"的显示文本修改为"Plugin Test",具体方法可浏览源代码
             var a = Const.Window.main.launchPage.GetControl<Button>(name:"VersionListBtn");
             a.Content = "Plugin Test";
+        }
+
+        public void OnDisable()
+        {
+            //当插件开关被关闭时
+        }
+
+        public void OnEnable()
+        {
+            //当插件开关被打开时
         }
     };
 }

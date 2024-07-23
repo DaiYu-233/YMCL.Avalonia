@@ -15,17 +15,16 @@ dotnet build YMCL.Main/YMCL.Main.csproj
 
 ## 3. Write plugins
 
-Redirects to `YMCL Plugin\Plugin.cs` source file
+Redirects to `YMCL.Plugin\Plugin.cs` source file
 
 ```csharp
 using Avalonia.Controls;
 using YMCL.Main.Public;
 using static YMCL.Main.Public.Plugin;
 
-namespace DiaYu  //Plugin namespace, Suggest changing to your username
+namespace YMCL.Plugin  //Do not modify
 {
-    public class Plugin_DaiYu_1_0 : IPlugin 
-    //"Plugin_DaiYu_1_0" is the plugin class name, Suggest changing it to "PluginName_PluginVersion", which only supports English, Chinese characters, and underscores (Chinese characters are not recommended as they may cause coding issues)
+    public class Main : IPlugin //Do not modify
     {
         public PluginInfo GetPluginInformation()
         {
@@ -65,22 +64,25 @@ namespace DiaYu  //Plugin namespace, Suggest changing to your username
     };
 }
 ```
+## 4. Rename Project
 
-## 4.  Building plugins
+Rename `YMCL.Plugin/YMCL.Plugin.csproj` to `YMCL.Plugin/插件作者名称.插件名称.csproj`
+Rename `YMCL.Plugin/YMCL.Plugin.csproj.user` to `YMCL.Plugin/插件作者名称.插件名称.csproj.user`
+
+## 5. 构建插件
 
 ````bash
-dotnet build YMCL.Plugin/YMCL.Plugin.csproj
+cd YMCL.Plugin
+````
+````bash
+dotnet build
 ````
 
-Output result: `YMCL.Plugin/bin/Debug/net8.0/YMCL.Plugin.dll`
-
-Rename the plugin binary file to `plugin-namespace.plugin-class-name.dll` (mandatory)
-
-The plugin compiled in the above code should be renamed as `DiaYu.Plugin_DaiYu_1_0.dll`
+Result File: `YMCL.Plugin/bin/Debug/net8.0/插件作者名称.插件名称.dll`
 
 The plugin has been developed and can be distributed to users for use
 
-## 5. Install plugins
+## 6. Install plugins
 
 ![img](https://pic.daiyu.fun/pic/2024/202407220914001.png)
 

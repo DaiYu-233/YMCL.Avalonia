@@ -123,8 +123,9 @@ public partial class MainWindow : Window
                 ExtendClientAreaToDecorationsHint = true;
                 break;
         }
-        Const.Window.initialize.Close();
+        Const.Window.initialize.Hide();
         Const.Window.main.Show();
+        Const.Window.initialize.Close();
 
         if (setting.CustomHomePage == CustomHomePageWay.Local)
         {

@@ -22,10 +22,9 @@ using Avalonia.Controls;
 using YMCL.Main.Public;
 using static YMCL.Main.Public.Plugin;
 
-namespace DiaYu  //插件命名空间，建议修改为你的用户名
+namespace YMCL.Pulgin  //不要修改
 {
-    public class Plugin_DaiYu_1_0 : IPlugin 
-    //"Plugin_DaiYu_1_0"为插件类名，建议修改为"插件名称_插件版本" ，仅支持英文、汉字、下划线 (不建议使用汉字，这可能会带来编码问题)  
+    public class Main : IPlugin //不要修改
     {
         public PluginInfo GetPluginInformation()
         {
@@ -68,17 +67,21 @@ namespace DiaYu  //插件命名空间，建议修改为你的用户名
 }
 ```
 
-## 4. 构建插件
+## 4. 重命名项目
+
+重命名 `YMCL.Plugin/YMCL.Plugin.csproj` 为 `YMCL.Plugin/插件作者名称.插件名称.csproj`
+重命名 `YMCL.Plugin/YMCL.Plugin.csproj.user` 为 `YMCL.Plugin/插件作者名称.插件名称.csproj.user`
+
+## 5. 构建插件
 
 ````bash
-dotnet build YMCL.Plugin/YMCL.Plugin.csproj
+cd YMCL.Plugin
+````
+````bash
+dotnet build
 ````
 
-输出结果: `YMCL.Plugin/bin/Debug/net8.0/YMCL.Plugin.dll`
-
-将插件二进制文件重命名为 `插件命名空间.插件类名.dll` (必须)
-
-在上述代码中编译的插件应重命名为 `DiaYu.Plugin_DaiYu_1_0.dll`
+输出结果: `YMCL.Plugin/bin/Debug/net8.0/插件作者名称.插件名称.dll`
 
 到此插件就开发完成,可以分发给用户使用
 

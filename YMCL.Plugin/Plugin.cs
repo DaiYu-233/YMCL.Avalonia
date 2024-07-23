@@ -2,9 +2,9 @@
 using YMCL.Main.Public;
 using static YMCL.Main.Public.Plugin;
 
-namespace DiaYu  //Plugin namespace, Suggest changing to your username
+namespace YMCL.Plugin  //Do not modify
 {
-    public class Plugin_DaiYu_1_0 : IPlugin //"Plugin_DaiYu_1_0" is the plugin class name, Suggest changing it to "PluginName_PluginVersion", which only supports English, Chinese characters, and underscores (Chinese characters are not recommended as they may cause coding issues)
+    public class Main : IPlugin //Do not modify
     {
         public PluginInfo GetPluginInformation()
         {

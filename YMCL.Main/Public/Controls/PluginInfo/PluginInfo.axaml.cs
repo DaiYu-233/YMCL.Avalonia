@@ -19,8 +19,7 @@ namespace YMCL.Main.Public.Controls
             {
                 Assembly asm = Assembly.LoadFrom(PluginPath.Text!);
                 var manifestModuleName = asm.ManifestModule.ScopeName;
-                var a = Path.GetFileNameWithoutExtension(PluginPath.Text!);
-                Type type = asm.GetType(a);
+                Type type = asm.GetType("YMCL.Plugin.Main");
                 var instance = Activator.CreateInstance(type!) as IPlugin;
                 var list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.PluginDataPath));
                 if (PluginSwitch.IsChecked == true)

@@ -47,6 +47,9 @@ using CurseForge.APIClient;
 using System.Threading;
 using Flurl;
 using CurseForge.APIClient.Models.Files;
+using static YMCL.Main.Public.Plugin;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace YMCL.Main.Public
 {
@@ -410,6 +413,44 @@ namespace YMCL.Main.Public
                 var name = Path.GetFileNameWithoutExtension(fullName);
                 var extension = Path.GetExtension(fullName);
                 return new FileInfo() { Name = name, Path = path, FullName = fullName, Extension = extension };
+            }
+            public static void CallEnabledPlugin()
+            {
+                var list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.PluginDataPath));
+                var list1 = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.PluginDataPath));
+                DirectoryInfo directoryInfo = new DirectoryInfo(Const.PluginFolderPath);
+                var dlls = directoryInfo.GetFiles();
+                var paths = new List<string>();
+                foreach (var item in dlls)
+                {
+                    paths.Add(item.FullName);
+                }
+                list1.ForEach(x =>
+                {
+                    if (!paths.Contains(x))
+                    {
+                        list.Remove(x);
+                    }
+                });
+                File.WriteAllText(Const.PluginDataPath, JsonConvert.SerializeObject(list, Formatting.Indented));
+                foreach (var item in dlls)
+                {
+                    Assembly asm = Assembly.LoadFrom(item.FullName);
+                    var manifestModuleName = asm.ManifestModule.ScopeName;
+                    Type type = asm.GetType("YMCL.Plugin.Main");
+                    if (!typeof(IPlugin).IsAssignableFrom(type))
+                    {
+                        Debug.WriteLine("未继承插件接口");
+                        continue;
+                    }
+                    var instance = Activator.CreateInstance(type) as IPlugin;
+                    var protocolInfo = instance.GetPluginInformation();
+                    if (list.Contains(item.FullName))
+                    {
+                        instance.OnLaunch();
+                    }
+                    instance = null;
+                }
             }
             public static void CopyDirectory(string sourceDir, string destinationDir)
             {
@@ -1273,6 +1314,10 @@ namespace YMCL.Main.Public
                         await Dispatcher.UIThread.InvokeAsync(async () =>
                         {
                             var watcher = await launcher.LaunchAsync(l_id);
+                            _ = Task.Run(() =>
+                            {
+                                Method.IO.CallEnabledPlugin();
+                            });
 
                             watcher.Exited += async (_, args) =>
                             {

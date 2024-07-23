@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using YMCL.Main.Public.Langs;
 using static YMCL.Main.Public.Plugin;
 
@@ -25,12 +26,18 @@ namespace YMCL.Main.Public.Controls
                 if (PluginSwitch.IsChecked == true)
                 {
                     list.Add(PluginPath.Text!);
-                    instance.OnEnable();
+                    _ = Task.Run(() =>
+                     {
+                         instance.OnEnable();
+                     });
                 }
                 else
                 {
                     list.Remove(PluginPath.Text!);
-                    instance.OnDisable();
+                    _ = Task.Run(() =>
+                      {
+                          instance.OnDisable();
+                      });
                 }
                 File.WriteAllText(Const.PluginDataPath, JsonConvert.SerializeObject(list, Formatting.Indented));
             };

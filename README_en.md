@@ -24,6 +24,10 @@ Yu Minecraft Launcher offers features like mod management, game customization, a
 
 Ymcl uses **Apache License 2.0** open source code, which requires **to retain the original copyright statement, license statement, and disclaimer when modifying and distributing software**; Allow users to freely use, modify, copy, and distribute Apache licensed software, whether for commercial or non-commercial purposes; Allow users to publish modified products or derivatives under different licenses, but the unmodified portion must retain the Apache license; The Apache license does not provide any form of guarantee, and users are fully responsible for any damage caused by the use of the software.
   
+## Plugin repository
+
+ →  https://github.com/DaiYu-233/YMCL.Plugin
+
 ## Platform Support  
   
 |       | Windows | Linux | Mac OS |  

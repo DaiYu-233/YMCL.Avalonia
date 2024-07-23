@@ -44,6 +44,13 @@ public partial class MainWindow : Window
     }
     private void EventBinding()
     {
+        Activated += (_, _) =>
+        {
+            if (settingPage.PluginSettingNavControl.IsSelected )
+            {
+                settingPage.pluginSettingPage.ReloadPluginListUi();
+            }
+        };
         TitleText.PointerPressed += (s, e) =>
         {
             BeginMoveDrag(e);
@@ -139,8 +146,6 @@ public partial class MainWindow : Window
                 Method.Ui.ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
             }
         }
-
-        settingPage.pluginSettingPage.LoadPlugin();
     }
     public async void HandleDrop(object sender, DragEventArgs e)
     {
@@ -234,7 +239,7 @@ public partial class MainWindow : Window
             {
                 foreach (var file in zipFile)
                 {
-                   var importResult = await Method.Mc.ImportModPack(file.Path);
+                    var importResult = await Method.Mc.ImportModPack(file.Path);
                     if (!importResult)
                     {
                         Method.Ui.Toast($"{MainLang.ImportFailed}: {file.FullName}", type: Avalonia.Controls.Notifications.NotificationType.Error);

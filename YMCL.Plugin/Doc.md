@@ -63,6 +63,13 @@ namespace YMCL.Pulgin  //不要修改
             //在这个例子中弹出了一个消息框来提示用户
             Method.Ui.Toast("Plugin On");
         }
+
+        public void OnEnable()
+        {
+            //当游戏启动时
+            //在这个例子中弹出了一个消息框来提示用户
+            Method.Ui.Toast("Game Launched");
+        }
     };
 }
 ```
@@ -70,6 +77,7 @@ namespace YMCL.Pulgin  //不要修改
 ## 4. 重命名项目
 
 重命名 `YMCL.Plugin/YMCL.Plugin.csproj` 为 `YMCL.Plugin/插件作者名称.插件名称.csproj`
+
 重命名 `YMCL.Plugin/YMCL.Plugin.csproj.user` 为 `YMCL.Plugin/插件作者名称.插件名称.csproj.user`
 
 ## 5. 构建插件

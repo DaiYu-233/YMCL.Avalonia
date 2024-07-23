@@ -61,13 +61,24 @@ namespace YMCL.Plugin  //Do not modify
             //In this example, a message box pops up to prompt the user
             Method.Ui.Toast("Plugin On");
         }
+        
+        public void OnLaunch()
+        {
+            //When the game launched
+            //In this example, a message box pops up to prompt the user
+            Dispatcher.UIThread.Invoke(() =>
+            {
+                Method.Ui.Toast("Game Launched");
+            });
+        }
     };
 }
 ```
 ## 4. Rename Project
 
-Rename `YMCL.Plugin/YMCL.Plugin.csproj` to `YMCL.Plugin/插件作者名称.插件名称.csproj`
-Rename `YMCL.Plugin/YMCL.Plugin.csproj.user` to `YMCL.Plugin/插件作者名称.插件名称.csproj.user`
+Rename `YMCL.Plugin/YMCL.Plugin.csproj` to `YMCL.Plugin/PluginAuthorName.PluginName.csproj`
+
+Rename `YMCL.Plugin/YMCL.Plugin.csproj.user` to `YMCL.Plugin/PluginAuthorName.PluginName.csproj.user`
 
 ## 5. 构建插件
 
@@ -78,7 +89,7 @@ cd YMCL.Plugin
 dotnet build
 ````
 
-Result File: `YMCL.Plugin/bin/Debug/net8.0/插件作者名称.插件名称.dll`
+Result File: `YMCL.Plugin/bin/Debug/net8.0/PluginAuthorName.PluginName.dll`
 
 The plugin has been developed and can be distributed to users for use
 

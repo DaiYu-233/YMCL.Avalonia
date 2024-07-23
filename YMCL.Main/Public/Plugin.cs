@@ -30,9 +30,13 @@ namespace YMCL.Main.Public
             /// <returns></returns>
             public void OnEnable();
             /// <summary>
-            /// 当插件卸载时
+            /// 当插件禁用
             /// </summary>
             public void OnDisable();
+            /// <summary>
+            /// 当游戏启动
+            /// </summary>
+            public void OnLaunch();
 
         }
     }

@@ -33,6 +33,7 @@ using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Controls.WindowTask;
 using YMCL.Main.Public.Langs;
+using YMCL.Main.Views.Main.Pages.Setting;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace YMCL.Main.Views.Main.Pages.Launch
@@ -78,6 +79,7 @@ namespace YMCL.Main.Views.Main.Pages.Launch
                 }
                 if (_firstLoad)
                 {
+                    Const.Window.main.settingPage.pluginSettingPage.LoadPlugin();
                     _firstLoad = false;
                     _shouldCloseVersuionList = true;
                 }

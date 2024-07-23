@@ -24,7 +24,8 @@ using static YMCL.Main.Public.Plugin;
 
 namespace DiaYu  //插件命名空间，建议修改为你的用户名
 {
-    public class Plugin_DaiYu_1_0 : IPlugin //"Plugin_DaiYu_1_0"为插件类名，建议修改为"插件名称_插件版本" ，仅支持英文、汉字、下划线 (不建议使用汉字，这可能会带来编码问题)
+    public class Plugin_DaiYu_1_0 : IPlugin 
+    //"Plugin_DaiYu_1_0"为插件类名，建议修改为"插件名称_插件版本" ，仅支持英文、汉字、下划线 (不建议使用汉字，这可能会带来编码问题)  
     {
         public PluginInfo GetPluginInformation()
         {

@@ -7,6 +7,9 @@ git clone https://github.com/DaiYu-233/YMCL.Avalonia.git
 ## 2. Build the main project
 
 ```bash
+cd YMCL.Avalonia
+```
+```bash
 dotnet build YMCL.Main/YMCL.Main.csproj
 ```
 
@@ -19,9 +22,9 @@ using Avalonia.Controls;
 using YMCL.Main.Public;
 using static YMCL.Main.Public.Plugin;
 
-namespace YMCL.Plugin_Test  //Plugin namespace
+namespace DiaYu  //Plugin namespace, Suggest changing to your username
 {
-    public class Plugin_DaiYu : IPlugin //"Plugin_DaiYu" is the plugin class name
+    public class Plugin_DaiYu_1_0 : IPlugin //"Plugin_DaiYu_1_0" is the plugin class name, Suggest changing it to "PluginName_PluginVersion", which only supports English, Chinese characters, and underscores (Chinese characters are not recommended as they may cause coding issues)
     {
         public PluginInfo GetPluginInformation()
         {
@@ -32,13 +35,14 @@ namespace YMCL.Plugin_Test  //Plugin namespace
                 Name="Test Plugin",//plugin name
                 Version="1.3.0",//plugin version
                 Description = "This A Plugin of YMCL.",//Plugin Description
-                Time=new DATE (1970, 1, 1, 0, 0, 0)//Plugin release time
+                Time= new DateTime(1970, 1, 1, 0, 0, 0)//Plugin release time, in the format of year month day hour minute second
             };
         }
 
         public void OnLoad()
         {
             //PluginBehavior
+            //Triggered when the program is opened
             //In this example, change the display text of the "Version List" button on the main interface to "Plugin Test". The specific method can be found by browsing the source code
             var a = Const.Window.main.launchPage.GetControl<Button>(name:"VersionListBtn");
             a.Content = "Plugin Test";
@@ -47,11 +51,15 @@ namespace YMCL.Plugin_Test  //Plugin namespace
         public void OnDisable()
         {
             //When the plugin switch is turned off
+            //In this example, a message box pops up to prompt the user
+            Method.Ui.Toast("Plugin Off");
         }
 
         public void OnEnable()
         {
             //When the plugin switch is turned on
+            //In this example, a message box pops up to prompt the user
+            Method.Ui.Toast("Plugin On");
         }
     };
 }
@@ -66,7 +74,8 @@ dotnet build YMCL.Plugin/YMCL.Plugin.csproj
 Output result: `YMCL.Plugin/bin/Debug/net8.0/YMCL.Plugin.dll`
 
 Rename the plugin binary file to `plugin-namespace.plugin-class-name.dll` (mandatory)
-The plugin compiled in the above code should be renamed as `YMCL.Plugin_Test.Plugin_DaiYu.dll`
+
+The plugin compiled in the above code should be renamed as `DiaYu.Plugin_DaiYu_1_0.dll`
 
 The plugin has been developed and can be distributed to users for use
 

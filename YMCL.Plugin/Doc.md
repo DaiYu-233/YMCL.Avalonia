@@ -64,7 +64,7 @@ namespace YMCL.Pulgin  //不要修改
             Method.Ui.Toast("Plugin On");
         }
 
-        public void OnEnable()
+        public void OnLaunch()
         {
             //当游戏启动时
             //在这个例子中弹出了一个消息框来提示用户

@@ -133,6 +133,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 所有类型 的本地化字符串。
+        /// </summary>
+        public static string AllType {
+            get {
+                return ResourceManager.GetString("AllType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 所有版本 的本地化字符串。
         /// </summary>
         public static string AllVersion {
@@ -991,11 +1000,29 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似 地图 的本地化字符串。
+        /// </summary>
+        public static string Map {
+            get {
+                return ResourceManager.GetString("Map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 匹配的版本 的本地化字符串。
         /// </summary>
         public static string MatchingVersion {
             get {
                 return ResourceManager.GetString("MatchingVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 材质包 的本地化字符串。
+        /// </summary>
+        public static string MaterialPack {
+            get {
+                return ResourceManager.GetString("MaterialPack", resourceCulture);
             }
         }
         
@@ -1180,6 +1207,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   查找类似  任务 的本地化字符串。
+        /// </summary>
+        public static string NavTask {
+            get {
+                return ResourceManager.GetString("NavTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 需要重启YMCL 的本地化字符串。
         /// </summary>
         public static string NeedRestartApp {
@@ -1284,6 +1320,15 @@ namespace YMCL.Main.Public.Langs {
         public static string On {
             get {
                 return ResourceManager.GetString("On", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 仅支持 Windows 10 以上系统 的本地化字符串。
+        /// </summary>
+        public static string OnlySupportsWindows10AndAboveSystems {
+            get {
+                return ResourceManager.GetString("OnlySupportsWindows10AndAboveSystems", resourceCulture);
             }
         }
         
@@ -1635,6 +1680,15 @@ namespace YMCL.Main.Public.Langs {
         public static string SuccessRemove {
             get {
                 return ResourceManager.GetString("SuccessRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 任务中心 的本地化字符串。
+        /// </summary>
+        public static string TaskCenter {
+            get {
+                return ResourceManager.GetString("TaskCenter", resourceCulture);
             }
         }
         

@@ -22,7 +22,7 @@ namespace YMCL.Main.Public.Classes
         public string Version { get; set; } 
         public bool EnableIndependencyCore { get; set; } = true;
         public bool AlreadyWrittenIntoTheUrlScheme { get; set; } = false;
-        public bool ShowGameOutput { get; set; } = true;
+        public bool ShowGameOutput { get; set; } = false;
         public WindowTitleBarStyle WindowTitleBarStyle { get; set; } = WindowTitleBarStyle.Unset;
         public CustomHomePageWay CustomHomePage { get; set; } = CustomHomePageWay.None;
     }

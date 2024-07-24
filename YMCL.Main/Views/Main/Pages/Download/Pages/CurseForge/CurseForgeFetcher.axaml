@@ -1,5 +1,5 @@
 <UserControl
-    x:Class="YMCL.Main.Views.Main.Pages.Download.Pages.Mod.Mod"
+    x:Class="YMCL.Main.Views.Main.Pages.Download.Pages.CurseForgeFetcher.CurseForgeFetcher"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cf="clr-namespace:CurseForge.APIClient.Models.Mods;assembly=CurseForge.APIClient"
@@ -50,7 +50,7 @@
                                             Text="{x:Static properties:MainLang.Search}" />
                                     </DockPanel>
                                 </Button>
-                                <TextBox Name="ModNameTextBox" Watermark="{x:Static properties:MainLang.ModName}" />
+                                <TextBox Name="ModNameTextBox" Watermark="{x:Static properties:MainLang.SearchKeyword}" />
                             </DockPanel>
                             <DockPanel>
                                 <ComboBox
@@ -68,15 +68,16 @@
                                     <ComboBoxItem Content="LiteLoader" FontFamily="{DynamicResource Font}" />
                                 </ComboBox>
                                 <ComboBox
-                                    x:Name="ResultSourceComboBox"
+                                    x:Name="ResultTypeComboBox"
                                     Width="160"
                                     Margin="0,0,5,0"
                                     VerticalAlignment="Center"
                                     FontFamily="{DynamicResource Font}"
-                                    SelectedIndex="0">
-                                    <ComboBoxItem Content="{x:Static properties:MainLang.AnySource}" FontFamily="{DynamicResource Font}" />
-                                    <ComboBoxItem Content="CurseForge" FontFamily="{DynamicResource Font}" />
-                                    <ComboBoxItem Content="Modrinth" FontFamily="{DynamicResource Font}" />
+                                    SelectedIndex="1">
+                                    <ComboBoxItem Content="{x:Static properties:MainLang.AllType}" FontFamily="{DynamicResource Font}" />
+                                    <ComboBoxItem Content="{x:Static properties:MainLang.Mod}" FontFamily="{DynamicResource Font}" />
+                                    <ComboBoxItem Content="{x:Static properties:MainLang.MaterialPack}" FontFamily="{DynamicResource Font}" />
+                                    <ComboBoxItem Content="{x:Static properties:MainLang.Map}" FontFamily="{DynamicResource Font}" />
                                 </ComboBox>
                                 <TextBox Name="ModVersionTextBox" Watermark="{x:Static properties:MainLang.GameVersion}" />
                             </DockPanel>
@@ -177,7 +178,7 @@
                             HorizontalAlignment="Center"
                             Classes="accent"
                             IsVisible="False">
-                            <TextBlock TextDecorations="{x:Null}" FontFamily="{DynamicResource Font}">
+                            <TextBlock FontFamily="{DynamicResource Font}" TextDecorations="{x:Null}">
                                 <Run Text="→" />
                                 <Run Text="{x:Static properties:MainLang.LoadMore}" />
                                 <Run Text="←" />

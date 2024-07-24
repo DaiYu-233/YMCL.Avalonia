@@ -50,8 +50,8 @@
       <DependentUpon>AutoInstallPage.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Main\Pages\Download\Pages\CurseForge\CurseForge.axaml.cs">
-      <DependentUpon>CurseForge.axaml</DependentUpon>
+    <Compile Update="Views\Main\Pages\Download\Pages\CurseForge\CurseForgeFetcher.axaml.cs">
+      <DependentUpon>CurseForgeFetcher.axaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Main\Pages\Download\Pages\CurseForge\Mod\Mod.axaml.cs">
       <DependentUpon>Mod.axaml</DependentUpon>

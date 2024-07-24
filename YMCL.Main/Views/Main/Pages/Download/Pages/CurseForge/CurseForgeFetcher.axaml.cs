@@ -16,10 +16,12 @@ using static YMCL.Main.Public.Classes.SearchModListViewItemEntry;
 using CurseForge.APIClient.Models.Files;
 using System.IO;
 using System.Net.Http;
+using Flurl;
+using MinecraftLaunch.Classes.Enums;
 
-namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
+namespace YMCL.Main.Views.Main.Pages.Download.Pages.CurseForgeFetcher
 {
-    public partial class Mod : UserControl
+    public partial class CurseForgeFetcher : UserControl
     {
         readonly ApiClient cfApiClient = new(Const.CurseForgeApiKey);
         readonly int _gameId = 432;
@@ -62,7 +64,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
             { DaiYuLoaderType.Quilt, ModLoaderType.Quilt },
             { DaiYuLoaderType.LiteLoader, ModLoaderType.LiteLoader }
         };
-        public Mod()
+        public CurseForgeFetcher()
         {
             InitializeComponent();
             ControlProperty();
@@ -83,6 +85,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                 {
                     _page = 0;
                     ModNameTextBox.IsEnabled = false;
+                    ModVersionTextBox.IsEnabled = false;
                     SearchBtn.IsEnabled = false;
                     Loading.IsVisible = true;
                     LoadMoreBtn.IsVisible = false;
@@ -96,6 +99,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                 {
                     _page = 0;
                     ModNameTextBox.IsEnabled = false;
+                    ModVersionTextBox.IsEnabled = false;
                     SearchBtn.IsEnabled = false;
                     Loading.IsVisible = true;
                     LoadMoreBtn.IsVisible = false;
@@ -180,11 +184,29 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                     var expander = new ModFileView(mcVersion);
                     expander.ListView.SelectionChanged += ModFileSelectionChanged;
                     expander.Name = $"mod_{mcVersion.Replace(".", "_")}";
+                    var classId = 0;
+                    if (ResultTypeComboBox.SelectedIndex == 0)
+                    {
+                        classId = 0;
+                    }
+                    else if (ResultTypeComboBox.SelectedIndex == 1)
+                    {
+                        classId = 6;
+                    }
+                    else if (ResultTypeComboBox.SelectedIndex == 2)
+                    {
+                        classId = 12;
+                    }
+                    else if (ResultTypeComboBox.SelectedIndex == 3)
+                    {
+                        classId = 17;
+                    }
                     foreach (var file in modFiles)
                     {
                         if (file.GameVersions[0].ToString() == mcVersion)
                         {
                             var item = new ModFileListViewItemEntry(file);
+                            item.ClassId = classId;
                             item.StringDownloadCount = Method.Value.ConvertToWanOrYi(file.DownloadCount);
                             DateTime localDateTime = file.FileDate.DateTime.ToLocalTime();
                             string formattedDateTime = localDateTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
@@ -213,6 +235,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                             if (file.GameVersions[0].ToString() == mcVersion)
                             {
                                 var item = new ModFileListViewItemEntry(file);
+                                item.ClassId = classId;
                                 item.StringDownloadCount = Method.Value.ConvertToWanOrYi(file.DownloadCount);
                                 DateTime localDateTime = file.FileDate.DateTime.ToLocalTime();
                                 string formattedDateTime = localDateTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
@@ -238,6 +261,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
             {
                 _page = 0;
                 ModNameTextBox.IsEnabled = false;
+                ModVersionTextBox.IsEnabled = false;
                 SearchBtn.IsEnabled = false;
                 Loading.IsVisible = true;
                 LoadMoreBtn.IsVisible = false;
@@ -252,14 +276,31 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                 ModListViewScroll.ScrollToEnd();
                 try
                 {
-                    GenericListResponse<CurseForge.APIClient.Models.Mods.Mod> mods;
+                    var classId = 0;
+                    if (ResultTypeComboBox.SelectedIndex == 0)
+                    {
+                        classId = 0;
+                    }
+                    else if (ResultTypeComboBox.SelectedIndex == 1)
+                    {
+                        classId = 6;
+                    }
+                    else if (ResultTypeComboBox.SelectedIndex == 2)
+                    {
+                        classId = 12;
+                    }
+                    else if (ResultTypeComboBox.SelectedIndex == 3)
+                    {
+                        classId = 17;
+                    }
+                    GenericListResponse<Mod> mods;
                     if (_loaderType == ModLoaderType.Any)
                     {
-                        mods = await cfApiClient.SearchModsAsync(gameId: _gameId, searchFilter: _keyword, gameVersion: _gameVersion, index: _page * 25, pageSize: 25);
+                        mods = await cfApiClient.SearchModsAsync(gameId: _gameId, gameVersion: _gameVersion, searchFilter: _keyword, index: _page * 25, pageSize: 25, categoryId: -1, classId: classId);
                     }
                     else
                     {
-                        mods = await cfApiClient.SearchModsAsync(gameId: _gameId, searchFilter: _keyword, modLoaderType: _loaderType, gameVersion: _gameVersion, index: _page * 25, pageSize: 25);
+                        mods = await cfApiClient.SearchModsAsync(gameId: _gameId, gameVersion: _gameVersion, searchFilter: _keyword, modLoaderType: _loaderType, index: _page * 25, pageSize: 25, categoryId: -1, classId: classId);
                     }
                     mods.Data.ForEach(mod =>
                     {
@@ -272,6 +313,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                         ModListView.Items.Add(entry);
                     });
                     ModNameTextBox.IsEnabled = true;
+                    ModVersionTextBox.IsEnabled = true;
                     SearchBtn.IsEnabled = true;
                     Loading.IsVisible = false;
                     LoadMoreBtn.IsVisible = true;
@@ -284,6 +326,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                 catch (Exception ex)
                 {
                     ModNameTextBox.IsEnabled = true;
+                    ModVersionTextBox.IsEnabled = true;
                     SearchBtn.IsEnabled = true;
                     Loading.IsVisible = false;
                     LoadMoreBtn.IsVisible = false;
@@ -292,7 +335,6 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                 }
             };
         }
-
         private async void ModFileSelectionChanged(object? s, SelectionChangedEventArgs e)
         {
             var sender = s as ListBox;
@@ -303,41 +345,97 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                 var path = await Method.IO.SaveFilePicker(TopLevel.GetTopLevel(this)!, new Avalonia.Platform.Storage.FilePickerSaveOptions
                 {
                     SuggestedFileName = item.DisplayName,
-                    DefaultExtension = "jar",
                     ShowOverwritePrompt = true,
                     Title = MainLang.SaveFile
                 });
                 if (path == null) return;
+                var classId = item.ClassId;
+                var extension = Path.GetExtension(path);
+                if (classId == 6 && extension != ".jar")
+                {
+                    path += ".jar";
+                }
+                if ((classId == 12 || classId == 17) && extension != ".zip")
+                {
+                    path += ".zip";
+                }
                 Method.Ui.Toast($"{MainLang.BeginDownload}: {item.DisplayName}");
+                var task = new TaskEntry($"{MainLang.Download} - {Path.GetFileName(path)}", true, false);
                 try
                 {
-                    using (HttpClient client = new HttpClient())
+                    using (var httpClient = new HttpClient())
                     {
-                        using (HttpResponseMessage response = await client.GetAsync(item.DownloadUrl.Replace("edge.forgecdn.net", "mediafilez.forgecdn.net"), HttpCompletionOption.ResponseHeadersRead))
+                        using (var response = await httpClient.GetAsync(item.DownloadUrl.Replace("edge.forgecdn.net", "mediafilez.forgecdn.net"), HttpCompletionOption.ResponseHeadersRead))
                         {
-                            response.EnsureSuccessStatusCode();
+                            response.EnsureSuccessStatusCode(); // 确保HTTP成功状态值  
 
-                            using (Stream contentStream = await response.Content.ReadAsStreamAsync(),
-                                   fileStream = System.IO.File.Open(path, FileMode.Create, FileAccess.Write, FileShare.None))
+                            var totalBytes = response.Content.Headers.ContentLength.GetValueOrDefault();
+                            using (var contentStream = await response.Content.ReadAsStreamAsync())
+                            using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
                             {
-                                await contentStream.CopyToAsync(fileStream);
+                                var buffer = new byte[4096];
+                                var totalBytesRead = 0L;
+                                int bytesRead;
+
+                                while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+                                {
+                                    await fileStream.WriteAsync(buffer, 0, bytesRead);
+                                    totalBytesRead += bytesRead;
+                                    var progressPercentage = (int)((totalBytesRead * 100) / totalBytes);
+                                    task.UpdateValueProgress(progressPercentage);
+                                }
+
+                                Method.Ui.Toast($"{MainLang.DownloadFinish}: {item.DisplayName}");
+                                task.Destory();
                             }
                         }
                     }
-                    Method.Ui.Toast($"{MainLang.DownloadFinish}: {item.DisplayName}",type:Avalonia.Controls.Notifications.NotificationType.Success);
                 }
-                catch (HttpRequestException ex)
+                catch
                 {
-                    Method.Ui.ShowShortException($"{MainLang.DownloadFail}: {item.DisplayName}", ex);
+                    try
+                    {
+                        using (var httpClient = new HttpClient())
+                        {
+                            using (var response = await httpClient.GetAsync(item.DownloadUrl, HttpCompletionOption.ResponseHeadersRead))
+                            {
+                                response.EnsureSuccessStatusCode(); // 确保HTTP成功状态值  
+
+                                var totalBytes = response.Content.Headers.ContentLength.GetValueOrDefault();
+                                using (var contentStream = await response.Content.ReadAsStreamAsync())
+                                using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
+                                {
+                                    var buffer = new byte[4096];
+                                    var totalBytesRead = 0L;
+                                    int bytesRead;
+
+                                    while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+                                    {
+                                        await fileStream.WriteAsync(buffer, 0, bytesRead);
+                                        totalBytesRead += bytesRead;
+                                        var progressPercentage = (int)((totalBytesRead * 100) / totalBytes);
+                                        task.UpdateValueProgress(progressPercentage);
+                                    }
+
+                                    Method.Ui.Toast($"{MainLang.DownloadFinish}: {item.DisplayName}");
+                                    task.Destory();
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        Method.Ui.Toast($"{MainLang.DownloadFail}: {item.DisplayName}");
+                        task.Destory();
+                    }
                 }
             }
         }
-
         private void ControlProperty()
         {
 
         }
-        async void SearchModFromCurseForge()
+        public async void SearchModFromCurseForge()
         {
             var keyword = ModNameTextBox.Text;
             _keyword = keyword;
@@ -357,14 +455,31 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
 
             try
             {
-                GenericListResponse<CurseForge.APIClient.Models.Mods.Mod> mods;
+                var classId = 0;
+                if (ResultTypeComboBox.SelectedIndex == 0)
+                {
+                    classId = 0;
+                }
+                else if (ResultTypeComboBox.SelectedIndex == 1)
+                {
+                    classId = 6;
+                }
+                else if (ResultTypeComboBox.SelectedIndex == 2)
+                {
+                    classId = 12;
+                }
+                else if (ResultTypeComboBox.SelectedIndex == 3)
+                {
+                    classId = 17;
+                }
+                GenericListResponse<Mod> mods;
                 if (loaderType == ModLoaderType.Any)
                 {
-                    mods = await cfApiClient.SearchModsAsync(gameId: _gameId, searchFilter: keyword, gameVersion: gameVersion, index: _page * 25, pageSize: 25);
+                    mods = await cfApiClient.SearchModsAsync(gameId: _gameId, gameVersion: gameVersion, searchFilter: keyword, index: _page * 25, pageSize: 25, categoryId: -1, classId: classId);
                 }
                 else
                 {
-                    mods = await cfApiClient.SearchModsAsync(gameId: _gameId, searchFilter: keyword, modLoaderType: loaderType, gameVersion: gameVersion, index: _page * 25, pageSize: 25);
+                    mods = await cfApiClient.SearchModsAsync(gameId: _gameId, gameVersion: gameVersion, searchFilter: keyword, modLoaderType: loaderType, index: _page * 25, pageSize: 25, categoryId: -1, classId: classId);
                 }
                 mods.Data.ForEach(mod =>
                 {
@@ -377,6 +492,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
                     ModListView.Items.Add(entry);
                 });
                 ModNameTextBox.IsEnabled = true;
+                ModVersionTextBox.IsEnabled = true;
                 SearchBtn.IsEnabled = true;
                 Loading.IsVisible = false;
                 LoadMoreBtn.IsVisible = true;
@@ -389,6 +505,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.Mod
             catch (Exception ex)
             {
                 ModNameTextBox.IsEnabled = true;
+                ModVersionTextBox.IsEnabled = true;
                 SearchBtn.IsEnabled = true;
                 Loading.IsVisible = false;
                 LoadMoreBtn.IsVisible = false;

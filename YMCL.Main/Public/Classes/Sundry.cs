@@ -165,6 +165,7 @@ namespace YMCL.Main.Public.Classes
         public string StringDownloadCount { get; set; }
         public string StringDateTime { get; set; }
         public string Loader { get; set; }
+        public int ClassId { get; set; } = 0;
 
         public ModFileListViewItemEntry(File file)
         {

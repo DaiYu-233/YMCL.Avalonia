@@ -1046,8 +1046,7 @@ namespace YMCL.Main.Public
                 Const.Window.main.Activate();
                 if (closeTask)
                 {
-                    task.Finish();
-                    task.Hide();
+                    task.Destory();
                 }
                 return true;
             }
@@ -1218,7 +1217,7 @@ namespace YMCL.Main.Public
                     }
                 }
 
-                var task = new WindowTask(MainLang.LaunchProgress, false);
+                var task = new WindowTask($"{MainLang.Launch} - {gameEntry.Id}", false);
                 task.UpdateTextProgress("-----> YMCL", false);
                 task.UpdateTextProgress(MainLang.VerifyingAccount);
 
@@ -1227,7 +1226,7 @@ namespace YMCL.Main.Public
                 {
                     Method.Ui.Toast(MainLang.AccountError, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                     Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
-                    task.Hide();
+                    task.Destory();
                     return false;
                 }
                 switch (accountData.AccountType)
@@ -1242,7 +1241,7 @@ namespace YMCL.Main.Public
                         {
                             Method.Ui.Toast(MainLang.AccountError, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                             Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
-                            task.Hide();
+                            task.Destory();
                             return false;
                         }
                         break;
@@ -1257,7 +1256,7 @@ namespace YMCL.Main.Public
                         {
                             Method.Ui.ShowShortException(MainLang.LoginFail, ex);
                             Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
-                            task.Hide();
+                            task.Destory();
                             return false;
                         }
                         break;
@@ -1269,7 +1268,7 @@ namespace YMCL.Main.Public
                 {
                     Method.Ui.Toast(MainLang.AccountError, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                     Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
-                    task.Hide();
+                    task.Destory();
                     return false;
                 }
 
@@ -1280,7 +1279,7 @@ namespace YMCL.Main.Public
                 {
                     Method.Ui.Toast(MainLang.BuildLaunchConfigFail, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                     Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
-                    task.Hide();
+                    task.Destory();
                     return false;
                 }
 
@@ -1299,11 +1298,9 @@ namespace YMCL.Main.Public
                 {
                     Method.Ui.Toast(MainLang.BuildLaunchConfigFail, Const.Notification.main, Avalonia.Controls.Notifications.NotificationType.Error);
                     Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
-                    task.Hide();
+                    task.Destory();
                     return false;
                 }
-
-                Method.Ui.Toast($"java:{l_javaPath},mem:{l_maxMem},core:{l_enableIndependencyCore},mcPath:{l_mcPath}", Const.Notification.main);
 
                 Launcher launcher = new(gameResolver, config);
 
@@ -1328,7 +1325,7 @@ namespace YMCL.Main.Public
                                     if (args.ExitCode == 0)
                                     {
                                         await Task.Delay(2000);
-                                        task.Hide();
+                                        task.Destory();
                                         Const.Window.main.Focus();
                                     }
                                     else
@@ -1360,7 +1357,7 @@ namespace YMCL.Main.Public
                                         task.isFinish = true;
 
                                         var dialogResult = await Method.Ui.ShowDialogAsync(MainLang.MineratCrashed, msg, b_primary: MainLang.Ok);
-                                        task.Hide();
+                                        task.Destory();
                                     }
                                 });
                             };
@@ -1372,6 +1369,13 @@ namespace YMCL.Main.Public
                                     await Dispatcher.UIThread.InvokeAsync(() =>
                                     {
                                         task.UpdateTextProgress(args.Original, false);
+                                    });
+                                }
+                                else
+                                {
+                                    await Dispatcher.UIThread.InvokeAsync(() =>
+                                    {
+                                        task.entry.UpdateTextProgress(args.Original, false);
                                     });
                                 }
                             };
@@ -1405,7 +1409,7 @@ namespace YMCL.Main.Public
                         {
                             Method.Ui.ShowShortException(MainLang.LaunchFail, ex);
                             Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
-                            task.Hide();
+                            task.Destory();
                         });
                     }
                 });

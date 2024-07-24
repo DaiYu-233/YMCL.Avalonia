@@ -743,4 +743,22 @@ sudo apt install vlc</value>
   <data name="NeedRestartApp" xml:space="preserve">
     <value>需要重启YMCL</value>
   </data>
+  <data name="OnlySupportsWindows10AndAboveSystems" xml:space="preserve">
+    <value>仅支持 Windows 10 以上系统</value>
+  </data>
+  <data name="NavTask" xml:space="preserve">
+    <value> 任务</value>
+  </data>
+  <data name="TaskCenter" xml:space="preserve">
+    <value>任务中心</value>
+  </data>
+  <data name="AllType" xml:space="preserve">
+    <value>所有类型</value>
+  </data>
+  <data name="MaterialPack" xml:space="preserve">
+    <value>材质包</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>地图</value>
+  </data>
 </root>

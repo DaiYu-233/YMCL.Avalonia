@@ -36,7 +36,7 @@ public partial class MainWindow : Window
     public readonly Pages.Music.MusicPage musicPage = new();
     public readonly Pages.Setting.SettingPage settingPage = new();
     public WindowTitleBarStyle titleBarStyle;
-
+    bool _isOpeningTaskCenter = false;
     public MainWindow()
     {
         InitializeComponent();
@@ -46,7 +46,7 @@ public partial class MainWindow : Window
     {
         Activated += (_, _) =>
         {
-            if (settingPage.PluginSettingNavControl.IsSelected )
+            if (settingPage.PluginSettingNavControl.IsSelected)
             {
                 settingPage.pluginSettingPage.ReloadPluginListUi();
             }
@@ -82,13 +82,18 @@ public partial class MainWindow : Window
         {
             HandleDrop(s!, e);
         }, RoutingStrategies.Bubble);
-        Nav.SelectionChanged += (s, e) =>
+        Nav.SelectionChanged += async (s, e) =>
         {
             switch (((NavigationViewItem)((NavigationView)s!).SelectedItem!).Tag)
             {
                 case "Launch":
-                    launchPage.Root.IsVisible = false;
-                    FrameView.Content = launchPage; break;
+                    if (!_isOpeningTaskCenter)
+                    {
+                        launchPage.Root.IsVisible = false;
+                        FrameView.Content = launchPage;
+                    }
+                    _isOpeningTaskCenter = false;
+                    break;
                 case "Setting":
                     settingPage.Root.IsVisible = false;
                     FrameView.Content = settingPage; break;
@@ -101,6 +106,14 @@ public partial class MainWindow : Window
                 case "More":
                     morePage.Root.IsVisible = false;
                     FrameView.Content = morePage; break;
+                case "Task":
+                    Const.Window.taskCenter.Show();
+                    Const.Window.taskCenter.Activate();
+                    _isOpeningTaskCenter = true;
+                    Nav.SelectedItem = Nav.MenuItems[0];
+                    FrameView.Content = settingPage;
+                    FrameView.Content = launchPage;
+                    break;
             }
         };
     }
@@ -146,6 +159,8 @@ public partial class MainWindow : Window
                 Method.Ui.ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
             }
         }
+
+        downloadPage.curseForgeFetcherPage.SearchModFromCurseForge();
     }
     public async void HandleDrop(object sender, DragEventArgs e)
     {

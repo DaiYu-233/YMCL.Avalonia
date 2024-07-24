@@ -59,6 +59,7 @@
                             SelectionFollowsFocus="False">
                             <ui:NavigationView.MenuItems>
                                 <ui:NavigationViewItem
+                                    Name="NavLaunch"
                                     FontFamily="{DynamicResource Font}"
                                     IsSelected="True"
                                     Tag="Launch">
@@ -104,7 +105,6 @@
                                             Foreground="{DynamicResource TextColor}"
                                             Text="{x:Static properties:MainLang.NavSetting}" />
                                     </DockPanel>
-
                                 </ui:NavigationViewItem>
                                 <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="Download">
                                     <DockPanel>
@@ -126,6 +126,40 @@
                                             FontSize="15"
                                             Foreground="{DynamicResource TextColor}"
                                             Text="{x:Static properties:MainLang.NavDownload}" />
+                                    </DockPanel>
+                                </ui:NavigationViewItem>
+                                <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="Task">
+                                    <DockPanel>
+                                        <Image Width="16" Height="16">
+                                            <Image.Source>
+                                                <DrawingImage>
+                                                    <DrawingImage.Drawing>
+                                                        <DrawingGroup>
+                                                            <DrawingGroup.Children>
+                                                                <GeometryDrawing Brush="{DynamicResource TextColor}">
+                                                                    <GeometryDrawing.Geometry>
+                                                                        <PathGeometry Figures="M831.825474,63.940169L191.939717,63.940169C121.2479,63.940169,63.940169,121.2479,63.940169,191.939717L63.940169,831.825474C63.940169,902.517291,121.2479,959.825022,191.939717,959.825022L831.825474,959.825022C902.517291,959.825022,959.825022,902.517291,959.825022,831.825474L959.825022,191.939717C959.825022,121.2479,902.517291,63.940169,831.825474,63.940169z M895.884854,831.998871A63.835408,63.835408,0,0,1,831.912173,895.884854L192.087827,895.884854C174.975704,895.884854 158.817264,889.310215 146.715595,877.2085440000001 134.61392600000002,865.1068730000002 127.880338,849.110994 127.880338,831.998871L127.880338,192.001129A64.236389,64.236389,0,0,1,192.087827,127.880338L831.9121729999999,127.880338A64.037705,64.037705,0,0,1,895.884854,192.001129L895.884854,831.998871z" />
+                                                                    </GeometryDrawing.Geometry>
+                                                                </GeometryDrawing>
+                                                                <GeometryDrawing Brush="{DynamicResource TextColor}">
+                                                                    <GeometryDrawing.Geometry>
+                                                                        <PathGeometry Figures="M791.998335,351.851551L535.999238,351.851551A31.970084,31.970084,0,0,0,535.999238,415.79171999999994L791.998335,415.79171999999994A31.970084,31.970084,0,0,0,791.998335,351.851551z M791.998335,607.973471L535.999238,607.973471A31.970084,31.970084,0,0,0,535.999238,671.91364L791.998335,671.91364A31.970084,31.970084,0,0,0,791.998335,607.973471z M344.001722,527.997686C282.14592999999996,527.997686 232.01611499999996,578.1419510000001 232.01611499999996,639.983292 232.01611499999996,701.824633 282.16038,751.968899 344.001722,751.968899 405.84306399999997,751.968899 455.987329,701.824634 455.987328,639.983292 455.987327,578.1419500000001 405.857513,527.997685 344.001722,527.997686z M377.983935,673.979955A48.045438,48.045438,0,1,1,392.07244599999996,639.997742A47.745605,47.745605,0,0,1,377.983935,673.983568z M417.395643,297.394035L311.999125,402.78694 270.6078,361.392003A31.970084,31.970084,0,1,0,225.39451400000002,406.605288L289.39248200000003,470.60686899999996A31.970084,31.970084,0,0,0,334.605768,470.60686899999996L462.605316,342.60731999999996A31.970084,31.970084,0,0,0,417.395643,297.394035z" />
+                                                                    </GeometryDrawing.Geometry>
+                                                                </GeometryDrawing>
+                                                            </DrawingGroup.Children>
+                                                            <DrawingGroup.ClipGeometry>
+                                                                <RectangleGeometry Rect="0,0,1024,1024" />
+                                                            </DrawingGroup.ClipGeometry>
+                                                        </DrawingGroup>
+                                                    </DrawingImage.Drawing>
+                                                </DrawingImage>
+                                            </Image.Source>
+                                        </Image>
+                                        <TextBlock
+                                            Margin="10,0,0,0"
+                                            FontSize="15"
+                                            Foreground="{DynamicResource TextColor}"
+                                            Text="{x:Static properties:MainLang.NavTask}" />
                                     </DockPanel>
                                 </ui:NavigationViewItem>
                                 <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="Music">

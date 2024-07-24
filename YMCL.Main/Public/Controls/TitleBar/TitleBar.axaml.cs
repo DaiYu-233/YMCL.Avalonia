@@ -111,7 +111,7 @@ public partial class TitleBar : UserControl
                 var window = button.GetVisualRoot() as Window;
                 if (window != null)
                 {
-                    window.Close();
+                    window.Hide();
                 }
             }
         }

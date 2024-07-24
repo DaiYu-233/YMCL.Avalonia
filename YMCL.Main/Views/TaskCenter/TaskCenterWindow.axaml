@@ -1,0 +1,47 @@
+<Window
+    x:Class="YMCL.Main.TaskCenterWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
+    xmlns:uc="clr-namespace:YMCL.Main.Public.Controls"
+    Title="{x:Static properties:MainLang.TaskCenter}"
+    FontFamily="{DynamicResource Font}"
+    FontWeight="{DynamicResource FontWeight}"
+    IsHitTestVisible="True"
+    IsVisible="True"
+    SystemDecorations="None"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.Styles>
+        <Style Selector="Window">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Opacity="0" Color="White" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Styles>
+    <Border
+        x:Name="Root"
+        Background="{DynamicResource 1x}"
+        ClipToBounds="True"
+        CornerRadius="5">
+        <Grid>
+            <DockPanel>
+                <uc:TitleBar
+                    Name="TitleBar"
+                    Title="{x:Static properties:MainLang.TaskCenter}"
+                    DockPanel.Dock="Top"
+                    IsCloseBtnExitApp="False" />
+                <ScrollViewer>
+                    <StackPanel
+                        Name="TaskContainer"
+                        Margin="10,0,10,10"
+                        Spacing="10" />
+                </ScrollViewer>
+            </DockPanel>
+        </Grid>
+    </Border>
+</Window>

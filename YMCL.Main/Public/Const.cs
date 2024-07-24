@@ -21,8 +21,9 @@ namespace YMCL.Main.Public
     {
         public class Window
         {
-            public static InitializeWindow initialize = new InitializeWindow();
-            public static MainWindow main = new MainWindow();
+            public static InitializeWindow initialize = new();
+            public static MainWindow main;
+            public static TaskCenterWindow taskCenter = new();
         }
         public class Notification
         {

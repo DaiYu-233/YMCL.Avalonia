@@ -16,6 +16,7 @@ namespace YMCL.Main.Public.Controls.WindowTask
     {
         private readonly Timer _debounceTimer;
         private readonly ConcurrentQueue<string> _textQueue = new ConcurrentQueue<string>();
+        public TaskEntry entry;
         private bool _isUpdating;
         public bool isFinish = false;
         public WindowTask(string name, bool valueProgress = true)
@@ -23,6 +24,9 @@ namespace YMCL.Main.Public.Controls.WindowTask
             InitializeComponent();
             TitleText.Text = name;
             Title = name;
+
+            entry = new TaskEntry(name, valueProgress);
+
             if (!valueProgress)
             {
                 ValueProgressRoot.IsVisible = false;
@@ -75,17 +79,13 @@ namespace YMCL.Main.Public.Controls.WindowTask
             Show();
             Activate();
         }
-
-        //public void Finish()
-        //{
-        //    isFinish = true;
-        //}
         public void Finish()
         {
             isFinish = true;
         }
         public void UpdateTextProgress(string text, bool includeTime = true)
         {
+            entry.UpdateTextProgress(text, includeTime);
             _textQueue.Enqueue(GetTextToAdd(text, includeTime));
 
             if (!_isUpdating)
@@ -98,6 +98,7 @@ namespace YMCL.Main.Public.Controls.WindowTask
         {
             Finish();
             Close();
+            entry.Destory();
         }
         private string GetTextToAdd(string text, bool includeTime)
         {
@@ -125,6 +126,7 @@ namespace YMCL.Main.Public.Controls.WindowTask
             try
             {
                 ProgressBar.Value = progress;
+                entry.UpdateValueProgress(progress);
                 ProgressBarText.Text = $"{Math.Round(progress, 1)}%";
             }
             catch { }
@@ -133,6 +135,7 @@ namespace YMCL.Main.Public.Controls.WindowTask
         {
             TitleText.Text = title;
             Title = title;
+            entry.UpdateTitle(title);
         }
     }
 }

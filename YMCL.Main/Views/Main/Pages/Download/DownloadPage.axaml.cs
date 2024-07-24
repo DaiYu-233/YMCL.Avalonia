@@ -12,7 +12,7 @@ namespace YMCL.Main.Views.Main.Pages.Download
     public partial class DownloadPage : UserControl
     {
         public Pages.AutoInstall.AutoInstallPage autoInstallPage = new();
-        public Pages.Mod.Mod modPage = new();
+        public Pages.CurseForgeFetcher.CurseForgeFetcher curseForgeFetcherPage = new();
         public DownloadPage()
         {
             InitializeComponent();
@@ -38,9 +38,9 @@ namespace YMCL.Main.Views.Main.Pages.Download
                     case "auto":
                         autoInstallPage.Root.IsVisible = false;
                         FrameView.Content = autoInstallPage; break;
-                    case "mod":
-                        modPage.Root.IsVisible = false;
-                        FrameView.Content = modPage; break;
+                    case "curseforgefetcher":
+                        curseForgeFetcherPage.Root.IsVisible = false;
+                        FrameView.Content = curseForgeFetcherPage; break;
                 }
             };
         }

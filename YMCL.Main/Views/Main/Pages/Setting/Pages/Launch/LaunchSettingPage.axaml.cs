@@ -123,7 +123,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch
                 Method.Ui.Toast(MainLang.SuccessRemove + ": " + path, Const.Notification.main, NotificationType.Success);
                 if (minecraftFolders.Count == 0)
                 {
-                    var a = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft");
+                    var a = Path.Combine(Const.UserDataRootPath, ".minecraft");
                     minecraftFolders.Add(a);
                     Method.Ui.Toast(MainLang.SuccessAdd + ": " + a, Const.Notification.main, NotificationType.Success);
                 }

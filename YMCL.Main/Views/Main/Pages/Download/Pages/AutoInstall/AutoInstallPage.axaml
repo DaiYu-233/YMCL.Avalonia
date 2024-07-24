@@ -30,7 +30,8 @@
                     VerticalAlignment="Top"
                     Background="{DynamicResource 1x}"
                     CornerRadius="5"
-                    DockPanel.Dock="Top">
+                    DockPanel.Dock="Top"
+                    IsVisible="False">
                     <DockPanel HorizontalAlignment="Stretch">
                         <Image
                             Width="15"

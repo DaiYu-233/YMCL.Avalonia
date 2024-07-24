@@ -22,10 +22,8 @@ namespace YMCL.Main
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                var window = new Views.Initialize.InitializeWindow();
-                Const.Window.initialize = window;
-                desktop.MainWindow = window;
-                window.Hide();
+                desktop.MainWindow = Const.Window.initialize;
+                Const.Window.initialize.Hide();
 
                 AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
                 Dispatcher.UIThread.UnhandledException += UIThread_UnhandledException;

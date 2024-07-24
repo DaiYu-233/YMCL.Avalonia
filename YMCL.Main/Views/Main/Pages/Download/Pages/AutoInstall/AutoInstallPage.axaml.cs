@@ -49,7 +49,15 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall
             {
                 if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
                 {
-
+                    if(Const.Platform ==Platform.Windows  && Environment.OSVersion.Version.Major >= 10)
+                    {
+                        var launcher = TopLevel.GetTopLevel(this).Launcher;
+                        launcher.LaunchUriAsync(new Uri($"https://minecraft.wiki/w/Java_Edition_{InstallPreviewIdText.Text}"));
+                    }
+                    else
+                    {
+                        Method.Ui.Toast(MainLang.OnlySupportsWindows10AndAboveSystems, type: NotificationType.Error);
+                    }
                 }
             };
             BeginInstallBtn.Click += (sender, e) =>

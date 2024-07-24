@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Langs;
+using YMCL.Main.Views.Main;
 using YMCL.Main.Views.Main.Pages.Launch;
 
 
@@ -53,10 +54,11 @@ namespace YMCL.Main.Views.Initialize
             }
             if (!File.Exists(Const.MinecraftFolderDataPath) || JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath)).Count == 0)
             {
-                Method.IO.TryCreateFolder(Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft"));
-                File.WriteAllText(Const.MinecraftFolderDataPath, JsonConvert.SerializeObject(new List<string>() { Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft") }, Formatting.Indented));
+                var path = Path.Combine(Const.UserDataRootPath, ".minecraft");
+                Method.IO.TryCreateFolder(path);
+                File.WriteAllText(Const.MinecraftFolderDataPath, JsonConvert.SerializeObject(new List<string>() { path }, Formatting.Indented));
                 var setting1 = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
-                setting1.MinecraftFolder = Path.Combine(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)!, ".minecraft");
+                setting1.MinecraftFolder = path;
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting1, Formatting.Indented));
             }
             if (!File.Exists(Const.JavaDataPath))
@@ -107,7 +109,9 @@ namespace YMCL.Main.Views.Initialize
                 LangHelper.Current.ChangedCulture(setting.Language);
             }
 
-            Const.Notification.main = new WindowNotificationManager(GetTopLevel(Const.Window.main)) { MaxItems = 3, Position = NotificationPosition.BottomRight /*FontFamily = (FontFamily)Application.Current.Resources["Font"]*/ };
+            var window = new MainWindow();
+            Const.Window.main = window;
+            Const.Notification.main = new WindowNotificationManager(GetTopLevel(window)) { MaxItems = 3, Position = NotificationPosition.BottomRight /*FontFamily = (FontFamily)Application.Current.Resources["Font"]*/ };
             Method.Ui.SetAccentColor(setting.AccentColor);
             if (setting.Theme == Public.Theme.Light)
             {

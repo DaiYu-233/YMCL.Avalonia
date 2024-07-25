@@ -102,23 +102,29 @@ public partial class LaunchPage : UserControl
             LoadVersions();
             VersionListView.SelectedIndex = 0;
         };
-        VersionListBtn.Click += (s, e) =>
+        VersionListBtn.Click += async (s, e) =>
         {
+            LaunchConsoleRoot.Opacity = 0;
             LoadVersions();
             _shouldCloseVersuionList = true;
             if (_firstOpenVersionList)
             {
-                VersionListRoot.Margin = new Thickness(Root.Bounds.Width, 10, -1 * Root.Bounds.Width, 10);
+                CloseVersionList();
+                await Task.Delay(260);
                 VersionListRoot.IsVisible = true;
                 _firstOpenVersionList = false;
                 VersionListRoot.Margin = new Thickness(10);
+                VersionListRoot.IsVisible = true;
+                LaunchConsoleRoot.Opacity = 0;
             }
             else
             {
                 VersionListRoot.Margin = new Thickness(10);
+                VersionListRoot.IsVisible = true;
+                LaunchConsoleRoot.Opacity = 0;
             }
         };
-        VersionSettingBtn.Click += (s, e) =>
+        VersionSettingBtn.Click += async (s, e) =>
         {
             if (VersionListView.SelectedItem != null)
             {
@@ -131,17 +137,26 @@ public partial class LaunchPage : UserControl
 
                 if (entry != null)
                 {
+                    LaunchConsoleRoot.Opacity = 0;
                     if (_firstOpenVersionSetting)
                     {
                         VersionSettingRoot.Margin = new Thickness(Root.Bounds.Width, 10, -1 * Root.Bounds.Width, 10);
+                        await Task.Delay(260);
+                        VersionSettingRoot.IsVisible = false;
                         VersionSettingRoot.IsVisible = true;
                         _firstOpenVersionSetting = false;
                         VersionSettingRoot.Margin = new Thickness(10);
+                        VersionSettingRoot.IsVisible = true;
+
+                        LaunchConsoleRoot.Opacity = 0;
                         LoadVersionSettingUI(entry);
                     }
                     else
                     {
                         VersionSettingRoot.Margin = new Thickness(10);
+                        VersionSettingRoot.IsVisible = true;
+
+                        LaunchConsoleRoot.Opacity = 0;
                         LoadVersionSettingUI(entry);
                     }
                 }
@@ -156,10 +171,7 @@ public partial class LaunchPage : UserControl
                 Method.Ui.Toast(MainLang.NoChooseGameOrCannotFindGame, Const.Notification.main, NotificationType.Error);
             }
         };
-        CloseVersionListBtn.Click += (s, e) =>
-        {
-            VersionListRoot.Margin = new Thickness(Root.Bounds.Width, 10, -1 * Root.Bounds.Width, 10);
-        };
+        CloseVersionListBtn.Click += (s, e) => { CloseVersionList(); };
         VersionListView.PointerEntered += (s, e) => { _shouldCloseVersuionList = true; };
         VersionListView.SelectionChanged += (s, e) =>
         {
@@ -178,7 +190,7 @@ public partial class LaunchPage : UserControl
 
             Task.Delay(200);
             if (_shouldCloseVersuionList)
-                VersionListRoot.Margin = new Thickness(Root.Bounds.Width, 10, -1 * Root.Bounds.Width, 10);
+                CloseVersionList();
         };
         LaunchBtn.Click += (s, e) =>
         {
@@ -206,12 +218,6 @@ public partial class LaunchPage : UserControl
             _shouldCloseVersuionList = false;
             LoadVersions();
         };
-
-        void CloseVersionSetting(TabViewItem sender, TabViewTabCloseRequestedEventArgs args)
-        {
-            VersionSettingRoot.Margin = new Thickness(Root.Bounds.Width, 10, -1 * Root.Bounds.Width, 10);
-        }
-
         VersionTabViewItemOverview.CloseRequested += CloseVersionSetting;
         VersionTabViewItemMod.CloseRequested += CloseVersionSetting;
         VersionTabViewItemSetting.CloseRequested += CloseVersionSetting;
@@ -533,5 +539,19 @@ public partial class LaunchPage : UserControl
         ModSearchBox.Text = string.Empty;
         LoadVersionMods(entry);
         SelectedModCount.Text = $"{MainLang.SelectedItem}0";
+    }
+
+    public async void CloseVersionSetting(TabViewItem sender, TabViewTabCloseRequestedEventArgs args)
+    {
+        VersionSettingRoot.Margin = new Thickness(Root.Bounds.Width, 10, -1 * Root.Bounds.Width, 10);
+        LaunchConsoleRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
+        VersionSettingRoot.IsVisible = false;
+    }
+
+    public async void CloseVersionList()
+    {
+        VersionListRoot.Margin = new Thickness(Root.Bounds.Width, 10, -1 * Root.Bounds.Width, 10);
+        LaunchConsoleRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
+        VersionListRoot.IsVisible = false;
     }
 }

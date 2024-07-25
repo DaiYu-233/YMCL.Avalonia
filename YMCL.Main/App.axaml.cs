@@ -30,6 +30,8 @@ public class App : Application
         }
 
         base.OnFrameworkInitializationCompleted();
+
+        Current.Resources["Opacity"] = 1.0;
     }
 
     private void UIThread_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

@@ -18,7 +18,7 @@
         <ScrollViewer>
             <StackPanel Margin="10" Spacing="10">
                 <Border
-                    Background="{DynamicResource 1x}"
+                    Opacity="{DynamicResource Opacity}" Background="{DynamicResource 1x}"
                     CornerRadius="5"
                     Padding="6.5">
                     <DockPanel>
@@ -48,7 +48,7 @@
                     </DockPanel>
                 </Border>
                 <Border
-                    Background="{DynamicResource 1x}"
+                    Opacity="{DynamicResource Opacity}" Background="{DynamicResource 1x}"
                     CornerRadius="5"
                     Padding="6.5">
                     <DockPanel>
@@ -90,7 +90,7 @@
                     </DockPanel>
                 </Border>
                 <Border
-                    Background="{DynamicResource 1x}"
+                    Opacity="{DynamicResource Opacity}" Background="{DynamicResource 1x}"
                     CornerRadius="5"
                     Height="40"
                     Padding="6.5">
@@ -118,7 +118,7 @@
                     </DockPanel>
                 </Border>
                 <Border
-                    Background="{DynamicResource 1x}"
+                    Opacity="{DynamicResource Opacity}" Background="{DynamicResource 1x}"
                     CornerRadius="5"
                     Height="40"
                     Padding="6.5">
@@ -140,7 +140,7 @@
                     </DockPanel>
                 </Border>
                 <Border
-                    Background="{DynamicResource 1x}"
+                    Opacity="{DynamicResource Opacity}" Background="{DynamicResource 1x}"
                     CornerRadius="5"
                     Height="40"
                     Padding="6.5">

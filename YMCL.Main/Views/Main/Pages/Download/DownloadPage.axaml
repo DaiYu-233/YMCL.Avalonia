@@ -1,51 +1,53 @@
 <UserControl
-    FontFamily="{DynamicResource Font}"
-    FontWeight="{DynamicResource FontWeight}"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    mc:Ignorable="d"
     x:Class="YMCL.Main.Views.Main.Pages.Download.DownloadPage"
     xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
     xmlns:uc="clr-namespace:YMCL.Main.Public.Controls"
     xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Border Background="{DynamicResource 2x}" x:Name="Root">
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    FontFamily="{DynamicResource Font}"
+    FontWeight="{DynamicResource FontWeight}"
+    mc:Ignorable="d">
+    <Border x:Name="Root">
         <Border.Transitions>
             <Transitions>
-                <ThicknessTransition Duration="0:0:0.45" Property="Margin" />
+                <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
             </Transitions>
         </Border.Transitions>
         <DockPanel>
             <Border
+                Height="40"
+                Margin="10,10,10,0"
+                VerticalAlignment="Top"
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 DockPanel.Dock="Top"
-                Height="40"
-                Margin="10,10,10,0"
-                VerticalAlignment="Top">
+                Opacity="{DynamicResource Opacity}">
                 <ui:NavigationView
+                    x:Name="Nav"
                     AlwaysShowHeader="False"
                     Background="{DynamicResource 1x}"
                     IsBackButtonVisible="False"
                     IsBackEnabled="False"
                     IsPaneToggleButtonVisible="False"
                     IsSettingsVisible="False"
+                    Opacity="{DynamicResource Opacity}"
                     PaneDisplayMode="Top"
-                    SelectionFollowsFocus="False"
-                    x:Name="Nav">
+                    SelectionFollowsFocus="False">
                     <ui:NavigationView.MenuItems>
                         <ui:NavigationViewItem
-                            IsSelected="True"
                             Margin="0,0,0,7"
+                            IsSelected="True"
                             Tag="auto">
                             <DockPanel>
                                 <Image
+                                    Width="15"
                                     Height="15"
-                                    Margin="0,0,7,0"
-                                    Width="15">
+                                    Margin="0,0,7,0">
                                     <Image.Source>
                                         <DrawingImage>
                                             <DrawingImage.Drawing>
@@ -65,14 +67,14 @@
                             </DockPanel>
                         </ui:NavigationViewItem>
                         <ui:NavigationViewItem
-                            IsSelected="True"
                             Margin="0,0,0,7"
+                            IsSelected="True"
                             Tag="curseforgefetcher">
                             <DockPanel>
                                 <uc:ImageIcon
+                                    Width="16"
                                     Margin="0,0,5,0"
-                                    Path="M0,1.0969204595312476E-05L1082.4422607421875,1.0969204595312476E-05 1082.4422607421875,120.4263916015625 1575.095703125,120.4263916015625C1524.2740478515625,272.08636474609375 1202.6539306640625,324.142333984375 1202.6539306640625,324.142333984375 737.745849609375,488.68212890625 1257.3931884765625,803.0573120117188 1257.3931884765625,803.0573120117188L1324.905029296875,1023.40966796875 607.9278564453125,1023.40966796875C713.5961303710938,914.3604736328125 849.3173217773438,845.9900512695312 984.2871704101562,802.1986083984375 629.6089477539062,796.0270385742188 436.19683837890625,924.2886352539062 334.6608581542969,1023.40966796875L399.5966796875,803.0573120117188C399.5966796875,803.0573120117188 778.1026000976562,574.064697265625 599.931640625,404.6949462890625 469.84539794921875,303.4272766113281 133.35989379882812,321.3517150878906 133.35989379882812,321.3517150878906L133.35989379882812,158.74388122558594 0,1.0969204595312476E-05z"
-                                    Width="16" />
+                                    Path="M0,1.0969204595312476E-05L1082.4422607421875,1.0969204595312476E-05 1082.4422607421875,120.4263916015625 1575.095703125,120.4263916015625C1524.2740478515625,272.08636474609375 1202.6539306640625,324.142333984375 1202.6539306640625,324.142333984375 737.745849609375,488.68212890625 1257.3931884765625,803.0573120117188 1257.3931884765625,803.0573120117188L1324.905029296875,1023.40966796875 607.9278564453125,1023.40966796875C713.5961303710938,914.3604736328125 849.3173217773438,845.9900512695312 984.2871704101562,802.1986083984375 629.6089477539062,796.0270385742188 436.19683837890625,924.2886352539062 334.6608581542969,1023.40966796875L399.5966796875,803.0573120117188C399.5966796875,803.0573120117188 778.1026000976562,574.064697265625 599.931640625,404.6949462890625 469.84539794921875,303.4272766113281 133.35989379882812,321.3517150878906 133.35989379882812,321.3517150878906L133.35989379882812,158.74388122558594 0,1.0969204595312476E-05z" />
                                 <TextBlock
                                     FontFamily="{DynamicResource Font}"
                                     FontSize="14"
@@ -84,10 +86,9 @@
             </Border>
             <ScrollViewer>
                 <ui:Frame
-                    Background="{DynamicResource 2x}"
-                    DockPanel.Dock="Bottom"
+                    Name="FrameView"
                     Margin="0,10,0,0"
-                    Name="FrameView" />
+                    DockPanel.Dock="Bottom" />
             </ScrollViewer>
         </DockPanel>
     </Border>

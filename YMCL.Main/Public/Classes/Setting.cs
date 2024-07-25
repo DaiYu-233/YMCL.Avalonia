@@ -15,7 +15,9 @@ public class Setting
     public Theme Theme { get; set; } = Theme.Light;
     public double MaxMem { get; set; } = 1024;
     public string Version { get; set; }
+    public string WindowBackGroundImgData { get; set; } = string.Empty;
     public bool EnableIndependencyCore { get; set; } = true;
+    public bool EnableCustomBackGroundImg { get; set; } = false;
     public bool AlreadyWrittenIntoTheUrlScheme { get; set; } = false;
     public bool ShowGameOutput { get; set; } = false;
     public WindowTitleBarStyle WindowTitleBarStyle { get; set; } = WindowTitleBarStyle.Unset;

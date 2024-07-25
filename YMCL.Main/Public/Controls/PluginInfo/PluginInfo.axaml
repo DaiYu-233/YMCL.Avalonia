@@ -9,7 +9,7 @@
     xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Border
-        Background="{DynamicResource 1x}"
+        Opacity="{DynamicResource Opacity}" Background="{DynamicResource 1x}"
         ClipToBounds="True"
         CornerRadius="5"
         Padding="10">

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -58,6 +59,16 @@ public partial class PersonalizeSettingPage : UserControl
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
                 Method.Ui.RestartApp();
             }
+        };
+        CustomBackGroundImgComboBox.SelectionChanged += (s, e) =>
+        {
+            var setting =
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+            EditCustomBackGroundImgBtn.IsVisible = CustomBackGroundImgComboBox.SelectedIndex == 1;
+            if (CustomBackGroundImgComboBox.SelectedIndex == 1 == setting.EnableCustomBackGroundImg) return;
+            setting.EnableCustomBackGroundImg = CustomBackGroundImgComboBox.SelectedIndex == 1;
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            Method.Ui.SetWindowBackGroundImg();
         };
         ColorPicker.ColorChanged += (s, e) =>
         {
@@ -193,6 +204,24 @@ public partial class PersonalizeSettingPage : UserControl
 
             Method.Ui.RestartApp();
         };
+        EditCustomBackGroundImgBtn.Click += async (_, _) =>
+        {
+            var path = (await Method.IO.OpenFilePicker(TopLevel.GetTopLevel(this),
+                    new FilePickerOpenOptions() { Title = MainLang.SelectImgFile }, MainLang.SelectImgFile))
+                .FirstOrDefault();
+
+            if (path != null)
+            {
+                var base64 = Method.Value.BytesToBase64(File.ReadAllBytes(path.Path));
+
+                var setting =
+                    JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                setting.WindowBackGroundImgData = base64;
+                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            }
+
+            Method.Ui.SetWindowBackGroundImg();
+        };
     }
 
     private void ControlProperty()
@@ -221,5 +250,7 @@ public partial class PersonalizeSettingPage : UserControl
         CustomHomePageComboBox.SelectedIndex = (int)setting.CustomHomePage;
         EditCustomHomePageBtn.IsVisible = CustomHomePageComboBox.SelectedIndex == 1 ? true : false;
         ColorPicker.Color = setting.AccentColor;
+        CustomBackGroundImgComboBox.SelectedIndex = setting.EnableCustomBackGroundImg ? 1 : 0;
+        EditCustomBackGroundImgBtn.IsVisible = CustomBackGroundImgComboBox.SelectedIndex == 1;
     }
 }

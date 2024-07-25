@@ -1,9 +1,9 @@
 <Application
-    RequestedThemeVariant="Default"
     x:Class="YMCL.Main.App"
     xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sty="using:FluentAvalonia.Styling"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    RequestedThemeVariant="Default">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

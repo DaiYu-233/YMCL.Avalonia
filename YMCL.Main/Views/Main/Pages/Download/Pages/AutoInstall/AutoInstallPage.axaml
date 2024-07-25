@@ -1,44 +1,45 @@
 <UserControl
-    FontFamily="{DynamicResource Font}"
-    FontWeight="{DynamicResource FontWeight}"
-    d:DesignHeight="800"
-    d:DesignWidth="800"
-    mc:Ignorable="d"
     x:Class="YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall.AutoInstallPage"
     xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ml="clr-namespace:MinecraftLaunch.Classes.Models.Install;assembly=MinecraftLaunch"
     xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
     xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Border Background="{DynamicResource 2x}" x:Name="Root">
+    d:DesignHeight="800"
+    d:DesignWidth="800"
+    FontFamily="{DynamicResource Font}"
+    FontWeight="{DynamicResource FontWeight}"
+    mc:Ignorable="d">
+    <Border x:Name="Root">
         <Border.Transitions>
             <Transitions>
-                <ThicknessTransition Duration="0:0:0.45" Property="Margin" />
+                <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
             </Transitions>
         </Border.Transitions>
-        <Grid Margin="0,-10,0,0">
+        <Grid Margin="0,0,0,0">
             <StackPanel
-                Margin="10,0,10,10"
                 Name="InstallableVersionListRoot"
+                Margin="10,0,10,10"
                 Spacing="10">
                 <Border
+                    Name="BedrockRoot"
+                    Margin="0,10,0,0"
+                    Padding="10"
+                    VerticalAlignment="Top"
                     Background="{DynamicResource 1x}"
                     CornerRadius="5"
                     DockPanel.Dock="Top"
                     IsVisible="False"
-                    Margin="0,10,0,0"
-                    Name="BedrockRoot"
-                    Padding="10"
-                    VerticalAlignment="Top">
+                    Opacity="{DynamicResource Opacity}">
                     <DockPanel HorizontalAlignment="Stretch">
                         <Image
-                            DockPanel.Dock="Right"
+                            Width="15"
                             Height="13"
-                            HorizontalAlignment="Right"
                             Margin="0,0,5,0"
-                            Width="15">
+                            HorizontalAlignment="Right"
+                            DockPanel.Dock="Right">
                             <Image.Source>
                                 <DrawingImage>
                                     <DrawingImage.Drawing>
@@ -52,55 +53,57 @@
                             </Image.Source>
                         </Image>
                         <TextBlock
-                            FontFamily="{DynamicResource Font}"
                             Margin="2"
+                            FontFamily="{DynamicResource Font}"
                             Text="{x:Static properties:MainLang.BedRockVersion}" />
                     </DockPanel>
                 </Border>
                 <ui:InfoBar
+                    Name="LoadInstallableVersionListErrorInfoBar"
                     DockPanel.Dock="Top"
                     FontWeight="Light"
                     IsClosable="False"
                     IsOpen="True"
                     IsVisible="False"
                     Message="{x:Static properties:MainLang.GetInstallableVersionFail}"
-                    Name="LoadInstallableVersionListErrorInfoBar"
                     Severity="Error">
                     <ui:InfoBar.ActionButton>
                         <Button
-                            Content="{x:Static properties:MainLang.Reload}"
+                            Name="ReloadLoadnstallableVersionListBtn"
                             HorizontalAlignment="Right"
-                            Name="ReloadLoadnstallableVersionListBtn" />
+                            Content="{x:Static properties:MainLang.Reload}" />
                     </ui:InfoBar.ActionButton>
                 </ui:InfoBar>
                 <Border
+                    VerticalAlignment="Top"
                     Background="{DynamicResource 1x}"
+                    ClipToBounds="True"
                     CornerRadius="5"
                     DockPanel.Dock="Top"
-                    VerticalAlignment="Top">
+                    Opacity="{DynamicResource Opacity}">
                     <DockPanel>
                         <TextBlock
+                            Margin="10,10,0,0"
                             DockPanel.Dock="Top"
                             FontFamily="{DynamicResource Font}"
                             FontSize="13"
-                            Margin="10,10,0,0"
                             Text="{x:Static properties:MainLang.LatestVersion}" />
                         <StackPanel
-                            DockPanel.Dock="Bottom"
                             Margin="10,5,10,10"
+                            DockPanel.Dock="Bottom"
                             Spacing="10">
                             <Border
-                                Background="{DynamicResource 2x}"
-                                CornerRadius="5"
                                 Name="LatestReleaseVersionRoot"
-                                Padding="5">
+                                Padding="5"
+                                Background="{DynamicResource 2x}"
+                                CornerRadius="5">
                                 <DockPanel>
                                     <Image
-                                        DockPanel.Dock="Right"
+                                        Width="15"
                                         Height="13"
-                                        HorizontalAlignment="Right"
                                         Margin="0,0,10,0"
-                                        Width="15">
+                                        HorizontalAlignment="Right"
+                                        DockPanel.Dock="Right">
                                         <Image.Source>
                                             <DrawingImage>
                                                 <DrawingImage.Drawing>
@@ -113,11 +116,11 @@
                                             </DrawingImage>
                                         </Image.Source>
                                     </Image>
-                                    <StackPanel DockPanel.Dock="Left" Margin="2,0,0,0">
+                                    <StackPanel Margin="2,0,0,0" DockPanel.Dock="Left">
                                         <TextBlock>
                                             <Run
-                                                FontSize="15"
                                                 Name="LatestReleaseVersionId"
+                                                FontSize="15"
                                                 Text="{x:Static properties:MainLang.Loading}" />
                                             <Run
                                                 FontSize="12"
@@ -125,26 +128,26 @@
                                                 Text="{x:Static properties:MainLang.ReleaseVersion}" />
                                         </TextBlock>
                                         <TextBlock
+                                            Name="LatestReleaseVersionTime"
+                                            Margin="1,0,0,0"
                                             FontSize="12"
                                             Foreground="{DynamicResource GrayColor}"
-                                            Margin="1,0,0,0"
-                                            Name="LatestReleaseVersionTime"
                                             Text="{x:Static properties:MainLang.Loading}" />
                                     </StackPanel>
                                 </DockPanel>
                             </Border>
                             <Border
-                                Background="{DynamicResource 2x}"
-                                CornerRadius="5"
                                 Name="LatestPreviewVersionRoot"
-                                Padding="5">
+                                Padding="5"
+                                Background="{DynamicResource 2x}"
+                                CornerRadius="5">
                                 <DockPanel>
                                     <Image
-                                        DockPanel.Dock="Right"
+                                        Width="15"
                                         Height="12"
-                                        HorizontalAlignment="Right"
                                         Margin="0,0,10,0"
-                                        Width="15">
+                                        HorizontalAlignment="Right"
+                                        DockPanel.Dock="Right">
                                         <Image.Source>
                                             <DrawingImage>
                                                 <DrawingImage.Drawing>
@@ -157,11 +160,11 @@
                                             </DrawingImage>
                                         </Image.Source>
                                     </Image>
-                                    <StackPanel DockPanel.Dock="Left" Margin="2,0,0,0">
+                                    <StackPanel Margin="2,0,0,0" DockPanel.Dock="Left">
                                         <TextBlock>
                                             <Run
-                                                FontSize="15"
                                                 Name="LatestPreviewVersionId"
+                                                FontSize="15"
                                                 Text="{x:Static properties:MainLang.Loading}" />
                                             <Run
                                                 FontSize="12"
@@ -169,10 +172,10 @@
                                                 Text="{x:Static properties:MainLang.PreviewVersion}" />
                                         </TextBlock>
                                         <TextBlock
+                                            Name="LatestPreviewVersionTime"
+                                            Margin="1,0,0,0"
                                             FontSize="12"
                                             Foreground="{DynamicResource GrayColor}"
-                                            Margin="1,0,0,0"
-                                            Name="LatestPreviewVersionTime"
                                             Text="{x:Static properties:MainLang.Loading}" />
                                     </StackPanel>
                                 </DockPanel>
@@ -181,30 +184,31 @@
                     </DockPanel>
                 </Border>
                 <Border
+                    VerticalAlignment="Top"
                     Background="{DynamicResource 1x}"
                     CornerRadius="5"
                     DockPanel.Dock="Top"
-                    VerticalAlignment="Top">
+                    Opacity="{DynamicResource Opacity}">
                     <Expander Header="{x:Static properties:MainLang.AllVersion}">
                         <Grid Height="300">
                             <ui:ProgressRing
-                                Foreground="{DynamicResource SystemAccentColor}"
-                                Height="50"
                                 Name="AllVersionLoadingRing"
-                                Width="50" />
+                                Width="50"
+                                Height="50"
+                                Foreground="{DynamicResource SystemAccentColor}" />
                             <DockPanel>
                                 <TextBox
-                                    DockPanel.Dock="Top"
                                     Name="AllVersionSearchBox"
+                                    DockPanel.Dock="Top"
                                     Watermark="{x:Static properties:MainLang.SearchKeyword}" />
                                 <ListBox
-                                    DockPanel.Dock="Bottom"
-                                    FontFamily="{DynamicResource Font}"
+                                    Name="AllVersionListView"
                                     Margin="0,10,0,0"
-                                    Name="AllVersionListView">
+                                    DockPanel.Dock="Bottom"
+                                    FontFamily="{DynamicResource Font}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate DataType="ml:VersionManifestEntry">
-                                            <Border BorderThickness="0,4,0,4" Margin="0,0,0,0">
+                                            <Border Margin="0,0,0,0" BorderThickness="0,4,0,4">
                                                 <DockPanel>
                                                     <Grid>
                                                         <TextBlock
@@ -213,10 +217,10 @@
                                                             Text="{Binding Id}" />
                                                         <StackPanel Margin="0,17,0,0" Orientation="Horizontal">
                                                             <TextBlock
+                                                                Margin="0,0,0,0"
                                                                 FontFamily="{DynamicResource Font}"
                                                                 FontSize="12"
                                                                 Foreground="{DynamicResource GrayColor}"
-                                                                Margin="0,0,0,0"
                                                                 Text="{Binding ReleaseTime}" />
                                                         </StackPanel>
                                                     </Grid>
@@ -230,21 +234,22 @@
                     </Expander>
                 </Border>
                 <Border
+                    VerticalAlignment="Top"
                     Background="{DynamicResource 1x}"
                     CornerRadius="5"
                     DockPanel.Dock="Top"
-                    VerticalAlignment="Top">
+                    Opacity="{DynamicResource Opacity}">
                     <Expander Header="{x:Static properties:MainLang.ReleaseVersion}">
                         <Grid Height="300">
                             <ui:ProgressRing
-                                Foreground="{DynamicResource SystemAccentColor}"
-                                Height="50"
                                 Name="ReleaseVersionLoadingRing"
-                                Width="50" />
-                            <ListBox FontFamily="{DynamicResource Font}" Name="ReleaseVersionListView">
+                                Width="50"
+                                Height="50"
+                                Foreground="{DynamicResource SystemAccentColor}" />
+                            <ListBox Name="ReleaseVersionListView" FontFamily="{DynamicResource Font}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate DataType="ml:VersionManifestEntry">
-                                        <Border BorderThickness="0,4,0,4" Margin="0,0,0,0">
+                                        <Border Margin="0,0,0,0" BorderThickness="0,4,0,4">
                                             <DockPanel>
                                                 <Grid>
                                                     <TextBlock
@@ -253,10 +258,10 @@
                                                         Text="{Binding Id}" />
                                                     <StackPanel Margin="0,17,0,0" Orientation="Horizontal">
                                                         <TextBlock
+                                                            Margin="0,0,0,0"
                                                             FontFamily="{DynamicResource Font}"
                                                             FontSize="12"
                                                             Foreground="{DynamicResource GrayColor}"
-                                                            Margin="0,0,0,0"
                                                             Text="{Binding ReleaseTime}" />
                                                     </StackPanel>
                                                 </Grid>
@@ -269,21 +274,22 @@
                     </Expander>
                 </Border>
                 <Border
+                    VerticalAlignment="Top"
                     Background="{DynamicResource 1x}"
                     CornerRadius="5"
                     DockPanel.Dock="Top"
-                    VerticalAlignment="Top">
+                    Opacity="{DynamicResource Opacity}">
                     <Expander Header="{x:Static properties:MainLang.PreviewVersion}">
                         <Grid Height="300">
                             <ui:ProgressRing
-                                Foreground="{DynamicResource SystemAccentColor}"
-                                Height="50"
                                 Name="PreviewVersionLoadingRing"
-                                Width="50" />
-                            <ListBox FontFamily="{DynamicResource Font}" Name="PreviewVersionListView">
+                                Width="50"
+                                Height="50"
+                                Foreground="{DynamicResource SystemAccentColor}" />
+                            <ListBox Name="PreviewVersionListView" FontFamily="{DynamicResource Font}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate DataType="ml:VersionManifestEntry">
-                                        <Border BorderThickness="0,4,0,4" Margin="0,0,0,0">
+                                        <Border Margin="0,0,0,0" BorderThickness="0,4,0,4">
                                             <DockPanel>
                                                 <Grid>
                                                     <TextBlock
@@ -292,10 +298,10 @@
                                                         Text="{Binding Id}" />
                                                     <StackPanel Margin="0,17,0,0" Orientation="Horizontal">
                                                         <TextBlock
+                                                            Margin="0,0,0,0"
                                                             FontFamily="{DynamicResource Font}"
                                                             FontSize="12"
                                                             Foreground="{DynamicResource GrayColor}"
-                                                            Margin="0,0,0,0"
                                                             Text="{Binding ReleaseTime}" />
                                                     </StackPanel>
                                                 </Grid>
@@ -308,21 +314,22 @@
                     </Expander>
                 </Border>
                 <Border
+                    VerticalAlignment="Top"
                     Background="{DynamicResource 1x}"
                     CornerRadius="5"
                     DockPanel.Dock="Top"
-                    VerticalAlignment="Top">
+                    Opacity="{DynamicResource Opacity}">
                     <Expander Header="{x:Static properties:MainLang.OldVersion}">
                         <Grid Height="300">
                             <ui:ProgressRing
-                                Foreground="{DynamicResource SystemAccentColor}"
-                                Height="50"
                                 Name="OldVersionLoadingRing"
-                                Width="50" />
-                            <ListBox FontFamily="{DynamicResource Font}" Name="OldVersionListView">
+                                Width="50"
+                                Height="50"
+                                Foreground="{DynamicResource SystemAccentColor}" />
+                            <ListBox Name="OldVersionListView" FontFamily="{DynamicResource Font}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate DataType="ml:VersionManifestEntry">
-                                        <Border BorderThickness="0,4,0,4" Margin="0,0,0,0">
+                                        <Border Margin="0,0,0,0" BorderThickness="0,4,0,4">
                                             <DockPanel>
                                                 <Grid>
                                                     <TextBlock
@@ -331,9 +338,9 @@
                                                         Text="{Binding Id}" />
                                                     <StackPanel Margin="0,17,0,0" Orientation="Horizontal">
                                                         <TextBlock
+                                                            Margin="0,0,0,0"
                                                             FontFamily="{DynamicResource Font}"
                                                             FontSize="12"
-                                                            Margin="0,0,0,0"
                                                             Text="{Binding ReleaseTime}" />
                                                     </StackPanel>
                                                 </Grid>
@@ -346,73 +353,74 @@
                     </Expander>
                 </Border>
             </StackPanel>
-            <DockPanel IsVisible="False" Name="InstallPreviewRoot">
+            <DockPanel Name="InstallPreviewRoot" IsVisible="False">
                 <Border
+                    Margin="10,0,10,10"
+                    VerticalAlignment="Stretch"
                     Background="{DynamicResource 1x}"
                     CornerRadius="5"
-                    Margin="10,10,10,10"
-                    VerticalAlignment="Stretch">
+                    Opacity="{DynamicResource Opacity}">
                     <StackPanel Margin="10" Spacing="10">
                         <Border
-                            Background="{DynamicResource 2x}"
-                            CornerRadius="5"
                             Padding="10"
-                            VerticalAlignment="Top">
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource 2x}"
+                            CornerRadius="5">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top" Text="{x:Static properties:MainLang.InstallPreview}" />
                                 <DockPanel DockPanel.Dock="Top">
-                                    <DockPanel DockPanel.Dock="Left" Margin="0,0,0,5">
+                                    <DockPanel Margin="0,0,0,5" DockPanel.Dock="Left">
                                         <TextBlock
+                                            Name="InstallPreviewIdText"
+                                            Margin="2,0,0,0"
                                             DockPanel.Dock="Top"
                                             FontSize="15"
-                                            Margin="2,0,0,0"
-                                            Name="InstallPreviewIdText"
                                             Text="1.12.2" />
                                         <TextBlock
+                                            Name="InstallPreviewAdditionalInstallText"
+                                            Margin="2,0,0,0"
                                             DockPanel.Dock="Top"
                                             FontSize="12"
                                             Foreground="{DynamicResource GrayColor}"
-                                            Margin="2,0,0,0"
-                                            Name="InstallPreviewAdditionalInstallText"
                                             Text="{x:Static properties:MainLang.NoAdditionalInstall}" />
                                     </DockPanel>
                                     <DockPanel
-                                        DockPanel.Dock="Right"
-                                        HorizontalAlignment="Right"
                                         Margin="0,0,0,5"
-                                        VerticalAlignment="Bottom">
-                                        <Button Content="{x:Static properties:MainLang.ViewUpdatedContent}" Name="ViewUpdatedContentBtn" />
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom"
+                                        DockPanel.Dock="Right">
+                                        <Button Name="ViewUpdatedContentBtn" Content="{x:Static properties:MainLang.ViewUpdatedContent}" />
                                         <Button
-                                            Content="{x:Static properties:MainLang.BeginInstall}"
+                                            Name="BeginInstallBtn"
                                             Margin="5,0,0,0"
-                                            Name="BeginInstallBtn" />
+                                            Content="{x:Static properties:MainLang.BeginInstall}" />
                                     </DockPanel>
                                 </DockPanel>
                                 <TextBlock
+                                    Name="CustomIdWarning"
+                                    Margin="1,5,0,0"
                                     DockPanel.Dock="Bottom"
                                     FontSize="12"
-                                    Foreground="Red"
-                                    Margin="1,5,0,0"
-                                    Name="CustomIdWarning">
+                                    Foreground="Red">
                                     <Run Text="{x:Static properties:MainLang.TheVersionNameWillBeRenamedTo}" />
                                     <Run Name="CustomIdWarningText" />
                                 </TextBlock>
-                                <TextBox DockPanel.Dock="Bottom" Name="InstallPreviewIdTextBox" />
+                                <TextBox Name="InstallPreviewIdTextBox" DockPanel.Dock="Bottom" />
                             </DockPanel>
                         </Border>
                         <Border
-                            Background="{DynamicResource 2x}"
-                            CornerRadius="5"
                             Name="RetuenToListRoot"
                             Padding="10"
-                            VerticalAlignment="Top">
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource 2x}"
+                            CornerRadius="5">
                             <DockPanel>
                                 <Image
-                                    DockPanel.Dock="Right"
-                                    Height="15"
-                                    HorizontalAlignment="Right"
+                                    Width="15"
+                                    Height="12"
                                     Margin="0,0,5,0"
-                                    Width="15">
+                                    HorizontalAlignment="Right"
+                                    DockPanel.Dock="Right">
                                     <Image.Source>
                                         <DrawingImage>
                                             <DrawingImage.Drawing>
@@ -426,17 +434,20 @@
                                     </Image.Source>
                                 </Image>
                                 <TextBlock
-                                    DockPanel.Dock="Right"
-                                    Margin="2,0,0,0"
                                     Name="MinecraftPreviewVerionId"
+                                    Margin="2,0,0,0"
+                                    DockPanel.Dock="Right"
                                     Text="1.12.2" />
                                 <TextBlock
-                                    DockPanel.Dock="Right"
                                     Margin="2,0,0,0"
+                                    DockPanel.Dock="Right"
                                     Text="Minecraft" />
                             </DockPanel>
                         </Border>
-                        <Border Background="{DynamicResource 1x}" CornerRadius="5">
+                        <Border
+                            Background="{DynamicResource 1x}"
+                            CornerRadius="5"
+                            Opacity="{DynamicResource Opacity}">
                             <Expander>
                                 <Expander.Header>
                                     <TextBlock>
@@ -447,8 +458,8 @@
                                 </Expander.Header>
                                 <Grid>
                                     <ListBox
-                                        Height="250"
                                         Name="OptiFineListView"
+                                        Height="250"
                                         Tag="optifine">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate DataType="ml:OptiFineInstallEntity">
@@ -460,17 +471,20 @@
                                         </ListBox.ItemTemplate>
                                     </ListBox>
                                     <TextBlock
-                                        Foreground="{DynamicResource GrayColor}"
                                         Name="NoOptifine"
+                                        Foreground="{DynamicResource GrayColor}"
                                         Text="{x:Static properties:MainLang.NoAvailableItem}" />
                                     <ui:ProgressRing
-                                        Height="50"
                                         Name="OptiFineLoading"
-                                        Width="50" />
+                                        Width="50"
+                                        Height="50" />
                                 </Grid>
                             </Expander>
                         </Border>
-                        <Border Background="{DynamicResource 1x}" CornerRadius="5">
+                        <Border
+                            Background="{DynamicResource 1x}"
+                            CornerRadius="5"
+                            Opacity="{DynamicResource Opacity}">
                             <Expander>
                                 <Expander.Header>
                                     <TextBlock>
@@ -481,8 +495,8 @@
                                 </Expander.Header>
                                 <Grid>
                                     <ListBox
-                                        Height="250"
                                         Name="ForgeListView"
+                                        Height="250"
                                         Tag="forge">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate DataType="ml:ForgeInstallEntry">
@@ -491,17 +505,20 @@
                                         </ListBox.ItemTemplate>
                                     </ListBox>
                                     <TextBlock
-                                        Foreground="{DynamicResource GrayColor}"
                                         Name="NoForge"
+                                        Foreground="{DynamicResource GrayColor}"
                                         Text="{x:Static properties:MainLang.NoAvailableItem}" />
                                     <ui:ProgressRing
-                                        Height="50"
                                         Name="ForgeLoading"
-                                        Width="50" />
+                                        Width="50"
+                                        Height="50" />
                                 </Grid>
                             </Expander>
                         </Border>
-                        <Border Background="{DynamicResource 1x}" CornerRadius="5">
+                        <Border
+                            Background="{DynamicResource 1x}"
+                            CornerRadius="5"
+                            Opacity="{DynamicResource Opacity}">
                             <Expander>
                                 <Expander.Header>
                                     <TextBlock>
@@ -512,8 +529,8 @@
                                 </Expander.Header>
                                 <Grid>
                                     <ListBox
-                                        Height="250"
                                         Name="FabricListView"
+                                        Height="250"
                                         Tag="fabric">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate DataType="ml:FabricBuildEntry">
@@ -522,17 +539,20 @@
                                         </ListBox.ItemTemplate>
                                     </ListBox>
                                     <TextBlock
-                                        Foreground="{DynamicResource GrayColor}"
                                         Name="NoFabric"
+                                        Foreground="{DynamicResource GrayColor}"
                                         Text="{x:Static properties:MainLang.NoAvailableItem}" />
                                     <ui:ProgressRing
-                                        Height="50"
                                         Name="FabricLoading"
-                                        Width="50" />
+                                        Width="50"
+                                        Height="50" />
                                 </Grid>
                             </Expander>
                         </Border>
-                        <Border Background="{DynamicResource 1x}" CornerRadius="5">
+                        <Border
+                            Background="{DynamicResource 1x}"
+                            CornerRadius="5"
+                            Opacity="{DynamicResource Opacity}">
                             <Expander>
                                 <Expander.Header>
                                     <TextBlock>
@@ -543,8 +563,8 @@
                                 </Expander.Header>
                                 <Grid>
                                     <ListBox
-                                        Height="250"
                                         Name="QuiltListView"
+                                        Height="250"
                                         Tag="quilt">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate DataType="ml:QuiltBuildEntry">
@@ -553,13 +573,13 @@
                                         </ListBox.ItemTemplate>
                                     </ListBox>
                                     <TextBlock
-                                        Foreground="{DynamicResource GrayColor}"
                                         Name="NoQuilt"
+                                        Foreground="{DynamicResource GrayColor}"
                                         Text="{x:Static properties:MainLang.NoAvailableItem}" />
                                     <ui:ProgressRing
-                                        Height="50"
                                         Name="QuiltLoading"
-                                        Width="50" />
+                                        Width="50"
+                                        Height="50" />
                                 </Grid>
                             </Expander>
                         </Border>

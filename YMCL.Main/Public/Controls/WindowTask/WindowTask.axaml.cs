@@ -30,7 +30,15 @@ public partial class WindowTask : Window
         if (!valueProgress) ValueProgressRoot.IsVisible = false;
         Closing += (s, e) =>
         {
-            if (!isFinish) e.Cancel = true;
+            if (!isFinish)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                Destory();
+                e.Cancel = true;
+            }
         };
         PropertyChanged += (s, e) =>
         {
@@ -57,10 +65,22 @@ public partial class WindowTask : Window
                 Root.CornerRadius = new CornerRadius(0, 0, 8, 8);
                 RootGrid.Margin = new Thickness(0, 10, 0, 0);
             }
+            else if (setting.WindowTitleBarStyle == WindowTitleBarStyle.Ymcl && setting.EnableCustomBackGroundImg)
+            {
+                TitleBar.Margin = new Thickness(0, 0, 0, 10);
+                WindowState = WindowState.Maximized;
+                WindowState = WindowState.Normal;
+            }
             else
             {
                 WindowState = WindowState.Maximized;
                 WindowState = WindowState.Normal;
+            }
+
+            if (setting.EnableCustomBackGroundImg && !string.IsNullOrEmpty(setting.WindowBackGroundImgData))
+            {
+                var bitmap = Method.Value.Base64ToBitmap(setting.WindowBackGroundImgData);
+                BackGroundImg.Source = bitmap;
             }
         };
 
@@ -92,7 +112,7 @@ public partial class WindowTask : Window
     public void Destory()
     {
         Finish();
-        Close();
+        Hide();
         entry.Destory();
     }
 

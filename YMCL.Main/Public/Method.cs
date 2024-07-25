@@ -166,6 +166,24 @@ public class Method
             }
         }
 
+        public static void SetWindowBackGroundImg()
+        {
+            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (setting.EnableCustomBackGroundImg && !string.IsNullOrEmpty(setting.WindowBackGroundImgData))
+            {
+                Application.Current.Resources["Opacity"] = 0.9;
+                var bitmap = Value.Base64ToBitmap(setting.WindowBackGroundImgData);
+                Const.Window.main.BackGroundImg.Source = bitmap;
+                Const.Window.taskCenter.BackGroundImg.Source = bitmap;
+            }
+            else
+            {
+                Application.Current.Resources["Opacity"] = 1.0;
+                Const.Window.main.BackGroundImg.Source = null;
+                Const.Window.taskCenter.BackGroundImg.Source = null;
+            }
+        }
+
         public static void ShowShortException(string msg, Exception ex)
         {
             Toast($"{msg}\n{ex.Message}", Const.Notification.main, NotificationType.Error);
@@ -443,19 +461,27 @@ public class Method
             File.WriteAllText(Const.PluginDataPath, JsonConvert.SerializeObject(list, Formatting.Indented));
             foreach (var item in dlls)
             {
-                var asm = Assembly.LoadFrom(item.FullName);
-                var manifestModuleName = asm.ManifestModule.ScopeName;
-                var type = asm.GetType("YMCL.Plugin.Main");
-                if (!typeof(IPlugin).IsAssignableFrom(type))
+                if (list.Contains(item.FullName))
                 {
-                    Debug.WriteLine("未继承插件接口");
-                    continue;
-                }
+                    try
+                    {
+                        var asm = Assembly.LoadFrom(item.FullName);
+                        var manifestModuleName = asm.ManifestModule.ScopeName;
+                        var type = asm.GetType("YMCL.Plugin.Main");
+                        if (!typeof(IPlugin).IsAssignableFrom(type))
+                        {
+                            Debug.WriteLine("未继承插件接口");
+                            continue;
+                        }
 
-                var instance = Activator.CreateInstance(type) as IPlugin;
-                var protocolInfo = instance.GetPluginInformation();
-                if (list.Contains(item.FullName)) instance.OnLaunch();
-                instance = null;
+                        var instance = Activator.CreateInstance(type) as IPlugin;
+                        var protocolInfo = instance.GetPluginInformation();
+                        if (list.Contains(item.FullName)) instance.OnLaunch();
+                    }
+                    catch
+                    {
+                    }
+                }
             }
         }
 

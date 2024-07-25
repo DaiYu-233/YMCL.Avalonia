@@ -84,6 +84,11 @@ public partial class TaskCenterWindow : Window
                 WindowState = WindowState.Normal;
                 ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
                 ExtendClientAreaToDecorationsHint = true;
+                if (setting.EnableCustomBackGroundImg)
+                {
+                    TitleBar.Margin = new Thickness(0, 0, 0, 10);
+                }
+
                 break;
         }
     }

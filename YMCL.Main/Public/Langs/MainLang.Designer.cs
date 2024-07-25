@@ -375,6 +375,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 自定义背景图.
+        /// </summary>
+        public static string CustomBackGroundImg {
+            get {
+                return ResourceManager.GetString("CustomBackGroundImg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 自定义主页面.
         /// </summary>
         public static string CustomHomePage {
@@ -1589,6 +1598,15 @@ namespace YMCL.Main.Public.Langs {
         public static string SelectedItem {
             get {
                 return ResourceManager.GetString("SelectedItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 选择图像文件.
+        /// </summary>
+        public static string SelectImgFile {
+            get {
+                return ResourceManager.GetString("SelectImgFile", resourceCulture);
             }
         }
         

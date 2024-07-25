@@ -16,6 +16,7 @@ using NAudio.Wave;
 using Newtonsoft.Json;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
+using YMCL.Main.Public.Controls.WindowTask;
 using YMCL.Main.Public.Langs;
 using YMCL.Main.Views.Main.Pages.Download;
 using YMCL.Main.Views.Main.Pages.Launch;
@@ -52,6 +53,15 @@ public partial class MainWindow : Window
         TitleText.PointerPressed += (s, e) => { BeginMoveDrag(e); };
         PropertyChanged += (s, e) =>
         {
+            if (e.Property.Name == nameof(WindowState))
+            {
+                if (WindowState == WindowState.Maximized)
+                {
+                    launchPage.CloseVersionList();
+                    launchPage.CloseVersionSetting(null, null);
+                }
+            }
+
             if (titleBarStyle == WindowTitleBarStyle.Ymcl && e.Property.Name == nameof(WindowState))
                 switch (WindowState)
                 {
@@ -150,6 +160,7 @@ public partial class MainWindow : Window
             }
 
         downloadPage.curseForgeFetcherPage.SearchModFromCurseForge();
+        Method.Ui.SetWindowBackGroundImg();
     }
 
     public async void HandleDrop(object sender, DragEventArgs e)

@@ -1,30 +1,31 @@
 <UserControl
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    mc:Ignorable="d"
     x:Class="YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher.LauncherSettingPage"
     xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <ScrollViewer>
-        <Border CornerRadius="8" x:Name="Root">
+        <Border x:Name="Root" CornerRadius="8">
             <Border.Transitions>
                 <Transitions>
-                    <ThicknessTransition Duration="0:0:0.45" Property="Margin" />
+                    <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
                 </Transitions>
             </Border.Transitions>
             <StackPanel Margin="10" Spacing="10">
                 <Border
+                    Padding="6.5"
                     Background="{DynamicResource 1x}"
                     CornerRadius="5"
-                    Padding="6.5">
+                    Opacity="{DynamicResource Opacity}">
                     <Grid>
                         <Image
                             Height="34"
-                            HorizontalAlignment="Left"
                             Margin="8,0,0,0"
+                            HorizontalAlignment="Left"
                             VerticalAlignment="Center">
                             <Image.Source>
                                 <DrawingImage>
@@ -83,51 +84,52 @@
                         </Image>
                         <Grid Margin="50,0,0,0">
                             <TextBlock
+                                x:Name="Version"
+                                Margin="0,-15,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
                                 FontFamily="{StaticResource Font}"
                                 FontSize="17"
                                 FontWeight="Thin"
-                                Foreground="{DynamicResource TextColor}"
-                                HorizontalAlignment="Left"
-                                Margin="0,-15,0,0"
-                                VerticalAlignment="Center"
-                                x:Name="Version" />
+                                Foreground="{DynamicResource TextColor}" />
                             <Label
+                                Margin="0,20,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
                                 Content=" - By DaiYu"
                                 FontFamily="{DynamicResource Font}"
                                 FontSize="12"
-                                Foreground="{DynamicResource GrayColor}"
-                                HorizontalAlignment="Left"
-                                Margin="0,20,0,0"
-                                VerticalAlignment="Center" />
+                                Foreground="{DynamicResource GrayColor}" />
                         </Grid>
                         <Button
+                            x:Name="CheckUpdateBtn"
+                            Height="30.5"
+                            Margin="200,0,9,0"
+                            HorizontalAlignment="Right"
                             Classes="accent"
                             Content="{x:Static properties:MainLang.CheckUpdate}"
                             FontFamily="{DynamicResource Font}"
-                            Foreground="White"
-                            Height="30.5"
-                            HorizontalAlignment="Right"
-                            Margin="200,0,9,0"
-                            x:Name="CheckUpdateBtn" />
+                            Foreground="White" />
                     </Grid>
 
                 </Border>
                 <Border
+                    Padding="6.5"
                     Background="{DynamicResource 1x}"
                     CornerRadius="5"
-                    Padding="6.5">
+                    Opacity="{DynamicResource Opacity}">
                     <StackPanel Margin="5" Spacing="5">
                         <Border
+                            Padding="8"
                             Background="{DynamicResource 2x}"
-                            CornerRadius="5"
-                            Padding="8">
+                            CornerRadius="5">
                             <DockPanel>
                                 <Image
-                                    DockPanel.Dock="Left"
+                                    Width="24"
                                     Height="24"
-                                    HorizontalAlignment="Left"
                                     Margin="7,0,0,0"
-                                    Width="24">
+                                    HorizontalAlignment="Left"
+                                    DockPanel.Dock="Left">
                                     <Image.Source>
                                         <DrawingImage>
                                             <DrawingImage.Drawing>
@@ -141,60 +143,63 @@
                                     </Image.Source>
                                 </Image>
                                 <Button
+                                    Name="OpenUserDataFolderBtn"
+                                    VerticalAlignment="Center"
                                     Content="{x:Static properties:MainLang.OpenFolder}"
                                     DockPanel.Dock="Right"
-                                    FontFamily="{DynamicResource Font}"
-                                    Name="OpenUserDataFolderBtn"
-                                    VerticalAlignment="Center" />
-                                <StackPanel DockPanel.Dock="Left" Margin="10,0,0,0">
+                                    FontFamily="{DynamicResource Font}" />
+                                <StackPanel Margin="10,0,0,0" DockPanel.Dock="Left">
                                     <TextBlock
+                                        HorizontalAlignment="Left"
                                         FontFamily="{DynamicResource Font}"
-                                        FontSize="14"
-                                        HorizontalAlignment="Left">
+                                        FontSize="14">
                                         <Run Text="{x:Static properties:MainLang.UserDataFolder}" />
                                         <Run
+                                            Name="UserDataSize"
                                             FontSize="12"
                                             Foreground="{DynamicResource GrayColor}"
-                                            Name="UserDataSize"
                                             Text="0 KiB" />
                                     </TextBlock>
                                     <TextBlock
+                                        Name="UserDataFolderPath"
+                                        Margin="-1,0,0,0"
+                                        HorizontalAlignment="Left"
                                         FontFamily="{DynamicResource Font}"
                                         FontSize="12"
                                         Foreground="{DynamicResource GrayColor}"
-                                        HorizontalAlignment="Left"
-                                        Margin="-1,0,0,0"
-                                        Name="UserDataFolderPath"
                                         Text="{x:Static properties:MainLang.UserDataFolder}" />
                                 </StackPanel>
                             </DockPanel>
                         </Border>
                     </StackPanel>
                 </Border>
-                <Border Background="{DynamicResource 1x}" CornerRadius="5">
+                <Border
+                    Background="{DynamicResource 1x}"
+                    CornerRadius="5"
+                    Opacity="{DynamicResource Opacity}">
                     <DockPanel>
                         <WrapPanel
-                            DockPanel.Dock="Top"
-                            HorizontalAlignment="Left"
                             Margin="8,10,10,0"
-                            VerticalAlignment="Top">
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            DockPanel.Dock="Top">
                             <HyperlinkButton
+                                Margin="0,0,2,0"
+                                HorizontalAlignment="Right"
                                 Cursor="Hand"
                                 FontFamily="{DynamicResource Font}"
-                                HorizontalAlignment="Right"
-                                Margin="0,0,2,0"
                                 NavigateUri="https://ymcl.daiyu.fun/">
                                 <Border Margin="-5,0,-6,0" Padding="0,0,5,0">
                                     <DockPanel>
                                         <Border
-                                            CornerRadius="5,5,5,5"
+                                            Width="38"
                                             Height="38"
                                             Margin="4,0,0,0"
-                                            Width="38">
+                                            CornerRadius="5,5,5,5">
                                             <Image
+                                                Width="35"
                                                 HorizontalAlignment="Left"
-                                                VerticalAlignment="Center"
-                                                Width="35">
+                                                VerticalAlignment="Center">
                                                 <Image.Source>
                                                     <DrawingImage>
                                                         <DrawingImage.Drawing>
@@ -257,9 +262,9 @@
                                                 Text="Yu Minecraft Launcher"
                                                 TextDecorations="{x:Null}" />
                                             <TextBlock
+                                                Margin="1,0,0,0"
                                                 FontSize="13"
                                                 Foreground="{DynamicResource TextColor}"
-                                                Margin="1,0,0,0"
                                                 Text="ymcl.daiyu.fun"
                                                 TextDecorations="{x:Null}" />
                                         </StackPanel>
@@ -267,18 +272,18 @@
                                 </Border>
                             </HyperlinkButton>
                             <HyperlinkButton
+                                Margin="0,0,2,0"
+                                HorizontalAlignment="Right"
                                 Cursor="Hand"
                                 FontFamily="{DynamicResource Font}"
-                                HorizontalAlignment="Right"
-                                Margin="0,0,2,0"
                                 NavigateUri="https://afdian.com/a/DaiYu_">
                                 <Border Margin="-5,0,-6,0" Padding="0,0,5,0">
                                     <DockPanel>
                                         <Border
-                                            CornerRadius="5,5,5,5"
+                                            Width="35"
                                             Height="35"
                                             Margin="4,0,0,0"
-                                            Width="35">
+                                            CornerRadius="5,5,5,5">
                                             <Image HorizontalAlignment="Left" VerticalAlignment="Center">
                                                 <Image.Source>
                                                     <DrawingImage>
@@ -333,18 +338,18 @@
                                 </Border>
                             </HyperlinkButton>
                             <HyperlinkButton
+                                Margin="0,0,2,0"
+                                HorizontalAlignment="Right"
                                 Cursor="Hand"
                                 FontFamily="{DynamicResource Font}"
-                                HorizontalAlignment="Right"
-                                Margin="0,0,2,0"
                                 NavigateUri="https://dotnet.microsoft.com/zh-cn/download/dotnet/8.0">
                                 <Border Margin="-5,0,-6,0" Padding="0,0,5,0">
                                     <DockPanel>
                                         <Border
-                                            CornerRadius="5,5,5,5"
+                                            Width="35"
                                             Height="35"
                                             Margin="4,0,0,0"
-                                            Width="35">
+                                            CornerRadius="5,5,5,5">
                                             <Image HorizontalAlignment="Left" VerticalAlignment="Center">
                                                 <Image.Source>
                                                     <DrawingImage>
@@ -393,9 +398,9 @@
                                                 Text=".NET Core 8.0"
                                                 TextDecorations="{x:Null}" />
                                             <TextBlock
+                                                Margin="2,0,0,0"
                                                 FontSize="13"
                                                 Foreground="{DynamicResource TextColor}"
-                                                Margin="2,0,0,0"
                                                 Text="dotnet.microsoft.com"
                                                 TextDecorations="{x:Null}" />
                                         </StackPanel>
@@ -403,18 +408,18 @@
                                 </Border>
                             </HyperlinkButton>
                             <HyperlinkButton
+                                Margin="0,0,2,0"
+                                HorizontalAlignment="Right"
                                 Cursor="Hand"
                                 FontFamily="{DynamicResource Font}"
-                                HorizontalAlignment="Right"
-                                Margin="0,0,2,0"
                                 NavigateUri="https://docs.avaloniaui.net/">
                                 <Border Margin="-5,0,-6,0" Padding="0,0,5,0">
                                     <DockPanel>
                                         <Border
-                                            CornerRadius="5,5,5,5"
+                                            Width="36"
                                             Height="36"
                                             Margin="4,0,0,0"
-                                            Width="36">
+                                            CornerRadius="5,5,5,5">
                                             <Image HorizontalAlignment="Left" VerticalAlignment="Center">
                                                 <Image.Source>
                                                     <DrawingImage>
@@ -452,9 +457,9 @@
                                                 Text=" AvaloniaUi"
                                                 TextDecorations="{x:Null}" />
                                             <TextBlock
+                                                Margin="2,0,0,0"
                                                 FontSize="13"
                                                 Foreground="{DynamicResource TextColor}"
-                                                Margin="2,0,0,0"
                                                 Text="docs.avaloniaui.net"
                                                 TextDecorations="{x:Null}" />
                                         </StackPanel>
@@ -463,15 +468,15 @@
                             </HyperlinkButton>
                         </WrapPanel>
                         <StackPanel
-                            DockPanel.Dock="Top"
                             Margin="20,10,20,0"
-                            VerticalAlignment="Top">
+                            VerticalAlignment="Top"
+                            DockPanel.Dock="Top">
                             <Grid VerticalAlignment="Top">
                                 <Image
+                                    Width="25"
                                     Height="25"
                                     HorizontalAlignment="Left"
-                                    VerticalAlignment="Top"
-                                    Width="25">
+                                    VerticalAlignment="Top">
                                     <Image.Source>
                                         <DrawingImage>
                                             <DrawingImage.Drawing>
@@ -485,34 +490,34 @@
                                     </Image.Source>
                                 </Image>
                                 <TextBlock
+                                    Margin="30,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
                                     FontFamily="{DynamicResource Font}"
                                     FontSize="18"
                                     Foreground="{DynamicResource TextColor}"
-                                    HorizontalAlignment="Left"
-                                    Margin="30,0,0,0"
                                     Text="Apache License"
-                                    TextDecorations="{x:Null}"
-                                    VerticalAlignment="Center" />
+                                    TextDecorations="{x:Null}" />
                             </Grid>
                             <TextBlock
+                                Margin="2,3,10,0"
                                 DockPanel.Dock="Bottom"
                                 FontFamily="{DynamicResource Font}"
                                 FontSize="13"
                                 Foreground="{DynamicResource TextColor}"
-                                Margin="2,3,10,0"
                                 Text="{x:Static properties:MainLang.GPL3Text}"
                                 TextDecorations="{x:Null}"
                                 TextWrapping="Wrap" />
                         </StackPanel>
-                        <Grid DockPanel.Dock="Top" Margin="10,12,10,10">
+                        <Grid Margin="10,12,10,10" DockPanel.Dock="Top">
                             <TextBlock
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
                                 FontFamily="{DynamicResource Font}"
                                 FontSize="15"
                                 Foreground="{DynamicResource TextColor}"
-                                HorizontalAlignment="Left"
-                                Margin="10,0,0,0"
-                                Text="{x:Static properties:MainLang.OpenSourceProjectUsageTable}"
-                                VerticalAlignment="Top" />
+                                Text="{x:Static properties:MainLang.OpenSourceProjectUsageTable}" />
                             <WrapPanel Margin="5,25,5,0">
                                 <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/Fody/Costura">
                                     <TextBlock

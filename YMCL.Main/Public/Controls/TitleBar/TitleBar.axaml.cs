@@ -18,6 +18,8 @@ public partial class TitleBar : UserControl
     public static readonly StyledProperty<bool> IsCloseBtnShowProperty =
         AvaloniaProperty.Register<TitleBar, bool>(nameof(IsCloseBtnShow), true);
 
+    private DateTime? lastClickTime;
+
     public TitleBar()
     {
         InitializeComponent();
@@ -34,8 +36,6 @@ public partial class TitleBar : UserControl
                 MaximizeButton.Margin = new Thickness(0, 0, -5, 0);
                 MinimizeButton.Margin = new Thickness(0, 0, 21, 0);
             }
-
-            ;
         };
     }
 
@@ -67,6 +67,22 @@ public partial class TitleBar : UserControl
                 var window = control.GetVisualRoot() as Window;
                 window.BeginMoveDrag(e);
             }
+
+            if (lastClickTime.HasValue && (DateTime.Now - lastClickTime.Value).TotalMilliseconds < 300)
+            {
+                lastClickTime = null;
+                var window = this.GetVisualRoot() as Window;
+                if (window != null)
+                    window.WindowState = window.WindowState == WindowState.Maximized
+                        ? WindowState.Normal
+                        : WindowState.Maximized;
+            }
+            else
+            {
+                lastClickTime = DateTime.Now;
+            }
+
+            e.Handled = true;
         }
     }
 

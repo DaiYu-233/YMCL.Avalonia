@@ -1,80 +1,90 @@
 <Window
-    ExtendClientAreaChromeHints="NoChrome"
-    ExtendClientAreaToDecorationsHint="True"
-    Height="420"
-    IsHitTestVisible="True"
-    Topmost="True"
-    Width="700"
-    WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d"
     x:Class="YMCL.Main.Public.Controls.WindowTask.WindowTask"
     xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:uc="clr-namespace:YMCL.Main.Public.Controls"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    Width="700"
+    Height="420"
+    ExtendClientAreaChromeHints="NoChrome"
+    ExtendClientAreaToDecorationsHint="True"
+    IsHitTestVisible="True"
+    Topmost="True"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Window.Styles>
         <Style Selector="Window">
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Color="White" Opacity="0" />
+                    <SolidColorBrush Opacity="0" Color="White" />
                 </Setter.Value>
             </Setter>
         </Style>
     </Window.Styles>
     <Border
+        x:Name="Root"
         Background="{DynamicResource 1x}"
         ClipToBounds="True"
-        CornerRadius="8"
-        x:Name="Root">
-        <Grid x:Name="RootGrid">
-            <DockPanel>
-                <uc:TitleBar
-                    DockPanel.Dock="Top"
-                    IsCloseBtnExitApp="False"
-                    Name="TitleBar"
-                    Title="" />
+        CornerRadius="8">
+        <Grid>
+            <Border ClipToBounds="True" CornerRadius="0,0,8,8">
+                <Viewbox Name="BackGroundImgRoot" Stretch="UniformToFill">
+                    <Image Name="BackGroundImg" />
+                </Viewbox>
+            </Border>
+            <Grid x:Name="RootGrid">
+
                 <DockPanel>
-                    <Border
-                        Background="{DynamicResource 2x}"
-                        CornerRadius="5"
+                    <uc:TitleBar
+                        Name="TitleBar"
+                        Title=""
                         DockPanel.Dock="Top"
-                        IsVisible="True"
-                        Margin="10,0,10,5"
-                        Name="ValueProgressRoot"
-                        VerticalAlignment="Top">
-                        <DockPanel>
-                            <TextBlock
-                                DockPanel.Dock="Right"
-                                FontFamily="{DynamicResource Font}"
-                                HorizontalAlignment="Right"
-                                Margin="5,5,7,5"
-                                Name="ProgressBarText"
-                                Text="0%"
-                                TextAlignment="Center"
-                                Width="40" />
-                            <ProgressBar
-                                Margin="12,0,0,0"
-                                Name="ProgressBar"
-                                Value="0" />
-                        </DockPanel>
-                    </Border>
-                    <TextBox
-                        DockPanel.Dock="Bottom"
-                        FontFamily="{DynamicResource Font}"
-                        IsReadOnly="True"
-                        Margin="10,0,10,10"
-                        Name="ProgressTextBox"
-                        TextWrapping="Wrap" />
+                        IsCloseBtnExitApp="False" />
+                    <DockPanel>
+                        <Border
+                            Name="ValueProgressRoot"
+                            Margin="10,0,10,5"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource 2x}"
+                            CornerRadius="5"
+                            DockPanel.Dock="Top"
+                            IsVisible="True"
+                            Opacity="{DynamicResource Opacity}">
+                            <DockPanel>
+                                <TextBlock
+                                    Name="ProgressBarText"
+                                    Width="40"
+                                    Margin="5,5,7,5"
+                                    HorizontalAlignment="Right"
+                                    DockPanel.Dock="Right"
+                                    FontFamily="{DynamicResource Font}"
+                                    Text="0%"
+                                    TextAlignment="Center" />
+                                <ProgressBar
+                                    Name="ProgressBar"
+                                    Margin="12,0,0,0"
+                                    Value="0" />
+                            </DockPanel>
+                        </Border>
+                        <TextBox
+                            Name="ProgressTextBox"
+                            Margin="10,0,10,10"
+                            DockPanel.Dock="Bottom"
+                            FontFamily="{DynamicResource Font}"
+                            IsReadOnly="True"
+                            Opacity="{DynamicResource Opacity}"
+                            TextWrapping="Wrap" />
+                    </DockPanel>
                 </DockPanel>
-            </DockPanel>
-            <TextBlock
-                FontFamily="{DynamicResource Font}"
-                FontSize="14"
-                HorizontalAlignment="Left"
-                Margin="5,5,0,0"
-                VerticalAlignment="Top"
-                x:Name="TitleText" />
+                <TextBlock
+                    x:Name="TitleText"
+                    Margin="5,5,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontFamily="{DynamicResource Font}"
+                    FontSize="14" />
+            </Grid>
         </Grid>
     </Border>
 </Window>

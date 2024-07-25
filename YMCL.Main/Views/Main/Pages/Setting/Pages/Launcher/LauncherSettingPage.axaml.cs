@@ -44,9 +44,10 @@ public partial class LauncherSettingPage : UserControl
     private void ControlProperty()
     {
         UserDataFolderPath.Text = Const.UserDataRootPath;
-        var userDataSize = Math.Round(Method.Value.GetDirectoryLength(Const.UserDataRootPath) / 1024, 2) >= 512
-            ? $"{Math.Round(Method.Value.GetDirectoryLength(Const.UserDataRootPath) / 1024 / 1024, 2)} Mib"
-            : $"{Math.Round(Method.Value.GetDirectoryLength(Const.UserDataRootPath) / 1024, 2)} Kib";
+        var lenth = Method.Value.GetDirectoryLength(Const.UserDataRootPath);
+        var userDataSize = Math.Round(lenth / 1024, 2) >= 512
+            ? $"{Math.Round(lenth / 1024 / 1024, 2)} Mib"
+            : $"{Math.Round(lenth / 1024, 2)} Kib";
         UserDataSize.Text = userDataSize;
         var resourceName = "YMCL.Main.Public.Texts.DateTime.txt";
         var _assembly = Assembly.GetExecutingAssembly();

@@ -1,58 +1,63 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Threading;
-using System;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Langs;
 
-namespace YMCL.Main
+namespace YMCL.Main;
+
+public class App : Application
 {
-    public partial class App : Application
+    public override void Initialize()
     {
-        public override void Initialize()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
-        public override void OnFrameworkInitializationCompleted()
-        {
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {
-                desktop.MainWindow = Const.Window.initialize;
-                Const.Window.initialize.Hide();
+        AvaloniaXamlLoader.Load(this);
+    }
 
-                AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-                Dispatcher.UIThread.UnhandledException += UIThread_UnhandledException;
-            }
+    public override void OnFrameworkInitializationCompleted()
+    {
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            desktop.MainWindow = Const.Window.initialize;
+            Const.Window.initialize.Hide();
 
-            base.OnFrameworkInitializationCompleted();
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            Dispatcher.UIThread.UnhandledException += UIThread_UnhandledException;
         }
 
-        private void UIThread_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
-            try
-            {
-                Method.Ui.ShowLongException(MainLang.UnhandledException, e.Exception);
-            }
-            finally
-            {
-                e.Handled = true;
-            }
-        }
+        base.OnFrameworkInitializationCompleted();
+    }
 
-        private async void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+    private void UIThread_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+    {
+        try
         {
-            try
-            {
-                var textBox = new TextBox() { FontFamily = (FontFamily)Current.Resources["Font"], TextWrapping = TextWrapping.Wrap, Text = $"{MainLang.UnhandledException}\n\n{e.ExceptionObject}", IsReadOnly = true, HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center };
-                await Method.Ui.ShowDialogAsync(MainLang.GetException, p_content: textBox, b_primary: MainLang.Ok);
-            }
-            catch { }
+            Method.Ui.ShowLongException(MainLang.UnhandledException, e.Exception);
         }
+        finally
+        {
+            e.Handled = true;
+        }
+    }
 
+    private async void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+    {
+        try
+        {
+            var textBox = new TextBox
+            {
+                FontFamily = (FontFamily)Current.Resources["Font"], TextWrapping = TextWrapping.Wrap,
+                Text = $"{MainLang.UnhandledException}\n\n{e.ExceptionObject}", IsReadOnly = true,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+            await Method.Ui.ShowDialogAsync(MainLang.GetException, p_content: textBox, b_primary: MainLang.Ok);
+        }
+        catch
+        {
+        }
     }
 }

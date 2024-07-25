@@ -1,10 +1,8 @@
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using Avalonia.Threading;
-using System.Timers;
 using System;
 using System.Collections.Concurrent;
+using System.Timers;
+using Avalonia.Controls;
+using Avalonia.Threading;
 using YMCL.Main.Public;
 
 namespace YMCL.Main;
@@ -12,9 +10,10 @@ namespace YMCL.Main;
 public partial class TaskEntry : UserControl
 {
     private readonly Timer _debounceTimer;
-    private readonly ConcurrentQueue<string> _textQueue = new ConcurrentQueue<string>();
+    private readonly ConcurrentQueue<string> _textQueue = new();
     private bool _isUpdating;
-    public bool isFinish = false;
+    public bool isFinish;
+
     public TaskEntry(string name, bool valueProgress = true, bool textProgress = true)
     {
         InitializeComponent();
@@ -24,14 +23,11 @@ public partial class TaskEntry : UserControl
             TaskProgressBar.IsVisible = false;
             TaskProgressBarText.IsVisible = false;
         }
+
         if (!textProgress)
-        {
             TaskTextBox.IsVisible = false;
-        }
         else
-        {
             Height = 210;
-        }
 
         _debounceTimer = new Timer(500); // 设置防抖时间间隔为0.5秒  
         _debounceTimer.Elapsed += DebounceTimerElapsed;
@@ -44,6 +40,7 @@ public partial class TaskEntry : UserControl
     {
         isFinish = true;
     }
+
     public void UpdateTextProgress(string text, bool includeTime = true)
     {
         _textQueue.Enqueue(GetTextToAdd(text, includeTime));
@@ -54,24 +51,24 @@ public partial class TaskEntry : UserControl
             _debounceTimer.Start();
         }
     }
+
     public void Destory()
     {
         Finish();
         Const.Window.taskCenter.TaskContainer.Children.Remove(this);
     }
+
     private string GetTextToAdd(string text, bool includeTime)
     {
         return includeTime ? $"[{DateTime.Now.ToString("HH:mm:ss")}] {text}\n" : $"{text}\n";
     }
+
     private void DebounceTimerElapsed(object? sender, ElapsedEventArgs e)
     {
         _isUpdating = false;
 
-        string combinedText = string.Empty;
-        while (_textQueue.TryDequeue(out string textToAdd))
-        {
-            combinedText += textToAdd;
-        }
+        var combinedText = string.Empty;
+        while (_textQueue.TryDequeue(out var textToAdd)) combinedText += textToAdd;
 
         Dispatcher.UIThread.Post(() =>
         {
@@ -80,6 +77,7 @@ public partial class TaskEntry : UserControl
             TaskTextBox.CaretIndex = TaskTextBox.Text.Length;
         });
     }
+
     public void UpdateValueProgress(double progress)
     {
         try
@@ -87,8 +85,11 @@ public partial class TaskEntry : UserControl
             TaskProgressBar.Value = progress;
             TaskProgressBarText.Text = $"{Math.Round(progress, 1)}%";
         }
-        catch { }
+        catch
+        {
+        }
     }
+
     public void UpdateTitle(string title)
     {
         TaskName.Text = title;

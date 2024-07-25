@@ -1,11 +1,11 @@
+using System.IO;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
+using Avalonia.Platform;
 using Avalonia.Threading;
 using Newtonsoft.Json;
-using System.IO;
-using System.Threading.Tasks;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
 
@@ -14,6 +14,7 @@ namespace YMCL.Main;
 public partial class TaskCenterWindow : Window
 {
     public WindowTitleBarStyle titleBarStyle;
+
     public TaskCenterWindow()
     {
         InitializeComponent();
@@ -22,7 +23,6 @@ public partial class TaskCenterWindow : Window
         PropertyChanged += (s, e) =>
         {
             if (titleBarStyle == WindowTitleBarStyle.Ymcl && e.Property.Name == nameof(WindowState))
-            {
                 switch (WindowState)
                 {
                     case WindowState.Normal:
@@ -32,10 +32,10 @@ public partial class TaskCenterWindow : Window
                         Root.Margin = new Thickness(20);
                         break;
                 }
-            }
         };
         UpdateTaskNumber();
     }
+
     public async void UpdateTaskNumber()
     {
         await Task.Run(async () =>
@@ -57,6 +57,7 @@ public partial class TaskCenterWindow : Window
             }
         });
     }
+
     protected override void OnLoaded(RoutedEventArgs e)
     {
         Hide();
@@ -73,7 +74,7 @@ public partial class TaskCenterWindow : Window
                 TitleBar.IsVisible = false;
                 Root.CornerRadius = new CornerRadius(0, 0, 8, 8);
                 TaskContainer.Margin = new Thickness(10);
-                ExtendClientAreaChromeHints = Avalonia.Platform.ExtendClientAreaChromeHints.Default;
+                ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.Default;
                 ExtendClientAreaToDecorationsHint = false;
                 break;
             case WindowTitleBarStyle.Ymcl:
@@ -81,7 +82,7 @@ public partial class TaskCenterWindow : Window
                 Root.CornerRadius = new CornerRadius(8);
                 WindowState = WindowState.Maximized;
                 WindowState = WindowState.Normal;
-                ExtendClientAreaChromeHints = Avalonia.Platform.ExtendClientAreaChromeHints.NoChrome;
+                ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
                 ExtendClientAreaToDecorationsHint = true;
                 break;
         }

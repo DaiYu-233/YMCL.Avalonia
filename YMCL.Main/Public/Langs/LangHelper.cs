@@ -1,75 +1,55 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 using YMCL.Main.Public.Classes;
 
-namespace YMCL.Main.Public.Langs
+namespace YMCL.Main.Public.Langs;
+
+public class LangHelper : INotifyPropertyChanged
 {
-    public class LangHelper : INotifyPropertyChanged
+    public static LangHelper Current { get; } = new();
+
+    public MainLang Resources { get; } = new();
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        var handler = PropertyChanged;
+        if (handler != null)
+            handler(this, new PropertyChangedEventArgs(propertyName));
+    }
 
-        private static readonly LangHelper _current = new LangHelper();
-        public static LangHelper Current => _current;
+    public void ChangedCulture(string name)
+    {
+        if (name == "" || name == null || name == "Unset")
+            MainLang.Culture = CultureInfo.GetCultureInfo("zh-CN");
+        else
+            MainLang.Culture = CultureInfo.GetCultureInfo(name);
+        RaisePropertyChanged("Resources");
+    }
 
-        readonly MainLang resource = new MainLang();
-        public MainLang Resources => resource;
-
-        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+    public static string GetText(string name, string culture = "")
+    {
+        var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+        CultureInfo cultureInfo;
+        if (culture == "")
         {
-            var handler = this.PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
+            if (setting.Language == "zh-CN" || setting.Language == null)
+                cultureInfo = CultureInfo.GetCultureInfo("");
+            else
+                cultureInfo = CultureInfo.GetCultureInfo(setting.Language);
+        }
+        else
+        {
+            cultureInfo = CultureInfo.GetCultureInfo(culture);
         }
 
-        public void ChangedCulture(string name)
-        {
-            if (name == "" || name == null || name == "Unset")
-            {
-                MainLang.Culture = CultureInfo.GetCultureInfo("zh-CN");
-            }
-            else
-            {
-                MainLang.Culture = CultureInfo.GetCultureInfo(name);
-            }
-            this.RaisePropertyChanged("Resources");
-        }
-
-        public static string GetText(string name, string culture = "")
-        {
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
-            CultureInfo cultureInfo;
-            if (culture == "")
-            {
-                if (setting.Language == "zh-CN" || setting.Language == null)
-                {
-                    cultureInfo = CultureInfo.GetCultureInfo("");
-                }
-                else
-                {
-                    cultureInfo = CultureInfo.GetCultureInfo(setting.Language);
-                }
-            }
-            else
-            {
-                cultureInfo = CultureInfo.GetCultureInfo(culture);
-            }
-            var res = MainLang.ResourceManager.GetObject(name, cultureInfo).ToString();
-            if (res == null)
-            {
-                return "Null";
-            }
-            else
-            {
-                return res;
-            }
-        }
+        var res = MainLang.ResourceManager.GetObject(name, cultureInfo).ToString();
+        if (res == null)
+            return "Null";
+        return res;
     }
 }

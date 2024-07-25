@@ -9,6 +9,7 @@ git clone https://github.com/DaiYu-233/YMCL.Avalonia.git
 ```bash
 cd YMCL.Avalonia
 ```
+
 ```bash
 dotnet build YMCL.Main/YMCL.Main.csproj
 ```
@@ -74,6 +75,7 @@ namespace YMCL.Plugin  //Do not modify
     };
 }
 ```
+
 ## 4. Rename Project
 
 Rename `YMCL.Plugin/YMCL.Plugin.csproj` to `YMCL.Plugin/PluginAuthorName.PluginName.csproj`
@@ -85,6 +87,7 @@ Rename `YMCL.Plugin/YMCL.Plugin.csproj.user` to `YMCL.Plugin/PluginAuthorName.Pl
 ````bash
 cd YMCL.Plugin
 ````
+
 ````bash
 dotnet build
 ````
@@ -97,4 +100,5 @@ The plugin has been developed and can be distributed to users for use
 
 ![img](https://pic.daiyu.fun/pic/2024/202407220914001.png)
 
-As shown in the picture, click this button to open the data folder, then find the 'Plugin' folder, put the plugin into this folder, restart YMCL to complete the installation
+As shown in the picture, click this button to open the data folder, then find the 'Plugin' folder, put the plugin into
+this folder, restart YMCL to complete the installation

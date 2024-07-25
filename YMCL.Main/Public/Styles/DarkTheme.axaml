@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <SolidColorBrush x:Key="1x" Color="#2c2c2c" />
-    <SolidColorBrush x:Key="2x" Color="#262626" />
-    <SolidColorBrush x:Key="TextColor" Color="#ffffff" />
-    <SolidColorBrush x:Key="TitleBarColor" Color="#242424" />
-    <SolidColorBrush x:Key="GrayColor" Color="#7e7e7e" />
+    <SolidColorBrush Color="#2c2c2c" x:Key="1x" />
+    <SolidColorBrush Color="#262626" x:Key="2x" />
+    <SolidColorBrush Color="#ffffff" x:Key="TextColor" />
+    <SolidColorBrush Color="#242424" x:Key="TitleBarColor" />
+    <SolidColorBrush Color="#7e7e7e" x:Key="GrayColor" />
 </ResourceDictionary>

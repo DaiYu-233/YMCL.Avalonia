@@ -1,61 +1,66 @@
-using Avalonia.Controls;
-using Avalonia.Platform.Storage;
-using FluentAvalonia.UI.Controls;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.IO;
+using Avalonia.Controls;
+using FluentAvalonia.UI.Controls;
 using YMCL.Main.Public;
+using YMCL.Main.Views.Main.Pages.Setting.Pages.Account;
+using YMCL.Main.Views.Main.Pages.Setting.Pages.Launch;
+using YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher;
+using YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize;
+using YMCL.Main.Views.Main.Pages.Setting.Pages.Plugin;
 
-namespace YMCL.Main.Views.Main.Pages.Setting
+namespace YMCL.Main.Views.Main.Pages.Setting;
+
+public partial class SettingPage : UserControl
 {
-    public partial class SettingPage : UserControl
+    public AccountSettingPage accountSettingPage = new();
+    public LauncherSettingPage launcherSettingPage = new();
+    public LaunchSettingPage launchSettingPage = new();
+    public PersonalizeSettingPage personalizeSettingPage = new();
+    public PluginSettingPage pluginSettingPage = new();
+
+    public SettingPage()
     {
-        public Pages.Launch.LaunchSettingPage launchSettingPage = new();
-        public Pages.Personalize.PersonalizeSettingPage personalizeSettingPage = new();
-        public Pages.Account.AccountSettingPage accountSettingPage = new();
-        public Pages.Launcher.LauncherSettingPage launcherSettingPage = new();
-        public Pages.Plugin.PluginSettingPage pluginSettingPage = new();
+        InitializeComponent();
+        ControlProperty();
+        BindingEvent();
+    }
 
-        public SettingPage()
-        {
-            InitializeComponent();
-            ControlProperty();
-            BindingEvent();
-        }
+    private void ControlProperty()
+    {
+        FrameView.Content = launchSettingPage;
+    }
 
-        private void ControlProperty()
+    private void BindingEvent()
+    {
+        Loaded += (s, e) =>
         {
-            FrameView.Content = launchSettingPage;
-        }
-
-        private void BindingEvent()
+            Method.Ui.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
+        };
+        Nav.SelectionChanged += (s, e) =>
         {
-            Loaded += (s, e) =>
+            switch (((NavigationViewItem)((NavigationView)s!).SelectedItem!).Tag)
             {
-                Method.Ui.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
-            };
-            Nav.SelectionChanged += (s, e) =>
-            {
-                switch (((NavigationViewItem)((NavigationView)s!).SelectedItem!).Tag)
-                {
-                    case "launch":
-                        launchSettingPage.Root.IsVisible = false;
-                        FrameView.Content = launchSettingPage; break;
-                    case "personalize":
-                        personalizeSettingPage.Root.IsVisible = false;
-                        FrameView.Content = personalizeSettingPage; break;
-                    case "account":
-                        accountSettingPage.Root.IsVisible = false;
-                        FrameView.Content = accountSettingPage; break;
-                    case "launcher":
-                        launcherSettingPage.Root.IsVisible = false;
-                        FrameView.Content = launcherSettingPage; break;
-                    case "plugin":
-                        pluginSettingPage.Root.IsVisible = false;
-                        FrameView.Content = pluginSettingPage; break;
-                }
-            };
-        }
+                case "launch":
+                    launchSettingPage.Root.IsVisible = false;
+                    FrameView.Content = launchSettingPage;
+                    break;
+                case "personalize":
+                    personalizeSettingPage.Root.IsVisible = false;
+                    FrameView.Content = personalizeSettingPage;
+                    break;
+                case "account":
+                    accountSettingPage.Root.IsVisible = false;
+                    FrameView.Content = accountSettingPage;
+                    break;
+                case "launcher":
+                    launcherSettingPage.Root.IsVisible = false;
+                    FrameView.Content = launcherSettingPage;
+                    break;
+                case "plugin":
+                    pluginSettingPage.Root.IsVisible = false;
+                    FrameView.Content = pluginSettingPage;
+                    break;
+            }
+        };
     }
 }

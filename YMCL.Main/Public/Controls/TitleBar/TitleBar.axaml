@@ -1,48 +1,48 @@
 <UserControl
+    mc:Ignorable="d"
     x:Class="YMCL.Main.Public.Controls.TitleBar"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Border
-        Height="30"
-        VerticalAlignment="Top"
         Background="{DynamicResource TitleBarColor}"
-        CornerRadius="8,8,0,0">
+        CornerRadius="8,8,0,0"
+        Height="30"
+        VerticalAlignment="Top">
         <Grid
-            Name="MoveDragArea"
+            Background="{DynamicResource TitleBarColor}"
             Margin="8,0,8,0"
-            Background="{DynamicResource TitleBarColor}">
+            Name="MoveDragArea">
             <TextBlock />
             <TextBlock
-                Name="TitleText"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
                 FontFamily="{DynamicResource Font}"
                 FontSize="16"
-                Text="Title" />
+                HorizontalAlignment="Left"
+                Name="TitleText"
+                Text="Title"
+                VerticalAlignment="Center" />
             <Button
-                Name="CloseButton"
+                Classes="icon-button"
+                Content="{DynamicResource Close}"
+                HorizontalAlignment="Right"
                 Margin="0,0,-5,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Classes="icon-button"
-                Content="{DynamicResource Close}" />
+                Name="CloseButton"
+                VerticalAlignment="Center" />
             <Button
-                Name="MaximizeButton"
+                Classes="icon-button"
+                Content="{DynamicResource Maximize}"
+                HorizontalAlignment="Right"
                 Margin="0,0,21,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Classes="icon-button"
-                Content="{DynamicResource Maximize}" />
+                Name="MaximizeButton"
+                VerticalAlignment="Center" />
             <Button
-                Name="MinimizeButton"
-                Margin="0,8,47,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
                 Classes="icon-button"
-                Content="{DynamicResource Minimize}" />
+                Content="{DynamicResource Minimize}"
+                HorizontalAlignment="Right"
+                Margin="0,8,47,0"
+                Name="MinimizeButton"
+                VerticalAlignment="Center" />
         </Grid>
     </Border>
 </UserControl>

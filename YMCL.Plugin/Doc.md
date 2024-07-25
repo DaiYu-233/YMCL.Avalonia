@@ -9,6 +9,7 @@ git clone https://github.com/DaiYu-233/YMCL.Avalonia.git
 ```bash
 cd YMCL.Avalonia
 ```
+
 ```bash
 dotnet build YMCL.Main/YMCL.Main.csproj
 ```
@@ -85,6 +86,7 @@ namespace YMCL.Pulgin  //不要修改
 ````bash
 cd YMCL.Plugin
 ````
+
 ````bash
 dotnet build
 ````

@@ -1,49 +1,44 @@
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Interactivity;
-using System;
-using System.Threading.Tasks;
+using YMCL.Main.Public.Classes;
 
-namespace YMCL.Main.Public.Controls
+namespace YMCL.Main.Public.Controls;
+
+public partial class UrlImage : UserControl
 {
-    public partial class UrlImage : UserControl
+    public static readonly StyledProperty<string> UrlProperty =
+        AvaloniaProperty.Register<TitleBar, string>(nameof(Url),
+            "null");
+
+    public UrlImage()
     {
-        bool _firstLoad = true;
-        public UrlImage()
-        {
-            InitializeComponent();
-            Loaded += UrlImage_Loaded;
-        }
+        InitializeComponent();
+        _ = LoadImgAsync();
+    }
 
-        private async void UrlImage_Loaded(object? sender, RoutedEventArgs e)
-        {
-            if (_firstLoad)
-            {
-                _firstLoad = false;
-                var bitmap = await Method.Value.LoadImageFromUrlAsync(Url);
-                if (bitmap != null)
-                {
-                    Img.Source = bitmap;
-                }
-            }
-        }
+    public string Url
+    {
+        get => GetValue(UrlProperty);
+        set => SetValue(UrlProperty, value);
+    }
 
-        public async Task RefreshImgAsync()
+    public async Task LoadImgAsync()
+    {
+        while (Url == "null") await Task.Delay(100);
+
+        var entry =
+            Const.UrlImageDataList.Find(UrlImageDataListEntry => UrlImageDataListEntry.Url == Url);
+        if (entry == null)
         {
             var bitmap = await Method.Value.LoadImageFromUrlAsync(Url);
-            if (bitmap != null)
-            {
-                Img.Source = bitmap;
-            }
+            if (bitmap != null) Img.Source = bitmap;
+
+            Const.UrlImageDataList.Add(new UrlImageDataListEntry { Url = Url, Bitmap = bitmap });
         }
-
-        public static readonly StyledProperty<string> UrlProperty =
-            AvaloniaProperty.Register<TitleBar, string>(nameof(Url), defaultValue: "https://ymcl.daiyu.fun/Assets/img/YMCL-Icon.png");
-
-        public string Url
+        else
         {
-            get => GetValue(UrlProperty);
-            set => SetValue(UrlProperty, value);
+            Img.Source = entry.Bitmap;
         }
     }
 }

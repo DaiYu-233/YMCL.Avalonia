@@ -1,52 +1,50 @@
 <Window
-    x:Class="YMCL.Main.Views.Main.MainWindow"
-    xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
-    xmlns:u="https://irihi.tech/ursa"
-    xmlns:uc="clr-namespace:YMCL.Main.Public.Controls"
-    xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
-    Title="Yu Minecraft Launcher"
-    MinWidth="450"
-    MinHeight="310"
     DragDrop.AllowDrop="True"
     FontWeight="{DynamicResource FontWeight}"
     IsHitTestVisible="True"
+    MinHeight="310"
+    MinWidth="450"
     SystemDecorations="None"
+    Title="Yu Minecraft Launcher"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    x:Class="YMCL.Main.Views.Main.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
+    xmlns:uc="clr-namespace:YMCL.Main.Public.Controls"
+    xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Window.Styles>
         <Style Selector="Window">
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Opacity="0" Color="White" />
+                    <SolidColorBrush Color="White" Opacity="0" />
                 </Setter.Value>
             </Setter>
         </Style>
     </Window.Styles>
     <Border
-        x:Name="Root"
         Background="{DynamicResource 1x}"
         ClipToBounds="True"
-        CornerRadius="8">
+        CornerRadius="8"
+        x:Name="Root">
         <Grid>
             <DockPanel>
                 <uc:TitleBar
-                    Name="TitleBar"
-                    Title=""
                     DockPanel.Dock="Top"
-                    IsCloseBtnExitApp="True" />
+                    IsCloseBtnExitApp="True"
+                    Name="TitleBar"
+                    Title="" />
                 <Border
-                    Margin="0"
                     Background="White"
                     BorderBrush="{DynamicResource TitleBarColor}"
                     BorderThickness="2"
-                    CornerRadius="0,0,8,8">
+                    CornerRadius="0,0,8,8"
+                    Margin="0">
                     <DockPanel>
                         <ui:NavigationView
-                            x:Name="Nav"
                             AlwaysShowHeader="False"
                             Background="{DynamicResource TitleBarColor}"
                             IsBackButtonVisible="False"
@@ -56,15 +54,16 @@
                             IsTabStop="False"
                             OpenPaneLength="140"
                             PaneDisplayMode="Left"
-                            SelectionFollowsFocus="False">
+                            SelectionFollowsFocus="False"
+                            x:Name="Nav">
                             <ui:NavigationView.MenuItems>
                                 <ui:NavigationViewItem
-                                    Name="NavLaunch"
                                     FontFamily="{DynamicResource Font}"
                                     IsSelected="True"
+                                    Name="NavLaunch"
                                     Tag="Launch">
                                     <DockPanel>
-                                        <Image Width="16" Height="16">
+                                        <Image Height="16" Width="16">
                                             <Image.Source>
                                                 <DrawingImage>
                                                     <DrawingImage.Drawing>
@@ -78,15 +77,15 @@
                                             </Image.Source>
                                         </Image>
                                         <TextBlock
-                                            Margin="10,0,0,0"
                                             FontSize="15"
                                             Foreground="{DynamicResource TextColor}"
+                                            Margin="10,0,0,0"
                                             Text="{x:Static properties:MainLang.NavLaunch}" />
                                     </DockPanel>
                                 </ui:NavigationViewItem>
                                 <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="Setting">
                                     <DockPanel>
-                                        <Image Width="16" Height="16">
+                                        <Image Height="16" Width="16">
                                             <Image.Source>
                                                 <DrawingImage>
                                                     <DrawingImage.Drawing>
@@ -100,15 +99,15 @@
                                             </Image.Source>
                                         </Image>
                                         <TextBlock
-                                            Margin="10,0,0,0"
                                             FontSize="15"
                                             Foreground="{DynamicResource TextColor}"
+                                            Margin="10,0,0,0"
                                             Text="{x:Static properties:MainLang.NavSetting}" />
                                     </DockPanel>
                                 </ui:NavigationViewItem>
                                 <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="Download">
                                     <DockPanel>
-                                        <Image Width="16" Height="16">
+                                        <Image Height="16" Width="16">
                                             <Image.Source>
                                                 <DrawingImage>
                                                     <DrawingImage.Drawing>
@@ -122,15 +121,15 @@
                                             </Image.Source>
                                         </Image>
                                         <TextBlock
-                                            Margin="10,0,0,0"
                                             FontSize="15"
                                             Foreground="{DynamicResource TextColor}"
+                                            Margin="10,0,0,0"
                                             Text="{x:Static properties:MainLang.NavDownload}" />
                                     </DockPanel>
                                 </ui:NavigationViewItem>
                                 <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="Task">
                                     <DockPanel>
-                                        <Image Width="16" Height="16">
+                                        <Image Height="16" Width="16">
                                             <Image.Source>
                                                 <DrawingImage>
                                                     <DrawingImage.Drawing>
@@ -156,18 +155,18 @@
                                             </Image.Source>
                                         </Image>
                                         <TextBlock
-                                            Margin="10,0,0,0"
                                             FontSize="15"
                                             Foreground="{DynamicResource TextColor}"
+                                            Margin="10,0,0,0"
                                             Text="{x:Static properties:MainLang.NavTask}" />
                                     </DockPanel>
                                 </ui:NavigationViewItem>
                                 <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="Music">
                                     <DockPanel>
                                         <Image
-                                            Width="16"
                                             Height="16"
-                                            Margin="-2,0,0,0">
+                                            Margin="-2,0,0,0"
+                                            Width="16">
                                             <Image.Source>
                                                 <DrawingImage>
                                                     <DrawingImage.Drawing>
@@ -181,15 +180,15 @@
                                             </Image.Source>
                                         </Image>
                                         <TextBlock
-                                            Margin="12,0,0,0"
                                             FontSize="15"
                                             Foreground="{DynamicResource TextColor}"
+                                            Margin="12,0,0,0"
                                             Text="{x:Static properties:MainLang.NavMusic}" />
                                     </DockPanel>
                                 </ui:NavigationViewItem>
                                 <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="More">
                                     <DockPanel>
-                                        <Image Width="16" Height="16">
+                                        <Image Height="16" Width="16">
                                             <Image.Source>
                                                 <DrawingImage>
                                                     <DrawingImage.Drawing>
@@ -203,15 +202,15 @@
                                             </Image.Source>
                                         </Image>
                                         <TextBlock
-                                            Margin="10,0,0,0"
                                             FontSize="15"
                                             Foreground="{DynamicResource TextColor}"
+                                            Margin="10,0,0,0"
                                             Text="{x:Static properties:MainLang.NavMore}" />
                                     </DockPanel>
                                 </ui:NavigationViewItem>
                             </ui:NavigationView.MenuItems>
                             <Border ClipToBounds="True" CornerRadius="8">
-                                <ui:Frame Name="FrameView" Background="{DynamicResource 2x}" />
+                                <ui:Frame Background="{DynamicResource 2x}" Name="FrameView" />
                             </Border>
                         </ui:NavigationView>
                     </DockPanel>
@@ -219,30 +218,30 @@
             </DockPanel>
             <DockPanel Name="TitleRoot">
                 <Image
-                    Width="20"
                     Height="20"
                     Margin="10,6,2,0"
+                    Source="/Public/Assets/TitleBar-Icon.png"
                     VerticalAlignment="Top"
-                    Source="/Public/Assets/TitleBar-Icon.png" />
+                    Width="20" />
                 <TextBlock
-                    x:Name="TitleText"
-                    Margin="0,5,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
                     FontFamily="{DynamicResource Font}"
                     FontSize="16"
-                    Text=" Yu Minecraft Launcher" />
+                    HorizontalAlignment="Left"
+                    Margin="0,5,0,0"
+                    Text=" Yu Minecraft Launcher"
+                    VerticalAlignment="Top"
+                    x:Name="TitleText" />
             </DockPanel>
             <ui:InfoBar
-                Name="DragTip"
-                Margin="155,10,10,10"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
                 FontFamily="{DynamicResource Font}"
+                HorizontalAlignment="Left"
                 IsClosable="False"
                 IsOpen="False"
+                Margin="155,10,10,10"
                 Message="{x:Static properties:MainLang.ReleaseTheMouseAndLetYmclProcessThisFile}"
-                Severity="Success" />
+                Name="DragTip"
+                Severity="Success"
+                VerticalAlignment="Bottom" />
         </Grid>
     </Border>
 </Window>

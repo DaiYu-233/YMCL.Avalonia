@@ -1,84 +1,97 @@
 <UserControl
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    mc:Ignorable="d"
     x:Class="YMCL.Main.Views.Main.Pages.Setting.Pages.Account.AccountSettingPage"
     xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:class="clr-namespace:YMCL.Main.Public.Classes;assembly=YMCL.Main"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Border CornerRadius="8" x:Name="Root">
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Border
+        x:Name="Root"
+        Margin="0,-10,0,0"
+        CornerRadius="8">
         <Border.Transitions>
             <Transitions>
-                <ThicknessTransition Duration="0:0:0.45" Property="Margin" />
+                <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
             </Transitions>
         </Border.Transitions>
-        <StackPanel Margin="10" Spacing="10">
-            <DockPanel>
-                <Button
-                    Content="{x:Static properties:MainLang.AddNewAccount}"
-                    FontFamily="{DynamicResource Font}"
-                    Margin="6.5,0,0,0"
-                    x:Name="AddAccountBtn" />
-                <Button
-                    Content="{x:Static properties:MainLang.DelSeletedItem}"
-                    FontFamily="{DynamicResource Font}"
-                    Margin="6.5,0,0,0"
-                    x:Name="DelSeletedAccountBtn" />
-                <Button
-                    Content="{x:Static properties:MainLang.ModifyMicrosoftSkin}"
-                    FontFamily="{DynamicResource Font}"
-                    IsEnabled="False"
-                    IsVisible="False"
-                    Margin="6.5,0,0,0"
-                    x:Name="ModifyMicrosoftSkinBtn" />
-                <Button
-                    Content="{x:Static properties:MainLang.RefreshMicrosoftSkin}"
-                    FontFamily="{DynamicResource Font}"
-                    IsEnabled="False"
-                    Margin="6.5,0,0,0"
-                    x:Name="RefreshMicrosoftSkinBtn" />
-            </DockPanel>
-            <ListBox Margin="0,-5,0,0" x:Name="AccountsListView">
-                <ListBox.ItemTemplate>
-                    <DataTemplate DataType="class:AccountInfo">
-                        <Border BorderThickness="0,6,0,6">
-                            <DockPanel>
-                                <Border
-                                    ClipToBounds="True"
-                                    CornerRadius="3,3,3,3"
-                                    Height="28"
-                                    Margin="2,0,6.5,0"
-                                    Width="28">
-                                    <Image Source="{Binding Bitmap}" />
+        <Border
+            Margin="10"
+            Padding="0,10,0,0"
+            Background="{DynamicResource 1x}"
+            ClipToBounds="True"
+            CornerRadius="5"
+            Opacity="{DynamicResource Opacity}">
+            <ScrollViewer>
+                <StackPanel Margin="5,0,10,10" Spacing="10">
+                    <DockPanel>
+                        <Button
+                            x:Name="AddAccountBtn"
+                            Margin="6.5,0,0,0"
+                            Content="{x:Static properties:MainLang.AddNewAccount}"
+                            FontFamily="{DynamicResource Font}" />
+                        <Button
+                            x:Name="DelSeletedAccountBtn"
+                            Margin="6.5,0,0,0"
+                            Content="{x:Static properties:MainLang.DelSeletedItem}"
+                            FontFamily="{DynamicResource Font}" />
+                        <Button
+                            x:Name="ModifyMicrosoftSkinBtn"
+                            Margin="6.5,0,0,0"
+                            Content="{x:Static properties:MainLang.ModifyMicrosoftSkin}"
+                            FontFamily="{DynamicResource Font}"
+                            IsEnabled="False"
+                            IsVisible="False" />
+                        <Button
+                            x:Name="RefreshMicrosoftSkinBtn"
+                            Margin="6.5,0,0,0"
+                            Content="{x:Static properties:MainLang.RefreshMicrosoftSkin}"
+                            FontFamily="{DynamicResource Font}"
+                            IsEnabled="False" />
+                    </DockPanel>
+                    <ListBox x:Name="AccountsListView" Margin="0,-5,0,0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="class:AccountInfo">
+                                <Border BorderThickness="0,6,0,6">
+                                    <DockPanel>
+                                        <Border
+                                            Width="28"
+                                            Height="28"
+                                            Margin="2,0,6.5,0"
+                                            ClipToBounds="True"
+                                            CornerRadius="3,3,3,3">
+                                            <Image Source="{Binding Bitmap}" />
+                                        </Border>
+                                        <Grid>
+                                            <TextBlock
+                                                FontFamily="{DynamicResource Font}"
+                                                FontSize="14"
+                                                Text="{Binding Name}" />
+                                            <StackPanel Margin="0,17,0,0" Orientation="Horizontal">
+                                                <TextBlock
+                                                    Margin="0,0,0,0"
+                                                    FontFamily="{DynamicResource Font}"
+                                                    FontSize="11"
+                                                    Foreground="{DynamicResource GrayColor}"
+                                                    Text="{Binding AccountType}" />
+                                                <TextBlock
+                                                    Margin="5,0,0,0"
+                                                    FontFamily="{DynamicResource Font}"
+                                                    FontSize="11"
+                                                    Foreground="{DynamicResource GrayColor}"
+                                                    Text="{Binding AddTime}" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </DockPanel>
                                 </Border>
-                                <Grid>
-                                    <TextBlock
-                                        FontFamily="{DynamicResource Font}"
-                                        FontSize="14"
-                                        Text="{Binding Name}" />
-                                    <StackPanel Margin="0,17,0,0" Orientation="Horizontal">
-                                        <TextBlock
-                                            FontFamily="{DynamicResource Font}"
-                                            FontSize="11"
-                                            Foreground="{DynamicResource GrayColor}"
-                                            Margin="0,0,0,0"
-                                            Text="{Binding AccountType}" />
-                                        <TextBlock
-                                            FontFamily="{DynamicResource Font}"
-                                            FontSize="11"
-                                            Foreground="{DynamicResource GrayColor}"
-                                            Margin="5,0,0,0"
-                                            Text="{Binding AddTime}" />
-                                    </StackPanel>
-                                </Grid>
-                            </DockPanel>
-                        </Border>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
     </Border>
 </UserControl>

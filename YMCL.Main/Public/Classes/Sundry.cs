@@ -8,6 +8,7 @@ using CurseForge.APIClient.Models.Files;
 using CurseForge.APIClient.Models.Games;
 using CurseForge.APIClient.Models.Mods;
 using Newtonsoft.Json;
+using YMCL.Main.Public.Langs;
 
 namespace YMCL.Main.Public.Classes;
 
@@ -77,6 +78,16 @@ public class SearchModListViewItemEntry
         GamePopularityRank = mod.GamePopularityRank;
         IsAvailable = mod.IsAvailable;
         ThumbsUpCount = mod.ThumbsUpCount;
+        ModType = ClassId switch
+        {
+            6 => MainLang.Mod,
+            12 => MainLang.MaterialPack,
+            17 => MainLang.Map,
+            6552 => MainLang.ShaderPack,
+            6945 => MainLang.DataPack,
+            4471 => MainLang.ModPack,
+            _ => MainLang.Unknown
+        };
     }
 
     public int Id { get; set; }
@@ -107,6 +118,7 @@ public class SearchModListViewItemEntry
     public string StringDownloadCount { get; set; }
     public string StringDateTime { get; set; }
     public ModSource ModSource { get; set; }
+    public string ModType { get; set; }
 }
 
 public class ModFileListViewItemEntry

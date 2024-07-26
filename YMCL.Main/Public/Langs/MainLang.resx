@@ -778,4 +778,28 @@ sudo apt install vlc</value>
   <data name="MusicGetFail" xml:space="preserve">
       <value>音乐获取失败</value>
     </data>
+  <data name="DownloadSource" xml:space="preserve">
+      <value>下载源</value>
+    </data>
+  <data name="MaximumDownloadThread" xml:space="preserve">
+      <value>最大下载线程</value>
+    </data>
+  <data name="DownloadThreadTooBigTip" xml:space="preserve">
+      <value>下载线程过大可能导致设备卡顿</value>
+    </data>
+  <data name="Unknown" xml:space="preserve">
+      <value>未知</value>
+    </data>
+  <data name="ShaderPack" xml:space="preserve">
+      <value>光影包</value>
+    </data>
+  <data name="DataPack" xml:space="preserve">
+      <value>数据包</value>
+    </data>
+  <data name="Api" xml:space="preserve">
+      <value>应用程序接口</value>
+    </data>
+  <data name="ModPack" xml:space="preserve">
+      <value>整合包</value>
+    </data>
 </root>

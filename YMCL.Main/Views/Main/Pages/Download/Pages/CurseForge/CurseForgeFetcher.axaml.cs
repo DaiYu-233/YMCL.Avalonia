@@ -53,6 +53,31 @@ public partial class CurseForgeFetcher : UserControl
 
     private void BindingEvent()
     {
+        async void CloseDetail()
+        {
+            ModInfoRoot.Margin = new Thickness(Root.Bounds.Width, 0, -1 * Root.Bounds.Width, 10);
+            SearchConsoleRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
+        }
+
+        async void OpenDetail()
+        {
+            ModFileLoading.IsVisible = true;
+            if (_firstOpenModInfo)
+            {
+                ModInfoRoot.IsVisible = false;
+                ModInfoRoot.Margin = new Thickness(Root.Bounds.Width, 0, -1 * Root.Bounds.Width, 10);
+                _firstOpenModInfo = false;
+                await Task.Delay(260);
+                ModInfoRoot.IsVisible = true;
+                ModInfoRoot.Margin = new Thickness(10, 0, 10, 10);
+            }
+            else
+            {
+                ModInfoRoot.Margin = new Thickness(10, 0, 10, 10);
+            }
+
+            SearchConsoleRoot.Opacity = 0;
+        }
         Loaded += (_, _) =>
         {
             Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
@@ -88,39 +113,19 @@ public partial class CurseForgeFetcher : UserControl
         CloseModInfoBtn.Click += async (_, _) =>
         {
             ModInfoRoot.Margin = new Thickness(Root.Bounds.Width, 0, -1 * Root.Bounds.Width, 10);
-            ModListView.Opacity = (double)Application.Current.Resources["Opacity"]!;
-            LoadMoreBtn.Opacity = (double)Application.Current.Resources["Opacity"]!;
-            ConsoleRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
-            await Task.Delay(260);
-            ModListView.IsVisible = true;
-            LoadMoreBtn.IsVisible = true;
-            ConsoleRoot.IsVisible = true;
+            await Task.Delay(240);
+            CloseDetail();
         };
         ModListView.SelectionChanged += async (_, e) =>
         {
             if (ModListView.SelectedIndex == -1) return;
-            if (_firstOpenModInfo)
-            {
-                ModInfoRoot.Margin = new Thickness(Root.Bounds.Width, 0, -1 * Root.Bounds.Width, 10);
-                ModInfoRoot.IsVisible = true;
-                _firstOpenModInfo = false;
-                ModInfoRoot.Margin = new Thickness(10, 0, 10, 10);
-            }
-            else
-            {
-                ModInfoRoot.Margin = new Thickness(10, 0, 10, 10);
-            }
-
-            ModListView.Opacity = 0;
-            ConsoleRoot.Opacity = 0;
-            LoadMoreBtn.Opacity = 0;
-            ModFileLoading.IsVisible = true;
+            OpenDetail();
             var entry = ModListView.SelectedItem as SearchModListViewItemEntry;
             ModFileVersionPanel.Children.Clear();
             var topChildPanel = new StackPanel();
             ModFileVersionPanel.Children.Add(topChildPanel);
             ModInfoName.Text = entry.Name;
-            ModInfoModSource.Text = entry.ModSource.ToString();
+            ModInfoModType.Text = entry.ModType;
             ModInfoStringDateTime.Text = entry.StringDateTime;
             ModInfoSummary.Text = entry.Summary;
             ModInfoIcon.Url = entry.Logo.Url;
@@ -130,17 +135,10 @@ public partial class CurseForgeFetcher : UserControl
             var modFiles = new List<File>();
             var index = 0;
             var shouldReturn = false;
-            _ = Task.Run(async () =>
+
+            await Task.Run(async () =>
             {
-                await Task.Delay(260);
-                Dispatcher.UIThread.Invoke(() =>
-                {
-                    ModListView.IsVisible = false;
-                    LoadMoreBtn.IsVisible = false;
-                    ConsoleRoot.IsVisible = false;
-                });
-            });
-            while (true)
+                while (true)
             {
                 GenericListResponse<File> files = new();
                 try
@@ -156,10 +154,19 @@ public partial class CurseForgeFetcher : UserControl
 
                 if (files.Data.Count == 0) break;
 
-                files.Data.ForEach(file => { modFiles.Add(file); });
+                if (files.Data[0].ModId != entry.Id) break;
+
+                await Task.Run(() =>
+                {
+                    files.Data.ForEach(async file =>
+                    {
+                        await Dispatcher.UIThread.InvokeAsync(() => { modFiles.Add(file); });
+                    });
+                });
                 index++;
             }
-
+            });
+            
             ModFileLoading.IsVisible = false;
             if (shouldReturn) return;
             List<string> mcVersions = new();
@@ -175,14 +182,7 @@ public partial class CurseForgeFetcher : UserControl
                 var expander = new ModFileView(mcVersion);
                 expander.ListView.SelectionChanged += ModFileSelectionChanged;
                 expander.Name = $"mod_{mcVersion.Replace(".", "_")}";
-                var classId = 0;
-                if (ResultTypeComboBox.SelectedIndex == 0)
-                    classId = 0;
-                else if (ResultTypeComboBox.SelectedIndex == 1)
-                    classId = 6;
-                else if (ResultTypeComboBox.SelectedIndex == 2)
-                    classId = 12;
-                else if (ResultTypeComboBox.SelectedIndex == 3) classId = 17;
+                var classId = GetClassIdFromResultTypeComboBoxSelectedIndex(ResultTypeComboBox.SelectedIndex);
 
                 foreach (var file in modFiles)
                     if (file.GameVersions[0] == mcVersion)
@@ -261,14 +261,7 @@ public partial class CurseForgeFetcher : UserControl
             ModListViewScroll.ScrollToEnd();
             try
             {
-                var classId = ResultTypeComboBox.SelectedIndex switch
-                {
-                    0 => 0,
-                    1 => 6,
-                    2 => 12,
-                    3 => 17,
-                    _ => 0
-                };
+                var classId = GetClassIdFromResultTypeComboBoxSelectedIndex(ResultTypeComboBox.SelectedIndex);
 
                 GenericListResponse<Mod> mods;
                 if (_loaderType == ModLoaderType.Any)
@@ -434,14 +427,7 @@ public partial class CurseForgeFetcher : UserControl
 
         try
         {
-            var classId = ResultTypeComboBox.SelectedIndex switch
-            {
-                0 => 0,
-                1 => 6,
-                2 => 12,
-                3 => 17,
-                _ => 0
-            };
+            var classId = GetClassIdFromResultTypeComboBoxSelectedIndex(ResultTypeComboBox.SelectedIndex);
 
             GenericListResponse<Mod> mods;
             if (loaderType == ModLoaderType.Any)
@@ -506,5 +492,21 @@ public partial class CurseForgeFetcher : UserControl
             // 如果所有相同位置的版本号都相同，但长度不同，则较长的版本号应该更大  
             return versionPartsX.Length.CompareTo(versionPartsY.Length);
         }
+    }
+
+    int GetClassIdFromResultTypeComboBoxSelectedIndex(int index)
+    {
+        var classId = ResultTypeComboBox.SelectedIndex switch
+        {
+            0 => 0, //Any
+            1 => 6, //Mod
+            2 => 12, //MaterialPack
+            3 => 17, //Map
+            4 => 6552, //ShaderPack
+            5 => 6945, //DataPack
+            6 => 4471, //ModPack
+            _ => 0
+        };
+        return classId;
     }
 }

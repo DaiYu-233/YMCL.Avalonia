@@ -171,7 +171,7 @@ public class Method
             var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
             if (setting.EnableCustomBackGroundImg && !string.IsNullOrEmpty(setting.WindowBackGroundImgData))
             {
-                Application.Current.Resources["Opacity"] = 0.9;
+                Application.Current.Resources["Opacity"] = 0.875;
                 var bitmap = Value.Base64ToBitmap(setting.WindowBackGroundImgData);
                 Const.Window.main.BackGroundImg.Source = bitmap;
                 Const.Window.taskCenter.BackGroundImg.Source = bitmap;

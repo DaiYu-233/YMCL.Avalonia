@@ -168,6 +168,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 应用程序接口.
+        /// </summary>
+        public static string Api {
+            get {
+                return ResourceManager.GetString("Api", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 作者.
         /// </summary>
         public static string Author {
@@ -411,6 +420,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 数据包.
+        /// </summary>
+        public static string DataPack {
+            get {
+                return ResourceManager.GetString("DataPack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 删除选中项.
         /// </summary>
         public static string DeleteSelect {
@@ -510,11 +528,29 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 下载源.
+        /// </summary>
+        public static string DownloadSource {
+            get {
+                return ResourceManager.GetString("DownloadSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 下载成功.
         /// </summary>
         public static string DownloadSuccess {
             get {
                 return ResourceManager.GetString("DownloadSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 下载线程过大可能导致设备卡顿.
+        /// </summary>
+        public static string DownloadThreadTooBigTip {
+            get {
+                return ResourceManager.GetString("DownloadThreadTooBigTip", resourceCulture);
             }
         }
         
@@ -1035,6 +1071,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 最大下载线程.
+        /// </summary>
+        public static string MaximumDownloadThread {
+            get {
+                return ResourceManager.GetString("MaximumDownloadThread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 最大内存.
         /// </summary>
         public static string MaxMem {
@@ -1112,6 +1157,15 @@ namespace YMCL.Main.Public.Langs {
         public static string ModName {
             get {
                 return ResourceManager.GetString("ModName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 整合包.
+        /// </summary>
+        public static string ModPack {
+            get {
+                return ResourceManager.GetString("ModPack", resourceCulture);
             }
         }
         
@@ -1674,6 +1728,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 光影包.
+        /// </summary>
+        public static string ShaderPack {
+            get {
+                return ResourceManager.GetString("ShaderPack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 光影包文件夹.
         /// </summary>
         public static string ShaderpacksFolder {
@@ -1841,6 +1904,15 @@ namespace YMCL.Main.Public.Langs {
         public static string UnhandledException {
             get {
                 return ResourceManager.GetString("UnhandledException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 未知.
+        /// </summary>
+        public static string Unknown {
+            get {
+                return ResourceManager.GetString("Unknown", resourceCulture);
             }
         }
         

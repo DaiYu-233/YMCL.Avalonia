@@ -253,6 +253,7 @@
                 IsClosable="False"
                 IsOpen="False"
                 Message="{x:Static properties:MainLang.ReleaseTheMouseAndLetYmclProcessThisFile}"
+                Opacity="{DynamicResource Opacity}"
                 Severity="Success" />
         </Grid>
     </Border>

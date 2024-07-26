@@ -21,6 +21,11 @@ public enum OpenFileWay
     ManualInput
 }
 
+public enum DownloadSource
+{
+    Mojang,
+    BmclApi
+}
 public enum AccountType
 {
     Offline,

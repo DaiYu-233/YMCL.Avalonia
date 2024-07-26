@@ -50,7 +50,7 @@ public partial class LaunchPage : UserControl
 
     private void BindingEvent()
     {
-        Loaded += (s, e) =>
+        Loaded += async (s, e) =>
         {
             Method.Ui.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
             LoadAccounts();
@@ -68,14 +68,17 @@ public partial class LaunchPage : UserControl
             {
                 Const.Window.main.settingPage.pluginSettingPage.LoadPlugin();
                 _firstLoad = false;
-                _shouldCloseVersuionList = true;
-            }
-            else
-            {
-                _shouldCloseVersuionList = false;
             }
 
             LoadVersions();
+
+            if (VersionListRoot.Margin == new Thickness(10))
+            {
+                LaunchConsoleRoot.IsVisible = false;
+                LaunchConsoleRoot.Opacity = 0;
+                await Task.Delay(260);
+                LaunchConsoleRoot.IsVisible = true;
+            }
         };
         AccountComboBox.SelectionChanged += (s, e) =>
         {
@@ -105,23 +108,19 @@ public partial class LaunchPage : UserControl
         VersionListBtn.Click += async (s, e) =>
         {
             LaunchConsoleRoot.Opacity = 0;
-            LoadVersions();
-            _shouldCloseVersuionList = true;
+            _shouldCloseVersuionList = false;
             if (_firstOpenVersionList)
             {
-                CloseVersionList();
+                VersionListRoot.Margin = new Thickness(Root.Bounds.Width, 10, -1 * Root.Bounds.Width, 10);
                 await Task.Delay(260);
-                VersionListRoot.IsVisible = true;
                 _firstOpenVersionList = false;
-                VersionListRoot.Margin = new Thickness(10);
-                VersionListRoot.IsVisible = true;
-                LaunchConsoleRoot.Opacity = 0;
+                await OpenVersionList();
             }
             else
             {
-                VersionListRoot.Margin = new Thickness(10);
-                VersionListRoot.IsVisible = true;
-                LaunchConsoleRoot.Opacity = 0;
+                LoadVersions();
+                await Task.Delay(260);
+                await OpenVersionList();
             }
         };
         VersionSettingBtn.Click += async (s, e) =>
@@ -142,21 +141,13 @@ public partial class LaunchPage : UserControl
                     {
                         VersionSettingRoot.Margin = new Thickness(Root.Bounds.Width, 10, -1 * Root.Bounds.Width, 10);
                         await Task.Delay(260);
-                        VersionSettingRoot.IsVisible = false;
-                        VersionSettingRoot.IsVisible = true;
                         _firstOpenVersionSetting = false;
-                        VersionSettingRoot.Margin = new Thickness(10);
-                        VersionSettingRoot.IsVisible = true;
-
-                        LaunchConsoleRoot.Opacity = 0;
+                        OpenVersionSetting();
                         LoadVersionSettingUI(entry);
                     }
                     else
                     {
-                        VersionSettingRoot.Margin = new Thickness(10);
-                        VersionSettingRoot.IsVisible = true;
-
-                        LaunchConsoleRoot.Opacity = 0;
+                        OpenVersionSetting();
                         LoadVersionSettingUI(entry);
                     }
                 }
@@ -173,9 +164,8 @@ public partial class LaunchPage : UserControl
         };
         CloseVersionListBtn.Click += (s, e) => { CloseVersionList(); };
         VersionListView.PointerEntered += (s, e) => { _shouldCloseVersuionList = true; };
-        VersionListView.SelectionChanged += (s, e) =>
+        VersionListView.SelectionChanged += async (s, e) =>
         {
-            Task.Delay(20);
             if (VersionListView.SelectedItem != null)
             {
                 var setting =
@@ -188,7 +178,7 @@ public partial class LaunchPage : UserControl
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
 
-            Task.Delay(200);
+            await Task.Delay(100);
             if (_shouldCloseVersuionList)
                 CloseVersionList();
         };
@@ -366,6 +356,7 @@ public partial class LaunchPage : UserControl
             index = 0;
         else
             index++;
+        _shouldCloseVersuionList = false;
         if (setting.Version != null)
         {
             VersionListView.SelectedIndex = index;
@@ -544,6 +535,7 @@ public partial class LaunchPage : UserControl
     public async void CloseVersionSetting(TabViewItem sender, TabViewTabCloseRequestedEventArgs args)
     {
         VersionSettingRoot.Margin = new Thickness(Root.Bounds.Width, 10, -1 * Root.Bounds.Width, 10);
+        await Task.Delay(260);
         LaunchConsoleRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
         VersionSettingRoot.IsVisible = false;
     }
@@ -551,7 +543,23 @@ public partial class LaunchPage : UserControl
     public async void CloseVersionList()
     {
         VersionListRoot.Margin = new Thickness(Root.Bounds.Width, 10, -1 * Root.Bounds.Width, 10);
+        await Task.Delay(260);
         LaunchConsoleRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
         VersionListRoot.IsVisible = false;
+    }
+
+    public async void OpenVersionSetting()
+    {
+        VersionSettingRoot.Margin = new Thickness(10);
+        LaunchConsoleRoot.Opacity = 0;
+        VersionSettingRoot.IsVisible = true;
+    }
+
+    public async Task OpenVersionList()
+    {
+        LaunchConsoleRoot.Opacity = 0;
+        VersionListRoot.IsVisible = true;
+        VersionListRoot.Margin = new Thickness(10);
+        await Task.Delay(260);
     }
 }

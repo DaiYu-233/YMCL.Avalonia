@@ -84,12 +84,10 @@
                     </ui:NavigationView.MenuItems>
                 </ui:NavigationView>
             </Border>
-            <ScrollViewer>
-                <ui:Frame
-                    Name="FrameView"
-                    Margin="0,10,0,0"
-                    DockPanel.Dock="Bottom" />
-            </ScrollViewer>
+            <ui:Frame
+                Name="FrameView"
+                Margin="0,10,0,0"
+                DockPanel.Dock="Bottom" />
         </DockPanel>
     </Border>
 </UserControl>

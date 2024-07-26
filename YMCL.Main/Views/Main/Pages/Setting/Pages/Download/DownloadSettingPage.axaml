@@ -1,0 +1,86 @@
+<UserControl
+    x:Class="YMCL.Main.Views.Main.Pages.Setting.Pages.Download.DownloadSettingPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ml="clr-namespace:MinecraftLaunch.Classes.Models.Game;assembly=MinecraftLaunch"
+    xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
+    xmlns:uc="clr-namespace:YMCL.Main.Public.Controls"
+    xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia">
+    <Border x:Name="Root" CornerRadius="8">
+        <Border.Transitions>
+            <Transitions>
+                <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
+            </Transitions>
+        </Border.Transitions>
+        <ScrollViewer>
+            <StackPanel Margin="10" Spacing="10">
+                <Border
+                    Padding="6.5"
+                    Background="{DynamicResource 1x}"
+                    CornerRadius="5"
+                    Opacity="{DynamicResource Opacity}">
+                    <DockPanel>
+                        <TextBlock
+                            Margin="10,0,20,0"
+                            VerticalAlignment="Center"
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="14"
+                            Text="{x:Static properties:MainLang.DownloadSource}" />
+                        <ComboBox
+                            x:Name="DownloadSourceComboBox"
+                            HorizontalAlignment="Stretch"
+                            DockPanel.Dock="Left"
+                            FontFamily="{DynamicResource Font}">
+                            <ComboBox.Items>
+                                <ComboBoxItem>Mojang</ComboBoxItem>
+                                <ComboBoxItem>BmclApi</ComboBoxItem>
+                            </ComboBox.Items>
+                        </ComboBox>
+                    </DockPanel>
+                </Border>
+                <Border
+                    Height="40"
+                    Padding="6.5"
+                    Background="{DynamicResource 1x}"
+                    CornerRadius="5"
+                    Opacity="{DynamicResource Opacity}">
+                    <DockPanel>
+                        <TextBlock
+                            Margin="10,0,20,0"
+                            VerticalAlignment="Center"
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="14"
+                            Text="{x:Static properties:MainLang.MaximumDownloadThread}" />
+                        <TextBlock
+                            Name="MaximumDownloadThreadText"
+                            Width="65"
+                            Margin="6.5,0,6.5,0"
+                            VerticalAlignment="Center"
+                            DockPanel.Dock="Right"
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="14"
+                            Text="¡Þ"
+                            TextAlignment="Center" />
+                        <Slider
+                            Name="MaximumDownloadThreadSlider"
+                            Height="35"
+                            Margin="0,-10,0,0"
+                            Maximum="128"
+                            Minimum="8"
+                            Value="32" />
+                    </DockPanel>
+                </Border>
+                <ui:InfoBar
+                    Name="DownloadThreadWarning"
+                    FontFamily="{DynamicResource Font}"
+                    IsClosable="False"
+                    IsOpen="False"
+                    Message="{x:Static properties:MainLang.DownloadThreadTooBigTip}"
+                    Opacity="{DynamicResource Opacity}"
+                    Severity="Warning" />
+            </StackPanel>
+        </ScrollViewer>
+    </Border>
+</UserControl>

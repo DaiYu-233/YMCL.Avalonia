@@ -9,7 +9,9 @@ public class Setting
     public Color AccentColor { get; set; } = Color.FromRgb(22, 233, 184);
     public string Language { get; set; } = "Unset";
     public string MinecraftFolder { get; set; }
+    public double MaximumDownloadThread { get; set; }
     public OpenFileWay OpenFileWay { get; set; }
+    public DownloadSource DownloadSource { get; set; } = DownloadSource.Mojang;
     public JavaEntry Java { get; set; } = Const.AutoJava;
     public int AccountSelectionIndex { get; set; }
     public Theme Theme { get; set; } = Theme.Light;

@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using FluentAvalonia.UI.Controls;
 using YMCL.Main.Public;
 using YMCL.Main.Views.Main.Pages.Setting.Pages.Account;
+using YMCL.Main.Views.Main.Pages.Setting.Pages.Download;
 using YMCL.Main.Views.Main.Pages.Setting.Pages.Launch;
 using YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher;
 using YMCL.Main.Views.Main.Pages.Setting.Pages.Personalize;
@@ -17,6 +18,7 @@ public partial class SettingPage : UserControl
     public LaunchSettingPage launchSettingPage = new();
     public PersonalizeSettingPage personalizeSettingPage = new();
     public PluginSettingPage pluginSettingPage = new();
+    public DownloadSettingPage downloadSettingPage = new();
 
     public SettingPage()
     {
@@ -59,6 +61,10 @@ public partial class SettingPage : UserControl
                 case "plugin":
                     pluginSettingPage.Root.IsVisible = false;
                     FrameView.Content = pluginSettingPage;
+                    break;
+                case "download":
+                    downloadSettingPage.Root.IsVisible = false;
+                    FrameView.Content = downloadSettingPage;
                     break;
             }
         };

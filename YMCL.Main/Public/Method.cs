@@ -485,6 +485,26 @@ public class Method
             }
         }
 
+        public static void ClearFolder(string folderPath)
+        {
+            if (!Directory.Exists(folderPath))
+            {
+                Console.WriteLine(MainLang.FolderNotExist + folderPath);
+                return;
+            }
+
+            foreach (string file in Directory.GetFiles(folderPath))
+            {
+                File.Delete(file);
+            }
+
+            foreach (string dir in Directory.GetDirectories(folderPath))
+            {
+                ClearFolder(dir);
+                Directory.Delete(dir);
+            }
+        }  
+
         public static void CopyDirectory(string sourceDir, string destinationDir)
         {
             // 确保目标目录不存在时创建它  

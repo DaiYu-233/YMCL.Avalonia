@@ -1,5 +1,5 @@
 <UserControl
-    x:Class="YMCL.Main.TaskEntry"
+    x:Class="YMCL.Main.Public.Controls.WindowTaskEntry.TaskEntry"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"

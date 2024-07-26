@@ -8,6 +8,8 @@ using Avalonia.Threading;
 using Newtonsoft.Json;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
+using YMCL.Main.Public.Controls.PageTaskEntry;
+using TaskEntry = YMCL.Main.Public.Controls.WindowTaskEntry.TaskEntry;
 
 namespace YMCL.Main;
 
@@ -91,5 +93,12 @@ public partial class TaskCenterWindow : Window
 
                 break;
         }
+    }
+
+    protected override void OnClosing(WindowClosingEventArgs e)
+    {
+        Hide();
+        e.Cancel = true;
+        base.OnClosing(e);
     }
 }

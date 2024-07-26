@@ -1,19 +1,19 @@
-//using LibVLCSharp.Avalonia;
-//using LibVLCSharp.Shared;
-
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Net.Http;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Timers;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using Avalonia.Input;
-using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
+using Avalonia.Threading;
 using NAudio.Wave;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Langs;
@@ -24,10 +24,18 @@ namespace YMCL.Main.Views.Main.Pages.Music;
 public partial class MusicPage : UserControl
 {
     private bool _firstLoad = true;
+    private bool _isHoldingSlider;
     private bool _isPlaying;
+    private PlaySongListViewItemEntry _selectedItem;
+    private IWavePlayer _waveOut;
+
+    private AudioFileReader _waveSource;
+    private WaveStream _waveStream;
+    public List<UrlImageDataListEntry> BitmapDataList = new();
     private string keyword = string.Empty;
     private int page;
     public List<PlaySongListViewItemEntry> playSongList = new();
+    private Timer timer;
 
     public MusicPage()
     {
@@ -37,28 +45,24 @@ public partial class MusicPage : UserControl
 
     private void BindingEvent()
     {
+        VolumeBtn.PointerPressed += (_, _) =>
+        {
+            if (VolumeRoot.Opacity == 0)
+                VolumeRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
+            else
+                VolumeRoot.Opacity = 0;
+        };
+        VolumeSlider.ValueChanged += (_, _) =>
+        {
+            VolumeText.Text = Math.Round(VolumeSlider.Value).ToString();
+            _waveOut.Volume = (float)VolumeSlider.Value / 100;
+        };
         Loaded += (s, e) =>
         {
             Method.Ui.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
             if (_firstLoad)
             {
                 _firstLoad = false;
-                Method.Ui.Toast(MainLang.ThisFeatureIsCurrentlyUnderDevelopment);
-                try
-                {
-                    //_libVLC = new LibVLC();
-                    //_mediaPlayer = new MediaPlayer(_libVLC);
-                    PlayerEvent();
-                }
-                catch (Exception ex)
-                {
-                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                        _ = Method.Ui.ShowDialogAsync(MainLang.InitAudioLibraryFail, MainLang.InstallVlcTip,
-                            b_primary: MainLang.Ok);
-                    else
-                        Method.Ui.ShowLongException(MainLang.InitAudioLibraryFail, ex);
-                }
-
                 var list = JsonConvert.DeserializeObject<List<PlaySongListViewItemEntry>>(
                     File.ReadAllText(Const.PlayerDataPath));
                 list.ForEach(list =>
@@ -66,6 +70,11 @@ public partial class MusicPage : UserControl
                     playSongList.Add(list);
                     PlayListView.Items.Add(list);
                 });
+
+                timer = new Timer(300);
+                timer.Elapsed += OnTimedEvent;
+                timer.AutoReset = true;
+                timer.Enabled = true;
             }
         };
         UpSong.Click += (s, e) =>
@@ -190,22 +199,36 @@ public partial class MusicPage : UserControl
         PlayListView.SelectionChanged += (s, e) =>
         {
             var song = (PlaySongListViewItemEntry)PlayListView.SelectedItem;
+            _selectedItem = song;
+            if (song.Type == PlaySongListViewItemEntryType.Local) SongImg.Source = Img.Source;
             PlaySong(song!);
         };
     }
 
-    private void PlayerEvent()
+    private void OnTimedEvent(object? sender, ElapsedEventArgs e)
     {
-        //_mediaPlayer.EndReached += (s, e) =>
-        //{
-        //    // MP3播放完成后的处理  
-        //};
-
-        //_mediaPlayer.MediaChanged += (s, e) =>
-        //{
-        //    // MP3加载后的处理  
-        //    _mediaPlayer.Play();
-        //};
+        var slider = true;
+        if (_selectedItem == null) return;
+        try
+        {
+            if (_selectedItem.Type == PlaySongListViewItemEntryType.Local)
+                Dispatcher.UIThread.Invoke(() =>
+                {
+                    if (_waveSource == null) return;
+                    CurrentTimeText.Text = Method.Value.MsToTime(_waveSource.CurrentTime.TotalMilliseconds);
+                    if (slider) PlayerSlider.Value = _waveSource.CurrentTime.TotalMilliseconds;
+                });
+            else if (_selectedItem.Type == PlaySongListViewItemEntryType.Network)
+                Dispatcher.UIThread.Invoke(() =>
+                {
+                    if (_waveStream == null) return;
+                    CurrentTimeText.Text = Method.Value.MsToTime(_waveStream.CurrentTime.TotalMilliseconds);
+                    if (slider) PlayerSlider.Value = _waveStream.CurrentTime.TotalMilliseconds;
+                });
+        }
+        catch
+        {
+        }
     }
 
     private void BeginPlaying()
@@ -213,7 +236,13 @@ public partial class MusicPage : UserControl
         _isPlaying = true;
         PauseIcon.IsVisible = false;
         PlayingIcon.IsVisible = true;
-        //_mediaPlayer.Play();
+        try
+        {
+            _waveOut.Play();
+        }
+        catch
+        {
+        }
     }
 
     private void PausePlaying()
@@ -221,7 +250,13 @@ public partial class MusicPage : UserControl
         _isPlaying = false;
         PauseIcon.IsVisible = true;
         PlayingIcon.IsVisible = false;
-        //_mediaPlayer.Pause();
+        try
+        {
+            _waveOut.Pause();
+        }
+        catch
+        {
+        }
     }
 
     private async Task SearchForListViewAsync(string keyword, int page)
@@ -238,7 +273,7 @@ public partial class MusicPage : UserControl
         var json = string.Empty;
         try
         {
-            var url = $"http://music.api.daiyu.fun/cloudsearch?keywords={keyword}&offset={page * 30}";
+            var url = $"{Const.MusicApiUrl}/cloudsearch?keywords={keyword}&offset={page * 30}";
             var response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             json = await response.Content.ReadAsStringAsync();
@@ -303,7 +338,7 @@ public partial class MusicPage : UserControl
         var json = string.Empty;
         try
         {
-            var url = $"http://music.api.daiyu.fun/cloudsearch?keywords={keyword}&offset={page * 30}";
+            var url = $"{Const.MusicApiUrl}/cloudsearch?keywords={keyword}&offset={page * 30}";
             var response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             json = await response.Content.ReadAsStringAsync();
@@ -363,21 +398,118 @@ public partial class MusicPage : UserControl
         SongAuthors.Text = entry.Authors;
         try
         {
-            using (var client = new HttpClient())
-            {
-                var imageData = await client.GetByteArrayAsync(entry.Img);
-                using (var stream = new MemoryStream(imageData))
-                {
-                    var bitmap = new Bitmap(stream);
-                    SongImg.Source = bitmap;
-                }
-            }
+            _waveOut.Stop();
+            _waveOut.Dispose();
         }
         catch
         {
         }
 
-        //_mediaPlayer.Media = new Media(_libVLC, entry.Path!, FromType.FromPath);
-        BeginPlaying();
+        if (entry.Type == PlaySongListViewItemEntryType.Local)
+        {
+            if (entry.Path == null)
+            {
+                Method.Ui.Toast(MainLang.MusicGetFail, type: NotificationType.Error);
+                return;
+            }
+
+            if (!File.Exists(entry.Path))
+            {
+                Method.Ui.Toast(MainLang.FileNotExist, type: NotificationType.Error);
+                return;
+            }
+
+            if (_waveOut != null)
+            {
+                _waveOut.Stop();
+                _waveOut.Dispose();
+            }
+
+            _waveOut = new WaveOutEvent();
+            _waveOut.Volume = (float)VolumeSlider.Value / 100;
+            _waveOut.PlaybackStopped += PlayerEnded;
+            _waveSource = new AudioFileReader(entry.Path);
+            _waveOut.Init(_waveSource);
+            PlayerSlider.Maximum = _waveSource.TotalTime.TotalMilliseconds;
+            TotalTimeText.Text = Method.Value.MsToTime(_waveSource.TotalTime.TotalMilliseconds);
+            BeginPlaying();
+        }
+        else
+        {
+            Const.Notification.main.Show(new Notification(
+                $"Yu Minecraft Launcher - {DateTime.Now.ToString("HH:mm:ss")}", MainLang.Loading,
+                expiration: TimeSpan.FromSeconds(0.9)));
+            var data =
+                BitmapDataList.Find(UrlImageDataListEntry => UrlImageDataListEntry.Url == entry.Img);
+            if (data == null)
+            {
+                var bitmap = await Method.Value.LoadImageFromUrlAsync(entry.Img!);
+                if (bitmap != null) SongImg.Source = bitmap;
+
+                BitmapDataList.Add(new UrlImageDataListEntry { Url = entry.Img, Bitmap = bitmap });
+            }
+            else
+            {
+                SongImg.Source = data.Bitmap;
+            }
+
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("User-Agent",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54");
+            var response = await client.GetAsync($"{Const.MusicApiUrl}/check/music?id={entry.SongId}");
+            response.EnsureSuccessStatusCode();
+            var jObject = JObject.Parse(await response.Content.ReadAsStringAsync());
+            var availability = (bool)jObject["success"]!;
+            if (!availability)
+            {
+                Method.Ui.Toast(MainLang.MusicNotAvailable, type: NotificationType.Error);
+                return;
+            }
+
+            var response1 = await client.GetAsync($"{Const.MusicApiUrl}/song/url?id={entry.SongId}");
+            response1.EnsureSuccessStatusCode();
+            var jObject1 = JObject.Parse(await response1.Content.ReadAsStringAsync());
+            if (jObject1 == null)
+            {
+                Method.Ui.Toast(MainLang.MusicGetFail, type: NotificationType.Error);
+                return;
+            }
+
+            var url = (string)((JObject)((JArray)jObject1["data"])[0])["url"];
+
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            using (var response4 = (HttpWebResponse)request.GetResponse())
+            using (var responseStream = response4.GetResponseStream())
+            {
+                var memoryStream = new MemoryStream();
+                responseStream.CopyTo(memoryStream);
+                memoryStream.Position = 0;
+
+                _waveStream = new Mp3FileReader(memoryStream);
+
+                var selectedItem = PlayListView.SelectedItem as PlaySongListViewItemEntry;
+                if (selectedItem.SongName != entry.SongName || selectedItem.SongId != entry.SongId) return;
+
+                PlayerSlider.Maximum = _waveStream.TotalTime.TotalMilliseconds;
+                TotalTimeText.Text = Method.Value.MsToTime(_waveStream.TotalTime.TotalMilliseconds);
+                if (_waveOut != null)
+                {
+                    _waveOut.Stop();
+                    _waveOut.Dispose();
+                }
+
+                _waveOut = new WaveOutEvent();
+                _waveOut.Volume = (float)VolumeSlider.Value / 100;
+                _waveOut.PlaybackStopped += PlayerEnded;
+                _waveOut.Init(_waveStream);
+                BeginPlaying();
+            }
+        }
+    }
+
+    private void PlayerEnded(object? sender, StoppedEventArgs e)
+    {
+        if (Math.Abs(PlayerSlider.Maximum - PlayerSlider.Value) > 1200) return;
+        var a = 0;
     }
 }

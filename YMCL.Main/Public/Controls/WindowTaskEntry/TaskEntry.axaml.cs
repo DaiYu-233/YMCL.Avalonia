@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Concurrent;
 using System.Timers;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
-using YMCL.Main.Public;
 
-namespace YMCL.Main;
+namespace YMCL.Main.Public.Controls.WindowTaskEntry;
 
 public partial class TaskEntry : UserControl
 {

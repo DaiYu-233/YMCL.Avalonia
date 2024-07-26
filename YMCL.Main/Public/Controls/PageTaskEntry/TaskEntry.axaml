@@ -1,0 +1,43 @@
+<UserControl
+    x:Class="YMCL.Main.Public.Controls.PageTaskEntry.TaskEntry"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{DynamicResource Font}"
+    FontWeight="{DynamicResource FontWeight}"
+    mc:Ignorable="d">
+    <Border
+        Background="{DynamicResource 2x}"
+        ClipToBounds="True"
+        CornerRadius="5"
+        Opacity="{DynamicResource Opacity}">
+        <DockPanel>
+            <DockPanel
+                Margin="10,7"
+                VerticalAlignment="Top"
+                DockPanel.Dock="Top">
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                    <TextBlock Name="TaskNumber" Text="#1" />
+                    <TextBlock Text=" " />
+                    <TextBlock Name="TaskName" Text="TaskName" />
+                </StackPanel>
+                <TextBlock
+                    Name="TaskProgressBarText"
+                    DockPanel.Dock="Right"
+                    Text="0%" />
+                <ProgressBar
+                    Name="TaskProgressBar"
+                    Margin="10,0"
+                    DockPanel.Dock="Left"
+                    Value="0" />
+            </DockPanel>
+            <TextBox
+                Name="TaskTextBox"
+                Margin="10,0,10,10"
+                DockPanel.Dock="Bottom"
+                IsReadOnly="True"
+                Opacity="{DynamicResource Opacity}" />
+        </DockPanel>
+    </Border>
+</UserControl>

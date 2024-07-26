@@ -23,6 +23,7 @@ using YMCL.Main.Views.Main.Pages.Launch;
 using YMCL.Main.Views.Main.Pages.More;
 using YMCL.Main.Views.Main.Pages.Music;
 using YMCL.Main.Views.Main.Pages.Setting;
+using YMCL.Main.Views.Main.Pages.TaskCenter;
 using static YMCL.Main.Public.Classes.PlaySongListViewItemEntry;
 using FileInfo = YMCL.Main.Public.Classes.FileInfo;
 
@@ -35,7 +36,7 @@ public partial class MainWindow : Window
     public readonly MorePage morePage = new();
     public readonly MusicPage musicPage = new();
     public readonly SettingPage settingPage = new();
-    private bool _isOpeningTaskCenter;
+    public readonly TaskCenterPage taskCenterPage = new();
     public WindowTitleBarStyle titleBarStyle;
 
     public MainWindow()
@@ -81,13 +82,8 @@ public partial class MainWindow : Window
             switch (((NavigationViewItem)((NavigationView)s!).SelectedItem!).Tag)
             {
                 case "Launch":
-                    if (!_isOpeningTaskCenter)
-                    {
-                        launchPage.Root.IsVisible = false;
-                        FrameView.Content = launchPage;
-                    }
-
-                    _isOpeningTaskCenter = false;
+                    launchPage.Root.IsVisible = false;
+                    FrameView.Content = launchPage;
                     break;
                 case "Setting":
                     settingPage.Root.IsVisible = false;
@@ -106,19 +102,25 @@ public partial class MainWindow : Window
                     FrameView.Content = morePage;
                     break;
                 case "Task":
-                    Const.Window.taskCenter.Show();
-                    Const.Window.taskCenter.Activate();
-                    _isOpeningTaskCenter = true;
-                    Nav.SelectedItem = Nav.MenuItems[0];
-                    FrameView.Content = settingPage;
-                    FrameView.Content = launchPage;
+                    taskCenterPage.Root.IsVisible = false;
+                    FrameView.Content = taskCenterPage;
                     break;
+            }
+        };
+        NavTask.PointerPressed += (_, e) =>
+        {
+            if (e.GetCurrentPoint(this).Properties.IsRightButtonPressed)
+            {
+                Const.Window.taskCenter.Show();
+                Const.Window.taskCenter.Activate();
             }
         };
     }
 
     public void LoadWindow()
     {
+        Method.IO.ClearFolder(Const.TempFolderPath);
+        
         SystemDecorations = SystemDecorations.Full;
 
         var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
@@ -286,5 +288,11 @@ public partial class MainWindow : Window
                 JsonConvert.SerializeObject(musicPage.playSongList, Formatting.Indented));
             musicPage.PlayListView.SelectedIndex = musicPage.PlayListView.Items.Count - 1;
         }
+    }
+
+    protected override void OnClosing(WindowClosingEventArgs e)
+    {
+        Environment.Exit(0);
+        base.OnClosing(e);
     }
 }

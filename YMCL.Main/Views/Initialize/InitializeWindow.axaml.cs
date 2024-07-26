@@ -66,6 +66,7 @@ public partial class InitializeWindow : Window
     {
         Method.IO.TryCreateFolder(Const.UserDataRootPath);
         Method.IO.TryCreateFolder(Const.PluginFolderPath);
+        Method.IO.TryCreateFolder(Const.TempFolderPath);
         if (!File.Exists(Const.SettingDataPath))
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(new Setting(), Formatting.Indented));
         if (File.Exists(Path.Combine(Const.UserDataRootPath, "YMCL.Update.Helper.win.exe")))
@@ -159,6 +160,8 @@ public partial class InitializeWindow : Window
 
     private async void OnLoaded()
     {
+        WindowState = WindowState.Maximized;
+        WindowState = WindowState.Normal;
         var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
         titleBarStyle = setting.WindowTitleBarStyle;
         switch (setting.WindowTitleBarStyle)
@@ -301,11 +304,10 @@ public partial class InitializeWindow : Window
                 File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
         }
-
+        
         Const.Window.main.LoadWindow();
         Hide();
     }
-
     protected override void OnLoaded(RoutedEventArgs e)
     {
         Hide();

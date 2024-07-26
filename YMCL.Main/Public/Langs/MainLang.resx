@@ -772,4 +772,10 @@ sudo apt install vlc</value>
     <data name="SelectImgFile" xml:space="preserve">
     <value>选择图像文件</value>
   </data>
+  <data name="MusicNotAvailable" xml:space="preserve">
+      <value>音乐不可用</value>
+    </data>
+  <data name="MusicGetFail" xml:space="preserve">
+      <value>音乐获取失败</value>
+    </data>
 </root>

@@ -16,6 +16,7 @@ using CurseForge.APIClient.Models.Mods;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Controls;
+using YMCL.Main.Public.Controls.PageTaskEntry;
 using YMCL.Main.Public.Langs;
 using File = CurseForge.APIClient.Models.Files.File;
 
@@ -451,6 +452,8 @@ public partial class CurseForgeFetcher : UserControl
                     searchFilter: keyword, modLoaderType: loaderType, index: _page * 25, pageSize: 25,
                     categoryId: -1, classId: classId);
 
+            if (ModNameTextBox.Text != keyword) return;
+            
             mods.Data.ForEach(mod =>
             {
                 var entry = new SearchModListViewItemEntry(mod);

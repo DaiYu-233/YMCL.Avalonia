@@ -8,6 +8,7 @@ using Avalonia.Platform;
 using Avalonia.Threading;
 using Newtonsoft.Json;
 using YMCL.Main.Public.Classes;
+using YMCL.Main.Public.Controls.PageTaskEntry;
 
 namespace YMCL.Main.Public.Controls.WindowTask;
 
@@ -154,5 +155,12 @@ public partial class WindowTask : Window
         TitleText.Text = title;
         Title = title;
         entry.UpdateTitle(title);
+    }
+
+    protected override void OnClosing(WindowClosingEventArgs e)
+    {
+        Hide();
+        e.Cancel = true;
+        base.OnClosing(e);
     }
 }

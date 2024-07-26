@@ -21,24 +21,25 @@
         <RepositoryUrl>https://github.com/DaiYu-233/YMCL.Avalonia</RepositoryUrl>
     </PropertyGroup>
     <ItemGroup>
-        <None Include="..\.editorconfig" Link=".editorconfig"/>
+        <None Include="..\.editorconfig" Link=".editorconfig" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.1.0"/>
-        <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.1.0"/>
-        <PackageReference Include="Avalonia.Desktop" Version="11.1.0"/>
-        <PackageReference Include="Avalonia.Markup.Xaml.Loader" Version="11.1.0"/>
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.0"/>
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.0"/>
+        <PackageReference Include="Avalonia" Version="11.1.0" />
+        <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.1.0" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.1.0" />
+        <PackageReference Include="Avalonia.Markup.Xaml.Loader" Version="11.1.0" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.0" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.0" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.0"/>
-        <PackageReference Include="CurseForge.APIClient" Version="2.2.0"/>
-        <PackageReference Include="FluentAvaloniaUI" Version="2.1.0-preview6"/>
-        <PackageReference Include="MinecraftLaunch" Version="3.1.0-preview06"/>
-        <PackageReference Include="MinecraftLaunch.Skin" Version="1.0.1"/>
-        <PackageReference Include="NAudio.Wasapi" Version="2.2.1"/>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
-        <PackageReference Include="System.Management" Version="9.0.0-preview.6.24327.7"/>
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.0" />
+        <PackageReference Include="CurseForge.APIClient" Version="2.2.0" />
+        <PackageReference Include="FluentAvaloniaUI" Version="2.1.0-preview6" />
+        <PackageReference Include="MinecraftLaunch" Version="3.1.0-preview06" />
+        <PackageReference Include="MinecraftLaunch.Skin" Version="1.0.1" />
+        <PackageReference Include="NAudio" Version="2.2.1" />
+        <PackageReference Include="NAudio.Wasapi" Version="2.2.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="System.Management" Version="9.0.0-preview.6.24327.7" />
     </ItemGroup>
     <ItemGroup>
         <Compile Update="Public\Langs\MainLang.Designer.cs">
@@ -56,7 +57,7 @@
         <Compile Update="Views\Main\Pages\Download\Pages\CurseForge\Mod\Mod.axaml.cs">
             <DependentUpon>Mod.axaml</DependentUpon>
         </Compile>
-        <Compile Remove="Public\Langs\LangHelperBase.cs"/>
+        <Compile Remove="Public\Langs\LangHelperBase.cs" />
     </ItemGroup>
     <ItemGroup>
         <EmbeddedResource Update="Public\Langs\MainLang.resx">
@@ -65,42 +66,42 @@
         </EmbeddedResource>
     </ItemGroup>
     <ItemGroup>
-        <AvaloniaResource Remove="Public\Assets\YMCL-Icon.ico"/>
+        <AvaloniaResource Remove="Public\Assets\YMCL-Icon.ico" />
     </ItemGroup>
     <ItemGroup>
-        <AvaloniaResource Remove="Public\Assets\YMCL-Icon.ico"/>
+        <AvaloniaResource Remove="Public\Assets\YMCL-Icon.ico" />
     </ItemGroup>
     <ItemGroup>
-        <AvaloniaXaml Remove="Public\Texts\CustomHomePageDefault.axaml"/>
+        <AvaloniaXaml Remove="Public\Texts\CustomHomePageDefault.axaml" />
     </ItemGroup>
     <ItemGroup>
-        <None Remove="Public\Assets\MiSans-Regular.otf"/>
-        <None Remove="Public\Assets\TitleBar-Icon.png"/>
-        <None Remove="Public\Assets\Transparent-Icon.png"/>
-        <None Remove="Public\Assets\YCML-Icon.ico"/>
-        <None Remove="Public\Assets\YMCL-Icon.png"/>
-        <None Remove="Public\Bins\YMCL.Starter.win.exe"/>
-        <None Remove="Public\Bins\YMCL.Update.Helper.linux"/>
-        <None Remove="Public\Bins\YMCL.Update.Helper.win.exe"/>
-        <None Remove="Public\Texts\DateTime.txt"/>
-        <None Remove="Public\Texts\IsAloneProgram.txt"/>
+        <None Remove="Public\Assets\MiSans-Regular.otf" />
+        <None Remove="Public\Assets\TitleBar-Icon.png" />
+        <None Remove="Public\Assets\Transparent-Icon.png" />
+        <None Remove="Public\Assets\YCML-Icon.ico" />
+        <None Remove="Public\Assets\YMCL-Icon.png" />
+        <None Remove="Public\Bins\YMCL.Starter.win.exe" />
+        <None Remove="Public\Bins\YMCL.Update.Helper.linux" />
+        <None Remove="Public\Bins\YMCL.Update.Helper.win.exe" />
+        <None Remove="Public\Texts\DateTime.txt" />
+        <None Remove="Public\Texts\IsAloneProgram.txt" />
     </ItemGroup>
     <ItemGroup>
-        <AvaloniaResource Include="Public\Assets\MiSans-Regular.otf"/>
-        <AvaloniaResource Include="Public\Assets\TitleBar-Icon.png"/>
-        <AvaloniaResource Include="Public\Assets\Transparent-Icon.png"/>
+        <AvaloniaResource Include="Public\Assets\MiSans-Regular.otf" />
+        <AvaloniaResource Include="Public\Assets\TitleBar-Icon.png" />
+        <AvaloniaResource Include="Public\Assets\Transparent-Icon.png" />
         <AvaloniaResource Include="Public\Assets\YMCL-Icon.png">
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </AvaloniaResource>
     </ItemGroup>
     <ItemGroup>
-        <EmbeddedResource Include="Public\Bins\YMCL.Starter.win.exe"/>
-        <EmbeddedResource Include="Public\Bins\YMCL.Update.Helper.linux"/>
-        <EmbeddedResource Include="Public\Bins\YMCL.Update.Helper.win.exe"/>
-        <EmbeddedResource Include="Public\Texts\CustomHomePageDefault.axaml"/>
-        <EmbeddedResource Include="Public\Texts\DateTime.txt"/>
-        <EmbeddedResource Include="Public\Texts\IsAloneProgram.txt"/>
+        <EmbeddedResource Include="Public\Bins\YMCL.Starter.win.exe" />
+        <EmbeddedResource Include="Public\Bins\YMCL.Update.Helper.linux" />
+        <EmbeddedResource Include="Public\Bins\YMCL.Update.Helper.win.exe" />
+        <EmbeddedResource Include="Public\Texts\CustomHomePageDefault.axaml" />
+        <EmbeddedResource Include="Public\Texts\DateTime.txt" />
+        <EmbeddedResource Include="Public\Texts\IsAloneProgram.txt" />
     </ItemGroup>
     <ItemGroup>
         <None Update="Public\Assets\YCML-Icon.png">

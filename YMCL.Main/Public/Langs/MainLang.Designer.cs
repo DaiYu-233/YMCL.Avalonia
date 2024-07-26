@@ -1143,6 +1143,24 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 音乐获取失败.
+        /// </summary>
+        public static string MusicGetFail {
+            get {
+                return ResourceManager.GetString("MusicGetFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 音乐不可用.
+        /// </summary>
+        public static string MusicNotAvailable {
+            get {
+                return ResourceManager.GetString("MusicNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  账户.
         /// </summary>
         public static string NavAccount {

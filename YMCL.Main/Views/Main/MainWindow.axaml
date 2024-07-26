@@ -134,7 +134,10 @@
                                                     Text="{x:Static properties:MainLang.NavDownload}" />
                                             </DockPanel>
                                         </ui:NavigationViewItem>
-                                        <ui:NavigationViewItem FontFamily="{DynamicResource Font}" Tag="Task">
+                                        <ui:NavigationViewItem
+                                            Name="NavTask"
+                                            FontFamily="{DynamicResource Font}"
+                                            Tag="Task">
                                             <DockPanel>
                                                 <Image Width="16" Height="16">
                                                     <Image.Source>

@@ -41,7 +41,7 @@ public class Const
     public static string GithubUpdateApiUrl { get; } =
         "https://api.github.com/repos/DaiYu-233/YMCL.Avalonia/releases?per_page=1";
 
-    public static string MusicApiUrl { get; } = "http://music.api.daiyu.fun";
+    public static string MusicApiUrl { get; } = "http://music.api.daiyu.fun/";
     public static string CurseForgeApiKey { get; } = "$2a$10$ndSPnOpYqH3DRmLTWJTf5Ofm7lz9uYoTGvhSj0OjJWJ8WdO4ZTsr.";
 
     public class Window

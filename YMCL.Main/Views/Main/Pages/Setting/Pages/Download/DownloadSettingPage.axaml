@@ -67,7 +67,7 @@
                             Name="MaximumDownloadThreadSlider"
                             Height="35"
                             Margin="0,-10,0,0"
-                            Maximum="128"
+                            Maximum="256"
                             Minimum="8"
                             Value="32" />
                     </DockPanel>
@@ -76,10 +76,42 @@
                     Name="DownloadThreadWarning"
                     FontFamily="{DynamicResource Font}"
                     IsClosable="False"
-                    IsOpen="False"
+                    IsOpen="True"
+                    IsVisible="False"
                     Message="{x:Static properties:MainLang.DownloadThreadTooBigTip}"
                     Opacity="{DynamicResource Opacity}"
                     Severity="Warning" />
+                <Border
+                    Padding="6.5"
+                    Background="{DynamicResource 1x}"
+                    CornerRadius="5"
+                    Opacity="{DynamicResource Opacity}">
+                    <DockPanel>
+                        <TextBlock
+                            Margin="10,0,20,0"
+                            VerticalAlignment="Center"
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="14"
+                            Text="{x:Static properties:MainLang.CustomUpdateUrl}" />
+                        <DockPanel HorizontalAlignment="Stretch" DockPanel.Dock="Left">
+                            <TextBox
+                                Name="CustomUpdateUrlTextBox"
+                                FontFamily="{DynamicResource Font}"
+                                IsVisible="False" />
+                            <ComboBox
+                                x:Name="CustomUpdateUrlEnableComboBox"
+                                Margin="5,0,0,0"
+                                HorizontalAlignment="Stretch"
+                                FontFamily="{DynamicResource Font}"
+                                SelectedIndex="0">
+                                <ComboBox.Items>
+                                    <ComboBoxItem Content="{x:Static properties:MainLang.Off}" />
+                                    <ComboBoxItem Content="{x:Static properties:MainLang.On}" />
+                                </ComboBox.Items>
+                            </ComboBox>
+                        </DockPanel>
+                    </DockPanel>
+                </Border>
             </StackPanel>
         </ScrollViewer>
     </Border>

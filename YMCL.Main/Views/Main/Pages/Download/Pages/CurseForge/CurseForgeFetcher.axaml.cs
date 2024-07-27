@@ -424,7 +424,6 @@ public partial class CurseForgeFetcher : UserControl
             loaderType = ModLoaderType.Any;
 
         _loaderType = loaderType;
-
         try
         {
             var classId = GetClassIdFromResultTypeComboBoxSelectedIndex(ResultTypeComboBox.SelectedIndex);

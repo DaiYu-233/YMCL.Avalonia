@@ -194,7 +194,7 @@ public partial class LaunchPage : UserControl
                 }
                 else
                 {
-                    _ = Method.Mc.LaunchClientAsync();
+                    _ = Method.Mc.LaunchClientUsingMinecraftLaunchAsync();
                 }
             }
         };

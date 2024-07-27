@@ -62,39 +62,39 @@ public partial class AutoInstallPage : UserControl
             {
                 var entry1 = ForgeListView.SelectedItem as ForgeInstallEntry;
                 var entry2 = OptiFineListView.SelectedItem as OptiFineInstallEntity;
-                _ = Method.Mc.InstallClientAsync(InstallPreviewIdText.Text!,
+                _ = Method.Mc.InstallClientUsingMinecraftLaunchAsync(InstallPreviewIdText.Text!,
                     HandleCustomId(InstallPreviewIdText.Text!, InstallPreviewIdTextBox.Text!),
                     optiFineInstallEntity: entry2!, forgeInstallEntry: entry1!);
             }
             else if (OptiFineListView.SelectedIndex >= 0)
             {
                 var entry = OptiFineListView.SelectedItem as OptiFineInstallEntity;
-                _ = Method.Mc.InstallClientAsync(InstallPreviewIdText.Text!,
+                _ = Method.Mc.InstallClientUsingMinecraftLaunchAsync(InstallPreviewIdText.Text!,
                     HandleCustomId(InstallPreviewIdText.Text!, InstallPreviewIdTextBox.Text!),
                     optiFineInstallEntity: entry!);
             }
             else if (ForgeListView.SelectedIndex >= 0)
             {
                 var entry = ForgeListView.SelectedItem as ForgeInstallEntry;
-                _ = Method.Mc.InstallClientAsync(InstallPreviewIdText.Text!,
+                _ = Method.Mc.InstallClientUsingMinecraftLaunchAsync(InstallPreviewIdText.Text!,
                     HandleCustomId(InstallPreviewIdText.Text!, InstallPreviewIdTextBox.Text!), entry!);
             }
             else if (FabricListView.SelectedIndex >= 0)
             {
                 var entry = FabricListView.SelectedItem as FabricBuildEntry;
-                _ = Method.Mc.InstallClientAsync(InstallPreviewIdText.Text!,
+                _ = Method.Mc.InstallClientUsingMinecraftLaunchAsync(InstallPreviewIdText.Text!,
                     HandleCustomId(InstallPreviewIdText.Text!, InstallPreviewIdTextBox.Text!),
                     fabricBuildEntry: entry!);
             }
             else if (QuiltListView.SelectedIndex >= 0)
             {
                 var entry = QuiltListView.SelectedItem as QuiltBuildEntry;
-                _ = Method.Mc.InstallClientAsync(InstallPreviewIdText.Text!,
+                _ = Method.Mc.InstallClientUsingMinecraftLaunchAsync(InstallPreviewIdText.Text!,
                     HandleCustomId(InstallPreviewIdText.Text!, InstallPreviewIdTextBox.Text!), quiltBuildEntry: entry!);
             }
             else
             {
-                _ = Method.Mc.InstallClientAsync(InstallPreviewIdText.Text!,
+                _ = Method.Mc.InstallClientUsingMinecraftLaunchAsync(InstallPreviewIdText.Text!,
                     HandleCustomId(InstallPreviewIdText.Text!, InstallPreviewIdTextBox.Text!));
             }
         };

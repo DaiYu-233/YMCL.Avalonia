@@ -10,6 +10,7 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using FluentAvalonia.UI.Controls;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Controls.WindowTask;
@@ -227,13 +228,21 @@ public partial class LauncherSettingPage : UserControl
 
                     if (url != null)
                     {
-                        task.UpdateTextProgress($"{MainLang.GetUpdateUrl}: {url}");
+                        var setting =
+                            JsonConvert.DeserializeObject<Public.Classes.Setting>(
+                                File.ReadAllText(Const.SettingDataPath));
+                        var trueUrl = url;
+                        if (setting.EnableCustomUpdateUrl)
+                        {
+                            trueUrl = setting.CustomUpdateUrl.Replace("{%url%}", url);
+                        }
+
+                        task.UpdateTextProgress($"{MainLang.GetUpdateUrl}: {trueUrl}");
                         var saveFile = Const.Platform == Platform.Windows ? "Update.exe" : "Update";
                         task.UpdateTextProgress(
                             $"{MainLang.BeginDownload}: {Path.Combine(Const.UserDataRootPath, saveFile)}");
                         try
                         {
-                            //url = "http://127.0.0.1:5500/a.file";
                             var handler = new HttpClientHandler();
                             handler.ServerCertificateCustomValidationCallback =
                                 (httpRequestMessage, cert, cetChain, policyErrors) => { return true; };
@@ -244,7 +253,7 @@ public partial class LauncherSettingPage : UserControl
                                 client.DefaultRequestHeaders.Add("User-Agent",
                                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0");
                                 using (var response =
-                                       await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
+                                       await client.GetAsync(trueUrl, HttpCompletionOption.ResponseHeadersRead))
                                 {
                                     response.EnsureSuccessStatusCode();
 
@@ -299,34 +308,12 @@ public partial class LauncherSettingPage : UserControl
                                         WorkingDirectory = Environment.CurrentDirectory,
                                         FileName = Path.Combine(Const.UserDataRootPath, "YMCL.Update.Helper.win.exe"),
                                         Arguments =
-                                            $"{Path.Combine(Const.UserDataRootPath, saveFile)} {Process.GetCurrentProcess().MainModule.FileName}",
+                                            $"\"{Path.Combine(Const.UserDataRootPath, saveFile)}\" \"{Process.GetCurrentProcess().MainModule.FileName}\"",
                                         Verb = "runas"
                                     };
                                     Process.Start(startInfo);
                                     Environment.Exit(0);
                                 }
-                                //else if (architecture == "linux-x64")
-                                //{
-                                //    string resourceName = "YMCL.Main.Public.Bins.YMCL.Update.Helper.linux";
-                                //    Assembly assembly = Assembly.GetExecutingAssembly();
-                                //    using (Stream resourceStream = assembly.GetManifestResourceStream(resourceName))
-                                //    {
-                                //        string outputFilePath = Path.Combine(Const.UserDataRootPath, "YMCL.Update.Helper.linux");
-                                //        using (FileStream fileStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write))
-                                //        {
-                                //            resourceStream.CopyTo(fileStream);
-                                //        }
-                                //    }
-                                //    ProcessStartInfo startInfo = new ProcessStartInfo
-                                //    {
-                                //        UseShellExecute = true,
-                                //        WorkingDirectory = Environment.CurrentDirectory,
-                                //        FileName = Path.Combine(Const.UserDataRootPath, "YMCL.Update.Helper.linux"),
-                                //        Arguments = $"{Path.Combine(Const.UserDataRootPath, saveFile)} {Process.GetCurrentProcess().MainModule.FileName}"
-                                //    };
-                                //    Process.Start(startInfo);
-                                //    Environment.Exit(0);
-                                //}
                                 else
                                 {
                                     var dialog1 = await Method.Ui.ShowDialogAsync(MainLang.Update,

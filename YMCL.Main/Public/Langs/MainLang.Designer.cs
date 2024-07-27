@@ -411,6 +411,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 自定义更新Url.
+        /// </summary>
+        public static string CustomUpdateUrl {
+            get {
+                return ResourceManager.GetString("CustomUpdateUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 深色.
         /// </summary>
         public static string Dark {
@@ -1017,6 +1026,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 我是歌词 ヾ(≧▽≦*)o.
+        /// </summary>
+        public static string LyricTip {
+            get {
+                return ResourceManager.GetString("LyricTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 手动添加.
         /// </summary>
         public static string ManualAdd {
@@ -1211,6 +1229,15 @@ namespace YMCL.Main.Public.Langs {
         public static string MusicNotAvailable {
             get {
                 return ResourceManager.GetString("MusicNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 音乐播放器仅支持Windows.
+        /// </summary>
+        public static string MusicPlayerOnlySupportWindows {
+            get {
+                return ResourceManager.GetString("MusicPlayerOnlySupportWindows", resourceCulture);
             }
         }
         
@@ -1589,6 +1616,15 @@ namespace YMCL.Main.Public.Langs {
         public static string RunCommandFail {
             get {
                 return ResourceManager.GetString("RunCommandFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 保存音频文件.
+        /// </summary>
+        public static string SaveAudioFile {
+            get {
+                return ResourceManager.GetString("SaveAudioFile", resourceCulture);
             }
         }
         

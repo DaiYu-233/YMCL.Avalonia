@@ -15,6 +15,13 @@ public enum Theme
     Dark
 }
 
+public enum Repeat
+{
+    RepeatOff,
+    RepeatAll,
+    RepeatOne
+}
+
 public enum OpenFileWay
 {
     FileSelectWindow,

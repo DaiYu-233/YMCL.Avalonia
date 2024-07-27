@@ -36,12 +36,29 @@ public partial class DownloadSettingPage : UserControl
             setting.DownloadSource = (DownloadSource)DownloadSourceComboBox.SelectedIndex;
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
+        CustomUpdateUrlEnableComboBox.SelectionChanged += (s, e) =>
+        {
+            CustomUpdateUrlTextBox.IsVisible = CustomUpdateUrlEnableComboBox.SelectedIndex == 1;
+            var setting =
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (setting.EnableCustomUpdateUrl == (CustomUpdateUrlEnableComboBox.SelectedIndex == 1)) return;
+            setting.EnableCustomUpdateUrl = CustomUpdateUrlEnableComboBox.SelectedIndex == 1;
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+        };
+        CustomUpdateUrlTextBox.TextChanged += (_, _) =>
+        {
+            var setting =
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (setting.CustomUpdateUrl == CustomUpdateUrlTextBox.Text) return;
+            setting.CustomUpdateUrl = CustomUpdateUrlTextBox.Text;
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+        };
         MaximumDownloadThreadSlider.ValueChanged += (_, _) =>
         {
             var value = Math.Round(MaximumDownloadThreadSlider.Value);
             MaximumDownloadThreadText.Text = value.ToString();
             MaximumDownloadThreadSlider.Value = value;
-            DownloadThreadWarning.IsOpen = MaximumDownloadThreadSlider.Value > 32;
+            DownloadThreadWarning.IsVisible = MaximumDownloadThreadSlider.Value > 100;
             var setting =
                 JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
             if (setting.MaximumDownloadThread == value) return;
@@ -57,6 +74,9 @@ public partial class DownloadSettingPage : UserControl
         DownloadSourceComboBox.SelectedIndex = (int)setting.DownloadSource;
         MaximumDownloadThreadText.Text = setting.MaximumDownloadThread.ToString();
         MaximumDownloadThreadSlider.Value = setting.MaximumDownloadThread;
-        DownloadThreadWarning.IsOpen = MaximumDownloadThreadSlider.Value > 32;
+        DownloadThreadWarning.IsVisible = MaximumDownloadThreadSlider.Value > 100;
+        CustomUpdateUrlEnableComboBox.SelectedIndex = setting.EnableCustomUpdateUrl ? 1 : 0;
+        CustomUpdateUrlTextBox.Text = setting.CustomUpdateUrl;
+        CustomUpdateUrlTextBox.IsVisible = CustomUpdateUrlEnableComboBox.SelectedIndex == 1;
     }
 }

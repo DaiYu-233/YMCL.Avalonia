@@ -603,10 +603,3 @@ public class Lyrics
     public string Text { get; set; }
     public double Index { get; set; }
 }
-
-public enum Repeat
-{
-    RepeatOff,
-    RepeatAll,
-    RepeatOne
-}

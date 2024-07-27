@@ -35,6 +35,10 @@ public partial class ImageIcon : UserControl
         set => SetValue(ColorProperty, value);
     }
 
+    public void Reload()
+    {
+        ImageIcon_Loaded(null, null);
+    }
     private void ImageIcon_Loaded(object? sender, RoutedEventArgs e)
     {
         var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));

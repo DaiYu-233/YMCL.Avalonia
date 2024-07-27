@@ -802,4 +802,16 @@ sudo apt install vlc</value>
   <data name="ModPack" xml:space="preserve">
       <value>整合包</value>
     </data>
+  <data name="SaveAudioFile" xml:space="preserve">
+      <value>保存音频文件</value>
+    </data>
+  <data name="CustomUpdateUrl" xml:space="preserve">
+      <value>自定义更新Url</value>
+    </data>
+  <data name="LyricTip" xml:space="preserve">
+      <value>我是歌词 ヾ(≧▽≦*)o</value>
+    </data>
+  <data name="MusicPlayerOnlySupportWindows" xml:space="preserve">
+      <value>音乐播放器仅支持Windows</value>
+    </data>
 </root>

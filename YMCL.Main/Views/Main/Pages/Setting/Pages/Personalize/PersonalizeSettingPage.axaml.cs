@@ -204,6 +204,16 @@ public partial class PersonalizeSettingPage : UserControl
 
             Method.Ui.RestartApp();
         };
+        LauncherVisibilityComboBox.SelectionChanged += (_, _) =>
+        {
+            var setting =
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (LauncherVisibilityComboBox.SelectedIndex != (int)setting.LauncherVisibility)
+            {
+                setting.LauncherVisibility = (LauncherVisibility)LauncherVisibilityComboBox.SelectedIndex;
+                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            }
+        };
         EditCustomBackGroundImgBtn.Click += async (_, _) =>
         {
             var path = (await Method.IO.OpenFilePicker(TopLevel.GetTopLevel(this),
@@ -247,6 +257,7 @@ public partial class PersonalizeSettingPage : UserControl
         }
 
         ThemeComboBox.SelectedIndex = (int)setting.Theme;
+        LauncherVisibilityComboBox.SelectedIndex = (int)setting.LauncherVisibility;
         CustomHomePageComboBox.SelectedIndex = (int)setting.CustomHomePage;
         EditCustomHomePageBtn.IsVisible = CustomHomePageComboBox.SelectedIndex == 1 ? true : false;
         ColorPicker.Color = setting.AccentColor;

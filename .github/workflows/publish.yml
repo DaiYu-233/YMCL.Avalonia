@@ -62,7 +62,7 @@ jobs:
         repo_token: "${{ secrets.TOKEN }}"
         title: "v${{ steps.date.outputs.title }}"
         automatic_release_tag: "AutoRelease-${{ steps.date.outputs.date }}"
-        prerelease: true
+        prerelease: false
         files: |
           YMCL.Main/bin/Release/net8.0/osx-arm64/publish/YMCL.Main.osx.arm64.bin
           YMCL.Main/bin/Release/net8.0/osx-x64/publish/YMCL.Main.osx.x64.bin

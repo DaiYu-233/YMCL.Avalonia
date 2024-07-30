@@ -41,6 +41,40 @@
                     </DockPanel>
                 </Border>
                 <Border
+                    Name="CustomUpdateUrlRoot"
+                    Padding="6.5"
+                    Background="{DynamicResource 1x}"
+                    CornerRadius="5"
+                    Opacity="{DynamicResource Opacity}">
+                    <DockPanel>
+                        <TextBlock
+                            Name="CustomUpdateUrlLabel"
+                            Margin="10,0,20,0"
+                            VerticalAlignment="Center"
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="14"
+                            Text="{x:Static properties:MainLang.CustomUpdateUrl}" />
+                        <DockPanel HorizontalAlignment="Stretch" DockPanel.Dock="Right">
+                            <ComboBox
+                                x:Name="CustomUpdateUrlEnableComboBox"
+                                Margin="0,0,5,0"
+                                HorizontalAlignment="Stretch"
+                                FontFamily="{DynamicResource Font}"
+                                SelectedIndex="0">
+                                <ComboBox.Items>
+                                    <ComboBoxItem Content="{x:Static properties:MainLang.Off}" />
+                                    <ComboBoxItem Content="{x:Static properties:MainLang.On}" />
+                                </ComboBox.Items>
+                            </ComboBox>
+                            <TextBox
+                                Name="CustomUpdateUrlTextBox"
+                                HorizontalAlignment="Stretch"
+                                FontFamily="{DynamicResource Font}"
+                                IsVisible="False" />
+                        </DockPanel>
+                    </DockPanel>
+                </Border>
+                <Border
                     Height="40"
                     Padding="6.5"
                     Background="{DynamicResource 1x}"
@@ -81,37 +115,6 @@
                     Message="{x:Static properties:MainLang.DownloadThreadTooBigTip}"
                     Opacity="{DynamicResource Opacity}"
                     Severity="Warning" />
-                <Border
-                    Padding="6.5"
-                    Background="{DynamicResource 1x}"
-                    CornerRadius="5"
-                    Opacity="{DynamicResource Opacity}">
-                    <DockPanel>
-                        <TextBlock
-                            Margin="10,0,20,0"
-                            VerticalAlignment="Center"
-                            FontFamily="{DynamicResource Font}"
-                            FontSize="14"
-                            Text="{x:Static properties:MainLang.CustomUpdateUrl}" />
-                        <DockPanel HorizontalAlignment="Stretch" DockPanel.Dock="Left">
-                            <TextBox
-                                Name="CustomUpdateUrlTextBox"
-                                FontFamily="{DynamicResource Font}"
-                                IsVisible="False" />
-                            <ComboBox
-                                x:Name="CustomUpdateUrlEnableComboBox"
-                                Margin="5,0,0,0"
-                                HorizontalAlignment="Stretch"
-                                FontFamily="{DynamicResource Font}"
-                                SelectedIndex="0">
-                                <ComboBox.Items>
-                                    <ComboBoxItem Content="{x:Static properties:MainLang.Off}" />
-                                    <ComboBoxItem Content="{x:Static properties:MainLang.On}" />
-                                </ComboBox.Items>
-                            </ComboBox>
-                        </DockPanel>
-                    </DockPanel>
-                </Border>
             </StackPanel>
         </ScrollViewer>
     </Border>

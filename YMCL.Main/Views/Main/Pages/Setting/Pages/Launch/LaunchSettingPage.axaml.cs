@@ -113,6 +113,13 @@ public partial class LaunchSettingPage : UserControl
             setting.MinecraftFolder = (string)MinecraftFolderComboBox.SelectionBoxItem;
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
+        LaunchCoreComboBox.SelectionChanged += (s, e) =>
+        {
+            var setting =
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+            setting.LaunchCore = (LaunchCore)LaunchCoreComboBox.SelectedIndex;
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+        };
         DelSeletedMinecraftFolderBtn.Click += (s, e) =>
         {
             var path = (string)MinecraftFolderComboBox.SelectedItem;
@@ -135,26 +142,16 @@ public partial class LaunchSettingPage : UserControl
         {
             var javaFetcher = new JavaFetcher();
             var javaList = await javaFetcher.FetchAsync();
-            var repeatJava = string.Empty;
-            var successAddJava = string.Empty;
             var repeatJavaCount = 0;
             var successAddCount = 0;
             foreach (var java in javaList)
                 if (!javas.Contains(java))
                 {
-                    if (successAddCount == 0)
-                        successAddJava += java.JavaPath;
-                    else
-                        successAddJava += "\n" + java.JavaPath;
                     javas.Add(java);
                     successAddCount++;
                 }
                 else
                 {
-                    if (repeatJavaCount == 0)
-                        repeatJava += java.JavaPath;
-                    else
-                        repeatJava += "\n" + java.JavaPath;
                     repeatJavaCount++;
                 }
 
@@ -235,5 +232,7 @@ public partial class LaunchSettingPage : UserControl
             JavaComboBox.SelectedIndex = 0;
         else
             JavaComboBox.SelectedItem = setting.Java;
+
+        LaunchCoreComboBox.SelectedIndex = (int)setting.LaunchCore;
     }
 }

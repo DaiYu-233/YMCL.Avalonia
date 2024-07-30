@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -11,6 +12,7 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
 using Avalonia.Platform.Storage;
+using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using MinecraftLaunch.Classes.Models.Game;
 using NAudio.Wave;
@@ -39,6 +41,7 @@ public partial class MainWindow : Window
     public readonly SettingPage settingPage = new();
     public readonly TaskCenterPage taskCenterPage = new();
     public WindowTitleBarStyle titleBarStyle;
+    public bool _firstLoad = true;
 
     public MainWindow()
     {
@@ -48,6 +51,11 @@ public partial class MainWindow : Window
 
     private void EventBinding()
     {
+        Loaded += (_, _) =>
+        {
+            if (!Const.Window.main._firstLoad) return;
+            Const.Window.main._firstLoad = false;
+        };
         Activated += (_, _) =>
         {
             if (settingPage.PluginSettingNavControl.IsSelected) settingPage.pluginSettingPage.ReloadPluginListUi();

@@ -132,7 +132,7 @@
             </DockPanel>
             <Border
                 Name="VersionListRoot"
-                Margin="10,10,10,10"
+                Margin="11,10,10,10"
                 Padding="10"
                 Background="{DynamicResource 1x}"
                 ClipToBounds="True"

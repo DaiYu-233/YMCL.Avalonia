@@ -60,6 +60,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 账户.
+        /// </summary>
+        public static string Account {
+            get {
+                return ResourceManager.GetString("Account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 账户错误.
         /// </summary>
         public static string AccountError {
@@ -83,6 +92,15 @@ namespace YMCL.Main.Public.Langs {
         public static string AccountPassword {
             get {
                 return ResourceManager.GetString("AccountPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 启动游戏至少需要一个账户，如使用离线账户将无法登入有正版验证的服务器。.
+        /// </summary>
+        public static string AccountTip {
+            get {
+                return ResourceManager.GetString("AccountTip", resourceCulture);
             }
         }
         
@@ -128,6 +146,51 @@ namespace YMCL.Main.Public.Langs {
         public static string AddTheFollowingFilesAsModsToTheCurrentVersion {
             get {
                 return ResourceManager.GetString("AddTheFollowingFilesAsModsToTheCurrentVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 启动完成后关闭.
+        /// </summary>
+        public static string AfterLaunchExitLauncher {
+            get {
+                return ResourceManager.GetString("AfterLaunchExitLauncher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 启动完成后隐藏，游戏退出后显示.
+        /// </summary>
+        public static string AfterLaunchHideAndShowWhenGameExit {
+            get {
+                return ResourceManager.GetString("AfterLaunchHideAndShowWhenGameExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 启动完成后保持不变.
+        /// </summary>
+        public static string AfterLaunchKeepLauncherVisible {
+            get {
+                return ResourceManager.GetString("AfterLaunchKeepLauncherVisible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 启动完成后最小化.
+        /// </summary>
+        public static string AfterLaunchMakeLauncherMinimize {
+            get {
+                return ResourceManager.GetString("AfterLaunchMakeLauncherMinimize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 启动完成后最小化，游戏退出后显示.
+        /// </summary>
+        public static string AfterLaunchMinimizeAndShowWhenGameExit {
+            get {
+                return ResourceManager.GetString("AfterLaunchMinimizeAndShowWhenGameExit", resourceCulture);
             }
         }
         
@@ -627,6 +690,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 现有的.
+        /// </summary>
+        public static string ExistingNow {
+            get {
+                return ResourceManager.GetString("ExistingNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 文件不存在.
         /// </summary>
         public static string FileNotExist {
@@ -909,11 +981,38 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Java运行时.
+        /// </summary>
+        public static string JavaRuntime {
+            get {
+                return ResourceManager.GetString("JavaRuntime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 启动游戏至少需要一个Java运行时。.
+        /// </summary>
+        public static string JavaRuntimeTip {
+            get {
+                return ResourceManager.GetString("JavaRuntimeTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 语言.
         /// </summary>
         public static string Language {
             get {
                 return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 在开始设置 Yu Minecraft Launcher 前，需要选择语言。.
+        /// </summary>
+        public static string LanguageTip {
+            get {
+                return ResourceManager.GetString("LanguageTip", resourceCulture);
             }
         }
         
@@ -932,6 +1031,33 @@ namespace YMCL.Main.Public.Langs {
         public static string Launch {
             get {
                 return ResourceManager.GetString("Launch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 启动核心.
+        /// </summary>
+        public static string LaunchCore {
+            get {
+                return ResourceManager.GetString("LaunchCore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 启动器样式.
+        /// </summary>
+        public static string LauncherStyle {
+            get {
+                return ResourceManager.GetString("LauncherStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 启动器可见性.
+        /// </summary>
+        public static string LauncherVisibility {
+            get {
+                return ResourceManager.GetString("LauncherVisibility", resourceCulture);
             }
         }
         
@@ -972,6 +1098,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ←.
+        /// </summary>
+        public static string LeftArrow {
+            get {
+                return ResourceManager.GetString("LeftArrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 让YMCL选择合适的Java.
         /// </summary>
         public static string LetYMCLChooseJava {
@@ -986,6 +1121,15 @@ namespace YMCL.Main.Public.Langs {
         public static string Light {
             get {
                 return ResourceManager.GetString("Light", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 加载音频文件失败.
+        /// </summary>
+        public static string LoadAudioFileFail {
+            get {
+                return ResourceManager.GetString("LoadAudioFileFail", resourceCulture);
             }
         }
         
@@ -1121,6 +1265,15 @@ namespace YMCL.Main.Public.Langs {
         public static string MinecraftFolder {
             get {
                 return ResourceManager.GetString("MinecraftFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 存放Minecraft数据的文件夹 (.minecraft).
+        /// </summary>
+        public static string MinecraftFolderTip {
+            get {
+                return ResourceManager.GetString("MinecraftFolderTip", resourceCulture);
             }
         }
         
@@ -1584,6 +1737,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to →.
+        /// </summary>
+        public static string RightArrow {
+            get {
+                return ResourceManager.GetString("RightArrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Русский язык.
         /// </summary>
         public static string ru_RU {
@@ -1818,6 +1980,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 系统样式.
+        /// </summary>
+        public static string SystemStyle {
+            get {
+                return ResourceManager.GetString("SystemStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 任务中心.
         /// </summary>
         public static string TaskCenter {
@@ -1949,6 +2120,16 @@ namespace YMCL.Main.Public.Langs {
         public static string Unknown {
             get {
                 return ResourceManager.GetString("Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 当前版本为非官方版本，可能遭受病毒攻击。
+        ///重定向至 https://ymcl.daiyu.fun/ 下载官方版本。.
+        /// </summary>
+        public static string UnofficialTip {
+            get {
+                return ResourceManager.GetString("UnofficialTip", resourceCulture);
             }
         }
         
@@ -2139,6 +2320,15 @@ namespace YMCL.Main.Public.Langs {
         public static string WindowTitleBarStyle {
             get {
                 return ResourceManager.GetString("WindowTitleBarStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 设置启动器窗口标题栏的样式，在特定情况启动器样式不受支持。.
+        /// </summary>
+        public static string WindowTitleBarStyleTip {
+            get {
+                return ResourceManager.GetString("WindowTitleBarStyleTip", resourceCulture);
             }
         }
         

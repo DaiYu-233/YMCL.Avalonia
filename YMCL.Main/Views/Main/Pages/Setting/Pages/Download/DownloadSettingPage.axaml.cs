@@ -1,8 +1,7 @@
 using System;
 using System.IO;
-using Avalonia;
+using System.Threading.Tasks;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 using Newtonsoft.Json;
 using YMCL.Main.Public;
 
@@ -21,13 +20,27 @@ public partial class DownloadSettingPage : UserControl
 
     private void BindingEvent()
     {
-        Loaded += (s, e) =>
+        Loaded += async (s, e) =>
         {
             Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
             if (!_firstLoad) return;
             _firstLoad = false;
+            CustomUpdateUrlTextBox.IsVisible = CustomUpdateUrlEnableComboBox.SelectedIndex == 1;
+            await Task.Delay(10);
+            if (CustomUpdateUrlTextBox.IsVisible)
+                CustomUpdateUrlEnableComboBox.Width = 150;
+            else
+                CustomUpdateUrlEnableComboBox.Width = CustomUpdateUrlRoot.Bounds.Width - 2 * 6.5 -
+                                                      CustomUpdateUrlLabel.Bounds.Width - 30;
         };
-
+        SizeChanged += (_, _) =>
+        {
+            if (CustomUpdateUrlTextBox.IsVisible)
+                CustomUpdateUrlEnableComboBox.Width = 150;
+            else
+                CustomUpdateUrlEnableComboBox.Width = CustomUpdateUrlRoot.Bounds.Width - 2 * 6.5 -
+                                                      CustomUpdateUrlLabel.Bounds.Width - 30;
+        };
         DownloadSourceComboBox.SelectionChanged += (s, e) =>
         {
             var setting =
@@ -39,6 +52,11 @@ public partial class DownloadSettingPage : UserControl
         CustomUpdateUrlEnableComboBox.SelectionChanged += (s, e) =>
         {
             CustomUpdateUrlTextBox.IsVisible = CustomUpdateUrlEnableComboBox.SelectedIndex == 1;
+            if (CustomUpdateUrlTextBox.IsVisible)
+                CustomUpdateUrlEnableComboBox.Width = 150;
+            else
+                CustomUpdateUrlEnableComboBox.Width = CustomUpdateUrlRoot.Bounds.Width - 2 * 6.5 -
+                                                      CustomUpdateUrlLabel.Bounds.Width - 30;
             var setting =
                 JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
             if (setting.EnableCustomUpdateUrl == (CustomUpdateUrlEnableComboBox.SelectedIndex == 1)) return;
@@ -77,6 +95,5 @@ public partial class DownloadSettingPage : UserControl
         DownloadThreadWarning.IsVisible = MaximumDownloadThreadSlider.Value > 100;
         CustomUpdateUrlEnableComboBox.SelectedIndex = setting.EnableCustomUpdateUrl ? 1 : 0;
         CustomUpdateUrlTextBox.Text = setting.CustomUpdateUrl;
-        CustomUpdateUrlTextBox.IsVisible = CustomUpdateUrlEnableComboBox.SelectedIndex == 1;
     }
 }

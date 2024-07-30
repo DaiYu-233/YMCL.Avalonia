@@ -96,6 +96,30 @@
                         </DockPanel>
                     </Border>
                     <Border
+                        Padding="6.5"
+                        Background="{DynamicResource 1x}"
+                        CornerRadius="5"
+                        Opacity="{DynamicResource Opacity}">
+                        <DockPanel>
+                            <TextBlock
+                                Margin="10,0,20,0"
+                                VerticalAlignment="Center"
+                                FontFamily="{DynamicResource Font}"
+                                FontSize="14"
+                                Text="{x:Static properties:MainLang.LaunchCore}" />
+                            <ComboBox
+                                Name="LaunchCoreComboBox"
+                                HorizontalAlignment="Stretch"
+                                FontFamily="{DynamicResource Font}"
+                                SelectedIndex="0">
+                                <ComboBox.Items>
+                                    <ComboBoxItem>MinecraftLaunch</ComboBoxItem>
+                                    <ComboBoxItem>StarLight</ComboBoxItem>
+                                </ComboBox.Items>
+                            </ComboBox>
+                        </DockPanel>
+                    </Border>
+                    <Border
                         Height="40"
                         Padding="6.5"
                         Background="{DynamicResource 1x}"

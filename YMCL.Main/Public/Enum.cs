@@ -22,6 +22,21 @@ public enum Repeat
     RepeatOne
 }
 
+public enum LaunchCore
+{
+    MinecraftLaunch,
+    StarLight
+}
+
+public enum LauncherVisibility
+{
+    AfterLaunchKeepLauncherVisible,
+    AfterLaunchMakeLauncherMinimize,
+    AfterLaunchMinimizeAndShowWhenGameExit,
+    AfterLaunchHideAndShowWhenGameExit,
+    AfterLaunchExitLauncher
+}
+
 public enum OpenFileWay
 {
     FileSelectWindow,

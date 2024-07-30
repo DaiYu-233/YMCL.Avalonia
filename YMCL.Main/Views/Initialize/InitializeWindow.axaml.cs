@@ -28,37 +28,26 @@ namespace YMCL.Main.Views.Initialize;
 public partial class InitializeWindow : Window
 {
     public WindowTitleBarStyle titleBarStyle;
-
+    public bool _exit = true;
     public InitializeWindow()
     {
         DetectPlatform();
         Init();
         InitializeComponent();
+        EventBinding();
+    }
+
+    private void EventBinding()
+    {
         PropertyChanged += (s, e) =>
         {
-            if (titleBarStyle == WindowTitleBarStyle.Ymcl && e.Property.Name == nameof(WindowState))
-                switch (WindowState)
-                {
-                    case WindowState.Normal:
-                        Root.Margin = new Thickness(0);
-                        break;
-                    case WindowState.Maximized:
-                        Root.Margin = new Thickness(20);
-                        break;
-                }
-        };
-        IdentifyLanguageBtn.Click += (_, _) =>
-        {
-            foreach (ToggleButton item in Langs.Children)
-                if (item.IsChecked == true)
-                {
-                    var lang = (((StackPanel)item.Content).Children[0] as TextBlock).Text;
-                    var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
-                    setting.Language = lang;
-                    File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
-                    Method.Ui.RestartApp();
-                    break;
-                }
+            if (titleBarStyle != WindowTitleBarStyle.Ymcl || e.Property.Name != nameof(WindowState)) return;
+            Root.Margin = WindowState switch
+            {
+                WindowState.Normal => new Thickness(0),
+                WindowState.Maximized => new Thickness(20),
+                _ => Root.Margin
+            };
         };
     }
 
@@ -125,19 +114,6 @@ public partial class InitializeWindow : Window
         if (Const.Platform == Platform.Linux)
             File.WriteAllText(Path.Combine(Const.UserDataRootPath, "launch.sh"),
                 $"\"{Process.GetCurrentProcess().MainModule.FileName!}\"");
-        var startInfo = new ProcessStartInfo
-        {
-            FileName = "/bin/bash",
-            Arguments = $"chmod +777 {Path.Combine(Const.UserDataRootPath, "launch.sh")}", // ???ls????  
-            UseShellExecute = false,
-            CreateNoWindow = true
-        };
-        if (Const.Platform == Platform.Linux)
-            using (var process = Process.Start(startInfo))
-            {
-                ;
-            }
-
         var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
         if (setting.Language == null || setting.Language == "zh-CN")
             LangHelper.Current.ChangedCulture("");
@@ -149,172 +125,17 @@ public partial class InitializeWindow : Window
         Const.Notification.main = new WindowNotificationManager(GetTopLevel(window))
         {
             MaxItems = 3,
-            Position = NotificationPosition
-                .BottomRight /*FontFamily = (FontFamily)Application.Current.Resources["Font"]*/
+            Position = NotificationPosition.BottomRight
+        };
+        Const.Notification.initialize = new WindowNotificationManager(GetTopLevel(this))
+        {
+            MaxItems = 2,
+            Position = NotificationPosition.BottomRight
         };
         Method.Ui.SetAccentColor(setting.AccentColor);
         if (setting.Theme == Public.Theme.Light)
             Method.Ui.ToggleTheme(Public.Theme.Light);
         else if (setting.Theme == Public.Theme.Dark) Method.Ui.ToggleTheme(Public.Theme.Dark);
-    }
-
-    private async void OnLoaded()
-    {
-        WindowState = WindowState.Maximized;
-        WindowState = WindowState.Normal;
-        var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
-        titleBarStyle = setting.WindowTitleBarStyle;
-        switch (setting.WindowTitleBarStyle)
-        {
-            case WindowTitleBarStyle.Unset:
-            case WindowTitleBarStyle.System:
-                TitleBar.IsVisible = false;
-                Root.CornerRadius = new CornerRadius(0, 0, 8, 8);
-                ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.Default;
-                ExtendClientAreaToDecorationsHint = false;
-                break;
-            case WindowTitleBarStyle.Ymcl:
-                TitleBar.IsVisible = true;
-                Root.CornerRadius = new CornerRadius(8);
-                WindowState = WindowState.Maximized;
-                WindowState = WindowState.Normal;
-                ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
-                ExtendClientAreaToDecorationsHint = true;
-                break;
-        }
-
-        if (setting.Language == "Unset")
-        {
-            Show();
-            return;
-        }
-
-        LanguageRoot.IsVisible = false;
-
-        if (setting.WindowTitleBarStyle == WindowTitleBarStyle.Unset)
-        {
-            Show();
-            await Task.Delay(350);
-            TitleBar.IsVisible = false;
-            Root.CornerRadius = new CornerRadius(0, 0, 8, 8);
-            ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.Default;
-            ExtendClientAreaToDecorationsHint = false;
-            var comboBox = new ComboBox
-            {
-                FontFamily = (FontFamily)Application.Current.Resources["Font"],
-                HorizontalAlignment = HorizontalAlignment.Stretch
-            };
-            comboBox.Items.Add("System");
-            comboBox.Items.Add("Ymcl");
-            comboBox.SelectedIndex = 0;
-            ContentDialog dialog = new()
-            {
-                FontFamily = (FontFamily)Application.Current.Resources["Font"],
-                Title = MainLang.WindowTitleBarStyle,
-                PrimaryButtonText = MainLang.Ok,
-                DefaultButton = ContentDialogButton.Primary,
-                Content = comboBox
-            };
-            comboBox.SelectionChanged += (_, _) =>
-            {
-                if (comboBox.SelectedIndex == 0)
-                {
-                    TitleBar.IsVisible = false;
-                    Root.CornerRadius = new CornerRadius(0, 0, 8, 8);
-                    ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.Default;
-                    ExtendClientAreaToDecorationsHint = false;
-                }
-                else
-                {
-                    TitleBar.IsVisible = true;
-                    Root.CornerRadius = new CornerRadius(8);
-                    WindowState = WindowState.Maximized;
-                    WindowState = WindowState.Normal;
-                    ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
-                    ExtendClientAreaToDecorationsHint = true;
-                }
-            };
-            dialog.PrimaryButtonClick += (_, _) =>
-            {
-                setting.WindowTitleBarStyle =
-                    comboBox.SelectedIndex == 0 ? WindowTitleBarStyle.System : WindowTitleBarStyle.Ymcl;
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
-            };
-            await dialog.ShowAsync();
-        }
-
-        if (!setting.AlreadyWrittenIntoTheUrlScheme)
-        {
-            if (Const.Platform == Platform.Windows)
-            {
-                var identity = WindowsIdentity.GetCurrent();
-                var principal = new WindowsPrincipal(identity);
-                if (!principal.IsInRole(WindowsBuiltInRole.Administrator)) Show();
-                await Method.Ui.UpgradeToAdministratorPrivilegesAsync(Const.Window.initialize);
-                Method.IO.TryCreateFolder("C:\\ProgramData\\DaiYu.Platform.YMCL");
-                var bat =
-                    "set /p ymcl=<%USERPROFILE%\\AppData\\Roaming\\DaiYu.Platform.YMCL\\YMCL.AppPath.DaiYu\r\necho %ymcl%\r\necho %1\r\nstart %ymcl% %1";
-                var path = "C:\\ProgramData\\DaiYu.Platform.YMCL\\launch.bat";
-                File.WriteAllText(path, bat);
-                try
-                {
-                    Registry.ClassesRoot.DeleteSubKey("YMCL");
-                }
-                catch
-                {
-                }
-
-                try
-                {
-                    var keyRoot = Registry.ClassesRoot.CreateSubKey("YMCL", true);
-                    keyRoot.SetValue("", "Yu Minecraft Launcher");
-                    keyRoot.SetValue("URL Protocol", path);
-                    var registryKeya = Registry.ClassesRoot.OpenSubKey("YMCL", true).CreateSubKey("DefaultIcon");
-                    registryKeya.SetValue("", path);
-                    var registryKeyb = Registry.ClassesRoot.OpenSubKey("YMCL", true)
-                        .CreateSubKey(@"shell\open\command");
-                    registryKeyb.SetValue("", $"\"{path}\" \"%1\"");
-
-                    var resourceName = "YMCL.Main.Public.Bins.YMCL.Starter.win.exe";
-                    var assembly = Assembly.GetExecutingAssembly();
-                    using (var resourceStream = assembly.GetManifestResourceStream(resourceName))
-                    {
-                        var outputFilePath = "C:\\Windows\\ymcl.exe";
-                        using (var fileStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write))
-                        {
-                            resourceStream.CopyTo(fileStream);
-                        }
-                    }
-
-                    setting.AlreadyWrittenIntoTheUrlScheme = true;
-                    File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
-                }
-                catch
-                {
-                }
-            }
-            else if (Const.Platform == Platform.Linux)
-            {
-                if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HOME"))) return;
-                var path = Path.Combine(Environment.GetEnvironmentVariable("HOME")!, ".local/share/applications");
-                var deskPath = Path.Combine(Const.UserDataRootPath, "launch.sh");
-                File.WriteAllText(Path.Combine(path, "YMCL.desktop"),
-                    $"[Desktop Entry]  \r\nVersion=1.0  \r\nName=YMCL Protocol Handler  \r\nComment=Handle ymcl:// URLs  \r\nExec={deskPath}\r\nTerminal=true  \r\nType=Application  \r\nCategories=Network;  \r\nMIMEType=x-scheme-handler/ymcl;  ");
-                setting.AlreadyWrittenIntoTheUrlScheme = true;
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
-            }
-        }
-        
-        Const.Window.main.LoadWindow();
-        Hide();
-    }
-    protected override void OnLoaded(RoutedEventArgs e)
-    {
-        Hide();
-        base.OnLoaded(e);
-        Hide();
-        SystemDecorations = SystemDecorations.Full;
-        OnLoaded();
     }
 
     public static void DetectPlatform()
@@ -341,9 +162,51 @@ public partial class InitializeWindow : Window
         }
     }
 
-    private void Button_Click(object? sender, RoutedEventArgs e)
+    protected override void OnClosed(EventArgs e)
     {
-        foreach (ToggleButton item in Langs.Children) item.IsChecked = false;
-        ((ToggleButton)sender).IsChecked = true;
+        base.OnClosed(e);
+        if (_exit)
+        {
+            Environment.Exit(0);
+        }
+    }
+
+    protected override void OnLoaded(RoutedEventArgs e)
+    {
+        YMCL.Main.Views.Initialize.Pages.Main.Main mianPage = new();
+        Frame.Content = mianPage;
+        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+        mianPage.WindowTitleBarStyleListBox.SelectedIndex = setting.WindowTitleBarStyle switch
+        {
+            WindowTitleBarStyle.System => 0,
+            WindowTitleBarStyle.Ymcl => 1,
+            _ => 0
+        };
+
+        Hide();
+        base.OnLoaded(e);
+        Hide();
+        switch (setting.WindowTitleBarStyle)
+        {
+            case WindowTitleBarStyle.Unset:
+            case WindowTitleBarStyle.System:
+                TitleBar.IsVisible = false;
+                MaxHeight = 480 - 30;
+                MinHeight = 480 - 30;
+                Root.CornerRadius = new CornerRadius(0, 0, 8, 8);
+                ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.Default;
+                ExtendClientAreaToDecorationsHint = false;
+                break;
+            case WindowTitleBarStyle.Ymcl:
+                TitleBar.IsVisible = true;
+                MaxHeight = 480;
+                MinHeight = 480;
+                Root.CornerRadius = new CornerRadius(8);
+                WindowState = WindowState.Maximized;
+                WindowState = WindowState.Normal;
+                ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
+                ExtendClientAreaToDecorationsHint = true;
+                break;
+        }
     }
 }

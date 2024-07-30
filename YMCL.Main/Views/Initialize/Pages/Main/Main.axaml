@@ -1,8 +1,552 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="YMCL.Main.Views.Initialize.Pages.Main.Main">
-    Welcome to Avalonia!
+<UserControl
+    x:Class="YMCL.Main.Views.Initialize.Pages.Main.Main"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:class="clr-namespace:YMCL.Main.Public.Classes;assembly=YMCL.Main"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:game="clr-namespace:MinecraftLaunch.Classes.Models.Game;assembly=MinecraftLaunch"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
+    xmlns:uc="clr-namespace:YMCL.Main.Public.Controls"
+    xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    FontWeight="{DynamicResource FontWeight}"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid
+            Name="LanguageRoot"
+            Margin="10"
+            VerticalAlignment="Stretch"
+            IsVisible="False"
+            Opacity="0">
+            <Grid.Transitions>
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.30" />
+                </Transitions>
+            </Grid.Transitions>
+            <DockPanel>
+                <DockPanel Margin="60,50">
+                    <TextBlock
+                        DockPanel.Dock="Top"
+                        FontSize="24"
+                        Text="{x:Static properties:MainLang.Language}" />
+                    <TextBlock
+                        Width="280"
+                        Margin="5,5,0,0"
+                        HorizontalAlignment="Left"
+                        DockPanel.Dock="Top"
+                        FontSize="16"
+                        Foreground="{DynamicResource GrayColor}"
+                        Text="{x:Static properties:MainLang.LanguageTip}"
+                        TextWrapping="Wrap" />
+                </DockPanel>
+                <ListBox
+                    Name="LanguageListBox"
+                    Margin="0,25,50,0"
+                    SelectedIndex="0">
+                    <ListBox.Items>
+                        <StackPanel Margin="0,7,0,7">
+                            <TextBlock
+                                FontFamily="{DynamicResource Font}"
+                                FontSize="16"
+                                Text="{x:Static properties:MainLang.zh_CN}" />
+                            <TextBlock
+                                Margin="0,-4,0,0"
+                                FontFamily="{DynamicResource Font}"
+                                FontSize="14"
+                                Foreground="{DynamicResource GrayColor}"
+                                Text="zh-CN" />
+                        </StackPanel>
+                        <StackPanel Margin="0,7,0,7">
+                            <TextBlock
+                                FontFamily="{DynamicResource Font}"
+                                FontSize="16"
+                                Text="{x:Static properties:MainLang.zh_Hant}" />
+                            <TextBlock
+                                Margin="0,-4,0,0"
+                                FontFamily="{DynamicResource Font}"
+                                FontSize="14"
+                                Foreground="{DynamicResource GrayColor}"
+                                Text="zh-Hant" />
+                        </StackPanel>
+                        <StackPanel Margin="0,7,0,7">
+                            <TextBlock
+                                FontFamily="{DynamicResource Font}"
+                                FontSize="16"
+                                Text="{x:Static properties:MainLang.en_US}" />
+                            <TextBlock
+                                Margin="0,-4,0,0"
+                                FontFamily="{DynamicResource Font}"
+                                FontSize="14"
+                                Foreground="{DynamicResource GrayColor}"
+                                Text="en-US" />
+                        </StackPanel>
+                        <StackPanel Margin="0,7,0,7">
+                            <TextBlock
+                                FontFamily="{DynamicResource Font}"
+                                FontSize="16"
+                                Text="{x:Static properties:MainLang.ja_JP}" />
+                            <TextBlock
+                                Margin="0,-4,0,0"
+                                FontFamily="{DynamicResource Font}"
+                                FontSize="14"
+                                Foreground="{DynamicResource GrayColor}"
+                                Text="ja-JP" />
+                        </StackPanel>
+                        <StackPanel Margin="0,7,0,7">
+                            <TextBlock
+                                FontFamily="{DynamicResource Font}"
+                                FontSize="16"
+                                Text="{x:Static properties:MainLang.ru_RU}" />
+                            <TextBlock
+                                Margin="0,-4,0,0"
+                                FontFamily="{DynamicResource Font}"
+                                FontSize="14"
+                                Foreground="{DynamicResource GrayColor}"
+                                Text="ru-RU" />
+                        </StackPanel>
+                    </ListBox.Items>
+                </ListBox>
+            </DockPanel>
+        </Grid>
+        <Grid
+            Name="WindowTitleBarStyleRoot"
+            Margin="10"
+            VerticalAlignment="Stretch"
+            IsVisible="False"
+            Opacity="0">
+            <Grid.Transitions>
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.30" />
+                </Transitions>
+            </Grid.Transitions>
+            <DockPanel>
+                <DockPanel Margin="60,50">
+                    <TextBlock
+                        DockPanel.Dock="Top"
+                        FontSize="24"
+                        Text="{x:Static properties:MainLang.WindowTitleBarStyle}" />
+                    <TextBlock
+                        Width="280"
+                        Margin="5,5,0,0"
+                        HorizontalAlignment="Left"
+                        DockPanel.Dock="Top"
+                        FontSize="16"
+                        Foreground="{DynamicResource GrayColor}"
+                        Text="{x:Static properties:MainLang.WindowTitleBarStyleTip}"
+                        TextWrapping="Wrap" />
+                </DockPanel>
+            </DockPanel>
+            <ListBox
+                Name="WindowTitleBarStyleListBox"
+                Width="380"
+                Margin="0,170,0,0"
+                VerticalAlignment="Top"
+                SelectedIndex="0">
+                <ListBox.Items>
+                    <TextBlock
+                        Margin="0,10"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="15"
+                        Text="{x:Static properties:MainLang.SystemStyle}" />
+                    <TextBlock
+                        Margin="0,10"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="15"
+                        Text="{x:Static properties:MainLang.LauncherStyle}" />
+                </ListBox.Items>
+            </ListBox>
+        </Grid>
+        <Grid
+            Name="MinecraftFolderRoot"
+            Margin="10"
+            VerticalAlignment="Stretch"
+            IsVisible="False"
+            Opacity="1">
+            <Grid.Transitions>
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.30" />
+                </Transitions>
+            </Grid.Transitions>
+            <DockPanel>
+                <DockPanel Margin="60,50,5,50">
+                    <TextBlock
+                        DockPanel.Dock="Top"
+                        FontSize="24"
+                        Text="{x:Static properties:MainLang.MinecraftFolder}" />
+                    <TextBlock
+                        Name="MinecraftFolderTipTextBlock"
+                        Width="270"
+                        Margin="5,5,0,0"
+                        HorizontalAlignment="Left"
+                        DockPanel.Dock="Top"
+                        FontSize="16"
+                        Foreground="{DynamicResource GrayColor}"
+                        Text="{x:Static properties:MainLang.MinecraftFolderTip}"
+                        TextWrapping="Wrap" />
+                    <WrapPanel
+                        Width="270"
+                        Margin="-15,10,0,0"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+                        <HyperlinkButton Name="AutoScanMinecraftFolderBtn" Margin="3">
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <uc:ImageIcon
+                                    Width="16"
+                                    Path="F1 M 18.75 18.125 C 18.75 18.294271 18.68815 18.440756 18.564453 18.564453 C 18.440754 18.68815 18.29427 18.75 18.125 18.75 C 17.955729 18.75 17.809244 18.68815 17.685547 18.564453 L 12.519531 13.398438 C 11.907552 13.912761 11.22233 14.308269 10.463867 14.584961 C 9.705403 14.861654 8.925781 15 8.125 15 C 7.493489 15 6.884765 14.91862 6.298828 14.755859 C 5.712891 14.5931 5.166016 14.361979 4.658203 14.0625 C 4.150391 13.763021 3.686523 13.40332 3.266602 12.983398 C 2.84668 12.563477 2.486979 12.099609 2.1875 11.591797 C 1.888021 11.083984 1.656901 10.537109 1.494141 9.951172 C 1.33138 9.365234 1.25 8.756511 1.25 8.125 C 1.25 7.49349 1.33138 6.884766 1.494141 6.298828 C 1.656901 5.712891 1.888021 5.166016 2.1875 4.658203 C 2.486979 4.150391 2.84668 3.686523 3.266602 3.266602 C 3.686523 2.84668 4.150391 2.48698 4.658203 2.1875 C 5.166016 1.888021 5.712891 1.656902 6.298828 1.494141 C 6.884765 1.331381 7.493489 1.25 8.125 1.25 C 8.75651 1.25 9.365234 1.331381 9.951172 1.494141 C 10.537109 1.656902 11.083984 1.888021 11.591797 2.1875 C 12.099609 2.48698 12.563477 2.84668 12.983398 3.266602 C 13.40332 3.686523 13.763021 4.150391 14.0625 4.658203 C 14.361979 5.166016 14.593099 5.712891 14.755859 6.298828 C 14.918619 6.884766 14.999999 7.49349 15 8.125 C 14.999999 8.925781 14.861652 9.705404 14.584961 10.463867 C 14.308268 11.222331 13.91276 11.907553 13.398438 12.519531 L 18.564453 17.685547 C 18.68815 17.809244 18.75 17.955729 18.75 18.125 Z M 13.75 8.125 C 13.75 7.610678 13.683268 7.114258 13.549805 6.635742 C 13.416341 6.157227 13.227539 5.709636 12.983398 5.292969 C 12.739258 4.876303 12.444661 4.495443 12.099609 4.150391 C 11.754557 3.80534 11.373697 3.510742 10.957031 3.266602 C 10.540364 3.022461 10.092773 2.83366 9.614258 2.700195 C 9.135742 2.566732 8.639322 2.5 8.125 2.5 C 7.35026 2.5 6.621094 2.648113 5.9375 2.944336 C 5.253906 3.240561 4.658203 3.642578 4.150391 4.150391 C 3.642578 4.658204 3.24056 5.253907 2.944336 5.9375 C 2.648112 6.621095 2.5 7.350262 2.5 8.125 C 2.5 8.90625 2.646484 9.638672 2.939453 10.322266 C 3.232422 11.005859 3.632812 11.601562 4.140625 12.109375 C 4.648438 12.617188 5.244141 13.017578 5.927734 13.310547 C 6.611328 13.603516 7.34375 13.75 8.125 13.75 C 8.899739 13.75 9.628906 13.601889 10.3125 13.305664 C 10.996094 13.00944 11.591797 12.607422 12.099609 12.099609 C 12.607421 11.591797 13.009439 10.996094 13.305664 10.3125 C 13.601888 9.628906 13.75 8.89974 13.75 8.125 Z "
+                                    Color="{DynamicResource SystemAccentColor}" />
+                                <TextBlock
+                                    FontFamily="{DynamicResource Font}"
+                                    Foreground="{DynamicResource SystemAccentColor}"
+                                    Text="{x:Static properties:MainLang.AutoScan}"
+                                    TextDecorations="{x:Null}" />
+                            </StackPanel>
+                        </HyperlinkButton>
+                        <HyperlinkButton Name="ManualAddMinecraftFolderBtn" Margin="3">
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <uc:ImageIcon
+                                    Width="16"
+                                    Path="F1 M 3.056641 18.75 C 2.646484 18.75 2.255859 18.666992 1.884766 18.500977 C 1.513672 18.334961 1.189779 18.113607 0.913086 17.836914 C 0.636393 17.560221 0.415039 17.236328 0.249023 16.865234 C 0.083008 16.494141 0 16.103516 0 15.693359 L 0 4.306641 C 0 3.896484 0.083008 3.505859 0.249023 3.134766 C 0.415039 2.763672 0.636393 2.439779 0.913086 2.163086 C 1.189779 1.886395 1.513672 1.665039 1.884766 1.499023 C 2.255859 1.333008 2.646484 1.25 3.056641 1.25 L 6.875 1.25 C 7.324219 1.25 7.709961 1.319988 8.032227 1.459961 C 8.354492 1.599936 8.644205 1.785482 8.901367 2.016602 C 9.158528 2.247723 9.397786 2.513021 9.619141 2.8125 C 9.840494 3.11198 10.071614 3.42448 10.3125 3.75 L 16.943359 3.75 C 17.353516 3.75 17.744141 3.833008 18.115234 3.999023 C 18.486328 4.165039 18.810221 4.386394 19.086914 4.663086 C 19.363605 4.939779 19.584961 5.263672 19.750977 5.634766 C 19.916992 6.005859 20 6.396484 20 6.806641 L 20 9.902344 C 19.817707 9.674479 19.622395 9.456381 19.414062 9.248047 C 19.205729 9.039714 18.984375 8.847656 18.75 8.671875 L 18.75 6.875 C 18.75 6.621095 18.701172 6.380209 18.603516 6.152344 C 18.505859 5.924479 18.370768 5.724284 18.198242 5.551758 C 18.025715 5.379232 17.82552 5.244142 17.597656 5.146484 C 17.369791 5.048829 17.128906 5.000001 16.875 5 L 10.185547 5 C 9.957682 5.156251 9.736328 5.309246 9.521484 5.458984 C 9.306641 5.608725 9.088541 5.742188 8.867188 5.859375 C 8.645833 5.976562 8.413086 6.070964 8.168945 6.142578 C 7.924805 6.214193 7.65625 6.25 7.363281 6.25 L 1.25 6.25 L 1.25 15.625 C 1.25 15.878906 1.298828 16.119791 1.396484 16.347656 C 1.494141 16.575521 1.629232 16.775717 1.801758 16.948242 C 1.974284 17.120768 2.174479 17.255859 2.402344 17.353516 C 2.630208 17.451172 2.871094 17.5 3.125 17.5 L 7.900391 17.5 C 8.011067 17.721354 8.129883 17.936197 8.256836 18.144531 C 8.383789 18.352865 8.522135 18.554688 8.671875 18.75 Z M 7.363281 5 C 7.539062 5.000001 7.70345 4.977215 7.856445 4.931641 C 8.009439 4.886068 8.154297 4.825847 8.291016 4.750977 C 8.427734 4.676107 8.562825 4.5931 8.696289 4.501953 C 8.829752 4.410808 8.964844 4.316406 9.101562 4.21875 C 8.951822 4.016928 8.805338 3.813477 8.662109 3.608398 C 8.51888 3.40332 8.36263 3.219402 8.193359 3.056641 C 8.024088 2.893881 7.833658 2.760418 7.62207 2.65625 C 7.410481 2.552084 7.161458 2.5 6.875 2.5 L 3.125 2.5 C 2.871094 2.5 2.630208 2.548828 2.402344 2.646484 C 2.174479 2.744141 1.974284 2.879232 1.801758 3.051758 C 1.629232 3.224285 1.494141 3.42448 1.396484 3.652344 C 1.298828 3.880209 1.25 4.121094 1.25 4.375 L 1.25 5 Z M 8.75 14.375 C 8.75 13.600261 8.898111 12.871094 9.194336 12.1875 C 9.49056 11.503906 9.892578 10.908203 10.400391 10.400391 C 10.908203 9.892578 11.503906 9.490561 12.1875 9.194336 C 12.871093 8.898112 13.60026 8.75 14.375 8.75 C 14.889322 8.75 15.385741 8.816732 15.864258 8.950195 C 16.342773 9.083659 16.790363 9.272461 17.207031 9.516602 C 17.623697 9.760742 18.004557 10.055339 18.349609 10.400391 C 18.69466 10.745443 18.989258 11.126303 19.233398 11.542969 C 19.477539 11.959636 19.66634 12.407227 19.799805 12.885742 C 19.933268 13.364258 20 13.860678 20 14.375 C 20 15.14974 19.851887 15.878906 19.555664 16.5625 C 19.259439 17.246094 18.857422 17.841797 18.349609 18.349609 C 17.841797 18.857422 17.246094 19.259439 16.5625 19.555664 C 15.878906 19.851889 15.149739 20 14.375 20 C 13.59375 20 12.861328 19.853516 12.177734 19.560547 C 11.494141 19.267578 10.898438 18.867188 10.390625 18.359375 C 9.882812 17.851562 9.482422 17.255859 9.189453 16.572266 C 8.896484 15.888672 8.75 15.15625 8.75 14.375 Z M 15 15 L 16.875 15 C 17.04427 15 17.190754 14.938151 17.314453 14.814453 C 17.43815 14.690756 17.5 14.544271 17.5 14.375 C 17.5 14.205729 17.43815 14.059245 17.314453 13.935547 C 17.190754 13.81185 17.04427 13.75 16.875 13.75 L 15 13.75 L 15 11.875 C 14.999999 11.705729 14.93815 11.559245 14.814453 11.435547 C 14.690755 11.31185 14.544271 11.25 14.375 11.25 C 14.205729 11.25 14.059244 11.31185 13.935547 11.435547 C 13.811849 11.559245 13.75 11.705729 13.75 11.875 L 13.75 13.75 L 11.875 13.75 C 11.705729 13.75 11.559244 13.81185 11.435547 13.935547 C 11.311849 14.059245 11.25 14.205729 11.25 14.375 C 11.25 14.544271 11.311849 14.690756 11.435547 14.814453 C 11.559244 14.938151 11.705729 15 11.875 15 L 13.75 15 L 13.75 16.875 C 13.75 17.044271 13.811849 17.190756 13.935547 17.314453 C 14.059244 17.43815 14.205729 17.5 14.375 17.5 C 14.544271 17.5 14.690755 17.43815 14.814453 17.314453 C 14.93815 17.190756 14.999999 17.044271 15 16.875 Z "
+                                    Color="{DynamicResource SystemAccentColor}" />
+                                <TextBlock
+                                    FontFamily="{DynamicResource Font}"
+                                    Foreground="{DynamicResource SystemAccentColor}"
+                                    Text="{x:Static properties:MainLang.ManualAdd}"
+                                    TextDecorations="{x:Null}" />
+                            </StackPanel>
+                        </HyperlinkButton>
+                    </WrapPanel>
+                </DockPanel>
+                <DockPanel>
+                    <StackPanel Margin="0,10,25,80" VerticalAlignment="Center">
+                        <TextBlock DockPanel.Dock="Top" FontFamily="{DynamicResource Font}">
+                            <Run Text="{x:Static properties:MainLang.ExistingNow}" />
+                            <Run Text=":" />
+                        </TextBlock>
+                        <ListBox
+                            Name="MinecraftFolderListBox"
+                            MaxHeight="320"
+                            Margin="0,10,0,0"
+                            VerticalAlignment="Top"
+                            DockPanel.Dock="Top"
+                            SelectedIndex="0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        Margin="0,5"
+                                        FontFamily="{DynamicResource Font}"
+                                        Text="{Binding}"
+                                        TextWrapping="Wrap" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </DockPanel>
+            </DockPanel>
+        </Grid>
+        <Grid
+            Name="JavaRuntimeRoot"
+            Margin="10"
+            VerticalAlignment="Stretch"
+            IsVisible="False"
+            Opacity="1">
+            <Grid.Transitions>
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.30" />
+                </Transitions>
+            </Grid.Transitions>
+            <DockPanel>
+                <DockPanel Margin="60,50,5,50">
+                    <TextBlock
+                        DockPanel.Dock="Top"
+                        FontSize="24"
+                        Text="{x:Static properties:MainLang.JavaRuntime}" />
+                    <TextBlock
+                        Name="JavaRuntimeTipTextBlock"
+                        Width="240"
+                        Margin="5,5,0,0"
+                        HorizontalAlignment="Left"
+                        DockPanel.Dock="Top"
+                        FontSize="16"
+                        Foreground="{DynamicResource GrayColor}"
+                        Text="{x:Static properties:MainLang.JavaRuntimeTip}"
+                        TextWrapping="Wrap" />
+                    <WrapPanel
+                        Width="270"
+                        Margin="-15,10,0,0"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+                        <HyperlinkButton Name="AutoScanJavaRuntimeBtn" Margin="3">
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <uc:ImageIcon
+                                    Width="16"
+                                    Path="F1 M 18.75 18.125 C 18.75 18.294271 18.68815 18.440756 18.564453 18.564453 C 18.440754 18.68815 18.29427 18.75 18.125 18.75 C 17.955729 18.75 17.809244 18.68815 17.685547 18.564453 L 12.519531 13.398438 C 11.907552 13.912761 11.22233 14.308269 10.463867 14.584961 C 9.705403 14.861654 8.925781 15 8.125 15 C 7.493489 15 6.884765 14.91862 6.298828 14.755859 C 5.712891 14.5931 5.166016 14.361979 4.658203 14.0625 C 4.150391 13.763021 3.686523 13.40332 3.266602 12.983398 C 2.84668 12.563477 2.486979 12.099609 2.1875 11.591797 C 1.888021 11.083984 1.656901 10.537109 1.494141 9.951172 C 1.33138 9.365234 1.25 8.756511 1.25 8.125 C 1.25 7.49349 1.33138 6.884766 1.494141 6.298828 C 1.656901 5.712891 1.888021 5.166016 2.1875 4.658203 C 2.486979 4.150391 2.84668 3.686523 3.266602 3.266602 C 3.686523 2.84668 4.150391 2.48698 4.658203 2.1875 C 5.166016 1.888021 5.712891 1.656902 6.298828 1.494141 C 6.884765 1.331381 7.493489 1.25 8.125 1.25 C 8.75651 1.25 9.365234 1.331381 9.951172 1.494141 C 10.537109 1.656902 11.083984 1.888021 11.591797 2.1875 C 12.099609 2.48698 12.563477 2.84668 12.983398 3.266602 C 13.40332 3.686523 13.763021 4.150391 14.0625 4.658203 C 14.361979 5.166016 14.593099 5.712891 14.755859 6.298828 C 14.918619 6.884766 14.999999 7.49349 15 8.125 C 14.999999 8.925781 14.861652 9.705404 14.584961 10.463867 C 14.308268 11.222331 13.91276 11.907553 13.398438 12.519531 L 18.564453 17.685547 C 18.68815 17.809244 18.75 17.955729 18.75 18.125 Z M 13.75 8.125 C 13.75 7.610678 13.683268 7.114258 13.549805 6.635742 C 13.416341 6.157227 13.227539 5.709636 12.983398 5.292969 C 12.739258 4.876303 12.444661 4.495443 12.099609 4.150391 C 11.754557 3.80534 11.373697 3.510742 10.957031 3.266602 C 10.540364 3.022461 10.092773 2.83366 9.614258 2.700195 C 9.135742 2.566732 8.639322 2.5 8.125 2.5 C 7.35026 2.5 6.621094 2.648113 5.9375 2.944336 C 5.253906 3.240561 4.658203 3.642578 4.150391 4.150391 C 3.642578 4.658204 3.24056 5.253907 2.944336 5.9375 C 2.648112 6.621095 2.5 7.350262 2.5 8.125 C 2.5 8.90625 2.646484 9.638672 2.939453 10.322266 C 3.232422 11.005859 3.632812 11.601562 4.140625 12.109375 C 4.648438 12.617188 5.244141 13.017578 5.927734 13.310547 C 6.611328 13.603516 7.34375 13.75 8.125 13.75 C 8.899739 13.75 9.628906 13.601889 10.3125 13.305664 C 10.996094 13.00944 11.591797 12.607422 12.099609 12.099609 C 12.607421 11.591797 13.009439 10.996094 13.305664 10.3125 C 13.601888 9.628906 13.75 8.89974 13.75 8.125 Z "
+                                    Color="{DynamicResource SystemAccentColor}" />
+                                <TextBlock
+                                    FontFamily="{DynamicResource Font}"
+                                    Foreground="{DynamicResource SystemAccentColor}"
+                                    Text="{x:Static properties:MainLang.AutoScan}"
+                                    TextDecorations="{x:Null}" />
+                            </StackPanel>
+                        </HyperlinkButton>
+                        <HyperlinkButton Name="ManualAddJavaRuntimeBtn" Margin="3">
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <uc:ImageIcon
+                                    Width="16"
+                                    Path="F1 M 3.056641 18.75 C 2.646484 18.75 2.255859 18.666992 1.884766 18.500977 C 1.513672 18.334961 1.189779 18.113607 0.913086 17.836914 C 0.636393 17.560221 0.415039 17.236328 0.249023 16.865234 C 0.083008 16.494141 0 16.103516 0 15.693359 L 0 4.306641 C 0 3.896484 0.083008 3.505859 0.249023 3.134766 C 0.415039 2.763672 0.636393 2.439779 0.913086 2.163086 C 1.189779 1.886395 1.513672 1.665039 1.884766 1.499023 C 2.255859 1.333008 2.646484 1.25 3.056641 1.25 L 6.875 1.25 C 7.324219 1.25 7.709961 1.319988 8.032227 1.459961 C 8.354492 1.599936 8.644205 1.785482 8.901367 2.016602 C 9.158528 2.247723 9.397786 2.513021 9.619141 2.8125 C 9.840494 3.11198 10.071614 3.42448 10.3125 3.75 L 16.943359 3.75 C 17.353516 3.75 17.744141 3.833008 18.115234 3.999023 C 18.486328 4.165039 18.810221 4.386394 19.086914 4.663086 C 19.363605 4.939779 19.584961 5.263672 19.750977 5.634766 C 19.916992 6.005859 20 6.396484 20 6.806641 L 20 9.902344 C 19.817707 9.674479 19.622395 9.456381 19.414062 9.248047 C 19.205729 9.039714 18.984375 8.847656 18.75 8.671875 L 18.75 6.875 C 18.75 6.621095 18.701172 6.380209 18.603516 6.152344 C 18.505859 5.924479 18.370768 5.724284 18.198242 5.551758 C 18.025715 5.379232 17.82552 5.244142 17.597656 5.146484 C 17.369791 5.048829 17.128906 5.000001 16.875 5 L 10.185547 5 C 9.957682 5.156251 9.736328 5.309246 9.521484 5.458984 C 9.306641 5.608725 9.088541 5.742188 8.867188 5.859375 C 8.645833 5.976562 8.413086 6.070964 8.168945 6.142578 C 7.924805 6.214193 7.65625 6.25 7.363281 6.25 L 1.25 6.25 L 1.25 15.625 C 1.25 15.878906 1.298828 16.119791 1.396484 16.347656 C 1.494141 16.575521 1.629232 16.775717 1.801758 16.948242 C 1.974284 17.120768 2.174479 17.255859 2.402344 17.353516 C 2.630208 17.451172 2.871094 17.5 3.125 17.5 L 7.900391 17.5 C 8.011067 17.721354 8.129883 17.936197 8.256836 18.144531 C 8.383789 18.352865 8.522135 18.554688 8.671875 18.75 Z M 7.363281 5 C 7.539062 5.000001 7.70345 4.977215 7.856445 4.931641 C 8.009439 4.886068 8.154297 4.825847 8.291016 4.750977 C 8.427734 4.676107 8.562825 4.5931 8.696289 4.501953 C 8.829752 4.410808 8.964844 4.316406 9.101562 4.21875 C 8.951822 4.016928 8.805338 3.813477 8.662109 3.608398 C 8.51888 3.40332 8.36263 3.219402 8.193359 3.056641 C 8.024088 2.893881 7.833658 2.760418 7.62207 2.65625 C 7.410481 2.552084 7.161458 2.5 6.875 2.5 L 3.125 2.5 C 2.871094 2.5 2.630208 2.548828 2.402344 2.646484 C 2.174479 2.744141 1.974284 2.879232 1.801758 3.051758 C 1.629232 3.224285 1.494141 3.42448 1.396484 3.652344 C 1.298828 3.880209 1.25 4.121094 1.25 4.375 L 1.25 5 Z M 8.75 14.375 C 8.75 13.600261 8.898111 12.871094 9.194336 12.1875 C 9.49056 11.503906 9.892578 10.908203 10.400391 10.400391 C 10.908203 9.892578 11.503906 9.490561 12.1875 9.194336 C 12.871093 8.898112 13.60026 8.75 14.375 8.75 C 14.889322 8.75 15.385741 8.816732 15.864258 8.950195 C 16.342773 9.083659 16.790363 9.272461 17.207031 9.516602 C 17.623697 9.760742 18.004557 10.055339 18.349609 10.400391 C 18.69466 10.745443 18.989258 11.126303 19.233398 11.542969 C 19.477539 11.959636 19.66634 12.407227 19.799805 12.885742 C 19.933268 13.364258 20 13.860678 20 14.375 C 20 15.14974 19.851887 15.878906 19.555664 16.5625 C 19.259439 17.246094 18.857422 17.841797 18.349609 18.349609 C 17.841797 18.857422 17.246094 19.259439 16.5625 19.555664 C 15.878906 19.851889 15.149739 20 14.375 20 C 13.59375 20 12.861328 19.853516 12.177734 19.560547 C 11.494141 19.267578 10.898438 18.867188 10.390625 18.359375 C 9.882812 17.851562 9.482422 17.255859 9.189453 16.572266 C 8.896484 15.888672 8.75 15.15625 8.75 14.375 Z M 15 15 L 16.875 15 C 17.04427 15 17.190754 14.938151 17.314453 14.814453 C 17.43815 14.690756 17.5 14.544271 17.5 14.375 C 17.5 14.205729 17.43815 14.059245 17.314453 13.935547 C 17.190754 13.81185 17.04427 13.75 16.875 13.75 L 15 13.75 L 15 11.875 C 14.999999 11.705729 14.93815 11.559245 14.814453 11.435547 C 14.690755 11.31185 14.544271 11.25 14.375 11.25 C 14.205729 11.25 14.059244 11.31185 13.935547 11.435547 C 13.811849 11.559245 13.75 11.705729 13.75 11.875 L 13.75 13.75 L 11.875 13.75 C 11.705729 13.75 11.559244 13.81185 11.435547 13.935547 C 11.311849 14.059245 11.25 14.205729 11.25 14.375 C 11.25 14.544271 11.311849 14.690756 11.435547 14.814453 C 11.559244 14.938151 11.705729 15 11.875 15 L 13.75 15 L 13.75 16.875 C 13.75 17.044271 13.811849 17.190756 13.935547 17.314453 C 14.059244 17.43815 14.205729 17.5 14.375 17.5 C 14.544271 17.5 14.690755 17.43815 14.814453 17.314453 C 14.93815 17.190756 14.999999 17.044271 15 16.875 Z "
+                                    Color="{DynamicResource SystemAccentColor}" />
+                                <TextBlock
+                                    FontFamily="{DynamicResource Font}"
+                                    Foreground="{DynamicResource SystemAccentColor}"
+                                    Text="{x:Static properties:MainLang.ManualAdd}"
+                                    TextDecorations="{x:Null}" />
+                            </StackPanel>
+                        </HyperlinkButton>
+                    </WrapPanel>
+                </DockPanel>
+                <DockPanel>
+                    <StackPanel Margin="0,10,25,80" VerticalAlignment="Center">
+                        <TextBlock DockPanel.Dock="Top" FontFamily="{DynamicResource Font}">
+                            <Run Text="{x:Static properties:MainLang.ExistingNow}" />
+                            <Run Text=":" />
+                        </TextBlock>
+                        <ListBox
+                            Name="JavaRuntimeListBox"
+                            MaxHeight="320"
+                            Margin="0,10,0,0"
+                            VerticalAlignment="Top"
+                            DockPanel.Dock="Top"
+                            SelectedIndex="0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="game:JavaEntry">
+                                    <TextBlock
+                                        Margin="0,5"
+                                        FontFamily="{DynamicResource Font}"
+                                        TextWrapping="Wrap">
+                                        <Run Text="[ Java" />
+                                        <Run Text="{Binding JavaVersion}" />
+                                        <Run Text="]" />
+                                        <Run Text="{Binding JavaPath}" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </DockPanel>
+            </DockPanel>
+        </Grid>
+        <Grid
+            Name="AccountRoot"
+            Margin="10"
+            VerticalAlignment="Stretch"
+            IsVisible="False"
+            Opacity="1">
+            <Grid.Transitions>
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.30" />
+                </Transitions>
+            </Grid.Transitions>
+            <DockPanel>
+                <DockPanel Margin="60,50,20,50">
+                    <TextBlock
+                        DockPanel.Dock="Top"
+                        FontSize="24"
+                        Text="{x:Static properties:MainLang.Account}" />
+                    <TextBlock
+                        Name="AccountTipTextBlock"
+                        Width="270"
+                        Margin="5,5,0,0"
+                        HorizontalAlignment="Left"
+                        DockPanel.Dock="Top"
+                        FontSize="16"
+                        Foreground="{DynamicResource GrayColor}"
+                        Text="{x:Static properties:MainLang.AccountTip}"
+                        TextWrapping="Wrap" />
+                    <WrapPanel
+                        Width="270"
+                        Margin="-15,10,0,0"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+                        <HyperlinkButton Name="AddAccountBtn" Margin="3">
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <Image Width="16" Margin="0,0,3,0">
+                                    <Image.Source>
+                                        <DrawingImage>
+                                            <DrawingImage.Drawing>
+                                                <DrawingGroup>
+                                                    <DrawingGroup.Children>
+                                                        <GeometryDrawing Brush="{DynamicResource SystemAccentColor}">
+                                                            <GeometryDrawing.Geometry>
+                                                                <PathGeometry Figures="M472.6,535.2C534.3,501.1 576,435.5 576,360 576,249.5 486.5,160 376,160 265.5,160 176,249.5 176,360 176,435.5 217.7,501.1 279.4,535.2 233.09999999999997,550.2 190.79999999999998,576 155.39999999999998,611.4000000000001 96.5,670.3 64,748.6 64,831.9 64,849.6 78.4,864 96.1,864 113.8,864 128.2,849.6 128.2,831.9 128.2,765.8 154,703.5 200.79999999999998,656.8 247.59999999999997,610.0999999999999 309.79999999999995,584.3 376,584.3 442.20000000000005,584.3 504.4,610 551.2,656.8 598,703.5 623.8000000000001,765.6999999999999 623.8000000000001,831.9 623.8000000000001,849.6 638.2,864 655.9000000000001,864 673.6000000000001,864 688.0000000000001,849.6 688.0000000000001,831.9 688.0000000000001,748.6 655.5000000000001,670.3 596.6000000000001,611.4 561.2000000000002,576 518.9000000000001,550.1999999999999 472.60000000000014,535.1999999999999z M280.9,264.9C306.29999999999995,239.49999999999997 340.09999999999997,225.49999999999997 376,225.49999999999997 411.9,225.49999999999997 445.7,239.49999999999997 471.1,264.9 496.5,290.29999999999995 510.5,324.09999999999997 510.5,360 510.5,395.9 496.5,429.7 471.1,455.1 445.70000000000005,480.5 411.90000000000003,494.5 376,494.5 340.1,494.5 306.3,480.5 280.9,455.1 255.49999999999997,429.70000000000005 241.49999999999997,395.90000000000003 241.49999999999997,360 241.49999999999997,324.1 255.49999999999997,290.3 280.9,264.9z M728,384L928,384C945.7,384 960,369.7 960,352 960,334.3 945.7,320 928,320L728,320C710.3,320 696,334.3 696,352 696,369.7 710.3,384 728,384z" />
+                                                            </GeometryDrawing.Geometry>
+                                                        </GeometryDrawing>
+                                                        <GeometryDrawing Brush="{DynamicResource SystemAccentColor}">
+                                                            <GeometryDrawing.Geometry>
+                                                                <PathGeometry Figures="M928,480L648,480C630.3,480 616,494.3 616,512 616,529.7 630.3,544 648,544L928,544C945.7,544 960,529.7 960,512 960,494.29999999999995 945.7,480 928,480z M928,640L760,640C742.3,640 728,654.3 728,672 728,689.7 742.3,704 760,704L928,704C945.7,704 960,689.7 960,672 960,654.3 945.7,640 928,640z" />
+                                                            </GeometryDrawing.Geometry>
+                                                        </GeometryDrawing>
+                                                    </DrawingGroup.Children>
+                                                    <DrawingGroup.ClipGeometry>
+                                                        <RectangleGeometry Rect="0,0,1024,1024" />
+                                                    </DrawingGroup.ClipGeometry>
+                                                </DrawingGroup>
+                                            </DrawingImage.Drawing>
+                                        </DrawingImage>
+                                    </Image.Source>
+                                </Image>
+                                <TextBlock
+                                    FontFamily="{DynamicResource Font}"
+                                    Foreground="{DynamicResource SystemAccentColor}"
+                                    Text="{x:Static properties:MainLang.AddNewAccount}"
+                                    TextDecorations="{x:Null}" />
+                            </StackPanel>
+                        </HyperlinkButton>
+                    </WrapPanel>
+                </DockPanel>
+                <DockPanel>
+                    <StackPanel Margin="0,10,25,80" VerticalAlignment="Center">
+                        <TextBlock DockPanel.Dock="Top" FontFamily="{DynamicResource Font}">
+                            <Run Text="{x:Static properties:MainLang.ExistingNow}" />
+                            <Run Text=":" />
+                        </TextBlock>
+                        <ListBox
+                            Name="AccountListBox"
+                            MaxHeight="320"
+                            Margin="0,10,20,0"
+                            VerticalAlignment="Top"
+                            DockPanel.Dock="Top"
+                            SelectedIndex="0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="class:AccountInfo">
+                                    <Border BorderThickness="0,6,0,6">
+                                        <DockPanel>
+                                            <Border
+                                                Width="28"
+                                                Height="28"
+                                                Margin="2,0,6.5,0"
+                                                ClipToBounds="True"
+                                                CornerRadius="3,3,3,3">
+                                                <Image Source="{Binding Bitmap}" />
+                                            </Border>
+                                            <Grid>
+                                                <TextBlock
+                                                    FontFamily="{DynamicResource Font}"
+                                                    FontSize="14"
+                                                    Text="{Binding Name}" />
+                                                <StackPanel Margin="0,17,0,0" Orientation="Horizontal">
+                                                    <TextBlock
+                                                        Margin="0,0,0,0"
+                                                        FontFamily="{DynamicResource Font}"
+                                                        FontSize="11"
+                                                        Foreground="{DynamicResource GrayColor}"
+                                                        Text="{Binding AccountType}" />
+                                                    <TextBlock
+                                                        Margin="5,0,0,0"
+                                                        FontFamily="{DynamicResource Font}"
+                                                        FontSize="11"
+                                                        Foreground="{DynamicResource GrayColor}"
+                                                        Text="{Binding AddTime}" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </DockPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </DockPanel>
+            </DockPanel>
+        </Grid>
+        <StackPanel
+            Margin="25"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal"
+            Spacing="10">
+            <Button
+                Name="Precious"
+                Width="90"
+                Content="{x:Static properties:MainLang.LeftArrow}" />
+            <Button
+                Name="Next"
+                Width="90"
+                Background="#16E9B8"
+                Classes="accent"
+                Content="{x:Static properties:MainLang.RightArrow}" />
+        </StackPanel>
+        <Border
+            Margin="20"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            CornerRadius="5">
+            <DockPanel DockPanel.Dock="Bottom">
+                <Image
+                    Height="40"
+                    Margin="8,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+                    <Image.Source>
+                        <DrawingImage>
+                            <DrawingImage.Drawing>
+                                <DrawingGroup>
+                                    <DrawingGroup.Children>
+                                        <DrawingGroup>
+                                            <DrawingGroup.Children>
+                                                <GeometryDrawing Brush="#FF00A0E9">
+                                                    <GeometryDrawing.Geometry>
+                                                        <PathGeometry Figures="M469.5,42.9C470.6,41.5 472.5,42.1 474,41.9 492.8,42 511.7,41.8 530.5,42 534,44.1 538.6,42.3 542.5,43 545.5,45.6 550.4,42.3 553.5,44.9 556.2,45 558.9,44.9 561.5,45 563.3,46.8 566.2,45.6 568.5,46 570.3,48.1 573.7,45.8 575.5,47.8 577.2,47.9 578.9,47.9 580.6,48 581.8000000000001,49.5 583.9,48.8 585.6,49 587.4,51 590.7,48.8 592.5,50.8 593.5,50.9 594.5,50.9 595.6,51 597.1,52.8 600,51 601.5,52.8 602.5,52.9 603.5,52.9 604.6,53 606.1,54.8 609,53 610.5,54.8 611.5,54.9 612.5,54.9 613.6,55 614.9,56.4 617.2,55.4 618.6,56.8 619.1,56.9 620.1,57 620.7,57.099999999999994 622,58.49999999999999 624.3000000000001,57.49999999999999 625.6,58.8 626.1,58.9 627.1,59 627.6,59.099999999999994 628.9,60.49999999999999 631.2,59.49999999999999 632.5,60.8 633,60.9 634,61 634.6,61.099999999999994 635.5,61.699999999999996 636.5,62.099999999999994 637.6,62.199999999999996 639.1,63.3 641.2,62.49999999999999 642.5,63.8 643,63.9 644,64 644.6,64.1 645.5,64.69999999999999 646.5,65.1 647.6,65.19999999999999 648.9,65.69999999999999 650.2,66.1 651.4,66.69999999999999 653.1,67.49999999999999 654.8,67.99999999999999 656.5,68.69999999999999 657.5,68.89999999999999 658.5,69.19999999999999 659.5,69.69999999999999 661,69.99999999999999 662.3,70.6 663.6,71.19999999999999 664.9,71.69999999999999 666.2,72.19999999999999 667.5,72.69999999999999 669.2,73.1 671,73.69999999999999 672.4,74.79999999999998 674,75.49999999999999 675.6999999999999,75.99999999999999 677.4,76.69999999999999 679.4,77.79999999999998 681.6,78.29999999999998 683.6,79.19999999999999 684.1,79.49999999999999 685.1,79.99999999999999 685.6,80.19999999999999 687.7,81.6 690.4,81.99999999999999 692.6,83.19999999999999 693.1,83.39999999999999 694.1,83.99999999999999 694.6,84.19999999999999 695.9,84.89999999999999 697.2,85.6 698.6,86.19999999999999 699.5,86.69999999999999 700.4,87.19999999999999 701.4,87.69999999999999 702.5,88.19999999999999 703.6,88.69999999999999 704.6,89.19999999999999 705.5,89.69999999999999 706.4,90.19999999999999 707.4,90.69999999999999 708.5,91.19999999999999 709.6,91.69999999999999 710.6,92.19999999999999 712.5,93.29999999999998 714.6,94.29999999999998 716.6,95.19999999999999 717.5,95.69999999999999 718.5,96.19999999999999 719.4,96.6 720.8,97.39999999999999 722.1999999999999,98.39999999999999 723.6,99.19999999999999 725.2,99.99999999999999 726.8000000000001,100.79999999999998 728.5,101.6 730.2,102.6 731.7,103.8 733.5,104.69999999999999 735.2,105.6 736.7,106.79999999999998 738.5,107.69999999999999 741.3,109.1 743.6,111.29999999999998 746.5,112.69999999999999 756.4,118.99999999999999 766.2,125.49999999999999 775.4,132.7 780.1999999999999,136.5 785.6,139.7 789.9,144.2 793,145.6 794.6999999999999,148.79999999999998 797.6999999999999,150.29999999999998 799.8,151.49999999999997 800.9999999999999,153.7 802.9999999999999,155.2 807.0999999999999,157.6 809.8999999999999,161.6 813.3999999999999,164.7 818.3999999999999,167.79999999999998 822.0999999999999,172.7 826.3999999999999,176.7 829.5999999999999,180.2 833.5999999999999,183 835.8999999999999,187.1 839.0999999999999,190.9 843.3999999999999,193.7 845.8999999999999,198.1 847.4999999999999,200.2 849.8999999999999,201.5 851.0999999999999,203.9 852.3,206.3 854.8999999999999,207.5 856.0999999999999,209.9 857.1999999999999,212.1 859.4999999999999,213.20000000000002 860.6999999999999,215.3 867.1999999999999,224.4 874.4,233 880.4,242.4 883.6999999999999,247.4 887.1999999999999,252.3 890.3,257.4 891.1999999999999,259.5 892.8,261.2 893.6999999999999,263.2 894.5999999999999,264.9 895.9,266.4 896.6999999999999,268.2 897.4999999999999,269.59999999999997 898.4,271 899.3,272.4 899.5,272.9 900,273.9 900.1999999999999,274.4 900.6999999999999,275.29999999999995 901.1999999999999,276.29999999999995 901.5999999999999,277.2 902.3999999999999,278.59999999999997 903.3999999999999,279.9 904.3,281.3 904.5,281.8 905,282.8 905.1999999999999,283.3 905.3999999999999,283.8 905.9,284.8 906.1999999999999,285.3 906.9,286.6 907.5999999999999,287.90000000000003 908.1999999999999,289.3 908.9999999999999,290.6 909.5999999999999,291.90000000000003 910.1999999999999,293.3 910.6999999999999,294.2 911.1999999999999,295.2 911.6999999999999,296.1 911.9,296.6 912.4,297.6 912.6999999999999,298.1 913.3,299.5 913.9,300.8 914.6999999999999,302.1 915.6999999999999,304.1 916.5999999999999,306.20000000000005 917.6999999999999,308.1 918.5999999999999,310.1 919.1999999999999,312.3 920.1999999999999,314.3 920.4999999999999,314.8 920.9999999999999,315.8 921.1999999999999,316.3 922.8,318.7 922.9,321.8 924.6999999999999,324.1 925.5999999999999,326.1 926.0999999999999,328.3 927.1999999999999,330.3 927.6999999999999,331.2 927.9999999999999,332.2 928.1999999999999,333.3 928.8,335 929.4,336.7 930.1999999999999,338.40000000000003 930.6999999999999,339.70000000000005 931.0999999999999,341.00000000000006 931.6999999999999,342.20000000000005 931.9,343.30000000000007 932.1999999999999,344.30000000000007 932.6999999999999,345.20000000000005 932.9999999999999,346.70000000000005 933.5999999999999,348.00000000000006 934.3,349.30000000000007 934.6999999999999,350.20000000000005 935.0999999999999,351.20000000000005 935.3,352.20000000000005 935.6999999999999,353.1 936.0999999999999,354.1 936.3,355.20000000000005 936.8,356.1 937.0999999999999,357.1 937.3,358.20000000000005 938.3,359.70000000000005 937.6999999999999,361.70000000000005 938.8,363.1 938.9,364.20000000000005 939.3,365.20000000000005 939.9,366.1 940,366.6 940.1,367.6 940.1999999999999,368.1 941.4999999999999,369.5 940.5999999999999,371.70000000000005 941.9,373.1 942,373.6 942.1,374.6 942.1999999999999,375.1 943.4999999999999,376.5 942.5999999999999,378.70000000000005 943.9,380.1 944,380.6 944.1,381.6 944.1999999999999,382.1 945.3,383.1 944.9999999999999,384.70000000000005 945.1999999999999,386.1 946.3,387.1 945.9,388.70000000000005 946.1999999999999,390.1 947.3,391.1 946.9,392.70000000000005 947.1999999999999,394.1 948.8,395.70000000000005 947.1999999999999,398.5 948.9,400 948.9,401 949,402 949.1,403 950.5,404.3 949.8000000000001,406.3 950.1,408 952.1,409.8 949.9,413.1 951.9,414.9 952.1999999999999,416.59999999999997 951.5,418.59999999999997 952.9,419.9 953.1999999999999,421.9 952.3,424.29999999999995 953.9,425.9 954.1999999999999,427.9 953.3,430.4 954.9,431.9 955,434.2 954.9,436.59999999999997 955,438.9 956.8,440.7 955.6,443.59999999999997 956,445.9 958.6,449.29999999999995 955.2,454.5 957.9,457.9 958.1,461.59999999999997 957.9,465.29999999999995 958,468.9 959.4,470 958.8,471.9 959,473.4 958.9,491.09999999999997 958.9,508.7 959,526.4 958.8,527.9 959.5,529.8 958,530.9 957.8,534.6 958,538.3 957.9,541.9 955.3,545.3 958.6999999999999,550.5 956,553.9 955.5,556.5 956.9,559.6999999999999 955,561.9 954.9,563.9 954.9,565.9 954.9,567.9 953.3,569.4 954.1999999999999,571.9 953.9,573.9 952.3,575.4 953.1999999999999,577.9 952.9,579.9 951.1,581.4 952.9,584.3 951.1,585.9 950.8000000000001,587.9 951.7,590.3 950.1,591.9 949.8000000000001,593.6 950.5,595.6 949.1,596.9 949,597.9 949,598.9 948.9,599.9 947.1,601.4 948.8,604.1999999999999 947.1999999999999,605.8 946.9,607.0999999999999 947.3,608.6999999999999 946.1999999999999,609.8 945.9,611.0999999999999 946.3,612.6999999999999 945.1999999999999,613.8 944.9,615.0999999999999 945.3,616.8 944.1999999999999,617.8 944.0999999999999,618.3 943.9999999999999,619.3 943.9,619.8 942.5,621.0999999999999 943.5,623.4 942.1999999999999,624.8 942.0999999999999,625.3 941.9999999999999,626.3 941.9,626.9 940.5,628.1999999999999 941.5,630.5 940.1999999999999,631.8 940.0999999999999,632.3 939.9999999999999,633.3 939.9,633.8 939.3,634.6999999999999 938.9,635.6999999999999 938.8,636.8 937.6999999999999,638.3 938.5,640.4 937.1999999999999,641.8 937.0999999999999,642.3 936.9999999999999,643.3 936.9,643.8 936.3,644.6999999999999 935.9,645.6999999999999 935.8,646.8 935.0999999999999,648.5 934.5999999999999,650.1999999999999 933.8,651.9 933.3,653.1999999999999 932.9,654.5 932.1999999999999,655.8 932.0999999999999,656.3 931.9999999999999,657.3 931.9,657.8 931.1999999999999,659 930.8,660.4 930.3,661.6999999999999 929.5999999999999,662.9999999999999 929,664.4 928.6999999999999,665.8 928.1999999999999,667.0999999999999 927.8,668.4 927.3,669.6999999999999 926,671.9 925.8,674.5999999999999 924.1999999999999,676.6999999999999 923.3,678.6999999999999 922.6999999999999,680.9 921.8,682.9999999999999 921.3,683.8999999999999 920.6999999999999,684.7999999999998 920.1999999999999,685.6999999999999 919.3,687.6999999999999 918.6999999999999,689.9 917.6999999999999,691.9999999999999 917.4,692.4999999999999 916.9,693.4999999999999 916.6999999999999,693.9999999999999 915.8,695.5999999999999 915.0999999999999,697.1999999999999 914.1999999999999,698.7999999999998 913.6999999999999,699.8999999999999 913.1999999999999,700.8999999999999 912.6999999999999,701.9999999999999 911.9,703.1999999999999 911.3,704.5999999999999 910.6999999999999,705.9999999999999 909.4,708.1999999999999 908.4999999999999,710.5999999999999 907.1999999999999,712.7999999999998 906.5999999999999,714.1999999999998 905.9999999999999,715.4999999999999 905.1999999999999,716.7999999999998 904.9999999999999,717.2999999999998 904.4999999999999,718.2999999999998 904.3,718.7999999999998 903.4,720.1999999999998 902.5,721.4999999999999 901.6999999999999,722.8999999999999 901.1999999999999,723.7999999999998 900.6999999999999,724.7999999999998 900.3,725.6999999999998 899.5,727.9999999999998 897.9,729.7999999999998 896.8,731.8999999999999 895.9,733.9999999999999 894.3,735.6999999999998 893.4,737.6999999999998 892.5,739.3999999999999 891.1999999999999,740.8999999999999 890.4,742.6999999999998 885.6999999999999,750.1999999999998 880.6,757.3999999999999 875.8,764.7999999999998 869.1999999999999,772.9999999999999 863.5,781.8999999999999 856.5,789.6999999999998 855.3,792.2999999999998 852.5,793.6999999999998 851.2,796.1999999999998 849.8000000000001,798.7999999999998 847,800.0999999999998 845.8000000000001,802.7999999999998 843.0000000000001,806.2999999999998 839.5000000000001,809.1999999999998 836.4000000000001,812.4999999999999 833.1000000000001,817.6999999999999 828.1000000000001,821.4999999999999 823.9000000000001,825.9999999999999 820.6000000000001,828.9999999999999 817.9000000000001,832.7999999999998 814.0000000000001,834.9999999999999 810.7000000000002,837.7999999999998 808.1000000000001,841.2999999999998 804.7000000000002,843.8999999999999 801.1000000000001,845.6999999999998 799.2000000000002,849.7999999999998 795.6000000000001,851.5999999999999 794.1000000000001,852.3999999999999 793.2000000000002,854.0999999999999 791.7000000000002,854.8999999999999 788.9000000000002,856.1999999999998 787.4000000000002,859.1999999999998 784.6000000000001,860.5999999999999 772.0000000000001,870.3 759.3000000000002,879.6999999999999 745.7000000000002,887.9999999999999 742.9000000000002,889.4999999999999 740.6000000000001,891.6999999999999 737.7000000000002,892.9999999999999 736.0000000000001,893.8999999999999 734.5000000000001,895.1999999999999 732.7000000000002,895.9999999999999 731.2000000000002,896.7999999999998 729.9000000000002,897.7999999999998 728.5000000000001,898.5999999999999 728.0000000000001,898.8 727.0000000000001,899.3 726.5000000000001,899.4999999999999 725.6000000000001,899.9999999999999 724.6000000000001,900.4999999999999 723.7000000000002,900.8999999999999 720.9000000000002,902.8999999999999 717.8000000000002,904.3999999999999 714.7000000000002,905.8999999999999 713.6000000000001,906.3999999999999 712.5000000000001,906.8999999999999 711.5000000000001,907.3999999999999 709.6000000000001,908.4999999999999 707.5000000000001,909.4999999999999 705.5000000000001,910.3999999999999 704.6000000000001,910.8999999999999 703.7000000000002,911.3999999999999 702.7000000000002,911.8999999999999 701.6000000000001,912.3999999999999 700.5000000000001,912.8999999999999 699.5000000000001,913.3999999999999 698.2000000000002,914.1999999999998 696.9000000000001,914.7999999999998 695.5000000000001,915.3999999999999 694.6000000000001,915.8999999999999 693.7000000000002,916.3999999999999 692.8000000000001,916.8999999999999 690.7,917.7999999999998 688.6,918.3999999999999 686.5000000000001,919.3999999999999 686.0000000000001,919.6999999999998 685.0000000000001,920.1999999999998 684.5000000000001,920.3999999999999 682.3000000000001,921.7999999999998 679.7000000000002,922.1999999999998 677.5000000000001,923.3999999999999 675.8000000000001,924.0999999999999 674.1000000000001,924.5999999999999 672.5000000000001,925.2999999999998 670.8000000000001,926.5999999999998 668.6000000000001,926.9999999999999 666.7000000000002,927.7999999999998 665.2000000000002,928.0999999999998 663.9000000000002,928.6999999999998 662.6000000000001,929.3999999999999 661.3000000000002,929.8999999999999 660.0000000000001,930.2999999999998 658.7000000000002,930.7999999999998 657.6000000000001,930.9999999999999 656.6000000000001,931.2999999999998 655.7000000000002,931.7999999999998 654.7000000000002,931.9999999999999 653.7000000000002,932.2999999999998 652.8000000000002,932.7999999999998 651.2000000000002,933.5999999999998 649.4000000000002,934.0999999999998 647.7000000000002,934.7999999999998 646.6000000000001,934.8999999999999 645.6000000000001,935.2999999999998 644.7000000000002,935.8999999999999 644.2000000000002,935.9999999999999 643.2000000000002,936.0999999999999 642.7000000000002,936.1999999999998 641.3000000000002,937.4999999999998 639.2000000000002,936.6999999999998 637.8000000000002,937.7999999999998 636.7000000000002,937.8999999999999 635.7000000000002,938.2999999999998 634.8000000000002,938.8999999999999 634.3000000000002,938.9999999999999 633.3000000000002,939.0999999999999 632.8000000000002,939.1999999999998 631.4000000000002,940.4999999999998 629.2000000000002,939.5999999999998 627.8000000000002,940.8999999999999 627.3000000000002,940.9999999999999 626.3000000000002,941.0999999999999 625.8000000000002,941.1999999999998 624.4000000000002,942.4999999999998 622.2000000000002,941.5999999999998 620.8000000000002,942.8999999999999 620.3000000000002,942.9999999999999 619.3000000000002,943.0999999999999 618.7000000000002,943.1999999999998 617.4000000000002,944.5999999999998 615.1000000000001,943.4999999999998 613.8000000000002,944.9999999999998 612.8000000000002,945.0999999999998 611.8000000000002,945.0999999999998 610.8000000000002,945.1999999999998 609.2000000000002,946.9999999999998 606.4000000000002,945.1999999999998 604.9000000000002,946.9999999999998 603.9000000000002,946.9999999999998 602.8000000000002,947.0999999999998 601.8000000000002,947.1999999999998 600.3000000000002,948.9999999999998 597.4000000000002,947.1999999999998 595.9000000000002,948.9999999999998 594.9000000000002,948.9999999999998 593.9000000000002,949.0999999999998 592.9000000000002,949.1999999999998 591.3000000000002,950.7999999999998 588.9000000000002,949.8999999999999 586.9000000000002,950.1999999999998 585.6000000000003,951.6999999999998 583.6000000000003,950.8999999999999 581.9000000000002,951.1999999999998 580.3000000000002,952.7999999999998 577.9000000000002,951.8999999999999 575.9000000000002,952.1999999999998 574.1000000000003,954.2999999999998 570.7000000000002,951.8999999999999 569.0000000000002,954.0999999999998 566.7000000000003,954.4999999999998 563.8000000000002,953.2999999999998 562.0000000000002,955.0999999999998 559.6000000000003,955.1999999999998 557.3000000000002,955.0999999999998 555.0000000000002,955.1999999999998 551.9000000000002,957.2999999999998 547.6000000000003,955.4999999999998 544.0000000000002,956.1999999999998 540.3000000000002,958.8999999999999 534.7000000000003,955.3999999999999 531.0000000000002,958.0999999999998 511.0000000000002,958.1999999999998 491.0000000000002,958.1999999999998 471.0000000000002,958.0999999999998 467.30000000000024,955.3999999999997 461.7000000000002,958.8999999999997 458.0000000000002,956.1999999999998 454.60000000000025,955.9999999999998 451.30000000000024,956.1999999999998 448.0000000000002,956.0999999999998 445.9000000000002,953.7999999999998 442.10000000000025,956.4999999999998 440.0000000000002,954.1999999999998 437.7000000000002,954.0999999999998 435.30000000000024,954.0999999999998 433.0000000000002,954.0999999999998 431.2000000000002,951.9999999999998 427.80000000000024,954.2999999999998 426.0000000000002,952.2999999999998 424.30000000000024,952.1999999999998 422.60000000000025,952.1999999999998 421.0000000000002,952.0999999999998 419.7000000000002,950.5999999999998 417.60000000000025,951.2999999999998 416.0000000000002,951.0999999999998 414.2000000000002,949.0999999999998 410.9000000000002,951.2999999999998 409.0000000000002,949.2999999999998 408.0000000000002,949.1999999999998 407.0000000000002,949.1999999999998 406.0000000000002,949.0999999999998 404.4000000000002,947.2999999999998 401.60000000000025,949.0999999999998 400.0000000000002,947.2999999999998 399.0000000000002,947.1999999999998 398.0000000000002,947.1999999999998 397.0000000000002,947.0999999999998 395.4000000000002,945.2999999999998 392.7000000000002,946.9999999999998 391.0000000000002,945.3999999999997 389.60000000000025,945.0999999999998 388.0000000000002,945.4999999999998 387.0000000000002,944.3999999999997 385.60000000000025,944.0999999999998 384.0000000000002,944.4999999999998 383.0000000000002,943.3999999999997 382.5000000000002,943.2999999999997 381.5000000000002,943.1999999999997 381.0000000000002,943.0999999999998 379.60000000000025,941.6999999999998 377.4000000000002,942.6999999999998 376.0000000000002,941.3999999999997 375.5000000000002,941.2999999999997 374.5000000000002,941.1999999999997 374.0000000000002,941.0999999999998 372.60000000000025,939.6999999999998 370.4000000000002,940.6999999999998 369.0000000000002,939.3999999999997 368.5000000000002,939.2999999999997 367.5000000000002,939.1999999999997 367.0000000000002,939.0999999999998 366.10000000000025,938.4999999999998 365.10000000000025,938.0999999999998 364.0000000000002,937.9999999999998 362.5000000000002,936.8999999999997 360.4000000000002,937.6999999999998 359.0000000000002,936.3999999999997 358.5000000000002,936.2999999999997 357.5000000000002,936.1999999999997 357.0000000000002,936.0999999999998 356.10000000000025,935.4999999999998 355.10000000000025,935.0999999999998 354.0000000000002,934.9999999999998 352.7000000000002,934.4999999999998 351.4000000000002,934.0999999999998 350.10000000000025,933.5999999999998 348.80000000000024,932.8999999999997 347.40000000000026,932.2999999999998 346.0000000000002,931.9999999999998 345.0000000000002,931.4999999999998 344.0000000000002,931.1999999999998 343.0000000000002,930.9999999999998 341.7000000000002,930.4999999999998 340.4000000000002,930.0999999999998 339.10000000000025,929.4999999999998 337.80000000000024,928.7999999999997 336.40000000000026,928.1999999999998 335.0000000000002,927.8999999999997 333.30000000000024,927.1999999999997 331.60000000000025,926.6999999999997 329.9000000000002,925.9999999999998 328.2000000000002,924.6999999999998 326.0000000000002,924.2999999999997 324.1000000000002,923.4999999999998 321.9000000000002,922.1999999999998 319.2000000000002,921.8999999999997 317.1000000000002,920.4999999999998 316.6000000000002,920.2999999999997 315.6000000000002,919.6999999999998 315.1000000000002,919.4999999999998 313.1000000000002,918.4999999999998 310.9000000000002,917.9999999999998 308.9000000000002,916.9999999999998 307.4000000000002,915.9999999999998 305.7000000000002,915.3999999999997 304.1000000000002,914.4999999999998 302.3000000000002,913.6999999999998 300.6000000000002,912.7999999999997 298.9000000000002,911.9999999999998 297.6000000000002,911.1999999999998 296.3000000000002,910.5999999999998 294.9000000000002,909.9999999999998 293.6000000000002,909.1999999999998 292.3000000000002,908.5999999999998 290.9000000000002,907.9999999999998 289.3000000000002,907.0999999999998 287.7000000000002,906.3999999999997 286.1000000000002,905.4999999999998 284.7000000000002,904.8999999999997 283.4000000000002,904.1999999999998 282.1000000000002,903.5999999999998 280.7000000000002,902.6999999999998 279.4000000000002,901.7999999999998 278.00000000000017,900.9999999999998 277.00000000000017,900.4999999999998 276.1000000000002,899.9999999999998 275.20000000000016,899.5999999999998 274.70000000000016,899.3999999999997 273.70000000000016,898.8999999999997 273.20000000000016,898.6999999999998 271.50000000000017,897.6999999999998 270.00000000000017,896.4999999999998 268.20000000000016,895.5999999999998 266.8000000000002,894.7999999999998 265.40000000000015,893.7999999999998 264.00000000000017,892.9999999999998 261.1000000000002,891.6999999999998 258.8000000000002,889.4999999999998 256.00000000000017,887.9999999999998 242.40000000000018,879.7999999999997 229.70000000000016,870.2999999999997 217.10000000000016,860.5999999999998 214.50000000000017,859.3999999999997 213.10000000000016,856.5999999999998 210.60000000000016,855.2999999999998 208.20000000000016,854.0999999999998 207.00000000000017,851.4999999999999 204.60000000000016,850.2999999999998 202.20000000000016,849.0999999999998 200.90000000000018,846.5999999999998 198.80000000000015,845.0999999999998 194.20000000000016,842.4999999999998 191.40000000000015,837.7999999999998 187.20000000000016,834.6999999999998 184.70000000000016,833.3999999999999 182.90000000000015,830.9999999999998 180.90000000000015,829.0999999999998 176.40000000000015,824.5999999999998 171.80000000000015,820.0999999999998 167.40000000000015,815.4999999999998 164.20000000000016,809.8999999999997 158.10000000000014,806.6999999999998 154.90000000000015,801.0999999999998 153.70000000000016,799.5999999999998 152.00000000000014,798.4999999999998 151.00000000000014,796.8999999999997 149.50000000000014,793.8999999999997 146.30000000000015,792.1999999999997 144.90000000000015,789.0999999999998 140.80000000000015,785.1999999999998 137.80000000000015,780.1999999999998 134.30000000000015,775.7999999999998 125.80000000000015,764.9999999999999 118.20000000000016,753.4999999999999 110.90000000000015,741.8999999999999 110.00000000000014,740.1999999999998 108.70000000000014,738.6999999999998 107.90000000000015,736.8999999999999 107.10000000000015,735.4999999999999 106.10000000000015,734.0999999999999 105.30000000000015,732.6999999999998 104.50000000000016,730.8999999999999 103.20000000000016,729.3999999999999 102.20000000000016,727.6999999999998 102.00000000000016,727.1999999999998 101.50000000000016,726.1999999999998 101.30000000000015,725.6999999999998 100.80000000000015,724.7999999999998 100.30000000000015,723.7999999999998 99.90000000000015,722.8999999999999 99.10000000000015,721.4999999999999 98.10000000000015,720.0999999999999 97.30000000000015,718.6999999999998 96.50000000000016,717.0999999999998 95.80000000000015,715.3999999999999 94.90000000000015,713.8999999999999 94.30000000000015,712.4999999999999 93.70000000000014,711.1999999999998 92.90000000000015,709.8999999999999 92.30000000000015,708.4999999999999 91.70000000000014,707.1999999999998 90.90000000000015,705.8999999999999 90.70000000000014,705.3999999999999 90.10000000000015,704.3999999999999 89.90000000000015,703.8999999999999 89.30000000000015,702.4999999999999 88.60000000000015,701.1999999999998 87.90000000000015,699.8999999999999 87.40000000000015,698.7999999999998 86.90000000000015,697.6999999999998 86.40000000000015,696.6999999999998 85.50000000000014,695.1999999999998 84.80000000000015,693.4999999999998 83.90000000000015,691.8999999999999 82.80000000000015,689.5999999999999 82.40000000000015,686.9999999999999 81.00000000000014,684.8999999999999 80.70000000000014,684.3999999999999 80.20000000000014,683.3999999999999 80.00000000000014,682.8999999999999 79.00000000000014,680.8999999999999 78.50000000000014,678.6999999999998 77.50000000000014,676.6999999999998 76.20000000000014,674.9999999999998 75.80000000000014,672.8999999999999 75.00000000000014,670.8999999999999 74.30000000000014,669.5999999999999 73.70000000000014,668.1999999999998 73.40000000000015,666.7999999999998 72.80000000000015,665.0999999999998 72.20000000000014,663.3999999999999 71.40000000000015,661.6999999999998 70.90000000000015,660.3999999999999 70.40000000000015,659.0999999999998 69.80000000000015,657.7999999999998 69.70000000000016,657.2999999999998 69.60000000000015,656.2999999999998 69.50000000000016,655.7999999999998 68.70000000000016,654.1999999999998 68.20000000000016,652.3999999999999 67.40000000000016,650.6999999999998 66.90000000000016,649.7999999999998 66.60000000000016,648.7999999999998 66.40000000000016,647.7999999999998 65.90000000000016,646.8999999999999 65.60000000000016,645.8999999999999 65.40000000000016,644.7999999999998 64.90000000000016,643.7999999999998 64.60000000000016,642.7999999999998 64.40000000000016,641.7999999999998 63.40000000000016,640.2999999999998 63.90000000000016,638.2999999999998 62.90000000000016,636.8999999999999 62.80000000000016,635.7999999999998 62.40000000000016,634.7999999999998 61.80000000000016,633.8999999999999 61.70000000000016,633.3999999999999 61.60000000000016,632.3999999999999 61.50000000000016,631.8999999999999 60.200000000000166,630.4999999999999 61.100000000000165,628.2999999999998 59.80000000000016,626.9999999999999 59.70000000000016,626.4999999999999 59.60000000000016,625.4999999999999 59.50000000000016,624.8999999999999 58.200000000000166,623.4999999999999 59.100000000000165,621.2999999999998 57.80000000000016,619.8999999999999 57.70000000000016,619.3999999999999 57.60000000000016,618.3999999999999 57.50000000000016,617.7999999999998 56.100000000000165,616.4999999999999 57.200000000000166,614.1999999999998 55.700000000000166,612.8999999999999 55.600000000000165,611.8999999999999 55.600000000000165,610.8999999999999 55.50000000000016,609.8999999999999 53.700000000000166,608.2999999999998 55.50000000000016,605.4999999999999 53.700000000000166,603.8999999999999 53.600000000000165,602.8999999999999 53.600000000000165,601.8999999999999 53.50000000000016,600.8999999999999 51.700000000000166,599.2999999999998 53.50000000000016,596.4999999999999 51.700000000000166,594.8999999999999 51.600000000000165,593.8999999999999 51.600000000000165,592.8999999999999 51.50000000000016,591.8999999999999 49.90000000000016,590.2999999999998 50.80000000000016,587.8999999999999 50.50000000000016,585.8999999999999 48.700000000000166,584.3999999999999 50.50000000000016,581.4999999999999 48.700000000000166,579.8999999999999 48.600000000000165,578.1999999999998 48.600000000000165,576.4999999999999 48.50000000000016,574.8999999999999 46.40000000000016,573.0999999999999 48.700000000000166,569.6999999999998 46.600000000000165,567.8999999999999 46.200000000000166,565.5999999999999 47.40000000000016,562.6999999999998 45.600000000000165,560.8999999999999 45.50000000000016,558.1999999999998 45.600000000000165,555.4999999999999 45.50000000000016,552.7999999999998 42.90000000000016,549.7999999999998 46.200000000000166,544.8999999999999 43.600000000000165,541.8999999999999 43.40000000000016,538.1999999999998 43.600000000000165,534.4999999999999 43.50000000000016,530.7999999999998 42.100000000000165,529.6999999999998 42.700000000000166,527.7999999999998 42.50000000000016,526.2999999999998 42.600000000000165,507.59999999999985 42.40000000000016,488.99999999999983 42.600000000000165,470.29999999999984 42.80000000000017,469.89999999999986 43.30000000000017,469.09999999999985 43.50000000000016,468.6999999999998 43.700000000000166,464.99999999999983 43.50000000000016,461.29999999999984 43.600000000000165,457.6999999999998 46.200000000000166,454.5999999999998 42.90000000000016,449.79999999999984 45.50000000000016,446.6999999999998 46.00000000000016,444.0999999999998 44.600000000000165,440.8999999999998 46.50000000000016,438.6999999999998 46.600000000000165,436.3999999999998 46.50000000000016,433.99999999999983 46.600000000000165,431.6999999999998 48.200000000000166,430.1999999999998 47.30000000000017,427.6999999999998 47.600000000000165,425.6999999999998 49.700000000000166,423.8999999999998 47.40000000000016,420.49999999999983 49.40000000000016,418.6999999999998 49.50000000000016,417.29999999999984 49.50000000000016,415.99999999999983 49.600000000000165,414.5999999999998 51.600000000000165,412.7999999999998 49.40000000000016,409.4999999999998 51.40000000000016,407.5999999999998 51.50000000000016,406.5999999999998 51.50000000000016,405.5999999999998 51.600000000000165,404.5999999999998 53.40000000000016,402.9999999999998 51.600000000000165,400.1999999999998 53.40000000000016,398.5999999999998 53.50000000000016,397.5999999999998 53.50000000000016,396.5999999999998 53.600000000000165,395.5999999999998 55.40000000000016,393.9999999999998 53.600000000000165,391.1999999999998 55.40000000000016,389.5999999999998 55.50000000000016,388.5999999999998 55.50000000000016,387.5999999999998 55.600000000000165,386.5999999999998 57.00000000000016,385.2999999999998 56.00000000000016,382.9999999999998 57.40000000000016,381.5999999999998 57.50000000000016,381.0999999999998 57.600000000000165,380.0999999999998 57.70000000000016,379.5999999999998 59.10000000000016,378.2999999999998 58.10000000000016,375.9999999999998 59.40000000000016,374.5999999999998 59.50000000000016,374.0999999999998 59.600000000000165,373.0999999999998 59.70000000000016,372.5999999999998 61.000000000000156,371.1999999999998 60.20000000000016,369.0999999999998 61.30000000000016,367.5999999999998 61.50000000000016,366.4999999999998 61.80000000000016,365.4999999999998 62.40000000000016,364.5999999999998 62.50000000000016,364.0999999999998 62.600000000000165,363.0999999999998 62.70000000000016,362.5999999999998 64.10000000000016,361.1999999999998 63.10000000000016,358.9999999999998 64.40000000000016,357.6999999999998 64.50000000000016,357.1999999999998 64.60000000000016,356.1999999999998 64.70000000000016,355.6999999999998 65.30000000000015,354.79999999999984 65.70000000000016,353.79999999999984 65.80000000000015,352.6999999999998 66.50000000000016,350.99999999999983 67.00000000000016,349.29999999999984 67.80000000000015,347.5999999999998 68.30000000000015,346.2999999999998 68.80000000000015,344.9999999999998 69.30000000000015,343.7999999999998 69.50000000000016,342.69999999999976 69.80000000000015,341.69999999999976 70.30000000000015,340.7999999999998 70.50000000000016,339.7999999999998 70.80000000000015,338.7999999999998 71.30000000000015,337.8999999999998 72.00000000000016,336.5999999999998 72.60000000000015,335.1999999999998 72.90000000000015,333.7999999999998 73.70000000000014,331.7999999999998 74.10000000000015,329.69999999999976 75.40000000000015,327.9999999999998 76.10000000000015,326.39999999999975 76.60000000000015,324.5999999999998 77.30000000000015,322.9999999999998 78.30000000000015,320.9999999999998 78.90000000000015,318.7999999999998 79.80000000000015,316.7999999999998 80.30000000000015,315.8999999999998 80.90000000000015,314.9999999999998 81.40000000000015,314.0999999999998 82.30000000000015,311.9999999999998 82.90000000000015,309.8999999999998 83.80000000000015,307.7999999999998 84.80000000000015,306.2999999999998 85.40000000000015,304.5999999999998 86.30000000000015,302.9999999999998 86.80000000000015,301.89999999999975 87.30000000000015,300.89999999999975 87.80000000000015,299.7999999999998 88.60000000000015,298.4999999999998 89.20000000000016,297.19999999999976 89.80000000000015,295.7999999999998 90.70000000000016,294.19999999999976 91.40000000000015,292.5999999999998 92.30000000000015,290.9999999999998 92.50000000000016,290.4999999999998 93.00000000000016,289.4999999999998 93.30000000000015,288.9999999999998 93.60000000000015,288.4999999999998 94.10000000000015,287.4999999999998 94.30000000000015,286.9999999999998 94.80000000000015,285.89999999999975 95.30000000000015,284.7999999999998 95.80000000000015,283.7999999999998 96.30000000000015,282.8999999999998 96.80000000000015,281.8999999999998 97.20000000000016,280.9999999999998 98.00000000000016,279.5999999999998 99.00000000000016,278.19999999999976 99.90000000000016,276.89999999999975 100.10000000000016,276.39999999999975 100.60000000000016,275.39999999999975 100.80000000000017,274.89999999999975 101.30000000000017,273.9999999999998 101.80000000000017,272.9999999999998 102.20000000000017,272.09999999999974 103.20000000000017,270.39999999999975 104.40000000000018,268.89999999999975 105.20000000000017,267.09999999999974 106.10000000000018,265.39999999999975 107.40000000000018,263.89999999999975 108.20000000000017,262.09999999999974 109.00000000000017,260.69999999999976 110.00000000000017,259.2999999999997 110.80000000000017,257.89999999999975 116.70000000000017,248.49999999999974 122.80000000000017,239.19999999999976 129.30000000000018,230.29999999999976 134.6000000000002,223.59999999999977 139.30000000000018,216.29999999999976 145.1000000000002,209.99999999999974 146.30000000000018,207.39999999999975 149.1000000000002,205.99999999999974 150.4000000000002,203.39999999999975 151.6000000000002,200.99999999999974 154.0000000000002,199.69999999999976 155.6000000000002,197.59999999999974 158.5000000000002,192.39999999999975 164.2000000000002,189.49999999999974 167.1000000000002,184.19999999999973 173.0000000000002,178.09999999999974 179.1000000000002,172.09999999999974 185.2000000000002,166.19999999999973 190.40000000000018,163.29999999999973 193.30000000000018,157.59999999999974 198.6000000000002,154.69999999999973 200.5000000000002,153.29999999999973 201.80000000000018,151.09999999999974 203.9000000000002,149.79999999999973 206.9000000000002,148.29999999999973 208.6000000000002,145.09999999999974 211.70000000000022,143.69999999999973 216.00000000000023,139.29999999999973 221.4000000000002,136.09999999999974 226.20000000000022,132.19999999999973 235.4000000000002,124.89999999999974 245.20000000000022,118.49999999999973 255.10000000000022,112.19999999999973 258.0000000000002,110.89999999999974 260.30000000000024,108.59999999999974 263.10000000000025,107.19999999999973 264.90000000000026,106.29999999999973 266.40000000000026,105.09999999999974 268.10000000000025,104.19999999999973 269.90000000000026,103.39999999999974 271.40000000000026,102.09999999999974 273.10000000000025,101.19999999999973 274.0000000000002,100.69999999999973 275.0000000000002,100.29999999999973 275.90000000000026,99.79999999999973 276.40000000000026,99.59999999999972 277.40000000000026,99.09999999999972 277.90000000000026,98.89999999999972 279.30000000000024,97.99999999999972 280.60000000000025,97.09999999999972 282.0000000000003,96.19999999999972 283.6000000000003,95.39999999999972 285.3000000000003,94.69999999999972 286.8000000000003,93.79999999999971 287.9000000000003,93.29999999999971 288.9000000000003,92.79999999999971 290.0000000000003,92.29999999999971 291.3000000000003,91.49999999999972 292.6000000000003,90.89999999999971 294.0000000000003,90.29999999999971 295.3000000000003,89.49999999999972 296.6000000000003,88.89999999999971 298.0000000000003,88.29999999999971 299.6000000000003,87.39999999999971 301.2000000000003,86.69999999999972 302.8000000000003,85.79999999999971 304.8000000000003,84.79999999999971 306.9000000000003,83.89999999999971 308.8000000000003,82.79999999999971 310.8000000000003,81.89999999999971 313.0000000000003,81.29999999999971 315.1000000000003,80.39999999999971 316.0000000000003,79.89999999999971 316.9000000000003,79.29999999999971 317.8000000000003,78.79999999999971 319.8000000000003,77.89999999999971 322.0000000000003,77.39999999999971 324.0000000000003,76.29999999999971 325.90000000000026,75.49999999999972 328.1000000000003,75.09999999999971 329.8000000000003,73.79999999999971 331.5000000000003,73.09999999999971 333.2000000000003,72.49999999999972 334.9000000000003,71.89999999999971 336.4000000000003,71.59999999999971 337.70000000000033,70.9999999999997 339.00000000000034,70.29999999999971 340.30000000000035,69.79999999999971 341.60000000000036,69.29999999999971 342.9000000000003,68.79999999999971 344.00000000000034,68.59999999999971 345.00000000000034,68.29999999999971 345.9000000000003,67.79999999999971 346.9000000000003,67.59999999999971 347.9000000000003,67.29999999999971 348.8000000000003,66.79999999999971 350.1000000000003,66.09999999999971 351.5000000000003,65.49999999999972 352.9000000000003,65.19999999999972 354.20000000000033,64.69999999999972 355.6000000000003,64.29999999999971 356.8000000000003,63.59999999999972 357.3000000000003,63.499999999999716 358.3000000000003,63.399999999999714 358.8000000000003,63.29999999999972 360.2000000000003,61.99999999999972 362.3000000000003,62.79999999999972 363.7000000000003,61.69999999999972 364.8000000000003,61.59999999999972 365.8000000000003,61.19999999999972 366.7000000000003,60.59999999999972 367.2000000000003,60.499999999999716 368.2000000000003,60.399999999999714 368.7000000000003,60.29999999999972 370.10000000000025,58.89999999999972 372.3000000000003,59.89999999999972 373.7000000000003,58.59999999999972 374.2000000000003,58.499999999999716 375.2000000000003,58.399999999999714 375.7000000000003,58.29999999999972 377.0000000000003,56.89999999999972 379.3000000000003,57.89999999999972 380.60000000000025,56.59999999999972 381.10000000000025,56.499999999999716 382.10000000000025,56.399999999999714 382.60000000000025,56.29999999999972 384.0000000000002,54.89999999999972 386.2000000000003,55.99999999999972 387.60000000000025,54.49999999999972 388.60000000000025,54.39999999999972 389.60000000000025,54.29999999999972 390.60000000000025,54.29999999999972 392.10000000000025,52.49999999999972 395.0000000000002,54.29999999999972 396.5000000000002,52.49999999999972 397.5000000000002,52.39999999999972 398.5000000000002,52.39999999999972 399.5000000000002,52.29999999999972 401.10000000000025,50.49999999999972 403.9000000000002,52.29999999999972 405.5000000000002,50.49999999999972 406.5000000000002,50.39999999999972 407.5000000000002,50.39999999999972 408.5000000000002,50.29999999999972 410.30000000000024,48.29999999999972 413.60000000000025,50.49999999999972 415.5000000000002,48.49999999999972 417.2000000000002,48.199999999999726 419.2000000000002,48.89999999999972 420.5000000000002,47.49999999999972 422.5000000000002,47.199999999999726 424.9000000000002,48.099999999999724 426.5000000000002,46.49999999999972 428.5000000000002,46.199999999999726 431.0000000000002,47.099999999999724 432.5000000000002,45.49999999999972 435.10000000000025,44.99999999999972 438.30000000000024,46.39999999999972 440.5000000000002,44.49999999999972 442.80000000000024,44.39999999999972 445.2000000000002,44.49999999999972 447.5000000000002,44.39999999999972 450.60000000000025,41.89999999999972 455.4000000000002,45.099999999999724 458.5000000000002,42.49999999999972 462.2,42.9 465.8,43.1 469.5,42.9 M482.3,126.4C394.1,130.4 307.8,167 243.8,227.8 198.20000000000002,270.6 163.70000000000002,325.1 144.4,384.6 127.9,435.1 122.4,489.20000000000005 128.4,542.1 137.20000000000002,622.3000000000001 172.8,699.3 228.4,757.7 278.9,811.5 345.9,849.6 417.9,865.8000000000001 484.09999999999997,880.9000000000001 554.4,877.4000000000001 618.8,855.9000000000001 664.5999999999999,840.7 707.4,816.5000000000001 744.0999999999999,785.1000000000001 781.9999999999999,752.8000000000002 813.1999999999999,712.8000000000002 835.4999999999999,668.3000000000002 863.6999999999999,612.1000000000001 877.3999999999999,548.8000000000002 874.7999999999998,486.1000000000002 871.9999999999999,409.20000000000016 844.5999999999998,333.5000000000002 797.5999999999998,272.6000000000002 753.2999999999998,214.6000000000002 691.4999999999998,170.2000000000002 622.4999999999998,146.6000000000002 577.6,130.9 529.7,124.1 482.3,126.4z" />
+                                                    </GeometryDrawing.Geometry>
+                                                </GeometryDrawing>
+                                            </DrawingGroup.Children>
+                                        </DrawingGroup>
+                                        <GeometryDrawing Brush="#FFFFFFFF">
+                                            <GeometryDrawing.Geometry>
+                                                <EllipseGeometry
+                                                    Center="500.8,500.6"
+                                                    RadiusX="402.8"
+                                                    RadiusY="402.8" />
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                        <DrawingGroup>
+                                            <DrawingGroup.Children>
+                                                <GeometryDrawing Brush="#FF515151">
+                                                    <GeometryDrawing.Geometry>
+                                                        <PathGeometry Figures="M404.6,172.5C414.1,165.2 426.20000000000005,161.1 438.20000000000005,161.2 483.00000000000006,161.2 527.9000000000001,161.2 572.8000000000001,161.2 578.5000000000001,161.2 584.3000000000001,161.1 589.8000000000001,162.39999999999998 605.4000000000001,165.59999999999997 619.2,176.09999999999997 626.6,190.09999999999997 633.8000000000001,203.59999999999997 634.8000000000001,220.29999999999995 629.2,234.59999999999997 622.1,253.59999999999997 603.6,267.2 583.3000000000001,268.99999999999994 583.3000000000001,323.99999999999994 583.3000000000001,379.19999999999993 583.3000000000001,434.19999999999993 583.4000000000001,444.79999999999995 582.4000000000001,455.69999999999993 584.6,466.0999999999999 588.7,485.8999999999999 596.1,504.8999999999999 603.9,523.4999999999999 608.8,534.2999999999998 613.1,545.5999999999999 619.6,555.5999999999999 649.2,603.9999999999999 678.9,652.5999999999999 708.3000000000001,700.9999999999999 712.7,708.2999999999998 717.5000000000001,715.5999999999999 720.9000000000001,723.2999999999998 727.8000000000001,738.9999999999999 730.8000000000001,756.8999999999999 726.7,773.6999999999998 723.9000000000001,785.8999999999999 717.2,796.9999999999998 707.5,804.9999999999998 698.4,812.3999999999997 687,816.8999999999997 675.2,817.3999999999997 565,817.6999999999997 454.70000000000005,817.7999999999997 344.50000000000006,818.1999999999997 329.70000000000005,818.2999999999997 314.90000000000003,812.4999999999997 304.40000000000003,801.9999999999997 294.00000000000006,791.6999999999997 288.20000000000005,777.3999999999996 287.3,762.8999999999996 286,743.8999999999996 292.7,725.1999999999996 303.1,709.6999999999996 333.70000000000005,658.4999999999995 364.20000000000005,607.3999999999996 394.8,556.0999999999996 401.6,545.2999999999996 407,533.4999999999995 412.1,521.7999999999996 418.5,507.39999999999964 424.3,492.89999999999964 428.6,477.89999999999964 430.90000000000003,470.0999999999996 432.5,461.99999999999966 432.5,453.7999999999996 432.9,422.6999999999996 432.5,391.5999999999996 432.4,360.39999999999964 432.4,329.7999999999996 432.4,299.49999999999966 432.4,268.89999999999964 418.7,267.69999999999965 405.29999999999995,260.89999999999964 396.4,250.49999999999963 386.7,239.49999999999963 381.7,224.39999999999964 383.4,209.89999999999964 384.9,195.4 392.7,181.4 404.6,172.5L404.6,172.5z M434.7,201.8C428.59999999999997,203 423.5,208.8 423.5,215.20000000000002 423.3,222.10000000000002 429.2,228.50000000000003 436.1,229.00000000000003 442.8,229.50000000000003 449.6,228.70000000000002 456.3,229.40000000000003 465.90000000000003,230.80000000000004 473.3,240.10000000000002 473,249.80000000000004 473.2,294.6 472.9,339.50000000000006 473.2,384.40000000000003 473.3,408.00000000000006 473.5,431.50000000000006 473.09999999999997,455.1 473.09999999999997,473.40000000000003 467.4,491 461.4,508.20000000000005 453.79999999999995,528.7 444.9,548.8000000000001 434.7,568.2 401,624.7 367.2,681.3000000000001 333.4,737.9000000000001 329.7,744.3000000000001 327.4,751.7 327.59999999999997,759.2 327.79999999999995,764.8000000000001 329.49999999999994,770.6 333.59999999999997,774.4000000000001 337.09999999999997,777.6000000000001 342.09999999999997,778.3000000000001 346.59999999999997,778.3000000000001 453.19999999999993,778.1 559.8,777.9000000000001 666.4,777.6 670.9,777.5 675.9,778.4 680,775.8000000000001 685.8,772.4000000000001 688.4,765.5000000000001 688.7,759.1 688.9000000000001,749.8000000000001 685.5,740.8000000000001 680.9000000000001,732.9 647.5000000000001,678.1999999999999 614.1000000000001,623.5 580.8000000000001,568.8 570.8000000000001,549.1999999999999 562.3000000000001,528.6999999999999 554.9000000000001,507.99999999999994 549.2,490.8999999999999 543.9000000000001,473.3999999999999 543.2,455.19999999999993 543.2,387.49999999999994 543.2,319.69999999999993 543.2,251.99999999999994 542.9000000000001,242.29999999999995 549.1,232.09999999999994 558.9000000000001,229.79999999999995 566.3000000000001,228.39999999999995 574.2,229.99999999999994 581.8000000000001,228.79999999999995 588.7,227.39999999999995 593.9000000000001,220.09999999999997 592.4000000000001,213.09999999999997 591.4000000000001,206.29999999999995 584.7,200.99999999999997 577.7,201.39999999999998 531.5,201.39999999999998 485.30000000000007,201.39999999999998 439.1,201.39999999999998 437.7,201.5 436.1,201.6 434.7,201.8z" />
+                                                    </GeometryDrawing.Geometry>
+                                                </GeometryDrawing>
+                                                <GeometryDrawing Brush="#FF515151">
+                                                    <GeometryDrawing.Geometry>
+                                                        <PathGeometry Figures="M461.5,629.2C483.6,629 505.8,629.2 527.9,629.1 533.6999999999999,628.9 539.6,630.9 543.6,635 549.5,640.7 551.2,650.1 547.7,657.5 544.6,664.4 537.4000000000001,669.3 529.7,669.3 507.50000000000006,669.3 485.20000000000005,669.3 462.90000000000003,669.3 456.50000000000006,669.4 450.3,666.0999999999999 446.70000000000005,661 442.30000000000007,655 441.70000000000005,646.4 445.30000000000007,639.9 448.5,634 454.7,629.6 461.5,629.2z" />
+                                                    </GeometryDrawing.Geometry>
+                                                </GeometryDrawing>
+                                                <GeometryDrawing Brush="#FF515151">
+                                                    <GeometryDrawing.Geometry>
+                                                        <PathGeometry Figures="M407.6,705.1C412.40000000000003,704 417.3,704.4 422.3,704.3000000000001 429.5,704.4000000000001 437,704.1 444.2,704.4000000000001 454.5,705.1000000000001 463,715.0000000000001 462.3,725.4000000000001 462.1,735.4000000000001 453.2,744.2 443.2,744.5000000000001 432.9,744.6000000000001 422.7,744.6000000000001 412.3,744.5000000000001 402.5,744.4000000000001 393.7,736.1000000000001 393,726.3000000000001 391.8,716.9 398.5,707.4 407.6,705.1z" />
+                                                    </GeometryDrawing.Geometry>
+                                                </GeometryDrawing>
+                                                <GeometryDrawing Brush="#FF515151">
+                                                    <GeometryDrawing.Geometry>
+                                                        <PathGeometry Figures="M507.4,705.9C511.09999999999997,704.8 515.1,705.1 519,705 545.5,705 572.1,705 598.8,705 605.5999999999999,704.8 612.3,708.4 615.9,714.1 620.3,720.7 620.1999999999999,729.8000000000001 615.8,736.2 612.1999999999999,741.8000000000001 605.5,745.3000000000001 598.8,745.1 570.5,745.1 542.3,745.1 514,745.1 508,745.2 501.9,742.7 498.1,738.1 493.5,732.8000000000001 492,725.1 494.40000000000003,718.5 496.2,712.7 501.4,707.9 507.4,705.9z" />
+                                                    </GeometryDrawing.Geometry>
+                                                </GeometryDrawing>
+                                            </DrawingGroup.Children>
+                                        </DrawingGroup>
+                                    </DrawingGroup.Children>
+                                    <DrawingGroup.ClipGeometry>
+                                        <RectangleGeometry Rect="0,0,1000,1000" />
+                                    </DrawingGroup.ClipGeometry>
+                                </DrawingGroup>
+                            </DrawingImage.Drawing>
+                        </DrawingImage>
+                    </Image.Source>
+                </Image>
+                <TextBlock
+                    Margin="15,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="22"
+                    Text="Yu Minecraft Launcher" />
+            </DockPanel>
+        </Border>
+    </Grid>
 </UserControl>

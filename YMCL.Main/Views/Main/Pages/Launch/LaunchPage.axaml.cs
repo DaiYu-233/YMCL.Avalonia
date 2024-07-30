@@ -79,6 +79,11 @@ public partial class LaunchPage : UserControl
                 await Task.Delay(260);
                 LaunchConsoleRoot.IsVisible = true;
             }
+            else
+            {
+                LaunchConsoleRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;;
+                LaunchConsoleRoot.IsVisible = true;
+            }
         };
         AccountComboBox.SelectionChanged += (s, e) =>
         {

@@ -6,13 +6,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
     xmlns:uc="clr-namespace:YMCL.Main.Public.Controls"
+    xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
     Title="Yu Minecraft Launcher"
-    Width="680"
-    Height="370"
-    MinWidth="680"
-    MinHeight="370"
+    Width="860"
+    Height="480"
+    MinWidth="860"
+    MinHeight="450"
+    MaxWidth="860"
+    MaxHeight="450"
     d:DesignHeight="0"
     d:DesignWidth="0"
+    CanResize="False"
     FontFamily="{DynamicResource Font}"
     FontWeight="{DynamicResource FontWeight}"
     IsHitTestVisible="True"
@@ -41,64 +45,10 @@
                     Name="TitleBar"
                     Title="Yu Minecraft Launcher"
                     DockPanel.Dock="Top"
-                    IsCloseBtnExitApp="True" />
-                <Grid>
-                    <Border Name="LanguageRoot">
-                        <DockPanel Margin="30,20">
-                            <TextBlock
-                                DockPanel.Dock="Top"
-                                FontSize="18"
-                                Text="{x:Static properties:MainLang.ChooseLanguage}" />
-                            <Button
-                                Name="IdentifyLanguageBtn"
-                                Width="100"
-                                Margin="15"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Bottom"
-                                Classes="accent"
-                                Content="→"
-                                DockPanel.Dock="Bottom" />
-                            <WrapPanel
-                                Name="Langs"
-                                Margin="15"
-                                DockPanel.Dock="Top">
-                                <ToggleButton
-                                    Margin="5"
-                                    Click="Button_Click"
-                                    IsChecked="True">
-                                    <StackPanel Margin="10,5">
-                                        <TextBlock HorizontalAlignment="Center" Text="zh-CN" />
-                                        <TextBlock HorizontalAlignment="Center" Text="{x:Static properties:MainLang.zh_CN}" />
-                                    </StackPanel>
-                                </ToggleButton>
-                                <ToggleButton Margin="5" Click="Button_Click">
-                                    <StackPanel Margin="10,5">
-                                        <TextBlock HorizontalAlignment="Center" Text="zh-Hant" />
-                                        <TextBlock HorizontalAlignment="Center" Text="{x:Static properties:MainLang.zh_Hant}" />
-                                    </StackPanel>
-                                </ToggleButton>
-                                <ToggleButton Margin="5" Click="Button_Click">
-                                    <StackPanel Margin="10,5">
-                                        <TextBlock HorizontalAlignment="Center" Text="en-US" />
-                                        <TextBlock HorizontalAlignment="Center" Text="{x:Static properties:MainLang.en_US}" />
-                                    </StackPanel>
-                                </ToggleButton>
-                                <ToggleButton Margin="5" Click="Button_Click">
-                                    <StackPanel Margin="10,5">
-                                        <TextBlock HorizontalAlignment="Center" Text="ja-JP" />
-                                        <TextBlock HorizontalAlignment="Center" Text="{x:Static properties:MainLang.ja_JP}" />
-                                    </StackPanel>
-                                </ToggleButton>
-                                <ToggleButton Margin="5" Click="Button_Click">
-                                    <StackPanel Margin="10,5">
-                                        <TextBlock HorizontalAlignment="Center" Text="ru-RU" />
-                                        <TextBlock HorizontalAlignment="Center" Text="{x:Static properties:MainLang.ru_RU}" />
-                                    </StackPanel>
-                                </ToggleButton>
-                            </WrapPanel>
-                        </DockPanel>
-                    </Border>
-                </Grid>
+                    IsCloseBtnExitApp="True"
+                    IsCloseBtnShow="True"
+                    IsMaxBtnShow="False" />
+                <ui:Frame Name="Frame" />
             </DockPanel>
         </Grid>
     </Border>

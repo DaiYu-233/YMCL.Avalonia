@@ -14,17 +14,17 @@
         <Setter Property="Template">
             <ControlTemplate>
                 <Border
+                    Name="bd"
                     Background="{TemplateBinding Background}"
                     BorderThickness="{TemplateBinding BorderThickness}"
-                    CornerRadius="5"
-                    Name="bd">
+                    CornerRadius="5">
                     <Path
+                        Name="ico"
+                        Width="10"
+                        Height="10"
                         Data="{TemplateBinding Content}"
                         Fill="{DynamicResource TextColor}"
-                        Height="10"
-                        Name="ico"
-                        Stretch="Uniform"
-                        Width="10" />
+                        Stretch="Uniform" />
                 </Border>
             </ControlTemplate>
         </Setter>
@@ -33,5 +33,8 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
     </Style>
 </Styles>

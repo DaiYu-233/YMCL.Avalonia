@@ -1,63 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
     <!-- 
-            Microsoft ResX Schema
-    
-            Version 1.3
-    
-            The primary goals of this format is to allow a simple XML format 
-            that is mostly human readable. The generation and parsing of the 
-            various data types are done through the TypeConverter classes 
-            associated with the data types.
-    
-            Example:
-    
-            ... ado.net/XML headers & schema ...
-            <resheader name="resmimetype">text/microsoft-resx</resheader>
-            <resheader name="version">1.3</resheader>
-            <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-            <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-            <data name="Name1">this is my long string</data>
-            <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-            <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-                [base64 mime encoded serialized .NET Framework object]
-            </data>
-            <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-                [base64 mime encoded string representing a byte array form of the .NET Framework object]
-            </data>
-    
-            There are any number of "resheader" rows that contain simple 
-            name/value pairs.
-    
-            Each data row contains a name, and value. The row also contains a 
-            type or mimetype. Type corresponds to a .NET class that support 
-            text/value conversion through the TypeConverter architecture. 
-            Classes that don't support this are serialized and stored with the 
-            mimetype set.
-    
-            The mimetype is used for serialized objects, and tells the 
-            ResXResourceReader how to depersist the object. This is currently not 
-            extensible. For a given mimetype the value must be set accordingly:
-    
-            Note - application/x-microsoft.net.object.binary.base64 is the format 
-            that the ResXResourceWriter will generate, however the reader can 
-            read any of the formats listed below.
-    
-            mimetype: application/x-microsoft.net.object.binary.base64
-            value   : The object must be serialized with 
-                : System.Serialization.Formatters.Binary.BinaryFormatter
-                : and then encoded with base64 encoding.
-    
-            mimetype: application/x-microsoft.net.object.soap.base64
-            value   : The object must be serialized with 
-                : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-                : and then encoded with base64 encoding.
-    
-            mimetype: application/x-microsoft.net.object.bytearray.base64
-            value   : The object must be serialized into a byte array 
-                : using a System.ComponentModel.TypeConverter
-                : and then encoded with base64 encoding.
-        -->
+              Microsoft ResX Schema
+      
+              Version 1.3
+      
+              The primary goals of this format is to allow a simple XML format 
+              that is mostly human readable. The generation and parsing of the 
+              various data types are done through the TypeConverter classes 
+              associated with the data types.
+      
+              Example:
+      
+              ... ado.net/XML headers & schema ...
+              <resheader name="resmimetype">text/microsoft-resx</resheader>
+              <resheader name="version">1.3</resheader>
+              <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+              <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+              <data name="Name1">this is my long string</data>
+              <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+              <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+                  [base64 mime encoded serialized .NET Framework object]
+              </data>
+              <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+                  [base64 mime encoded string representing a byte array form of the .NET Framework object]
+              </data>
+      
+              There are any number of "resheader" rows that contain simple 
+              name/value pairs.
+      
+              Each data row contains a name, and value. The row also contains a 
+              type or mimetype. Type corresponds to a .NET class that support 
+              text/value conversion through the TypeConverter architecture. 
+              Classes that don't support this are serialized and stored with the 
+              mimetype set.
+      
+              The mimetype is used for serialized objects, and tells the 
+              ResXResourceReader how to depersist the object. This is currently not 
+              extensible. For a given mimetype the value must be set accordingly:
+      
+              Note - application/x-microsoft.net.object.binary.base64 is the format 
+              that the ResXResourceWriter will generate, however the reader can 
+              read any of the formats listed below.
+      
+              mimetype: application/x-microsoft.net.object.binary.base64
+              value   : The object must be serialized with 
+                  : System.Serialization.Formatters.Binary.BinaryFormatter
+                  : and then encoded with base64 encoding.
+      
+              mimetype: application/x-microsoft.net.object.soap.base64
+              value   : The object must be serialized with 
+                  : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+                  : and then encoded with base64 encoding.
+      
+              mimetype: application/x-microsoft.net.object.bytearray.base64
+              value   : The object must be serialized into a byte array 
+                  : using a System.ComponentModel.TypeConverter
+                  : and then encoded with base64 encoding.
+          -->
     <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
                 id="root" xmlns="">
         <xsd:element name="root" msdata:IsDataSet="true">
@@ -338,8 +338,8 @@
     <value>自动安装</value>
   </data>
     <data name="LatestVersion" xml:space="preserve">
-    <value>最新版本</value>
-  </data>
+      <value>最新版本</value>
+    </data>
     <data name="PreviewVersion" xml:space="preserve">
     <value>预览版本</value>
   </data>
@@ -813,5 +813,69 @@ sudo apt install vlc</value>
     </data>
   <data name="MusicPlayerOnlySupportWindows" xml:space="preserve">
       <value>音乐播放器仅支持Windows</value>
+    </data>
+    <data name="LoadAudioFileFail" xml:space="preserve">
+      <value>加载音频文件失败</value>
+    </data>
+    <data name="LaunchCore" xml:space="preserve">
+      <value>启动核心</value>
+    </data>
+    <data name="AfterLaunchKeepLauncherVisible" xml:space="preserve">
+      <value>启动完成后保持不变</value>
+    </data>
+    <data name="AfterLaunchMakeLauncherMinimize" xml:space="preserve">
+      <value>启动完成后最小化</value>
+    </data>
+    <data name="AfterLaunchExitLauncher" xml:space="preserve">
+      <value>启动完成后关闭</value>
+    </data>
+    <data name="AfterLaunchHideAndShowWhenGameExit" xml:space="preserve">
+      <value>启动完成后隐藏，游戏退出后显示</value>
+    </data>
+    <data name="LauncherVisibility" xml:space="preserve">
+      <value>启动器可见性</value>
+    </data>
+    <data name="AfterLaunchMinimizeAndShowWhenGameExit" xml:space="preserve">
+      <value>启动完成后最小化，游戏退出后显示</value>
+    </data>
+    <data name="UnofficialTip" xml:space="preserve">
+      <value>当前版本为非官方版本，可能遭受病毒攻击。
+重定向至 https://ymcl.daiyu.fun/ 下载官方版本。</value>
+    </data>
+    <data name="LanguageTip" xml:space="preserve">
+      <value>在开始设置 Yu Minecraft Launcher 前，需要选择语言。</value>
+    </data>
+    <data name="RightArrow" xml:space="preserve">
+      <value>→</value>
+    </data>
+    <data name="Account" xml:space="preserve">
+      <value>账户</value>
+    </data>
+    <data name="LeftArrow" xml:space="preserve">
+      <value>←</value>
+    </data>
+    <data name="WindowTitleBarStyleTip" xml:space="preserve">
+    <value>设置启动器窗口标题栏的样式，在特定情况启动器样式不受支持。</value>
+  </data>
+    <data name="SystemStyle" xml:space="preserve">
+      <value>系统样式</value>
+    </data>
+    <data name="LauncherStyle" xml:space="preserve">
+      <value>启动器样式</value>
+    </data>
+    <data name="MinecraftFolderTip" xml:space="preserve">
+      <value>存放Minecraft数据的文件夹 (.minecraft)</value>
+    </data>
+    <data name="ExistingNow" xml:space="preserve">
+      <value>现有的</value>
+    </data>
+    <data name="JavaRuntime" xml:space="preserve">
+      <value>Java运行时</value>
+    </data>
+    <data name="JavaRuntimeTip" xml:space="preserve">
+      <value>启动游戏至少需要一个Java运行时。</value>
+    </data>
+    <data name="AccountTip" xml:space="preserve">
+      <value>启动游戏至少需要一个账户，如使用离线账户将无法登入有正版验证的服务器。</value>
     </data>
 </root>

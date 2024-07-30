@@ -193,6 +193,48 @@ public class Method
             }
         }
 
+        public static void CheckLauncher()
+        {
+            async void UnofficialToast()
+            {
+                await Method.Ui.ShowDialogAsync("Error !", MainLang.UnofficialTip);
+                UnofficialToast();
+            }
+
+            var name = Const.Window.main.settingPage.launcherSettingPage.Version.Text;
+            var author = Const.Window.main.settingPage.launcherSettingPage.AuthorLabel.Content;
+            Task.Run(async () =>
+            {
+                string url = "https://player.daiyu.fun/a.json";
+                HttpClient client = new HttpClient();
+
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync(url);
+                    response.EnsureSuccessStatusCode();
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    var list = JsonConvert.DeserializeObject<List<string>>(responseBody);
+                    foreach (var se in list)
+                    {
+                        if (se.Equals(name))
+                        {
+                            Dispatcher.UIThread.Invoke(
+                                () => { UnofficialToast(); });
+                        }
+
+                        if (se.Equals(author))
+                        {
+                            Dispatcher.UIThread.Invoke(
+                                () => { UnofficialToast(); });
+                        }
+                    }
+                }
+                catch
+                {
+                }
+            });
+        }
+
         public static void ShowShortException(string msg, Exception ex)
         {
             Toast($"{msg}\n{ex.Message}", Const.Notification.main, NotificationType.Error);
@@ -788,7 +830,8 @@ public class Method
             {
                 var str = string.Empty;
                 foreach (Match match in matches) str += match.Value;
-
+                Ui.Toast($"{MainLang.IncludeSpecialWord}: {str}", Const.Notification.main,
+                    NotificationType.Error);
                 return false;
             }
 
@@ -1381,6 +1424,14 @@ public class Method
                         {
                             await Dispatcher.UIThread.InvokeAsync(async () =>
                             {
+                                if (setting.LauncherVisibility !=
+                                    LauncherVisibility.AfterLaunchMakeLauncherMinimize)
+                                {
+                                    Const.Window.main.Show();
+                                    Const.Window.main.WindowState = WindowState.Normal;
+                                    Const.Window.main.Activate();
+                                }
+                                
                                 Ui.Toast($"{MainLang.GameExited}: {args.ExitCode}", Const.Notification.main);
 
                                 if (args.ExitCode == 0)
@@ -1446,6 +1497,27 @@ public class Method
                         _ = Task.Run(async () =>
                         {
                             watcher.Process.WaitForInputIdle();
+
+                            Dispatcher.UIThread.Invoke(() =>
+                            {
+                                switch (setting.LauncherVisibility)
+                                {
+                                    case LauncherVisibility.AfterLaunchExitLauncher:
+                                        Environment.Exit(0);
+                                        break;
+                                    case LauncherVisibility.AfterLaunchMakeLauncherMinimize:
+                                    case LauncherVisibility.AfterLaunchMinimizeAndShowWhenGameExit:
+                                        Const.Window.main.WindowState = WindowState.Minimized;
+                                        break;
+                                    case LauncherVisibility.AfterLaunchHideAndShowWhenGameExit:
+                                        Const.Window.main.Hide();
+                                        break;
+                                    case LauncherVisibility.AfterLaunchKeepLauncherVisible:
+                                    default:
+                                        break;
+                                }
+                            });
+                            
                             if (!setting.ShowGameOutput)
                                 await Dispatcher.UIThread.InvokeAsync(() => { task.Hide(); });
                         });
@@ -1716,17 +1788,6 @@ public class Method
                 return false;
             }
 
-            /*  var config = new LaunchConfig
-              {
-                  JvmConfig = new JvmConfig(l_javaPath)
-                  {
-                      MaxMemory = Convert.ToInt32(l_maxMem)
-                  },
-                  IsEnableIndependencyCore = l_enableIndependencyCore,
-                  LauncherName = "YMCL",
-                  ServerConfig = new ServerConfig(l_port, l_ip)
-              };*/
-
             var config = new StarLight_Core.Models.Launch.LaunchConfig()
             {
                 GameCoreConfig = new GameCoreConfig()
@@ -1752,8 +1813,6 @@ public class Method
                 task.Destory();
                 return false;
             }
-
-            //Launcher launcher = new(gameResolver, config);
 
             var launcher = new MinecraftLauncher(config);
 
@@ -1817,6 +1876,27 @@ public class Method
                         _ = Task.Run(async () =>
                         {
                             watcher.Process.WaitForInputIdle();
+
+                            Dispatcher.UIThread.Invoke(() =>
+                            {
+                                switch (setting.LauncherVisibility)
+                                {
+                                    case LauncherVisibility.AfterLaunchExitLauncher:
+                                        Environment.Exit(0);
+                                        break;
+                                    case LauncherVisibility.AfterLaunchMakeLauncherMinimize:
+                                    case LauncherVisibility.AfterLaunchMinimizeAndShowWhenGameExit:
+                                        Const.Window.main.WindowState = WindowState.Minimized;
+                                        break;
+                                    case LauncherVisibility.AfterLaunchHideAndShowWhenGameExit:
+                                        Const.Window.main.Hide();
+                                        break;
+                                    case LauncherVisibility.AfterLaunchKeepLauncherVisible:
+                                    default:
+                                        break;
+                                }
+                            });
+                            
                             if (!setting.ShowGameOutput)
                                 await Dispatcher.UIThread.InvokeAsync(() => { task.Hide(); });
                         });
@@ -1826,6 +1906,14 @@ public class Method
                             {
                                 await Dispatcher.UIThread.InvokeAsync(() =>
                                 {
+                                    if (setting.LauncherVisibility !=
+                                        LauncherVisibility.AfterLaunchMakeLauncherMinimize)
+                                    {
+                                        Const.Window.main.Show();
+                                        Const.Window.main.WindowState = WindowState.Normal;
+                                        Const.Window.main.Activate();
+                                    }
+                                    
                                     Ui.Toast($"{MainLang.GameExited}", Const.Notification.main);
                                     task.Destory();
                                 });

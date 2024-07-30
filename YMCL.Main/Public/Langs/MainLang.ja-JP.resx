@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <!-- 
+  <!-- 
         Microsoft ResX Schema 
         
         Version 2.0
@@ -59,734 +59,842 @@
                 : using a System.ComponentModel.TypeConverter
                 : and then encoded with base64 encoding.
         -->
-    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
-                id="root" xmlns="">
-        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
-        <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root" xmlns="">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
             <xsd:complexType>
-                <xsd:choice maxOccurs="unbounded">
-                    <xsd:element name="metadata">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
-                            </xsd:sequence>
-                            <xsd:attribute name="name" use="required" type="xsd:string"/>
-                            <xsd:attribute name="type" type="xsd:string"/>
-                            <xsd:attribute name="mimetype" type="xsd:string"/>
-                            <xsd:attribute ref="xml:space"/>
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="assembly">
-                        <xsd:complexType>
-                            <xsd:attribute name="alias" type="xsd:string"/>
-                            <xsd:attribute name="name" type="xsd:string"/>
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="data">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
-                            </xsd:sequence>
-                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-                            <xsd:attribute ref="xml:space"/>
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="resheader">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                            </xsd:sequence>
-                            <xsd:attribute name="name" type="xsd:string" use="required"/>
-                        </xsd:complexType>
-                    </xsd:element>
-                </xsd:choice>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
-        </xsd:element>
-    </xsd:schema>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>2.0</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089
         </value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
             PublicKeyToken=b77a5c561934e089
         </value>
-    </resheader>
-    <data name="NavLaunch" xml:space="preserve">
+  </resheader>
+  <data name="NavLaunch" xml:space="preserve">
     <value> 起動</value>
   </data>
-    <data name="NavSetting" xml:space="preserve">
+  <data name="NavSetting" xml:space="preserve">
     <value> 設定</value>
   </data>
-    <data name="NavDownload" xml:space="preserve">
+  <data name="NavDownload" xml:space="preserve">
     <value> ダウンロード</value>
   </data>
-    <data name="NavMore" xml:space="preserve">
+  <data name="NavMore" xml:space="preserve">
     <value> より多く</value>
   </data>
-    <data name="NavMusic" xml:space="preserve">
+  <data name="NavMusic" xml:space="preserve">
     <value> 音楽</value>
   </data>
-    <data name="Launch" xml:space="preserve">
+  <data name="Launch" xml:space="preserve">
     <value>起動</value>
   </data>
-    <data name="MinecraftFolder" xml:space="preserve">
+  <data name="MinecraftFolder" xml:space="preserve">
     <value>Minecraftフォルダー</value>
   </data>
-    <data name="DelSeletedItem" xml:space="preserve">
+  <data name="DelSeletedItem" xml:space="preserve">
     <value>選択したものを削除</value>
   </data>
-    <data name="AddFolder" xml:space="preserve">
+  <data name="AddFolder" xml:space="preserve">
     <value>フォルダーを追加</value>
   </data>
-    <data name="SelectMinecraftFolder" xml:space="preserve">
+  <data name="SelectMinecraftFolder" xml:space="preserve">
     <value>'.minecraft'フォルダーを選択します</value>
   </data>
-    <data name="NeedToSelectMinecraftFolder" xml:space="preserve">
+  <data name="NeedToSelectMinecraftFolder" xml:space="preserve">
     <value>'.minecraft 'フォルダーを選択する必要があります</value>
   </data>
-    <data name="SuccessAdd" xml:space="preserve">
+  <data name="SuccessAdd" xml:space="preserve">
     <value>正常に追加されました</value>
   </data>
-    <data name="TheItemAlreadyExist" xml:space="preserve">
+  <data name="TheItemAlreadyExist" xml:space="preserve">
     <value>このアイテムはすでに存在します</value>
   </data>
-    <data name="SuccessRemove" xml:space="preserve">
+  <data name="SuccessRemove" xml:space="preserve">
     <value>削除に成功しました</value>
   </data>
-    <data name="AutoScan" xml:space="preserve">
+  <data name="AutoScan" xml:space="preserve">
     <value>自動スキャン</value>
   </data>
-    <data name="LetYMCLChooseJava" xml:space="preserve">
+  <data name="LetYMCLChooseJava" xml:space="preserve">
     <value>YMCLに適切なJavaを選ばせましょう</value>
   </data>
-    <data name="ScanJavaSuccess" xml:space="preserve">
+  <data name="ScanJavaSuccess" xml:space="preserve">
     <value>Javaのスキャンに成功しました</value>
   </data>
-    <data name="RepeatItem" xml:space="preserve">
+  <data name="RepeatItem" xml:space="preserve">
     <value>アイテムが重複しています</value>
   </data>
-    <data name="NavLauncher" xml:space="preserve">
+  <data name="NavLauncher" xml:space="preserve">
     <value> ランチャー</value>
   </data>
-    <data name="OpenFileWay" xml:space="preserve">
+  <data name="OpenFileWay" xml:space="preserve">
     <value>ファイルを開く方法</value>
   </data>
-    <data name="FileSelectWindow" xml:space="preserve">
+  <data name="FileSelectWindow" xml:space="preserve">
     <value>ファイル選択ウィンドウ</value>
   </data>
-    <data name="ManualInput" xml:space="preserve">
+  <data name="ManualInput" xml:space="preserve">
     <value>手動入力</value>
   </data>
-    <data name="YggdrasilServerUrlIsEmpty" xml:space="preserve">
+  <data name="YggdrasilServerUrlIsEmpty" xml:space="preserve">
     <value>検証サーバーを空にすることはできません</value>
   </data>
-    <data name="YggdrasilPasswordIsEmpty" xml:space="preserve">
+  <data name="YggdrasilPasswordIsEmpty" xml:space="preserve">
     <value>パスワードを空にすることはできません</value>
   </data>
-    <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
+  <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
     <value>メールアドレスを空にすることはできません</value>
   </data>
-    <data name="Ok" xml:space="preserve">
+  <data name="Ok" xml:space="preserve">
     <value>確認</value>
   </data>
-    <data name="Cancel" xml:space="preserve">
+  <data name="Cancel" xml:space="preserve">
     <value>キャンセル</value>
   </data>
-    <data name="InputFolderPath" xml:space="preserve">
+  <data name="InputFolderPath" xml:space="preserve">
     <value>フォルダパスを入力してください</value>
   </data>
-    <data name="FolderNotExist" xml:space="preserve">
+  <data name="FolderNotExist" xml:space="preserve">
     <value>ディレクトリはありません</value>
   </data>
-    <data name="InputFilePath" xml:space="preserve">
+  <data name="InputFilePath" xml:space="preserve">
     <value>ファイルパスを入力してください</value>
   </data>
-    <data name="FileNotExist" xml:space="preserve">
+  <data name="FileNotExist" xml:space="preserve">
     <value>ファイルが存在しません。ローカルファイルの場所を確認してください</value>
   </data>
-    <data name="ManualAdd" xml:space="preserve">
+  <data name="ManualAdd" xml:space="preserve">
     <value>手動で追加してください</value>
   </data>
-    <data name="SelectJava" xml:space="preserve">
+  <data name="SelectJava" xml:space="preserve">
     <value>Javaを選択してください</value>
   </data>
-    <data name="TheJavaIsError" xml:space="preserve">
+  <data name="TheJavaIsError" xml:space="preserve">
     <value>Javaが正しくありません</value>
   </data>
-    <data name="NavAccount" xml:space="preserve">
+  <data name="NavAccount" xml:space="preserve">
     <value> アカウント</value>
   </data>
-    <data name="AddNewAccount" xml:space="preserve">
+  <data name="AddNewAccount" xml:space="preserve">
     <value>新しいアカウントを追加</value>
   </data>
-    <data name="OfflineLogin" xml:space="preserve">
+  <data name="OfflineLogin" xml:space="preserve">
     <value>オフラインでログイン</value>
   </data>
-    <data name="MicrosoftLogin" xml:space="preserve">
+  <data name="MicrosoftLogin" xml:space="preserve">
     <value>Microsoftログイン</value>
   </data>
-    <data name="ThirdPartyLogin" xml:space="preserve">
+  <data name="ThirdPartyLogin" xml:space="preserve">
     <value>サードパーティのログイン</value>
   </data>
-    <data name="SelectAccountType" xml:space="preserve">
+  <data name="SelectAccountType" xml:space="preserve">
     <value>アカウントの種類を選択してください</value>
   </data>
-    <data name="AccountNameCannotBeNull" xml:space="preserve">
+  <data name="AccountNameCannotBeNull" xml:space="preserve">
     <value>アカウント名を空白にすることはできません</value>
   </data>
-    <data name="InputAccountName" xml:space="preserve">
+  <data name="InputAccountName" xml:space="preserve">
     <value>アカウント名を入力してください</value>
   </data>
-    <data name="VerificationCode" xml:space="preserve">
+  <data name="VerificationCode" xml:space="preserve">
     <value>コードを確認してください</value>
   </data>
-    <data name="Loading" xml:space="preserve">
+  <data name="Loading" xml:space="preserve">
     <value>読み込み中...</value>
   </data>
-    <data name="WaitForMicrosoftVerification" xml:space="preserve">
+  <data name="WaitForMicrosoftVerification" xml:space="preserve">
     <value>Microsoftアカウントの認証が完了するのを待っています
 ブラウザに移動して認証を完了してください</value>
   </data>
-    <data name="LoginFail" xml:space="preserve">
+  <data name="LoginFail" xml:space="preserve">
     <value>ログイン失敗</value>
   </data>
-    <data name="VerifyingAccount" xml:space="preserve">
+  <data name="VerifyingAccount" xml:space="preserve">
     <value>アカウントを認証しています</value>
   </data>
-    <data name="VerificationServer" xml:space="preserve">
+  <data name="VerificationServer" xml:space="preserve">
     <value>認証サーバー</value>
   </data>
-    <data name="EmailAddress" xml:space="preserve">
+  <data name="EmailAddress" xml:space="preserve">
     <value>メールアドレス</value>
   </data>
-    <data name="AccountPassword" xml:space="preserve">
+  <data name="AccountPassword" xml:space="preserve">
     <value>アカウントパスワード</value>
   </data>
-    <data name="NavPersonalize" xml:space="preserve">
+  <data name="NavPersonalize" xml:space="preserve">
     <value> パーソナライズ</value>
   </data>
-    <data name="Language" xml:space="preserve">
+  <data name="Language" xml:space="preserve">
     <value>言語</value>
   </data>
-    <data name="ColorMode" xml:space="preserve">
+  <data name="ColorMode" xml:space="preserve">
     <value>カラーモード</value>
   </data>
-    <data name="FollowSystem" xml:space="preserve">
+  <data name="FollowSystem" xml:space="preserve">
     <value>システムに従う</value>
   </data>
-    <data name="Light" xml:space="preserve">
+  <data name="Light" xml:space="preserve">
     <value>ライト</value>
   </data>
-    <data name="Dark" xml:space="preserve">
+  <data name="Dark" xml:space="preserve">
     <value>深い色合い</value>
   </data>
-    <data name="MaxMem" xml:space="preserve">
+  <data name="MaxMem" xml:space="preserve">
     <value>最大メモリ</value>
   </data>
-    <data name="CannotOpenBrowser" xml:space="preserve">
+  <data name="CannotOpenBrowser" xml:space="preserve">
     <value>ブラウザを開けません</value>
   </data>
-    <data name="ManualOpen" xml:space="preserve">
+  <data name="ManualOpen" xml:space="preserve">
     <value>手動で開きます</value>
   </data>
-    <data name="VersionList" xml:space="preserve">
+  <data name="VersionList" xml:space="preserve">
     <value>バージョンリスト</value>
   </data>
-    <data name="VersionSetting" xml:space="preserve">
+  <data name="VersionSetting" xml:space="preserve">
     <value>バージョン設定</value>
   </data>
-    <data name="LaunchGame" xml:space="preserve">
+  <data name="LaunchGame" xml:space="preserve">
     <value>ゲームを起動してください</value>
   </data>
-    <data name="NoChooseGame" xml:space="preserve">
+  <data name="NoChooseGame" xml:space="preserve">
     <value>ゲームが選択されていません</value>
   </data>
-    <data name="ReturnWithIcon" xml:space="preserve">
+  <data name="ReturnWithIcon" xml:space="preserve">
     <value>← 戻る</value>
   </data>
-    <data name="CreateGameEntryFail" xml:space="preserve">
+  <data name="CreateGameEntryFail" xml:space="preserve">
     <value>ゲームインスタンスの作成に失敗しました</value>
   </data>
-    <data name="NoChooseGameOrCannotFindGame" xml:space="preserve">
+  <data name="NoChooseGameOrCannotFindGame" xml:space="preserve">
     <value>ゲームが選択されていないか、見つかりませんでした</value>
   </data>
-    <data name="AccountError" xml:space="preserve">
+  <data name="AccountError" xml:space="preserve">
     <value>アカウントエラー</value>
   </data>
-    <data name="LaunchProgress" xml:space="preserve">
+  <data name="LaunchProgress" xml:space="preserve">
     <value>ローンチの進行状況</value>
   </data>
-    <data name="BuildLaunchConfigFail" xml:space="preserve">
+  <data name="BuildLaunchConfigFail" xml:space="preserve">
     <value>スタートアップ構成の構築に失敗しました</value>
   </data>
-    <data name="GameExited" xml:space="preserve">
+  <data name="GameExited" xml:space="preserve">
     <value>ゲームが終了しました</value>
   </data>
-    <data name="WaitForGameWindowAppear" xml:space="preserve">
+  <data name="WaitForGameWindowAppear" xml:space="preserve">
     <value>ゲームウィンドウが表示されるまでお待ちください</value>
   </data>
-    <data name="LaunchFinish" xml:space="preserve">
+  <data name="LaunchFinish" xml:space="preserve">
     <value>スタートアップが完了しました</value>
   </data>
-    <data name="LaunchFail" xml:space="preserve">
+  <data name="LaunchFail" xml:space="preserve">
     <value>起動に失敗しました</value>
   </data>
-    <data name="CopyCodeAndOPenBrowser" xml:space="preserve">
+  <data name="CopyCodeAndOPenBrowser" xml:space="preserve">
     <value>コードをコピーしてブラウザを開きます</value>
   </data>
-    <data name="CopyUrlAndManualOpen" xml:space="preserve">
+  <data name="CopyUrlAndManualOpen" xml:space="preserve">
     <value>Ctrl + C 次のリンクをコピーしてブラウザに貼り付けてください</value>
   </data>
-    <data name="UserDataFolder" xml:space="preserve">
+  <data name="UserDataFolder" xml:space="preserve">
     <value>ユーザーデータフォルダ</value>
   </data>
-    <data name="OpenFolder" xml:space="preserve">
+  <data name="OpenFolder" xml:space="preserve">
     <value>フォルダーを開きます</value>
   </data>
-    <data name="AutoInstall" xml:space="preserve">
+  <data name="AutoInstall" xml:space="preserve">
     <value>自動インストール</value>
   </data>
-    <data name="LatestVersion" xml:space="preserve">
+  <data name="LatestVersion" xml:space="preserve">
     <value>最新バージョン</value>
   </data>
-    <data name="PreviewVersion" xml:space="preserve">
+  <data name="PreviewVersion" xml:space="preserve">
     <value>プレビュー版</value>
   </data>
-    <data name="ReleaseVersion" xml:space="preserve">
+  <data name="ReleaseVersion" xml:space="preserve">
     <value>公式リリース</value>
   </data>
-    <data name="GetInstallableVersionFail" xml:space="preserve">
+  <data name="GetInstallableVersionFail" xml:space="preserve">
     <value>インストール可能なリストの取得に失敗しました</value>
   </data>
-    <data name="OldVersion" xml:space="preserve">
+  <data name="OldVersion" xml:space="preserve">
     <value>古代バージョン</value>
   </data>
-    <data name="AllVersion" xml:space="preserve">
+  <data name="AllVersion" xml:space="preserve">
     <value>すべてのバージョン</value>
   </data>
-    <data name="SearchKeyword" xml:space="preserve">
+  <data name="SearchKeyword" xml:space="preserve">
     <value>キーワードを検索...</value>
   </data>
-    <data name="InstallPreview" xml:space="preserve">
+  <data name="InstallPreview" xml:space="preserve">
     <value>プレビューをインストール</value>
   </data>
-    <data name="NoAdditionalInstall" xml:space="preserve">
+  <data name="NoAdditionalInstall" xml:space="preserve">
     <value>追加のインストールはありません</value>
   </data>
-    <data name="BeginInstall" xml:space="preserve">
+  <data name="BeginInstall" xml:space="preserve">
     <value>インストールを開始してください</value>
   </data>
-    <data name="ViewUpdatedContent" xml:space="preserve">
+  <data name="ViewUpdatedContent" xml:space="preserve">
     <value>新着情報をチェック</value>
   </data>
-    <data name="Reload" xml:space="preserve">
+  <data name="Reload" xml:space="preserve">
     <value>リロード</value>
   </data>
-    <data name="GetFail" xml:space="preserve">
+  <data name="GetFail" xml:space="preserve">
     <value>取得に失敗しました</value>
   </data>
-    <data name="NoAvailableItem" xml:space="preserve">
+  <data name="NoAvailableItem" xml:space="preserve">
     <value>利用可能なアイテムがありません</value>
   </data>
-    <data name="MineratCrashed" xml:space="preserve">
+  <data name="MineratCrashed" xml:space="preserve">
     <value>マインクラットが墜落しました</value>
   </data>
-    <data name="TheVersionNameWillBeRenamedTo" xml:space="preserve">
+  <data name="TheVersionNameWillBeRenamedTo" xml:space="preserve">
     <value>バージョン名は次の名前に変更されます: </value>
   </data>
-    <data name="IncludeSpecialWord" xml:space="preserve">
+  <data name="IncludeSpecialWord" xml:space="preserve">
     <value>スペシャルキャラクター入り</value>
   </data>
-    <data name="FolderAlreadyExists" xml:space="preserve">
+  <data name="FolderAlreadyExists" xml:space="preserve">
     <value>フォルダーは既に存在します</value>
   </data>
-    <data name="InstallFail" xml:space="preserve">
+  <data name="InstallFail" xml:space="preserve">
     <value>インストール失敗</value>
   </data>
-    <data name="Install" xml:space="preserve">
+  <data name="Install" xml:space="preserve">
     <value>インストール</value>
   </data>
-    <data name="InstallFinish" xml:space="preserve">
+  <data name="InstallFinish" xml:space="preserve">
     <value>インストールが完了しました</value>
   </data>
-    <data name="CannotFandRightJava" xml:space="preserve">
+  <data name="CannotFandRightJava" xml:space="preserve">
     <value>適切なJavaが見つかりませんでした</value>
   </data>
-    <data name="Refresh" xml:space="preserve">
+  <data name="Refresh" xml:space="preserve">
     <value>リフレッシュ</value>
   </data>
-    <data name="Mod" xml:space="preserve">
+  <data name="Mod" xml:space="preserve">
     <value>モッド</value>
   </data>
-    <data name="Overview" xml:space="preserve">
+  <data name="Overview" xml:space="preserve">
     <value>概要</value>
   </data>
-    <data name="Setting" xml:space="preserve">
+  <data name="Setting" xml:space="preserve">
     <value>設定</value>
   </data>
-    <data name="SavesFolder" xml:space="preserve">
+  <data name="SavesFolder" xml:space="preserve">
     <value>アーカイブフォルダ</value>
   </data>
-    <data name="ModsFolder" xml:space="preserve">
+  <data name="ModsFolder" xml:space="preserve">
     <value>モジュールフォルダ</value>
   </data>
-    <data name="ResourcepacksFolder" xml:space="preserve">
+  <data name="ResourcepacksFolder" xml:space="preserve">
     <value>資源パックフォルダ</value>
   </data>
-    <data name="ShaderpacksFolder" xml:space="preserve">
+  <data name="ShaderpacksFolder" xml:space="preserve">
     <value>ライトパックフォルダ</value>
   </data>
-    <data name="VersionFolder" xml:space="preserve">
+  <data name="VersionFolder" xml:space="preserve">
     <value>バージョンフォルダ</value>
   </data>
-    <data name="EnableIndependencyCore" xml:space="preserve">
+  <data name="EnableIndependencyCore" xml:space="preserve">
     <value>スタンドアロンコアを有効にします</value>
   </data>
-    <data name="UseGlobalSetting" xml:space="preserve">
+  <data name="UseGlobalSetting" xml:space="preserve">
     <value>グローバル設定を使用</value>
   </data>
-    <data name="Off" xml:space="preserve">
+  <data name="Off" xml:space="preserve">
     <value>閉じる</value>
   </data>
-    <data name="On" xml:space="preserve">
+  <data name="On" xml:space="preserve">
     <value>開放する</value>
   </data>
-    <data name="AutoJoinServer" xml:space="preserve">
+  <data name="AutoJoinServer" xml:space="preserve">
     <value>サーバーに自動的に参加します</value>
   </data>
-    <data name="EnableSelect" xml:space="preserve">
+  <data name="EnableSelect" xml:space="preserve">
     <value>チェックを有効にします</value>
   </data>
-    <data name="DisableSelect" xml:space="preserve">
+  <data name="DisableSelect" xml:space="preserve">
     <value>選択したものを無効にします</value>
   </data>
-    <data name="DeleteSelect" xml:space="preserve">
+  <data name="DeleteSelect" xml:space="preserve">
     <value>選択したものを削除</value>
   </data>
-    <data name="SelectAll" xml:space="preserve">
+  <data name="SelectAll" xml:space="preserve">
     <value>すべて選択</value>
   </data>
-    <data name="DeselectAll" xml:space="preserve">
+  <data name="DeselectAll" xml:space="preserve">
     <value>何も選択しないでください</value>
   </data>
-    <data name="SelectedItem" xml:space="preserve">
+  <data name="SelectedItem" xml:space="preserve">
     <value>選択したアイテム: </value>
   </data>
-    <data name="OpenSourceProjectUsageTable" xml:space="preserve">
+  <data name="OpenSourceProjectUsageTable" xml:space="preserve">
     <value>オープンソースプロジェクト使用シート</value>
   </data>
-    <data name="MoveToRecycleBin" xml:space="preserve">
+  <data name="MoveToRecycleBin" xml:space="preserve">
     <value>ゴミ箱に移動</value>
   </data>
-    <data name="WindowTitleBarStyle" xml:space="preserve">
+  <data name="WindowTitleBarStyle" xml:space="preserve">
     <value>ウィンドウタイトルバーのスタイル</value>
   </data>
-    <data name="GetException" xml:space="preserve">
+  <data name="GetException" xml:space="preserve">
     <value>異常があります</value>
   </data>
-    <data name="UnhandledException" xml:space="preserve">
+  <data name="UnhandledException" xml:space="preserve">
     <value>未処理の例外</value>
   </data>
-    <data name="CustomHomePage" xml:space="preserve">
+  <data name="CustomHomePage" xml:space="preserve">
     <value>メインページをカスタマイズしましょう</value>
   </data>
-    <data name="LocalSourceCode" xml:space="preserve">
+  <data name="LocalSourceCode" xml:space="preserve">
     <value>ローカルソースコード</value>
   </data>
-    <data name="Edit" xml:space="preserve">
+  <data name="Edit" xml:space="preserve">
     <value>編集</value>
   </data>
-    <data name="CustomHomePageSourceCodeError" xml:space="preserve">
+  <data name="CustomHomePageSourceCodeError" xml:space="preserve">
     <value>カスタムメインページソースコードエラー</value>
   </data>
-    <data name="CheckUpdate" xml:space="preserve">
+  <data name="CheckUpdate" xml:space="preserve">
     <value>アップデートを確認する</value>
   </data>
-    <data name="ChooseArchitecture" xml:space="preserve">
+  <data name="ChooseArchitecture" xml:space="preserve">
     <value>プラットフォームを選択してください</value>
   </data>
-    <data name="CheckUpdateFail" xml:space="preserve">
+  <data name="CheckUpdateFail" xml:space="preserve">
     <value>アップデートの確認に失敗しました</value>
   </data>
-    <data name="FoundNewVersion" xml:space="preserve">
+  <data name="FoundNewVersion" xml:space="preserve">
     <value>新しいバージョンを発見する</value>
   </data>
-    <data name="GetUpdateUrl" xml:space="preserve">
+  <data name="GetUpdateUrl" xml:space="preserve">
     <value>更新された統一資源ロケーターをゲット</value>
   </data>
-    <data name="BeginDownload" xml:space="preserve">
+  <data name="BeginDownload" xml:space="preserve">
     <value>ダウンロードを開始してください</value>
   </data>
-    <data name="UpdateFail" xml:space="preserve">
+  <data name="UpdateFail" xml:space="preserve">
     <value>更新に失敗しました</value>
   </data>
-    <data name="ThisArchitectureCannotAutoUpdate" xml:space="preserve">
+  <data name="ThisArchitectureCannotAutoUpdate" xml:space="preserve">
     <value>このプラットフォームは自動更新をサポートしていません。次のパスを開いて手動で交換してください</value>
   </data>
-    <data name="Update" xml:space="preserve">
+  <data name="Update" xml:space="preserve">
     <value>更新</value>
   </data>
-    <data name="DownloadFinish" xml:space="preserve">
+  <data name="DownloadFinish" xml:space="preserve">
     <value>ダウンロードが完了しました</value>
   </data>
-    <data name="CurrentlyTheLatestVersion" xml:space="preserve">
+  <data name="CurrentlyTheLatestVersion" xml:space="preserve">
     <value>現在のバージョンは最新です</value>
   </data>
-    <data name="ShowGameOutput" xml:space="preserve">
+  <data name="ShowGameOutput" xml:space="preserve">
     <value>ゲーム出力を表示</value>
   </data>
-    <data name="zh_CN" xml:space="preserve">
+  <data name="zh_CN" xml:space="preserve">
     <value>简体中文</value>
   </data>
-    <data name="zh_Hant" xml:space="preserve">
+  <data name="zh_Hant" xml:space="preserve">
     <value>繁體中文</value>
   </data>
-    <data name="en_US" xml:space="preserve">
+  <data name="en_US" xml:space="preserve">
     <value>English</value>
   </data>
-    <data name="ja_JP" xml:space="preserve">
+  <data name="ja_JP" xml:space="preserve">
     <value>日本語</value>
   </data>
-    <data name="ru_RU" xml:space="preserve">
+  <data name="ru_RU" xml:space="preserve">
     <value>Русский язык</value>
   </data>
-    <data name="ChooseLanguage" xml:space="preserve">
+  <data name="ChooseLanguage" xml:space="preserve">
     <value>选择语言/Choose Language</value>
   </data>
-    <data name="GPL3Text" xml:space="preserve">
+  <data name="GPL3Text" xml:space="preserve">
     <value>YMCLはApacheライセンスの下でオープンソースであり、変更および配布することができますが、ソフトウェアには元のコードの著作権およびライセンス通知、およびライセンス情報を含む通知ファイルが含まれている必要があります。</value>
   </data>
-    <data name="Search" xml:space="preserve">
+  <data name="Search" xml:space="preserve">
     <value>検索</value>
   </data>
-    <data name="LoadMore" xml:space="preserve">
+  <data name="LoadMore" xml:space="preserve">
     <value>もっと読み込む</value>
   </data>
-    <data name="ErrorCallingApi" xml:space="preserve">
+  <data name="ErrorCallingApi" xml:space="preserve">
     <value>Apiの呼び出し中にエラーが発生しました</value>
   </data>
-    <data name="SearchNoResult" xml:space="preserve">
+  <data name="SearchNoResult" xml:space="preserve">
     <value>結果が見つかりません</value>
   </data>
-    <data name="AddLocalSong" xml:space="preserve">
+  <data name="AddLocalSong" xml:space="preserve">
     <value>オーディオファイルを追加</value>
   </data>
-    <data name="SelectMusicFile" xml:space="preserve">
+  <data name="SelectMusicFile" xml:space="preserve">
     <value>オーディオファイルを選択してください</value>
   </data>
-    <data name="ThemeColor" xml:space="preserve">
+  <data name="ThemeColor" xml:space="preserve">
     <value>テーマカラー</value>
   </data>
-    <data name="InitAudioLibraryFail" xml:space="preserve">
+  <data name="InitAudioLibraryFail" xml:space="preserve">
     <value>オーディオライブラリの初期化に失敗しました</value>
   </data>
-    <data name="InstallVlcTip" xml:space="preserve">
+  <data name="InstallVlcTip" xml:space="preserve">
     <value>実行を試みます： 
 
 sudo apt install libvlc - dev
 sudo apt install vlc</value>
   </data>
-    <data name="ThisFeatureIsCurrentlyUnderDevelopment" xml:space="preserve">
+  <data name="ThisFeatureIsCurrentlyUnderDevelopment" xml:space="preserve">
     <value>この機能は開発中です</value>
   </data>
-    <data name="TreasureBox" xml:space="preserve">
+  <data name="TreasureBox" xml:space="preserve">
     <value>宝箱</value>
   </data>
-    <data name="ActivateWinOffice" xml:space="preserve">
+  <data name="ActivateWinOffice" xml:space="preserve">
     <value>Windows/Officeを有効にしてください</value>
   </data>
-    <data name="Run" xml:space="preserve">
+  <data name="Run" xml:space="preserve">
     <value>実行</value>
   </data>
-    <data name="ThisFeatureOnlySupportsWindowsPlatform" xml:space="preserve">
+  <data name="ThisFeatureOnlySupportsWindowsPlatform" xml:space="preserve">
     <value>この機能はWindowsでのみ利用できます</value>
   </data>
-    <data name="RunCommandFail" xml:space="preserve">
+  <data name="RunCommandFail" xml:space="preserve">
     <value>コマンドの実行に失敗しました</value>
   </data>
-    <data name="RunActivate" xml:space="preserve">
+  <data name="RunActivate" xml:space="preserve">
     <value>アクティベーションを実行</value>
   </data>
-    <data name="CancelActivateWin" xml:space="preserve">
+  <data name="CancelActivateWin" xml:space="preserve">
     <value>Windowsを無効にしてください</value>
   </data>
-    <data name="CancelActivateWinTip" xml:space="preserve">
+  <data name="CancelActivateWinTip" xml:space="preserve">
     <value>このアクションを実行すると、Windowsのアクティベーションステータスが削除され、Windowsのパーソナライゼーションなどの機能が使用できなくなります。続行しますか？</value>
   </data>
-    <data name="ThisFeatureOnlySupportsWindows10AndAbove" xml:space="preserve">
+  <data name="ThisFeatureOnlySupportsWindows10AndAbove" xml:space="preserve">
     <value>この機能はWindows 10以降のみをサポートしており、このバージョンよりも前のシステムが正常にアクティベートされることは保証されていません</value>
   </data>
-    <data name="PlayList" xml:space="preserve">
+  <data name="PlayList" xml:space="preserve">
     <value>放映リスト</value>
   </data>
-    <data name="ModName" xml:space="preserve">
+  <data name="ModName" xml:space="preserve">
     <value>モジュール名</value>
   </data>
-    <data name="GameVersion" xml:space="preserve">
+  <data name="GameVersion" xml:space="preserve">
     <value>ゲームバージョン</value>
   </data>
-    <data name="AnyModLoader" xml:space="preserve">
+  <data name="AnyModLoader" xml:space="preserve">
     <value>任意のローダー</value>
   </data>
-    <data name="AnySource" xml:space="preserve">
+  <data name="AnySource" xml:space="preserve">
     <value>すべての情報源</value>
   </data>
-    <data name="Download" xml:space="preserve">
+  <data name="Download" xml:space="preserve">
     <value>ダウンロード</value>
   </data>
-    <data name="SaveFile" xml:space="preserve">
+  <data name="SaveFile" xml:space="preserve">
     <value>ファイルを保存</value>
   </data>
-    <data name="DownloadFail" xml:space="preserve">
+  <data name="DownloadFail" xml:space="preserve">
     <value>ダウンロード失敗</value>
   </data>
-    <data name="MatchingVersion" xml:space="preserve">
+  <data name="MatchingVersion" xml:space="preserve">
     <value>バージョンが一致しています</value>
   </data>
-    <data name="ModifyMicrosoftSkin" xml:space="preserve">
+  <data name="ModifyMicrosoftSkin" xml:space="preserve">
     <value>マイクロソフト</value>
   </data>
-    <data name="SkinModel" xml:space="preserve">
+  <data name="SkinModel" xml:space="preserve">
     <value>スキンモデル</value>
   </data>
-    <data name="InputSkinFilePath" xml:space="preserve">
+  <data name="InputSkinFilePath" xml:space="preserve">
     <value>スキンファイルのパスを入力してください</value>
   </data>
-    <data name="SelectSkinFile" xml:space="preserve">
+  <data name="SelectSkinFile" xml:space="preserve">
     <value>スキンファイルを選択してください</value>
   </data>
-    <data name="RefreshMicrosoftSkin" xml:space="preserve">
+  <data name="RefreshMicrosoftSkin" xml:space="preserve">
     <value>マイクロソフト</value>
   </data>
-    <data name="ModifySuccess" xml:space="preserve">
+  <data name="ModifySuccess" xml:space="preserve">
     <value>正常に変更されました</value>
   </data>
-    <data name="ModifyFail" xml:space="preserve">
+  <data name="ModifyFail" xml:space="preserve">
     <value>編集に失敗しました</value>
   </data>
-    <data name="IfInstallBedRock" xml:space="preserve">
+  <data name="IfInstallBedRock" xml:space="preserve">
     <value>基盤バージョンがインストールされていない場合、起動しません</value>
   </data>
-    <data name="BedRockVersion" xml:space="preserve">
+  <data name="BedRockVersion" xml:space="preserve">
     <value>岩盤エディション</value>
   </data>
-    <data name="CannotOpenBedRockSetting" xml:space="preserve">
+  <data name="CannotOpenBedRockSetting" xml:space="preserve">
     <value>岩盤設定を開けませんでした</value>
   </data>
-    <data name="UpgradeToAdministratorPrivileges" xml:space="preserve">
+  <data name="UpgradeToAdministratorPrivileges" xml:space="preserve">
     <value>管理者権限にアップグレード</value>
   </data>
-    <data name="UpgradeToAdministratorPrivilegesFail" xml:space="preserve">
+  <data name="UpgradeToAdministratorPrivilegesFail" xml:space="preserve">
     <value>管理者権限へのアップグレードに失敗しました</value>
   </data>
-    <data name="UpgradeToAdministratorPrivilegesTip" xml:space="preserve">
+  <data name="UpgradeToAdministratorPrivilegesTip" xml:space="preserve">
     <value>操作を実行するには、管理者権限にアップグレードする必要があります。[OK]をクリックして、管理者権限でプログラムを再起動します</value>
   </data>
-    <data name="ReleaseTheMouseAndLetYmclProcessThisFile" xml:space="preserve">
+  <data name="ReleaseTheMouseAndLetYmclProcessThisFile" xml:space="preserve">
     <value>マウスを離して、YMCLがこのファイルを処理できるようにします</value>
   </data>
-    <data name="UnableToAddModsForBedrockEdition" xml:space="preserve">
+  <data name="UnableToAddModsForBedrockEdition" xml:space="preserve">
     <value>モジュールをBedrock Editionに追加することはできません</value>
   </data>
-    <data name="AddTheFollowingFilesAsModsToTheCurrentVersion" xml:space="preserve">
+  <data name="AddTheFollowingFilesAsModsToTheCurrentVersion" xml:space="preserve">
     <value>次のファイルをモジュールとして現在のバージョンに追加します</value>
   </data>
-    <data name="UnsupportedFileType" xml:space="preserve">
+  <data name="UnsupportedFileType" xml:space="preserve">
     <value>サポートされていないファイルタイプです</value>
   </data>
-    <data name="InstallTheFollowingFilesAsAnIntegrationPackageCurseforgeFormat" xml:space="preserve">
+  <data name="InstallTheFollowingFilesAsAnIntegrationPackageCurseforgeFormat" xml:space="preserve">
     <value>以下のファイルを統合パッケージ（ CurseForge形式）としてインストールしてください</value>
   </data>
-    <data name="Unzip" xml:space="preserve">
+  <data name="Unzip" xml:space="preserve">
     <value>荷造りを始めましょう</value>
   </data>
-    <data name="UnzipingModPack" xml:space="preserve">
+  <data name="UnzipingModPack" xml:space="preserve">
     <value>インテグレーションパックを展開しています</value>
   </data>
-    <data name="FinsihUnzipModPack" xml:space="preserve">
+  <data name="FinsihUnzipModPack" xml:space="preserve">
     <value>インテグレーションパックの開梱が完了しました</value>
   </data>
-    <data name="GetModPackInfo" xml:space="preserve">
+  <data name="GetModPackInfo" xml:space="preserve">
     <value>インテグレーションパックの情報を入手してください</value>
   </data>
-    <data name="ModPackInfo" xml:space="preserve">
+  <data name="ModPackInfo" xml:space="preserve">
     <value>パッケージ情報を統合</value>
   </data>
-    <data name="ImportFailed" xml:space="preserve">
+  <data name="ImportFailed" xml:space="preserve">
     <value>インポートに失敗しました</value>
   </data>
-    <data name="ImportSuccess" xml:space="preserve">
+  <data name="ImportSuccess" xml:space="preserve">
     <value>インポートに成功しました</value>
   </data>
-    <data name="NoCrashInfo" xml:space="preserve">
+  <data name="NoCrashInfo" xml:space="preserve">
     <value>衝突情報はありません</value>
   </data>
-    <data name="DownloadModPackMod" xml:space="preserve">
+  <data name="DownloadModPackMod" xml:space="preserve">
     <value>インテグレーションパックモジュールをダウンロードしてください</value>
   </data>
-    <data name="TotalNumberOfMod" xml:space="preserve">
+  <data name="TotalNumberOfMod" xml:space="preserve">
     <value>モジュールの総数</value>
   </data>
-    <data name="DownloadSuccess" xml:space="preserve">
+  <data name="DownloadSuccess" xml:space="preserve">
     <value>ダウンロードに成功しました</value>
   </data>
-    <data name="OverrideModPack" xml:space="preserve">
+  <data name="OverrideModPack" xml:space="preserve">
     <value>インテグレーションパックを上書きします</value>
   </data>
-    <data name="DownloadFailedFileAgain" xml:space="preserve">
+  <data name="DownloadFailedFileAgain" xml:space="preserve">
     <value>ファイルの再ダウンロードに失敗しました</value>
   </data>
-    <data name="Plugin" xml:space="preserve">
+  <data name="Plugin" xml:space="preserve">
     <value>プラグイン</value>
   </data>
-    <data name="EnableAll" xml:space="preserve">
+  <data name="EnableAll" xml:space="preserve">
     <value>全員発動</value>
   </data>
-    <data name="DisableAll" xml:space="preserve">
+  <data name="DisableAll" xml:space="preserve">
     <value>すべて無効にします</value>
   </data>
-    <data name="Author" xml:space="preserve">
+  <data name="Author" xml:space="preserve">
     <value>作家</value>
   </data>
-    <data name="Version" xml:space="preserve">
+  <data name="Version" xml:space="preserve">
     <value>バージョン</value>
   </data>
-    <data name="Description" xml:space="preserve">
+  <data name="Description" xml:space="preserve">
     <value>説明</value>
   </data>
-    <data name="NeedRestartApp" xml:space="preserve">
+  <data name="NeedRestartApp" xml:space="preserve">
     <value>YMCLを再起動する必要があります</value>
   </data>
-    <data name="OnlySupportsWindows10AndAboveSystems" xml:space="preserve">
+  <data name="OnlySupportsWindows10AndAboveSystems" xml:space="preserve">
     <value>Windows 10以降のみをサポートしています</value>
   </data>
-    <data name="NavTask" xml:space="preserve">
+  <data name="NavTask" xml:space="preserve">
     <value> タスク</value>
   </data>
-    <data name="TaskCenter" xml:space="preserve">
+  <data name="TaskCenter" xml:space="preserve">
     <value>タスクセンター</value>
   </data>
-    <data name="AllType" xml:space="preserve">
+  <data name="AllType" xml:space="preserve">
     <value>すべてのジャンル</value>
   </data>
-    <data name="MaterialPack" xml:space="preserve">
+  <data name="MaterialPack" xml:space="preserve">
     <value>素材パック</value>
   </data>
-    <data name="Map" xml:space="preserve">
+  <data name="Map" xml:space="preserve">
     <value>地図</value>
   </data>
-    <data name="CustomBackGroundImg" xml:space="preserve">
+  <data name="CustomBackGroundImg" xml:space="preserve">
     <value>カスタム背景画像</value>
+  </data>
+  <data name="SelectImgFile" xml:space="preserve">
+    <value>画像ファイルを選択してください</value>
+  </data>
+  <data name="MusicNotAvailable" xml:space="preserve">
+    <value>音楽は利用できません</value>
+  </data>
+  <data name="MusicGetFail" xml:space="preserve">
+    <value>音楽の取得に失敗しました</value>
+  </data>
+  <data name="DownloadSource" xml:space="preserve">
+    <value>ソースをダウンロード</value>
+  </data>
+  <data name="MaximumDownloadThread" xml:space="preserve">
+    <value>最大ダウンロードスレッド数</value>
+  </data>
+  <data name="DownloadThreadTooBigTip" xml:space="preserve">
+    <value>ダウンロードスレッドが大きすぎるため、デバイスがクラッシュする可能性があります</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>不明</value>
+  </data>
+  <data name="ShaderPack" xml:space="preserve">
+    <value>ライトパック</value>
+  </data>
+  <data name="DataPack" xml:space="preserve">
+    <value>パケット</value>
+  </data>
+  <data name="Api" xml:space="preserve">
+    <value>API</value>
+  </data>
+  <data name="ModPack" xml:space="preserve">
+    <value>インテグレーションパッケージ</value>
+  </data>
+  <data name="SaveAudioFile" xml:space="preserve">
+    <value>オーディオファイルを保存します</value>
+  </data>
+  <data name="CustomUpdateUrl" xml:space="preserve">
+    <value>カスタム更新URL</value>
+  </data>
+  <data name="LyricTip" xml:space="preserve">
+    <value>私が歌詞▽(≧≦*) o</value>
+  </data>
+  <data name="MusicPlayerOnlySupportWindows" xml:space="preserve">
+    <value>音楽プレーヤーはWindowsのみをサポートしています</value>
+  </data>
+  <data name="LoadAudioFileFail" xml:space="preserve">
+    <value>オーディオファイルの読み込みに失敗しました</value>
+  </data>
+  <data name="LaunchCore" xml:space="preserve">
+    <value>Coreを起動してください</value>
+  </data>
+  <data name="AfterLaunchKeepLauncherVisible" xml:space="preserve">
+    <value>起動が完了した後は変更しないでください</value>
+  </data>
+  <data name="AfterLaunchMakeLauncherMinimize" xml:space="preserve">
+    <value>起動完了後に最小化</value>
+  </data>
+  <data name="AfterLaunchExitLauncher" xml:space="preserve">
+    <value>起動が完了したら閉じます</value>
+  </data>
+  <data name="AfterLaunchHideAndShowWhenGameExit" xml:space="preserve">
+    <value>起動が完了したら非表示にし、ゲーム終了後に表示します</value>
+  </data>
+  <data name="LauncherVisibility" xml:space="preserve">
+    <value>ランチャーの可視性</value>
+  </data>
+  <data name="AfterLaunchMinimizeAndShowWhenGameExit" xml:space="preserve">
+    <value>起動後に最小化し、ゲーム終了後に表示します</value>
+  </data>
+  <data name="UnofficialTip" xml:space="preserve">
+    <value>現在のバージョンは非公式であり、ウイルスに対して脆弱である可能性があります。
+公式バージョンをダウンロードするには、https://ymcl.daiyu.fun/にリダイレクトしてください。</value>
+  </data>
+  <data name="LanguageTip" xml:space="preserve">
+    <value>Yu Minecraft Launcherのセットアップを開始する前に、言語を選択する必要があります。</value>
+  </data>
+  <data name="RightArrow" xml:space="preserve">
+    <value>→</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>アカウント</value>
+  </data>
+  <data name="LeftArrow" xml:space="preserve">
+    <value>←</value>
+  </data>
+  <data name="SystemStyle" xml:space="preserve">
+    <value>システムスタイル</value>
+  </data>
+  <data name="LauncherStyle" xml:space="preserve">
+    <value>ランチャースタイル</value>
+  </data>
+  <data name="MinecraftFolderTip" xml:space="preserve">
+    <value>Minecraftデータ用フォルダ（.minecraft ）</value>
+  </data>
+  <data name="ExistingNow" xml:space="preserve">
+    <value>既存</value>
+  </data>
+  <data name="JavaRuntime" xml:space="preserve">
+    <value>Javaランタイム</value>
+  </data>
+  <data name="JavaRuntimeTip" xml:space="preserve">
+    <value>ゲームを開始するには、少なくとも1つのJavaランタイムが必要です。</value>
+  </data>
+  <data name="AccountTip" xml:space="preserve">
+    <value>ゲームを起動するには、少なくとも1つのアカウントが必要です。オフラインアカウントを使用している場合、本物の認証を使用してサーバーにログインすることはできません。</value>
+  </data>
+  <data name="WindowTitleBarStyleTip" xml:space="preserve">
+    <value>ランチャーウィンドウのタイトルバーのスタイルを設定します。場合によっては、ランチャーのスタイルはサポートされていません。</value>
   </data>
 </root>

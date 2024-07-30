@@ -54,5 +54,6 @@ public class Const
     public class Notification
     {
         public static WindowNotificationManager main { get; set; }
+        public static WindowNotificationManager initialize { get; set; }
     }
 }

@@ -9,16 +9,21 @@ public class Setting
     public string Language { get; set; } = "Unset";
     public string MinecraftFolder { get; set; }
     public double MaximumDownloadThread { get; set; } = 64;
+    public bool IsCompleteJavaInitialize { get; set; }
+    public bool IsCompleteMinecraftFolderInitialize { get; set; }
+    public bool IsCompleteAccountInitialize { get; set; }
     public OpenFileWay OpenFileWay { get; set; }
     public DownloadSource DownloadSource { get; set; } = DownloadSource.Mojang;
+    public LauncherVisibility LauncherVisibility { get; set; } = LauncherVisibility.AfterLaunchKeepLauncherVisible;
     public int AccountSelectionIndex { get; set; }
     public Theme Theme { get; set; } = Theme.Light;
     public double MaxMem { get; set; } = 1024;
     public double Volume { get; set; } = 50;
     public Repeat Repeat { get; set; } = Repeat.RepeatAll;
+    public LaunchCore LaunchCore { get; set; } = LaunchCore.MinecraftLaunch;
     public string Version { get; set; }
     public bool EnableIndependencyCore { get; set; } = true;
-    public bool EnableCustomUpdateUrl { get; set; } = true;
+    public bool EnableCustomUpdateUrl { get; set; } = false;
     public string CustomUpdateUrl { get; set; } = "https://gh.api.99988866.xyz/{%url%}";
     public bool EnableCustomBackGroundImg { get; set; } = false;
     public bool AlreadyWrittenIntoTheUrlScheme { get; set; } = false;

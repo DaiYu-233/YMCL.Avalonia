@@ -97,6 +97,7 @@
                                     FontWeight="Thin"
                                     Foreground="{DynamicResource TextColor}" />
                                 <Label
+                                    Name="AuthorLabel"
                                     Margin="0,20,0,0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"

@@ -18,6 +18,9 @@ public partial class TitleBar : UserControl
     public static readonly StyledProperty<bool> IsCloseBtnShowProperty =
         AvaloniaProperty.Register<TitleBar, bool>(nameof(IsCloseBtnShow), true);
 
+    public static readonly StyledProperty<bool> IsMaxBtnShowProperty =
+        AvaloniaProperty.Register<TitleBar, bool>(nameof(IsMaxBtnShow), true);
+
     private DateTime? lastClickTime;
 
     public TitleBar()
@@ -30,12 +33,8 @@ public partial class TitleBar : UserControl
         Loaded += (_, _) =>
         {
             TitleText.Text = Title;
-            if (!IsCloseBtnShow)
-            {
-                CloseButton.IsVisible = false;
-                MaximizeButton.Margin = new Thickness(0, 0, -5, 0);
-                MinimizeButton.Margin = new Thickness(0, 0, 21, 0);
-            }
+            CloseButton.IsVisible = IsCloseBtnShow;
+            MaximizeButton.IsVisible = IsMaxBtnShow;
         };
     }
 
@@ -57,6 +56,12 @@ public partial class TitleBar : UserControl
         set => SetValue(IsCloseBtnShowProperty, value);
     }
 
+    public bool IsMaxBtnShow
+    {
+        get => GetValue(IsMaxBtnShowProperty);
+        set => SetValue(IsMaxBtnShowProperty, value);
+    }
+
     private void MoveDragArea_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         if (e.Pointer.Type == PointerType.Mouse)
@@ -68,7 +73,7 @@ public partial class TitleBar : UserControl
                 window.BeginMoveDrag(e);
             }
 
-            if (lastClickTime.HasValue && (DateTime.Now - lastClickTime.Value).TotalMilliseconds < 300)
+            if (IsMaxBtnShow && lastClickTime.HasValue && (DateTime.Now - lastClickTime.Value).TotalMilliseconds < 300)
             {
                 lastClickTime = null;
                 var window = this.GetVisualRoot() as Window;

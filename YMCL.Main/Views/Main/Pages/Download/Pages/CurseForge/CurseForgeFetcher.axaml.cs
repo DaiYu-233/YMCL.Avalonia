@@ -7,12 +7,16 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
 using Avalonia.Input;
+using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using CurseForge.APIClient;
 using CurseForge.APIClient.Models;
 using CurseForge.APIClient.Models.Mods;
+using FluentAvalonia.UI.Controls;
+using Newtonsoft.Json;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Controls;
@@ -309,32 +313,110 @@ public partial class CurseForgeFetcher : UserControl
     private async void ModFileSelectionChanged(object? s, SelectionChangedEventArgs e)
     {
         var sender = s as ListBox;
-        if (sender.SelectedIndex >= 0)
+        if (sender.SelectedIndex < 0) return;
+        var item = sender.SelectedItem as ModFileListViewItemEntry;
+        if (item.ClassId == 4471)
         {
-            var item = sender.SelectedItem as ModFileListViewItemEntry;
-            sender.SelectedIndex = -1;
-            var path = await Method.IO.SaveFilePicker(TopLevel.GetTopLevel(this)!,
-                new FilePickerSaveOptions
+            var fN = item.DisplayName;
+            if (Path.GetExtension(fN) != ".zip") fN += ".zip";
+            var setting =
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(
+                    System.IO.File.ReadAllText(Const.SettingDataPath));
+            while (true)
+            {
+                var textBox = new TextBox
                 {
-                    SuggestedFileName = item.DisplayName,
-                    ShowOverwritePrompt = true,
-                    Title = MainLang.SaveFile
-                });
-            if (path == null) return;
-            var classId = item.ClassId;
-            var extension = Path.GetExtension(path);
-            if (classId == 6 && extension != ".jar") path += ".jar";
+                    TextWrapping = TextWrapping.Wrap, FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                    Text = Path.GetFileNameWithoutExtension(fN)
+                };
+                var cR = await Method.Ui.ShowDialogAsync(title: $"{MainLang.Install} - {Path.GetFileName(fN)}",
+                    p_content: textBox,
+                    b_primary: MainLang.Install, b_secondary: MainLang.SaveAs, b_cancel: MainLang.Cancel);
+                sender.SelectedIndex = -1;
+                if (cR == ContentDialogResult.Primary)
+                {
+                    if (Directory.Exists(Path.Combine(setting.MinecraftFolder, "versions", textBox.Text)))
+                    {
+                        Method.Ui.Toast($"{MainLang.FolderAlreadyExists}: {textBox.Text}", Const.Notification.main,
+                            NotificationType.Error);
+                    }
+                    else
+                    {
+                        Method.Mc.ImportModPackFromCurseForge(item, textBox.Text);
+                        return;
+                        break;
+                    }
+                }
 
-            if ((classId == 12 || classId == 17) && extension != ".zip") path += ".zip";
+                if (cR == ContentDialogResult.None)
+                {
+                    return;
+                }
 
-            Method.Ui.Toast($"{MainLang.BeginDownload}: {item.DisplayName}");
-            var task = new TaskEntry($"{MainLang.Download} - {Path.GetFileName(path)}", true, false);
+                if (cR == ContentDialogResult.Secondary)
+                {
+                    break;
+                }
+            }
+        }
+
+        sender.SelectedIndex = -1;
+        var path = await Method.IO.SaveFilePicker(TopLevel.GetTopLevel(this)!,
+            new FilePickerSaveOptions
+            {
+                SuggestedFileName = item.DisplayName,
+                ShowOverwritePrompt = true,
+                Title = MainLang.SaveFile
+            });
+        if (path == null) return;
+        var classId = item.ClassId;
+        var extension = Path.GetExtension(path);
+        if (classId == 6 && extension != ".jar") path += ".jar";
+
+        if ((classId == 12 || classId == 17) && extension != ".zip") path += ".zip";
+
+        Method.Ui.Toast($"{MainLang.BeginDownload}: {item.DisplayName}");
+        var task = new TaskEntry($"{MainLang.Download} - {Path.GetFileName(path)}", true, false);
+        try
+        {
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(
+                           item.DownloadUrl.Replace("edge.forgecdn.net", "mediafilez.forgecdn.net"),
+                           HttpCompletionOption.ResponseHeadersRead))
+                {
+                    response.EnsureSuccessStatusCode(); // 确保HTTP成功状态值  
+
+                    var totalBytes = response.Content.Headers.ContentLength.GetValueOrDefault();
+                    using (var contentStream = await response.Content.ReadAsStreamAsync())
+                    using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write,
+                               FileShare.None, 4096, true))
+                    {
+                        var buffer = new byte[4096];
+                        var totalBytesRead = 0L;
+                        int bytesRead;
+
+                        while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+                        {
+                            await fileStream.WriteAsync(buffer, 0, bytesRead);
+                            totalBytesRead += bytesRead;
+                            var progressPercentage = (int)(totalBytesRead * 100 / totalBytes);
+                            task.UpdateValueProgress(progressPercentage);
+                        }
+
+                        Method.Ui.Toast($"{MainLang.DownloadFinish}: {item.DisplayName}");
+                        task.Destory();
+                    }
+                }
+            }
+        }
+        catch
+        {
             try
             {
                 using (var httpClient = new HttpClient())
                 {
-                    using (var response = await httpClient.GetAsync(
-                               item.DownloadUrl.Replace("edge.forgecdn.net", "mediafilez.forgecdn.net"),
+                    using (var response = await httpClient.GetAsync(item.DownloadUrl,
                                HttpCompletionOption.ResponseHeadersRead))
                     {
                         response.EnsureSuccessStatusCode(); // 确保HTTP成功状态值  
@@ -364,43 +446,8 @@ public partial class CurseForgeFetcher : UserControl
             }
             catch
             {
-                try
-                {
-                    using (var httpClient = new HttpClient())
-                    {
-                        using (var response = await httpClient.GetAsync(item.DownloadUrl,
-                                   HttpCompletionOption.ResponseHeadersRead))
-                        {
-                            response.EnsureSuccessStatusCode(); // 确保HTTP成功状态值  
-
-                            var totalBytes = response.Content.Headers.ContentLength.GetValueOrDefault();
-                            using (var contentStream = await response.Content.ReadAsStreamAsync())
-                            using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write,
-                                       FileShare.None, 4096, true))
-                            {
-                                var buffer = new byte[4096];
-                                var totalBytesRead = 0L;
-                                int bytesRead;
-
-                                while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
-                                {
-                                    await fileStream.WriteAsync(buffer, 0, bytesRead);
-                                    totalBytesRead += bytesRead;
-                                    var progressPercentage = (int)(totalBytesRead * 100 / totalBytes);
-                                    task.UpdateValueProgress(progressPercentage);
-                                }
-
-                                Method.Ui.Toast($"{MainLang.DownloadFinish}: {item.DisplayName}");
-                                task.Destory();
-                            }
-                        }
-                    }
-                }
-                catch
-                {
-                    Method.Ui.Toast($"{MainLang.DownloadFail}: {item.DisplayName}");
-                    task.Destory();
-                }
+                Method.Ui.Toast($"{MainLang.DownloadFail}: {item.DisplayName}");
+                task.Destory();
             }
         }
     }

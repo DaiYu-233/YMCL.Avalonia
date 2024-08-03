@@ -8,7 +8,7 @@
     FontWeight="{DynamicResource FontWeight}"
     mc:Ignorable="d">
     <Border
-        Background="{DynamicResource 2x}"
+        Background="{DynamicResource 1x}"
         ClipToBounds="True"
         CornerRadius="5"
         Opacity="{DynamicResource Opacity}">

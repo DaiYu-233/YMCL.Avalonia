@@ -33,6 +33,19 @@ public partial class DownloadSettingPage : UserControl
                 CustomUpdateUrlEnableComboBox.Width = CustomUpdateUrlRoot.Bounds.Width - 2 * 6.5 -
                                                       CustomUpdateUrlLabel.Bounds.Width - 30;
         };
+        MusicApiButton.Click += (s, e) =>
+        {
+            var launcher = TopLevel.GetTopLevel(this).Launcher;
+            launcher.LaunchUriAsync(new Uri("https://gitlab.com/Binaryify/neteasecloudmusicapi"));
+        };
+        MusicApiTextBox.TextChanged += (s, e) =>
+        {
+            var setting =
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+            setting.MusicApi = MusicApiTextBox.Text;
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            Const.MusicApiUrl = MusicApiTextBox.Text;
+        };
         SizeChanged += (_, _) =>
         {
             if (CustomUpdateUrlTextBox.IsVisible)
@@ -95,5 +108,7 @@ public partial class DownloadSettingPage : UserControl
         DownloadThreadWarning.IsVisible = MaximumDownloadThreadSlider.Value > 100;
         CustomUpdateUrlEnableComboBox.SelectedIndex = setting.EnableCustomUpdateUrl ? 1 : 0;
         CustomUpdateUrlTextBox.Text = setting.CustomUpdateUrl;
+        Const.MusicApiUrl = setting.MusicApi;
+        MusicApiTextBox.Text = setting.MusicApi;
     }
 }

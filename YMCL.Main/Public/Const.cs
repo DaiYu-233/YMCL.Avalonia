@@ -4,12 +4,13 @@ using System.IO;
 using Avalonia.Controls.Notifications;
 using MinecraftLaunch.Classes.Models.Game;
 using YMCL.Main.Public.Classes;
+using YMCL.Main.Views.DeskLyric;
 using YMCL.Main.Views.Initialize;
 using YMCL.Main.Views.Main;
 
 namespace YMCL.Main.Public;
 
-public class Const
+public abstract class Const
 {
     public static JavaEntry AutoJava = new() { JavaPath = "Auto", JavaVersion = "All" };
     public static List<UrlImageDataListEntry> UrlImageDataList = new();
@@ -41,17 +42,18 @@ public class Const
     public static string GithubUpdateApiUrl { get; } =
         "https://api.github.com/repos/DaiYu-233/YMCL.Avalonia/releases?per_page=1";
 
-    public static string MusicApiUrl { get; } = "http://music.api.daiyu.fun/";
+    public static string MusicApiUrl { get; set; } = "http://music.api.daiyu.fun/";
     public static string CurseForgeApiKey { get; } = "$2a$10$ndSPnOpYqH3DRmLTWJTf5Ofm7lz9uYoTGvhSj0OjJWJ8WdO4ZTsr.";
 
-    public class Window
+    public abstract class Window
     {
         public static InitializeWindow initialize = new();
         public static MainWindow main;
         public static TaskCenterWindow taskCenter = new();
+        public static DeskLyric deskLyric = new();
     }
 
-    public class Notification
+    public abstract class Notification
     {
         public static WindowNotificationManager main { get; set; }
         public static WindowNotificationManager initialize { get; set; }

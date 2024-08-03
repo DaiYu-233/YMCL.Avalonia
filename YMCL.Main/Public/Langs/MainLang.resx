@@ -878,4 +878,31 @@ sudo apt install vlc</value>
     <data name="AccountTip" xml:space="preserve">
       <value>启动游戏至少需要一个账户，如使用离线账户将无法登入有正版验证的服务器。</value>
     </data>
+  <data name="MusicApi" xml:space="preserve">
+      <value>音乐Api</value>
+    </data>
+  <data name="ProjectInfo" xml:space="preserve">
+      <value>项目信息</value>
+    </data>
+  <data name="SaveAs" xml:space="preserve">
+      <value>另存为</value>
+    </data>
+  <data name="DeskLyricColor" xml:space="preserve">
+      <value>桌面歌词颜色</value>
+    </data>
+  <data name="DeskLyricAlignment" xml:space="preserve">
+      <value>桌面歌词对齐</value>
+    </data>
+  <data name="AlignLeft" xml:space="preserve">
+      <value>居左对齐</value>
+    </data>
+  <data name="AlignCenter" xml:space="preserve">
+      <value>居中对齐</value>
+    </data>
+  <data name="AlignRight" xml:space="preserve">
+      <value>居右对齐</value>
+    </data>
+  <data name="DeskLyricSize" xml:space="preserve">
+      <value>桌面歌词大小</value>
+    </data>
 </root>

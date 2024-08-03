@@ -45,6 +45,7 @@ using StarLight_Core.Launch;
 using StarLight_Core.Models.Authentication;
 using StarLight_Core.Models.Launch;
 using YMCL.Main.Public.Classes;
+using YMCL.Main.Public.Controls.PageTaskEntry;
 using YMCL.Main.Public.Controls.WindowTask;
 using YMCL.Main.Public.Langs;
 using File = System.IO.File;
@@ -521,7 +522,7 @@ public class Method
                         var type = asm.GetType("YMCL.Plugin.Main");
                         if (!typeof(IPlugin).IsAssignableFrom(type))
                         {
-                            Debug.WriteLine("未继承插件接口");
+                            Console.WriteLine("未继承插件接口");
                             continue;
                         }
 
@@ -1470,7 +1471,7 @@ public class Method
                         };
                         watcher.OutputLogReceived += async (_, args) =>
                         {
-                            Debug.WriteLine(args.Log);
+                            Console.WriteLine(args.Log);
                             if (setting.ShowGameOutput)
                                 await Dispatcher.UIThread.InvokeAsync(() =>
                                 {
@@ -1824,7 +1825,7 @@ public class Method
                     {
                         var watcher = await launcher.LaunchAsync(async x =>
                         {
-                            Debug.WriteLine(x.Description);
+                            Console.WriteLine(x.Description);
                             if (setting.ShowGameOutput)
                                 await Dispatcher.UIThread.InvokeAsync(() =>
                                 {
@@ -1841,7 +1842,7 @@ public class Method
 
                         watcher.OutputReceived += async a =>
                         {
-                            Debug.WriteLine(a);
+                            Console.WriteLine(a);
                             if (setting.ShowGameOutput)
                                 await Dispatcher.UIThread.InvokeAsync(() => { task.UpdateTextProgress(a, true); });
                             else
@@ -1852,7 +1853,7 @@ public class Method
                         };
                         watcher.ErrorReceived += async a =>
                         {
-                            Debug.WriteLine(a);
+                            Console.WriteLine(a);
                             if (setting.ShowGameOutput)
                                 await Dispatcher.UIThread.InvokeAsync(() => { task.UpdateTextProgress(a, true); });
                             else
@@ -1937,12 +1938,14 @@ public class Method
             return true;
         }
 
-        public static async Task<bool> ImportModPack(string path)
+        public static async Task<bool> ImportModPackFromLocal(string path, bool confirmBox = true,
+            string p_customId = null)
         {
             var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
             var customId = string.Empty;
             while (true)
             {
+                if (!confirmBox) break;
                 var textBox = new TextBox
                 {
                     TextWrapping = TextWrapping.Wrap, FontFamily = (FontFamily)Application.Current.Resources["Font"],
@@ -1977,6 +1980,10 @@ public class Method
                 }
             }
 
+            if (!string.IsNullOrEmpty(customId))
+            {
+                customId = p_customId;
+            }
             var task = new WindowTask($"{MainLang.Unzip} - {Path.GetFileName(path)}");
 
             IO.TryCreateFolder(Path.Combine(setting.MinecraftFolder, "YMCLTemp"));
@@ -1995,7 +2002,7 @@ public class Method
             task.UpdateTitle($"{MainLang.Install} - {Path.GetFileName(path)}");
             var loaders = info.minecraft.modLoaders[0].id.Split('-');
             var result = false;
-            if (loaders[0] == "forge") // 0 加载器类型 1 版本
+            if (loaders[0] == "forge") 
             {
                 var forges = (await ForgeInstaller.EnumerableFromVersionAsync(info.minecraft.version)).ToList();
                 ForgeInstallEntry enrty = null;
@@ -2027,6 +2034,7 @@ public class Method
             }
             else
             {
+                task.Destory();
                 return false;
             }
 
@@ -2098,7 +2106,7 @@ public class Method
 
             async Task GetAndDownloadMod(int projectId = -1, int fileId = -1, string url = null)
             {
-                await semaphore.WaitAsync(); // 等待进入信号量 
+                await semaphore.WaitAsync();
                 var modFileDownloadUrl = string.Empty;
                 var fileName = string.Empty;
                 try
@@ -2117,31 +2125,22 @@ public class Method
                     var uri = new Uri(modFileDownloadUrl);
                     fileName = Path.GetFileName(uri.AbsolutePath);
                     var savePath = Path.Combine(saveDirectory, fileName);
-
-                    // 使用HttpClient下载文件  
                     using (var client = new HttpClient())
                     {
-                        // 发送GET请求获取文件流  
                         var response = await client.GetAsync(modFileDownloadUrl,
                             HttpCompletionOption.ResponseHeadersRead);
-                        response.EnsureSuccessStatusCode(); // 确保HTTP成功状态值  
-
-                        // 读取响应内容并保存到文件  
+                        response.EnsureSuccessStatusCode();
                         using (Stream contentStream = await response.Content.ReadAsStreamAsync(),
                                fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write, FileShare.None,
                                    4096, true))
                         {
-                            // 写入文件  
                             await contentStream.CopyToAsync(fileStream);
                         }
 
                         successDownloads++;
                     }
 
-                    // 更新已完成下载的文件数量  
                     Interlocked.Increment(ref completedDownloads);
-
-                    // 打印进度
                     Dispatcher.UIThread.Invoke(() =>
                     {
                         task.UpdateValueProgress(completedDownloads / (double)totalDownloads * 100);
@@ -2160,12 +2159,98 @@ public class Method
                 }
                 finally
                 {
-                    semaphore.Release(); // 释放信号量  
+                    semaphore.Release(); 
                 }
             }
 
             task.Destory();
             return true;
+        }
+
+        public static async Task ImportModPackFromCurseForge(ModFileListViewItemEntry item, string customId)
+        {
+            var shouldReturn = false;
+            var fN = item.DisplayName;
+            if (Path.GetExtension(fN) != ".zip") fN += ".zip";
+            var path = Path.Combine(Const.TempFolderPath, fN);
+            var task = new TaskEntry($"{MainLang.Download} - {fN}", true, false);
+            try
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    using (var response = await httpClient.GetAsync(
+                               item.DownloadUrl.Replace("edge.forgecdn.net", "mediafilez.forgecdn.net"),
+                               HttpCompletionOption.ResponseHeadersRead))
+                    {
+                        response.EnsureSuccessStatusCode();
+
+                        var totalBytes = response.Content.Headers.ContentLength.GetValueOrDefault();
+                        using (var contentStream = await response.Content.ReadAsStreamAsync())
+                        using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write,
+                                   FileShare.None, 4096, true))
+                        {
+                            var buffer = new byte[4096];
+                            var totalBytesRead = 0L;
+                            int bytesRead;
+
+                            while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+                            {
+                                await fileStream.WriteAsync(buffer, 0, bytesRead);
+                                totalBytesRead += bytesRead;
+                                var progressPercentage = (int)(totalBytesRead * 100 / totalBytes);
+                                task.UpdateValueProgress(progressPercentage);
+                            }
+
+                            Method.Ui.Toast($"{MainLang.DownloadFinish}: {item.DisplayName}");
+                            task.Destory();
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                try
+                {
+                    using (var httpClient = new HttpClient())
+                    {
+                        using (var response = await httpClient.GetAsync(item.DownloadUrl,
+                                   HttpCompletionOption.ResponseHeadersRead))
+                        {
+                            response.EnsureSuccessStatusCode(); // 确保HTTP成功状态值  
+
+                            var totalBytes = response.Content.Headers.ContentLength.GetValueOrDefault();
+                            using (var contentStream = await response.Content.ReadAsStreamAsync())
+                            using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write,
+                                       FileShare.None, 4096, true))
+                            {
+                                var buffer = new byte[4096];
+                                var totalBytesRead = 0L;
+                                int bytesRead;
+
+                                while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+                                {
+                                    await fileStream.WriteAsync(buffer, 0, bytesRead);
+                                    totalBytesRead += bytesRead;
+                                    var progressPercentage = (int)(totalBytesRead * 100 / totalBytes);
+                                    task.UpdateValueProgress(progressPercentage);
+                                }
+
+                                Method.Ui.Toast($"{MainLang.DownloadFinish}: {item.DisplayName}");
+                                task.Destory();
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    shouldReturn = true;
+                    Method.Ui.Toast($"{MainLang.DownloadFail}: {item.DisplayName}");
+                    task.Destory();
+                }
+            }
+
+            if (shouldReturn) return;
+            ImportModPackFromLocal(path, false, customId);
         }
     }
 

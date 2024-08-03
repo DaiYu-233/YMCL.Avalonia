@@ -75,6 +75,7 @@ public partial class MusicPage : UserControl
     private void BindingEvent()
     {
         NextSongBtn.PointerPressed += async (_, _) => { NextSong(); };
+        DeskLyricBtn.PointerPressed += (_, _) => { Const.Window.deskLyric.Toggle(); };
         PreviousSongBtn.PointerPressed += async (_, _) => { PreviousSong(); };
         RepeatBtn.PointerPressed += async (_, _) =>
         {
@@ -137,7 +138,8 @@ public partial class MusicPage : UserControl
             var path = await Method.IO.SaveFilePicker(TopLevel.GetTopLevel(this)!,
                 new FilePickerSaveOptions
                 {
-                    Title = MainLang.SaveAudioFile, SuggestedFileName = $"{_selectedItem.SongName}.mp3",
+                    Title = MainLang.SaveAudioFile,
+                    SuggestedFileName = $"{_selectedItem.SongName}.mp3",
                     DefaultExtension = "mp3"
                 });
             if (string.IsNullOrEmpty(path)) return;
@@ -273,7 +275,8 @@ public partial class MusicPage : UserControl
 
                 LyricBlock.Children.Add(new TextBlock
                 {
-                    Text = MainLang.LyricTip + "\n", Height = 22,
+                    Text = MainLang.LyricTip + "\n",
+                    Height = 22,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
                     TextAlignment = TextAlignment.Center,
@@ -408,7 +411,7 @@ public partial class MusicPage : UserControl
                 if (_waveOut == null) return;
                 _waveOut.Stop();
                 _waveOut.Dispose();
-
+                Const.Window.deskLyric.LyricText.Text = MainLang.LyricTip;
                 return;
             }
 
@@ -417,7 +420,8 @@ public partial class MusicPage : UserControl
             LyricBlock.Children.Clear();
             LyricBlock.Children.Add(new TextBlock
             {
-                Text = MainLang.LyricTip + "\n", Height = 22,
+                Text = MainLang.LyricTip + "\n",
+                Height = 22,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
                 TextAlignment = TextAlignment.Center,
@@ -642,8 +646,11 @@ public partial class MusicPage : UserControl
 
         try
         {
-            _waveOut.Stop();
-            _waveOut.Dispose();
+            if (_waveOut != null)
+            {
+                _waveOut.Stop();
+                _waveOut.Dispose();
+            }
         }
         catch
         {
@@ -870,6 +877,7 @@ public partial class MusicPage : UserControl
                 }
 
                 AccentUi(lyricRuns[i - 1]);
+                Const.Window.deskLyric.LyricText.Text = lyricRuns[i - 1].Text;
 
                 await Task.Delay(210);
                 var offset = lyricRuns[i - 1].Bounds.Top * -1;

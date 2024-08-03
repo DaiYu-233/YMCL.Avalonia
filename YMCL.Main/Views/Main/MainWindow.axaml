@@ -138,6 +138,14 @@
                                             Name="NavTask"
                                             FontFamily="{DynamicResource Font}"
                                             Tag="Task">
+                                            <ui:NavigationViewItem.InfoBadge>
+                                                <ui:InfoBadge
+                                                    x:Name="TaskInfoBadge"
+                                                    FontFamily="{DynamicResource Font}"
+                                                    FontSize="15"
+                                                    IsVisible="False"
+                                                    Value="0" />
+                                            </ui:NavigationViewItem.InfoBadge>
                                             <DockPanel>
                                                 <Image Width="16" Height="16">
                                                     <Image.Source>

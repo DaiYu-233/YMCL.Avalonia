@@ -19,18 +19,22 @@ public class Setting
     public Theme Theme { get; set; } = Theme.Light;
     public double MaxMem { get; set; } = 1024;
     public double Volume { get; set; } = 50;
+    public double DeskLyricSize { get; set; } = 16;
     public Repeat Repeat { get; set; } = Repeat.RepeatAll;
+    public TextAlignment DeskLyricAlignment { get; set; } = TextAlignment.Center;
     public LaunchCore LaunchCore { get; set; } = LaunchCore.MinecraftLaunch;
     public string Version { get; set; }
     public bool EnableIndependencyCore { get; set; } = true;
     public bool EnableCustomUpdateUrl { get; set; } = false;
     public string CustomUpdateUrl { get; set; } = "https://gh.api.99988866.xyz/{%url%}";
+    public string MusicApi { get; set; } = "http://music.api.daiyu.fun/";
     public bool EnableCustomBackGroundImg { get; set; } = false;
-    public bool AlreadyWrittenIntoTheUrlScheme { get; set; } = false;
+    public bool IsAlreadyWrittenIntoTheUrlScheme { get; set; } = false;
     public bool ShowGameOutput { get; set; } = false;
     public WindowTitleBarStyle WindowTitleBarStyle { get; set; } = WindowTitleBarStyle.Unset;
     public CustomHomePageWay CustomHomePage { get; set; } = CustomHomePageWay.None;
     public Color AccentColor { get; set; } = Color.FromRgb(22, 233, 184);
+    public Color DeskLyricColor { get; set; } = Color.FromRgb(22, 233, 184);
     public JavaEntry Java { get; set; } = Const.AutoJava;
     public string WindowBackGroundImgData { get; set; } = string.Empty;
 }

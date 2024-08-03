@@ -61,7 +61,7 @@ public partial class PluginSettingPage : UserControl
                 var type = asm.GetType("YMCL.Plugin.Main");
                 if (!typeof(IPlugin).IsAssignableFrom(type))
                 {
-                    Debug.WriteLine("¦Ä??§Ó?????");
+                    Console.WriteLine("¦Ä??§Ó?????");
                     continue;
                 }
 
@@ -108,7 +108,7 @@ public partial class PluginSettingPage : UserControl
                 var type = asm.GetType("YMCL.Plugin.Main");
                 if (!typeof(IPlugin).IsAssignableFrom(type))
                 {
-                    Debug.WriteLine("¦Ä??§Ó?????");
+                    Console.WriteLine("¦Ä??§Ó?????");
                     continue;
                 }
 

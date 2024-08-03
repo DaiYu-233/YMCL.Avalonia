@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -14,6 +16,7 @@ using Avalonia.Platform;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
+using Microsoft.Win32;
 using MinecraftLaunch.Classes.Models.Game;
 using NAudio.Wave;
 using Newtonsoft.Json;
@@ -51,10 +54,67 @@ public partial class MainWindow : Window
 
     private void EventBinding()
     {
-        Loaded += (_, _) =>
+        Loaded += async (_, _) =>
         {
             if (!Const.Window.main._firstLoad) return;
             Const.Window.main._firstLoad = false;
+            Method.Ui.CheckLauncher();
+            var setting =
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (!setting.IsAlreadyWrittenIntoTheUrlScheme)
+            {
+                if (Const.Platform == Platform.Windows)
+                {
+                    await Method.Ui.UpgradeToAdministratorPrivilegesAsync(Const.Window.main);
+                    Method.IO.TryCreateFolder("C:\\ProgramData\\DaiYu.Platform.YMCL");
+                    var bat =
+                        "@echo off  \nset /p ymcl=<%USERPROFILE%\\AppData\\Roaming\\DaiYu.Platform.YMCL\\YMCL.AppPath.DaiYu  \necho %ymcl%  \necho %1  \nstart \"\" \"%ymcl%\" %1  \nexit";
+                    var path = "C:\\ProgramData\\DaiYu.Platform.YMCL\\launch.bat";
+                    File.WriteAllText(path, bat);
+                    try
+                    {
+                        Registry.ClassesRoot.DeleteSubKey("YMCL");
+                    }
+                    catch
+                    {
+                    }
+
+                    try
+                    {
+                        var keyRoot = Registry.ClassesRoot.CreateSubKey("YMCL", true);
+                        keyRoot.SetValue("", "Yu Minecraft Launcher");
+                        keyRoot.SetValue("URL Protocol", path);
+                        var registryKeya = Registry.ClassesRoot.OpenSubKey("YMCL", true).CreateSubKey("DefaultIcon");
+                        registryKeya.SetValue("", path);
+                        var registryKeyb = Registry.ClassesRoot.OpenSubKey("YMCL", true)
+                            .CreateSubKey(@"shell\open\command");
+                        registryKeyb.SetValue("", $"\"{path}\" \"%1\"");
+
+                        var resourceName = "YMCL.Main.Public.Bins.YMCL.Starter.win.exe";
+                        var assembly = Assembly.GetExecutingAssembly();
+                        using (var resourceStream = assembly.GetManifestResourceStream(resourceName))
+                        {
+                            var outputFilePath = "C:\\Windows\\ymcl.exe";
+                            using (var fileStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write))
+                            {
+                                resourceStream.CopyTo(fileStream);
+                            }
+                        }
+
+                        setting.IsAlreadyWrittenIntoTheUrlScheme = true;
+                        File.WriteAllText(Const.SettingDataPath,
+                            JsonConvert.SerializeObject(setting, Formatting.Indented));
+                    }
+                    catch
+                    {
+                    }
+                }
+                else if (Const.Platform == Platform.Linux)
+                {
+                    setting.IsAlreadyWrittenIntoTheUrlScheme = true;
+                    File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                }
+            }
         };
         Activated += (_, _) =>
         {
@@ -264,7 +324,7 @@ public partial class MainWindow : Window
             if (result == ContentDialogResult.Primary)
                 foreach (var file in zipFile)
                 {
-                    var importResult = await Method.Mc.ImportModPack(file.Path);
+                    var importResult = await Method.Mc.ImportModPackFromLocal(file.Path);
                     if (!importResult)
                         Method.Ui.Toast($"{MainLang.ImportFailed}: {file.FullName}", type: NotificationType.Error);
                     else

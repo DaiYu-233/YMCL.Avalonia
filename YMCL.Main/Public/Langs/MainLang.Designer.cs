@@ -195,6 +195,33 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 居中对齐.
+        /// </summary>
+        public static string AlignCenter {
+            get {
+                return ResourceManager.GetString("AlignCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 居左对齐.
+        /// </summary>
+        public static string AlignLeft {
+            get {
+                return ResourceManager.GetString("AlignLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 居右对齐.
+        /// </summary>
+        public static string AlignRight {
+            get {
+                return ResourceManager.GetString("AlignRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 所有类型.
         /// </summary>
         public static string AllType {
@@ -533,6 +560,33 @@ namespace YMCL.Main.Public.Langs {
         public static string DeselectAll {
             get {
                 return ResourceManager.GetString("DeselectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 桌面歌词对齐.
+        /// </summary>
+        public static string DeskLyricAlignment {
+            get {
+                return ResourceManager.GetString("DeskLyricAlignment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 桌面歌词颜色.
+        /// </summary>
+        public static string DeskLyricColor {
+            get {
+                return ResourceManager.GetString("DeskLyricColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 桌面歌词大小.
+        /// </summary>
+        public static string DeskLyricSize {
+            get {
+                return ResourceManager.GetString("DeskLyricSize", resourceCulture);
             }
         }
         
@@ -1368,6 +1422,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 音乐Api.
+        /// </summary>
+        public static string MusicApi {
+            get {
+                return ResourceManager.GetString("MusicApi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 音乐获取失败.
         /// </summary>
         public static string MusicGetFail {
@@ -1665,6 +1728,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 项目信息.
+        /// </summary>
+        public static string ProjectInfo {
+            get {
+                return ResourceManager.GetString("ProjectInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 刷新.
         /// </summary>
         public static string Refresh {
@@ -1778,6 +1850,15 @@ namespace YMCL.Main.Public.Langs {
         public static string RunCommandFail {
             get {
                 return ResourceManager.GetString("RunCommandFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 另存为.
+        /// </summary>
+        public static string SaveAs {
+            get {
+                return ResourceManager.GetString("SaveAs", resourceCulture);
             }
         }
         

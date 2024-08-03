@@ -112,8 +112,19 @@ public partial class InitializeWindow : Window
 
         File.WriteAllText(Const.AppPathDataPath, Process.GetCurrentProcess().MainModule.FileName!);
         if (Const.Platform == Platform.Linux)
-            File.WriteAllText(Path.Combine(Const.UserDataRootPath, "launch.sh"),
-                $"\"{Process.GetCurrentProcess().MainModule.FileName!}\"");
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HOME"))) return;
+                var path = Path.Combine(Environment.GetEnvironmentVariable("HOME")!, ".local/share/applications");
+                File.WriteAllText(Path.Combine(path, "YMCL.desktop"),
+                    $"[Desktop Entry]  \r\nVersion=1.0  \r\nName=YMCL Protocol Handler  \r\nComment=Handle ymcl:// URLs  \r\nExec={Process.GetCurrentProcess().MainModule.FileName!}\r\nTerminal=true  \r\nType=Application  \r\nCategories=Network;  \r\nMIMEType=x-scheme-handler/ymcl;  ");
+            }
+            catch
+            {
+            }
+        }
+            
         var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
         if (setting.Language == null || setting.Language == "zh-CN")
             LangHelper.Current.ChangedCulture("");
@@ -142,22 +153,22 @@ public partial class InitializeWindow : Window
     {
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            Debug.WriteLine("Running on Windows");
+            Console.WriteLine("Running on Windows");
             Const.Platform = Platform.Windows;
         }
         else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
-            Debug.WriteLine("Running on Linux");
+            Console.WriteLine("Running on Linux");
             Const.Platform = Platform.Linux;
         }
         else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
         {
-            Debug.WriteLine("Running on macOS");
+            Console.WriteLine("Running on macOS");
             Const.Platform = Platform.MacOs;
         }
         else
         {
-            Debug.WriteLine("Running on an unknown platform");
+            Console.WriteLine("Running on an unknown platform");
             Const.Platform = Platform.Unknown;
         }
     }

@@ -43,10 +43,12 @@ public partial class PersonalizeSettingPage : UserControl
 
             await Task.Delay(20);
             ColorPicker.Width = ColorPickerRoot.Bounds.Width - 2 * 6.5 - ColorPickerLabel.Bounds.Width - 30;
+            LyricColorPicker.Width = LyricRoot.Bounds.Width - 2 * 6.5 - LyricColorPickerLabel.Bounds.Width - 30;
         };
         SizeChanged += (s, e) =>
         {
             ColorPicker.Width = ColorPickerRoot.Bounds.Width - 2 * 6.5 - ColorPickerLabel.Bounds.Width - 30;
+            LyricColorPicker.Width = LyricRoot.Bounds.Width - 2 * 6.5 - LyricColorPickerLabel.Bounds.Width - 30;
         };
         CustomHomePageComboBox.SelectionChanged += (s, e) =>
         {
@@ -70,6 +72,15 @@ public partial class PersonalizeSettingPage : UserControl
             File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             Method.Ui.SetWindowBackGroundImg();
         };
+        LyricAlignComboBox.SelectionChanged += (s, e) =>
+        {
+            var setting =
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+            Const.Window.deskLyric.LyricText.TextAlignment = (TextAlignment)LyricAlignComboBox.SelectedIndex;
+            if (setting.DeskLyricAlignment == (TextAlignment)LyricAlignComboBox.SelectedIndex) return;
+            setting.DeskLyricAlignment = (TextAlignment)LyricAlignComboBox.SelectedIndex;
+            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+        };
         ColorPicker.ColorChanged += (s, e) =>
         {
             var color = ColorPicker.Color;
@@ -83,10 +94,39 @@ public partial class PersonalizeSettingPage : UserControl
 
             Method.Ui.SetAccentColor(color);
         };
+        LyricColorPicker.ColorChanged += (s, e) =>
+        {
+            var color = LyricColorPicker.Color;
+            var setting =
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (setting.DeskLyricColor != color)
+            {
+                setting.DeskLyricColor = color;
+                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            }
+
+            Const.Window.deskLyric.LyricText.Foreground = new SolidColorBrush(color);
+        };
         EditCustomHomePageBtn.Click += (s, e) =>
         {
             var launcher = TopLevel.GetTopLevel(this).Launcher;
             launcher.LaunchFileInfoAsync(new FileInfo(Const.CustomHomePageXamlDataPath));
+        };
+        LyricSizeSlider.ValueChanged += (s, e) =>
+        {
+            LyricSizeSliderText.Text = Math.Round(LyricSizeSlider.Value).ToString();
+            var color = LyricColorPicker.Color;
+            var setting =
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+            if (setting.DeskLyricSize != Math.Round(LyricSizeSlider.Value))
+            {
+                setting.DeskLyricSize = Math.Round(LyricSizeSlider.Value);
+                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            }
+
+            Const.Window.deskLyric.LyricText.Transitions = null;
+            Const.Window.deskLyric.LyricText.FontSize = Math.Round(LyricSizeSlider.Value);
+            Const.Window.deskLyric.Height = setting.DeskLyricSize + 20;
         };
         WindowTitleBarStyleComboBox.SelectionChanged += async (_, _) =>
         {
@@ -259,8 +299,12 @@ public partial class PersonalizeSettingPage : UserControl
         ThemeComboBox.SelectedIndex = (int)setting.Theme;
         LauncherVisibilityComboBox.SelectedIndex = (int)setting.LauncherVisibility;
         CustomHomePageComboBox.SelectedIndex = (int)setting.CustomHomePage;
+        LyricAlignComboBox.SelectedIndex = (int)setting.DeskLyricAlignment;
         EditCustomHomePageBtn.IsVisible = CustomHomePageComboBox.SelectedIndex == 1 ? true : false;
         ColorPicker.Color = setting.AccentColor;
+        LyricColorPicker.Color = setting.DeskLyricColor;
+        LyricSizeSlider.Value = setting.DeskLyricSize;
+        LyricSizeSliderText.Text = Math.Round(setting.DeskLyricSize).ToString();
         CustomBackGroundImgComboBox.SelectedIndex = setting.EnableCustomBackGroundImg ? 1 : 0;
         EditCustomBackGroundImgBtn.IsVisible = CustomBackGroundImgComboBox.SelectedIndex == 1;
     }

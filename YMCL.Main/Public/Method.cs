@@ -338,8 +338,12 @@ public class Method
                         case "YMCL.Main.linux.x64.AppImage" when architecture == "linux-x64":
                         case "YMCL.Main.osx.mac.x64.app.zip" when architecture == "osx-x64":
                         case "YMCL.Main.osx.mac.arm64.app.zip" when architecture == "osx-arm64":
-                        case "YMCL.Main.win.x64.installer.exe" when architecture == "win-x64":
-                        case "YMCL.Main.win.x86.installer.exe" when architecture == "win-x86":
+                        case "YMCL.Main.win10+.x64.installer.exe" when architecture == "win-x64" && Environment.OSVersion.Version.Major >= 10:
+                        case "YMCL.Main.win10+.x86.installer.exe" when architecture == "win-x86" && Environment.OSVersion.Version.Major >= 10:
+                        case "YMCL.Main.win10+.arm64.installer.exe" when architecture == "win-arm64" && Environment.OSVersion.Version.Major >= 10:
+                        case "YMCL.Main.win7+.x64.exe.zip" when architecture == "win-x64" && Environment.OSVersion.Version.Major >= 7:
+                        case "YMCL.Main.win7+.arm64.exe.zip" when architecture == "win-arm64" && Environment.OSVersion.Version.Major >= 7:
+                        case "YMCL.Main.win7+.x86.exe.zip" when architecture == "win-x86" && Environment.OSVersion.Version.Major >= 7:
                             url = browser_download_url;
                             fileName = name;
                             break;
@@ -405,7 +409,8 @@ public class Method
                     }
 
                     task.UpdateTextProgress($"{MainLang.DownloadFinish}");
-                    if (architecture == "win-x86" || architecture == "win-x64")
+                    if ((architecture == "win-x86" || architecture == "win-x64") &&
+                        Environment.OSVersion.Version.Major >= 10)
                     {
                         var startInfo = new ProcessStartInfo
                         {

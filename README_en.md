@@ -16,73 +16,34 @@ Free, Cross-Platform, Fully-Open-Source Minecraft Launcher
 
 </div>
 
-## Introduction  
-  
-Yu Minecraft Launcher is a cross-platform Minecraft launcher that supports operating systems such as Windows, MacOS, and Linux, with compatibility for x64 and Arm architectures.  
-  
+## Introduction
+
+Yu Minecraft Launcher is a cross-platform Minecraft launcher that supports operating systems such as Windows, MacOS, and Linux, with compatibility for x64 and Arm architectures.
+
 Yu Minecraft Launcher offers features like mod management, game customization, automatic game installation (Forge, Fabric, Quilt, OptiFine), and custom interface capabilities. <del>It can even activate Windows !</del>
 
 Ymcl uses **Apache License 2.0** open source code, which requires **to retain the original copyright statement, license statement, and disclaimer when modifying and distributing software**; Allow users to freely use, modify, copy, and distribute Apache licensed software, whether for commercial or non-commercial purposes; Allow users to publish modified products or derivatives under different licenses, but the unmodified portion must retain the Apache license; The Apache license does not provide any form of guarantee, and users are fully responsible for any damage caused by the use of the software.
-  
+
 ## Plugin repository
 
- →  https://github.com/DaiYu-233/YMCL.Plugin
+→ https://github.com/DaiYu-233/YMCL.Plugin
 
-## Platform Support  
-  
-|       | Windows | Linux | Mac OS |  
-| ----- | :-----: | :---: | :----: |  
-| x64   |   ✅    |   ✅   |   ✅❔   |  
-| x86   |   ✅    |   ❌   |   ❌    |  
-| ARM64 |   ❌    |   ✅❔   |   ✅❔   |  
-| ARM32 |   ❌    |   ✅❔   |   ❌    |  
-  
-* ✅: Supported platform  
-* ❔: Untested platform  
-* ❌: Unsupported platform
+## Platform Support
 
-## How to Install  
-  
-### 1. Download  
-  
-- [Release](https://github.com/DaiYu-233/YMCL.Avalonia/releases)  
-  
-### 2. Install Runtime  
-  
-Ymcl requires a .NET Core 8.0 runtime to run on various operating systems.  
-  
-<details>   
-<summary>Windows</summary> 
+|       | Windows | Linux | Mac OS |
+| ----- | :------ | :---- | :----- |
+| x64   | ✅️     | ✅️   | ✅     |
+| x86   | ✅️     | ❌    | ❌     |
+| ARM64 | ❌      | ❔    | ❔     |
+| ARM32 | ❌      | ❔    | ❌     |
 
-```DiaYu
-x64：
-	https://dotnet.microsoft.com/zh-cn/download/dotnet/thank-you/runtime-aspnetcore-8.0.6-windows-x64-installer
+- ✅: Supported platform
+- ❔: Supported but Untested platform
+- ❌: Unsupported platform
 
-x86：
-	https://dotnet.microsoft.com/zh-cn/download/dotnet/thank-you/runtime-aspnetcore-8.0.6-windows-x86-installer
+## Download
 
-WinGet：
-	winget install Microsoft.DotNet.SDK.8
-```
-
-</details>
-
-
-<details>   
-<summary>Linux</summary> 
-Documentation：https://learn.microsoft.com/zh-cn/dotnet/core/install/linux?WT.mc_id=dotnet-35129-website
-
-Debian：
-```DaiYu
-wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-rm packages-microsoft-prod.deb
-
-sudo apt-get update && \
-  sudo apt-get install -y dotnet-sdk-8.0
-```
-
-</details>
+→ https://github.com/DaiYu-233/YMCL.Avalonia/releases
 
 ## Plugin Development Document
 
@@ -92,4 +53,4 @@ English → https://github.com/DaiYu-233/YMCL.Avalonia/tree/main/YMCL.Plugin/Doc
 
 ## Open-Source Project Usage
 
-**[Costura.Fody](https://github.com/Fody/Costura)**  **[MinecraftLaunch](https://github.com/Blessing-Studio/MinecraftLaunch)**  **[Newtonsoft.Json](https://www.newtonsoft.com/json)** 
+**[Costura.Fody](https://github.com/Fody/Costura)** **[MinecraftLaunch](https://github.com/Blessing-Studio/MinecraftLaunch)** **[Newtonsoft.Json](https://www.newtonsoft.com/json)** **[StarLight](https://www.newtonsoft.com/json)**

@@ -79,16 +79,14 @@ public partial class Main : UserControl
                     break;
             }
 
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             setting.Language = lang;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             Method.Ui.RestartApp();
         };
         WindowTitleBarStyleListBox.SelectionChanged += (_, e) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (WindowTitleBarStyleListBox.SelectedIndex == 0)
             {
                 Const.Window.initialize.TitleBar.IsVisible = false;
@@ -258,9 +256,7 @@ public partial class Main : UserControl
                                     Name = textBox.Text
                                 });
                                 AccountListBox.Items.Clear();
-                                var setting =
-                                    JsonConvert.DeserializeObject<Public.Classes.Setting>(
-                                        File.ReadAllText(Const.String.SettingDataPath));
+                                var setting = Const.Data.Setting;
                                 _accountList.ForEach(x =>
                                 {
                                     SkinResolver SkinResolver = new(Convert.FromBase64String(x.Skin));
@@ -389,9 +385,7 @@ public partial class Main : UserControl
                                 Skin = Method.Value.BytesToBase64(bytes)
                             });
                             AccountListBox.Items.Clear();
-                            var setting =
-                                JsonConvert.DeserializeObject<Public.Classes.Setting>(
-                                    File.ReadAllText(Const.String.SettingDataPath));
+                            var setting = Const.Data.Setting;
                             _accountList.ForEach(x =>
                             {
                                 SkinResolver SkinResolver = new(Convert.FromBase64String(x.Skin));
@@ -468,8 +462,7 @@ public partial class Main : UserControl
                     break;
             }
 
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             setting.Language = lang;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
@@ -478,8 +471,7 @@ public partial class Main : UserControl
         {
             MinecraftFolderRoot.IsVisible = true;
             MinecraftFolderRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             setting.WindowTitleBarStyle = WindowTitleBarStyleListBox.SelectedIndex == 0
                 ? WindowTitleBarStyle.System
                 : WindowTitleBarStyle.Ymcl;
@@ -490,8 +482,7 @@ public partial class Main : UserControl
         {
             JavaRuntimeRoot.IsVisible = true;
             JavaRuntimeRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             setting.IsCompleteMinecraftFolderInitialize = true;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
@@ -500,16 +491,14 @@ public partial class Main : UserControl
         {
             AccountRoot.IsVisible = true;
             AccountRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             setting.IsCompleteJavaInitialize = true;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
 
         if (_page == 6)
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             setting.IsCompleteAccountInitialize = true;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             Method.Ui.RestartApp();
@@ -518,7 +507,7 @@ public partial class Main : UserControl
 
     private void OnLoaded(object? sender, RoutedEventArgs e)
     {
-        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+        var setting = Const.Data.Setting;
         _mcFolderList.ForEach(x => MinecraftFolderListBox.Items.Add(x));
         _javaList.ForEach(x => JavaRuntimeListBox.Items.Add(x));
         _accountList.ForEach(x =>
@@ -703,9 +692,7 @@ public partial class Main : UserControl
                                     Skin = Method.Value.BytesToBase64(bytes)
                                 });
                                 AccountListBox.Items.Clear();
-                                var setting =
-                                    JsonConvert.DeserializeObject<Public.Classes.Setting>(
-                                        File.ReadAllText(Const.String.SettingDataPath));
+                                var setting = Const.Data.Setting;
                                 _accountList.ForEach(x =>
                                 {
                                     SkinResolver SkinResolver = new(Convert.FromBase64String(x.Skin));
@@ -734,9 +721,7 @@ public partial class Main : UserControl
                                     Name = account.Name
                                 });
                                 AccountListBox.Items.Clear();
-                                var setting =
-                                    JsonConvert.DeserializeObject<Public.Classes.Setting>(
-                                        File.ReadAllText(Const.String.SettingDataPath));
+                                var setting = Const.Data.Setting;
                                 _accountList.ForEach(x =>
                                 {
                                     SkinResolver SkinResolver = new(Convert.FromBase64String(x.Skin));

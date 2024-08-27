@@ -39,8 +39,7 @@ public partial class AccountSettingPage : UserControl
         Loaded += (s, e) =>
         {
             Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (setting.AccountSelectionIndex + 1 <= AccountsListView.Items.Count)
             {
                 AccountsListView.SelectedIndex = setting.AccountSelectionIndex;
@@ -310,8 +309,7 @@ public partial class AccountSettingPage : UserControl
             {
             }
 
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             setting.AccountSelectionIndex = AccountsListView.SelectedIndex;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
@@ -319,7 +317,7 @@ public partial class AccountSettingPage : UserControl
 
     private void ControlProperty()
     {
-        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+        var setting = Const.Data.Setting;
         LoadAccounts();
     }
 
@@ -327,7 +325,7 @@ public partial class AccountSettingPage : UserControl
     {
         accounts = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.String.AccountDataPath));
         AccountsListView.Items.Clear();
-        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+        var setting = Const.Data.Setting;
         accounts.ForEach(x =>
         {
             SkinResolver SkinResolver = new(Convert.FromBase64String(x.Skin));

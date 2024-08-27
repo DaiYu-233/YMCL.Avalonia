@@ -36,23 +36,24 @@
         <None Remove="Public\Texts\Default.isl" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.1.1" />
-        <PackageReference Include="Dotnet.Bundle" Version="*" />
-        <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.1.1" />
-        <PackageReference Include="Avalonia.Desktop" Version="11.1.1" />
-        <PackageReference Include="Avalonia.Markup.Xaml.Loader" Version="11.1.1" />
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.1" />
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.1" />
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.1" />
-        <PackageReference Include="CurseForge.APIClient" Version="2.2.0" />
-        <PackageReference Include="FluentAvaloniaUI" Version="2.1.0-preview6" />
+        <PackageReference Include="Avalonia" Version="11.2.0-beta1" />
+        <PackageReference Include="Dotnet.Bundle" Version="0.9.13" />
+        <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.2.0-beta1" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.2.0-beta1" />
+        <PackageReference Include="Avalonia.Markup.Xaml.Loader" Version="11.2.0-beta1" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.0-beta1" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.0-beta1" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.2.0-beta1" />
+        <PackageReference Include="CurseForge.APIClient" Version="3.0.0" />
+        <PackageReference Include="FluentAvaloniaUI" Version="2.1.0" />
         <PackageReference Include="ManagedBass" Version="3.1.1" />
         <PackageReference Include="MinecraftLaunch" Version="3.1.0-preview06" />
         <PackageReference Include="MinecraftLaunch.Skin" Version="1.0.1" />
         <PackageReference Include="NAudio" Version="2.2.1" />
         <PackageReference Include="NAudio.Wasapi" Version="2.2.1" />
-        <PackageReference Include="StarLight_Core" Version="1.3.6-Preview8" />
-        <PackageReference Include="System.Management" Version="9.0.0-preview.6.24327.7" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="StarLight_Core" Version="2.0.1-Preview2" />
+        <PackageReference Include="System.Management" Version="9.0.0-preview.7.24405.7" />
     </ItemGroup>
     <ItemGroup>
         <Compile Update="Public\Langs\MainLang.Designer.cs">
@@ -114,11 +115,6 @@
         <EmbeddedResource Include="Public\Texts\CustomHomePageDefault.axaml" />
         <EmbeddedResource Include="Public\Texts\DateTime.txt" />
         <EmbeddedResource Include="Public\Texts\IsAloneProgram.txt" />
-    </ItemGroup>
-    <ItemGroup>
-        <Reference Include="Bass.Net">
-            <HintPath>Public\Assets\Bass.Net.dll</HintPath>
-        </Reference>
     </ItemGroup>
     <ItemGroup>
         <None Update="Public\Assets\YCML-Icon.png">

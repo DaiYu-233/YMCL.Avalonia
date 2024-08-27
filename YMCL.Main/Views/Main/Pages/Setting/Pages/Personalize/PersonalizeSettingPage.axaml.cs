@@ -35,8 +35,7 @@ public partial class PersonalizeSettingPage : UserControl
             if (_firstLoad)
             {
                 _firstLoad = false;
-                var setting =
-                    JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+                var setting = Const.Data.Setting;
                 WindowTitleBarStyleComboBox.SelectedIndex =
                     setting.WindowTitleBarStyle == WindowTitleBarStyle.System ? 0 : 1;
             }
@@ -52,8 +51,7 @@ public partial class PersonalizeSettingPage : UserControl
         };
         CustomHomePageComboBox.SelectionChanged += (s, e) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             EditCustomHomePageBtn.IsVisible = CustomHomePageComboBox.SelectedIndex == 1 ? true : false;
             if (CustomHomePageComboBox.SelectedIndex != (int)setting.CustomHomePage)
             {
@@ -64,8 +62,7 @@ public partial class PersonalizeSettingPage : UserControl
         };
         CustomBackGroundImgComboBox.SelectionChanged += (s, e) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             EditCustomBackGroundImgBtn.IsVisible = CustomBackGroundImgComboBox.SelectedIndex == 1;
             if (CustomBackGroundImgComboBox.SelectedIndex == 1 == setting.EnableCustomBackGroundImg) return;
             setting.EnableCustomBackGroundImg = CustomBackGroundImgComboBox.SelectedIndex == 1;
@@ -74,8 +71,7 @@ public partial class PersonalizeSettingPage : UserControl
         };
         LyricAlignComboBox.SelectionChanged += (s, e) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             Const.Window.deskLyric.LyricText.TextAlignment = (TextAlignment)LyricAlignComboBox.SelectedIndex;
             if (setting.DeskLyricAlignment == (TextAlignment)LyricAlignComboBox.SelectedIndex) return;
             setting.DeskLyricAlignment = (TextAlignment)LyricAlignComboBox.SelectedIndex;
@@ -84,8 +80,7 @@ public partial class PersonalizeSettingPage : UserControl
         ColorPicker.ColorChanged += (s, e) =>
         {
             var color = ColorPicker.Color;
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (setting.AccentColor != color)
             {
                 setting.AccentColor = color;
@@ -97,8 +92,7 @@ public partial class PersonalizeSettingPage : UserControl
         LyricColorPicker.ColorChanged += (s, e) =>
         {
             var color = LyricColorPicker.Color;
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (setting.DeskLyricColor != color)
             {
                 setting.DeskLyricColor = color;
@@ -116,8 +110,7 @@ public partial class PersonalizeSettingPage : UserControl
         {
             LyricSizeSliderText.Text = Math.Round(LyricSizeSlider.Value).ToString();
             var color = LyricColorPicker.Color;
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (setting.DeskLyricSize != Math.Round(LyricSizeSlider.Value))
             {
                 setting.DeskLyricSize = Math.Round(LyricSizeSlider.Value);
@@ -130,8 +123,7 @@ public partial class PersonalizeSettingPage : UserControl
         };
         WindowTitleBarStyleComboBox.SelectionChanged += async (_, _) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if ((WindowTitleBarStyleComboBox.SelectedIndex == 0 &&
                  setting.WindowTitleBarStyle == WindowTitleBarStyle.System) ||
                 (WindowTitleBarStyleComboBox.SelectedIndex == 1 &&
@@ -216,15 +208,13 @@ public partial class PersonalizeSettingPage : UserControl
         };
         OpenFileWayComboBox.SelectionChanged += (s, e) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             setting.OpenFileWay = (OpenFileWay)OpenFileWayComboBox.SelectedIndex;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
         LanguageComboBox.SelectionChanged += (s, e) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (LanguageComboBox.SelectedItem.ToString().Split(' ')[0] != setting.Language)
             {
                 setting.Language = LanguageComboBox.SelectedItem.ToString().Split(' ')[0];
@@ -234,8 +224,7 @@ public partial class PersonalizeSettingPage : UserControl
         };
         ThemeComboBox.SelectionChanged += (_, _) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (ThemeComboBox.SelectedIndex != (int)setting.Theme)
             {
                 setting.Theme = (Theme)ThemeComboBox.SelectedIndex;
@@ -246,8 +235,7 @@ public partial class PersonalizeSettingPage : UserControl
         };
         LauncherVisibilityComboBox.SelectionChanged += (_, _) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (LauncherVisibilityComboBox.SelectedIndex != (int)setting.LauncherVisibility)
             {
                 setting.LauncherVisibility = (LauncherVisibility)LauncherVisibilityComboBox.SelectedIndex;
@@ -264,8 +252,7 @@ public partial class PersonalizeSettingPage : UserControl
             {
                 var base64 = Method.Value.BytesToBase64(File.ReadAllBytes(path.Path));
 
-                var setting =
-                    JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+                var setting = Const.Data.Setting;
                 setting.WindowBackGroundImgData = base64;
                 File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
@@ -276,7 +263,7 @@ public partial class PersonalizeSettingPage : UserControl
 
     private void ControlProperty()
     {
-        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+        var setting = Const.Data.Setting;
         OpenFileWayComboBox.SelectedIndex = (int)setting.OpenFileWay;
         var langs = new List<string>
         {

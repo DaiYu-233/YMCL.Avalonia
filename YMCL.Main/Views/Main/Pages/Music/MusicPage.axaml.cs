@@ -98,8 +98,7 @@ public partial class MusicPage : UserControl
                     break;
             }
 
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             setting.Repeat = _repeat;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             RepeatBtn.Reload();
@@ -215,8 +214,7 @@ public partial class MusicPage : UserControl
             _volume = (float)VolumeSlider.Value / 100;
             if (_waveOut != null) _waveOut.Volume = (float)VolumeSlider.Value / 100;
 
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (VolumeSlider.Value == setting.Volume) return;
             setting.Volume = VolumeSlider.Value;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
@@ -244,8 +242,7 @@ public partial class MusicPage : UserControl
                 timer.AutoReset = true;
                 timer.Enabled = true;
 
-                var setting =
-                    JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+                var setting = Const.Data.Setting;
                 _solidColorBrush = setting.Theme == Public.Theme.Light
                     ? new SolidColorBrush(Color.FromArgb((byte)(255 * 0.3), 0x33, 0x33, 0x33))
                     : new SolidColorBrush(Color.FromArgb((byte)(255 * 0.3), 255, 255, 255));

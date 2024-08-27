@@ -41,7 +41,7 @@ public partial class ImageIcon : UserControl
     }
     private void ImageIcon_Loaded(object? sender, RoutedEventArgs e)
     {
-        var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
+        var setting = Const.Data.Setting;
         IBrush? brush;
         if (Color == null)
             brush = setting.Theme == Public.Theme.Light ? Brush.Parse("#333333") : Brush.Parse("#ffffff");

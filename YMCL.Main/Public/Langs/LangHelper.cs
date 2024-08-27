@@ -33,7 +33,7 @@ public class LangHelper : INotifyPropertyChanged
 
     public static string GetText(string name, string culture = "")
     {
-        var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
+        var setting = Const.Data.Setting;
         CultureInfo cultureInfo;
         if (culture == "")
         {

@@ -319,9 +319,7 @@ public partial class CurseForgeFetcher : UserControl
         {
             var fN = item.DisplayName;
             if (Path.GetExtension(fN) != ".zip") fN += ".zip";
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(
-                    System.IO.File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             while (true)
             {
                 var textBox = new TextBox

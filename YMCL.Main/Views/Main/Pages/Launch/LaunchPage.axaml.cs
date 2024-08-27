@@ -57,8 +57,7 @@ public partial class LaunchPage : UserControl
             minecraftFolders =
                 JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.MinecraftFolderDataPath));
             MinecraftFolderComboBox.Items.Clear();
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             foreach (var item in minecraftFolders) MinecraftFolderComboBox.Items.Add(item);
             if (setting.MinecraftFolder == null || !minecraftFolders.Contains(setting.MinecraftFolder))
                 MinecraftFolderComboBox.SelectedIndex = 0;
@@ -89,8 +88,7 @@ public partial class LaunchPage : UserControl
         {
             AccountComboBox.IsVisible = false;
             AccountComboBox.IsVisible = true;
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (AccountComboBox.SelectedItem as AccountInfo != null)
                 Head.Source = (AccountComboBox.SelectedItem as AccountInfo).Bitmap;
             if (AccountComboBox.SelectedIndex == setting.AccountSelectionIndex ||
@@ -100,8 +98,7 @@ public partial class LaunchPage : UserControl
         };
         MinecraftFolderComboBox.SelectionChanged += (s, e) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (MinecraftFolderComboBox.SelectedItem == null ||
                 MinecraftFolderComboBox.SelectedItem.ToString() == setting.MinecraftFolder) return;
             setting.MinecraftFolder = MinecraftFolderComboBox.SelectedItem.ToString();
@@ -173,8 +170,7 @@ public partial class LaunchPage : UserControl
         {
             if (VersionListView.SelectedItem != null)
             {
-                var setting =
-                    JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+                var setting = Const.Data.Setting;
                 GameCoreText.Text = (VersionListView.SelectedItem as GameEntry).Id;
                 if (VersionListView.SelectedIndex == 0)
                     setting.Version = "BedRock";
@@ -342,7 +338,7 @@ public partial class LaunchPage : UserControl
 
     private void LoadVersions()
     {
-        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+        var setting = Const.Data.Setting;
         IGameResolver gameResolver = new GameResolver(setting.MinecraftFolder);
         var list = gameResolver.GetGameEntitys();
         VersionListView.Items.Clear();
@@ -377,7 +373,7 @@ public partial class LaunchPage : UserControl
     {
         var accounts = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.String.AccountDataPath));
         AccountComboBox.Items.Clear();
-        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+        var setting = Const.Data.Setting;
         accounts.ForEach(x =>
         {
             SkinResolver SkinResolver = new(Convert.FromBase64String(x.Skin));

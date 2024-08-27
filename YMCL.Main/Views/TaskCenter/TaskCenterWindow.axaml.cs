@@ -67,7 +67,7 @@ public partial class TaskCenterWindow : Window
         Hide();
         SystemDecorations = SystemDecorations.Full;
 
-        var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
+        var setting = Const.Data.Setting;
         titleBarStyle = setting.WindowTitleBarStyle;
         switch (setting.WindowTitleBarStyle)
         {

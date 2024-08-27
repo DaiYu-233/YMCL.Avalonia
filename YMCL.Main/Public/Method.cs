@@ -180,7 +180,7 @@ public class Method
 
         public static void SetWindowBackGroundImg()
         {
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (setting.EnableCustomBackGroundImg && !string.IsNullOrEmpty(setting.WindowBackGroundImgData))
             {
                 Application.Current.Resources["Opacity"] = 0.875;
@@ -352,9 +352,7 @@ public class Method
                     return false;
                 }
 
-                var setting =
-                    JsonConvert.DeserializeObject<Setting>(
-                        File.ReadAllText(Const.String.SettingDataPath));
+                var setting = Const.Data.Setting;
                 var trueUrl = url;
                 if (setting.EnableCustomUpdateUrl)
                 {
@@ -448,7 +446,7 @@ public class Method
             FolderPickerOpenOptions options = null)
         {
             var isPrimaryButtonClick = false;
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (setting.OpenFileWay == OpenFileWay.FileSelectWindow)
             {
                 if (options != null && topLevel != null)
@@ -501,7 +499,7 @@ public class Method
         {
             var title = p_title == null ? MainLang.InputFilePath : p_title;
             var isPrimaryButtonClick = false;
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (setting.OpenFileWay == OpenFileWay.FileSelectWindow)
             {
                 if (options != null && topLevel != null)
@@ -559,7 +557,7 @@ public class Method
         public static async Task<string> SaveFilePicker(TopLevel topLevel = null, FilePickerSaveOptions options = null)
         {
             var isPrimaryButtonClick = false;
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (setting.OpenFileWay == OpenFileWay.FileSelectWindow)
             {
                 if (options != null && topLevel != null)
@@ -994,7 +992,7 @@ public class Method
                 return false;
             }
 
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             var resolver = new GameResolver(setting.MinecraftFolder);
             var vanlliaInstaller = new VanlliaInstaller(resolver, versionId, MirrorDownloadManager.Bmcl);
             if (Directory.Exists(Path.Combine(setting.MinecraftFolder, "versions", customId)))
@@ -1322,7 +1320,7 @@ public class Method
             double l_maxMem = -1;
             var l_enableIndependencyCore = true;
 
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (string.IsNullOrEmpty(p_id))
             {
                 if (Const.Window.main.launchPage.VersionListView.SelectedItem as GameEntry != null)
@@ -1713,7 +1711,7 @@ public class Method
             double l_maxMem = -1;
             var l_enableIndependencyCore = true;
 
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (string.IsNullOrEmpty(p_id))
             {
                 if (Const.Window.main.launchPage.VersionListView.SelectedItem as GameEntry != null)
@@ -2103,7 +2101,7 @@ public class Method
         public static async Task<bool> ImportModPackFromLocal(string path, bool confirmBox = true,
             string p_customId = null)
         {
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             var customId = string.Empty;
             while (true)
             {

@@ -36,8 +36,7 @@ public partial class LaunchSettingPage : UserControl
         {
             Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
             var totalMemory = Method.Value.GetTotalMemory(Const.Data.Platform);
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (_firstLoad)
             {
                 _firstLoad = false;
@@ -55,8 +54,7 @@ public partial class LaunchSettingPage : UserControl
         };
         IndependencyCoreSwitch.Click += (s, e) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (IndependencyCoreSwitch.IsChecked != setting.EnableIndependencyCore)
             {
                 setting.EnableIndependencyCore = (bool)IndependencyCoreSwitch.IsChecked!;
@@ -65,8 +63,7 @@ public partial class LaunchSettingPage : UserControl
         };
         ShowGameOutputSwitch.Click += (s, e) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (ShowGameOutputSwitch.IsChecked != setting.ShowGameOutput)
             {
                 setting.ShowGameOutput = (bool)ShowGameOutputSwitch.IsChecked!;
@@ -108,15 +105,13 @@ public partial class LaunchSettingPage : UserControl
         };
         MinecraftFolderComboBox.SelectionChanged += (s, e) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             setting.MinecraftFolder = (string)MinecraftFolderComboBox.SelectionBoxItem;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
         LaunchCoreComboBox.SelectionChanged += (s, e) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             setting.LaunchCore = (LaunchCore)LaunchCoreComboBox.SelectedIndex;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
@@ -193,8 +188,7 @@ public partial class LaunchSettingPage : UserControl
         {
             JavaComboBox.IsVisible = false;
             JavaComboBox.IsVisible = true;
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (JavaComboBox.SelectedIndex == 0)
                 setting.Java = new JavaEntry { JavaPath = "Auto", JavaVersion = "All" };
             else
@@ -204,8 +198,7 @@ public partial class LaunchSettingPage : UserControl
         MaxMemSlider.ValueChanged += (s, e) =>
         {
             MaxMemText.Text = $"{Math.Round(MaxMemSlider.Value)}M";
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (setting.MaxMem != MaxMemSlider.Value)
             {
                 setting.MaxMem = Math.Round(MaxMemSlider.Value);
@@ -216,7 +209,7 @@ public partial class LaunchSettingPage : UserControl
 
     private void ControlProperty()
     {
-        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+        var setting = Const.Data.Setting;
         minecraftFolders.ForEach(folder => { MinecraftFolderComboBox.Items.Add(folder); });
         IndependencyCoreSwitch.IsChecked = setting.EnableIndependencyCore;
         ShowGameOutputSwitch.IsChecked = setting.ShowGameOutput;

@@ -59,8 +59,7 @@ public partial class MainWindow : Window
             if (!Const.Window.main._firstLoad) return;
             Const.Window.main._firstLoad = false;
             Method.Ui.CheckLauncher();
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (!setting.IsAlreadyWrittenIntoTheUrlScheme)
             {
                 if (Const.Data.Platform == Platform.Windows)
@@ -192,7 +191,7 @@ public partial class MainWindow : Window
         
         SystemDecorations = SystemDecorations.Full;
 
-        var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
+        var setting = Const.Data.Setting;
         FrameView.Content = launchPage;
         titleBarStyle = setting.WindowTitleBarStyle;
         switch (setting.WindowTitleBarStyle)

@@ -58,14 +58,6 @@ public partial class InitializeWindow : Window
         Method.IO.TryCreateFolder(Const.String.TempFolderPath);
         if (!File.Exists(Const.String.SettingDataPath))
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(new Setting(), Formatting.Indented));
-        if (File.Exists(Path.Combine(Const.String.UserDataRootPath, "YMCL.Update.Helper.win.exe")))
-            File.Delete(Path.Combine(Const.String.UserDataRootPath, "YMCL.Update.Helper.win.exe"));
-        if (File.Exists(Path.Combine(Const.String.UserDataRootPath, "YMCL.Update.Helper.linux")))
-            File.Delete(Path.Combine(Const.String.UserDataRootPath, "YMCL.Update.Helper.linux"));
-        if (File.Exists(Path.Combine(Const.String.UserDataRootPath, "Update.exe")))
-            File.Delete(Path.Combine(Const.String.UserDataRootPath, "Update.exe"));
-        if (File.Exists(Path.Combine(Const.String.UserDataRootPath, "Update")))
-            File.Delete(Path.Combine(Const.String.UserDataRootPath, "Update"));
         if (!File.Exists(Const.String.MinecraftFolderDataPath) || JsonConvert
                 .DeserializeObject<List<string>>(File.ReadAllText(Const.String.MinecraftFolderDataPath)).Count == 0)
         {
@@ -77,7 +69,7 @@ public partial class InitializeWindow : Window
             setting1.MinecraftFolder = path;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting1, Formatting.Indented));
         }
-
+        Const.Data.Setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
         if (!File.Exists(Const.String.JavaDataPath))
             File.WriteAllText(Const.String.JavaDataPath,
                 JsonConvert.SerializeObject(new List<JavaEntry>(), Formatting.Indented));
@@ -125,7 +117,7 @@ public partial class InitializeWindow : Window
             }
         }
             
-        var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
+        var setting = Const.Data.Setting;
         if (setting.Language == null || setting.Language == "zh-CN")
             LangHelper.Current.ChangedCulture("");
         else
@@ -186,7 +178,7 @@ public partial class InitializeWindow : Window
     {
         YMCL.Main.Views.Initialize.Pages.Main.Main mianPage = new();
         Frame.Content = mianPage;
-        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+        var setting = Const.Data.Setting;
         mianPage.WindowTitleBarStyleListBox.SelectedIndex = setting.WindowTitleBarStyle switch
         {
             WindowTitleBarStyle.System => 0,

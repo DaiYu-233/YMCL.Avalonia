@@ -40,8 +40,7 @@ public partial class DownloadSettingPage : UserControl
         };
         MusicApiTextBox.TextChanged += (s, e) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             setting.MusicApi = MusicApiTextBox.Text;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             Const.String.MusicApiUrl = MusicApiTextBox.Text;
@@ -56,8 +55,7 @@ public partial class DownloadSettingPage : UserControl
         };
         DownloadSourceComboBox.SelectionChanged += (s, e) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (setting.DownloadSource == (DownloadSource)DownloadSourceComboBox.SelectedIndex) return;
             setting.DownloadSource = (DownloadSource)DownloadSourceComboBox.SelectedIndex;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
@@ -70,16 +68,14 @@ public partial class DownloadSettingPage : UserControl
             else
                 CustomUpdateUrlEnableComboBox.Width = CustomUpdateUrlRoot.Bounds.Width - 2 * 6.5 -
                                                       CustomUpdateUrlLabel.Bounds.Width - 30;
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (setting.EnableCustomUpdateUrl == (CustomUpdateUrlEnableComboBox.SelectedIndex == 1)) return;
             setting.EnableCustomUpdateUrl = CustomUpdateUrlEnableComboBox.SelectedIndex == 1;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
         CustomUpdateUrlTextBox.TextChanged += (_, _) =>
         {
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (setting.CustomUpdateUrl == CustomUpdateUrlTextBox.Text) return;
             setting.CustomUpdateUrl = CustomUpdateUrlTextBox.Text;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
@@ -90,8 +86,7 @@ public partial class DownloadSettingPage : UserControl
             MaximumDownloadThreadText.Text = value.ToString();
             MaximumDownloadThreadSlider.Value = value;
             DownloadThreadWarning.IsVisible = MaximumDownloadThreadSlider.Value > 100;
-            var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (setting.MaximumDownloadThread == value) return;
             setting.MaximumDownloadThread = value;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
@@ -100,8 +95,7 @@ public partial class DownloadSettingPage : UserControl
 
     private void ControlProperty()
     {
-        var setting =
-            JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
+        var setting = Const.Data.Setting;
         DownloadSourceComboBox.SelectedIndex = (int)setting.DownloadSource;
         MaximumDownloadThreadText.Text = setting.MaximumDownloadThread.ToString();
         MaximumDownloadThreadSlider.Value = setting.MaximumDownloadThread;

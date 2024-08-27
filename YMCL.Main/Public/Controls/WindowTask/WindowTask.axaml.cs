@@ -56,7 +56,7 @@ public partial class WindowTask : Window
         };
         Loaded += (_, _) =>
         {
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
+            var setting = Const.Data.Setting;
             if (setting.WindowTitleBarStyle == WindowTitleBarStyle.System)
             {
                 TitleBar.IsVisible = false;

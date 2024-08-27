@@ -73,6 +73,7 @@ public partial class LauncherSettingPage : UserControl
 
             if (!checkUpdateAsyncStatus)
             {
+                Method.Ui.Toast(MainLang.CurrentlyTheLatestVersion);
                 return;
             }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using FluentAvalonia.UI.Controls;
 using YMCL.Main.Public;
@@ -38,7 +39,7 @@ public partial class SettingPage : UserControl
         {
             Method.Ui.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
         };
-        Nav.SelectionChanged += (s, e) =>
+        Nav.SelectionChanged += async (s, e) =>
         {
             switch (((NavigationViewItem)((NavigationView)s!).SelectedItem!).Tag)
             {
@@ -67,6 +68,8 @@ public partial class SettingPage : UserControl
                     FrameView.Content = downloadSettingPage;
                     break;
             }
+            await Task.Delay(800);
+            Button.Focus();
         };
     }
 }

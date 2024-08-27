@@ -905,4 +905,10 @@ sudo apt install vlc</value>
   <data name="DeskLyricSize" xml:space="preserve">
       <value>桌面歌词大小</value>
     </data>
+    <data name="AutoUpdate" xml:space="preserve">
+      <value>自动更新</value>
+    </data>
+    <data name="SkipThisVersion" xml:space="preserve">
+      <value>跳过此版本</value>
+    </data>
 </root>

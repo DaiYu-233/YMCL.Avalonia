@@ -8,6 +8,8 @@ public class Setting
 {
     public string Language { get; set; } = "Unset";
     public string MinecraftFolder { get; set; }
+    public string SkipUpdateVersion { get; set; } = string.Empty;
+    public bool EnableAutoCheckUpdate { get; set; } = true;
     public double MaximumDownloadThread { get; set; } = 64;
     public bool IsCompleteJavaInitialize { get; set; }
     public bool IsCompleteMinecraftFolderInitialize { get; set; }

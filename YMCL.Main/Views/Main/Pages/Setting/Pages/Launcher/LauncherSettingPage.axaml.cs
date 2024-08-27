@@ -1,21 +1,13 @@
 using System;
-using System.Diagnostics;
 using System.IO;
-using System.Net;
-using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using Avalonia.Controls;
-using Avalonia.Layout;
-using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using YMCL.Main.Public;
-using YMCL.Main.Public.Controls.WindowTask;
 using YMCL.Main.Public.Langs;
-using Application = Avalonia.Application;
 
 namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher;
 
@@ -26,6 +18,28 @@ public partial class LauncherSettingPage : UserControl
         InitializeComponent();
         ControlProperty();
         BindingEvent();
+    }
+
+    public async Task AutoUpdate()
+    {
+        if (!Const.Data.Setting.EnableAutoCheckUpdate) return;
+        var updateAvailable = await Method.Ui.CheckUpdateAsync();
+        if (!updateAvailable.Item1) return;
+        if (Const.Data.Setting.SkipUpdateVersion == updateAvailable.Item2) return;
+        var dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion, updateAvailable.Item3
+            , b_cancel: MainLang.Cancel, b_secondary: MainLang.SkipThisVersion,
+            b_primary: MainLang.Ok);
+        if (dialog == ContentDialogResult.Primary)
+        {
+            var updateAppAsync = await Method.Ui.UpdateAppAsync();
+            if (!updateAppAsync) Method.Ui.Toast(MainLang.UpdateFail);
+        }
+        else if (dialog == ContentDialogResult.Secondary)
+        {
+            Const.Data.Setting.SkipUpdateVersion = updateAvailable.Item2;
+            File.WriteAllText(Const.String.SettingDataPath,
+                JsonConvert.SerializeObject(Const.Data.Setting, Formatting.Indented));
+        }
     }
 
     private void BindingEvent()
@@ -47,7 +61,7 @@ public partial class LauncherSettingPage : UserControl
             CheckUpdateBtn.Content = ring;
             ring.Height = 17;
             ring.Width = 17;
-            var (checkUpdateAsyncStatus, checkUpdateAsyncMsg) = await Method.Ui.CheckUpdateAsync();
+            var (checkUpdateAsyncStatus, _, checkUpdateAsyncMsg) = await Method.Ui.CheckUpdateAsync();
             CheckUpdateBtn.IsEnabled = true;
             CheckUpdateBtn.Content = MainLang.CheckUpdate;
             if (!checkUpdateAsyncStatus)
@@ -62,10 +76,7 @@ public partial class LauncherSettingPage : UserControl
             if (dialog == ContentDialogResult.Primary)
             {
                 var updateAppAsync = await Method.Ui.UpdateAppAsync();
-                if (!updateAppAsync)
-                {
-                    Method.Ui.Toast(MainLang.UpdateFail);
-                }
+                if (!updateAppAsync) Method.Ui.Toast(MainLang.UpdateFail);
             }
         };
     }

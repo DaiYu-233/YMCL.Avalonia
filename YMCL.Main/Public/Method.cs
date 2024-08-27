@@ -285,7 +285,7 @@ public class Method
             Environment.Exit(0);
         }
 
-        public static async Task<(bool, string)> CheckUpdateAsync()
+        public static async Task<(bool, string, string)> CheckUpdateAsync()
         {
             try
             {
@@ -303,12 +303,12 @@ public class Method
                 httpClient.DefaultRequestHeaders.Add("User-Agent",
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54");
                 var githubApiJson = JArray.Parse(await httpClient.GetStringAsync(Const.String.GithubUpdateApiUrl));
-                var apiVersion = (string)githubApiJson[0]["name"];
-                return (apiVersion != version, $"{apiVersion!}\n\n{(string)githubApiJson[0]["html_url"]}");
+                var apiVersion = (string)githubApiJson[0]["name"]!;
+                return (apiVersion != version, apiVersion, $"{apiVersion!}\n\n{(string)githubApiJson[0]["html_url"]}");
             }
             catch
             {
-                return (false, string.Empty);
+                return (false, string.Empty, string.Empty);
             }
         }
 

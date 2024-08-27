@@ -303,6 +303,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 自动更新.
+        /// </summary>
+        public static string AutoUpdate {
+            get {
+                return ResourceManager.GetString("AutoUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 基岩版.
         /// </summary>
         public static string BedRockVersion {
@@ -2039,6 +2048,15 @@ namespace YMCL.Main.Public.Langs {
         public static string SkinModel {
             get {
                 return ResourceManager.GetString("SkinModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 跳过此版本.
+        /// </summary>
+        public static string SkipThisVersion {
+            get {
+                return ResourceManager.GetString("SkipThisVersion", resourceCulture);
             }
         }
         

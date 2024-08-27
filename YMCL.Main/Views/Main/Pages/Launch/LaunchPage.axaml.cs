@@ -31,6 +31,7 @@ public partial class LaunchPage : UserControl
     private bool _firstOpenVersionList = true;
     private bool _firstOpenVersionSetting = true;
     private bool _shouldCloseVersuionList;
+    private bool _isSelectioningVersionFolder = false;
 
     private List<string> minecraftFolders =
         JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.MinecraftFolderDataPath));
@@ -80,7 +81,8 @@ public partial class LaunchPage : UserControl
             }
             else
             {
-                LaunchConsoleRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;;
+                LaunchConsoleRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
+                ;
                 LaunchConsoleRoot.IsVisible = true;
             }
         };
@@ -103,6 +105,7 @@ public partial class LaunchPage : UserControl
                 MinecraftFolderComboBox.SelectedItem.ToString() == setting.MinecraftFolder) return;
             setting.MinecraftFolder = MinecraftFolderComboBox.SelectedItem.ToString();
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            _isSelectioningVersionFolder = true;
             _shouldCloseVersuionList = false;
             LoadVersions();
             VersionListView.SelectedIndex = 0;
@@ -165,7 +168,16 @@ public partial class LaunchPage : UserControl
             }
         };
         CloseVersionListBtn.Click += (s, e) => { CloseVersionList(); };
-        VersionListView.PointerEntered += (s, e) => { _shouldCloseVersuionList = true; };
+        VersionListView.PointerEntered += async (s, e) =>
+        {
+            if (_isSelectioningVersionFolder)
+            {
+                await Task.Delay(200);
+                _isSelectioningVersionFolder = false;
+            }
+
+            _shouldCloseVersuionList = true;
+        };
         VersionListView.SelectionChanged += async (s, e) =>
         {
             if (VersionListView.SelectedItem != null)
@@ -176,7 +188,8 @@ public partial class LaunchPage : UserControl
                     setting.Version = "BedRock";
                 else
                     setting.Version = (VersionListView.SelectedItem as GameEntry).Id;
-                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
 
             await Task.Delay(100);
@@ -399,7 +412,8 @@ public partial class LaunchPage : UserControl
             {
                 AccountComboBox.SelectedItem = AccountComboBox.Items[0];
                 setting.AccountSelectionIndex = 0;
-                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
         }
         else

@@ -111,9 +111,13 @@ public partial class MainWindow : Window
                 else if (Const.Data.Platform == Platform.Linux)
                 {
                     setting.IsAlreadyWrittenIntoTheUrlScheme = true;
-                    File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                    File.WriteAllText(Const.String.SettingDataPath,
+                        JsonConvert.SerializeObject(setting, Formatting.Indented));
                 }
             }
+
+            await Task.Delay(200);
+            _ = Const.Window.main.settingPage.launcherSettingPage.AutoUpdate();
         };
         Activated += (_, _) =>
         {
@@ -188,7 +192,7 @@ public partial class MainWindow : Window
     public void LoadWindow()
     {
         Method.IO.ClearFolder(Const.String.TempFolderPath);
-        
+
         SystemDecorations = SystemDecorations.Full;
 
         var setting = Const.Data.Setting;
@@ -221,7 +225,8 @@ public partial class MainWindow : Window
         if (setting.CustomHomePage == CustomHomePageWay.Local)
             try
             {
-                var c = (Control)AvaloniaRuntimeXamlLoader.Load(File.ReadAllText(Const.String.CustomHomePageXamlDataPath));
+                var c = (Control)AvaloniaRuntimeXamlLoader.Load(
+                    File.ReadAllText(Const.String.CustomHomePageXamlDataPath));
                 launchPage.CustomPageRoot.Child = c;
             }
             catch (Exception ex)

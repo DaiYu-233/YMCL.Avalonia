@@ -45,13 +45,28 @@ public partial class DownloadSettingPage : UserControl
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             Const.String.MusicApiUrl = MusicApiTextBox.Text;
         };
+        AutoUpdateSwitch.Click += (s, e) =>
+        {
+            var setting = Const.Data.Setting;
+            if (AutoUpdateSwitch.IsChecked != setting.ShowGameOutput)
+            {
+                setting.EnableAutoCheckUpdate = (bool)AutoUpdateSwitch.IsChecked!;
+                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            }
+        };
         SizeChanged += (_, _) =>
         {
-            if (CustomUpdateUrlTextBox.IsVisible)
-                CustomUpdateUrlEnableComboBox.Width = 150;
-            else
-                CustomUpdateUrlEnableComboBox.Width = CustomUpdateUrlRoot.Bounds.Width - 2 * 6.5 -
-                                                      CustomUpdateUrlLabel.Bounds.Width - 30;
+            try
+            {
+                if (CustomUpdateUrlTextBox.IsVisible)
+                    CustomUpdateUrlEnableComboBox.Width = 150;
+                else
+                    CustomUpdateUrlEnableComboBox.Width = CustomUpdateUrlRoot.Bounds.Width - 2 * 6.5 -
+                                                          CustomUpdateUrlLabel.Bounds.Width - 30;
+            }
+            catch
+            {
+            }
         };
         DownloadSourceComboBox.SelectionChanged += (s, e) =>
         {
@@ -101,6 +116,7 @@ public partial class DownloadSettingPage : UserControl
         MaximumDownloadThreadSlider.Value = setting.MaximumDownloadThread;
         DownloadThreadWarning.IsVisible = MaximumDownloadThreadSlider.Value > 100;
         CustomUpdateUrlEnableComboBox.SelectedIndex = setting.EnableCustomUpdateUrl ? 1 : 0;
+        AutoUpdateSwitch.IsChecked = setting.EnableAutoCheckUpdate;
         CustomUpdateUrlTextBox.Text = setting.CustomUpdateUrl;
         Const.String.MusicApiUrl = setting.MusicApi;
         MusicApiTextBox.Text = setting.MusicApi;

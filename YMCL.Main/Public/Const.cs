@@ -44,6 +44,7 @@ public abstract class Const
         public static string PluginDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.Plugin.DaiYu");
         public static string PluginFolderPath { get; } = Path.Combine(UserDataRootPath, "Plugin");
         public static string TempFolderPath { get; } = Path.Combine(UserDataRootPath, "Temp");
+        public static string UpdateFolderPath { get; } = Path.Combine(UserDataRootPath, "Update");
         public static string VersionSettingFileName { get; } = "YMCLSetting.DaiYu";
 
         public static string GithubUpdateApiUrl { get; } =

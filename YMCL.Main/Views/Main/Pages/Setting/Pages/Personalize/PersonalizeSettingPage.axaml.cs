@@ -46,8 +46,14 @@ public partial class PersonalizeSettingPage : UserControl
         };
         SizeChanged += (s, e) =>
         {
-            ColorPicker.Width = ColorPickerRoot.Bounds.Width - 2 * 6.5 - ColorPickerLabel.Bounds.Width - 30;
-            LyricColorPicker.Width = LyricRoot.Bounds.Width - 2 * 6.5 - LyricColorPickerLabel.Bounds.Width - 30;
+            try
+            {
+                ColorPicker.Width = ColorPickerRoot.Bounds.Width - 2 * 6.5 - ColorPickerLabel.Bounds.Width - 30;
+                LyricColorPicker.Width = LyricRoot.Bounds.Width - 2 * 6.5 - LyricColorPickerLabel.Bounds.Width - 30;
+            }
+            catch
+            {
+            }
         };
         CustomHomePageComboBox.SelectionChanged += (s, e) =>
         {
@@ -56,7 +62,8 @@ public partial class PersonalizeSettingPage : UserControl
             if (CustomHomePageComboBox.SelectedIndex != (int)setting.CustomHomePage)
             {
                 setting.CustomHomePage = (CustomHomePageWay)CustomHomePageComboBox.SelectedIndex;
-                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(setting, Formatting.Indented));
                 Method.Ui.RestartApp();
             }
         };
@@ -84,7 +91,8 @@ public partial class PersonalizeSettingPage : UserControl
             if (setting.AccentColor != color)
             {
                 setting.AccentColor = color;
-                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
 
             Method.Ui.SetAccentColor(color);
@@ -96,7 +104,8 @@ public partial class PersonalizeSettingPage : UserControl
             if (setting.DeskLyricColor != color)
             {
                 setting.DeskLyricColor = color;
-                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
 
             Const.Window.deskLyric.LyricText.Foreground = new SolidColorBrush(color);
@@ -114,7 +123,8 @@ public partial class PersonalizeSettingPage : UserControl
             if (setting.DeskLyricSize != Math.Round(LyricSizeSlider.Value))
             {
                 setting.DeskLyricSize = Math.Round(LyricSizeSlider.Value);
-                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
 
             Const.Window.deskLyric.LyricText.Transitions = null;
@@ -218,7 +228,8 @@ public partial class PersonalizeSettingPage : UserControl
             if (LanguageComboBox.SelectedItem.ToString().Split(' ')[0] != setting.Language)
             {
                 setting.Language = LanguageComboBox.SelectedItem.ToString().Split(' ')[0];
-                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(setting, Formatting.Indented));
                 Method.Ui.RestartApp();
             }
         };
@@ -228,7 +239,8 @@ public partial class PersonalizeSettingPage : UserControl
             if (ThemeComboBox.SelectedIndex != (int)setting.Theme)
             {
                 setting.Theme = (Theme)ThemeComboBox.SelectedIndex;
-                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
 
             Method.Ui.RestartApp();
@@ -239,7 +251,8 @@ public partial class PersonalizeSettingPage : UserControl
             if (LauncherVisibilityComboBox.SelectedIndex != (int)setting.LauncherVisibility)
             {
                 setting.LauncherVisibility = (LauncherVisibility)LauncherVisibilityComboBox.SelectedIndex;
-                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
         };
         EditCustomBackGroundImgBtn.Click += async (_, _) =>
@@ -254,7 +267,8 @@ public partial class PersonalizeSettingPage : UserControl
 
                 var setting = Const.Data.Setting;
                 setting.WindowBackGroundImgData = base64;
-                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
 
             Method.Ui.SetWindowBackGroundImg();

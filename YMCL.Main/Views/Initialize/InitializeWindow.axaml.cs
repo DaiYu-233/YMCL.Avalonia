@@ -56,6 +56,7 @@ public partial class InitializeWindow : Window
         Method.IO.TryCreateFolder(Const.String.UserDataRootPath);
         Method.IO.TryCreateFolder(Const.String.PluginFolderPath);
         Method.IO.TryCreateFolder(Const.String.TempFolderPath);
+        Method.IO.TryCreateFolder(Const.String.UpdateFolderPath);
         if (!File.Exists(Const.String.SettingDataPath))
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(new Setting(), Formatting.Indented));
         if (!File.Exists(Const.String.MinecraftFolderDataPath) || JsonConvert

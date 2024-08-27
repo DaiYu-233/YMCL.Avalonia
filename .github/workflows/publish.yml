@@ -143,3 +143,4 @@ jobs:
           files: |
             YMCL.Release/*.exe
             YMCL.Release/Deploy/OUT/*.AppImage
+            YMCL.Release/bin/Release/net8.0/*.zip

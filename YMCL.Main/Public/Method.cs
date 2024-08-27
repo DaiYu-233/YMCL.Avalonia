@@ -314,6 +314,7 @@ public class Method
 
         public static async Task<bool> UpdateAppAsync()
         {
+            var task = new WindowTask(MainLang.CheckUpdate);
             try
             {
                 var architecture = Value.GetCurrentPlatformAndArchitecture();
@@ -321,7 +322,6 @@ public class Method
                 httpClient.DefaultRequestHeaders.Add("User-Agent",
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54");
                 var githubApiJson = JArray.Parse(await httpClient.GetStringAsync(Const.String.GithubUpdateApiUrl));
-                var task = new WindowTask(MainLang.CheckUpdate);
                 task.UpdateTextProgress(MainLang.CheckUpdate);
                 var assets = (JArray)githubApiJson[0]["assets"];
                 var url = String.Empty;
@@ -338,12 +338,21 @@ public class Method
                         case "YMCL.Main.linux.x64.AppImage" when architecture == "linux-x64":
                         case "YMCL.Main.osx.mac.x64.app.zip" when architecture == "osx-x64":
                         case "YMCL.Main.osx.mac.arm64.app.zip" when architecture == "osx-arm64":
-                        case "YMCL.Main.win10+.x64.installer.exe" when architecture == "win-x64" && Environment.OSVersion.Version.Major >= 10:
-                        case "YMCL.Main.win10+.x86.installer.exe" when architecture == "win-x86" && Environment.OSVersion.Version.Major >= 10:
-                        case "YMCL.Main.win10+.arm64.installer.exe" when architecture == "win-arm64" && Environment.OSVersion.Version.Major >= 10:
-                        case "YMCL.Main.win7+.x64.exe.zip" when architecture == "win-x64" && Environment.OSVersion.Version.Major >= 7:
-                        case "YMCL.Main.win7+.arm64.exe.zip" when architecture == "win-arm64" && Environment.OSVersion.Version.Major >= 7:
-                        case "YMCL.Main.win7+.x86.exe.zip" when architecture == "win-x86" && Environment.OSVersion.Version.Major >= 7:
+                        case "YMCL.Main.win10+.x64.installer.exe"
+                            when architecture == "win-x64" && Environment.OSVersion.Version.Major >= 10:
+                        case "YMCL.Main.win10+.x86.installer.exe"
+                            when architecture == "win-x86" && Environment.OSVersion.Version.Major >= 10:
+                        case "YMCL.Main.win10+.arm64.installer.exe"
+                            when architecture == "win-arm64" && Environment.OSVersion.Version.Major >= 10:
+                        case "YMCL.Main.win7+.x64.exe.zip"
+                            when architecture == "win-x64" && Environment.OSVersion.Version.Major >= 7 &&
+                                 Environment.OSVersion.Version.Major < 10:
+                        case "YMCL.Main.win7+.arm64.exe.zip"
+                            when architecture == "win-arm64" && Environment.OSVersion.Version.Major >= 7 &&
+                                 Environment.OSVersion.Version.Major < 10:
+                        case "YMCL.Main.win7+.x86.exe.zip"
+                            when architecture == "win-x86" && Environment.OSVersion.Version.Major >= 7 &&
+                                 Environment.OSVersion.Version.Major < 10:
                             url = browser_download_url;
                             fileName = name;
                             break;
@@ -426,6 +435,7 @@ public class Method
                         var launcher = TopLevel.GetTopLevel(Const.Window.main).Launcher;
                         await launcher.LaunchDirectoryInfoAsync(
                             new DirectoryInfo(Const.String.TempFolderPath));
+                        await Task.Delay(1000);
                         Environment.Exit(0);
                     }
                 }
@@ -434,10 +444,12 @@ public class Method
                     ShowShortException(MainLang.UpdateFail, ex);
                 }
 
+                task.Destory();
                 return false;
             }
             catch
             {
+                task.Destory();
                 return false;
             }
         }

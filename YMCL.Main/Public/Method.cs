@@ -361,7 +361,7 @@ public class Method
 
                 task.UpdateTextProgress($"{MainLang.GetUpdateUrl}: {trueUrl}");
                 task.UpdateTextProgress(
-                    $"{MainLang.BeginDownload}: {Path.Combine(Const.String.UserDataRootPath, fileName)}");
+                    $"{MainLang.BeginDownload}: {Path.Combine(Const.String.TempFolderPath, fileName)}");
                 try
                 {
                     var handler = new HttpClientHandler();
@@ -380,7 +380,7 @@ public class Method
                         await using (var downloadStream = await response.Content.ReadAsStreamAsync())
                         {
                             await using (var fileStream = new FileStream(
-                                             Path.Combine(Const.String.UserDataRootPath, fileName), FileMode.Create,
+                                             Path.Combine(Const.String.TempFolderPath, fileName), FileMode.Create,
                                              FileAccess.Write))
                             {
                                 var buffer = new byte[8192];
@@ -411,7 +411,7 @@ public class Method
                         {
                             UseShellExecute = true,
                             WorkingDirectory = Environment.CurrentDirectory,
-                            FileName = Path.Combine(Const.String.UserDataRootPath, fileName)
+                            FileName = Path.Combine(Const.String.TempFolderPath, fileName)
                         };
                         Process.Start(startInfo);
                         Environment.Exit(0);
@@ -419,11 +419,9 @@ public class Method
                     else
                     {
                         var launcher = TopLevel.GetTopLevel(Const.Window.main).Launcher;
-                        await launcher.LaunchFileInfoAsync(
-                            new System.IO.FileInfo(Path.Combine(Const.String.UserDataRootPath, fileName)));
-                        await Task.Delay(250);
-                        task.Destory();
-                        return true;
+                        await launcher.LaunchDirectoryInfoAsync(
+                            new DirectoryInfo(Const.String.TempFolderPath));
+                        Environment.Exit(0);
                     }
                 }
                 catch (Exception ex)

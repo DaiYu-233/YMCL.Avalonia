@@ -42,9 +42,9 @@ public partial class PluginSettingPage : UserControl
 
     public void LoadPlugin()
     {
-        var list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.PluginDataPath));
-        var list1 = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.PluginDataPath));
-        var directoryInfo = new DirectoryInfo(Const.PluginFolderPath);
+        var list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.PluginDataPath));
+        var list1 = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.PluginDataPath));
+        var directoryInfo = new DirectoryInfo(Const.String.PluginFolderPath);
         var dlls = directoryInfo.GetFiles();
         var paths = new List<string>();
         foreach (var item in dlls) paths.Add(item.FullName);
@@ -52,7 +52,7 @@ public partial class PluginSettingPage : UserControl
         {
             if (!paths.Contains(x)) list.Remove(x);
         });
-        File.WriteAllText(Const.PluginDataPath, JsonConvert.SerializeObject(list, Formatting.Indented));
+        File.WriteAllText(Const.String.PluginDataPath, JsonConvert.SerializeObject(list, Formatting.Indented));
         foreach (var item in dlls)
             try
             {
@@ -61,7 +61,7 @@ public partial class PluginSettingPage : UserControl
                 var type = asm.GetType("YMCL.Plugin.Main");
                 if (!typeof(IPlugin).IsAssignableFrom(type))
                 {
-                    Console.WriteLine("¦Ä??§Ó?????");
+                    Console.WriteLine("Î´??Ð²?????");
                     continue;
                 }
 
@@ -89,9 +89,9 @@ public partial class PluginSettingPage : UserControl
     public void ReloadPluginListUi()
     {
         Container.Children.Clear();
-        var list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.PluginDataPath));
-        var list1 = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.PluginDataPath));
-        var directoryInfo = new DirectoryInfo(Const.PluginFolderPath);
+        var list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.PluginDataPath));
+        var list1 = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.PluginDataPath));
+        var directoryInfo = new DirectoryInfo(Const.String.PluginFolderPath);
         var dlls = directoryInfo.GetFiles();
         var paths = new List<string>();
         foreach (var item in dlls) paths.Add(item.FullName);
@@ -99,7 +99,7 @@ public partial class PluginSettingPage : UserControl
         {
             if (!paths.Contains(x)) list.Remove(x);
         });
-        File.WriteAllText(Const.PluginDataPath, JsonConvert.SerializeObject(list, Formatting.Indented));
+        File.WriteAllText(Const.String.PluginDataPath, JsonConvert.SerializeObject(list, Formatting.Indented));
         foreach (var item in dlls)
             try
             {
@@ -108,7 +108,7 @@ public partial class PluginSettingPage : UserControl
                 var type = asm.GetType("YMCL.Plugin.Main");
                 if (!typeof(IPlugin).IsAssignableFrom(type))
                 {
-                    Console.WriteLine("¦Ä??§Ó?????");
+                    Console.WriteLine("Î´??Ð²?????");
                     continue;
                 }
 

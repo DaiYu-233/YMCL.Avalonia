@@ -20,7 +20,7 @@ public partial class PluginInfo : UserControl
             var manifestModuleName = asm.ManifestModule.ScopeName;
             var type = asm.GetType("YMCL.Plugin.Main");
             var instance = Activator.CreateInstance(type!) as IPlugin;
-            var list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.PluginDataPath));
+            var list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.PluginDataPath));
             if (PluginSwitch.IsChecked == true)
             {
                 list.Add(PluginPath.Text!);
@@ -32,7 +32,7 @@ public partial class PluginInfo : UserControl
                 _ = Task.Run(() => { instance.OnDisable(); });
             }
 
-            File.WriteAllText(Const.PluginDataPath, JsonConvert.SerializeObject(list, Formatting.Indented));
+            File.WriteAllText(Const.String.PluginDataPath, JsonConvert.SerializeObject(list, Formatting.Indented));
         };
     }
 }

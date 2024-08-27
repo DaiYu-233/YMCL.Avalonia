@@ -44,7 +44,7 @@ public partial class AutoInstallPage : UserControl
         {
             if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
             {
-                if (Const.Platform == Platform.Windows && Environment.OSVersion.Version.Major >= 10)
+                if (Const.Data.Platform == Platform.Windows && Environment.OSVersion.Version.Major >= 10)
                 {
                     var launcher = TopLevel.GetTopLevel(this).Launcher;
                     launcher.LaunchUriAsync(

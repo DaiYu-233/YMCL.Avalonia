@@ -102,7 +102,7 @@ public class Method
             string title = "Yu Minecraft Launcher")
         {
             var notification = p_notification == null ? Const.Notification.main : p_notification;
-            var showTitle = Const.AppTitle;
+            var showTitle = Const.String.AppTitle;
             if (!string.IsNullOrEmpty(title)) showTitle = title;
             if (time) showTitle += $" - {DateTime.Now.ToString("HH:mm:ss")}";
             notification.Show(new Notification(showTitle, msg, type));
@@ -178,7 +178,7 @@ public class Method
 
         public static void SetWindowBackGroundImg()
         {
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (setting.EnableCustomBackGroundImg && !string.IsNullOrEmpty(setting.WindowBackGroundImgData))
             {
                 Application.Current.Resources["Opacity"] = 0.875;
@@ -290,7 +290,7 @@ public class Method
             FolderPickerOpenOptions options = null)
         {
             var isPrimaryButtonClick = false;
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (setting.OpenFileWay == OpenFileWay.FileSelectWindow)
             {
                 if (options != null && topLevel != null)
@@ -343,7 +343,7 @@ public class Method
         {
             var title = p_title == null ? MainLang.InputFilePath : p_title;
             var isPrimaryButtonClick = false;
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (setting.OpenFileWay == OpenFileWay.FileSelectWindow)
             {
                 if (options != null && topLevel != null)
@@ -401,7 +401,7 @@ public class Method
         public static async Task<string> SaveFilePicker(TopLevel topLevel = null, FilePickerSaveOptions options = null)
         {
             var isPrimaryButtonClick = false;
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (setting.OpenFileWay == OpenFileWay.FileSelectWindow)
             {
                 if (options != null && topLevel != null)
@@ -500,9 +500,9 @@ public class Method
 
         public static void CallEnabledPlugin()
         {
-            var list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.PluginDataPath));
-            var list1 = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.PluginDataPath));
-            var directoryInfo = new DirectoryInfo(Const.PluginFolderPath);
+            var list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.PluginDataPath));
+            var list1 = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.PluginDataPath));
+            var directoryInfo = new DirectoryInfo(Const.String.PluginFolderPath);
             var dlls = directoryInfo.GetFiles();
             var paths = new List<string>();
             foreach (var item in dlls) paths.Add(item.FullName);
@@ -510,7 +510,7 @@ public class Method
             {
                 if (!paths.Contains(x)) list.Remove(x);
             });
-            File.WriteAllText(Const.PluginDataPath, JsonConvert.SerializeObject(list, Formatting.Indented));
+            File.WriteAllText(Const.String.PluginDataPath, JsonConvert.SerializeObject(list, Formatting.Indented));
             foreach (var item in dlls)
             {
                 if (list.Contains(item.FullName))
@@ -812,7 +812,7 @@ public class Method
                 return null;
             }
 
-            var filePath = Path.Combine(Path.GetDirectoryName(entry.JarPath)!, Const.VersionSettingFileName);
+            var filePath = Path.Combine(Path.GetDirectoryName(entry.JarPath)!, Const.String.VersionSettingFileName);
             if (!File.Exists(filePath))
                 File.WriteAllText(filePath, JsonConvert.SerializeObject(new VersionSetting(), Formatting.Indented));
             var versionSetting = JsonConvert.DeserializeObject<VersionSetting>(File.ReadAllText(filePath));
@@ -836,7 +836,7 @@ public class Method
                 return false;
             }
 
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
             var resolver = new GameResolver(setting.MinecraftFolder);
             var vanlliaInstaller = new VanlliaInstaller(resolver, versionId, MirrorDownloadManager.Bmcl);
             if (Directory.Exists(Path.Combine(setting.MinecraftFolder, "versions", customId)))
@@ -908,7 +908,7 @@ public class Method
                     try
                     {
                         var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(
-                            File.ReadAllText(Const.JavaDataPath));
+                            File.ReadAllText(Const.String.JavaDataPath));
                         if (javas.Count <= 0)
                         {
                             Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, NotificationType.Error);
@@ -974,7 +974,7 @@ public class Method
                     try
                     {
                         var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(
-                            File.ReadAllText(Const.JavaDataPath));
+                            File.ReadAllText(Const.String.JavaDataPath));
                         if (javas.Count <= 0)
                         {
                             Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, NotificationType.Error);
@@ -1164,7 +1164,7 @@ public class Method
             double l_maxMem = -1;
             var l_enableIndependencyCore = true;
 
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (string.IsNullOrEmpty(p_id))
             {
                 if (Const.Window.main.launchPage.VersionListView.SelectedItem as GameEntry != null)
@@ -1197,7 +1197,7 @@ public class Method
             }
 
             var versionSetting = GetVersionSetting(gameEntry);
-            var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath));
+            var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.String.JavaDataPath));
             if (javas.Count == 0)
             {
                 Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, NotificationType.Error);
@@ -1212,7 +1212,7 @@ public class Method
                     if (setting.Java.JavaPath == "Auto")
                     {
                         var javaEntry = JavaUtil.GetCurrentJava(
-                            JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath))!,
+                            JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.String.JavaDataPath))!,
                             gameEntry);
                         l_javaPath = javaEntry.JavaPath;
                     }
@@ -1233,7 +1233,7 @@ public class Method
                     if (versionSetting.Java.JavaPath == "Auto")
                     {
                         var javaEntry = JavaUtil.GetCurrentJava(
-                            JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath))!,
+                            JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.String.JavaDataPath))!,
                             gameEntry);
                         l_javaPath = javaEntry.JavaPath;
                     }
@@ -1324,7 +1324,7 @@ public class Method
             task.UpdateTextProgress(MainLang.VerifyingAccount);
 
             var accountData =
-                JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath))[
+                JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.String.AccountDataPath))[
                     setting.AccountSelectionIndex];
             if (accountData == null)
             {
@@ -1353,7 +1353,7 @@ public class Method
                     break;
                 case AccountType.Microsoft:
                     var profile = JsonConvert.DeserializeObject<MicrosoftAccount>(accountData.Data!);
-                    MicrosoftAuthenticator authenticator2 = new(profile, Const.AzureClientId, true);
+                    MicrosoftAuthenticator authenticator2 = new(profile, Const.String.AzureClientId, true);
                     try
                     {
                         account = await authenticator2.AuthenticateAsync();
@@ -1553,7 +1553,7 @@ public class Method
             double l_maxMem = -1;
             var l_enableIndependencyCore = true;
 
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (string.IsNullOrEmpty(p_id))
             {
                 if (Const.Window.main.launchPage.VersionListView.SelectedItem as GameEntry != null)
@@ -1586,7 +1586,7 @@ public class Method
             }
 
             var versionSetting = GetVersionSetting(gameEntry);
-            var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath));
+            var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.String.JavaDataPath));
             if (javas.Count == 0)
             {
                 Ui.Toast(MainLang.CannotFandRightJava, Const.Notification.main, NotificationType.Error);
@@ -1601,7 +1601,7 @@ public class Method
                     if (setting.Java.JavaPath == "Auto")
                     {
                         var javaEntry = JavaUtil.GetCurrentJava(
-                            JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath))!,
+                            JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.String.JavaDataPath))!,
                             gameEntry);
                         l_javaPath = javaEntry.JavaPath;
                     }
@@ -1622,7 +1622,7 @@ public class Method
                     if (versionSetting.Java.JavaPath == "Auto")
                     {
                         var javaEntry = JavaUtil.GetCurrentJava(
-                            JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath))!,
+                            JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.String.JavaDataPath))!,
                             gameEntry);
                         l_javaPath = javaEntry.JavaPath;
                     }
@@ -1713,7 +1713,7 @@ public class Method
             task.UpdateTextProgress(MainLang.VerifyingAccount);
 
             var accountData =
-                JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath))[
+                JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.String.AccountDataPath))[
                     setting.AccountSelectionIndex];
             if (accountData == null)
             {
@@ -1742,13 +1742,13 @@ public class Method
                     break;
                 case AccountType.Microsoft:
                     var profile = JsonConvert.DeserializeObject<MicrosoftAccount>(accountData.Data!);
-                    var entry = new MicrosoftAuthentication(Const.AzureClientId);
+                    var entry = new MicrosoftAuthentication(Const.String.AzureClientId);
                     try
                     {
                         account = await entry.MicrosoftAuthAsync(new GetTokenResponse()
                         {
                             AccessToken = profile.AccessToken, RefreshToken = profile.RefreshToken,
-                            ClientId = Const.AzureClientId
+                            ClientId = Const.String.AzureClientId
                         }, progress => { task.UpdateTextProgress(progress); }, profile.RefreshToken);
                     }
                     catch (Exception ex)
@@ -1941,7 +1941,7 @@ public class Method
         public static async Task<bool> ImportModPackFromLocal(string path, bool confirmBox = true,
             string p_customId = null)
         {
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
             var customId = string.Empty;
             while (true)
             {
@@ -2045,7 +2045,7 @@ public class Method
             var completedDownloads = 0; // 已完成下载的文件数量  
             var successDownloads = 0; // 成功下载的文件数量
             var totalDownloads = info.files.Count; // 总下载文件数量  
-            ApiClient cfApiClient = new(Const.CurseForgeApiKey); // 创建一个CurseForge API 客户端
+            ApiClient cfApiClient = new(Const.String.CurseForgeApiKey); // 创建一个CurseForge API 客户端
             var tasks = new List<Task>(); // 创建一个任务列表来存储下载任务
             var errors = new List<string>(); // 创建一个列表来存储下载错误
 
@@ -2172,7 +2172,7 @@ public class Method
             var shouldReturn = false;
             var fN = item.DisplayName;
             if (Path.GetExtension(fN) != ".zip") fN += ".zip";
-            var path = Path.Combine(Const.TempFolderPath, fN);
+            var path = Path.Combine(Const.String.TempFolderPath, fN);
             var task = new TaskEntry($"{MainLang.Download} - {fN}", true, false);
             try
             {

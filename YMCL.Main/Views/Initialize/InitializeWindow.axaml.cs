@@ -53,42 +53,42 @@ public partial class InitializeWindow : Window
 
     private void Init()
     {
-        Method.IO.TryCreateFolder(Const.UserDataRootPath);
-        Method.IO.TryCreateFolder(Const.PluginFolderPath);
-        Method.IO.TryCreateFolder(Const.TempFolderPath);
-        if (!File.Exists(Const.SettingDataPath))
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(new Setting(), Formatting.Indented));
-        if (File.Exists(Path.Combine(Const.UserDataRootPath, "YMCL.Update.Helper.win.exe")))
-            File.Delete(Path.Combine(Const.UserDataRootPath, "YMCL.Update.Helper.win.exe"));
-        if (File.Exists(Path.Combine(Const.UserDataRootPath, "YMCL.Update.Helper.linux")))
-            File.Delete(Path.Combine(Const.UserDataRootPath, "YMCL.Update.Helper.linux"));
-        if (File.Exists(Path.Combine(Const.UserDataRootPath, "Update.exe")))
-            File.Delete(Path.Combine(Const.UserDataRootPath, "Update.exe"));
-        if (File.Exists(Path.Combine(Const.UserDataRootPath, "Update")))
-            File.Delete(Path.Combine(Const.UserDataRootPath, "Update"));
-        if (!File.Exists(Const.MinecraftFolderDataPath) || JsonConvert
-                .DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath)).Count == 0)
+        Method.IO.TryCreateFolder(Const.String.UserDataRootPath);
+        Method.IO.TryCreateFolder(Const.String.PluginFolderPath);
+        Method.IO.TryCreateFolder(Const.String.TempFolderPath);
+        if (!File.Exists(Const.String.SettingDataPath))
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(new Setting(), Formatting.Indented));
+        if (File.Exists(Path.Combine(Const.String.UserDataRootPath, "YMCL.Update.Helper.win.exe")))
+            File.Delete(Path.Combine(Const.String.UserDataRootPath, "YMCL.Update.Helper.win.exe"));
+        if (File.Exists(Path.Combine(Const.String.UserDataRootPath, "YMCL.Update.Helper.linux")))
+            File.Delete(Path.Combine(Const.String.UserDataRootPath, "YMCL.Update.Helper.linux"));
+        if (File.Exists(Path.Combine(Const.String.UserDataRootPath, "Update.exe")))
+            File.Delete(Path.Combine(Const.String.UserDataRootPath, "Update.exe"));
+        if (File.Exists(Path.Combine(Const.String.UserDataRootPath, "Update")))
+            File.Delete(Path.Combine(Const.String.UserDataRootPath, "Update"));
+        if (!File.Exists(Const.String.MinecraftFolderDataPath) || JsonConvert
+                .DeserializeObject<List<string>>(File.ReadAllText(Const.String.MinecraftFolderDataPath)).Count == 0)
         {
-            var path = Path.Combine(Const.UserDataRootPath, ".minecraft");
+            var path = Path.Combine(Const.String.UserDataRootPath, ".minecraft");
             Method.IO.TryCreateFolder(path);
-            File.WriteAllText(Const.MinecraftFolderDataPath,
+            File.WriteAllText(Const.String.MinecraftFolderDataPath,
                 JsonConvert.SerializeObject(new List<string> { path }, Formatting.Indented));
-            var setting1 = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+            var setting1 = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
             setting1.MinecraftFolder = path;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting1, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting1, Formatting.Indented));
         }
 
-        if (!File.Exists(Const.JavaDataPath))
-            File.WriteAllText(Const.JavaDataPath,
+        if (!File.Exists(Const.String.JavaDataPath))
+            File.WriteAllText(Const.String.JavaDataPath,
                 JsonConvert.SerializeObject(new List<JavaEntry>(), Formatting.Indented));
-        if (!File.Exists(Const.PluginDataPath))
-            File.WriteAllText(Const.PluginDataPath,
+        if (!File.Exists(Const.String.PluginDataPath))
+            File.WriteAllText(Const.String.PluginDataPath,
                 JsonConvert.SerializeObject(new List<string>(), Formatting.Indented));
-        if (!File.Exists(Const.PlayerDataPath))
-            File.WriteAllText(Const.PlayerDataPath,
+        if (!File.Exists(Const.String.PlayerDataPath))
+            File.WriteAllText(Const.String.PlayerDataPath,
                 JsonConvert.SerializeObject(new List<PlaySongListViewItemEntry>(), Formatting.Indented));
-        if (!File.Exists(Const.AccountDataPath))
-            File.WriteAllText(Const.AccountDataPath,
+        if (!File.Exists(Const.String.AccountDataPath))
+            File.WriteAllText(Const.String.AccountDataPath,
                 JsonConvert.SerializeObject(
                     new List<AccountInfo>
                     {
@@ -98,7 +98,7 @@ public partial class InitializeWindow : Window
                             AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")
                         }
                     }, Formatting.Indented));
-        if (!File.Exists(Const.CustomHomePageXamlDataPath))
+        if (!File.Exists(Const.String.CustomHomePageXamlDataPath))
         {
             var resourceName = "YMCL.Main.Public.Texts.CustomHomePageDefault.axaml";
             var _assembly = Assembly.GetExecutingAssembly();
@@ -106,12 +106,12 @@ public partial class InitializeWindow : Window
             using (var reader = new StreamReader(stream!))
             {
                 var result = reader.ReadToEnd();
-                File.WriteAllText(Const.CustomHomePageXamlDataPath, result);
+                File.WriteAllText(Const.String.CustomHomePageXamlDataPath, result);
             }
         }
 
-        File.WriteAllText(Const.AppPathDataPath, Process.GetCurrentProcess().MainModule.FileName!);
-        if (Const.Platform == Platform.Linux)
+        File.WriteAllText(Const.String.AppPathDataPath, Process.GetCurrentProcess().MainModule.FileName!);
+        if (Const.Data.Platform == Platform.Linux)
         {
             try
             {
@@ -125,7 +125,7 @@ public partial class InitializeWindow : Window
             }
         }
             
-        var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+        var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
         if (setting.Language == null || setting.Language == "zh-CN")
             LangHelper.Current.ChangedCulture("");
         else
@@ -154,22 +154,22 @@ public partial class InitializeWindow : Window
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             Console.WriteLine("Running on Windows");
-            Const.Platform = Platform.Windows;
+            Const.Data.Platform = Platform.Windows;
         }
         else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
             Console.WriteLine("Running on Linux");
-            Const.Platform = Platform.Linux;
+            Const.Data.Platform = Platform.Linux;
         }
         else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
         {
             Console.WriteLine("Running on macOS");
-            Const.Platform = Platform.MacOs;
+            Const.Data.Platform = Platform.MacOs;
         }
         else
         {
             Console.WriteLine("Running on an unknown platform");
-            Const.Platform = Platform.Unknown;
+            Const.Data.Platform = Platform.Unknown;
         }
     }
 
@@ -186,7 +186,7 @@ public partial class InitializeWindow : Window
     {
         YMCL.Main.Views.Initialize.Pages.Main.Main mianPage = new();
         Frame.Content = mianPage;
-        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
         mianPage.WindowTitleBarStyleListBox.SelectedIndex = setting.WindowTitleBarStyle switch
         {
             WindowTitleBarStyle.System => 0,

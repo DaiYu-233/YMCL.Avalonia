@@ -37,15 +37,15 @@ public partial class LauncherSettingPage : UserControl
         OpenUserDataFolderBtn.Click += async (s, e) =>
         {
             var launcher = TopLevel.GetTopLevel(this).Launcher;
-            await launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(Const.UserDataRootPath));
+            await launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(Const.String.UserDataRootPath));
         };
         CheckUpdateBtn.Click += (_, _) => { _ = CheckUpdateAsync(); };
     }
 
     private void ControlProperty()
     {
-        UserDataFolderPath.Text = Const.UserDataRootPath;
-        var lenth = Method.Value.GetDirectoryLength(Const.UserDataRootPath);
+        UserDataFolderPath.Text = Const.String.UserDataRootPath;
+        var lenth = Method.Value.GetDirectoryLength(Const.String.UserDataRootPath);
         var userDataSize = Math.Round(lenth / 1024, 2) >= 512
             ? $"{Math.Round(lenth / 1024 / 1024, 2)} Mib"
             : $"{Math.Round(lenth / 1024, 2)} Kib";
@@ -80,7 +80,7 @@ public partial class LauncherSettingPage : UserControl
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("User-Agent",
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54");
-            var githubApiJson = JArray.Parse(await httpClient.GetStringAsync(Const.GithubUpdateApiUrl));
+            var githubApiJson = JArray.Parse(await httpClient.GetStringAsync(Const.String.GithubUpdateApiUrl));
             var apiVersion = (string)githubApiJson[0]["name"];
             var localVersion = Version.Text;
             if (apiVersion != localVersion)
@@ -230,7 +230,7 @@ public partial class LauncherSettingPage : UserControl
                     {
                         var setting =
                             JsonConvert.DeserializeObject<Public.Classes.Setting>(
-                                File.ReadAllText(Const.SettingDataPath));
+                                File.ReadAllText(Const.String.SettingDataPath));
                         var trueUrl = url;
                         if (setting.EnableCustomUpdateUrl)
                         {
@@ -238,9 +238,9 @@ public partial class LauncherSettingPage : UserControl
                         }
 
                         task.UpdateTextProgress($"{MainLang.GetUpdateUrl}: {trueUrl}");
-                        var saveFile = Const.Platform == Platform.Windows ? "Update.exe" : "Update";
+                        var saveFile = Const.Data.Platform == Platform.Windows ? "Update.exe" : "Update";
                         task.UpdateTextProgress(
-                            $"{MainLang.BeginDownload}: {Path.Combine(Const.UserDataRootPath, saveFile)}");
+                            $"{MainLang.BeginDownload}: {Path.Combine(Const.String.UserDataRootPath, saveFile)}");
                         try
                         {
                             var handler = new HttpClientHandler();
@@ -260,7 +260,7 @@ public partial class LauncherSettingPage : UserControl
                                     using (var downloadStream = await response.Content.ReadAsStreamAsync())
                                     {
                                         using (var fileStream = new FileStream(
-                                                   Path.Combine(Const.UserDataRootPath, saveFile), FileMode.Create,
+                                                   Path.Combine(Const.String.UserDataRootPath, saveFile), FileMode.Create,
                                                    FileAccess.Write))
                                         {
                                             var buffer = new byte[8192];
@@ -293,7 +293,7 @@ public partial class LauncherSettingPage : UserControl
                                     var assembly = Assembly.GetExecutingAssembly();
                                     using (var resourceStream = assembly.GetManifestResourceStream(resourceName1))
                                     {
-                                        var outputFilePath = Path.Combine(Const.UserDataRootPath,
+                                        var outputFilePath = Path.Combine(Const.String.UserDataRootPath,
                                             "YMCL.Update.Helper.win.exe");
                                         using (var fileStream = new FileStream(outputFilePath, FileMode.Create,
                                                    FileAccess.Write))
@@ -306,9 +306,9 @@ public partial class LauncherSettingPage : UserControl
                                     {
                                         UseShellExecute = true,
                                         WorkingDirectory = Environment.CurrentDirectory,
-                                        FileName = Path.Combine(Const.UserDataRootPath, "YMCL.Update.Helper.win.exe"),
+                                        FileName = Path.Combine(Const.String.UserDataRootPath, "YMCL.Update.Helper.win.exe"),
                                         Arguments =
-                                            $"\"{Path.Combine(Const.UserDataRootPath, saveFile)}\" \"{Process.GetCurrentProcess().MainModule.FileName}\"",
+                                            $"\"{Path.Combine(Const.String.UserDataRootPath, saveFile)}\" \"{Process.GetCurrentProcess().MainModule.FileName}\"",
                                         Verb = "runas"
                                     };
                                     Process.Start(startInfo);
@@ -317,13 +317,13 @@ public partial class LauncherSettingPage : UserControl
                                 else
                                 {
                                     var dialog1 = await Method.Ui.ShowDialogAsync(MainLang.Update,
-                                        $"{MainLang.ThisArchitectureCannotAutoUpdate}: {Path.Combine(Const.UserDataRootPath, saveFile)}",
+                                        $"{MainLang.ThisArchitectureCannotAutoUpdate}: {Path.Combine(Const.String.UserDataRootPath, saveFile)}",
                                         b_cancel: MainLang.Cancel, b_primary: MainLang.Ok);
                                     if (dialog1 == ContentDialogResult.Primary)
                                     {
                                         var launcher = TopLevel.GetTopLevel(this).Launcher;
                                         await launcher.LaunchDirectoryInfoAsync(
-                                            new DirectoryInfo(Const.UserDataRootPath));
+                                            new DirectoryInfo(Const.String.UserDataRootPath));
                                         await Task.Delay(250);
                                         task.Destory();
                                     }

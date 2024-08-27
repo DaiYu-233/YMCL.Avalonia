@@ -34,13 +34,13 @@ public partial class Main : UserControl
     public int _currentLang;
 
     public List<string> _mcFolderList =
-        JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath))!;
+        JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.MinecraftFolderDataPath))!;
 
     public List<JavaEntry> _javaList =
-        JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath))!;
+        JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.String.JavaDataPath))!;
 
     private List<AccountInfo> _accountList =
-        JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath));
+        JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.String.AccountDataPath));
 
     public Main()
     {
@@ -80,15 +80,15 @@ public partial class Main : UserControl
             }
 
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             setting.Language = lang;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             Method.Ui.RestartApp();
         };
         WindowTitleBarStyleListBox.SelectionChanged += (_, e) =>
         {
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (WindowTitleBarStyleListBox.SelectedIndex == 0)
             {
                 Const.Window.initialize.TitleBar.IsVisible = false;
@@ -108,7 +108,7 @@ public partial class Main : UserControl
                 setting.WindowTitleBarStyle = WindowTitleBarStyle.Ymcl;
             }
 
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
         AutoScanMinecraftFolderBtn.Click += (_, _) =>
         {
@@ -120,7 +120,7 @@ public partial class Main : UserControl
                 ".minecraft"));
             MinecraftFolderListBox.Items.Add(
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".minecraft"));
-            File.WriteAllText(Const.MinecraftFolderDataPath,
+            File.WriteAllText(Const.String.MinecraftFolderDataPath,
                 JsonConvert.SerializeObject(_mcFolderList, Formatting.Indented));
         };
         ManualAddMinecraftFolderBtn.Click += async (_, _) =>
@@ -135,7 +135,7 @@ public partial class Main : UserControl
                     if (!_mcFolderList.Contains(item.Path))
                     {
                         _mcFolderList.Add(item.Path);
-                        File.WriteAllText(Const.MinecraftFolderDataPath,
+                        File.WriteAllText(Const.String.MinecraftFolderDataPath,
                             JsonConvert.SerializeObject(_mcFolderList, Formatting.Indented));
                         MinecraftFolderListBox.Items.Clear();
                         _mcFolderList.ForEach(folder => { MinecraftFolderListBox.Items.Add(folder); });
@@ -176,7 +176,7 @@ public partial class Main : UserControl
 
             JavaRuntimeListBox.Items.Clear();
             _javaList.ForEach(java => { JavaRuntimeListBox.Items.Add(java); });
-            File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(_javaList, Formatting.Indented));
+            File.WriteAllText(Const.String.JavaDataPath, JsonConvert.SerializeObject(_javaList, Formatting.Indented));
             Method.Ui.Toast(
                 $"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}: {successAddCount}\n{MainLang.RepeatItem}: {repeatJavaCount}",
                 Const.Notification.initialize, NotificationType.Success);
@@ -203,7 +203,7 @@ public partial class Main : UserControl
             });
             JavaRuntimeListBox.Items.Clear();
             _javaList.ForEach(java => { JavaRuntimeListBox.Items.Add(java); });
-            File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(_javaList, Formatting.Indented));
+            File.WriteAllText(Const.String.JavaDataPath, JsonConvert.SerializeObject(_javaList, Formatting.Indented));
         };
         AddAccountBtn.Click += async (s, e) =>
         {
@@ -260,7 +260,7 @@ public partial class Main : UserControl
                                 AccountListBox.Items.Clear();
                                 var setting =
                                     JsonConvert.DeserializeObject<Public.Classes.Setting>(
-                                        File.ReadAllText(Const.SettingDataPath));
+                                        File.ReadAllText(Const.String.SettingDataPath));
                                 _accountList.ForEach(x =>
                                 {
                                     SkinResolver SkinResolver = new(Convert.FromBase64String(x.Skin));
@@ -275,7 +275,7 @@ public partial class Main : UserControl
                                         Bitmap = Method.Value.Base64ToBitmap(skin)
                                     });
                                 });
-                                File.WriteAllText(Const.AccountDataPath,
+                                File.WriteAllText(Const.String.AccountDataPath,
                                     JsonConvert.SerializeObject(_accountList, Formatting.Indented));
                             }
                             else
@@ -308,7 +308,7 @@ public partial class Main : UserControl
                             IsPrimaryButtonEnabled = false,
                             IsSecondaryButtonEnabled = false
                         };
-                        MicrosoftAuthenticator authenticator = new(Const.AzureClientId);
+                        MicrosoftAuthenticator authenticator = new(Const.String.AzureClientId);
                         microsoftDialog.PrimaryButtonClick += async (_, _) =>
                         {
                             var clipboard = TopLevel.GetTopLevel(this)?.Clipboard;
@@ -391,7 +391,7 @@ public partial class Main : UserControl
                             AccountListBox.Items.Clear();
                             var setting =
                                 JsonConvert.DeserializeObject<Public.Classes.Setting>(
-                                    File.ReadAllText(Const.SettingDataPath));
+                                    File.ReadAllText(Const.String.SettingDataPath));
                             _accountList.ForEach(x =>
                             {
                                 SkinResolver SkinResolver = new(Convert.FromBase64String(x.Skin));
@@ -407,7 +407,7 @@ public partial class Main : UserControl
                                 });
                             });
 
-                            File.WriteAllText(Const.AccountDataPath,
+                            File.WriteAllText(Const.String.AccountDataPath,
                                 JsonConvert.SerializeObject(_accountList, Formatting.Indented));
                             Const.Window.initialize.Activate();
                         }
@@ -469,9 +469,9 @@ public partial class Main : UserControl
             }
 
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             setting.Language = lang;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
 
         if (_page == 3)
@@ -479,11 +479,11 @@ public partial class Main : UserControl
             MinecraftFolderRoot.IsVisible = true;
             MinecraftFolderRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             setting.WindowTitleBarStyle = WindowTitleBarStyleListBox.SelectedIndex == 0
                 ? WindowTitleBarStyle.System
                 : WindowTitleBarStyle.Ymcl;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
 
         if (_page == 4)
@@ -491,9 +491,9 @@ public partial class Main : UserControl
             JavaRuntimeRoot.IsVisible = true;
             JavaRuntimeRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             setting.IsCompleteMinecraftFolderInitialize = true;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
 
         if (_page == 5)
@@ -501,24 +501,24 @@ public partial class Main : UserControl
             AccountRoot.IsVisible = true;
             AccountRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             setting.IsCompleteJavaInitialize = true;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         }
 
         if (_page == 6)
         {
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             setting.IsCompleteAccountInitialize = true;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             Method.Ui.RestartApp();
         }
     }
 
     private void OnLoaded(object? sender, RoutedEventArgs e)
     {
-        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
         _mcFolderList.ForEach(x => MinecraftFolderListBox.Items.Add(x));
         _javaList.ForEach(x => JavaRuntimeListBox.Items.Add(x));
         _accountList.ForEach(x =>
@@ -705,7 +705,7 @@ public partial class Main : UserControl
                                 AccountListBox.Items.Clear();
                                 var setting =
                                     JsonConvert.DeserializeObject<Public.Classes.Setting>(
-                                        File.ReadAllText(Const.SettingDataPath));
+                                        File.ReadAllText(Const.String.SettingDataPath));
                                 _accountList.ForEach(x =>
                                 {
                                     SkinResolver SkinResolver = new(Convert.FromBase64String(x.Skin));
@@ -736,7 +736,7 @@ public partial class Main : UserControl
                                 AccountListBox.Items.Clear();
                                 var setting =
                                     JsonConvert.DeserializeObject<Public.Classes.Setting>(
-                                        File.ReadAllText(Const.SettingDataPath));
+                                        File.ReadAllText(Const.String.SettingDataPath));
                                 _accountList.ForEach(x =>
                                 {
                                     SkinResolver SkinResolver = new(Convert.FromBase64String(x.Skin));
@@ -755,7 +755,7 @@ public partial class Main : UserControl
                         }
                     }
 
-                    File.WriteAllText(Const.AccountDataPath,
+                    File.WriteAllText(Const.String.AccountDataPath,
                         JsonConvert.SerializeObject(_accountList, Formatting.Indented));
                     Const.Window.initialize.Activate();
                 }

@@ -29,7 +29,7 @@ namespace YMCL.Main.Views.Main.Pages.Download.Pages.CurseForgeFetcher;
 public partial class CurseForgeFetcher : UserControl
 {
     private readonly int _gameId = 432;
-    private readonly ApiClient cfApiClient = new(Const.CurseForgeApiKey);
+    private readonly ApiClient cfApiClient = new(Const.String.CurseForgeApiKey);
 
     private readonly Dictionary<DaiYuLoaderType, ModLoaderType> mapping = new()
     {
@@ -321,7 +321,7 @@ public partial class CurseForgeFetcher : UserControl
             if (Path.GetExtension(fN) != ".zip") fN += ".zip";
             var setting =
                 JsonConvert.DeserializeObject<Public.Classes.Setting>(
-                    System.IO.File.ReadAllText(Const.SettingDataPath));
+                    System.IO.File.ReadAllText(Const.String.SettingDataPath));
             while (true)
             {
                 var textBox = new TextBox
@@ -385,7 +385,7 @@ public partial class CurseForgeFetcher : UserControl
                            item.DownloadUrl.Replace("edge.forgecdn.net", "mediafilez.forgecdn.net"),
                            HttpCompletionOption.ResponseHeadersRead))
                 {
-                    response.EnsureSuccessStatusCode(); // È·±£HTTP³É¹¦×´Ì¬Öµ  
+                    response.EnsureSuccessStatusCode(); // ç¡®ä¿HTTPæˆåŠŸçŠ¶æ€å€¼  
 
                     var totalBytes = response.Content.Headers.ContentLength.GetValueOrDefault();
                     using (var contentStream = await response.Content.ReadAsStreamAsync())
@@ -419,7 +419,7 @@ public partial class CurseForgeFetcher : UserControl
                     using (var response = await httpClient.GetAsync(item.DownloadUrl,
                                HttpCompletionOption.ResponseHeadersRead))
                     {
-                        response.EnsureSuccessStatusCode(); // È·±£HTTP³É¹¦×´Ì¬Öµ  
+                        response.EnsureSuccessStatusCode(); // ç¡®ä¿HTTPæˆåŠŸçŠ¶æ€å€¼  
 
                         var totalBytes = response.Content.Headers.ContentLength.GetValueOrDefault();
                         using (var contentStream = await response.Content.ReadAsStreamAsync())
@@ -458,7 +458,7 @@ public partial class CurseForgeFetcher : UserControl
 
     public async void SearchModFromCurseForge()
     {
-        Const.UrlImageDataList.Clear();
+        Const.Data.UrlImageDataList.Clear();
         var keyword = ModNameTextBox.Text;
         _keyword = keyword;
         var gameVersion = ModVersionTextBox.Text;
@@ -535,7 +535,7 @@ public partial class CurseForgeFetcher : UserControl
                 if (partX != partY) return partX.CompareTo(partY);
             }
 
-            // Èç¹ûËùÓĞÏàÍ¬Î»ÖÃµÄ°æ±¾ºÅ¶¼ÏàÍ¬£¬µ«³¤¶È²»Í¬£¬Ôò½Ï³¤µÄ°æ±¾ºÅÓ¦¸Ã¸ü´ó  
+            // å¦‚æœæ‰€æœ‰ç›¸åŒä½ç½®çš„ç‰ˆæœ¬å·éƒ½ç›¸åŒï¼Œä½†é•¿åº¦ä¸åŒï¼Œåˆ™è¾ƒé•¿çš„ç‰ˆæœ¬å·åº”è¯¥æ›´å¤§  
             return versionPartsX.Length.CompareTo(versionPartsY.Length);
         }
     }

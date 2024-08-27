@@ -33,7 +33,7 @@ public partial class LaunchPage : UserControl
     private bool _shouldCloseVersuionList;
 
     private List<string> minecraftFolders =
-        JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath));
+        JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.MinecraftFolderDataPath));
 
     private ObservableCollection<ModManageEntry> modManageEntries;
 
@@ -55,10 +55,10 @@ public partial class LaunchPage : UserControl
             Method.Ui.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
             LoadAccounts();
             minecraftFolders =
-                JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath));
+                JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.MinecraftFolderDataPath));
             MinecraftFolderComboBox.Items.Clear();
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             foreach (var item in minecraftFolders) MinecraftFolderComboBox.Items.Add(item);
             if (setting.MinecraftFolder == null || !minecraftFolders.Contains(setting.MinecraftFolder))
                 MinecraftFolderComboBox.SelectedIndex = 0;
@@ -90,22 +90,22 @@ public partial class LaunchPage : UserControl
             AccountComboBox.IsVisible = false;
             AccountComboBox.IsVisible = true;
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (AccountComboBox.SelectedItem as AccountInfo != null)
                 Head.Source = (AccountComboBox.SelectedItem as AccountInfo).Bitmap;
             if (AccountComboBox.SelectedIndex == setting.AccountSelectionIndex ||
                 AccountComboBox.SelectedIndex == -1) return;
             setting.AccountSelectionIndex = AccountComboBox.SelectedIndex;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
         MinecraftFolderComboBox.SelectionChanged += (s, e) =>
         {
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (MinecraftFolderComboBox.SelectedItem == null ||
                 MinecraftFolderComboBox.SelectedItem.ToString() == setting.MinecraftFolder) return;
             setting.MinecraftFolder = MinecraftFolderComboBox.SelectedItem.ToString();
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             _shouldCloseVersuionList = false;
             LoadVersions();
             VersionListView.SelectedIndex = 0;
@@ -174,13 +174,13 @@ public partial class LaunchPage : UserControl
             if (VersionListView.SelectedItem != null)
             {
                 var setting =
-                    JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                    JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
                 GameCoreText.Text = (VersionListView.SelectedItem as GameEntry).Id;
                 if (VersionListView.SelectedIndex == 0)
                     setting.Version = "BedRock";
                 else
                     setting.Version = (VersionListView.SelectedItem as GameEntry).Id;
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
 
             await Task.Delay(100);
@@ -222,7 +222,7 @@ public partial class LaunchPage : UserControl
             var setting = Method.Mc.GetVersionSetting(entry!);
             setting.EnableIndependencyCore =
                 (VersionSettingEnableIndependencyCore)EnableIndependencyCoreComboBox.SelectedIndex;
-            File.WriteAllText(Path.Combine(Path.GetDirectoryName(entry.JarPath)!, Const.VersionSettingFileName),
+            File.WriteAllText(Path.Combine(Path.GetDirectoryName(entry.JarPath)!, Const.String.VersionSettingFileName),
                 JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
         AutoJoinServerTextBox.TextChanged += (_, _) =>
@@ -230,7 +230,7 @@ public partial class LaunchPage : UserControl
             var entry = VersionListView.SelectedItem as GameEntry;
             var setting = Method.Mc.GetVersionSetting(entry!);
             setting.AutoJoinServerIp = AutoJoinServerTextBox.Text;
-            File.WriteAllText(Path.Combine(Path.GetDirectoryName(entry.JarPath)!, Const.VersionSettingFileName),
+            File.WriteAllText(Path.Combine(Path.GetDirectoryName(entry.JarPath)!, Const.String.VersionSettingFileName),
                 JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
         JavaComboBox.SelectionChanged += (_, _) =>
@@ -238,7 +238,7 @@ public partial class LaunchPage : UserControl
             JavaComboBox.IsVisible = false;
             JavaComboBox.IsVisible = true;
             var version = VersionListView.SelectedItem as GameEntry;
-            var filePath = Path.Combine(Path.GetDirectoryName(version.JarPath)!, Const.VersionSettingFileName);
+            var filePath = Path.Combine(Path.GetDirectoryName(version.JarPath)!, Const.String.VersionSettingFileName);
             var versionSetting = Method.Mc.GetVersionSetting(version);
             if (JavaComboBox.SelectedItem == null ||
                 JavaComboBox.SelectedItem.ToString() == versionSetting.Java.JavaPath) return;
@@ -342,7 +342,7 @@ public partial class LaunchPage : UserControl
 
     private void LoadVersions()
     {
-        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
         IGameResolver gameResolver = new GameResolver(setting.MinecraftFolder);
         var list = gameResolver.GetGameEntitys();
         VersionListView.Items.Clear();
@@ -375,9 +375,9 @@ public partial class LaunchPage : UserControl
 
     private void LoadAccounts()
     {
-        var accounts = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath));
+        var accounts = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.String.AccountDataPath));
         AccountComboBox.Items.Clear();
-        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
         accounts.ForEach(x =>
         {
             SkinResolver SkinResolver = new(Convert.FromBase64String(x.Skin));
@@ -403,13 +403,13 @@ public partial class LaunchPage : UserControl
             {
                 AccountComboBox.SelectedItem = AccountComboBox.Items[0];
                 setting.AccountSelectionIndex = 0;
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
         }
         else
         {
             var now = DateTime.Now;
-            File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(new List<AccountInfo>
+            File.WriteAllText(Const.String.AccountDataPath, JsonConvert.SerializeObject(new List<AccountInfo>
             {
                 new()
                 {
@@ -419,14 +419,14 @@ public partial class LaunchPage : UserControl
                 }
             }, Formatting.Indented));
             setting.AccountSelectionIndex = 0;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             LoadAccounts();
         }
 
         if (setting.AccountSelectionIndex == -1 && accounts.Count > 0)
         {
             setting.AccountSelectionIndex = 0;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             LoadAccounts();
         }
     }
@@ -489,14 +489,14 @@ public partial class LaunchPage : UserControl
             return;
         }
 
-        var filePath = Path.Combine(Path.GetDirectoryName(entry.JarPath)!, Const.VersionSettingFileName);
+        var filePath = Path.Combine(Path.GetDirectoryName(entry.JarPath)!, Const.String.VersionSettingFileName);
         if (!File.Exists(filePath))
             File.WriteAllText(filePath, JsonConvert.SerializeObject(new VersionSetting(), Formatting.Indented));
         var versionSetting = JsonConvert.DeserializeObject<VersionSetting>(File.ReadAllText(filePath));
 
         EnableIndependencyCoreComboBox.SelectedIndex = (int)versionSetting.EnableIndependencyCore;
 
-        var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath));
+        var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.String.JavaDataPath));
         JavaComboBox.Items.Clear();
         JavaComboBox.Items.Add(new JavaEntry
         {
@@ -520,7 +520,7 @@ public partial class LaunchPage : UserControl
         else
             JavaComboBox.SelectedItem = versionSetting.Java;
 
-        var totalMemory = Method.Value.GetTotalMemory(Const.Platform);
+        var totalMemory = Method.Value.GetTotalMemory(Const.Data.Platform);
         if (totalMemory != 0)
             SliderBox.Maximum = totalMemory / 1024;
         else

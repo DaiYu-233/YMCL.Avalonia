@@ -16,10 +16,10 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launch;
 public partial class LaunchSettingPage : UserControl
 {
     private readonly List<JavaEntry> javas =
-        JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.JavaDataPath))!;
+        JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.String.JavaDataPath))!;
 
     private readonly List<string> minecraftFolders =
-        JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.MinecraftFolderDataPath))!;
+        JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.MinecraftFolderDataPath))!;
 
     private bool _firstLoad = true;
 
@@ -35,9 +35,9 @@ public partial class LaunchSettingPage : UserControl
         Loaded += (s, e) =>
         {
             Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
-            var totalMemory = Method.Value.GetTotalMemory(Const.Platform);
+            var totalMemory = Method.Value.GetTotalMemory(Const.Data.Platform);
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (_firstLoad)
             {
                 _firstLoad = false;
@@ -56,21 +56,21 @@ public partial class LaunchSettingPage : UserControl
         IndependencyCoreSwitch.Click += (s, e) =>
         {
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (IndependencyCoreSwitch.IsChecked != setting.EnableIndependencyCore)
             {
                 setting.EnableIndependencyCore = (bool)IndependencyCoreSwitch.IsChecked!;
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
         };
         ShowGameOutputSwitch.Click += (s, e) =>
         {
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (ShowGameOutputSwitch.IsChecked != setting.ShowGameOutput)
             {
                 setting.ShowGameOutput = (bool)ShowGameOutputSwitch.IsChecked!;
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
         };
         AddMinecraftFolderBtn.Click += async (s, e) =>
@@ -85,7 +85,7 @@ public partial class LaunchSettingPage : UserControl
                     if (!minecraftFolders.Contains(item.Path))
                     {
                         minecraftFolders.Add(item.Path);
-                        File.WriteAllText(Const.MinecraftFolderDataPath,
+                        File.WriteAllText(Const.String.MinecraftFolderDataPath,
                             JsonConvert.SerializeObject(minecraftFolders, Formatting.Indented));
                         MinecraftFolderComboBox.Items.Clear();
                         minecraftFolders.ForEach(folder => { MinecraftFolderComboBox.Items.Add(folder); });
@@ -109,16 +109,16 @@ public partial class LaunchSettingPage : UserControl
         MinecraftFolderComboBox.SelectionChanged += (s, e) =>
         {
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             setting.MinecraftFolder = (string)MinecraftFolderComboBox.SelectionBoxItem;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
         LaunchCoreComboBox.SelectionChanged += (s, e) =>
         {
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             setting.LaunchCore = (LaunchCore)LaunchCoreComboBox.SelectedIndex;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
         DelSeletedMinecraftFolderBtn.Click += (s, e) =>
         {
@@ -127,7 +127,7 @@ public partial class LaunchSettingPage : UserControl
             Method.Ui.Toast(MainLang.SuccessRemove + ": " + path, Const.Notification.main, NotificationType.Success);
             if (minecraftFolders.Count == 0)
             {
-                var a = Path.Combine(Const.UserDataRootPath, ".minecraft");
+                var a = Path.Combine(Const.String.UserDataRootPath, ".minecraft");
                 minecraftFolders.Add(a);
                 Method.Ui.Toast(MainLang.SuccessAdd + ": " + a, Const.Notification.main, NotificationType.Success);
             }
@@ -135,7 +135,7 @@ public partial class LaunchSettingPage : UserControl
             MinecraftFolderComboBox.Items.Clear();
             minecraftFolders.ForEach(folder => { MinecraftFolderComboBox.Items.Add(folder); });
             MinecraftFolderComboBox.SelectedIndex = MinecraftFolderComboBox.ItemCount - 1;
-            File.WriteAllText(Const.MinecraftFolderDataPath,
+            File.WriteAllText(Const.String.MinecraftFolderDataPath,
                 JsonConvert.SerializeObject(minecraftFolders, Formatting.Indented));
         };
         AutoScanBtn.Click += async (s, e) =>
@@ -159,7 +159,7 @@ public partial class LaunchSettingPage : UserControl
             JavaComboBox.Items.Add(new JavaEntry { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "All" });
             javas.ForEach(java => { JavaComboBox.Items.Add(java); });
             JavaComboBox.SelectedIndex = 0;
-            File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
+            File.WriteAllText(Const.String.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
             Method.Ui.Toast(
                 $"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}: {successAddCount}\n{MainLang.RepeatItem}: {repeatJavaCount}",
                 Const.Notification.main, NotificationType.Success);
@@ -187,43 +187,43 @@ public partial class LaunchSettingPage : UserControl
             JavaComboBox.Items.Add(new JavaEntry { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "All" });
             javas.ForEach(java => { JavaComboBox.Items.Add(java); });
             JavaComboBox.SelectedIndex = 0;
-            File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
+            File.WriteAllText(Const.String.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
         };
         JavaComboBox.SelectionChanged += (s, e) =>
         {
             JavaComboBox.IsVisible = false;
             JavaComboBox.IsVisible = true;
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (JavaComboBox.SelectedIndex == 0)
                 setting.Java = new JavaEntry { JavaPath = "Auto", JavaVersion = "All" };
             else
                 setting.Java = JavaComboBox.SelectedItem as JavaEntry;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
         MaxMemSlider.ValueChanged += (s, e) =>
         {
             MaxMemText.Text = $"{Math.Round(MaxMemSlider.Value)}M";
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (setting.MaxMem != MaxMemSlider.Value)
             {
                 setting.MaxMem = Math.Round(MaxMemSlider.Value);
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
         };
     }
 
     private void ControlProperty()
     {
-        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
         minecraftFolders.ForEach(folder => { MinecraftFolderComboBox.Items.Add(folder); });
         IndependencyCoreSwitch.IsChecked = setting.EnableIndependencyCore;
         ShowGameOutputSwitch.IsChecked = setting.ShowGameOutput;
         if (javas.Contains(null))
         {
             javas.RemoveAll(item => item == null);
-            File.WriteAllText(Const.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
+            File.WriteAllText(Const.String.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
         }
 
         JavaComboBox.Items.Add(new JavaEntry { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "All" });

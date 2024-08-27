@@ -28,13 +28,13 @@ public partial class UrlImage : UserControl
         while (Url == "null") await Task.Delay(100);
 
         var entry =
-            Const.UrlImageDataList.Find(UrlImageDataListEntry => UrlImageDataListEntry.Url == Url);
+            Const.Data.UrlImageDataList.Find(UrlImageDataListEntry => UrlImageDataListEntry.Url == Url);
         if (entry == null)
         {
             var bitmap = await Method.Value.LoadImageFromUrlAsync(Url);
             if (bitmap != null) Img.Source = bitmap;
 
-            Const.UrlImageDataList.Add(new UrlImageDataListEntry { Url = Url, Bitmap = bitmap });
+            Const.Data.UrlImageDataList.Add(new UrlImageDataListEntry { Url = Url, Bitmap = bitmap });
         }
         else
         {

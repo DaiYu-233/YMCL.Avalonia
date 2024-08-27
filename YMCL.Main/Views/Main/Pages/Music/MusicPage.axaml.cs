@@ -99,9 +99,9 @@ public partial class MusicPage : UserControl
             }
 
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             setting.Repeat = _repeat;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             RepeatBtn.Reload();
         };
         var _isOpenLyric = false;
@@ -163,7 +163,7 @@ public partial class MusicPage : UserControl
                 try
                 {
                     using var client = new HttpClient();
-                    var response = await client.GetAsync($"{Const.MusicApiUrl}/song/url?id={_selectedItem.SongId}");
+                    var response = await client.GetAsync($"{Const.String.MusicApiUrl}/song/url?id={_selectedItem.SongId}");
                     response.EnsureSuccessStatusCode();
                     var jObject1 = JObject.Parse(await response.Content.ReadAsStringAsync());
                     if (jObject1 == null)
@@ -216,10 +216,10 @@ public partial class MusicPage : UserControl
             if (_waveOut != null) _waveOut.Volume = (float)VolumeSlider.Value / 100;
 
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (VolumeSlider.Value == setting.Volume) return;
             setting.Volume = VolumeSlider.Value;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
         Loaded += (s, e) =>
         {
@@ -227,12 +227,12 @@ public partial class MusicPage : UserControl
             if (_firstLoad)
             {
                 _firstLoad = false;
-                if (Const.Platform != Platform.Windows)
+                if (Const.Data.Platform != Platform.Windows)
                 {
                     Method.Ui.Toast(MainLang.MusicPlayerOnlySupportWindows, type: NotificationType.Error);
                 }
                 var list = JsonConvert.DeserializeObject<List<PlaySongListViewItemEntry>>(
-                    File.ReadAllText(Const.PlayerDataPath));
+                    File.ReadAllText(Const.String.PlayerDataPath));
                 list.ForEach(list =>
                 {
                     playSongList.Add(list);
@@ -245,7 +245,7 @@ public partial class MusicPage : UserControl
                 timer.Enabled = true;
 
                 var setting =
-                    JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                    JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
                 _solidColorBrush = setting.Theme == Public.Theme.Light
                     ? new SolidColorBrush(Color.FromArgb((byte)(255 * 0.3), 0x33, 0x33, 0x33))
                     : new SolidColorBrush(Color.FromArgb((byte)(255 * 0.3), 255, 255, 255));
@@ -350,7 +350,7 @@ public partial class MusicPage : UserControl
                 Type = PlaySongListViewItemEntryType.Network
             });
             PlayListView.SelectedIndex = PlayListView.Items.Count - 1;
-            File.WriteAllText(Const.PlayerDataPath, JsonConvert.SerializeObject(playSongList, Formatting.Indented));
+            File.WriteAllText(Const.String.PlayerDataPath, JsonConvert.SerializeObject(playSongList, Formatting.Indented));
             await Task.Delay(250);
             SearchSongListView.SelectedIndex = -1;
         };
@@ -359,7 +359,7 @@ public partial class MusicPage : UserControl
             if (PlayListView.Items.Count == 0 || PlayListView.SelectedIndex == -1) return;
             playSongList.RemoveAt(PlayListView.SelectedIndex);
             PlayListView.Items.RemoveAt(PlayListView.SelectedIndex);
-            File.WriteAllText(Const.PlayerDataPath, JsonConvert.SerializeObject(playSongList, Formatting.Indented));
+            File.WriteAllText(Const.String.PlayerDataPath, JsonConvert.SerializeObject(playSongList, Formatting.Indented));
             PlayListView.SelectedIndex = PlayListView.Items.Count - 1;
         };
         var _theLastLocalSong = string.Empty;
@@ -390,7 +390,7 @@ public partial class MusicPage : UserControl
                 }
             }
 
-            File.WriteAllText(Const.PlayerDataPath, JsonConvert.SerializeObject(playSongList, Formatting.Indented));
+            File.WriteAllText(Const.String.PlayerDataPath, JsonConvert.SerializeObject(playSongList, Formatting.Indented));
             PlayListView.SelectedIndex = PlayListView.Items.Count - 1;
         };
         PlayBtn.PointerPressed += (s, e) =>
@@ -520,7 +520,7 @@ public partial class MusicPage : UserControl
         var json = string.Empty;
         try
         {
-            var url = $"{Const.MusicApiUrl}/cloudsearch?keywords={keyword}&offset={page * 30}";
+            var url = $"{Const.String.MusicApiUrl}/cloudsearch?keywords={keyword}&offset={page * 30}";
             var response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             json = await response.Content.ReadAsStringAsync();
@@ -585,7 +585,7 @@ public partial class MusicPage : UserControl
         var json = string.Empty;
         try
         {
-            var url = $"{Const.MusicApiUrl}/cloudsearch?keywords={keyword}&offset={page * 30}";
+            var url = $"{Const.String.MusicApiUrl}/cloudsearch?keywords={keyword}&offset={page * 30}";
             var response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             json = await response.Content.ReadAsStringAsync();
@@ -704,7 +704,7 @@ public partial class MusicPage : UserControl
             }
 
             using var client = new HttpClient();
-            var response = await client.GetAsync($"{Const.MusicApiUrl}/check/music?id={entry.SongId}");
+            var response = await client.GetAsync($"{Const.String.MusicApiUrl}/check/music?id={entry.SongId}");
             response.EnsureSuccessStatusCode();
             var jObject = JObject.Parse(await response.Content.ReadAsStringAsync());
             var availability = (bool)jObject["success"]!;
@@ -714,7 +714,7 @@ public partial class MusicPage : UserControl
                 return;
             }
 
-            var response1 = await client.GetAsync($"{Const.MusicApiUrl}/song/url?id={entry.SongId}");
+            var response1 = await client.GetAsync($"{Const.String.MusicApiUrl}/song/url?id={entry.SongId}");
             response1.EnsureSuccessStatusCode();
             var jObject1 = JObject.Parse(await response1.Content.ReadAsStringAsync());
             if (jObject1 == null)
@@ -763,7 +763,7 @@ public partial class MusicPage : UserControl
         var res2 = string.Empty;
         try
         {
-            var url2 = $"{Const.MusicApiUrl}/lyric?id={entry.SongId}";
+            var url2 = $"{Const.String.MusicApiUrl}/lyric?id={entry.SongId}";
             var response3 = await client2.GetAsync(url2);
             response3.EnsureSuccessStatusCode();
             res2 = await response3.Content.ReadAsStringAsync();

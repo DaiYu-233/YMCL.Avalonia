@@ -25,7 +25,7 @@ namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Account;
 public partial class AccountSettingPage : UserControl
 {
     private List<AccountInfo> accounts =
-        JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath));
+        JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.String.AccountDataPath));
 
     public AccountSettingPage()
     {
@@ -40,7 +40,7 @@ public partial class AccountSettingPage : UserControl
         {
             Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (setting.AccountSelectionIndex + 1 <= AccountsListView.Items.Count)
             {
                 AccountsListView.SelectedIndex = setting.AccountSelectionIndex;
@@ -49,7 +49,7 @@ public partial class AccountSettingPage : UserControl
             {
                 AccountsListView.SelectedItem = AccountsListView.Items[0];
                 setting.AccountSelectionIndex = 0;
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
 
             try
@@ -147,7 +147,7 @@ public partial class AccountSettingPage : UserControl
                                     Name = textBox.Text
                                 });
 
-                                File.WriteAllText(Const.AccountDataPath,
+                                File.WriteAllText(Const.String.AccountDataPath,
                                     JsonConvert.SerializeObject(accounts, Formatting.Indented));
                                 LoadAccounts();
                             }
@@ -181,7 +181,7 @@ public partial class AccountSettingPage : UserControl
                             IsPrimaryButtonEnabled = false,
                             IsSecondaryButtonEnabled = false
                         };
-                        MicrosoftAuthenticator authenticator = new(Const.AzureClientId);
+                        MicrosoftAuthenticator authenticator = new(Const.String.AzureClientId);
                         microsoftDialog.PrimaryButtonClick += async (_, _) =>
                         {
                             var clipboard = TopLevel.GetTopLevel(this)?.Clipboard;
@@ -262,7 +262,7 @@ public partial class AccountSettingPage : UserControl
                                 Skin = Method.Value.BytesToBase64(bytes)
                             });
 
-                            File.WriteAllText(Const.AccountDataPath,
+                            File.WriteAllText(Const.String.AccountDataPath,
                                 JsonConvert.SerializeObject(accounts, Formatting.Indented));
                             LoadAccounts();
                             Const.Window.main.Activate();
@@ -290,7 +290,7 @@ public partial class AccountSettingPage : UserControl
                     AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
                     Name = "Steve"
                 });
-            File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
+            File.WriteAllText(Const.String.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
             LoadAccounts();
             AccountsListView.SelectedIndex = 0;
         };
@@ -311,23 +311,23 @@ public partial class AccountSettingPage : UserControl
             }
 
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             setting.AccountSelectionIndex = AccountsListView.SelectedIndex;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
     }
 
     private void ControlProperty()
     {
-        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
         LoadAccounts();
     }
 
     private void LoadAccounts()
     {
-        accounts = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.AccountDataPath));
+        accounts = JsonConvert.DeserializeObject<List<AccountInfo>>(File.ReadAllText(Const.String.AccountDataPath));
         AccountsListView.Items.Clear();
-        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+        var setting = JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
         accounts.ForEach(x =>
         {
             SkinResolver SkinResolver = new(Convert.FromBase64String(x.Skin));
@@ -353,13 +353,13 @@ public partial class AccountSettingPage : UserControl
             {
                 AccountsListView.SelectedItem = AccountsListView.Items[0];
                 setting.AccountSelectionIndex = 0;
-                File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
         }
         else
         {
             var now = DateTime.Now;
-            File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(new List<AccountInfo>
+            File.WriteAllText(Const.String.AccountDataPath, JsonConvert.SerializeObject(new List<AccountInfo>
             {
                 new()
                 {
@@ -369,14 +369,14 @@ public partial class AccountSettingPage : UserControl
                 }
             }, Formatting.Indented));
             setting.AccountSelectionIndex = 0;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             LoadAccounts();
         }
 
         if (setting.AccountSelectionIndex == -1 && accounts.Count > 0)
         {
             setting.AccountSelectionIndex = 0;
-            File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             LoadAccounts();
         }
     }
@@ -494,7 +494,7 @@ public partial class AccountSettingPage : UserControl
                         }
                     }
 
-                    File.WriteAllText(Const.AccountDataPath,
+                    File.WriteAllText(Const.String.AccountDataPath,
                         JsonConvert.SerializeObject(accounts, Formatting.Indented));
                     LoadAccounts();
                     Const.Window.main.Activate();
@@ -521,7 +521,7 @@ public partial class AccountSettingPage : UserControl
         account.Skin = Method.Value.BytesToBase64(bytes);
         account.Bitmap = null;
         accounts[index] = account;
-        File.WriteAllText(Const.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
+        File.WriteAllText(Const.String.AccountDataPath, JsonConvert.SerializeObject(accounts, Formatting.Indented));
         LoadAccounts();
     }
 }

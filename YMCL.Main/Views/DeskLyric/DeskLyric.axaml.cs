@@ -43,7 +43,7 @@ public partial class DeskLyric : Window
         else
         {
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             LyricText.Foreground = new SolidColorBrush(setting.DeskLyricColor);
             LyricText.TextAlignment = setting.DeskLyricAlignment;
             _isOpen = true;

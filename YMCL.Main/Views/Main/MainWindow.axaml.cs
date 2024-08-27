@@ -60,10 +60,10 @@ public partial class MainWindow : Window
             Const.Window.main._firstLoad = false;
             Method.Ui.CheckLauncher();
             var setting =
-                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.SettingDataPath));
+                JsonConvert.DeserializeObject<Public.Classes.Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (!setting.IsAlreadyWrittenIntoTheUrlScheme)
             {
-                if (Const.Platform == Platform.Windows)
+                if (Const.Data.Platform == Platform.Windows)
                 {
                     await Method.Ui.UpgradeToAdministratorPrivilegesAsync(Const.Window.main);
                     Method.IO.TryCreateFolder("C:\\ProgramData\\DaiYu.Platform.YMCL");
@@ -102,17 +102,17 @@ public partial class MainWindow : Window
                         }
 
                         setting.IsAlreadyWrittenIntoTheUrlScheme = true;
-                        File.WriteAllText(Const.SettingDataPath,
+                        File.WriteAllText(Const.String.SettingDataPath,
                             JsonConvert.SerializeObject(setting, Formatting.Indented));
                     }
                     catch
                     {
                     }
                 }
-                else if (Const.Platform == Platform.Linux)
+                else if (Const.Data.Platform == Platform.Linux)
                 {
                     setting.IsAlreadyWrittenIntoTheUrlScheme = true;
-                    File.WriteAllText(Const.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                    File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
                 }
             }
         };
@@ -188,11 +188,11 @@ public partial class MainWindow : Window
 
     public void LoadWindow()
     {
-        Method.IO.ClearFolder(Const.TempFolderPath);
+        Method.IO.ClearFolder(Const.String.TempFolderPath);
         
         SystemDecorations = SystemDecorations.Full;
 
-        var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+        var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
         FrameView.Content = launchPage;
         titleBarStyle = setting.WindowTitleBarStyle;
         switch (setting.WindowTitleBarStyle)
@@ -222,7 +222,7 @@ public partial class MainWindow : Window
         if (setting.CustomHomePage == CustomHomePageWay.Local)
             try
             {
-                var c = (Control)AvaloniaRuntimeXamlLoader.Load(File.ReadAllText(Const.CustomHomePageXamlDataPath));
+                var c = (Control)AvaloniaRuntimeXamlLoader.Load(File.ReadAllText(Const.String.CustomHomePageXamlDataPath));
                 launchPage.CustomPageRoot.Child = c;
             }
             catch (Exception ex)
@@ -353,7 +353,7 @@ public partial class MainWindow : Window
                     musicPage.PlayListView.Items.Add(song);
                 }
 
-            File.WriteAllText(Const.PlayerDataPath,
+            File.WriteAllText(Const.String.PlayerDataPath,
                 JsonConvert.SerializeObject(musicPage.playSongList, Formatting.Indented));
             musicPage.PlayListView.SelectedIndex = musicPage.PlayListView.Items.Count - 1;
         }

@@ -33,6 +33,7 @@
     </PropertyGroup>
     <ItemGroup>
         <None Include="..\.editorconfig" Link=".editorconfig" />
+        <None Remove="Public\Texts\Default.isl" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Avalonia" Version="11.1.1" />

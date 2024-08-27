@@ -35,7 +35,7 @@ public class Setting
     public CustomHomePageWay CustomHomePage { get; set; } = CustomHomePageWay.None;
     public Color AccentColor { get; set; } = Color.FromRgb(22, 233, 184);
     public Color DeskLyricColor { get; set; } = Color.FromRgb(22, 233, 184);
-    public JavaEntry Java { get; set; } = Const.AutoJava;
+    public JavaEntry Java { get; set; } = Const.Data.AutoJava;
     public string WindowBackGroundImgData { get; set; } = string.Empty;
 }
 

@@ -25,7 +25,7 @@ public partial class TreasureBox : UserControl
         };
         ActivateBtn.Click += async (sender, e) =>
         {
-            if (Const.Platform != Platform.Windows)
+            if (Const.Data.Platform != Platform.Windows)
                 Method.Ui.Toast(MainLang.ThisFeatureOnlySupportsWindowsPlatform, type: NotificationType.Error);
             else
                 try
@@ -49,7 +49,7 @@ public partial class TreasureBox : UserControl
         };
         CancelActivateWinBtn.Click += async (sender, e) =>
         {
-            if (Const.Platform != Platform.Windows)
+            if (Const.Data.Platform != Platform.Windows)
                 Method.Ui.Toast(MainLang.ThisFeatureOnlySupportsWindowsPlatform, type: NotificationType.Error);
             else
                 try
@@ -61,13 +61,13 @@ public partial class TreasureBox : UserControl
                         var str = "slmgr -upk";
                         Process p = new();
                         p.StartInfo.FileName = "cmd.exe";
-                        p.StartInfo.UseShellExecute = false; //ÊÇ·ñÊ¹ÓÃ²Ù×÷ÏµÍ³shellÆô¶¯
+                        p.StartInfo.UseShellExecute = false; //æ˜¯å¦ä½¿ç”¨æ“ä½œç³»ç»Ÿshellå¯åŠ¨
                         p.StartInfo.Verb = "runas";
-                        p.StartInfo.RedirectStandardInput = true; //½ÓÊÜÀ´×Ôµ÷ÓÃ³ÌĞòµÄÊäÈëĞÅÏ¢
-                        p.StartInfo.RedirectStandardOutput = true; //ÓÉµ÷ÓÃ³ÌĞò»ñÈ¡Êä³öĞÅÏ¢
-                        p.StartInfo.RedirectStandardError = true; //ÖØ¶¨Ïò±ê×¼´íÎóÊä³ö
-                        p.StartInfo.CreateNoWindow = true; //²»ÏÔÊ¾³ÌĞò´°¿Ú
-                        p.Start(); //Æô¶¯³ÌĞò
+                        p.StartInfo.RedirectStandardInput = true; //æ¥å—æ¥è‡ªè°ƒç”¨ç¨‹åºçš„è¾“å…¥ä¿¡æ¯
+                        p.StartInfo.RedirectStandardOutput = true; //ç”±è°ƒç”¨ç¨‹åºè·å–è¾“å‡ºä¿¡æ¯
+                        p.StartInfo.RedirectStandardError = true; //é‡å®šå‘æ ‡å‡†é”™è¯¯è¾“å‡º
+                        p.StartInfo.CreateNoWindow = true; //ä¸æ˜¾ç¤ºç¨‹åºçª—å£
+                        p.Start(); //å¯åŠ¨ç¨‹åº
                         p.StandardInput.WriteLine(str + "&exit");
                         p.StandardInput.AutoFlush = true;
                         var output = p.StandardOutput.ReadToEnd();

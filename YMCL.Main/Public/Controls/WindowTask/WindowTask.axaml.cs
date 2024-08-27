@@ -56,7 +56,7 @@ public partial class WindowTask : Window
         };
         Loaded += (_, _) =>
         {
-            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.SettingDataPath));
+            var setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
             if (setting.WindowTitleBarStyle == WindowTitleBarStyle.System)
             {
                 TitleBar.IsVisible = false;
@@ -85,9 +85,9 @@ public partial class WindowTask : Window
             }
         };
 
-        _debounceTimer = new Timer(500); // ÉèÖÃ·À¶¶Ê±¼ä¼ä¸ôÎª0.5Ãë  
+        _debounceTimer = new Timer(500); // è®¾ç½®é˜²æŠ–æ—¶é—´é—´éš”ä¸º0.5ç§’  
         _debounceTimer.Elapsed += DebounceTimerElapsed;
-        _debounceTimer.AutoReset = false; // ²»×Ô¶¯ÖØÖÃ£¬ÒÔ±ãÎÒÃÇ¿ÉÒÔ¿ØÖÆºÎÊ±ÔÙ´ÎÆô¶¯Ëü  
+        _debounceTimer.AutoReset = false; // ä¸è‡ªåŠ¨é‡ç½®ï¼Œä»¥ä¾¿æˆ‘ä»¬å¯ä»¥æ§åˆ¶ä½•æ—¶å†æ¬¡å¯åŠ¨å®ƒ  
 
         Show();
         Activate();

@@ -3,7 +3,7 @@
         <OutputType>WinExe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <PublishSingleFile>true</PublishSingleFile>
+        <PublishSingleFile>false</PublishSingleFile>
         <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -19,27 +19,38 @@
         <PackageProjectUrl>http://ymcl.daiyu.fun</PackageProjectUrl>
         <PackageIcon>YMCL-Icon.png</PackageIcon>
         <RepositoryUrl>https://github.com/DaiYu-233/YMCL.Avalonia</RepositoryUrl>
+        <CFBundleName>YMCL</CFBundleName>
+        <CFBundleDisplayName>YMCL</CFBundleDisplayName>
+        <CFBundleIdentifier>fun.daiyu.ymcl</CFBundleIdentifier>
+        <CFBundleVersion>1.0.0</CFBundleVersion>
+        <CFBundlePackageType>AAPL</CFBundlePackageType>
+        <CFBundleSignature>YuMinecraftLauncher</CFBundleSignature>
+        <CFBundleExecutable>YMCL.Main</CFBundleExecutable>
+        <CFBundleIconFile>Public/Assets/YMCL-Icon.icns</CFBundleIconFile>
+        <CFBundleShortVersionString>1.0</CFBundleShortVersionString>
+        <NSPrincipalClass>NSApplication</NSPrincipalClass>
+        <NSHighResolutionCapable>true</NSHighResolutionCapable>
     </PropertyGroup>
     <ItemGroup>
         <None Include="..\.editorconfig" Link=".editorconfig" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.1.1"/>
-        <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.1.1"/>
-        <PackageReference Include="Avalonia.Desktop" Version="11.1.1"/>
-        <PackageReference Include="Avalonia.Markup.Xaml.Loader" Version="11.1.1"/>
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.1"/>
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.1"/>
-        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.1"/>
+        <PackageReference Include="Avalonia" Version="11.1.1" />
+        <PackageReference Include="Dotnet.Bundle" Version="*" />
+        <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.1.1" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.1.1" />
+        <PackageReference Include="Avalonia.Markup.Xaml.Loader" Version="11.1.1" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.1" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.1" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.1" />
         <PackageReference Include="CurseForge.APIClient" Version="2.2.0" />
         <PackageReference Include="FluentAvaloniaUI" Version="2.1.0-preview6" />
-        <PackageReference Include="ManagedBass" Version="3.1.1"/>
+        <PackageReference Include="ManagedBass" Version="3.1.1" />
         <PackageReference Include="MinecraftLaunch" Version="3.1.0-preview06" />
         <PackageReference Include="MinecraftLaunch.Skin" Version="1.0.1" />
         <PackageReference Include="NAudio" Version="2.2.1" />
         <PackageReference Include="NAudio.Wasapi" Version="2.2.1" />
-        <PackageReference Include="StarLight_Core" Version="1.3.6-Preview8"/>
+        <PackageReference Include="StarLight_Core" Version="1.3.6-Preview8" />
         <PackageReference Include="System.Management" Version="9.0.0-preview.6.24327.7" />
     </ItemGroup>
     <ItemGroup>
@@ -76,8 +87,8 @@
         <AvaloniaXaml Remove="Public\Texts\CustomHomePageDefault.axaml" />
     </ItemGroup>
     <ItemGroup>
-        <None Remove="Public\Assets\bass.dll"/>
-        <None Remove="Public\Assets\Bass.Net.dll"/>
+        <None Remove="Public\Assets\bass.dll" />
+        <None Remove="Public\Assets\Bass.Net.dll" />
         <None Remove="Public\Assets\MiSans-Regular.otf" />
         <None Remove="Public\Assets\TitleBar-Icon.png" />
         <None Remove="Public\Assets\Transparent-Icon.png" />
@@ -115,6 +126,9 @@
         <None Update="Public\Assets\YCML-Icon.png">
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
+        </None>
+        <None Update="Public\Assets\YMCL-Icon.icns">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>
 </Project>

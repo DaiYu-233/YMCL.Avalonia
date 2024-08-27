@@ -1,81 +1,145 @@
 name: Publish
+
 on:
   workflow_dispatch:
   push:
-    branches: [ "**" ]
-  
+    branches: ["**"]
+
 jobs:
-  main:
-    runs-on: windows-latest
+  time:
+    runs-on: ubuntu-latest
+    outputs:
+      v: ${{ steps.date.outputs.time }}
+      y: ${{ steps.date.outputs.y }}
+      md: ${{ steps.date.outputs.md }}
+      hm: ${{ steps.date.outputs.hm }}
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - name: Time
-      id: date
-      run: |
-        echo "date=$(date +'%Y-%m-%d.%H-%M-%S')" >> $GITHUB_OUTPUT
-        echo "$(date +'%Y.%m.%d.%H.%M')" > ./YMCL.Main/Public/Texts/DateTime.txt
-        echo "title=$(date +'%Y.%m.%d.%H.%M')" >> $GITHUB_OUTPUT
-      shell: bash
-    - name: Build-Dependent
-      run: |
-        dotnet publish YMCL.Main/YMCL.Main.csproj -r win-x86 --self-contained false
-        dotnet publish YMCL.Main/YMCL.Main.csproj -r win-x64 --self-contained false
-        dotnet publish YMCL.Main/YMCL.Main.csproj -r osx-x64 --self-contained false
-        dotnet publish YMCL.Main/YMCL.Main.csproj -r osx-arm64 --self-contained false
-        dotnet publish YMCL.Main/YMCL.Main.csproj -r linux-x64 --self-contained false
-        dotnet publish YMCL.Main/YMCL.Main.csproj -r linux-arm --self-contained false
-        dotnet publish YMCL.Main/YMCL.Main.csproj -r linux-arm64 --self-contained false
-    - name: Rename-Dependent
-      run: |
-        mv ./YMCL.Main/bin/Release/net8.0/win-x86/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0/win-x86/publish/YMCL.Main.win.x86.exe
-        mv ./YMCL.Main/bin/Release/net8.0/win-x64/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0/win-x64/publish/YMCL.Main.win.x64.exe
-        mv ./YMCL.Main/bin/Release/net8.0/osx-x64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0/osx-x64/publish/YMCL.Main.osx.x64.bin
-        mv ./YMCL.Main/bin/Release/net8.0/osx-arm64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0/osx-arm64/publish/YMCL.Main.osx.arm64.bin
-        mv ./YMCL.Main/bin/Release/net8.0/linux-x64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0/linux-x64/publish/YMCL.Main.linux.x64.bin
-        mv ./YMCL.Main/bin/Release/net8.0/linux-arm/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0/linux-arm/publish/YMCL.Main.linux.arm.bin
-        mv ./YMCL.Main/bin/Release/net8.0/linux-arm64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0/linux-arm64/publish/YMCL.Main.linux.arm64.bin
-    - name: Build-Independence
-      run: |
-        echo "True" > ./YMCL.Main/Public/Texts/IsAloneProgram.txt
-        dotnet publish YMCL.Main/YMCL.Main.csproj -r win-x86 --self-contained true
-        dotnet publish YMCL.Main/YMCL.Main.csproj -r win-x64 --self-contained true
-        dotnet publish YMCL.Main/YMCL.Main.csproj -r osx-x64 --self-contained true
-        dotnet publish YMCL.Main/YMCL.Main.csproj -r osx-arm64 --self-contained true
-        dotnet publish YMCL.Main/YMCL.Main.csproj -r linux-x64 --self-contained true
-        dotnet publish YMCL.Main/YMCL.Main.csproj -r linux-arm --self-contained true
-        dotnet publish YMCL.Main/YMCL.Main.csproj -r linux-arm64 --self-contained true
-    - name: Rename-Independence
-      run: |
-        mv ./YMCL.Main/bin/Release/net8.0/win-x86/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0/win-x86/publish/YMCL.Main.alone.win.x86.exe
-        mv ./YMCL.Main/bin/Release/net8.0/win-x64/publish/YMCL.Main.exe ./YMCL.Main/bin/Release/net8.0/win-x64/publish/YMCL.Main.alone.win.x64.exe
-        mv ./YMCL.Main/bin/Release/net8.0/osx-x64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0/osx-x64/publish/YMCL.Main.alone.osx.x64.bin
-        mv ./YMCL.Main/bin/Release/net8.0/osx-arm64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0/osx-arm64/publish/YMCL.Main.alone.osx.arm64.bin
-        mv ./YMCL.Main/bin/Release/net8.0/linux-x64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0/linux-x64/publish/YMCL.Main.alone.linux.x64.bin
-        mv ./YMCL.Main/bin/Release/net8.0/linux-arm/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0/linux-arm/publish/YMCL.Main.alone.linux.arm.bin
-        mv ./YMCL.Main/bin/Release/net8.0/linux-arm64/publish/YMCL.Main ./YMCL.Main/bin/Release/net8.0/linux-arm64/publish/YMCL.Main.alone.linux.arm64.bin
-    - name: Publish
-      uses: marvinpinto/action-automatic-releases@latest
-      with:
-        repo_token: "${{ secrets.TOKEN }}"
-        title: "v${{ steps.date.outputs.title }}"
-        automatic_release_tag: "AutoRelease-${{ steps.date.outputs.date }}"
-        prerelease: false
-        files: |
-          YMCL.Main/bin/Release/net8.0/osx-arm64/publish/YMCL.Main.osx.arm64.bin
-          YMCL.Main/bin/Release/net8.0/osx-x64/publish/YMCL.Main.osx.x64.bin
-          YMCL.Main/bin/Release/net8.0/linux-arm64/publish/YMCL.Main.linux.arm64.bin
-          YMCL.Main/bin/Release/net8.0/linux-arm/publish/YMCL.Main.linux.arm.bin
-          YMCL.Main/bin/Release/net8.0/linux-x64/publish/YMCL.Main.linux.x64.bin
-          YMCL.Main/bin/Release/net8.0/win-x86/publish/YMCL.Main.win.x86.exe
-          YMCL.Main/bin/Release/net8.0/win-x64/publish/YMCL.Main.win.x64.exe
-          YMCL.Main/bin/Release/net8.0/osx-arm64/publish/YMCL.Main.alone.osx.arm64.bin
-          YMCL.Main/bin/Release/net8.0/osx-x64/publish/YMCL.Main.alone.osx.x64.bin
-          YMCL.Main/bin/Release/net8.0/linux-arm64/publish/YMCL.Main.alone.linux.arm64.bin
-          YMCL.Main/bin/Release/net8.0/linux-arm/publish/YMCL.Main.alone.linux.arm.bin
-          YMCL.Main/bin/Release/net8.0/linux-x64/publish/YMCL.Main.alone.linux.x64.bin
-          YMCL.Main/bin/Release/net8.0/win-x86/publish/YMCL.Main.alone.win.x86.exe
-          YMCL.Main/bin/Release/net8.0/win-x64/publish/YMCL.Main.alone.win.x64.exe
-        
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Time
+        id: date
+        run: |
+          echo "::set-output name=time::$(date +'%Y.%m.%d.%H.%M')"
+          echo "::set-output name=y::$(date +'%Y')"
+          echo "::set-output name=md::$(date +'%m%d')"
+          echo "::set-output name=hm::$(date +'%H%M')"
+      - name: EchoTime
+        run: |
+          echo "The current time is: ${{ steps.date.outputs.time }}"
+
+  linux:
+    runs-on: ubuntu-latest
+    needs: time
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Time
+        id: date
+        run: |
+          echo "${{ needs.time.outputs.v }}" > ./YMCL.Main/Public/Texts/DateTime.txt
+          echo "Version is ${{ needs.time.outputs.v }}"
+      - name: Dependency
+        run: |
+          dotnet tool install -g KuiperZone.PupNet
+          sudo apt-get update
+          sudo apt-get install fuse
+      - name: Build-AppImage
+        run: |
+          cd ./YMCL.Main
+          sudo su
+          pupnet --runtime linux-x64 --kind appimage -o YMCL.Main.linux.x64.AppImage -y --app-version ${{ needs.time.outputs.y }}.${{ needs.time.outputs.md }}.${{ needs.time.outputs.hm }}
+          pupnet --runtime linux-arm --kind appimage -o YMCL.Main.linux.arm.AppImage -y --app-version ${{ needs.time.outputs.y }}.${{ needs.time.outputs.md }}.${{ needs.time.outputs.hm }}
+          pupnet --runtime linux-arm64 --kind appimage -o YMCL.Main.linux.arm64.AppImage -y --app-version ${{ needs.time.outputs.y }}.${{ needs.time.outputs.md }}.${{ needs.time.outputs.hm }}
+      - name: Build-MacOsApp
+        run: |
+          cd ./YMCL.Main
+          sudo su
+          dotnet restore -r osx-x64
+          dotnet msbuild -t:BundleApp -p:RuntimeIdentifier=osx-x64  -property:Configuration=Release -p:SelfContained=true
+          dotnet restore -r osx-arm64
+          dotnet msbuild -t:BundleApp -p:RuntimeIdentifier=osx-arm64  -property:Configuration=Release -p:SelfContained=true
+          cd ./bin/Release/net8.0/
+          cd ./osx-x64/publish/
+          zip -9 -r ../../YMCL.Main.osx.mac.x64.app.zip ./YMCL.app
+          cd ../../
+          cd ./osx-arm64/publish/
+          zip -9 -r ../../YMCL.Main.osx.mac.arm64.app.zip ./YMCL.app
+      - name: UploadArtifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-artifacts
+          path: |
+            YMCL.Main/Deploy/OUT/*
+            YMCL.Main/bin/Release/net8.0/YMCL.Main.osx.mac.x64.app.zip
+            YMCL.Main/bin/Release/net8.0/YMCL.Main.osx.mac.arm64.app.zip
+
+  win:
+    runs-on: windows-latest
+    needs: time
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Dependency-InnoSetup
+        uses: ConorMacBride/install-package@v1
+        with:
+          choco: innosetup
+      - name: Dependency-Pupnet
+        run: |
+          dotnet tool install -g KuiperZone.PupNet
+      - name: Time
+        id: date
+        run: |
+          echo "${{ needs.time.outputs.v }}" > ./YMCL.Main/Public/Texts/DateTime.txt
+          echo "Version is ${{ needs.time.outputs.v }}"
+        shell: bash
+      - name: Build
+        run: |
+          cd ./YMCL.Main
+          pupnet -r win-x64 -k setup -y -o YMCL.Main.win.x64.installer.exe --app-version ${{ needs.time.outputs.y }}.${{ needs.time.outputs.md }}.${{ needs.time.outputs.hm }}
+          pupnet -r win-x86 -k setup -y -o YMCL.Main.win.x86.installer.exe --app-version ${{ needs.time.outputs.y }}.${{ needs.time.outputs.md }}.${{ needs.time.outputs.hm }}
+          pupnet -r win-arm64 -k setup -y -o YMCL.Main.win.arm64.installer.exe --app-version ${{ needs.time.outputs.y }}.${{ needs.time.outputs.md }}.${{ needs.time.outputs.hm }}
+      - name: UploadArtifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: win-artifacts
+          path: |
+            YMCL.Main/Deploy/OUT/*
+
+  publish:
+    needs: [linux, win, time]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Time
+        id: gdate
+        run: |
+          echo "date=$(date +'%Y-%m-%d.%H-%M-%S')" >> $GITHUB_OUTPUT
+          echo "title=$(date +'%Y.%m.%d.%H.%M')" >> $GITHUB_OUTPUT
+      - name: Download-LinuxArtifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: linux-artifacts
+          path: ./YMCL.Release/
+      - name: Download-WindowsArtifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: win-artifacts
+          path: ./YMCL.Release/
+      - name: List Files
+        run: |
+          ls -la ./YMCL.Release/
+      - name: Publish Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.TOKEN }}"
+          title: "v${{ needs.time.outputs.v }}"
+          automatic_release_tag: "AutoPublish-${{ steps.gdate.outputs.date }}"
+          prerelease: false
+          files: |
+            YMCL.Release/*.exe
+            YMCL.Release/Deploy/OUT/*.AppImage
+            YMCL.Release/bin/Release/net8.0/YMCL.Main.osx.mac.x64.app.zip
+            YMCL.Release/bin/Release/net8.0/YMCL.Main.osx.mac.arm64.app.zip

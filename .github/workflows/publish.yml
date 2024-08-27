@@ -68,25 +68,6 @@ jobs:
           cd ../../
           cd ./osx-arm64/publish/
           zip -9 -r ../../YMCL.Main.osx.mac.arm64.app.zip ./YMCL.app
-      - name: Build-WinExe
-        run: |
-          cd ./YMCL.Main
-          sudo su
-          dotnet publish -r win-x86 --self-contained true -p:PublishSingleFile=true
-          dotnet publish -r win-x64 --self-contained true -p:PublishSingleFile=true
-          dotnet publish -r win-arm64 --self-contained true -p:PublishSingleFile=true
-          mv ./bin/Release/net8.0/win-x86/publish/YMCL.Main.exe ./bin/Release/net8.0/win-x86/publish/YMCL.Main.win7+.x86.exe
-          mv ./bin/Release/net8.0/win-x64/publish/YMCL.Main.exe ./bin/Release/net8.0/win-x64/publish/YMCL.Main.win7+.x64.exe
-          mv ./bin/Release/net8.0/win-arm64/publish/YMCL.Main.exe ./bin/Release/net8.0/win-arm64/publish/YMCL.Main.win7+.arm64.exe
-          cd ./bin/Release/net8.0/
-          cd ./win-x86/publish/
-          zip -9 -r "../../YMCL.Main.win7+.x86.exe.zip" "./YMCL.Main.win7+.x86.exe"
-          cd ../../
-          cd ./win-x64/publish/
-          zip -9 -r "../../YMCL.Main.win7+.x64.exe.zip" "./YMCL.Main.win7+.x64.exe"
-          cd ../../
-          cd ./win-arm64/publish/
-          zip -9 -r "../../YMCL.Main.win7+.arm64.exe.zip" "./YMCL.Main.win7+.arm64.exe"
       - name: UploadArtifacts
         uses: actions/upload-artifact@v3
         with:
@@ -120,9 +101,9 @@ jobs:
       - name: Build
         run: |
           cd ./YMCL.Main
-          pupnet -r win-x64 -k setup -y -o YMCL.Main.win10+.x64.installer.exe --app-version ${{ needs.time.outputs.y }}.${{ needs.time.outputs.md }}.${{ needs.time.outputs.hm }}
-          pupnet -r win-x86 -k setup -y -o YMCL.Main.win10+.x86.installer.exe --app-version ${{ needs.time.outputs.y }}.${{ needs.time.outputs.md }}.${{ needs.time.outputs.hm }}
-          pupnet -r win-arm64 -k setup -y -o YMCL.Main.win10+.arm64.installer.exe --app-version ${{ needs.time.outputs.y }}.${{ needs.time.outputs.md }}.${{ needs.time.outputs.hm }}
+          pupnet -r win-x64 -k setup -y -o YMCL.Main.win.x64.installer.exe --app-version ${{ needs.time.outputs.y }}.${{ needs.time.outputs.md }}.${{ needs.time.outputs.hm }}
+          pupnet -r win-x86 -k setup -y -o YMCL.Main.win.x86.installer.exe --app-version ${{ needs.time.outputs.y }}.${{ needs.time.outputs.md }}.${{ needs.time.outputs.hm }}
+          pupnet -r win-arm64 -k setup -y -o YMCL.Main.win.arm64.installer.exe --app-version ${{ needs.time.outputs.y }}.${{ needs.time.outputs.md }}.${{ needs.time.outputs.hm }}
       - name: UploadArtifacts
         uses: actions/upload-artifact@v3
         with:
@@ -162,4 +143,3 @@ jobs:
           files: |
             YMCL.Release/*.exe
             YMCL.Release/Deploy/OUT/*.AppImage
-            YMCL.Release/bin/Release/net8.0/*.zip

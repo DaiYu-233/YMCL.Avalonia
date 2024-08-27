@@ -25,7 +25,8 @@ public partial class LauncherSettingPage : UserControl
         if (!Const.Data.Setting.EnableAutoCheckUpdate) return;
         var updateAvailable = await Method.Ui.CheckUpdateAsync();
         if (!updateAvailable.Item1) return;
-        if (Const.Data.Setting.SkipUpdateVersion == updateAvailable.Item2) return;
+        if (!updateAvailable.Item2) return;
+        if (Const.Data.Setting.SkipUpdateVersion == updateAvailable.Item3) return;
         var dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion, updateAvailable.Item3
             , b_cancel: MainLang.Cancel, b_secondary: MainLang.SkipThisVersion,
             b_primary: MainLang.Ok);
@@ -36,7 +37,7 @@ public partial class LauncherSettingPage : UserControl
         }
         else if (dialog == ContentDialogResult.Secondary)
         {
-            Const.Data.Setting.SkipUpdateVersion = updateAvailable.Item2;
+            Const.Data.Setting.SkipUpdateVersion = updateAvailable.Item3;
             File.WriteAllText(Const.String.SettingDataPath,
                 JsonConvert.SerializeObject(Const.Data.Setting, Formatting.Indented));
         }
@@ -61,12 +62,17 @@ public partial class LauncherSettingPage : UserControl
             CheckUpdateBtn.Content = ring;
             ring.Height = 17;
             ring.Width = 17;
-            var (checkUpdateAsyncStatus, _, checkUpdateAsyncMsg) = await Method.Ui.CheckUpdateAsync();
+            var (success, checkUpdateAsyncStatus, _, checkUpdateAsyncMsg) = await Method.Ui.CheckUpdateAsync();
             CheckUpdateBtn.IsEnabled = true;
             CheckUpdateBtn.Content = MainLang.CheckUpdate;
-            if (!checkUpdateAsyncStatus)
+            if (!success)
             {
                 Method.Ui.Toast(MainLang.CheckUpdateFail);
+                return;
+            }
+
+            if (!checkUpdateAsyncStatus)
+            {
                 return;
             }
 

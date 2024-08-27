@@ -111,9 +111,6 @@
         </AvaloniaResource>
     </ItemGroup>
     <ItemGroup>
-        <EmbeddedResource Include="Public\Bins\YMCL.Starter.win.exe" />
-        <EmbeddedResource Include="Public\Bins\YMCL.Update.Helper.linux" />
-        <EmbeddedResource Include="Public\Bins\YMCL.Update.Helper.win.exe" />
         <EmbeddedResource Include="Public\Texts\CustomHomePageDefault.axaml" />
         <EmbeddedResource Include="Public\Texts\DateTime.txt" />
         <EmbeddedResource Include="Public\Texts\IsAloneProgram.txt" />

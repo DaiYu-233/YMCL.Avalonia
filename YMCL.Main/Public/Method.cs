@@ -5,6 +5,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Management;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
@@ -40,6 +41,7 @@ using MinecraftLaunch.Components.Launcher;
 using MinecraftLaunch.Components.Resolver;
 using MinecraftLaunch.Utilities;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using StarLight_Core.Authentication;
 using StarLight_Core.Launch;
 using StarLight_Core.Models.Authentication;
@@ -281,6 +283,162 @@ public class Method
             };
             Process.Start(startInfo);
             Environment.Exit(0);
+        }
+
+        public static async Task<(bool, string)> CheckUpdateAsync()
+        {
+            try
+            {
+                var resourceName = "YMCL.Main.Public.Texts.DateTime.txt";
+                var _assembly = Assembly.GetExecutingAssembly();
+                var stream = _assembly.GetManifestResourceStream(resourceName);
+                var version = string.Empty;
+                using (var reader = new StreamReader(stream!))
+                {
+                    var result = reader.ReadToEnd();
+                    version = $"v{result.Trim()}";
+                }
+
+                var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Add("User-Agent",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54");
+                var githubApiJson = JArray.Parse(await httpClient.GetStringAsync(Const.String.GithubUpdateApiUrl));
+                var apiVersion = (string)githubApiJson[0]["name"];
+                return (apiVersion != version, $"{apiVersion!}\n\n{(string)githubApiJson[0]["html_url"]}");
+            }
+            catch
+            {
+                return (false, string.Empty);
+            }
+        }
+
+        public static async Task<bool> UpdateAppAsync()
+        {
+            try
+            {
+                var architecture = Value.GetCurrentPlatformAndArchitecture();
+                var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Add("User-Agent",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54");
+                var githubApiJson = JArray.Parse(await httpClient.GetStringAsync(Const.String.GithubUpdateApiUrl));
+                var task = new WindowTask(MainLang.CheckUpdate);
+                task.UpdateTextProgress(MainLang.CheckUpdate);
+                var assets = (JArray)githubApiJson[0]["assets"];
+                var url = String.Empty;
+                var fileName = string.Empty;
+                foreach (var jToken in assets)
+                {
+                    var asset = (JObject)jToken;
+                    var name = (string)asset["name"];
+                    var browser_download_url = (string)asset["browser_download_url"];
+                    switch (name)
+                    {
+                        case "YMCL.Main.linux.arm.AppImage" when architecture == "linux-arm":
+                        case "YMCL.Main.linux.arm64.AppImage" when architecture == "linux-arm64":
+                        case "YMCL.Main.linux.x64.AppImage" when architecture == "linux-x64":
+                        case "YMCL.Main.osx.mac.x64.app.zip" when architecture == "osx-x64":
+                        case "YMCL.Main.osx.mac.arm64.app.zip" when architecture == "osx-arm64":
+                        case "YMCL.Main.win.x64.installer.exe" when architecture == "win-x64":
+                        case "YMCL.Main.win.x86.installer.exe" when architecture == "win-x86":
+                            url = browser_download_url;
+                            fileName = name;
+                            break;
+                    }
+                }
+
+                if (url == null)
+                {
+                    task.Destory();
+                    return false;
+                }
+
+                var setting =
+                    JsonConvert.DeserializeObject<Setting>(
+                        File.ReadAllText(Const.String.SettingDataPath));
+                var trueUrl = url;
+                if (setting.EnableCustomUpdateUrl)
+                {
+                    trueUrl = setting.CustomUpdateUrl.Replace("{%url%}", url);
+                }
+
+                task.UpdateTextProgress($"{MainLang.GetUpdateUrl}: {trueUrl}");
+                task.UpdateTextProgress(
+                    $"{MainLang.BeginDownload}: {Path.Combine(Const.String.UserDataRootPath, fileName)}");
+                try
+                {
+                    var handler = new HttpClientHandler();
+                    handler.ServerCertificateCustomValidationCallback =
+                        (_, _, _, _) => true;
+                    ServicePointManager.SecurityProtocol =
+                        SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12;
+                    using var client = new HttpClient(handler);
+                    client.DefaultRequestHeaders.Add("User-Agent",
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0");
+                    using (var response =
+                           await client.GetAsync(trueUrl, HttpCompletionOption.ResponseHeadersRead))
+                    {
+                        response.EnsureSuccessStatusCode();
+
+                        await using (var downloadStream = await response.Content.ReadAsStreamAsync())
+                        {
+                            await using (var fileStream = new FileStream(
+                                             Path.Combine(Const.String.UserDataRootPath, fileName), FileMode.Create,
+                                             FileAccess.Write))
+                            {
+                                var buffer = new byte[8192];
+                                int bytesRead;
+                                long totalBytesRead = 0;
+                                var totalBytes = response.Content.Headers.ContentLength.HasValue
+                                    ? response.Content.Headers.ContentLength.Value
+                                    : -1;
+
+                                while ((bytesRead =
+                                           await downloadStream.ReadAsync(buffer)) > 0)
+                                {
+                                    await fileStream.WriteAsync(buffer.AsMemory(0, bytesRead));
+                                    totalBytesRead += bytesRead;
+
+                                    if (totalBytes <= 0) continue;
+                                    var progress = (double)totalBytesRead / totalBytes * 100;
+                                    task.UpdateValueProgress(progress);
+                                }
+                            }
+                        }
+                    }
+
+                    task.UpdateTextProgress($"{MainLang.DownloadFinish}");
+                    if (architecture == "win-x86" || architecture == "win-x64")
+                    {
+                        var startInfo = new ProcessStartInfo
+                        {
+                            UseShellExecute = true,
+                            WorkingDirectory = Environment.CurrentDirectory,
+                            FileName = Path.Combine(Const.String.UserDataRootPath, fileName)
+                        };
+                        Process.Start(startInfo);
+                        Environment.Exit(0);
+                    }
+                    else
+                    {
+                        var launcher = TopLevel.GetTopLevel(Const.Window.main).Launcher;
+                        await launcher.LaunchFileInfoAsync(
+                            new System.IO.FileInfo(Path.Combine(Const.String.UserDataRootPath, fileName)));
+                        await Task.Delay(250);
+                        task.Destory();
+                        return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowShortException(MainLang.UpdateFail, ex);
+                }
+
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 
@@ -555,7 +713,7 @@ public class Method
                 ClearFolder(dir);
                 Directory.Delete(dir);
             }
-        }  
+        }
 
         public static void CopyDirectory(string sourceDir, string destinationDir)
         {
@@ -847,7 +1005,7 @@ public class Method
             }
 
             MirrorDownloadManager.IsUseMirrorDownloadSource = setting.DownloadSource == DownloadSource.BmclApi;
-            
+
             Const.Window.main.downloadPage.autoInstallPage.InstallPreviewRoot.IsVisible = false;
             Const.Window.main.downloadPage.autoInstallPage.InstallableVersionListRoot.IsVisible = true;
 
@@ -1212,7 +1370,8 @@ public class Method
                     if (setting.Java.JavaPath == "Auto")
                     {
                         var javaEntry = JavaUtil.GetCurrentJava(
-                            JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.String.JavaDataPath))!,
+                            JsonConvert.DeserializeObject<List<JavaEntry>>(
+                                File.ReadAllText(Const.String.JavaDataPath))!,
                             gameEntry);
                         l_javaPath = javaEntry.JavaPath;
                     }
@@ -1233,7 +1392,8 @@ public class Method
                     if (versionSetting.Java.JavaPath == "Auto")
                     {
                         var javaEntry = JavaUtil.GetCurrentJava(
-                            JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.String.JavaDataPath))!,
+                            JsonConvert.DeserializeObject<List<JavaEntry>>(
+                                File.ReadAllText(Const.String.JavaDataPath))!,
                             gameEntry);
                         l_javaPath = javaEntry.JavaPath;
                     }
@@ -1432,7 +1592,7 @@ public class Method
                                     Const.Window.main.WindowState = WindowState.Normal;
                                     Const.Window.main.Activate();
                                 }
-                                
+
                                 Ui.Toast($"{MainLang.GameExited}: {args.ExitCode}", Const.Notification.main);
 
                                 if (args.ExitCode == 0)
@@ -1518,7 +1678,7 @@ public class Method
                                         break;
                                 }
                             });
-                            
+
                             if (!setting.ShowGameOutput)
                                 await Dispatcher.UIThread.InvokeAsync(() => { task.Hide(); });
                         });
@@ -1601,7 +1761,8 @@ public class Method
                     if (setting.Java.JavaPath == "Auto")
                     {
                         var javaEntry = JavaUtil.GetCurrentJava(
-                            JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.String.JavaDataPath))!,
+                            JsonConvert.DeserializeObject<List<JavaEntry>>(
+                                File.ReadAllText(Const.String.JavaDataPath))!,
                             gameEntry);
                         l_javaPath = javaEntry.JavaPath;
                     }
@@ -1622,7 +1783,8 @@ public class Method
                     if (versionSetting.Java.JavaPath == "Auto")
                     {
                         var javaEntry = JavaUtil.GetCurrentJava(
-                            JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.String.JavaDataPath))!,
+                            JsonConvert.DeserializeObject<List<JavaEntry>>(
+                                File.ReadAllText(Const.String.JavaDataPath))!,
                             gameEntry);
                         l_javaPath = javaEntry.JavaPath;
                     }
@@ -1897,7 +2059,7 @@ public class Method
                                         break;
                                 }
                             });
-                            
+
                             if (!setting.ShowGameOutput)
                                 await Dispatcher.UIThread.InvokeAsync(() => { task.Hide(); });
                         });
@@ -1914,7 +2076,7 @@ public class Method
                                         Const.Window.main.WindowState = WindowState.Normal;
                                         Const.Window.main.Activate();
                                     }
-                                    
+
                                     Ui.Toast($"{MainLang.GameExited}", Const.Notification.main);
                                     task.Destory();
                                 });
@@ -1984,6 +2146,7 @@ public class Method
             {
                 customId = p_customId;
             }
+
             var task = new WindowTask($"{MainLang.Unzip} - {Path.GetFileName(path)}");
 
             IO.TryCreateFolder(Path.Combine(setting.MinecraftFolder, "YMCLTemp"));
@@ -2002,7 +2165,7 @@ public class Method
             task.UpdateTitle($"{MainLang.Install} - {Path.GetFileName(path)}");
             var loaders = info.minecraft.modLoaders[0].id.Split('-');
             var result = false;
-            if (loaders[0] == "forge") 
+            if (loaders[0] == "forge")
             {
                 var forges = (await ForgeInstaller.EnumerableFromVersionAsync(info.minecraft.version)).ToList();
                 ForgeInstallEntry enrty = null;
@@ -2159,7 +2322,7 @@ public class Method
                 }
                 finally
                 {
-                    semaphore.Release(); 
+                    semaphore.Release();
                 }
             }
 
@@ -2286,5 +2449,5 @@ public class Method
             _timer?.Stop();
             _timer?.Dispose();
         }
-    } 
+    }
 }

@@ -55,4 +55,12 @@ English → https://github.com/DaiYu-233/YMCL.Avalonia/tree/main/YMCL.Plugin/Doc
 
 ## 开源项目使用
 
-**[Costura.Fody](https://github.com/Fody/Costura)** **[MinecraftLaunch](https://github.com/Blessing-Studio/MinecraftLaunch)** **[Newtonsoft.Json](https://www.newtonsoft.com/json)** **[StarLight](https://www.newtonsoft.com/json)**
+**[CurseForge.APIClient](https://github.com/CurseForgeCommunity/.NET-APIClient)**
+**[FluentAvaloniaUI](https://github.com/amwx/FluentAvalonia)**
+**[Irihi.Ursa](https://github.com/irihitech/Ursa.Avalonia)**
+**[MinecraftLaunch.Skin](https://github.com/Blessing-Studio/MinecraftLaunch.Skin)**
+**[NAudio](https://github.com/naudio/NAudio)**
+**[Semi.Avalonia](https://github.com/irihitech/Semi.Avalonia)**
+**[StarLight_Core](https://github.com/Ink-Marks-Studio/StarLight.Core)**
+**[MinecraftLaunch](https://github.com/Blessing-Studio/MinecraftLaunch)**
+**[Newtonsoft.Json](https://www.newtonsoft.com/json)**

@@ -144,8 +144,8 @@
                                 TextAlignment="Center" />
                             <Slider
                                 Name="MaxMemSlider"
-                                Height="35"
-                                Margin="0,-10,0,0" />
+                                Margin="0,0,0,0"
+                                VerticalAlignment="Center" />
                         </DockPanel>
                     </Border>
                     <Border

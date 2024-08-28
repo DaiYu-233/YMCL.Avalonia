@@ -128,7 +128,7 @@ public class ModFileListViewItemEntry
         Id = file.Id;
         GameId = file.GameId;
         IsAvailable = file.IsAvailable;
-        DisplayName = file.DisplayName;
+        DisplayName = file.DisplayName.Trim();
         FileName = file.FileName;
         ReleaseType = file.ReleaseType;
         FileStatus = file.FileStatus;

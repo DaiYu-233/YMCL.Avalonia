@@ -39,23 +39,23 @@
                             Content="{x:Static properties:MainLang.DelSeletedItem}"
                             FontFamily="{DynamicResource Font}" />
                         <Button
+                            x:Name="RefreshMicrosoftSkinBtn"
+                            Margin="6.5,0,0,0"
+                            Content="{x:Static properties:MainLang.RefreshMicrosoftSkin}"
+                            FontFamily="{DynamicResource Font}"
+                            IsEnabled="False" />
+                        <Button
                             x:Name="ModifyMicrosoftSkinBtn"
                             Margin="6.5,0,0,0"
                             Content="{x:Static properties:MainLang.ModifyMicrosoftSkin}"
                             FontFamily="{DynamicResource Font}"
                             IsEnabled="False"
                             IsVisible="False" />
-                        <Button
-                            x:Name="RefreshMicrosoftSkinBtn"
-                            Margin="6.5,0,0,0"
-                            Content="{x:Static properties:MainLang.RefreshMicrosoftSkin}"
-                            FontFamily="{DynamicResource Font}"
-                            IsEnabled="False" />
                     </DockPanel>
                     <ListBox x:Name="AccountsListView" Margin="0,-5,0,0">
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="class:AccountInfo">
-                                <Border BorderThickness="0,6,0,6">
+                                <Border Margin="0,3">
                                     <DockPanel>
                                         <Border
                                             Width="28"

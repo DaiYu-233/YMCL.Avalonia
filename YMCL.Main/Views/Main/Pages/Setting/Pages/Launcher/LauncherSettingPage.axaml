@@ -111,10 +111,11 @@
                                 Height="30.5"
                                 Margin="200,0,9,0"
                                 HorizontalAlignment="Right"
-                                Classes="accent"
+                                Classes="Primary"
                                 Content="{x:Static properties:MainLang.CheckUpdate}"
                                 FontFamily="{DynamicResource Font}"
-                                Foreground="White" />
+                                Foreground="White"
+                                Theme="{DynamicResource SolidButton}" />
                         </Grid>
 
                     </Border>
@@ -526,10 +527,46 @@
                                     Foreground="{DynamicResource TextColor}"
                                     Text="{x:Static properties:MainLang.OpenSourceProjectUsageTable}" />
                                 <WrapPanel Margin="5,25,5,0">
-                                    <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/Fody/Costura">
+                                    <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/CurseForgeCommunity/.NET-APIClient">
                                         <TextBlock
                                             Foreground="{DynamicResource SystemAccentColor}"
-                                            Text=" Costura.Fody "
+                                            Text=" CurseForge.APIClient "
+                                            TextDecorations="{x:Null}" />
+                                    </HyperlinkButton>
+                                    <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/amwx/FluentAvalonia">
+                                        <TextBlock
+                                            Foreground="{DynamicResource SystemAccentColor}"
+                                            Text=" FluentAvaloniaUI "
+                                            TextDecorations="{x:Null}" />
+                                    </HyperlinkButton>
+                                    <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/irihitech/Ursa.Avalonia">
+                                        <TextBlock
+                                            Foreground="{DynamicResource SystemAccentColor}"
+                                            Text=" Irihi.Ursa "
+                                            TextDecorations="{x:Null}" />
+                                    </HyperlinkButton>
+                                    <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/Blessing-Studio/MinecraftLaunch.Skin">
+                                        <TextBlock
+                                            Foreground="{DynamicResource SystemAccentColor}"
+                                            Text=" MinecraftLaunch.Skin "
+                                            TextDecorations="{x:Null}" />
+                                    </HyperlinkButton>
+                                    <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/naudio/NAudio">
+                                        <TextBlock
+                                            Foreground="{DynamicResource SystemAccentColor}"
+                                            Text=" NAudio "
+                                            TextDecorations="{x:Null}" />
+                                    </HyperlinkButton>
+                                    <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/irihitech/Semi.Avalonia">
+                                        <TextBlock
+                                            Foreground="{DynamicResource SystemAccentColor}"
+                                            Text=" Semi.Avalonia "
+                                            TextDecorations="{x:Null}" />
+                                    </HyperlinkButton>
+                                    <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/Ink-Marks-Studio/StarLight.Core">
+                                        <TextBlock
+                                            Foreground="{DynamicResource SystemAccentColor}"
+                                            Text=" StarLight_Core "
                                             TextDecorations="{x:Null}" />
                                     </HyperlinkButton>
                                     <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/Blessing-Studio/MinecraftLaunch">

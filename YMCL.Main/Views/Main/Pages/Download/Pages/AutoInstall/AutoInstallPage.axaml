@@ -216,7 +216,7 @@
                                                 FontFamily="{DynamicResource Font}">
                                                 <ListBox.ItemTemplate>
                                                     <DataTemplate DataType="ml:VersionManifestEntry">
-                                                        <Border Margin="0,0,0,0" BorderThickness="0,4,0,4">
+                                                        <Border Margin="0,3">
                                                             <DockPanel>
                                                                 <Grid>
                                                                     <TextBlock
@@ -257,7 +257,7 @@
                                         <ListBox Name="ReleaseVersionListView" FontFamily="{DynamicResource Font}">
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate DataType="ml:VersionManifestEntry">
-                                                    <Border Margin="0,0,0,0" BorderThickness="0,4,0,4">
+                                                    <Border Margin="0,3">
                                                         <DockPanel>
                                                             <Grid>
                                                                 <TextBlock
@@ -297,7 +297,7 @@
                                         <ListBox Name="PreviewVersionListView" FontFamily="{DynamicResource Font}">
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate DataType="ml:VersionManifestEntry">
-                                                    <Border Margin="0,0,0,0" BorderThickness="0,4,0,4">
+                                                    <Border Margin="0,3">
                                                         <DockPanel>
                                                             <Grid>
                                                                 <TextBlock
@@ -337,7 +337,7 @@
                                         <ListBox Name="OldVersionListView" FontFamily="{DynamicResource Font}">
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate DataType="ml:VersionManifestEntry">
-                                                    <Border Margin="0,0,0,0" BorderThickness="0,4,0,4">
+                                                    <Border Margin="0,3">
                                                         <DockPanel>
                                                             <Grid>
                                                                 <TextBlock
@@ -475,9 +475,14 @@
                                                     Name="OptiFineListView"
                                                     Height="250"
                                                     Tag="optifine">
+                                                    <ListBox.Styles>
+                                                        <Style Selector="ListBoxItem">
+                                                            <Setter Property="Margin" Value="5,1" />
+                                                        </Style>
+                                                    </ListBox.Styles>
                                                     <ListBox.ItemTemplate>
                                                         <DataTemplate DataType="ml:OptiFineInstallEntity">
-                                                            <TextBlock>
+                                                            <TextBlock Margin="0,2">
                                                                 <Run Text="{Binding Type}" />
                                                                 <Run Text="{Binding Patch}" />
                                                             </TextBlock>
@@ -512,9 +517,14 @@
                                                     Name="ForgeListView"
                                                     Height="250"
                                                     Tag="forge">
+                                                    <ListBox.Styles>
+                                                        <Style Selector="ListBoxItem">
+                                                            <Setter Property="Margin" Value="5,1" />
+                                                        </Style>
+                                                    </ListBox.Styles>
                                                     <ListBox.ItemTemplate>
                                                         <DataTemplate DataType="ml:ForgeInstallEntry">
-                                                            <TextBlock Text="{Binding ForgeVersion}" />
+                                                            <TextBlock Margin="0,2" Text="{Binding ForgeVersion}" />
                                                         </DataTemplate>
                                                     </ListBox.ItemTemplate>
                                                 </ListBox>
@@ -546,9 +556,14 @@
                                                     Name="FabricListView"
                                                     Height="250"
                                                     Tag="fabric">
+                                                    <ListBox.Styles>
+                                                        <Style Selector="ListBoxItem">
+                                                            <Setter Property="Margin" Value="5,1" />
+                                                        </Style>
+                                                    </ListBox.Styles>
                                                     <ListBox.ItemTemplate>
                                                         <DataTemplate DataType="ml:FabricBuildEntry">
-                                                            <TextBlock Text="{Binding BuildVersion}" />
+                                                            <TextBlock Margin="0,2" Text="{Binding BuildVersion}" />
                                                         </DataTemplate>
                                                     </ListBox.ItemTemplate>
                                                 </ListBox>
@@ -580,9 +595,14 @@
                                                     Name="QuiltListView"
                                                     Height="250"
                                                     Tag="quilt">
+                                                    <ListBox.Styles>
+                                                        <Style Selector="ListBoxItem">
+                                                            <Setter Property="Margin" Value="5,1" />
+                                                        </Style>
+                                                    </ListBox.Styles>
                                                     <ListBox.ItemTemplate>
                                                         <DataTemplate DataType="ml:QuiltBuildEntry">
-                                                            <TextBlock Text="{Binding BuildVersion}" />
+                                                            <TextBlock Margin="0,2" Text="{Binding BuildVersion}" />
                                                         </DataTemplate>
                                                     </ListBox.ItemTemplate>
                                                 </ListBox>

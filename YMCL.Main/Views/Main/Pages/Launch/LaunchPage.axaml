@@ -172,7 +172,7 @@
                         FontFamily="{DynamicResource Font}">
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="ml:GameEntry">
-                                <StackPanel Margin="0,3,0,3">
+                                <StackPanel Margin="0,0,0,0">
                                     <TextBlock FontFamily="{DynamicResource Font}" Text="{Binding Id}" />
                                     <TextBlock
                                         Margin="0,-4,0,0"
@@ -536,9 +536,15 @@
                                                 Margin="5"
                                                 DockPanel.Dock="Bottom"
                                                 SelectionMode="Multiple,Toggle">
+                                                <ListBox.Styles>
+                                                    <Style Selector="ListBoxItem">
+                                                        <Setter Property="Margin" Value="5,1" />
+                                                    </Style>
+                                                </ListBox.Styles>
                                                 <ListBox.ItemTemplate>
                                                     <DataTemplate DataType="cl:ModManageEntry">
                                                         <TextBlock
+                                                            Margin="0,2"
                                                             VerticalAlignment="Center"
                                                             FontFamily="{DynamicResource Font}"
                                                             FontWeight="{DynamicResource FontWeight}"

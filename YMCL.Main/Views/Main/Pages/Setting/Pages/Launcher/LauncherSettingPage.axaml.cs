@@ -27,7 +27,7 @@ public partial class LauncherSettingPage : UserControl
         if (!updateAvailable.Item1) return;
         if (!updateAvailable.Item2) return;
         if (Const.Data.Setting.SkipUpdateVersion == updateAvailable.Item3) return;
-        var dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion, updateAvailable.Item3
+        var dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion, updateAvailable.Item4
             , b_cancel: MainLang.Cancel, b_secondary: MainLang.SkipThisVersion,
             b_primary: MainLang.Ok);
         if (dialog == ContentDialogResult.Primary)
@@ -48,6 +48,11 @@ public partial class LauncherSettingPage : UserControl
         Loaded += (s, e) =>
         {
             Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
+            var lenth = Method.Value.GetDirectoryLength(Const.String.UserDataRootPath);
+            var userDataSize = Math.Round(lenth / 1024, 2) >= 512
+                ? $"{Math.Round(lenth / 1024 / 1024, 2)} Mib"
+                : $"{Math.Round(lenth / 1024, 2)} Kib";
+            UserDataSize.Text = userDataSize;
         };
         OpenUserDataFolderBtn.Click += async (s, e) =>
         {
@@ -91,11 +96,6 @@ public partial class LauncherSettingPage : UserControl
     private void ControlProperty()
     {
         UserDataFolderPath.Text = Const.String.UserDataRootPath;
-        var lenth = Method.Value.GetDirectoryLength(Const.String.UserDataRootPath);
-        var userDataSize = Math.Round(lenth / 1024, 2) >= 512
-            ? $"{Math.Round(lenth / 1024 / 1024, 2)} Mib"
-            : $"{Math.Round(lenth / 1024, 2)} Kib";
-        UserDataSize.Text = userDataSize;
         var resourceName = "YMCL.Main.Public.Texts.DateTime.txt";
         var _assembly = Assembly.GetExecutingAssembly();
         var stream = _assembly.GetManifestResourceStream(resourceName);

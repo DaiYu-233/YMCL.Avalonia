@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.IO;
+using System.Threading.Tasks;
 using System.Timers;
 using Avalonia;
 using Avalonia.Controls;
@@ -91,8 +92,14 @@ public partial class WindowTask : Window
 
         Show();
         Activate();
+
+        _ = UpdateUi();
     }
 
+    public async Task UpdateUi()
+    {
+       
+    }
     public void Finish()
     {
         isFinish = true;

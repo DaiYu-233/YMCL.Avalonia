@@ -101,7 +101,7 @@
                     Opacity="{DynamicResource Opacity}">
                     <ScrollViewer Name="ModListViewScroll">
                         <StackPanel>
-                            <ListBox Name="ModListView">
+                            <ListBox Name="ModListView" Margin="10">
                                 <ListBox.Transitions>
                                     <Transitions>
                                         <DoubleTransition Property="Opacity" Duration="0:0:0.25" />
@@ -109,7 +109,7 @@
                                 </ListBox.Transitions>
                                 <ListBox.ItemTemplate>
                                     <DataTemplate DataType="cl:SearchModListViewItemEntry">
-                                        <DockPanel Margin="0,6.5">
+                                        <DockPanel Margin="0,3">
                                             <Border
                                                 Width="44"
                                                 Height="{Binding $self.Bounds.Width}"

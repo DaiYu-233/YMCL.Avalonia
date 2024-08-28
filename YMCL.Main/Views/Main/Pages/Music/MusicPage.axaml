@@ -54,13 +54,13 @@
                         </Image>
                         <Slider
                             Name="PlayerSlider"
-                            Margin="0,-22,0,0"
+                            Margin="0,-10,0,0"
                             VerticalAlignment="Top"
                             Maximum="100000"
                             Opacity="1" />
                         <Slider
                             Name="ControlPlayerSlider"
-                            Margin="0,-22,0,0"
+                            Margin="0,-10,0,0"
                             VerticalAlignment="Top"
                             Maximum="100000"
                             Opacity="0" />
@@ -254,7 +254,7 @@
                                 DockPanel.Dock="Bottom">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate DataType="cl:PlaySongListViewItemEntry">
-                                        <StackPanel Margin="0,6.5">
+                                        <StackPanel Margin="0,3">
                                             <TextBlock TextWrapping="Wrap">
                                                 <Run FontFamily="{DynamicResource Font}" Text="{Binding SongName}" />
                                                 <Run
@@ -319,7 +319,7 @@
                                         <ListBox Name="SearchSongListView" Margin="10,0,10,0">
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate DataType="cl:SearchSongListViewItemEntry">
-                                                    <StackPanel Margin="0,6.5">
+                                                    <StackPanel Margin="0,3">
                                                         <TextBlock TextWrapping="Wrap">
                                                             <Run FontFamily="{DynamicResource Font}" Text="{Binding SongName}" />
                                                             <Run

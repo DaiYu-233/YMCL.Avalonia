@@ -8,5 +8,6 @@ public partial class ModFileView : UserControl
     {
         InitializeComponent();
         Expander.Header = header;
+        
     }
 }

@@ -150,6 +150,18 @@ public class Method
         public static void SetAccentColor(Color color)
         {
             Application.Current.Resources["SystemAccentColor"] = color;
+            Application.Current.Resources["ButtonDefaultPrimaryForeground"] = color;
+            Application.Current.Resources["TextBoxFocusBorderBrush"] = color;
+            Application.Current.Resources["ComboBoxSelectorPressedBorderBrush"] = color;
+            Application.Current.Resources["ComboBoxSelectorFocusBorderBrush"] = color;
+            Application.Current.Resources["TextBoxSelectionBackground"] = color;
+            Application.Current.Resources["ProgressBarPrimaryForeground"] = color;
+            Application.Current.Resources["ProgressBarIndicatorBrush"] = color;
+            Application.Current.Resources["SliderThumbBorderBrush"] = color;
+            Application.Current.Resources["SliderTrackForeground"] = color;
+            Application.Current.Resources["HyperlinkButtonOverForeground"] = color;
+            Application.Current.Resources["SliderThumbPressedBorderBrush"] = color;
+            Application.Current.Resources["SliderThumbPointeroverBorderBrush"] = color;
             Application.Current.Resources["SystemAccentColorLight1"] = Value.ColorVariant(color, 0.15f);
             Application.Current.Resources["SystemAccentColorLight2"] = Value.ColorVariant(color, 0.30f);
             Application.Current.Resources["SystemAccentColorLight3"] = Value.ColorVariant(color, 0.45f);
@@ -160,6 +172,10 @@ public class Method
 
         public static void ToggleTheme(Theme theme)
         {
+            Application.Current!.Resources.MergedDictionaries.Add((AvaloniaXamlLoader.Load(new Uri("avares://FluentAvalonia/Styling/ControlThemes/BasicControls/ToggleSwitchStyles.axaml")) as
+                ResourceDictionary)!);
+            Application.Current!.Resources.MergedDictionaries.Add((AvaloniaXamlLoader.Load(new Uri("avares://FluentAvalonia/Styling/ControlThemes/BasicControls/HyperlinkButtonStyles.axaml")) as
+                ResourceDictionary)!);
             if (theme == Theme.Light)
             {
                 var rd =

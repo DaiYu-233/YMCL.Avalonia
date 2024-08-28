@@ -34,7 +34,6 @@
                 </Viewbox>
             </Border>
             <Grid x:Name="RootGrid">
-
                 <DockPanel>
                     <uc:TitleBar
                         Name="TitleBar"
@@ -70,10 +69,15 @@
                         <TextBox
                             Name="ProgressTextBox"
                             Margin="10,0,10,10"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            AcceptsReturn="True"
+                            AcceptsTab="True"
                             DockPanel.Dock="Bottom"
                             FontFamily="{DynamicResource Font}"
                             IsReadOnly="True"
                             Opacity="{DynamicResource Opacity}"
+                            TextAlignment="Start"
                             TextWrapping="Wrap" />
                     </DockPanel>
                 </DockPanel>

@@ -2,7 +2,9 @@
     x:Class="YMCL.Main.App"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:semi="https://irihi.tech/semi"
     xmlns:sty="using:FluentAvalonia.Styling"
+    xmlns:u-semi="https://irihi.tech/ursa/themes/semi"
     RequestedThemeVariant="Default">
     <Application.Resources>
         <ResourceDictionary>
@@ -24,5 +26,8 @@
     <Application.Styles>
         <sty:FluentAvaloniaTheme />
         <StyleInclude Source="/Public/Styles/Style.axaml" />
+        <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
+        <semi:SemiTheme Locale="zh-cn" />
+        <u-semi:SemiTheme Locale="zh-CN" />
     </Application.Styles>
 </Application>

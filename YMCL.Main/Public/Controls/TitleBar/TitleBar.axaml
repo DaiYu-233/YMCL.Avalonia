@@ -21,7 +21,7 @@
                 VerticalAlignment="Center"
                 FontFamily="{DynamicResource Font}"
                 FontSize="16"
-                Text="Title" />
+                Text="" />
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                 <Button
                     Name="MinimizeButton"

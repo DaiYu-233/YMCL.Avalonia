@@ -209,6 +209,7 @@ public partial class CurseForgeFetcher : UserControl
                         }
 
                         item.Loader = loader;
+                        item.DisplayName.Trim('\n');
                         expander.ListView.Items.Add(item);
                     }
 
@@ -239,6 +240,7 @@ public partial class CurseForgeFetcher : UserControl
                             }
 
                             item.Loader = loader;
+                            item.DisplayName.Trim('\n');
                             matchedExpander.ListView.Items.Add(item);
                         }
 

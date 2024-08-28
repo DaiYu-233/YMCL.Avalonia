@@ -123,8 +123,7 @@
                             TextAlignment="Center" />
                         <Slider
                             Name="MaximumDownloadThreadSlider"
-                            Height="35"
-                            Margin="0,-10,0,0"
+                            VerticalAlignment="Center"
                             Maximum="256"
                             Minimum="8"
                             Value="32" />
@@ -157,6 +156,7 @@
                             Height="40"
                             Margin="0,-10,10,0"
                             HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
                             FontFamily="{DynamicResource Font}"
                             OffContent="{x:Static properties:MainLang.Off}"
                             OnContent="{x:Static properties:MainLang.On}" />

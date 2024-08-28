@@ -48,8 +48,8 @@ public partial class PersonalizeSettingPage : UserControl
         {
             try
             {
-                ColorPicker.Width = ColorPickerRoot.Bounds.Width - 2 * 6.5 - ColorPickerLabel.Bounds.Width - 30;
-                LyricColorPicker.Width = LyricRoot.Bounds.Width - 2 * 6.5 - LyricColorPickerLabel.Bounds.Width - 30;
+                // ColorPicker.Width = ColorPickerRoot.Bounds.Width - 2 * 6.5 - ColorPickerLabel.Bounds.Width - 30;
+                // LyricColorPicker.Width = LyricRoot.Bounds.Width - 2 * 6.5 - LyricColorPickerLabel.Bounds.Width - 30;
             }
             catch
             {

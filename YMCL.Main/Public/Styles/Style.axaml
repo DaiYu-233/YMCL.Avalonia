@@ -5,6 +5,9 @@
         </Border>
     </Design.PreviewWith>
     <!--  Add Styles Here  -->
+    <Style Selector="ListBoxItem">
+        <Setter Property="Margin" Value="5,3" />
+    </Style>
     <Style Selector="Button.icon-button">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Cursor" Value="Hand" />

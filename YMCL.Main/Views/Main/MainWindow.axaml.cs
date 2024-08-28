@@ -179,14 +179,14 @@ public partial class MainWindow : Window
                     break;
             }
         };
-        NavTask.PointerPressed += (_, e) =>
-        {
-            if (e.GetCurrentPoint(this).Properties.IsRightButtonPressed)
-            {
-                Const.Window.taskCenter.Show();
-                Const.Window.taskCenter.Activate();
-            }
-        };
+        // NavTask.PointerPressed += (_, e) =>
+        // {
+        //     if (e.GetCurrentPoint(this).Properties.IsRightButtonPressed)
+        //     {
+        //         Const.Window.taskCenter.Show();
+        //         Const.Window.taskCenter.Activate();
+        //     }
+        // };
     }
 
     public void LoadWindow()

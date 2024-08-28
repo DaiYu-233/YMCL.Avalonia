@@ -10,7 +10,7 @@ namespace YMCL.Main.Public.Controls;
 public partial class TitleBar : UserControl
 {
     public static readonly StyledProperty<string> TitleProperty =
-        AvaloniaProperty.Register<TitleBar, string>(nameof(Title), "Default Title");
+        AvaloniaProperty.Register<TitleBar, string>(nameof(Title), "");
 
     public static readonly StyledProperty<bool> IsCloseBtnExitAppProperty =
         AvaloniaProperty.Register<TitleBar, bool>(nameof(IsCloseBtnExitApp));

@@ -29,6 +29,7 @@ public partial class InitializeWindow : Window
 {
     public WindowTitleBarStyle titleBarStyle;
     public bool _exit = true;
+
     public InitializeWindow()
     {
         DetectPlatform();
@@ -58,7 +59,8 @@ public partial class InitializeWindow : Window
         Method.IO.TryCreateFolder(Const.String.TempFolderPath);
         Method.IO.TryCreateFolder(Const.String.UpdateFolderPath);
         if (!File.Exists(Const.String.SettingDataPath))
-            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(new Setting(), Formatting.Indented));
+            File.WriteAllText(Const.String.SettingDataPath,
+                JsonConvert.SerializeObject(new Setting(), Formatting.Indented));
         if (!File.Exists(Const.String.MinecraftFolderDataPath) || JsonConvert
                 .DeserializeObject<List<string>>(File.ReadAllText(Const.String.MinecraftFolderDataPath)).Count == 0)
         {
@@ -70,6 +72,7 @@ public partial class InitializeWindow : Window
             setting1.MinecraftFolder = path;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting1, Formatting.Indented));
         }
+
         Const.Data.Setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
         if (!File.Exists(Const.String.JavaDataPath))
             File.WriteAllText(Const.String.JavaDataPath,
@@ -117,7 +120,7 @@ public partial class InitializeWindow : Window
             {
             }
         }
-            
+
         var setting = Const.Data.Setting;
         if (setting.Language == null || setting.Language == "zh-CN")
             LangHelper.Current.ChangedCulture("");
@@ -128,12 +131,14 @@ public partial class InitializeWindow : Window
         Const.Window.main = window;
         Const.Notification.main = new WindowNotificationManager(GetTopLevel(window))
         {
-            MaxItems = 3,
+            MaxItems = 3, MaxHeight = 99999, FontFamily = (FontFamily)Application.Current.Resources["Font"]!,
+            CornerRadius = new CornerRadius(8), FontSize = 14, Margin = new Thickness(0),
             Position = NotificationPosition.BottomRight
         };
         Const.Notification.initialize = new WindowNotificationManager(GetTopLevel(this))
         {
-            MaxItems = 2,
+            MaxItems = 2, MaxHeight = 99999, FontFamily = (FontFamily)Application.Current.Resources["Font"]!,
+            CornerRadius = new CornerRadius(8), FontSize = 14, Margin = new Thickness(0),
             Position = NotificationPosition.BottomRight
         };
         Method.Ui.SetAccentColor(setting.AccentColor);

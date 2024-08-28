@@ -49,15 +49,15 @@ public partial class TaskCenterPage : UserControl
                         index++;
                     }
 
-                    // if (tasks.Count >= 1)
-                    // {
-                    //     Const.Window.main.TaskInfoBadge.IsVisible = true;
-                    //     Const.Window.main.TaskInfoBadge.Value = tasks.Count;
-                    // }
-                    // else
-                    // {
-                    //     Const.Window.main.TaskInfoBadge.IsVisible = false;
-                    // }
+                    if (tasks.Count >= 1)
+                    {
+                        Const.Window.main.TaskInfoBadge.IsVisible = true;
+                        Const.Window.main.TaskInfoBadge.Value = tasks.Count;
+                    }
+                    else
+                    {
+                        Const.Window.main.TaskInfoBadge.IsVisible = false;
+                    }
                 });
             }
         });

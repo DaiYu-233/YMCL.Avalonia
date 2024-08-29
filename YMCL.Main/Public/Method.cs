@@ -172,10 +172,23 @@ public class Method
 
         public static void ToggleTheme(Theme theme)
         {
-            Application.Current!.Resources.MergedDictionaries.Add((AvaloniaXamlLoader.Load(new Uri("avares://FluentAvalonia/Styling/ControlThemes/BasicControls/ToggleSwitchStyles.axaml")) as
-                ResourceDictionary)!);
-            Application.Current!.Resources.MergedDictionaries.Add((AvaloniaXamlLoader.Load(new Uri("avares://FluentAvalonia/Styling/ControlThemes/BasicControls/HyperlinkButtonStyles.axaml")) as
-                ResourceDictionary)!);
+            Application.Current!.Resources.MergedDictionaries.Add(
+                (AvaloniaXamlLoader.Load(
+                        new Uri("avares://FluentAvalonia/Styling/ControlThemes/BasicControls/ToggleSwitchStyles.axaml"))
+                    as
+                    ResourceDictionary)!);
+            Application.Current!.Resources.MergedDictionaries.Add(
+                (AvaloniaXamlLoader.Load(new Uri(
+                        "avares://FluentAvalonia/Styling/ControlThemes/BasicControls/HyperlinkButtonStyles.axaml")) as
+                    ResourceDictionary)!);
+            Application.Current!.Resources.MergedDictionaries.Add(
+                (AvaloniaXamlLoader.Load(
+                        new Uri("avares://FluentAvalonia/Styling/ControlThemes/BasicControls/ListBoxStyles.axaml")) as
+                    ResourceDictionary)!);
+            Application.Current!.Resources.MergedDictionaries.Add(
+                (AvaloniaXamlLoader.Load(
+                        new Uri("avares://FluentAvalonia/Styling/ControlThemes/BasicControls/ExpanderStyles.axaml")) as
+                    ResourceDictionary)!);
             if (theme == Theme.Light)
             {
                 var rd =
@@ -948,22 +961,35 @@ public class Method
 
         public static async Task<Bitmap> LoadImageFromUrlAsync(string url)
         {
-            try
+            if (url is "Url" or "null") return null;
+            using (var httpClient = new HttpClient())
             {
-                using (var client = new HttpClient())
+                try
                 {
-                    var imageData = await client.GetByteArrayAsync(url);
-                    using (var stream = new MemoryStream(imageData))
+                    httpClient.DefaultRequestHeaders.Add("User-Agent",
+                        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54");
+                    var response = await httpClient.GetAsync(url);
+                    if (response.IsSuccessStatusCode)
                     {
-                        var bitmap = new Bitmap(stream);
-                        return bitmap;
+                        var imageData = await response.Content.ReadAsByteArrayAsync();
+
+                        using (var stream = new MemoryStream(imageData))
+                        {
+                            var bitmap = new Bitmap(stream);
+                            return bitmap;
+                        }
                     }
+
+                    Console.WriteLine($"Failed to load image. Status code: {response.StatusCode}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error loading image: {ex.Message}");
+                    return null;
                 }
             }
-            catch
-            {
-                return null;
-            }
+
+            return null;
         }
 
         public static string ConvertToWanOrYi(double number)

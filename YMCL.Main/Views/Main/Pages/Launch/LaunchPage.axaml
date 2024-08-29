@@ -172,10 +172,9 @@
                         FontFamily="{DynamicResource Font}">
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="ml:GameEntry">
-                                <StackPanel Margin="0,0,0,0">
+                                <StackPanel Margin="0,3">
                                     <TextBlock FontFamily="{DynamicResource Font}" Text="{Binding Id}" />
                                     <TextBlock
-                                        Margin="0,-4,0,0"
                                         FontFamily="{DynamicResource Font}"
                                         FontSize="12"
                                         Foreground="{DynamicResource GrayColor}">

@@ -43,6 +43,7 @@ public partial class DownloadPage : UserControl
                     FrameView.Content = curseForgeFetcherPage;
                     break;
             }
+            _ = Const.Window.main.FocusButton();
         };
     }
 }

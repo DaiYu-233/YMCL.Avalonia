@@ -213,11 +213,6 @@
                 </Border>
                 <ui:Frame Name="FrameView" DockPanel.Dock="Bottom" />
             </DockPanel>
-            <Button
-                Name="Button"
-                Width="1"
-                Height="1"
-                Opacity="0" />
         </Grid>
     </Border>
 </UserControl>

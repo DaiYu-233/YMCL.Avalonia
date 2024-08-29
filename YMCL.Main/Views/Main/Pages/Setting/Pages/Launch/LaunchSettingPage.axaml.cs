@@ -186,8 +186,8 @@ public partial class LaunchSettingPage : UserControl
         };
         JavaComboBox.SelectionChanged += (s, e) =>
         {
-            JavaComboBox.IsVisible = false;
-            JavaComboBox.IsVisible = true;
+            // JavaComboBox.IsVisible = false;
+            // JavaComboBox.IsVisible = true;
             var setting = Const.Data.Setting;
             if (JavaComboBox.SelectedIndex == 0)
                 setting.Java = new JavaEntry { JavaPath = "Auto", JavaVersion = "All" };

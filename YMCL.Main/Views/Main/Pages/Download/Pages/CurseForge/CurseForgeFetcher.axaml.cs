@@ -120,7 +120,7 @@ public partial class CurseForgeFetcher : UserControl
             await Task.Delay(240);
             CloseDetail();
         };
-        ModListView.SelectionChanged += async (_, e) =>
+        ModListView.SelectionChanged += async (o, e) =>
         {
             if (ModListView.SelectedIndex == -1) return;
             OpenDetail();
@@ -143,32 +143,32 @@ public partial class CurseForgeFetcher : UserControl
             await Task.Run(async () =>
             {
                 while (true)
-            {
-                GenericListResponse<File> files = new();
-                try
                 {
-                    files = await cfApiClient.GetModFilesAsync(entry.Id, pageSize: 40, index: index * 40);
-                }
-                catch (Exception ex)
-                {
-                    Method.Ui.ShowShortException(MainLang.ErrorCallingApi, ex);
-                    shouldReturn = true;
-                    break;
-                }
-
-                if (files.Data.Count == 0) break;
-
-                if (files.Data[0].ModId != entry.Id) break;
-
-                await Task.Run(() =>
-                {
-                    files.Data.ForEach(async file =>
+                    GenericListResponse<File> files = new();
+                    try
                     {
-                        await Dispatcher.UIThread.InvokeAsync(() => { modFiles.Add(file); });
+                        files = await cfApiClient.GetModFilesAsync(entry.Id, pageSize: 40, index: index * 40);
+                    }
+                    catch (Exception ex)
+                    {
+                        Method.Ui.ShowShortException(MainLang.ErrorCallingApi, ex);
+                        shouldReturn = true;
+                        break;
+                    }
+
+                    if (files.Data.Count == 0) break;
+
+                    if (files.Data[0].ModId != entry.Id) break;
+
+                    await Task.Run(() =>
+                    {
+                        files.Data.ForEach(async file =>
+                        {
+                            await Dispatcher.UIThread.InvokeAsync(() => { modFiles.Add(file); });
+                        });
                     });
-                });
-                index++;
-            }
+                    index++;
+                }
             });
             
             ModFileLoading.IsVisible = false;

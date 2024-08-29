@@ -68,8 +68,7 @@ public partial class SettingPage : UserControl
                     FrameView.Content = downloadSettingPage;
                     break;
             }
-            await Task.Delay(800);
-            Button.Focus();
+            _ = Const.Window.main.FocusButton();
         };
     }
 }

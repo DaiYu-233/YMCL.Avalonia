@@ -35,7 +35,7 @@ public class Setting
     public bool ShowGameOutput { get; set; } = false;
     public WindowTitleBarStyle WindowTitleBarStyle { get; set; } = WindowTitleBarStyle.Unset;
     public CustomHomePageWay CustomHomePage { get; set; } = CustomHomePageWay.None;
-    public Color AccentColor { get; set; } = Color.FromRgb(22, 233, 184);
+    public Color AccentColor { get; set; } = Color.Parse("#d64eff");
     public Color DeskLyricColor { get; set; } = Color.FromRgb(22, 233, 184);
     public JavaEntry Java { get; set; } = Const.Data.AutoJava;
     public string WindowBackGroundImgData { get; set; } = string.Empty;

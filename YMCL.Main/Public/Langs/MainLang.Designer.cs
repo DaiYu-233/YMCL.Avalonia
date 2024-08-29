@@ -2061,6 +2061,16 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 已跳过版本 : {version}
+        ///前往 设置-启动器-检查更新 可再次获取此版本.
+        /// </summary>
+        public static string SkipVersionTip {
+            get {
+                return ResourceManager.GetString("SkipVersionTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 添加成功.
         /// </summary>
         public static string SuccessAdd {

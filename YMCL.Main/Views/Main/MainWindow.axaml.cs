@@ -60,61 +60,61 @@ public partial class MainWindow : Window
             Const.Window.main._firstLoad = false;
             Method.Ui.CheckLauncher();
             var setting = Const.Data.Setting;
-            if (!setting.IsAlreadyWrittenIntoTheUrlScheme)
-            {
-                if (Const.Data.Platform == Platform.Windows)
-                {
-                    await Method.Ui.UpgradeToAdministratorPrivilegesAsync(Const.Window.main);
-                    Method.IO.TryCreateFolder("C:\\ProgramData\\DaiYu.Platform.YMCL");
-                    var bat =
-                        "@echo off  \nset /p ymcl=<%USERPROFILE%\\AppData\\Roaming\\DaiYu.Platform.YMCL\\YMCL.AppPath.DaiYu  \necho %ymcl%  \necho %1  \nstart \"\" \"%ymcl%\" %1  \nexit";
-                    var path = "C:\\ProgramData\\DaiYu.Platform.YMCL\\launch.bat";
-                    File.WriteAllText(path, bat);
-                    try
-                    {
-                        Registry.ClassesRoot.DeleteSubKey("YMCL");
-                    }
-                    catch
-                    {
-                    }
-
-                    try
-                    {
-                        var keyRoot = Registry.ClassesRoot.CreateSubKey("YMCL", true);
-                        keyRoot.SetValue("", "Yu Minecraft Launcher");
-                        keyRoot.SetValue("URL Protocol", path);
-                        var registryKeya = Registry.ClassesRoot.OpenSubKey("YMCL", true).CreateSubKey("DefaultIcon");
-                        registryKeya.SetValue("", path);
-                        var registryKeyb = Registry.ClassesRoot.OpenSubKey("YMCL", true)
-                            .CreateSubKey(@"shell\open\command");
-                        registryKeyb.SetValue("", $"\"{path}\" \"%1\"");
-
-                        var resourceName = "YMCL.Main.Public.Bins.YMCL.Starter.win.exe";
-                        var assembly = Assembly.GetExecutingAssembly();
-                        using (var resourceStream = assembly.GetManifestResourceStream(resourceName))
-                        {
-                            var outputFilePath = "C:\\Windows\\ymcl.exe";
-                            using (var fileStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write))
-                            {
-                                resourceStream.CopyTo(fileStream);
-                            }
-                        }
-
-                        setting.IsAlreadyWrittenIntoTheUrlScheme = true;
-                        File.WriteAllText(Const.String.SettingDataPath,
-                            JsonConvert.SerializeObject(setting, Formatting.Indented));
-                    }
-                    catch
-                    {
-                    }
-                }
-                else if (Const.Data.Platform == Platform.Linux)
-                {
-                    setting.IsAlreadyWrittenIntoTheUrlScheme = true;
-                    File.WriteAllText(Const.String.SettingDataPath,
-                        JsonConvert.SerializeObject(setting, Formatting.Indented));
-                }
-            }
+            // if (!setting.IsAlreadyWrittenIntoTheUrlScheme)
+            // {
+            //     if (Const.Data.Platform == Platform.Windows)
+            //     {
+            //         await Method.Ui.UpgradeToAdministratorPrivilegesAsync(Const.Window.main);
+            //         Method.IO.TryCreateFolder("C:\\ProgramData\\DaiYu.Platform.YMCL");
+            //         var bat =
+            //             "@echo off  \nset /p ymcl=<%USERPROFILE%\\AppData\\Roaming\\DaiYu.Platform.YMCL\\YMCL.AppPath.DaiYu  \necho %ymcl%  \necho %1  \nstart \"\" \"%ymcl%\" %1  \nexit";
+            //         var path = "C:\\ProgramData\\DaiYu.Platform.YMCL\\launch.bat";
+            //         File.WriteAllText(path, bat);
+            //         try
+            //         {
+            //             Registry.ClassesRoot.DeleteSubKey("YMCL");
+            //         }
+            //         catch
+            //         {
+            //         }
+            //
+            //         try
+            //         {
+            //             var keyRoot = Registry.ClassesRoot.CreateSubKey("YMCL", true);
+            //             keyRoot.SetValue("", "Yu Minecraft Launcher");
+            //             keyRoot.SetValue("URL Protocol", path);
+            //             var registryKeya = Registry.ClassesRoot.OpenSubKey("YMCL", true).CreateSubKey("DefaultIcon");
+            //             registryKeya.SetValue("", path);
+            //             var registryKeyb = Registry.ClassesRoot.OpenSubKey("YMCL", true)
+            //                 .CreateSubKey(@"shell\open\command");
+            //             registryKeyb.SetValue("", $"\"{path}\" \"%1\"");
+            //
+            //             var resourceName = "YMCL.Main.Public.Bins.YMCL.Starter.win.exe";
+            //             var assembly = Assembly.GetExecutingAssembly();
+            //             using (var resourceStream = assembly.GetManifestResourceStream(resourceName))
+            //             {
+            //                 var outputFilePath = "C:\\Windows\\ymcl.exe";
+            //                 using (var fileStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write))
+            //                 {
+            //                     resourceStream.CopyTo(fileStream);
+            //                 }
+            //             }
+            //
+            //             setting.IsAlreadyWrittenIntoTheUrlScheme = true;
+            //             File.WriteAllText(Const.String.SettingDataPath,
+            //                 JsonConvert.SerializeObject(setting, Formatting.Indented));
+            //         }
+            //         catch
+            //         {
+            //         }
+            //     }
+            //     else if (Const.Data.Platform == Platform.Linux)
+            //     {
+            //         setting.IsAlreadyWrittenIntoTheUrlScheme = true;
+            //         File.WriteAllText(Const.String.SettingDataPath,
+            //             JsonConvert.SerializeObject(setting, Formatting.Indented));
+            //     }
+            // }
 
             await Task.Delay(200);
             _ = Const.Window.main.settingPage.launcherSettingPage.AutoUpdate();
@@ -178,6 +178,8 @@ public partial class MainWindow : Window
                     FrameView.Content = taskCenterPage;
                     break;
             }
+
+            _ = FocusButton();
         };
         // NavTask.PointerPressed += (_, e) =>
         // {
@@ -367,5 +369,13 @@ public partial class MainWindow : Window
     {
         Environment.Exit(0);
         base.OnClosing(e);
+    }
+
+    public async Task FocusButton()
+    {
+        await Task.Delay(500);
+        FocusButton1.Focus();
+        await Task.Delay(10);
+        FocusButton2.Focus();
     }
 }

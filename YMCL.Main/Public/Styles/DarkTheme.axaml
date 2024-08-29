@@ -5,4 +5,5 @@
     <SolidColorBrush x:Key="TitleBarColor" Color="#242424" />
     <SolidColorBrush x:Key="GrayColor" Color="#7e7e7e" />
     <SolidColorBrush x:Key="BorderBrushColor" Color="#e1e9f0" />
+    <SolidColorBrush x:Key="ListBoxItemSelectedBackground" Color="#383838" />
 </ResourceDictionary>

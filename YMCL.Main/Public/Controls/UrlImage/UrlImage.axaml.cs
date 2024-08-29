@@ -25,16 +25,23 @@ public partial class UrlImage : UserControl
 
     public async Task LoadImgAsync()
     {
-        while (Url == "null") await Task.Delay(100);
+        var index = 0;
+        while (Url == "null" && index < 20)
+        {
+            await Task.Delay(500);
+            index++;
+        }
 
         var entry =
             Const.Data.UrlImageDataList.Find(UrlImageDataListEntry => UrlImageDataListEntry.Url == Url);
         if (entry == null)
         {
             var bitmap = await Method.Value.LoadImageFromUrlAsync(Url);
-            if (bitmap != null) Img.Source = bitmap;
-
-            Const.Data.UrlImageDataList.Add(new UrlImageDataListEntry { Url = Url, Bitmap = bitmap });
+            if (bitmap != null)
+            {
+                Img.Source = bitmap;
+                Const.Data.UrlImageDataList.Add(new UrlImageDataListEntry { Url = Url, Bitmap = bitmap });
+            }
         }
         else
         {

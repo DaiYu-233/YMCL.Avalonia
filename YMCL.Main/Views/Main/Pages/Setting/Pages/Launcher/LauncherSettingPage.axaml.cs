@@ -40,6 +40,7 @@ public partial class LauncherSettingPage : UserControl
             Const.Data.Setting.SkipUpdateVersion = updateAvailable.Item3;
             File.WriteAllText(Const.String.SettingDataPath,
                 JsonConvert.SerializeObject(Const.Data.Setting, Formatting.Indented));
+            Method.Ui.Toast(MainLang.SkipVersionTip.Replace("{version}", updateAvailable.Item3));
         }
     }
 

@@ -55,7 +55,7 @@
                     <ListBox x:Name="AccountsListView" Margin="0,-5,0,0">
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="class:AccountInfo">
-                                <Border Margin="0,3">
+                                <Border Margin="0,6">
                                     <DockPanel>
                                         <Border
                                             Width="28"

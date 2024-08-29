@@ -471,8 +471,7 @@
             <Button
                 Name="Next"
                 Width="90"
-                Background="#16E9B8"
-                Classes="accent"
+                Classes="Success"
                 Content="{x:Static properties:MainLang.RightArrow}" />
         </StackPanel>
         <Border

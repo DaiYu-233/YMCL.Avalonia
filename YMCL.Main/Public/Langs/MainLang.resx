@@ -911,4 +911,8 @@ sudo apt install vlc</value>
     <data name="SkipThisVersion" xml:space="preserve">
       <value>跳过此版本</value>
     </data>
+    <data name="SkipVersionTip" xml:space="preserve">
+      <value>已跳过版本 : {version}
+前往 设置-启动器-检查更新 可再次获取此版本</value>
+    </data>
 </root>

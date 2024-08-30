@@ -198,6 +198,9 @@ button {
     align-items: center;
   }
   .footer-area {
-    height: 760px;
+    height: 800px;
   }
+}
+.copyright {
+  text-align: center;
 }

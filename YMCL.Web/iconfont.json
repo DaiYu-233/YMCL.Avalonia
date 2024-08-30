@@ -1,0 +1,37 @@
+{
+  "id": "4669137",
+  "name": "YMCL-Web",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "8682245",
+      "name": "播放",
+      "font_class": "bofang",
+      "unicode": "e681",
+      "unicode_decimal": 59009
+    },
+    {
+      "icon_id": "8759836",
+      "name": "QQ",
+      "font_class": "QQ",
+      "unicode": "e698",
+      "unicode_decimal": 59032
+    },
+    {
+      "icon_id": "21182307",
+      "name": "浏览器",
+      "font_class": "liulanqi",
+      "unicode": "e720",
+      "unicode_decimal": 59168
+    },
+    {
+      "icon_id": "21213246",
+      "name": "github",
+      "font_class": "github",
+      "unicode": "e722",
+      "unicode_decimal": 59170
+    }
+  ]
+}

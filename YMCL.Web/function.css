@@ -1,0 +1,165 @@
+h1 {
+  text-align: center;
+  margin-block: 40vh;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-block: 100px;
+  gap: 100px;
+}
+
+.card {
+  width: 650px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 12px;
+  transition: 0.3s ease;
+}
+
+.card h4 {
+  font-size: 22px;
+  margin: 15px;
+}
+
+.card span {
+  font-size: 13px;
+  width: 80%;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-style: italic;
+  opacity: 0.6;
+}
+
+.card p {
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.card .icon {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  font-size: 30px;
+}
+
+.card:hover {
+  scale: 1.05;
+}
+
+@keyframes left {
+  from {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes right {
+  from {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.card:nth-child(odd) {
+  margin-right: 390px;
+  /* 核心代码 */
+  /* 设置动画 */
+  animation: right 1s ease forwards;
+  /* 设置时间线显示方式。注意本属性不支持火狐和Sfari浏览器
+    取值有：
+    view()
+    详细信息参见：
+    https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline/view
+    scroll()
+    详细信息参见：
+    https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline/scroll   
+  */
+  animation-timeline: view();
+  /* 设置动画范围
+    详细信息参见：
+    https://developer.mozilla.org/en-US/docs/Web/CSS/animation-range
+  */
+  /* animation-range: entry 0% cover 30%; */
+  animation-range: 0% 30%;
+}
+
+.card:nth-child(even) {
+  margin-left: 390px;
+  animation: left 1s ease forwards;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+@media (max-width: 1150px) {
+  .card:nth-child(odd) {
+    margin-right: 160px;
+  }
+
+  .card:nth-child(even) {
+    margin-left: 160px;
+  }
+  .card {
+    width: 520px;
+  }
+}
+
+@media (max-width: 760px) {
+  @keyframes left {
+    from {
+      opacity: 0;
+      transform: translateX(-90vw);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes right {
+    from {
+      opacity: 0;
+      transform: translateX(90vw);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  .card:nth-child(odd) {
+    margin-right: 0px;
+  }
+
+  .card:nth-child(even) {
+    margin-left: 0px;
+  }
+  .card {
+    width: calc(100vw - 40px);
+  }
+}
+.card > img {
+  width: calc(100% - 40px);
+  margin-bottom: 20px;
+}

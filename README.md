@@ -1,5 +1,5 @@
 <p align="center">
-<img height="400" width="400" src="https://ymcl.daiyu.fun/Assets/img/YMCL-Icon.svg"/>
+<img height="400" width="400" src="https://ymcl.daiyu.fun/YMCL-Icon.svg"/>
 </p>
 
 <div align="center">

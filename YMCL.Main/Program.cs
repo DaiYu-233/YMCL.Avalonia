@@ -1,5 +1,6 @@
 ﻿using System;
 using Avalonia;
+using Avalonia.Dialogs;
 
 namespace YMCL.Main;
 
@@ -19,8 +20,9 @@ internal class Program
     {
         return AppBuilder.Configure<App>()
             .UsePlatformDetect()
-            //.UseManagedSystemDialogs()
+            .UseManagedSystemDialogs()
             .WithInterFont()
+            // .UsePlatformDetect()
             .LogToTrace();
     }
 }

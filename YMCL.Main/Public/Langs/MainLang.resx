@@ -924,4 +924,16 @@ win10 以下系统(不包括10)不支持自动更新
     <data name="OpenBrowser" xml:space="preserve">
       <value>打开浏览器</value>
     </data>
+    <data name="CustomHomePageWay_Presetting_JavaNews" xml:space="preserve">
+      <value>预设-Java新闻</value>
+    </data>
+    <data name="NetworkSource" xml:space="preserve">
+      <value>网络源</value>
+    </data>
+    <data name="NoSupportNow" xml:space="preserve">
+      <value>现不支持</value>
+    </data>
+    <data name="AggregateSearchTip" xml:space="preserve">
+      <value>输入关键词以在YMCL中搜索 </value>
+    </data>
 </root>

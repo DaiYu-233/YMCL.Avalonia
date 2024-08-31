@@ -80,6 +80,9 @@ public partial class InitializeWindow : Window
         if (!File.Exists(Const.String.PluginDataPath))
             File.WriteAllText(Const.String.PluginDataPath,
                 JsonConvert.SerializeObject(new List<string>(), Formatting.Indented));
+        if (!File.Exists(Const.String.JavaNewsDataPath))
+            File.WriteAllText(Const.String.JavaNewsDataPath,
+                "{}");
         if (!File.Exists(Const.String.PlayerDataPath))
             File.WriteAllText(Const.String.PlayerDataPath,
                 JsonConvert.SerializeObject(new List<PlaySongListViewItemEntry>(), Formatting.Indented));

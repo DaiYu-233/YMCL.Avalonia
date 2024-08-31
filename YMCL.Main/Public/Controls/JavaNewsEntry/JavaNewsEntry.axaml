@@ -1,0 +1,29 @@
+<UserControl
+    x:Class="YMCL.Main.Public.Controls.JavaNewsEntry"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Border
+        Padding="10"
+        Background="{DynamicResource 1x}"
+        ClipToBounds="True"
+        CornerRadius="5">
+        <DockPanel>
+            <Border
+                Width="180"
+                Height="180"
+                Margin="5"
+                VerticalAlignment="Top"
+                ClipToBounds="True"
+                CornerRadius="5">
+                <asyncImageLoader:AdvancedImage Name="ImageC" />
+            </Border>
+            <WrapPanel Name="WrapPanelC" Margin="10" />
+        </DockPanel>
+    </Border>
+</UserControl>

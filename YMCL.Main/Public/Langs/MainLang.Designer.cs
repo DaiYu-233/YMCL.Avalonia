@@ -195,6 +195,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 输入关键词以在YMCL中搜索 .
+        /// </summary>
+        public static string AggregateSearchTip {
+            get {
+                return ResourceManager.GetString("AggregateSearchTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 居中对齐.
         /// </summary>
         public static string AlignCenter {
@@ -506,6 +515,15 @@ namespace YMCL.Main.Public.Langs {
         public static string CustomHomePageSourceCodeError {
             get {
                 return ResourceManager.GetString("CustomHomePageSourceCodeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 预设-Java新闻.
+        /// </summary>
+        public static string CustomHomePageWay_Presetting_JavaNews {
+            get {
+                return ResourceManager.GetString("CustomHomePageWay_Presetting_JavaNews", resourceCulture);
             }
         }
         
@@ -1566,6 +1584,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 网络源.
+        /// </summary>
+        public static string NetworkSource {
+            get {
+                return ResourceManager.GetString("NetworkSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 无附加安装.
         /// </summary>
         public static string NoAdditionalInstall {
@@ -1607,6 +1634,15 @@ namespace YMCL.Main.Public.Langs {
         public static string NoCrashInfo {
             get {
                 return ResourceManager.GetString("NoCrashInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 现不支持.
+        /// </summary>
+        public static string NoSupportNow {
+            get {
+                return ResourceManager.GetString("NoSupportNow", resourceCulture);
             }
         }
         

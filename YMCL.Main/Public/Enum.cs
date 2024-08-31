@@ -73,7 +73,8 @@ public enum CustomHomePageWay
 {
     None,
     Local,
-    Network
+    Network,
+    Presetting_JavaNews
 }
 
 public enum DaiYuLoaderType

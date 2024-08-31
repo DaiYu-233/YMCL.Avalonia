@@ -29,5 +29,6 @@
         <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
         <semi:SemiTheme Locale="zh-cn" />
         <u-semi:SemiTheme Locale="zh-CN" />
+        <StyleInclude Source="avares://AsyncImageLoader.Avalonia/AdvancedImage.axaml" />
     </Application.Styles>
 </Application>

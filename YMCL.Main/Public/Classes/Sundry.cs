@@ -12,6 +12,13 @@ using YMCL.Main.Public.Langs;
 
 namespace YMCL.Main.Public.Classes;
 
+public class AggregateSearch()
+{
+    public string Tag { get; set; }
+    public string Type { get; set; }
+    public string Summary { get; set; }
+    public string Text { get; set; }
+}
 public class FolderInfo()
 {
     public string Name { get; set; }
@@ -295,4 +302,66 @@ public class UrlImageDataListEntry()
 {
     public string Url { get; set; }
     public Bitmap Bitmap { get; set; }
+}
+
+public class MojangJavaNews()
+{
+    public class Image
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string url { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string title { get; set; }
+    }
+
+    public class EntriesItem
+    {
+        public string BitmapBase64 { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string title { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string type { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string version { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public Image image { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string body { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string id { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string contentPath { get; set; }
+    }
+
+    public class Root
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public int version { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public List <EntriesItem > entries { get; set; }
+    }
+
 }

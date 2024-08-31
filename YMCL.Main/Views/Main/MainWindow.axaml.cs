@@ -22,6 +22,7 @@ using NAudio.Wave;
 using Newtonsoft.Json;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
+using YMCL.Main.Public.Controls;
 using YMCL.Main.Public.Controls.WindowTask;
 using YMCL.Main.Public.Langs;
 using YMCL.Main.Views.Main.Pages.Download;
@@ -224,7 +225,25 @@ public partial class MainWindow : Window
         Const.Window.main.Show();
         Const.Window.initialize.Close();
 
-        if (setting.CustomHomePage == CustomHomePageWay.Local)
+        _ = FetchJavaNews();
+        _ = LoadCustomHomePage();
+
+        _ = downloadPage.curseForgeFetcherPage.InitModFromCurseForge();
+        Method.Ui.SetWindowBackGroundImg();
+    }
+
+    private async Task FetchJavaNews()
+    {
+        using var client = new HttpClient();
+        var json = await client.GetStringAsync("https://launchercontent.mojang.com/javaPatchNotes.json");
+        await File.WriteAllTextAsync(Const.String.JavaNewsDataPath, json);
+        // _ = LoadCustomHomePage();
+    }
+
+    private async Task LoadCustomHomePage()
+    {
+        if (Const.Data.Setting.CustomHomePage == CustomHomePageWay.Local)
+        {
             try
             {
                 var c = (Control)AvaloniaRuntimeXamlLoader.Load(
@@ -235,9 +254,27 @@ public partial class MainWindow : Window
             {
                 Method.Ui.ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
             }
-
-        downloadPage.curseForgeFetcherPage.SearchModFromCurseForge();
-        Method.Ui.SetWindowBackGroundImg();
+        }
+        else if (Const.Data.Setting.CustomHomePage == CustomHomePageWay.Presetting_JavaNews)
+        {
+            try
+            {
+                var viewer = new ScrollViewer();
+                var container = new StackPanel()
+                {
+                     Spacing = 10
+                };
+                viewer.Content = container;
+                launchPage.CustomPageRoot.Child = viewer;
+                var news = JsonConvert.DeserializeObject<MojangJavaNews.Root>(
+                    await File.ReadAllTextAsync(Const.String.JavaNewsDataPath));
+                news.entries.ForEach(v =>
+                    container.Children.Add(new JavaNewsEntry(v.image.url, v.body)));
+            }
+            catch (Exception ex)
+            {
+            }
+        }
     }
 
     public async void HandleDrop(object sender, DragEventArgs e)

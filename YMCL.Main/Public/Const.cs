@@ -34,6 +34,7 @@ public abstract class Const
             Path.Combine(UserDataRootPath, "YMCL.MinecraftFolder.DaiYu");
 
         public static string JavaDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.Java.DaiYu");
+        public static string JavaNewsDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.JavaNews.DaiYu");
         public static string AppPathDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.AppPath.DaiYu");
         public static string PlayerDataPath { get; } = Path.Combine(UserDataRootPath, "YMCL.Player.DaiYu");
 

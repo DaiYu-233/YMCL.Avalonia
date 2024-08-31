@@ -82,6 +82,7 @@ public partial class CurseForgeFetcher : UserControl
 
             SearchConsoleRoot.Opacity = 0;
         }
+
         Loaded += (_, _) =>
         {
             Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
@@ -170,7 +171,7 @@ public partial class CurseForgeFetcher : UserControl
                     index++;
                 }
             });
-            
+
             ModFileLoading.IsVisible = false;
             if (shouldReturn) return;
             List<string> mcVersions = new();
@@ -485,7 +486,7 @@ public partial class CurseForgeFetcher : UserControl
                     categoryId: -1, classId: classId);
 
             if (ModNameTextBox.Text != keyword) return;
-            
+
             mods.Data.ForEach(mod =>
             {
                 var entry = new SearchModListViewItemEntry(mod);
@@ -516,6 +517,71 @@ public partial class CurseForgeFetcher : UserControl
             LoadMoreBtn.IsVisible = false;
             Method.Ui.ShowShortException(MainLang.ErrorCallingApi, ex);
         }
+    }
+
+    public async Task InitModFromCurseForge()
+    {
+        await Task.Run(async () =>
+        {
+            Const.Data.UrlImageDataList.Clear();
+            var keyword = ModNameTextBox.Text;
+            _keyword = keyword;
+            var gameVersion = ModVersionTextBox.Text;
+            _gameVersion = gameVersion;
+            ModLoaderType loaderType;
+
+            if (mapping.TryGetValue((DaiYuLoaderType)LoaderTypeComboBox.SelectedIndex, out var modLoaderType))
+                loaderType = modLoaderType;
+            else
+                loaderType = ModLoaderType.Any;
+
+            _loaderType = loaderType;
+            try
+            {
+                var classId = GetClassIdFromResultTypeComboBoxSelectedIndex(ResultTypeComboBox.SelectedIndex);
+
+                GenericListResponse<Mod> mods;
+                if (loaderType == ModLoaderType.Any)
+                    mods = await cfApiClient.SearchModsAsync(_gameId, gameVersion: gameVersion,
+                        searchFilter: keyword, index: _page * 25, pageSize: 25, categoryId: -1, classId: classId);
+                else
+                    mods = await cfApiClient.SearchModsAsync(_gameId, gameVersion: gameVersion,
+                        searchFilter: keyword, modLoaderType: loaderType, index: _page * 25, pageSize: 25,
+                        categoryId: -1, classId: classId);
+
+                if (ModNameTextBox.Text != keyword) return;
+
+                mods.Data.ForEach(mod =>
+                {
+                    var entry = new SearchModListViewItemEntry(mod);
+                    entry.StringDownloadCount = Method.Value.ConvertToWanOrYi(mod.DownloadCount);
+                    var localDateTime = mod.DateReleased.DateTime.ToLocalTime();
+                    var formattedDateTime = localDateTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+                    entry.StringDateTime = formattedDateTime;
+                    entry.ModSource = ModSource.CurseForge;
+                    ModListView.Items.Add(entry);
+                });
+                ModNameTextBox.IsEnabled = true;
+                ModVersionTextBox.IsEnabled = true;
+                SearchBtn.IsEnabled = true;
+                Loading.IsVisible = false;
+                LoadMoreBtn.IsVisible = true;
+                if (mods.Data.Count == 0)
+                {
+                    Method.Ui.Toast(MainLang.SearchNoResult);
+                    LoadMoreBtn.IsVisible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ModNameTextBox.IsEnabled = true;
+                ModVersionTextBox.IsEnabled = true;
+                SearchBtn.IsEnabled = true;
+                Loading.IsVisible = false;
+                LoadMoreBtn.IsVisible = false;
+                Method.Ui.ShowShortException(MainLang.ErrorCallingApi, ex);
+            }
+        });
     }
 
     public class VersionComparer : IComparer<string>

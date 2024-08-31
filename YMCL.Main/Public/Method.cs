@@ -333,7 +333,7 @@ public class Method
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54");
                 var githubApiJson = JArray.Parse(await httpClient.GetStringAsync(Const.String.GithubUpdateApiUrl));
                 var apiVersion = (string)githubApiJson[0]["name"]!;
-                return (true, apiVersion != version, apiVersion,  (string)githubApiJson[0]["html_url"]!);
+                return (true, apiVersion != version, apiVersion, (string)githubApiJson[0]["html_url"]!);
             }
             catch
             {
@@ -1612,7 +1612,9 @@ public class Method
             }
 
             Launcher launcher = new(gameResolver, config);
-
+            bool _showed = false;
+            string _gameMsg = String.Empty;
+            bool _firstOut = true;
             await Task.Run(async () =>
             {
                 try
@@ -1647,6 +1649,12 @@ public class Method
                                     var crashAnalyzer = new GameCrashAnalyzer(gameEntry, l_enableIndependencyCore);
                                     var reports = crashAnalyzer.AnalysisLogs();
                                     var msg = string.Empty;
+                                    if (_firstOut == true && !setting.ShowGameOutput)
+                                    {
+                                        task.UpdateTextProgress(_gameMsg, false);
+                                        _firstOut = false;
+                                    }
+
                                     try
                                     {
                                         if (reports == null || reports.Count() == 0)
@@ -1663,26 +1671,32 @@ public class Method
                                     task.UpdateTextProgress(string.Empty, false);
                                     task.UpdateTextProgress($"YMCL -----> {MainLang.MineratCrashed}");
                                     task.isFinish = true;
-
+                                    task.Show();
                                     var dialogResult = await Ui.ShowDialogAsync(MainLang.MineratCrashed, msg,
                                         b_primary: MainLang.Ok);
                                     task.Destory();
                                 }
                             });
                         };
+
                         watcher.OutputLogReceived += async (_, args) =>
                         {
                             Console.WriteLine(args.Log);
-                            if (setting.ShowGameOutput)
-                                await Dispatcher.UIThread.InvokeAsync(() =>
+                            if ((!setting.ShowGameOutput && !_showed))
+                            {
+                                _gameMsg += args.Log;
+                            }
+
+                            if (setting.ShowGameOutput || (!setting.ShowGameOutput && _showed))
+                            {
+                                if (_firstOut)
                                 {
-                                    task.UpdateTextProgress(args.Original, false);
-                                });
-                            else
-                                await Dispatcher.UIThread.InvokeAsync(() =>
-                                {
-                                    task.entry.UpdateTextProgress(args.Original, false);
-                                });
+                                    task.UpdateTextProgress(_gameMsg, false);
+                                    _firstOut = false;
+                                }
+
+                                task.UpdateTextProgress(args.Original, false);
+                            }
                         };
 
                         await Dispatcher.UIThread.InvokeAsync(() =>
@@ -1702,6 +1716,11 @@ public class Method
 
                             Dispatcher.UIThread.Invoke(() =>
                             {
+                                if (!setting.ShowGameOutput)
+                                {
+                                    task.Hide();
+                                }
+
                                 switch (setting.LauncherVisibility)
                                 {
                                     case LauncherVisibility.AfterLaunchExitLauncher:

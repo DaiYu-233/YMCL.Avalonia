@@ -58,6 +58,12 @@ public partial class PersonalizeSettingPage : UserControl
         CustomHomePageComboBox.SelectionChanged += (s, e) =>
         {
             var setting = Const.Data.Setting;
+            if (CustomHomePageComboBox.SelectedIndex == 2)
+            {
+                CustomHomePageComboBox.SelectedIndex = 0;
+                Method.Ui.Toast(MainLang.NoSupportNow);
+                return;
+            }
             EditCustomHomePageBtn.IsVisible = CustomHomePageComboBox.SelectedIndex == 1 ? true : false;
             if (CustomHomePageComboBox.SelectedIndex != (int)setting.CustomHomePage)
             {

@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Platform.Storage;
+using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json;
 using YMCL.Main.Public;
@@ -20,28 +21,63 @@ public partial class LauncherSettingPage : UserControl
         BindingEvent();
     }
 
-    public async Task AutoUpdate()
+    public Task AutoUpdate()
     {
-        if (!Const.Data.Setting.EnableAutoCheckUpdate) return;
-        var updateAvailable = await Method.Ui.CheckUpdateAsync();
-        if (!updateAvailable.Item1) return;
-        if (!updateAvailable.Item2) return;
-        if (Const.Data.Setting.SkipUpdateVersion == updateAvailable.Item3) return;
-        var dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion, updateAvailable.Item4
-            , b_cancel: MainLang.Cancel, b_secondary: MainLang.SkipThisVersion,
-            b_primary: MainLang.Ok);
-        if (dialog == ContentDialogResult.Primary)
+        _ = Task.Run(async () =>
         {
-            var updateAppAsync = await Method.Ui.UpdateAppAsync();
-            if (!updateAppAsync) Method.Ui.Toast(MainLang.UpdateFail);
-        }
-        else if (dialog == ContentDialogResult.Secondary)
-        {
-            Const.Data.Setting.SkipUpdateVersion = updateAvailable.Item3;
-            File.WriteAllText(Const.String.SettingDataPath,
-                JsonConvert.SerializeObject(Const.Data.Setting, Formatting.Indented));
-            Method.Ui.Toast(MainLang.SkipVersionTip.Replace("{version}", updateAvailable.Item3));
-        }
+            if (!Const.Data.Setting.EnableAutoCheckUpdate) return;
+            var updateAvailable = await Method.Ui.CheckUpdateAsync();
+            if (!updateAvailable.Item1) return;
+            if (!updateAvailable.Item2) return;
+            if (Const.Data.Setting.SkipUpdateVersion == updateAvailable.Item3) return;
+            ContentDialogResult dialog = ContentDialogResult.None;
+            if (Environment.OSVersion.Version.Major < 10)
+            {
+                await Dispatcher.UIThread.Invoke(async () =>
+                {
+                    dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion,
+                        $"{MainLang.WinSevenAutoUpdateTip.Replace("{url}", updateAvailable.Item4).Replace("{version}", updateAvailable.Item3)}"
+                        , b_cancel: MainLang.Cancel, b_secondary: MainLang.SkipThisVersion,
+                        b_primary: MainLang.OpenBrowser);
+                });
+            }
+            else
+            {
+                await Dispatcher.UIThread.Invoke(async () =>
+                {
+                    dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion,
+                        $"{updateAvailable.Item3!}\n\n{updateAvailable.Item4}"
+                        , b_cancel: MainLang.Cancel, b_secondary: MainLang.SkipThisVersion,
+                        b_primary: MainLang.Update);
+                });
+            }
+
+            if (dialog == ContentDialogResult.Primary)
+            {
+                if (Environment.OSVersion.Version.Major < 10)
+                {
+                    await Dispatcher.UIThread.Invoke(async () =>
+                    {
+                        var launcher = TopLevel.GetTopLevel(Const.Window.main).Launcher;
+                        await launcher.LaunchUriAsync(new Uri(updateAvailable.Item4));
+                        return;
+                    });
+                    var updateAppAsync = await Method.Ui.UpdateAppAsync();
+                    if (!updateAppAsync) Method.Ui.Toast(MainLang.UpdateFail);
+                }
+            }
+            else if (dialog == ContentDialogResult.Secondary)
+            {
+                Dispatcher.UIThread.Invoke(() =>
+                {
+                    Const.Data.Setting.SkipUpdateVersion = updateAvailable.Item3;
+                    File.WriteAllText(Const.String.SettingDataPath,
+                        JsonConvert.SerializeObject(Const.Data.Setting, Formatting.Indented));
+                    Method.Ui.Toast(MainLang.SkipVersionTip.Replace("{version}", updateAvailable.Item3));
+                });
+            }
+        });
+        return Task.CompletedTask;
     }
 
     private void BindingEvent()
@@ -68,28 +104,54 @@ public partial class LauncherSettingPage : UserControl
             CheckUpdateBtn.Content = ring;
             ring.Height = 17;
             ring.Width = 17;
-            var (success, checkUpdateAsyncStatus, _, checkUpdateAsyncMsg) = await Method.Ui.CheckUpdateAsync();
+            var updateAvailable = await Method.Ui.CheckUpdateAsync();
             CheckUpdateBtn.IsEnabled = true;
             CheckUpdateBtn.Content = MainLang.CheckUpdate;
-            if (!success)
+            ContentDialogResult dialog = ContentDialogResult.None;
+            if (Environment.OSVersion.Version.Major < 10)
             {
-                Method.Ui.Toast(MainLang.CheckUpdateFail);
-                return;
+                await Dispatcher.UIThread.Invoke(async () =>
+                {
+                    dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion,
+                        $"{MainLang.WinSevenAutoUpdateTip.Replace("{url}", updateAvailable.Item4).Replace("{version}", updateAvailable.Item3)}"
+                        , b_cancel: MainLang.Cancel,
+                        b_primary: MainLang.OpenBrowser);
+                });
+            }
+            else
+            {
+                await Dispatcher.UIThread.Invoke(async () =>
+                {
+                    dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion,
+                        $"{updateAvailable.Item3!}\n\n{updateAvailable.Item4}"
+                        , b_cancel: MainLang.Cancel,
+                        b_primary: MainLang.Update);
+                });
             }
 
-            if (!checkUpdateAsyncStatus)
-            {
-                Method.Ui.Toast(MainLang.CurrentlyTheLatestVersion);
-                return;
-            }
-
-            var dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion, checkUpdateAsyncMsg
-                , b_cancel: MainLang.Cancel,
-                b_primary: MainLang.Ok);
             if (dialog == ContentDialogResult.Primary)
             {
-                var updateAppAsync = await Method.Ui.UpdateAppAsync();
-                if (!updateAppAsync) Method.Ui.Toast(MainLang.UpdateFail);
+                if (Environment.OSVersion.Version.Major < 10)
+                {
+                    await Dispatcher.UIThread.Invoke(async () =>
+                    {
+                        var launcher = TopLevel.GetTopLevel(Const.Window.main).Launcher;
+                        await launcher.LaunchUriAsync(new Uri(updateAvailable.Item4));
+                        return;
+                    });
+                    var updateAppAsync = await Method.Ui.UpdateAppAsync();
+                    if (!updateAppAsync) Method.Ui.Toast(MainLang.UpdateFail);
+                }
+            }
+            else if (dialog == ContentDialogResult.Secondary)
+            {
+                Dispatcher.UIThread.Invoke(() =>
+                {
+                    Const.Data.Setting.SkipUpdateVersion = updateAvailable.Item3;
+                    File.WriteAllText(Const.String.SettingDataPath,
+                        JsonConvert.SerializeObject(Const.Data.Setting, Formatting.Indented));
+                    Method.Ui.Toast(MainLang.SkipVersionTip.Replace("{version}", updateAvailable.Item3));
+                });
             }
         };
     }

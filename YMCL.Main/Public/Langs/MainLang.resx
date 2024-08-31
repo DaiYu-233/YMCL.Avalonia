@@ -915,4 +915,13 @@ sudo apt install vlc</value>
       <value>已跳过版本 : {version}
 前往 设置-启动器-检查更新 可再次获取此版本</value>
     </data>
+    <data name="WinSevenAutoUpdateTip" xml:space="preserve">
+      <value>发现新版本 : {version}
+win10 以下系统(不包括10)不支持自动更新
+前往以下链接下载新版本 :  “{url}”
+前往 设置-下载-自动更新 可关闭自动检查更新</value>
+    </data>
+    <data name="OpenBrowser" xml:space="preserve">
+      <value>打开浏览器</value>
+    </data>
 </root>

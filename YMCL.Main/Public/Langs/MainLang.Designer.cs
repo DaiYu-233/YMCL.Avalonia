@@ -18,7 +18,7 @@ namespace YMCL.Main.Public.Langs {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class MainLang {
@@ -1665,6 +1665,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 打开浏览器.
+        /// </summary>
+        public static string OpenBrowser {
+            get {
+                return ResourceManager.GetString("OpenBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 打开文件方式.
         /// </summary>
         public static string OpenFileWay {
@@ -2438,6 +2447,18 @@ namespace YMCL.Main.Public.Langs {
         public static string WindowTitleBarStyleTip {
             get {
                 return ResourceManager.GetString("WindowTitleBarStyleTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 发现新版本 : {version}
+        ///win10 以下系统(不包括10)不支持自动更新
+        ///前往以下链接下载新版本 :  “{url}”
+        ///前往 设置-下载-自动更新 可关闭自动检查更新.
+        /// </summary>
+        public static string WinSevenAutoUpdateTip {
+            get {
+                return ResourceManager.GetString("WinSevenAutoUpdateTip", resourceCulture);
             }
         }
         

@@ -35,6 +35,7 @@
             <TextBox
                 Name="TaskTextBox"
                 Margin="10,0,10,10"
+                VerticalAlignment="Stretch"
                 DockPanel.Dock="Bottom"
                 IsReadOnly="True"
                 Opacity="{DynamicResource Opacity}" />

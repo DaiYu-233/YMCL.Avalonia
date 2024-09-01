@@ -105,6 +105,20 @@ public partial class LauncherSettingPage : UserControl
             ring.Height = 17;
             ring.Width = 17;
             var updateAvailable = await Method.Ui.CheckUpdateAsync();
+            if (!updateAvailable.Item1)
+            {
+                CheckUpdateBtn.IsEnabled = true;
+                CheckUpdateBtn.Content = MainLang.CheckUpdate;
+                Method.Ui.Toast(MainLang.CheckUpdateFail);
+                return;
+            }
+            if (!updateAvailable.Item2)
+            {
+                CheckUpdateBtn.IsEnabled = true;
+                CheckUpdateBtn.Content = MainLang.CheckUpdate;
+                Method.Ui.Toast(MainLang.CurrentlyTheLatestVersion);
+                return;
+            }
             CheckUpdateBtn.IsEnabled = true;
             CheckUpdateBtn.Content = MainLang.CheckUpdate;
             ContentDialogResult dialog = ContentDialogResult.None;
@@ -139,6 +153,9 @@ public partial class LauncherSettingPage : UserControl
                         await launcher.LaunchUriAsync(new Uri(updateAvailable.Item4));
                         return;
                     });
+                }
+                else
+                {
                     var updateAppAsync = await Method.Ui.UpdateAppAsync();
                     if (!updateAppAsync) Method.Ui.Toast(MainLang.UpdateFail);
                 }

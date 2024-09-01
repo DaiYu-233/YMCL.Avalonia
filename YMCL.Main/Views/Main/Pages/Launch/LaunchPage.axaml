@@ -127,14 +127,14 @@
                 <DockPanel>
                     <StackPanel
                         Name="LaunchingPanel"
-                        Margin="10,10,0,5"
+                        Margin="10,10,0,0"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Top"
                         DockPanel.Dock="Top"
                         Spacing="10" />
                     <Border
                         Name="CustomPageRoot"
-                        Margin="10,5,0,10"
+                        Margin="10,0,0,10"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         ClipToBounds="True"

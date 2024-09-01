@@ -204,6 +204,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 输入关键词以在YMCL中搜索.
+        /// </summary>
+        public static string AggregateSearchWatermark {
+            get {
+                return ResourceManager.GetString("AggregateSearchWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 居中对齐.
         /// </summary>
         public static string AlignCenter {
@@ -407,6 +416,15 @@ namespace YMCL.Main.Public.Langs {
         public static string CannotOpenBrowser {
             get {
                 return ResourceManager.GetString("CannotOpenBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 无法识别选中版本.
+        /// </summary>
+        public static string CannotRecognitionTheVersion {
+            get {
+                return ResourceManager.GetString("CannotRecognitionTheVersion", resourceCulture);
             }
         }
         
@@ -636,6 +654,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 显示独立任务窗口.
+        /// </summary>
+        public static string DisplayIndependentTaskWindow {
+            get {
+                return ResourceManager.GetString("DisplayIndependentTaskWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 下载.
         /// </summary>
         public static string Download {
@@ -767,6 +794,15 @@ namespace YMCL.Main.Public.Langs {
         public static string ErrorCallingApi {
             get {
                 return ResourceManager.GetString("ErrorCallingApi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 现存账户.
+        /// </summary>
+        public static string ExistAccount {
+            get {
+                return ResourceManager.GetString("ExistAccount", resourceCulture);
             }
         }
         
@@ -1041,6 +1077,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 安装版本.
+        /// </summary>
+        public static string InstallVersion {
+            get {
+                return ResourceManager.GetString("InstallVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 尝试执行: 
         ///
         ///sudo apt install libvlc-dev
@@ -1076,6 +1121,24 @@ namespace YMCL.Main.Public.Langs {
         public static string JavaRuntimeTip {
             get {
                 return ResourceManager.GetString("JavaRuntimeTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 跳转搜索.
+        /// </summary>
+        public static string JumpSearch {
+            get {
+                return ResourceManager.GetString("JumpSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 将会跳转到 {target} 搜索此关键词.
+        /// </summary>
+        public static string JumpToSearchTip {
+            get {
+                return ResourceManager.GetString("JumpToSearchTip", resourceCulture);
             }
         }
         
@@ -1229,6 +1292,15 @@ namespace YMCL.Main.Public.Langs {
         public static string LoadMore {
             get {
                 return ResourceManager.GetString("LoadMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 本地资源.
+        /// </summary>
+        public static string LocalResource {
+            get {
+                return ResourceManager.GetString("LocalResource", resourceCulture);
             }
         }
         
@@ -1449,6 +1521,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 音乐.
+        /// </summary>
+        public static string Music {
+            get {
+                return ResourceManager.GetString("Music", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 音乐Api.
         /// </summary>
         public static string MusicApi {
@@ -1544,6 +1625,15 @@ namespace YMCL.Main.Public.Langs {
         public static string NavPersonalize {
             get {
                 return ResourceManager.GetString("NavPersonalize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  搜索.
+        /// </summary>
+        public static string NavSearch {
+            get {
+                return ResourceManager.GetString("NavSearch", resourceCulture);
             }
         }
         
@@ -1962,6 +2052,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 在 {target} 中搜索.
+        /// </summary>
+        public static string SearchInTip {
+            get {
+                return ResourceManager.GetString("SearchInTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 搜索关键词....
         /// </summary>
         public static string SearchKeyword {
@@ -2130,6 +2229,15 @@ namespace YMCL.Main.Public.Langs {
         public static string SuccessRemove {
             get {
                 return ResourceManager.GetString("SuccessRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 已切换到.
+        /// </summary>
+        public static string SwitchedTo {
+            get {
+                return ResourceManager.GetString("SwitchedTo", resourceCulture);
             }
         }
         

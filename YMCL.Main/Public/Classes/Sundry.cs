@@ -7,6 +7,7 @@ using CurseForge.APIClient.Models;
 using CurseForge.APIClient.Models.Files;
 using CurseForge.APIClient.Models.Games;
 using CurseForge.APIClient.Models.Mods;
+using MinecraftLaunch.Classes.Models.Game;
 using Newtonsoft.Json;
 using YMCL.Main.Public.Langs;
 
@@ -15,9 +16,14 @@ namespace YMCL.Main.Public.Classes;
 public class AggregateSearch()
 {
     public string Tag { get; set; }
+    public int Order { get; set; }
     public string Type { get; set; }
     public string Summary { get; set; }
     public string Text { get; set; }
+    public string? Target { get; set; }
+    public GameEntry? GameEntry { get; set; }
+    public string? InstallVersionId { get; set; }
+    public int AccountIndex { get; set; }
 }
 public class FolderInfo()
 {

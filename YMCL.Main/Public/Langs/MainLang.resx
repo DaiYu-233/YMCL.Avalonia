@@ -936,4 +936,40 @@ win10 以下系统(不包括10)不支持自动更新
     <data name="AggregateSearchTip" xml:space="preserve">
       <value>输入关键词以在YMCL中搜索 </value>
     </data>
+    <data name="CannotRecognitionTheVersion" xml:space="preserve">
+      <value>无法识别选中版本</value>
+    </data>
+    <data name="LocalResource" xml:space="preserve">
+      <value>本地资源</value>
+    </data>
+    <data name="InstallVersion" xml:space="preserve">
+      <value>安装版本</value>
+    </data>
+    <data name="JumpSearch" xml:space="preserve">
+      <value>跳转搜索</value>
+    </data>
+    <data name="AggregateSearchWatermark" xml:space="preserve">
+      <value>输入关键词以在YMCL中搜索</value>
+    </data>
+    <data name="SwitchedTo" xml:space="preserve">
+      <value>已切换到</value>
+    </data>
+    <data name="JumpToSearchTip" xml:space="preserve">
+      <value>将会跳转到 {target} 搜索此关键词</value>
+    </data>
+    <data name="SearchInTip" xml:space="preserve">
+      <value>在 {target} 中搜索</value>
+    </data>
+    <data name="NavSearch" xml:space="preserve">
+      <value> 搜索</value>
+    </data>
+    <data name="Music" xml:space="preserve">
+      <value>音乐</value>
+    </data>
+    <data name="ExistAccount" xml:space="preserve">
+      <value>现存账户</value>
+    </data>
+    <data name="DisplayIndependentTaskWindow" xml:space="preserve">
+      <value>显示独立任务窗口</value>
+    </data>
 </root>

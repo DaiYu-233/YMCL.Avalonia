@@ -47,8 +47,7 @@ using StarLight_Core.Launch;
 using StarLight_Core.Models.Authentication;
 using StarLight_Core.Models.Launch;
 using YMCL.Main.Public.Classes;
-using YMCL.Main.Public.Controls.PageTaskEntry;
-using YMCL.Main.Public.Controls.WindowTask;
+using YMCL.Main.Public.Controls.TaskManage;
 using YMCL.Main.Public.Langs;
 using File = System.IO.File;
 using FileInfo = YMCL.Main.Public.Classes.FileInfo;
@@ -105,7 +104,7 @@ public class Method
         {
             var notification = p_notification == null ? Const.Notification.main : p_notification;
             var showTitle = Const.String.AppTitle;
-            if (!string.IsNullOrEmpty(title)) showTitle = title;
+            if (!string.IsNullOrWhiteSpace(title)) showTitle = title;
             if (time) showTitle += $" - {DateTime.Now.ToString("HH:mm:ss")}";
             notification.Show(new Notification(showTitle, msg, type));
         }
@@ -210,7 +209,7 @@ public class Method
         public static void SetWindowBackGroundImg()
         {
             var setting = Const.Data.Setting;
-            if (setting.EnableCustomBackGroundImg && !string.IsNullOrEmpty(setting.WindowBackGroundImgData))
+            if (setting.EnableCustomBackGroundImg && !string.IsNullOrWhiteSpace(setting.WindowBackGroundImgData))
             {
                 Application.Current.Resources["Opacity"] = 0.875;
                 var bitmap = Value.Base64ToBitmap(setting.WindowBackGroundImgData);
@@ -343,7 +342,7 @@ public class Method
 
         public static async Task<bool> UpdateAppAsync()
         {
-            var task = new WindowTask(MainLang.CheckUpdate);
+            var task = new TaskManager.TaskEntry(MainLang.CheckUpdate);
             try
             {
                 var architecture = Value.GetCurrentPlatformAndArchitecture();
@@ -1021,7 +1020,7 @@ public class Method
         public static async Task<bool> InstallClientUsingMinecraftLaunchAsync(string versionId, string customId = null,
             ForgeInstallEntry forgeInstallEntry = null, FabricBuildEntry fabricBuildEntry = null,
             QuiltBuildEntry quiltBuildEntry = null, OptiFineInstallEntity optiFineInstallEntity = null,
-            WindowTask p_task = null, bool closeTask = true)
+            TaskManager.TaskEntry p_task = null, bool closeTask = true)
         {
             var shouldReturn = false;
             var regex = new Regex(@"[\\/:*?""<>|]");
@@ -1050,7 +1049,9 @@ public class Method
             Const.Window.main.downloadPage.autoInstallPage.InstallPreviewRoot.IsVisible = false;
             Const.Window.main.downloadPage.autoInstallPage.InstallableVersionListRoot.IsVisible = true;
 
-            var task = p_task == null ? new WindowTask($"{MainLang.Install}: Vanllia - {versionId}") : p_task;
+            var task = p_task == null
+                ? new TaskManager.TaskEntry($"{MainLang.Install}: Vanllia - {versionId}")
+                : p_task;
             task.UpdateTextProgress("-----> Vanllia", false);
 
             //Vanllia
@@ -1364,7 +1365,7 @@ public class Method
             var l_enableIndependencyCore = true;
 
             var setting = Const.Data.Setting;
-            if (string.IsNullOrEmpty(p_id))
+            if (string.IsNullOrWhiteSpace(p_id))
             {
                 if (Const.Window.main.launchPage.VersionListView.SelectedItem as GameEntry != null)
                 {
@@ -1382,7 +1383,7 @@ public class Method
                 l_id = p_id;
             }
 
-            if (string.IsNullOrEmpty(p_mcPath))
+            if (string.IsNullOrWhiteSpace(p_mcPath))
                 l_mcPath = setting.MinecraftFolder;
             else
                 l_mcPath = p_mcPath;
@@ -1404,7 +1405,7 @@ public class Method
                 return false;
             }
 
-            if (string.IsNullOrEmpty(p_javaPath))
+            if (string.IsNullOrWhiteSpace(p_javaPath))
             {
                 if (versionSetting.Java.JavaPath == "Global")
                 {
@@ -1488,9 +1489,9 @@ public class Method
                     l_enableIndependencyCore = false;
             }
 
-            if (string.IsNullOrEmpty(p_fullUrl))
+            if (string.IsNullOrWhiteSpace(p_fullUrl))
             {
-                if (!string.IsNullOrEmpty(versionSetting.AutoJoinServerIp))
+                if (!string.IsNullOrWhiteSpace(versionSetting.AutoJoinServerIp))
                 {
                     if (versionSetting.AutoJoinServerIp.Contains(':'))
                     {
@@ -1520,8 +1521,13 @@ public class Method
                 }
             }
 
-            var task = new WindowTask($"{MainLang.Launch} - {gameEntry.Id}", false);
+            var homePageTask = new TextBox()
+                { IsReadOnly = true, FontFamily = (FontFamily)Application.Current.Resources["Font"]!, FontSize = 14 };
+            Const.Window.main.launchPage.LaunchingPanel.Children.Add(homePageTask);
+            homePageTask.Text += $"{MainLang.Launch} - {gameEntry.Id}";
+            var task = new TaskManager.TaskEntry($"{MainLang.Launch} - {gameEntry.Id}", false);
             task.UpdateTextProgress("-----> YMCL", false);
+            homePageTask.Text += $"\n[{DateTime.Now:HH:mm:ss}]" + $"{MainLang.VerifyingAccount}";
             task.UpdateTextProgress(MainLang.VerifyingAccount);
 
             var accountData =
@@ -1532,13 +1538,14 @@ public class Method
                 Ui.Toast(MainLang.AccountError, Const.Notification.main, NotificationType.Error);
                 Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                 task.Destory();
+                Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                 return false;
             }
 
             switch (accountData.AccountType)
             {
                 case AccountType.Offline:
-                    if (!string.IsNullOrEmpty(accountData.Name))
+                    if (!string.IsNullOrWhiteSpace(accountData.Name))
                     {
                         OfflineAuthenticator authenticator1 = new(accountData.Name);
                         account = authenticator1.Authenticate();
@@ -1548,6 +1555,7 @@ public class Method
                         Ui.Toast(MainLang.AccountError, Const.Notification.main, NotificationType.Error);
                         Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                         task.Destory();
+                        Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                         return false;
                     }
 
@@ -1564,6 +1572,7 @@ public class Method
                         Ui.ShowShortException(MainLang.LoginFail, ex);
                         Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                         task.Destory();
+                        Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                         return false;
                     }
 
@@ -1577,17 +1586,19 @@ public class Method
             {
                 Ui.Toast(MainLang.AccountError, Const.Notification.main, NotificationType.Error);
                 Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+                Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                 task.Destory();
                 return false;
             }
 
-            if (string.IsNullOrEmpty(l_id) ||
-                string.IsNullOrEmpty(l_mcPath) ||
-                string.IsNullOrEmpty(l_javaPath) ||
+            if (string.IsNullOrWhiteSpace(l_id) ||
+                string.IsNullOrWhiteSpace(l_mcPath) ||
+                string.IsNullOrWhiteSpace(l_javaPath) ||
                 l_maxMem == -1)
             {
                 Ui.Toast(MainLang.BuildLaunchConfigFail, Const.Notification.main, NotificationType.Error);
                 Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+                Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                 task.Destory();
                 return false;
             }
@@ -1607,14 +1618,13 @@ public class Method
             {
                 Ui.Toast(MainLang.BuildLaunchConfigFail, Const.Notification.main, NotificationType.Error);
                 Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+                Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                 task.Destory();
                 return false;
             }
 
             Launcher launcher = new(gameResolver, config);
-            bool _showed = false;
             string _gameMsg = String.Empty;
-            bool _firstOut = true;
             await Task.Run(async () =>
             {
                 try
@@ -1640,6 +1650,7 @@ public class Method
 
                                 if (args.ExitCode == 0)
                                 {
+                                    Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                                     await Task.Delay(2000);
                                     task.Destory();
                                     Const.Window.main.Focus();
@@ -1649,12 +1660,8 @@ public class Method
                                     var crashAnalyzer = new GameCrashAnalyzer(gameEntry, l_enableIndependencyCore);
                                     var reports = crashAnalyzer.AnalysisLogs();
                                     var msg = string.Empty;
-                                    if (_firstOut == true && !setting.ShowGameOutput)
-                                    {
-                                        task.UpdateTextProgress(_gameMsg, false);
-                                        _firstOut = false;
-                                    }
-
+                                    task._windowTaskEntry.ProgressTextBox.Text =
+                                        task._pageTaskEntry.TaskTextBox.Text;
                                     try
                                     {
                                         if (reports == null || reports.Count() == 0)
@@ -1669,12 +1676,13 @@ public class Method
                                     }
 
                                     task.UpdateTextProgress(string.Empty, false);
-                                    task.UpdateTextProgress($"YMCL -----> {MainLang.MineratCrashed}");
-                                    task.isFinish = true;
+                                    task.UpdateTextProgress($"YMCL -----> \n{MainLang.MineratCrashed}");
+                                    task.Finish();
                                     task.Show();
                                     var dialogResult = await Ui.ShowDialogAsync(MainLang.MineratCrashed, msg,
                                         b_primary: MainLang.Ok);
                                     task.Destory();
+                                    Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                                 }
                             });
                         };
@@ -1682,25 +1690,19 @@ public class Method
                         watcher.OutputLogReceived += async (_, args) =>
                         {
                             Console.WriteLine(args.Log);
-                            if ((!setting.ShowGameOutput && !_showed))
+                            if (!setting.ShowGameOutput)
                             {
-                                _gameMsg += args.Log;
+                                task._pageTaskEntry.UpdateTextProgress(args.Original, false);
                             }
-
-                            if (setting.ShowGameOutput || (!setting.ShowGameOutput && _showed))
+                            else
                             {
-                                if (_firstOut)
-                                {
-                                    task.UpdateTextProgress(_gameMsg, false);
-                                    _firstOut = false;
-                                }
-
                                 task.UpdateTextProgress(args.Original, false);
                             }
                         };
 
                         await Dispatcher.UIThread.InvokeAsync(() =>
                         {
+                            homePageTask.Text += $"\n[{DateTime.Now:HH:mm:ss}]" + $"{MainLang.WaitForGameWindowAppear}";
                             task.UpdateTextProgress(MainLang.WaitForGameWindowAppear);
                             if (setting.ShowGameOutput)
                             {
@@ -1716,6 +1718,7 @@ public class Method
 
                             Dispatcher.UIThread.Invoke(() =>
                             {
+                                Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                                 if (!setting.ShowGameOutput)
                                 {
                                     task.Hide();
@@ -1746,11 +1749,13 @@ public class Method
                 }
                 catch (Exception ex)
                 {
+                    var a = ex.ToString();
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
                         Ui.ShowShortException(MainLang.LaunchFail, ex);
                         Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                         task.Destory();
+                        Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                     });
                 }
             });
@@ -1774,7 +1779,7 @@ public class Method
             var l_enableIndependencyCore = true;
 
             var setting = Const.Data.Setting;
-            if (string.IsNullOrEmpty(p_id))
+            if (string.IsNullOrWhiteSpace(p_id))
             {
                 if (Const.Window.main.launchPage.VersionListView.SelectedItem as GameEntry != null)
                 {
@@ -1792,7 +1797,7 @@ public class Method
                 l_id = p_id;
             }
 
-            if (string.IsNullOrEmpty(p_mcPath))
+            if (string.IsNullOrWhiteSpace(p_mcPath))
                 l_mcPath = setting.MinecraftFolder;
             else
                 l_mcPath = p_mcPath;
@@ -1814,7 +1819,7 @@ public class Method
                 return false;
             }
 
-            if (string.IsNullOrEmpty(p_javaPath))
+            if (string.IsNullOrWhiteSpace(p_javaPath))
             {
                 if (versionSetting.Java.JavaPath == "Global")
                 {
@@ -1898,9 +1903,9 @@ public class Method
                     l_enableIndependencyCore = false;
             }
 
-            if (string.IsNullOrEmpty(p_fullUrl))
+            if (string.IsNullOrWhiteSpace(p_fullUrl))
             {
-                if (!string.IsNullOrEmpty(versionSetting.AutoJoinServerIp))
+                if (!string.IsNullOrWhiteSpace(versionSetting.AutoJoinServerIp))
                 {
                     if (versionSetting.AutoJoinServerIp.Contains(':'))
                     {
@@ -1930,7 +1935,7 @@ public class Method
                 }
             }
 
-            var task = new WindowTask($"{MainLang.Launch} - {gameEntry.Id}", false);
+            var task = new TaskManager.TaskEntry($"{MainLang.Launch} - {gameEntry.Id}", false);
             task.UpdateTextProgress("-----> YMCL", false);
             task.UpdateTextProgress(MainLang.VerifyingAccount);
 
@@ -1949,7 +1954,7 @@ public class Method
             switch (accountData.AccountType)
             {
                 case AccountType.Offline:
-                    if (!string.IsNullOrEmpty(accountData.Name))
+                    if (!string.IsNullOrWhiteSpace(accountData.Name))
                     {
                         account = new OfflineAuthentication(accountData.Name).OfflineAuth();
                     }
@@ -2000,9 +2005,9 @@ public class Method
                 return false;
             }
 
-            if (string.IsNullOrEmpty(l_id) ||
-                string.IsNullOrEmpty(l_mcPath) ||
-                string.IsNullOrEmpty(l_javaPath) ||
+            if (string.IsNullOrWhiteSpace(l_id) ||
+                string.IsNullOrWhiteSpace(l_mcPath) ||
+                string.IsNullOrWhiteSpace(l_javaPath) ||
                 l_maxMem == -1)
             {
                 Ui.Toast(MainLang.BuildLaunchConfigFail, Const.Notification.main, NotificationType.Error);
@@ -2048,16 +2053,10 @@ public class Method
                         var watcher = await launcher.LaunchAsync(async x =>
                         {
                             Console.WriteLine(x.Description);
-                            if (setting.ShowGameOutput)
-                                await Dispatcher.UIThread.InvokeAsync(() =>
-                                {
-                                    task.UpdateTextProgress(x.Description, true);
-                                });
-                            else
-                                await Dispatcher.UIThread.InvokeAsync(() =>
-                                {
-                                    task.entry.UpdateTextProgress(x.Description, true);
-                                });
+                            await Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                task.UpdateTextProgress(x.Description, true);
+                            });
                         });
 
                         _ = Task.Run(() => { IO.CallEnabledPlugin(); });
@@ -2065,13 +2064,7 @@ public class Method
                         watcher.OutputReceived += async a =>
                         {
                             Console.WriteLine(a);
-                            if (setting.ShowGameOutput)
-                                await Dispatcher.UIThread.InvokeAsync(() => { task.UpdateTextProgress(a, true); });
-                            else
-                                await Dispatcher.UIThread.InvokeAsync(() =>
-                                {
-                                    task.entry.UpdateTextProgress(a, true);
-                                });
+                            await Dispatcher.UIThread.InvokeAsync(() => { task.UpdateTextProgress(a, true); });
                         };
                         watcher.ErrorReceived += async a =>
                         {
@@ -2079,10 +2072,7 @@ public class Method
                             if (setting.ShowGameOutput)
                                 await Dispatcher.UIThread.InvokeAsync(() => { task.UpdateTextProgress(a, true); });
                             else
-                                await Dispatcher.UIThread.InvokeAsync(() =>
-                                {
-                                    task.entry.UpdateTextProgress(a, true);
-                                });
+                                await Dispatcher.UIThread.InvokeAsync(() => { task.UpdateTextProgress(a, true); });
                         };
 
                         await Dispatcher.UIThread.InvokeAsync(() =>
@@ -2202,12 +2192,12 @@ public class Method
                 }
             }
 
-            if (!string.IsNullOrEmpty(customId))
+            if (!string.IsNullOrWhiteSpace(customId))
             {
                 customId = p_customId;
             }
 
-            var task = new WindowTask($"{MainLang.Unzip} - {Path.GetFileName(path)}");
+            var task = new TaskManager.TaskEntry($"{MainLang.Unzip} - {Path.GetFileName(path)}");
 
             IO.TryCreateFolder(Path.Combine(setting.MinecraftFolder, "YMCLTemp"));
             var unzipDirectory =
@@ -2320,7 +2310,7 @@ public class Method
                 }
             }
 
-            if (!string.IsNullOrEmpty(info.overrides))
+            if (!string.IsNullOrWhiteSpace(info.overrides))
             {
                 task.UpdateTitle(MainLang.OverrideModPack);
                 IO.CopyDirectory(Path.Combine(unzipDirectory, info.overrides),
@@ -2343,7 +2333,8 @@ public class Method
 
                     var saveDirectory = Path.Combine(setting.MinecraftFolder, "versions", customId, "mods");
                     IO.TryCreateFolder(saveDirectory);
-                    if (string.IsNullOrEmpty(modFileDownloadUrl)) throw new Exception("Failed to get download URL");
+                    if (string.IsNullOrWhiteSpace(modFileDownloadUrl))
+                        throw new Exception("Failed to get download URL");
 
                     var uri = new Uri(modFileDownloadUrl);
                     fileName = Path.GetFileName(uri.AbsolutePath);
@@ -2396,7 +2387,7 @@ public class Method
             var fN = item.DisplayName;
             if (Path.GetExtension(fN) != ".zip") fN += ".zip";
             var path = Path.Combine(Const.String.TempFolderPath, fN);
-            var task = new TaskEntry($"{MainLang.Download} - {fN}", true, false);
+            var task = new TaskManager.TaskEntry($"{MainLang.Download} - {fN}", true, false);
             try
             {
                 using (var httpClient = new HttpClient())

@@ -5,7 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
 using YMCL.Main.Public;
-using YMCL.Main.Public.Controls.PageTaskEntry;
+using YMCL.Main.Public.Controls.TaskManage;
 
 namespace YMCL.Main.Views.Main.Pages.TaskCenter;
 
@@ -44,7 +44,7 @@ public partial class TaskCenterPage : UserControl
                     var index = 1;
                     foreach (var item in tasks)
                     {
-                        var task = item as TaskEntry;
+                        var task = item as PageTaskEntry;
                         task.TaskNumber.Text = $"#{index}";
                         index++;
                     }

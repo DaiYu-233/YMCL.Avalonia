@@ -82,7 +82,6 @@ public partial class LaunchPage : UserControl
             else
             {
                 LaunchConsoleRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
-                ;
                 LaunchConsoleRoot.IsVisible = true;
             }
         };
@@ -576,5 +575,39 @@ public partial class LaunchPage : UserControl
         VersionListRoot.IsVisible = true;
         VersionListRoot.Margin = new Thickness(10);
         await Task.Delay(260);
+    }
+
+    public async void ReLoadPage()
+    {
+        LoadAccounts();
+        minecraftFolders =
+            JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.MinecraftFolderDataPath));
+        MinecraftFolderComboBox.Items.Clear();
+        var setting = Const.Data.Setting;
+        foreach (var item in minecraftFolders) MinecraftFolderComboBox.Items.Add(item);
+        if (setting.MinecraftFolder == null || !minecraftFolders.Contains(setting.MinecraftFolder))
+            MinecraftFolderComboBox.SelectedIndex = 0;
+        else
+            MinecraftFolderComboBox.SelectedItem = setting.MinecraftFolder;
+        if (_firstLoad)
+        {
+            Const.Window.main.settingPage.pluginSettingPage.LoadPlugin();
+            _firstLoad = false;
+        }
+
+        LoadVersions();
+
+        if (VersionListRoot.Margin == new Thickness(10))
+        {
+            LaunchConsoleRoot.IsVisible = false;
+            LaunchConsoleRoot.Opacity = 0;
+            await Task.Delay(260);
+            LaunchConsoleRoot.IsVisible = true;
+        }
+        else
+        {
+            LaunchConsoleRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
+            LaunchConsoleRoot.IsVisible = true;
+        }
     }
 }

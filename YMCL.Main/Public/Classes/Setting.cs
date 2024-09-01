@@ -31,7 +31,7 @@ public class Setting
     public string CustomUpdateUrl { get; set; } = "https://gh.api.99988866.xyz/{%url%}";
     public string MusicApi { get; set; } = "http://music.api.daiyu.fun/";
     public bool EnableCustomBackGroundImg { get; set; } = false;
-    public bool IsAlreadyWrittenIntoTheUrlScheme { get; set; } = false;
+    public bool EnableDisplayIndependentTaskWindow { get; set; } = false;
     public bool ShowGameOutput { get; set; } = false;
     public WindowTitleBarStyle WindowTitleBarStyle { get; set; } = WindowTitleBarStyle.Unset;
     public CustomHomePageWay CustomHomePage { get; set; } = CustomHomePageWay.None;

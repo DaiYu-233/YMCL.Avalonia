@@ -8,8 +8,7 @@ using Avalonia.Threading;
 using Newtonsoft.Json;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
-using YMCL.Main.Public.Controls.PageTaskEntry;
-using TaskEntry = YMCL.Main.Public.Controls.WindowTaskEntry.TaskEntry;
+using YMCL.Main.Public.Controls.TaskManage;
 
 namespace YMCL.Main;
 
@@ -51,7 +50,7 @@ public partial class TaskCenterWindow : Window
                     var index = 1;
                     foreach (var item in tasks)
                     {
-                        var task = item as TaskEntry;
+                        var task = item as PageTaskEntry;
                         task.TaskNumber.Text = $"#{index}";
                         index++;
                     }

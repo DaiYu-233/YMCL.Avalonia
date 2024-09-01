@@ -114,7 +114,7 @@ public partial class InitializeWindow : Window
         {
             try
             {
-                if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HOME"))) return;
+                if (string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("HOME"))) return;
                 var path = Path.Combine(Environment.GetEnvironmentVariable("HOME")!, ".local/share/applications");
                 File.WriteAllText(Path.Combine(path, "YMCL.desktop"),
                     $"[Desktop Entry]  \r\nVersion=1.0  \r\nName=YMCL Protocol Handler  \r\nComment=Handle ymcl:// URLs  \r\nExec={Process.GetCurrentProcess().MainModule.FileName!}\r\nTerminal=true  \r\nType=Application  \r\nCategories=Network;  \r\nMIMEType=x-scheme-handler/ymcl;  ");
@@ -136,13 +136,13 @@ public partial class InitializeWindow : Window
         {
             MaxItems = 3, MaxHeight = 99999, FontFamily = (FontFamily)Application.Current.Resources["Font"]!,
             CornerRadius = new CornerRadius(8), FontSize = 14, Margin = new Thickness(0),
-            Position = NotificationPosition.BottomRight
+            Position = NotificationPosition.TopRight
         };
         Const.Notification.initialize = new WindowNotificationManager(GetTopLevel(this))
         {
             MaxItems = 2, MaxHeight = 99999, FontFamily = (FontFamily)Application.Current.Resources["Font"]!,
             CornerRadius = new CornerRadius(8), FontSize = 14, Margin = new Thickness(0),
-            Position = NotificationPosition.BottomRight
+            Position = NotificationPosition.TopRight
         };
         Method.Ui.SetAccentColor(setting.AccentColor);
         if (setting.Theme == Public.Theme.Light)

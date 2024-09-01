@@ -771,7 +771,7 @@ sudo apt install vlc</value>
     <value>Only supports Windows 10 and above</value>
   </data>
   <data name="NavTask" xml:space="preserve">
-    <value> Task</value>
+    <value> TaskManage</value>
   </data>
   <data name="TaskCenter" xml:space="preserve">
     <value>task center</value>

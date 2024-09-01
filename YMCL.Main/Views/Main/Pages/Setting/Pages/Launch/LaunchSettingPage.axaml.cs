@@ -97,7 +97,7 @@ public partial class LaunchSettingPage : UserControl
                 }
                 else
                 {
-                    if (!string.IsNullOrEmpty(item.Path))
+                    if (!string.IsNullOrWhiteSpace(item.Path))
                         Method.Ui.Toast(MainLang.NeedToSelectMinecraftFolder, Const.Notification.main,
                             NotificationType.Error);
                 }
@@ -166,7 +166,7 @@ public partial class LaunchSettingPage : UserControl
             list.ForEach(java =>
             {
                 var javaInfo = JavaUtil.GetJavaInfo(java.Path);
-                if (javaInfo == null && !string.IsNullOrEmpty(java.Path))
+                if (javaInfo == null && !string.IsNullOrWhiteSpace(java.Path))
                 {
                     Method.Ui.Toast(MainLang.TheJavaIsError, Const.Notification.main, NotificationType.Error);
                 }

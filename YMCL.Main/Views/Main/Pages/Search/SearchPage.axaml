@@ -1,0 +1,56 @@
+<UserControl
+    x:Class="YMCL.Main.Views.Main.Pages.Search.SearchPage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:classes="clr-namespace:YMCL.Main.Public.Classes"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Border Name="Root">
+        <Border.Transitions>
+            <Transitions>
+                <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
+            </Transitions>
+        </Border.Transitions>
+        <Border
+            Margin="10"
+            Background="{DynamicResource 1x}"
+            ClipToBounds="True"
+            CornerRadius="5">
+            <DockPanel>
+                <TextBox
+                    Name="AggregateSearchBox"
+                    Margin="10"
+                    DockPanel.Dock="Top"
+                    FontFamily="{DynamicResource Font}"
+                    Watermark="{x:Static properties:MainLang.AggregateSearchTip}" />
+                <ListBox
+                    Name="AggregateSearchListBox"
+                    Margin="10,0,10,10"
+                    FontFamily="{DynamicResource Font}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="classes:AggregateSearch">
+                            <StackPanel Margin="0,5">
+                                <TextBlock FontFamily="{DynamicResource Font}" TextWrapping="Wrap">
+                                    <Run Text="[" />
+                                    <Run Text="{Binding Type}" />
+                                    <Run Text="]" />
+                                    <Run Text="{Binding Text}" />
+                                </TextBlock>
+                                <TextBlock
+                                    FontFamily="{DynamicResource Font}"
+                                    FontSize="12"
+                                    Foreground="{DynamicResource GrayColor}"
+                                    Text="{Binding Summary}"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </Border>
+    </Border>
+</UserControl>

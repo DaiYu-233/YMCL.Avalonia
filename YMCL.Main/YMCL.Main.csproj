@@ -78,6 +78,14 @@
             <DependentUpon>Mod.axaml</DependentUpon>
         </Compile>
         <Compile Remove="Public\Langs\LangHelperBase.cs" />
+        <Compile Update="Public\Controls\TaskEntry\PageTaskEntry.axaml.cs">
+          <DependentUpon>TaskEntry.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Public\Controls\TaskEntry\TaskEntry.axaml.cs">
+          <DependentUpon>WindowTask.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
     <ItemGroup>
         <EmbeddedResource Update="Public\Langs\MainLang.resx">
@@ -130,5 +138,13 @@
         <None Update="Public\Assets\YMCL-Icon.icns">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
+    </ItemGroup>
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Public\Controls\TaskEntry\TaskEntry.axaml" />
+      <UpToDateCheckInput Remove="Public\Controls\TaskEntry\TaskEntry.axaml" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Public\Controls\PageTaskEntry\" />
+      <Folder Include="Public\Controls\WindowTask\" />
     </ItemGroup>
 </Project>

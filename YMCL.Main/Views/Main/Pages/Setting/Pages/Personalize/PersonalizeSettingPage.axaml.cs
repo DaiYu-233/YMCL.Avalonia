@@ -121,6 +121,11 @@ public partial class PersonalizeSettingPage : UserControl
             var launcher = TopLevel.GetTopLevel(this).Launcher;
             launcher.LaunchFileInfoAsync(new FileInfo(Const.String.CustomHomePageXamlDataPath));
         };
+        DisplayIndependentTaskWindowSwitch.Click += (s, e) =>
+        {
+            Const.Data.Setting.EnableDisplayIndependentTaskWindow = DisplayIndependentTaskWindowSwitch.IsChecked == true;
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(Const.Data.Setting, Formatting.Indented));
+        };
         LyricSizeSlider.ValueChanged += (s, e) =>
         {
             LyricSizeSliderText.Text = Math.Round(LyricSizeSlider.Value).ToString();

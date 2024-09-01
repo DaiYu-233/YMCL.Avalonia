@@ -1,5 +1,5 @@
 <UserControl
-    x:Class="YMCL.Main.Public.Controls.WindowTaskEntry.TaskEntry"
+    x:Class="YMCL.Main.Public.Controls.TaskManage.PageTaskEntry"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,7 +8,7 @@
     FontWeight="{DynamicResource FontWeight}"
     mc:Ignorable="d">
     <Border
-        Background="{DynamicResource 2x}"
+        Background="{DynamicResource 1x}"
         ClipToBounds="True"
         CornerRadius="5"
         Opacity="{DynamicResource Opacity}">
@@ -35,6 +35,7 @@
             <TextBox
                 Name="TaskTextBox"
                 Margin="10,0,10,10"
+                VerticalAlignment="Stretch"
                 DockPanel.Dock="Bottom"
                 IsReadOnly="True"
                 Opacity="{DynamicResource Opacity}" />

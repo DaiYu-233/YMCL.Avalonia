@@ -1,33 +1,33 @@
 using System;
 using System.Collections.Concurrent;
-using System.IO;
-using System.Threading.Tasks;
 using System.Timers;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Platform;
 using Avalonia.Threading;
-using Newtonsoft.Json;
-using YMCL.Main.Public.Classes;
-using YMCL.Main.Public.Controls.PageTaskEntry;
 
-namespace YMCL.Main.Public.Controls.WindowTask;
+namespace YMCL.Main.Public.Controls.TaskManage;
 
-public partial class WindowTask : Window
+public partial class WindowTaskEntry : Window
 {
     private readonly Timer _debounceTimer;
     private readonly ConcurrentQueue<string> _textQueue = new();
     private bool _isUpdating;
-    public TaskEntry entry;
     public bool isFinish;
 
-    public WindowTask(string name, bool valueProgress = true)
+    protected override void OnLoaded(RoutedEventArgs e)
+    {
+        if (!Const.Data.Setting.EnableDisplayIndependentTaskWindow) Hide();
+        base.OnLoaded(e);
+        if(!Const.Data.Setting.EnableDisplayIndependentTaskWindow)Hide();
+    }
+
+    public WindowTaskEntry(string name, bool valueProgress = true)
     {
         InitializeComponent();
         TitleText.Text = name;
         Title = name;
-
-        entry = new TaskEntry(name, valueProgress);
 
         if (!valueProgress) ValueProgressRoot.IsVisible = false;
         Closing += (s, e) =>
@@ -58,6 +58,7 @@ public partial class WindowTask : Window
         Loaded += (_, _) =>
         {
             var setting = Const.Data.Setting;
+            SystemDecorations = SystemDecorations.Full;
             if (setting.WindowTitleBarStyle == WindowTitleBarStyle.System)
             {
                 TitleBar.IsVisible = false;
@@ -79,7 +80,7 @@ public partial class WindowTask : Window
                 WindowState = WindowState.Normal;
             }
 
-            if (setting.EnableCustomBackGroundImg && !string.IsNullOrEmpty(setting.WindowBackGroundImgData))
+            if (setting.EnableCustomBackGroundImg && !string.IsNullOrWhiteSpace(setting.WindowBackGroundImgData))
             {
                 var bitmap = Method.Value.Base64ToBitmap(setting.WindowBackGroundImgData);
                 BackGroundImg.Source = bitmap;
@@ -96,7 +97,7 @@ public partial class WindowTask : Window
         _ = UpdateUi();
     }
 
-    public async Task UpdateUi()
+    public async System.Threading.Tasks.Task UpdateUi()
     {
        
     }
@@ -107,7 +108,6 @@ public partial class WindowTask : Window
 
     public void UpdateTextProgress(string text, bool includeTime = true)
     {
-        entry.UpdateTextProgress(text, includeTime);
         _textQueue.Enqueue(GetTextToAdd(text, includeTime));
 
         if (!_isUpdating)
@@ -121,7 +121,6 @@ public partial class WindowTask : Window
     {
         Finish();
         Hide();
-        entry.Destory();
     }
 
     private string GetTextToAdd(string text, bool includeTime)
@@ -149,7 +148,6 @@ public partial class WindowTask : Window
         try
         {
             ProgressBar.Value = progress;
-            entry.UpdateValueProgress(progress);
             ProgressBarText.Text = $"{Math.Round(progress, 1)}%";
         }
         catch
@@ -161,7 +159,6 @@ public partial class WindowTask : Window
     {
         TitleText.Text = title;
         Title = title;
-        entry.UpdateTitle(title);
     }
 
     protected override void OnClosing(WindowClosingEventArgs e)

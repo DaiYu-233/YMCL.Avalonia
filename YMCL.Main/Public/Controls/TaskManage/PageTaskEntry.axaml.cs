@@ -1,21 +1,19 @@
 using System;
 using System.Collections.Concurrent;
 using System.Timers;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
 
-namespace YMCL.Main.Public.Controls.WindowTaskEntry;
+namespace YMCL.Main.Public.Controls.TaskManage;
 
-public partial class TaskEntry : UserControl
+public partial class PageTaskEntry : UserControl
 {
     private readonly Timer _debounceTimer;
     private readonly ConcurrentQueue<string> _textQueue = new();
     private bool _isUpdating;
     public bool isFinish;
 
-    public TaskEntry(string name, bool valueProgress = true, bool textProgress = true)
+    public PageTaskEntry(string name, bool valueProgress = true, bool textProgress = true)
     {
         InitializeComponent();
         TaskName.Text = name;
@@ -33,8 +31,7 @@ public partial class TaskEntry : UserControl
         _debounceTimer = new Timer(500); // 设置防抖时间间隔为0.5秒  
         _debounceTimer.Elapsed += DebounceTimerElapsed;
         _debounceTimer.AutoReset = false; // 不自动重置，以便我们可以控制何时再次启动它  
-
-        Const.Window.taskCenter.TaskContainer.Children.Add(this);
+        Const.Window.main.taskCenterPage.TaskContainer.Children.Add(this);
     }
 
     public void Finish()
@@ -56,7 +53,7 @@ public partial class TaskEntry : UserControl
     public void Destory()
     {
         Finish();
-        Const.Window.taskCenter.TaskContainer.Children.Remove(this);
+        Const.Window.main.taskCenterPage.TaskContainer.Children.Remove(this);
     }
 
     private string GetTextToAdd(string text, bool includeTime)

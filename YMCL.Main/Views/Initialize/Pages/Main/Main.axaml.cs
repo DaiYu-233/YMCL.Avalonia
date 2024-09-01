@@ -149,7 +149,7 @@ public partial class Main : UserControl
                 }
                 else
                 {
-                    if (!string.IsNullOrEmpty(item.Path))
+                    if (!string.IsNullOrWhiteSpace(item.Path))
                         Method.Ui.Toast(MainLang.NeedToSelectMinecraftFolder, Const.Notification.initialize,
                             NotificationType.Error);
                 }
@@ -186,7 +186,7 @@ public partial class Main : UserControl
             list.ForEach(java =>
             {
                 var javaInfo = JavaUtil.GetJavaInfo(java.Path);
-                if (javaInfo == null && !string.IsNullOrEmpty(java.Path))
+                if (javaInfo == null && !string.IsNullOrWhiteSpace(java.Path))
                 {
                     Method.Ui.Toast(MainLang.TheJavaIsError, Const.Notification.initialize, NotificationType.Error);
                 }
@@ -245,7 +245,7 @@ public partial class Main : UserControl
                         var dialogResult1 = await offlineDialog.ShowAsync();
                         if (dialogResult1 == ContentDialogResult.Primary)
                         {
-                            if (!string.IsNullOrEmpty(textBox.Text) && !string.IsNullOrWhiteSpace(textBox.Text))
+                            if (!string.IsNullOrWhiteSpace(textBox.Text) && !string.IsNullOrWhiteSpace(textBox.Text))
                             {
                                 var now = DateTime.Now;
                                 _accountList.Add(new AccountInfo
@@ -633,20 +633,20 @@ public partial class Main : UserControl
             var email = emailTextBox.Text;
             var password = passwordTextBox.Text;
             var reInput = false;
-            if (string.IsNullOrEmpty(server) && string.IsNullOrWhiteSpace(server))
+            if (string.IsNullOrWhiteSpace(server) && string.IsNullOrWhiteSpace(server))
             {
                 Method.Ui.Toast(MainLang.YggdrasilServerUrlIsEmpty, Const.Notification.initialize,
                     NotificationType.Error);
                 reInput = true;
             }
 
-            if (string.IsNullOrEmpty(email) && string.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrWhiteSpace(email) && string.IsNullOrWhiteSpace(email))
             {
                 Method.Ui.Toast(MainLang.YggdrasilEmailIsEmpty, Const.Notification.initialize, NotificationType.Error);
                 reInput = true;
             }
 
-            if (string.IsNullOrEmpty(password) && string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(password) && string.IsNullOrWhiteSpace(password))
             {
                 Method.Ui.Toast(MainLang.YggdrasilPasswordIsEmpty, Const.Notification.initialize,
                     NotificationType.Error);

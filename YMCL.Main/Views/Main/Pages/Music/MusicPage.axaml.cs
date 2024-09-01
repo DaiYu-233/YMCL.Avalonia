@@ -20,7 +20,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
-using YMCL.Main.Public.Controls.PageTaskEntry;
+using YMCL.Main.Public.Controls.TaskManage;
 using YMCL.Main.Public.Langs;
 using static YMCL.Main.Public.Classes.PlaySongListViewItemEntry;
 using Repeat = YMCL.Main.Public.Repeat;
@@ -72,6 +72,12 @@ public partial class MusicPage : UserControl
         }, 10);
     }
 
+    public void ExternalCall()
+    {
+        page = 0;
+        keyword = SearchBox.Text;
+        _ = SearchForListViewAsync(keyword!, page);
+    }
     private void BindingEvent()
     {
         NextSongBtn.PointerPressed += async (_, _) => { NextSong(); };
@@ -141,7 +147,7 @@ public partial class MusicPage : UserControl
                     SuggestedFileName = $"{_selectedItem.SongName}.mp3",
                     DefaultExtension = "mp3"
                 });
-            if (string.IsNullOrEmpty(path)) return;
+            if (string.IsNullOrWhiteSpace(path)) return;
             if (_selectedItem.Type == PlaySongListViewItemEntryType.Local)
             {
                 try
@@ -157,7 +163,7 @@ public partial class MusicPage : UserControl
             }
             else
             {
-                var task = new TaskEntry($"{MainLang.Download} - {_selectedItem.SongName}.mp3", true, false);
+                var task = new TaskManager.TaskEntry($"{MainLang.Download} - {_selectedItem.SongName}.mp3", true, false);
                 Method.Ui.Toast($"{MainLang.BeginDownload}: {_selectedItem.SongName}.mp3");
                 try
                 {
@@ -505,7 +511,7 @@ public partial class MusicPage : UserControl
 
     private async Task SearchForListViewAsync(string keyword, int page)
     {
-        if (string.IsNullOrEmpty(keyword)) return;
+        if (string.IsNullOrWhiteSpace(keyword)) return;
         LoadMoreBtn.IsVisible = false;
         Loading.IsVisible = true;
         SearchBtn.IsEnabled = false;
@@ -769,7 +775,7 @@ public partial class MusicPage : UserControl
         {
         }
 
-        if (!string.IsNullOrEmpty(res2))
+        if (!string.IsNullOrWhiteSpace(res2))
         {
             var obj2 = JsonConvert.DeserializeObject<LyricApi>(res2);
             var lyricData = obj2.lrc.lyric;
@@ -931,7 +937,7 @@ public partial class MusicPage : UserControl
             var timeText = parts[0].TrimStart('[');
             var time = ParseTime(timeText);
             var text = parts[1];
-            if (!string.IsNullOrEmpty(text)) lyrics.Add(new Lyrics { Time = time, Text = text, Index = i });
+            if (!string.IsNullOrWhiteSpace(text)) lyrics.Add(new Lyrics { Time = time, Text = text, Index = i });
         }
 
         return lyrics;

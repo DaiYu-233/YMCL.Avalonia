@@ -1,5 +1,5 @@
 <Window
-    x:Class="YMCL.Main.Public.Controls.WindowTask.WindowTask"
+    x:Class="YMCL.Main.Public.Controls.TaskManage.WindowTaskEntry"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,6 +10,7 @@
     ExtendClientAreaChromeHints="NoChrome"
     ExtendClientAreaToDecorationsHint="True"
     IsHitTestVisible="True"
+    SystemDecorations="None"
     Topmost="True"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">

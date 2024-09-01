@@ -23,12 +23,12 @@ using Newtonsoft.Json;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Controls;
-using YMCL.Main.Public.Controls.WindowTask;
 using YMCL.Main.Public.Langs;
 using YMCL.Main.Views.Main.Pages.Download;
 using YMCL.Main.Views.Main.Pages.Launch;
 using YMCL.Main.Views.Main.Pages.More;
 using YMCL.Main.Views.Main.Pages.Music;
+using YMCL.Main.Views.Main.Pages.Search;
 using YMCL.Main.Views.Main.Pages.Setting;
 using YMCL.Main.Views.Main.Pages.TaskCenter;
 using static YMCL.Main.Public.Classes.PlaySongListViewItemEntry;
@@ -43,6 +43,7 @@ public partial class MainWindow : Window
     public readonly MorePage morePage = new();
     public readonly MusicPage musicPage = new();
     public readonly SettingPage settingPage = new();
+    public readonly SearchPage searchPage = new();
     public readonly TaskCenterPage taskCenterPage = new();
     public WindowTitleBarStyle titleBarStyle;
     public bool _firstLoad = true;
@@ -174,9 +175,13 @@ public partial class MainWindow : Window
                     morePage.Root.IsVisible = false;
                     FrameView.Content = morePage;
                     break;
-                case "Task":
+                case "TaskManage":
                     taskCenterPage.Root.IsVisible = false;
                     FrameView.Content = taskCenterPage;
+                    break;
+                case "Search":
+                    searchPage.Root.IsVisible = false;
+                    FrameView.Content = searchPage;
                     break;
             }
 
@@ -339,7 +344,7 @@ public partial class MainWindow : Window
                 return;
             }
 
-            Nav.SelectedItem = Nav.MenuItems[0];
+            Nav.SelectedItem = NavLaunch;
             var text = string.Empty;
             jarFile.ForEach(jar => { text += $"{jar.FullName}\n"; });
             var result = await Method.Ui.ShowDialogAsync(MainLang.AddTheFollowingFilesAsModsToTheCurrentVersion + "?",
@@ -358,7 +363,7 @@ public partial class MainWindow : Window
 
         if (zipFile.Count > 0)
         {
-            Nav.SelectedItem = Nav.MenuItems[0];
+            Nav.SelectedItem = NavLaunch;
             var text = string.Empty;
             zipFile.ForEach(zip => { text += $"{zip.FullName}\n"; });
             var result = await Method.Ui.ShowDialogAsync(
@@ -377,7 +382,7 @@ public partial class MainWindow : Window
 
         if (audioFile.Count > 0)
         {
-            Nav.SelectedItem = Nav.MenuItems[3];
+            Nav.SelectedItem = NavMusic;
             foreach (var file in audioFile)
                 using (var reader = new MediaFoundationReader(file.Path))
                 {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
@@ -10,6 +11,7 @@ using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using MinecraftLaunch.Classes.Models.Auth;
+using MinecraftLaunch.Classes.Models.Install;
 using MinecraftLaunch.Components.Authenticator;
 using MinecraftLaunch.Skin;
 using MinecraftLaunch.Skin.Class.Fetchers;
@@ -48,7 +50,8 @@ public partial class AccountSettingPage : UserControl
             {
                 AccountsListView.SelectedItem = AccountsListView.Items[0];
                 setting.AccountSelectionIndex = 0;
-                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
 
             try
@@ -135,7 +138,7 @@ public partial class AccountSettingPage : UserControl
                         var dialogResult1 = await offlineDialog.ShowAsync();
                         if (dialogResult1 == ContentDialogResult.Primary)
                         {
-                            if (!string.IsNullOrEmpty(textBox.Text) && !string.IsNullOrWhiteSpace(textBox.Text))
+                            if (!string.IsNullOrWhiteSpace(textBox.Text) && !string.IsNullOrWhiteSpace(textBox.Text))
                             {
                                 var now = DateTime.Now;
                                 accounts.Add(new AccountInfo
@@ -351,7 +354,8 @@ public partial class AccountSettingPage : UserControl
             {
                 AccountsListView.SelectedItem = AccountsListView.Items[0];
                 setting.AccountSelectionIndex = 0;
-                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
         }
         else
@@ -419,19 +423,19 @@ public partial class AccountSettingPage : UserControl
             var email = emailTextBox.Text;
             var password = passwordTextBox.Text;
             var reInput = false;
-            if (string.IsNullOrEmpty(server) && string.IsNullOrWhiteSpace(server))
+            if (string.IsNullOrWhiteSpace(server) && string.IsNullOrWhiteSpace(server))
             {
                 Method.Ui.Toast(MainLang.YggdrasilServerUrlIsEmpty, Const.Notification.main, NotificationType.Error);
                 reInput = true;
             }
 
-            if (string.IsNullOrEmpty(email) && string.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrWhiteSpace(email) && string.IsNullOrWhiteSpace(email))
             {
                 Method.Ui.Toast(MainLang.YggdrasilEmailIsEmpty, Const.Notification.main, NotificationType.Error);
                 reInput = true;
             }
 
-            if (string.IsNullOrEmpty(password) && string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(password) && string.IsNullOrWhiteSpace(password))
             {
                 Method.Ui.Toast(MainLang.YggdrasilPasswordIsEmpty, Const.Notification.main, NotificationType.Error);
                 reInput = true;

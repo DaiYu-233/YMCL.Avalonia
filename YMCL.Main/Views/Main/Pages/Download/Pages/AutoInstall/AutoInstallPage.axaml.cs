@@ -11,6 +11,7 @@ using MinecraftLaunch;
 using MinecraftLaunch.Classes.Models.Install;
 using MinecraftLaunch.Components.Installer;
 using YMCL.Main.Public;
+using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Langs;
 
 namespace YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall;
@@ -152,11 +153,13 @@ public partial class AutoInstallPage : UserControl
             await Task.Run(async () =>
             {
                 var vanlliaList = await VanlliaInstaller.EnumerableGameCoreAsync(MirrorDownloadManager.Bmcl);
+                var manifestEntries = vanlliaList.ToList();
+                Const.Window.main.searchPage.versionManifestEntries = manifestEntries.ToList();
                 await Dispatcher.UIThread.InvokeAsync(() =>
                 {
                     latestRelease = false;
                     latestSnapshot = false;
-                    foreach (var item in vanlliaList)
+                    foreach (var item in manifestEntries)
                     {
                         AllVersionListView.Items.Add(item);
                         versionManifestEntries.Add(item);
@@ -169,6 +172,12 @@ public partial class AutoInstallPage : UserControl
                                 LatestReleaseVersionId.Text = item.Id;
                                 LatestReleaseVersionTime.Text = item.ReleaseTime.ToString("yyyy-MM-ddTHH:mm:sszzz");
                             }
+
+                            Const.Window.main.searchPage.aggregateSearchList.Add(new AggregateSearch()
+                            {
+                                Tag = "jump", Text = $"{MainLang.ReleaseVersion} - {item.Id}", Type = MainLang.InstallVersion, Target = "auto-install",
+                                Summary = $"{MainLang.JumpToSearchTip.Replace("{target}",$"{MainLang.Download}-{MainLang.AutoInstall}")}", Order = 70, InstallVersionId = item.Id
+                            });
                         }
                         else if (item.Type == "snapshot")
                         {
@@ -179,12 +188,27 @@ public partial class AutoInstallPage : UserControl
                                 LatestPreviewVersionId.Text = item.Id;
                                 LatestPreviewVersionTime.Text = item.ReleaseTime.ToString("yyyy-MM-ddTHH:mm:sszzz");
                             }
+
+                            Const.Window.main.searchPage.aggregateSearchList.Add(new AggregateSearch()
+                            {
+                                Tag = "jump", Text = $"{MainLang.PreviewVersion} - {item.Id}", Type =MainLang.InstallVersion, Target = "auto-install",
+                                Summary =  $"{MainLang.JumpToSearchTip.Replace("{target}",$"{MainLang.Download}-{MainLang.AutoInstall}")}", Order = 70, InstallVersionId = item.Id
+                            });
                         }
                         else
                         {
                             OldVersionListView.Items.Add(item);
+                            Const.Window.main.searchPage.aggregateSearchList.Add(new AggregateSearch()
+                            {
+                                Tag = "jump", Text = $"{MainLang.OldVersion} - {item.Id}", Type = MainLang.InstallVersion, Target = "auto-install",
+                                Summary =  $"{MainLang.JumpToSearchTip.Replace("{target}",$"{MainLang.Download}-{MainLang.AutoInstall}")}", Order = 70, InstallVersionId = item.Id
+                            });
                         }
                     }
+
+                    Const.Window.main.searchPage.aggregateSearchList = Const.Window.main.searchPage.aggregateSearchList
+                        .OrderBy(x => x.Order).ToList();
+                    Const.Window.main.searchPage.UpdateAggregateSearch();
 
                     ReleaseVersionLoadingRing.IsVisible = false;
                     PreviewVersionLoadingRing.IsVisible = false;
@@ -201,6 +225,18 @@ public partial class AutoInstallPage : UserControl
         }
     }
 
+    public void ExternalCall(string id)
+    {
+        InstallPreviewIdText.Text = id;
+        MinecraftPreviewVerionId.Text = id;
+        InstallPreviewIdTextBox.Text = id;
+        InstallPreviewAdditionalInstallText.Text = MainLang.NoAdditionalInstall;
+        InstallableVersionListRoot.IsVisible = false;
+        InstallPreviewRoot.IsVisible = true;
+        LoadLoaderList();
+        CustomIdWarning.IsVisible = false;
+    }
+    
     private void LoadLoaderList()
     {
         var id = InstallPreviewIdText.Text;

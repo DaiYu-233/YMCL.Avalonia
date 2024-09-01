@@ -20,7 +20,7 @@ using Newtonsoft.Json;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Controls;
-using YMCL.Main.Public.Controls.PageTaskEntry;
+using YMCL.Main.Public.Controls.TaskManage;
 using YMCL.Main.Public.Langs;
 using File = CurseForge.APIClient.Models.Files.File;
 
@@ -179,7 +179,7 @@ public partial class CurseForgeFetcher : UserControl
                 if (!mcVersions.Contains(file.SortableGameVersions[0].GameVersion!))
                     mcVersions.Add(file.SortableGameVersions[0].GameVersion!);
 
-            mcVersions = mcVersions.Where(s => !string.IsNullOrEmpty(s)).ToList();
+            mcVersions = mcVersions.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
             mcVersions.Sort(new VersionComparer());
             mcVersions.Reverse();
             mcVersions.ForEach(mcVersion =>
@@ -215,7 +215,7 @@ public partial class CurseForgeFetcher : UserControl
                     }
 
                 ModFileVersionPanel.Children.Add(expander);
-                if (mcVersion == _gameVersion && !string.IsNullOrEmpty(_gameVersion))
+                if (mcVersion == _gameVersion && !string.IsNullOrWhiteSpace(_gameVersion))
                 {
                     var matchedExpander = new ModFileView($"{MainLang.MatchingVersion} - {mcVersion}");
                     matchedExpander.Margin = new Thickness(0, 10, 0, 0);
@@ -313,6 +313,18 @@ public partial class CurseForgeFetcher : UserControl
         };
     }
 
+    public void ExternalCallSearchModFromCurseForge()
+    {
+        _page = 0;
+        ModNameTextBox.IsEnabled = false;
+        ModVersionTextBox.IsEnabled = false;
+        SearchBtn.IsEnabled = false;
+        Loading.IsVisible = true;
+        LoadMoreBtn.IsVisible = false;
+        ModListView.Items.Clear();
+        SearchModFromCurseForge();
+    }
+
     private async void ModFileSelectionChanged(object? s, SelectionChangedEventArgs e)
     {
         var sender = s as ListBox;
@@ -377,7 +389,7 @@ public partial class CurseForgeFetcher : UserControl
         if ((classId == 12 || classId == 17) && extension != ".zip") path += ".zip";
 
         Method.Ui.Toast($"{MainLang.BeginDownload}: {item.DisplayName}");
-        var task = new TaskEntry($"{MainLang.Download} - {Path.GetFileName(path)}", true, false);
+        var task = new TaskManager.TaskEntry($"{MainLang.Download} - {Path.GetFileName(path)}", true, false);
         try
         {
             using (var httpClient = new HttpClient())
@@ -521,67 +533,64 @@ public partial class CurseForgeFetcher : UserControl
 
     public async Task InitModFromCurseForge()
     {
-        await Task.Run(async () =>
+        Const.Data.UrlImageDataList.Clear();
+        var keyword = ModNameTextBox.Text;
+        _keyword = keyword;
+        var gameVersion = ModVersionTextBox.Text;
+        _gameVersion = gameVersion;
+        ModLoaderType loaderType;
+
+        if (mapping.TryGetValue((DaiYuLoaderType)LoaderTypeComboBox.SelectedIndex, out var modLoaderType))
+            loaderType = modLoaderType;
+        else
+            loaderType = ModLoaderType.Any;
+
+        _loaderType = loaderType;
+        try
         {
-            Const.Data.UrlImageDataList.Clear();
-            var keyword = ModNameTextBox.Text;
-            _keyword = keyword;
-            var gameVersion = ModVersionTextBox.Text;
-            _gameVersion = gameVersion;
-            ModLoaderType loaderType;
+            var classId = GetClassIdFromResultTypeComboBoxSelectedIndex(ResultTypeComboBox.SelectedIndex);
 
-            if (mapping.TryGetValue((DaiYuLoaderType)LoaderTypeComboBox.SelectedIndex, out var modLoaderType))
-                loaderType = modLoaderType;
+            GenericListResponse<Mod> mods;
+            if (loaderType == ModLoaderType.Any)
+                mods = await cfApiClient.SearchModsAsync(_gameId, gameVersion: gameVersion,
+                    searchFilter: keyword, index: _page * 25, pageSize: 25, categoryId: -1, classId: classId);
             else
-                loaderType = ModLoaderType.Any;
+                mods = await cfApiClient.SearchModsAsync(_gameId, gameVersion: gameVersion,
+                    searchFilter: keyword, modLoaderType: loaderType, index: _page * 25, pageSize: 25,
+                    categoryId: -1, classId: classId);
 
-            _loaderType = loaderType;
-            try
+            if (ModNameTextBox.Text != keyword) return;
+
+            mods.Data.ForEach(mod =>
             {
-                var classId = GetClassIdFromResultTypeComboBoxSelectedIndex(ResultTypeComboBox.SelectedIndex);
-
-                GenericListResponse<Mod> mods;
-                if (loaderType == ModLoaderType.Any)
-                    mods = await cfApiClient.SearchModsAsync(_gameId, gameVersion: gameVersion,
-                        searchFilter: keyword, index: _page * 25, pageSize: 25, categoryId: -1, classId: classId);
-                else
-                    mods = await cfApiClient.SearchModsAsync(_gameId, gameVersion: gameVersion,
-                        searchFilter: keyword, modLoaderType: loaderType, index: _page * 25, pageSize: 25,
-                        categoryId: -1, classId: classId);
-
-                if (ModNameTextBox.Text != keyword) return;
-
-                mods.Data.ForEach(mod =>
-                {
-                    var entry = new SearchModListViewItemEntry(mod);
-                    entry.StringDownloadCount = Method.Value.ConvertToWanOrYi(mod.DownloadCount);
-                    var localDateTime = mod.DateReleased.DateTime.ToLocalTime();
-                    var formattedDateTime = localDateTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
-                    entry.StringDateTime = formattedDateTime;
-                    entry.ModSource = ModSource.CurseForge;
-                    ModListView.Items.Add(entry);
-                });
-                ModNameTextBox.IsEnabled = true;
-                ModVersionTextBox.IsEnabled = true;
-                SearchBtn.IsEnabled = true;
-                Loading.IsVisible = false;
-                LoadMoreBtn.IsVisible = true;
-                if (mods.Data.Count == 0)
-                {
-                    Method.Ui.Toast(MainLang.SearchNoResult);
-                    LoadMoreBtn.IsVisible = false;
-                }
-            }
-            catch (Exception ex)
+                var entry = new SearchModListViewItemEntry(mod);
+                entry.StringDownloadCount = Method.Value.ConvertToWanOrYi(mod.DownloadCount);
+                var localDateTime = mod.DateReleased.DateTime.ToLocalTime();
+                var formattedDateTime = localDateTime.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+                entry.StringDateTime = formattedDateTime;
+                entry.ModSource = ModSource.CurseForge;
+                ModListView.Items.Add(entry);
+            });
+            ModNameTextBox.IsEnabled = true;
+            ModVersionTextBox.IsEnabled = true;
+            SearchBtn.IsEnabled = true;
+            Loading.IsVisible = false;
+            LoadMoreBtn.IsVisible = true;
+            if (mods.Data.Count == 0)
             {
-                ModNameTextBox.IsEnabled = true;
-                ModVersionTextBox.IsEnabled = true;
-                SearchBtn.IsEnabled = true;
-                Loading.IsVisible = false;
+                Method.Ui.Toast(MainLang.SearchNoResult);
                 LoadMoreBtn.IsVisible = false;
-                Method.Ui.ShowShortException(MainLang.ErrorCallingApi, ex);
             }
-        });
+        }
+        catch (Exception ex)
+        {
+            ModNameTextBox.IsEnabled = true;
+            ModVersionTextBox.IsEnabled = true;
+            SearchBtn.IsEnabled = true;
+            Loading.IsVisible = false;
+            LoadMoreBtn.IsVisible = false;
+            Method.Ui.ShowShortException(MainLang.ErrorCallingApi, ex);
+        }
     }
 
     public class VersionComparer : IComparer<string>

@@ -21,63 +21,61 @@ public partial class LauncherSettingPage : UserControl
         BindingEvent();
     }
 
-    public Task AutoUpdate()
+    public async Task AutoUpdate()
     {
-        _ = Task.Run(async () =>
+        if (!Const.Data.Setting.EnableAutoCheckUpdate) return;
+        var updateAvailable = await Method.Ui.CheckUpdateAsync();
+        if (!updateAvailable.Item1) return;
+        if (!updateAvailable.Item2) return;
+        if (Const.Data.Setting.SkipUpdateVersion == updateAvailable.Item3) return;
+        ContentDialogResult dialog = ContentDialogResult.None;
+        if (Environment.OSVersion.Version.Major < 10)
         {
-            if (!Const.Data.Setting.EnableAutoCheckUpdate) return;
-            var updateAvailable = await Method.Ui.CheckUpdateAsync();
-            if (!updateAvailable.Item1) return;
-            if (!updateAvailable.Item2) return;
-            if (Const.Data.Setting.SkipUpdateVersion == updateAvailable.Item3) return;
-            ContentDialogResult dialog = ContentDialogResult.None;
+            await Dispatcher.UIThread.Invoke(async () =>
+            {
+                dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion,
+                    $"{MainLang.WinSevenAutoUpdateTip.Replace("{url}", updateAvailable.Item4).Replace("{version}", updateAvailable.Item3)}"
+                    , b_cancel: MainLang.Cancel, b_secondary: MainLang.SkipThisVersion,
+                    b_primary: MainLang.OpenBrowser);
+            });
+        }
+        else
+        {
+            await Dispatcher.UIThread.Invoke(async () =>
+            {
+                dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion,
+                    $"{updateAvailable.Item3!}\n\n{updateAvailable.Item4}"
+                    , b_cancel: MainLang.Cancel, b_secondary: MainLang.SkipThisVersion,
+                    b_primary: MainLang.Update);
+            });
+        }
+
+        if (dialog == ContentDialogResult.Primary)
+        {
             if (Environment.OSVersion.Version.Major < 10)
             {
                 await Dispatcher.UIThread.Invoke(async () =>
                 {
-                    dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion,
-                        $"{MainLang.WinSevenAutoUpdateTip.Replace("{url}", updateAvailable.Item4).Replace("{version}", updateAvailable.Item3)}"
-                        , b_cancel: MainLang.Cancel, b_secondary: MainLang.SkipThisVersion,
-                        b_primary: MainLang.OpenBrowser);
+                    var launcher = TopLevel.GetTopLevel(Const.Window.main).Launcher;
+                    await launcher.LaunchUriAsync(new Uri(updateAvailable.Item4));
                 });
             }
             else
             {
-                await Dispatcher.UIThread.Invoke(async () =>
-                {
-                    dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion,
-                        $"{updateAvailable.Item3!}\n\n{updateAvailable.Item4}"
-                        , b_cancel: MainLang.Cancel, b_secondary: MainLang.SkipThisVersion,
-                        b_primary: MainLang.Update);
-                });
+                var updateAppAsync = await Method.Ui.UpdateAppAsync();
+                if (!updateAppAsync) Method.Ui.Toast(MainLang.UpdateFail);
             }
-
-            if (dialog == ContentDialogResult.Primary)
+        }
+        else if (dialog == ContentDialogResult.Secondary)
+        {
+            Dispatcher.UIThread.Invoke(() =>
             {
-                if (Environment.OSVersion.Version.Major < 10)
-                {
-                    await Dispatcher.UIThread.Invoke(async () =>
-                    {
-                        var launcher = TopLevel.GetTopLevel(Const.Window.main).Launcher;
-                        await launcher.LaunchUriAsync(new Uri(updateAvailable.Item4));
-                        return;
-                    });
-                    var updateAppAsync = await Method.Ui.UpdateAppAsync();
-                    if (!updateAppAsync) Method.Ui.Toast(MainLang.UpdateFail);
-                }
-            }
-            else if (dialog == ContentDialogResult.Secondary)
-            {
-                Dispatcher.UIThread.Invoke(() =>
-                {
-                    Const.Data.Setting.SkipUpdateVersion = updateAvailable.Item3;
-                    File.WriteAllText(Const.String.SettingDataPath,
-                        JsonConvert.SerializeObject(Const.Data.Setting, Formatting.Indented));
-                    Method.Ui.Toast(MainLang.SkipVersionTip.Replace("{version}", updateAvailable.Item3));
-                });
-            }
-        });
-        return Task.CompletedTask;
+                Const.Data.Setting.SkipUpdateVersion = updateAvailable.Item3;
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(Const.Data.Setting, Formatting.Indented));
+                Method.Ui.Toast(MainLang.SkipVersionTip.Replace("{version}", updateAvailable.Item3));
+            });
+        }
     }
 
     private void BindingEvent()
@@ -112,6 +110,7 @@ public partial class LauncherSettingPage : UserControl
                 Method.Ui.Toast(MainLang.CheckUpdateFail);
                 return;
             }
+
             if (!updateAvailable.Item2)
             {
                 CheckUpdateBtn.IsEnabled = true;
@@ -119,6 +118,7 @@ public partial class LauncherSettingPage : UserControl
                 Method.Ui.Toast(MainLang.CurrentlyTheLatestVersion);
                 return;
             }
+
             CheckUpdateBtn.IsEnabled = true;
             CheckUpdateBtn.Content = MainLang.CheckUpdate;
             ContentDialogResult dialog = ContentDialogResult.None;
@@ -151,7 +151,6 @@ public partial class LauncherSettingPage : UserControl
                     {
                         var launcher = TopLevel.GetTopLevel(Const.Window.main).Launcher;
                         await launcher.LaunchUriAsync(new Uri(updateAvailable.Item4));
-                        return;
                     });
                 }
                 else

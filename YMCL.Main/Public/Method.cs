@@ -343,6 +343,7 @@ public class Method
         public static async Task<bool> UpdateAppAsync()
         {
             var task = new TaskManager.TaskEntry(MainLang.CheckUpdate);
+            task.Show();
             try
             {
                 var architecture = Value.GetCurrentPlatformAndArchitecture();

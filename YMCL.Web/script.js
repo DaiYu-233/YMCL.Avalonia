@@ -19,6 +19,7 @@ fetch("https://api.github.com/repos/DaiYu-233/YMCL.Avalonia/releases?per_page=1"
         if (!response.ok) {
             alert("加载失败！\n Network response was not ok " + response.statusText);
             console.error("加载失败！\n Network response was not ok " + response.statusText);
+            window.close();
         }
         // 解析JSON数据
         return response.json();
@@ -33,6 +34,7 @@ fetch("https://api.github.com/repos/DaiYu-233/YMCL.Avalonia/releases?per_page=1"
                 (element.name == "YMCL.Main.osx.mac.x64.app.zip" && f == "osx-x64") ||
                 (element.name == "YMCL.Main.osx.mac.arm64.app.zip" && f == "osx-arm64") ||
                 (element.name == "YMCL.Main.win.x64.installer.exe" && f == "win-x64") ||
+                (element.name == "YMCL.Main.win.arm64.installer.exe" && f == "win-arm64") ||
                 (element.name == "YMCL.Main.win.x86.installer.exe" && f == "win-x86")) {
                 orUrl = element.browser_download_url;
                 console.log(element.name);
@@ -40,27 +42,35 @@ fetch("https://api.github.com/repos/DaiYu-233/YMCL.Avalonia/releases?per_page=1"
             }
         });
         if (orUrl == null) {
-            onsole.error("加载失败！");
+            console.error("加载失败！");
+            alert("加载失败！");
+            window.close();
             return;
         }
         var taUrl = null;
         if (w == 0) {
-            taUrl = orUrl
+            taUrl = orUrl;
         } else if (w == 1) {
             taUrl = "https://github.moeyy.xyz/" + orUrl;
         } else if (w == 2) {
-            taUrl = "https://ghproxy.net/" + orUrl;;
+            taUrl = "https://ghproxy.net/" + orUrl;
         } else if (w == 3) {
-            taUrl = "https://mirror.ghproxy.com/" + orUrl;;
+            taUrl = "https://mirror.ghproxy.com/" + orUrl;
         }
         if (taUrl == null) {
-            onsole.error("加载失败！");
+            console.error("加载失败！");
+            alert("加载失败！");
+            window.close();
             return;
         }
-        window.location = taUrl;
+        window.location = taUrl; // 在新窗口中打开下载链接
+        // setTimeout(function () {
+        //     window.close(); // 延迟关闭当前窗口
+        // }, 1000);
     })
     .catch((error) => {
         // 处理请求过程中发生的任何错误
         console.error("加载失败！ \nThere has been a problem with your fetch operation:", error);
         alert("加载失败！ \nThere has been a problem with your fetch operation:", error);
+        window.close();
     });

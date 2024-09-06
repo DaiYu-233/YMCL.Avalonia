@@ -193,7 +193,7 @@ public partial class SearchPage : UserControl
                 aggregateSearchList.Add(new AggregateSearch()
                 {
                     Tag = "change-selection", Text = $"Java - {e.JavaVersion}", Type = MainLang.LocalResource,
-                    Summary = e.JavaPath ?? "Unknown", Order = 90
+                    Summary = e.JavaPath ?? "Unknown", Order = 50
                 });
             });
 

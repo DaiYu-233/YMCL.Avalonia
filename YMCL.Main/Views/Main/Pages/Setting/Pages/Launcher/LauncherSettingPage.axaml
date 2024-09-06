@@ -283,7 +283,7 @@
                                     HorizontalAlignment="Right"
                                     Cursor="Hand"
                                     FontFamily="{DynamicResource Font}"
-                                    NavigateUri="https://afdian.com/a/DaiYu_">
+                                    NavigateUri="https://afdian.com/a/DaiYui">
                                     <Border Margin="-5,0,-6,0" Padding="0,0,5,0">
                                         <DockPanel>
                                             <Border
@@ -339,7 +339,7 @@
                                                 <TextBlock
                                                     FontSize="13"
                                                     Foreground="{DynamicResource TextColor}"
-                                                    Text="afdian.com/a/DaiYu_"
+                                                    Text="afdian.com/a/DaiYui"
                                                     TextDecorations="{x:Null}" />
                                             </StackPanel>
                                         </DockPanel>

@@ -116,8 +116,10 @@ public class Method
             var content = p_content == null
                 ? new TextBox
                 {
-                    TextWrapping = TextWrapping.Wrap, IsReadOnly = true,
-                    FontFamily = (FontFamily)Application.Current.Resources["Font"], Text = msg
+                    TextWrapping = TextWrapping.Wrap,
+                    IsReadOnly = true,
+                    FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                    Text = msg
                 }
                 : p_content;
             var window = p_window == null ? Const.Window.main : p_window;
@@ -139,8 +141,10 @@ public class Method
         {
             var textBox = new TextBox
             {
-                FontFamily = (FontFamily)Application.Current.Resources["Font"], TextWrapping = TextWrapping.Wrap,
-                Text = $"{msg} - {ex.Message}\n\n{ex}", HorizontalAlignment = HorizontalAlignment.Center,
+                FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                TextWrapping = TextWrapping.Wrap,
+                Text = $"{msg} - {ex.Message}\n\n{ex}",
+                HorizontalAlignment = HorizontalAlignment.Center,
                 IsReadOnly = true
             };
             await ShowDialogAsync(MainLang.GetException, p_content: textBox, b_primary: MainLang.Ok);
@@ -498,7 +502,8 @@ public class Method
             {
                 var textBox = new TextBox
                 {
-                    FontFamily = (FontFamily)Application.Current.Resources["Font"], TextWrapping = TextWrapping.Wrap
+                    FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                    TextWrapping = TextWrapping.Wrap
                 };
                 ContentDialog dialog = new()
                 {
@@ -555,7 +560,8 @@ public class Method
             {
                 var textBox = new TextBox
                 {
-                    FontFamily = (FontFamily)Application.Current.Resources["Font"], TextWrapping = TextWrapping.Wrap
+                    FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                    TextWrapping = TextWrapping.Wrap
                 };
                 ContentDialog dialog = new()
                 {
@@ -606,7 +612,8 @@ public class Method
             {
                 var textBox = new TextBox
                 {
-                    FontFamily = (FontFamily)Application.Current.Resources["Font"], TextWrapping = TextWrapping.Wrap
+                    FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                    TextWrapping = TextWrapping.Wrap
                 };
                 ContentDialog dialog = new()
                 {
@@ -1523,7 +1530,7 @@ public class Method
             }
 
             var homePageTask = new TextBox()
-                { IsReadOnly = true, FontFamily = (FontFamily)Application.Current.Resources["Font"]!, FontSize = 14 };
+            { IsReadOnly = true, FontFamily = (FontFamily)Application.Current.Resources["Font"]!, FontSize = 14 };
             Const.Window.main.launchPage.LaunchingPanel.Children.Add(homePageTask);
             homePageTask.Text += $"{MainLang.Launch} - {gameEntry.Id}";
             var task = new TaskManager.TaskEntry($"{MainLang.Launch} - {gameEntry.Id}", false);
@@ -1975,7 +1982,8 @@ public class Method
                     {
                         account = await entry.MicrosoftAuthAsync(new GetTokenResponse()
                         {
-                            AccessToken = profile.AccessToken, RefreshToken = profile.RefreshToken,
+                            AccessToken = profile.AccessToken,
+                            RefreshToken = profile.RefreshToken,
                             ClientId = Const.String.AzureClientId
                         }, progress => { task.UpdateTextProgress(progress); }, profile.RefreshToken);
                     }
@@ -1992,8 +2000,11 @@ public class Method
                     var profile1 = JsonConvert.DeserializeObject<YggdrasilAccount>(accountData.Data!);
                     account = new StarLight_Core.Models.Authentication.YggdrasilAccount()
                     {
-                        ServerUrl = profile1.YggdrasilServerUrl, ClientToken = profile1.ClientToken,
-                        Name = profile1.Name, Uuid = profile1.Uuid.ToString(), AccessToken = profile1.AccessToken
+                        ServerUrl = profile1.YggdrasilServerUrl,
+                        ClientToken = profile1.ClientToken,
+                        Name = profile1.Name,
+                        Uuid = profile1.Uuid.ToString(),
+                        AccessToken = profile1.AccessToken
                     };
                     break;
             }
@@ -2161,7 +2172,8 @@ public class Method
                 if (!confirmBox) break;
                 var textBox = new TextBox
                 {
-                    TextWrapping = TextWrapping.Wrap, FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                    TextWrapping = TextWrapping.Wrap,
+                    FontFamily = (FontFamily)Application.Current.Resources["Font"],
                     Text = Path.GetFileNameWithoutExtension(path)
                 };
                 var dialog = new ContentDialog

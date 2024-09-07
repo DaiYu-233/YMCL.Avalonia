@@ -972,4 +972,16 @@ win10 以下系统(不包括10)不支持自动更新
     <data name="DisplayIndependentTaskWindow" xml:space="preserve">
       <value>显示独立任务窗口</value>
     </data>
+    <data name="Sponsor" xml:space="preserve">
+      <value>赞助</value>
+    </data>
+    <data name="Sponsors" xml:space="preserve">
+      <value>赞助者</value>
+    </data>
+    <data name="SponsorsTip" xml:space="preserve">
+      <value>以下是发电的赞助者，感谢对 Yu Minecraft Launcher 的支持 ！</value>
+    </data>
+    <data name="CNYSymbol" xml:space="preserve">
+      <value>￥</value>
+    </data>
 </root>

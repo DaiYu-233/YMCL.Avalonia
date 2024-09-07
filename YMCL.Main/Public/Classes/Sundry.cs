@@ -25,10 +25,477 @@ public class AggregateSearch()
     public string? InstallVersionId { get; set; }
     public int AccountIndex { get; set; }
 }
+
 public class FolderInfo()
 {
     public string Name { get; set; }
     public string Path { get; set; }
+}
+
+public class AfdianSponsor()
+{
+    public class Config
+    {
+    }
+
+    public class Sponsor_plansItem
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public double can_ali_agreement { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string plan_id { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double rank { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string user_id { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double status { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string name { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pic { get; set; }
+
+        /// <summary>
+        /// 加入赞助者名单，并标注金额
+        /// </summary>
+        public string desc { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string price { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double update_time { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Timing timing { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double pay_month { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string show_price { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string show_price_after_adjust { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double has_coupon { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<string> coupon { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double favorable_price { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double independent { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double permanent { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double can_buy_hide { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double need_address { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double product_type { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double sale_limit_count { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string need_invite_code { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double bundle_stock { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double bundle_sku_select_count { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Config config { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double has_plan_config { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<string> shipping_fee_info { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double expire_time { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<string> sku_processed { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double rankType { get; set; }
+    }
+
+    public class Timing
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public double timing_on { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double timing_off { get; set; }
+    }
+
+    public class Current_plan
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public double can_ali_agreement { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string plan_id { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double rank { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string user_id { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double status { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string name { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pic { get; set; }
+
+        /// <summary>
+        /// 加入赞助者名单，并标注金额
+        /// </summary>
+        public string desc { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string price { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double update_time { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Timing timing { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double pay_month { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string show_price { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string show_price_after_adjust { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double has_coupon { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<string> coupon { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double favorable_price { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double independent { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double permanent { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double can_buy_hide { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double need_address { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double product_type { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double sale_limit_count { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string need_invite_code { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double bundle_stock { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double bundle_sku_select_count { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Config config { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double has_plan_config { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<string> shipping_fee_info { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double expire_time { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<string> sku_processed { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double rankType { get; set; }
+    }
+
+    public class User
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string user_id { get; set; }
+
+        /// <summary>
+        /// 爱发电用户_bbae8
+        /// </summary>
+        public string name { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string avatar { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string user_private_id { get; set; }
+    }
+
+    public class ListItem
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<Sponsor_plansItem> sponsor_plans { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Current_plan current_plan { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string all_sum_amount { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double first_pay_time { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double last_pay_time { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public User user { get; set; }
+    }
+
+    public class Request
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string user_id { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string @params { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double ts { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string sign { get; set; }
+    }
+
+    public class Data
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public double total_count { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double total_page { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<ListItem> list { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Request request { get; set; }
+    }
+
+    public class Root
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public double ec { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string em { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Data data { get; set; }
+    }
 }
 
 public class FileInfo
@@ -318,6 +785,7 @@ public class MojangJavaNews()
         /// 
         /// </summary>
         public string url { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -332,26 +800,32 @@ public class MojangJavaNews()
         /// 
         /// </summary>
         public string title { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public string type { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public string version { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public Image image { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public string body { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public string id { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -364,10 +838,10 @@ public class MojangJavaNews()
         /// 
         /// </summary>
         public int version { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public List <EntriesItem > entries { get; set; }
+        public List<EntriesItem> entries { get; set; }
     }
-
 }

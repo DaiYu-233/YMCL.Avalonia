@@ -1,13 +1,19 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Afdian.Sdk;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json;
 using YMCL.Main.Public;
+using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Langs;
 
 namespace YMCL.Main.Views.Main.Pages.Setting.Pages.Launcher;
@@ -172,7 +178,7 @@ public partial class LauncherSettingPage : UserControl
         };
     }
 
-    private void ControlProperty()
+    private async void ControlProperty()
     {
         UserDataFolderPath.Text = Const.String.UserDataRootPath;
         var resourceName = "YMCL.Main.Public.Texts.DateTime.txt";
@@ -183,5 +189,45 @@ public partial class LauncherSettingPage : UserControl
             var result = reader.ReadToEnd();
             Version.Text = $"v{result.Trim()}";
         }
+
+        await Task.Run(async () =>
+        {
+            AfdianClient afdianClient =
+                new AfdianClient("5f710d20e0aa11edb6cf5254001e7c00", "FseYBK8u9Vvr7CJxhk4Dw6aMN5WcqgUf");
+            var page = 1;
+            List<AfdianSponsor.ListItem> list = new();
+            while (true)
+            {
+                var json = afdianClient.QuerySponsor(page);
+                if (string.IsNullOrWhiteSpace(json)) break;
+                var data = JsonConvert.DeserializeObject<AfdianSponsor.Root>(json);
+                if (data is not { ec: 200 } || data.data.list.Count == 0) break;
+                data.data.list.ForEach(x =>
+                {
+                    list.Add(x);
+                });
+                if (page >= data.data.total_page) break;
+                page++;
+            }
+
+            list.OrderBy(x => x.all_sum_amount).ToList().ForEach(x =>
+            {
+                Dispatcher.UIThread.Invoke(() =>
+                {
+                    var block = new TextBlock()
+                    {
+                        FontFamily = (FontFamily)Application.Current.Resources["Font"], FontSize = 14,
+                        TextWrapping = TextWrapping.Wrap, TextDecorations = null,
+                        Foreground = new SolidColorBrush(Const.Data.Setting.AccentColor),
+                        Text = $"{x.user.name} {MainLang.CNYSymbol}{x.all_sum_amount}"
+                    };
+                    var link = new HyperlinkButton()
+                    {
+                        Margin = new Thickness(3), Content = block
+                    };
+                    SponsorPanel.Children.Add(link);
+                });
+            });
+        });
     }
 }

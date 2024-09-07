@@ -465,6 +465,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ￥.
+        /// </summary>
+        public static string CNYSymbol {
+            get {
+                return ResourceManager.GetString("CNYSymbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 色彩模式.
         /// </summary>
         public static string ColorMode {
@@ -2211,6 +2220,33 @@ namespace YMCL.Main.Public.Langs {
         public static string SkipVersionTip {
             get {
                 return ResourceManager.GetString("SkipVersionTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 赞助.
+        /// </summary>
+        public static string Sponsor {
+            get {
+                return ResourceManager.GetString("Sponsor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 赞助者.
+        /// </summary>
+        public static string Sponsors {
+            get {
+                return ResourceManager.GetString("Sponsors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 以下是发电的赞助者，感谢对 Yu Minecraft Launcher 的支持 ！.
+        /// </summary>
+        public static string SponsorsTip {
+            get {
+                return ResourceManager.GetString("SponsorsTip", resourceCulture);
             }
         }
         

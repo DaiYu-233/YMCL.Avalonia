@@ -35,7 +35,10 @@ fetch("https://api.github.com/repos/DaiYu-233/YMCL.Avalonia/releases?per_page=1"
                 (element.name == "YMCL.Main.osx.mac.arm64.app.zip" && f == "osx-arm64") ||
                 (element.name == "YMCL.Main.win.x64.installer.exe" && f == "win-x64") ||
                 (element.name == "YMCL.Main.win.arm64.installer.exe" && f == "win-arm64") ||
-                (element.name == "YMCL.Main.win.x86.installer.exe" && f == "win-x86")) {
+                (element.name == "YMCL.Main.win.x86.installer.exe" && f == "win-x86") ||
+                (element.name == "YMCL.Main.win7.x64.exe.zip" && f == "win7-x64") ||
+                (element.name == "YMCL.Main.win7.arm64.exe.zip" && f == "win7-arm64") ||
+                (element.name == "YMCL.Main.win7.x86.exe.zip" && f == "win7-x86")) {
                 orUrl = element.browser_download_url;
                 console.log(element.name);
                 console.log(orUrl);
@@ -64,9 +67,8 @@ fetch("https://api.github.com/repos/DaiYu-233/YMCL.Avalonia/releases?per_page=1"
             return;
         }
         window.location = taUrl; // 在新窗口中打开下载链接
-        // setTimeout(function () {
-        //     window.close(); // 延迟关闭当前窗口
-        // }, 1000);
+        document.getElementById('ma').innerHTML = `已开始下载，若未开始下载请手动跳转 → <a href="${taUrl}" target="_blank" rel="noopener noreferrer"
+      style="text-decoration: none;color: skyblue;">${taUrl}</a>`
     })
     .catch((error) => {
         // 处理请求过程中发生的任何错误

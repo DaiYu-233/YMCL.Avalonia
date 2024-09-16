@@ -371,8 +371,18 @@ public class Method
                         case "YMCL.Main.linux.x64.AppImage" when architecture == "linux-x64":
                         case "YMCL.Main.osx.mac.x64.app.zip" when architecture == "osx-x64":
                         case "YMCL.Main.osx.mac.arm64.app.zip" when architecture == "osx-arm64":
-                        case "YMCL.Main.win.x64.installer.exe" when architecture == "win-x64":
-                        case "YMCL.Main.win.x86.installer.exe" when architecture == "win-x86":
+                        case "YMCL.Main.win.x64.installer.exe"
+                            when architecture == "win-x64" && Environment.OSVersion.Version.Major >= 10:
+                        case "YMCL.Main.win.x86.installer.exe"
+                            when architecture == "win-x86" && Environment.OSVersion.Version.Major >= 10:
+                        case "YMCL.Main.win.arm64.installer.exe"
+                            when architecture == "win-arm64" && Environment.OSVersion.Version.Major >= 10:
+                        case "YMCL.Main.win7.x64.exe.zip"
+                            when architecture == "win-x64" && Environment.OSVersion.Version.Major < 10:
+                        case "YMCL.Main.win7.x86.exe.zip"
+                            when architecture == "win-x86" && Environment.OSVersion.Version.Major < 10:
+                        case "YMCL.Main.win7.arm64.exe.zip"
+                            when architecture == "win-arm64" && Environment.OSVersion.Version.Major < 10:
                             url = browser_download_url;
                             fileName = name;
                             break;
@@ -385,6 +395,8 @@ public class Method
                     return false;
                 }
 
+                IO.ClearFolder(Const.String.UpdateFolderPath);
+
                 var setting = Const.Data.Setting;
                 var trueUrl = url;
                 if (setting.EnableCustomUpdateUrl)
@@ -394,7 +406,7 @@ public class Method
 
                 task.UpdateTextProgress($"{MainLang.GetUpdateUrl}: {trueUrl}");
                 task.UpdateTextProgress(
-                    $"{MainLang.BeginDownload}: {Path.Combine(Const.String.TempFolderPath, fileName)}");
+                    $"{MainLang.BeginDownload}: {Path.Combine(Const.String.UpdateFolderPath, fileName)}");
                 try
                 {
                     var handler = new HttpClientHandler();
@@ -413,7 +425,7 @@ public class Method
                         await using (var downloadStream = await response.Content.ReadAsStreamAsync())
                         {
                             await using (var fileStream = new FileStream(
-                                             Path.Combine(Const.String.TempFolderPath, fileName), FileMode.Create,
+                                             Path.Combine(Const.String.UpdateFolderPath, fileName), FileMode.Create,
                                              FileAccess.Write))
                             {
                                 var buffer = new byte[8192];
@@ -438,24 +450,33 @@ public class Method
                     }
 
                     task.UpdateTextProgress($"{MainLang.DownloadFinish}");
-                    if (architecture == "win-x86" || architecture == "win-x64")
+                    if ((architecture == "win-x86" || architecture == "win-x64" || architecture == "win-arm64") &&
+                        Environment.OSVersion.Version.Major >= 10)
                     {
                         var startInfo = new ProcessStartInfo
                         {
                             UseShellExecute = true,
                             WorkingDirectory = Environment.CurrentDirectory,
-                            FileName = Path.Combine(Const.String.TempFolderPath, fileName)
+                            FileName = Path.Combine(Const.String.UpdateFolderPath, fileName)
                         };
                         Process.Start(startInfo);
                         Environment.Exit(0);
                     }
                     else
                     {
-                        var launcher = TopLevel.GetTopLevel(Const.Window.main).Launcher;
-                        await launcher.LaunchDirectoryInfoAsync(
-                            new DirectoryInfo(Const.String.TempFolderPath));
-                        await Task.Delay(1000);
-                        Environment.Exit(0);
+                        var dialog = Ui.ShowDialogAsync(MainLang.DownloadFinish,
+                            MainLang.CurrectSystemNoSupportAutoUpdateTip+"\n"+Path.Combine(Const.String.UpdateFolderPath, fileName), b_primary: MainLang.OpenFolder,
+                            b_cancel: MainLang.Cancel);
+                        if (dialog.Result == ContentDialogResult.Primary)
+                        {
+                            var launcher = TopLevel.GetTopLevel(Const.Window.main).Launcher;
+                            await launcher.LaunchDirectoryInfoAsync(
+                                new DirectoryInfo(Const.String.TempFolderPath));
+                            await Task.Delay(1000);
+                            var clipboard = TopLevel.GetTopLevel(Const.Window.main)?.Clipboard;
+                            await clipboard.SetTextAsync(Path.Combine(Const.String.UpdateFolderPath, fileName));
+                            Toast(MainLang.AlreadyCopyToClipBoard+$" : {Path.Combine(Const.String.UpdateFolderPath, fileName)}");
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -1530,7 +1551,7 @@ public class Method
             }
 
             var homePageTask = new TextBox()
-            { IsReadOnly = true, FontFamily = (FontFamily)Application.Current.Resources["Font"]!, FontSize = 14 };
+                { IsReadOnly = true, FontFamily = (FontFamily)Application.Current.Resources["Font"]!, FontSize = 14 };
             Const.Window.main.launchPage.LaunchingPanel.Children.Add(homePageTask);
             homePageTask.Text += $"{MainLang.Launch} - {gameEntry.Id}";
             var task = new TaskManager.TaskEntry($"{MainLang.Launch} - {gameEntry.Id}", false);

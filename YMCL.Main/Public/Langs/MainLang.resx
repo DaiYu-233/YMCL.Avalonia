@@ -984,4 +984,17 @@ win10 以下系统(不包括10)不支持自动更新
     <data name="CNYSymbol" xml:space="preserve">
       <value>￥</value>
     </data>
+    <data name="MacOsUpdateTip" xml:space="preserve">
+      <value>发现新版本 : {version}
+MacOs 不支持自动更新
+前往以下链接下载新版本 :  “{url}”
+前往 设置-下载-自动更新 可关闭自动检查更新</value>
+    </data>
+    <data name="CurrectSystemNoSupportAutoUpdateTip" xml:space="preserve">
+      <value>当前系统不支持自动更新
+可手动打开以下目录复制最新版本并替换当前版本</value>
+    </data>
+    <data name="AlreadyCopyToClipBoard" xml:space="preserve">
+      <value>已复制到剪切板</value>
+    </data>
 </root>

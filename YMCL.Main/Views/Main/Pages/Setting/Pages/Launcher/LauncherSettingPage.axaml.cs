@@ -35,42 +35,20 @@ public partial class LauncherSettingPage : UserControl
         if (!updateAvailable.Item2) return;
         if (Const.Data.Setting.SkipUpdateVersion == updateAvailable.Item3) return;
         ContentDialogResult dialog = ContentDialogResult.None;
-        if (Environment.OSVersion.Version.Major < 10)
+
+        await Dispatcher.UIThread.Invoke(async () =>
         {
-            await Dispatcher.UIThread.Invoke(async () =>
-            {
-                dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion,
-                    $"{MainLang.WinSevenAutoUpdateTip.Replace("{url}", updateAvailable.Item4).Replace("{version}", updateAvailable.Item3)}"
-                    , b_cancel: MainLang.Cancel, b_secondary: MainLang.SkipThisVersion,
-                    b_primary: MainLang.OpenBrowser);
-            });
-        }
-        else
-        {
-            await Dispatcher.UIThread.Invoke(async () =>
-            {
-                dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion,
-                    $"{updateAvailable.Item3!}\n\n{updateAvailable.Item4}"
-                    , b_cancel: MainLang.Cancel, b_secondary: MainLang.SkipThisVersion,
-                    b_primary: MainLang.Update);
-            });
-        }
+            dialog = await Method.Ui.ShowDialogAsync(MainLang.FoundNewVersion,
+                $"{updateAvailable.Item3!}\n\n{updateAvailable.Item4}"
+                , b_cancel: MainLang.Cancel, b_secondary: MainLang.SkipThisVersion,
+                b_primary: MainLang.Update);
+        });
+
 
         if (dialog == ContentDialogResult.Primary)
         {
-            if (Environment.OSVersion.Version.Major < 10)
-            {
-                await Dispatcher.UIThread.Invoke(async () =>
-                {
-                    var launcher = TopLevel.GetTopLevel(Const.Window.main).Launcher;
-                    await launcher.LaunchUriAsync(new Uri(updateAvailable.Item4));
-                });
-            }
-            else
-            {
-                var updateAppAsync = await Method.Ui.UpdateAppAsync();
-                if (!updateAppAsync) Method.Ui.Toast(MainLang.UpdateFail);
-            }
+            var updateAppAsync = await Method.Ui.UpdateAppAsync();
+            if (!updateAppAsync) Method.Ui.Toast(MainLang.UpdateFail);
         }
         else if (dialog == ContentDialogResult.Secondary)
         {
@@ -202,10 +180,7 @@ public partial class LauncherSettingPage : UserControl
                 if (string.IsNullOrWhiteSpace(json)) break;
                 var data = JsonConvert.DeserializeObject<AfdianSponsor.Root>(json);
                 if (data is not { ec: 200 } || data.data.list.Count == 0) break;
-                data.data.list.ForEach(x =>
-                {
-                    list.Add(x);
-                });
+                data.data.list.ForEach(x => { list.Add(x); });
                 if (page >= data.data.total_page) break;
                 page++;
             }

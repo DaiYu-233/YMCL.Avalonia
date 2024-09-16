@@ -258,6 +258,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 已复制到剪切板.
+        /// </summary>
+        public static string AlreadyCopyToClipBoard {
+            get {
+                return ResourceManager.GetString("AlreadyCopyToClipBoard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 任意加载器.
         /// </summary>
         public static string AnyModLoader {
@@ -506,6 +515,16 @@ namespace YMCL.Main.Public.Langs {
         public static string CreateGameEntryFail {
             get {
                 return ResourceManager.GetString("CreateGameEntryFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 当前系统不支持自动更新
+        ///可手动打开以下目录复制最新版本并替换当前版本.
+        /// </summary>
+        public static string CurrectSystemNoSupportAutoUpdateTip {
+            get {
+                return ResourceManager.GetString("CurrectSystemNoSupportAutoUpdateTip", resourceCulture);
             }
         }
         
@@ -1337,6 +1356,18 @@ namespace YMCL.Main.Public.Langs {
         public static string LyricTip {
             get {
                 return ResourceManager.GetString("LyricTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 发现新版本 : {version}
+        ///MacOs 不支持自动更新
+        ///前往以下链接下载新版本 :  “{url}”
+        ///前往 设置-下载-自动更新 可关闭自动检查更新.
+        /// </summary>
+        public static string MacOsUpdateTip {
+            get {
+                return ResourceManager.GetString("MacOsUpdateTip", resourceCulture);
             }
         }
         

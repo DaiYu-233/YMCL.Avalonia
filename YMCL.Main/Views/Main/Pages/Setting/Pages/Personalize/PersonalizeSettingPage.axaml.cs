@@ -9,6 +9,7 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Platform.Storage;
+using Avalonia.VisualTree;
 using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json;
 using YMCL.Main.Public;
@@ -29,6 +30,37 @@ public partial class PersonalizeSettingPage : UserControl
 
     private void BindingEvent()
     {
+        Application.Current.PropertyChanged += async (_, e) =>
+        {
+            if (e.Property.Name == nameof(App.RequestedThemeVariant))
+            {
+                var visuals = new Queue<Visual>();
+                visuals.Enqueue(Const.Window.main);
+
+                while (visuals.Count > 0)
+                {
+                    var current = visuals.Dequeue();
+                    var control = current as Control;
+
+                    if (control != null)
+                    {
+                        foreach (var child in control.GetVisualChildren())
+                        {
+                            visuals.Enqueue((Visual)child);
+                        }
+
+                        var imageControl = control as Image;
+                        if (imageControl != null && imageControl.Source is DrawingImage)
+                        {
+                            imageControl.InvalidateVisual();
+                            Console.WriteLine(imageControl.GetVisualRoot());
+                        }
+                    }
+                }
+            }
+        };
+        
+        
         Loaded += async (s, e) =>
         {
             Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
@@ -48,8 +80,8 @@ public partial class PersonalizeSettingPage : UserControl
         {
             try
             {
-                // ColorPicker.Width = ColorPickerRoot.Bounds.Width - 2 * 6.5 - ColorPickerLabel.Bounds.Width - 30;
-                // LyricColorPicker.Width = LyricRoot.Bounds.Width - 2 * 6.5 - LyricColorPickerLabel.Bounds.Width - 30;
+                ColorPicker.Width = ColorPickerRoot.Bounds.Width - 2 * 6.5 - ColorPickerLabel.Bounds.Width - 30;
+                LyricColorPicker.Width = LyricRoot.Bounds.Width - 2 * 6.5 - LyricColorPickerLabel.Bounds.Width - 30;
             }
             catch
             {
@@ -64,6 +96,7 @@ public partial class PersonalizeSettingPage : UserControl
                 Method.Ui.Toast(MainLang.NoSupportNow);
                 return;
             }
+
             EditCustomHomePageBtn.IsVisible = CustomHomePageComboBox.SelectedIndex == 1 ? true : false;
             if (CustomHomePageComboBox.SelectedIndex != (int)setting.CustomHomePage)
             {
@@ -123,8 +156,10 @@ public partial class PersonalizeSettingPage : UserControl
         };
         DisplayIndependentTaskWindowSwitch.Click += (s, e) =>
         {
-            Const.Data.Setting.EnableDisplayIndependentTaskWindow = DisplayIndependentTaskWindowSwitch.IsChecked == true;
-            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(Const.Data.Setting, Formatting.Indented));
+            Const.Data.Setting.EnableDisplayIndependentTaskWindow =
+                DisplayIndependentTaskWindowSwitch.IsChecked == true;
+            File.WriteAllText(Const.String.SettingDataPath,
+                JsonConvert.SerializeObject(Const.Data.Setting, Formatting.Indented));
         };
         LyricSizeSlider.ValueChanged += (s, e) =>
         {
@@ -252,9 +287,12 @@ public partial class PersonalizeSettingPage : UserControl
                 setting.Theme = (Theme)ThemeComboBox.SelectedIndex;
                 File.WriteAllText(Const.String.SettingDataPath,
                     JsonConvert.SerializeObject(setting, Formatting.Indented));
+                if (setting.Theme == Public.Theme.Light)
+                    Method.Ui.ToggleTheme(Public.Theme.Light);
+                else if (setting.Theme == Public.Theme.Dark) Method.Ui.ToggleTheme(Public.Theme.Dark);
             }
 
-            Method.Ui.RestartApp();
+            // Method.Ui.RestartApp();
         };
         LauncherVisibilityComboBox.SelectionChanged += (_, _) =>
         {
@@ -269,7 +307,9 @@ public partial class PersonalizeSettingPage : UserControl
         EditCustomBackGroundImgBtn.Click += async (_, _) =>
         {
             var path = (await Method.IO.OpenFilePicker(TopLevel.GetTopLevel(this),
-                    new FilePickerOpenOptions() { Title = MainLang.SelectImgFile }, MainLang.SelectImgFile))
+                    new FilePickerOpenOptions()
+                        { Title = MainLang.SelectImgFile, FileTypeFilter = new[] { FilePickerFileTypes.ImageAll } },
+                    MainLang.SelectImgFile))
                 .FirstOrDefault();
 
             if (path != null)

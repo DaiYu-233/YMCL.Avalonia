@@ -72,8 +72,7 @@ public partial class InitializeWindow : Window
             setting1.MinecraftFolder = path;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting1, Formatting.Indented));
         }
-
-        Const.Data.Setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
+        
         if (!File.Exists(Const.String.JavaDataPath))
             File.WriteAllText(Const.String.JavaDataPath,
                 JsonConvert.SerializeObject(new List<JavaEntry>(), Formatting.Indented));

@@ -1,0 +1,22 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Dark">
+            <SolidColorBrush x:Key="1x" Color="#2c2c2c" />
+            <SolidColorBrush x:Key="2x" Color="#262626" />
+            <SolidColorBrush x:Key="TextColor" Color="#ffffff" />
+            <SolidColorBrush x:Key="TitleBarColor" Color="#242424" />
+            <SolidColorBrush x:Key="GrayColor" Color="#7e7e7e" />
+            <SolidColorBrush x:Key="BorderBrushColor" Color="#e1e9f0" />
+            <SolidColorBrush x:Key="ListBoxItemSelectedBackground" Color="#383838" />
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Light">
+            <SolidColorBrush x:Key="1x" Color="#FFE9F6FF" />
+            <SolidColorBrush x:Key="2x" Color="#f6fafd" />
+            <SolidColorBrush x:Key="TextColor" Color="#333333" />
+            <SolidColorBrush x:Key="TitleBarColor" Color="#e7f5ff" />
+            <SolidColorBrush x:Key="GrayColor" Color="#7e7e7e" />
+            <SolidColorBrush x:Key="BorderBrushColor" Color="#e1e9f0" />
+            <SolidColorBrush x:Key="ListBoxItemSelectedBackground" Color="#DFEFFF" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

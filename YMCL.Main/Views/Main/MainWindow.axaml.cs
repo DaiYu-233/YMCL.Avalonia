@@ -45,8 +45,12 @@ public partial class MainWindow : Window
     public readonly SettingPage settingPage = new();
     public readonly SearchPage searchPage = new();
     public readonly TaskCenterPage taskCenterPage = new();
+    public readonly Pages.Setting.Pages.Launcher.LauncherSettingPage aboutPage = new();
     public WindowTitleBarStyle titleBarStyle;
     public bool _firstLoad = true;
+    public bool _needInit = false;
+
+    public event EventHandler AppThemeChanged;
 
     public MainWindow()
     {
@@ -61,65 +65,10 @@ public partial class MainWindow : Window
             if (!Const.Window.main._firstLoad) return;
             Const.Window.main._firstLoad = false;
             Method.Ui.CheckLauncher();
-            var setting = Const.Data.Setting;
-            // if (!setting.IsAlreadyWrittenIntoTheUrlScheme)
-            // {
-            //     if (Const.Data.Platform == Platform.Windows)
-            //     {
-            //         await Method.Ui.UpgradeToAdministratorPrivilegesAsync(Const.Window.main);
-            //         Method.IO.TryCreateFolder("C:\\ProgramData\\DaiYu.Platform.YMCL");
-            //         var bat =
-            //             "@echo off  \nset /p ymcl=<%USERPROFILE%\\AppData\\Roaming\\DaiYu.Platform.YMCL\\YMCL.AppPath.DaiYu  \necho %ymcl%  \necho %1  \nstart \"\" \"%ymcl%\" %1  \nexit";
-            //         var path = "C:\\ProgramData\\DaiYu.Platform.YMCL\\launch.bat";
-            //         File.WriteAllText(path, bat);
-            //         try
-            //         {
-            //             Registry.ClassesRoot.DeleteSubKey("YMCL");
-            //         }
-            //         catch
-            //         {
-            //         }
-            //
-            //         try
-            //         {
-            //             var keyRoot = Registry.ClassesRoot.CreateSubKey("YMCL", true);
-            //             keyRoot.SetValue("", "Yu Minecraft Launcher");
-            //             keyRoot.SetValue("URL Protocol", path);
-            //             var registryKeya = Registry.ClassesRoot.OpenSubKey("YMCL", true).CreateSubKey("DefaultIcon");
-            //             registryKeya.SetValue("", path);
-            //             var registryKeyb = Registry.ClassesRoot.OpenSubKey("YMCL", true)
-            //                 .CreateSubKey(@"shell\open\command");
-            //             registryKeyb.SetValue("", $"\"{path}\" \"%1\"");
-            //
-            //             var resourceName = "YMCL.Main.Public.Bins.YMCL.Starter.win.exe";
-            //             var assembly = Assembly.GetExecutingAssembly();
-            //             using (var resourceStream = assembly.GetManifestResourceStream(resourceName))
-            //             {
-            //                 var outputFilePath = "C:\\Windows\\ymcl.exe";
-            //                 using (var fileStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write))
-            //                 {
-            //                     resourceStream.CopyTo(fileStream);
-            //                 }
-            //             }
-            //
-            //             setting.IsAlreadyWrittenIntoTheUrlScheme = true;
-            //             File.WriteAllText(Const.String.SettingDataPath,
-            //                 JsonConvert.SerializeObject(setting, Formatting.Indented));
-            //         }
-            //         catch
-            //         {
-            //         }
-            //     }
-            //     else if (Const.Data.Platform == Platform.Linux)
-            //     {
-            //         setting.IsAlreadyWrittenIntoTheUrlScheme = true;
-            //         File.WriteAllText(Const.String.SettingDataPath,
-            //             JsonConvert.SerializeObject(setting, Formatting.Indented));
-            //     }
-            // }
-
             await Task.Delay(200);
             _ = Const.Window.main.settingPage.launcherSettingPage.AutoUpdate();
+            
+            if (_needInit) LoadWindow();
         };
         Activated += (_, _) =>
         {
@@ -183,6 +132,10 @@ public partial class MainWindow : Window
                     searchPage.Root.IsVisible = false;
                     FrameView.Content = searchPage;
                     break;
+                case "About":
+                    aboutPage.Root.IsVisible = false;
+                    FrameView.Content = aboutPage;
+                    break;
             }
 
             _ = FocusButton();
@@ -228,7 +181,7 @@ public partial class MainWindow : Window
 
         Const.Window.initialize.Hide();
         Const.Window.main.Show();
-        Const.Window.initialize.Close();
+        /*Const.Window.initialize.Close();*/
 
         _ = FetchJavaNews();
         _ = LoadCustomHomePage();
@@ -267,7 +220,7 @@ public partial class MainWindow : Window
                 var viewer = new ScrollViewer();
                 var container = new StackPanel()
                 {
-                     Spacing = 10
+                    Spacing = 10
                 };
                 viewer.Content = container;
                 launchPage.CustomPageRoot.Child = viewer;

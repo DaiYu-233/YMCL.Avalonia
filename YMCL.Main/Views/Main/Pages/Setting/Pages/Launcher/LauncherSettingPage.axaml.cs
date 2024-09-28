@@ -43,8 +43,7 @@ public partial class LauncherSettingPage : UserControl
                 , b_cancel: MainLang.Cancel, b_secondary: MainLang.SkipThisVersion,
                 b_primary: MainLang.Update);
         });
-
-
+        
         if (dialog == ContentDialogResult.Primary)
         {
             var updateAppAsync = await Method.Ui.UpdateAppAsync();
@@ -170,22 +169,43 @@ public partial class LauncherSettingPage : UserControl
 
         await Task.Run(async () =>
         {
-            AfdianClient afdianClient =
-                new AfdianClient("5f710d20e0aa11edb6cf5254001e7c00", "FseYBK8u9Vvr7CJxhk4Dw6aMN5WcqgUf");
-            var page = 1;
-            List<AfdianSponsor.ListItem> list = new();
-            while (true)
+            try
             {
-                var json = afdianClient.QuerySponsor(page);
-                if (string.IsNullOrWhiteSpace(json)) break;
-                var data = JsonConvert.DeserializeObject<AfdianSponsor.Root>(json);
-                if (data is not { ec: 200 } || data.data.list.Count == 0) break;
-                data.data.list.ForEach(x => { list.Add(x); });
-                if (page >= data.data.total_page) break;
-                page++;
-            }
+                AfdianClient afdianClient =
+                    new AfdianClient("5f710d20e0aa11edb6cf5254001e7c00", "FseYBK8u9Vvr7CJxhk4Dw6aMN5WcqgUf");
+                var page = 1;
+                List<AfdianSponsor.ListItem> list = new();
+                while (true)
+                {
+                    var json = afdianClient.QuerySponsor(page);
+                    if (string.IsNullOrWhiteSpace(json)) break;
+                    var data = JsonConvert.DeserializeObject<AfdianSponsor.Root>(json);
+                    if (data is not { ec: 200 } || data.data.list.Count == 0) break;
+                    data.data.list.ForEach(x => { list.Add(x); });
+                    if (page >= data.data.total_page) break;
+                    page++;
+                }
 
-            list.OrderBy(x => x.all_sum_amount).ToList().ForEach(x =>
+                list.OrderBy(x => x.all_sum_amount).ToList().ForEach(x =>
+                {
+                    Dispatcher.UIThread.Invoke(() =>
+                    {
+                        var block = new TextBlock()
+                        {
+                            FontFamily = (FontFamily)Application.Current.Resources["Font"], FontSize = 14,
+                            TextWrapping = TextWrapping.Wrap, TextDecorations = null,
+                            Foreground = new SolidColorBrush(Const.Data.Setting.AccentColor),
+                            Text = $"{x.user.name} {MainLang.CNYSymbol}{x.all_sum_amount}"
+                        };
+                        var link = new HyperlinkButton()
+                        {
+                            Margin = new Thickness(3), Content = block
+                        };
+                        SponsorPanel.Children.Add(link);
+                    });
+                });
+            }
+            catch
             {
                 Dispatcher.UIThread.Invoke(() =>
                 {
@@ -194,7 +214,7 @@ public partial class LauncherSettingPage : UserControl
                         FontFamily = (FontFamily)Application.Current.Resources["Font"], FontSize = 14,
                         TextWrapping = TextWrapping.Wrap, TextDecorations = null,
                         Foreground = new SolidColorBrush(Const.Data.Setting.AccentColor),
-                        Text = $"{x.user.name} {MainLang.CNYSymbol}{x.all_sum_amount}"
+                        Text = MainLang.LoadFail
                     };
                     var link = new HyperlinkButton()
                     {
@@ -202,7 +222,7 @@ public partial class LauncherSettingPage : UserControl
                     };
                     SponsorPanel.Children.Add(link);
                 });
-            });
+            }
         });
     }
 }

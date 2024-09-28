@@ -19,10 +19,19 @@
             </Transitions>
         </Border.Transitions>
         <ScrollViewer>
-            <StackPanel
-                Name="TaskContainer"
-                Margin="10,10,10,10"
-                Spacing="10" />
+            <Grid>
+                <StackPanel
+                    Name="TaskContainer"
+                    Margin="10,10,10,10"
+                    Spacing="10" />
+                <TextBlock
+                    Name="NoTaskTip"
+                    Margin="0,70,0,0"
+                    HorizontalAlignment="Center"
+                    FontFamily="{DynamicResource Font}"
+                    Foreground="{DynamicResource GrayColor}"
+                    Text="{x:Static properties:MainLang.NoWorkingTask}" />
+            </Grid>
         </ScrollViewer>
     </Border>
 </UserControl>

@@ -40,4 +40,10 @@
     <Style Selector="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
     </Style>
+    <Style Selector="Rectangle#HCPaneBorder">
+        <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="Border#ContentGridBorder">
+        <Setter Property="IsVisible" Value="False" />
+    </Style>
 </Styles>

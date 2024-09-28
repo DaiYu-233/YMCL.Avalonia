@@ -194,18 +194,10 @@ public class Method
                     ResourceDictionary)!);
             if (theme == Theme.Light)
             {
-                var rd =
-                    (AvaloniaXamlLoader.Load(new Uri("avares://YMCL.Main/Public/Styles/LightTheme.axaml")) as
-                        ResourceDictionary)!;
-                Application.Current!.Resources.MergedDictionaries.Add(rd);
                 Application.Current.RequestedThemeVariant = ThemeVariant.Light;
             }
             else if (theme == Theme.Dark)
             {
-                var rd =
-                    (AvaloniaXamlLoader.Load(new Uri("avares://YMCL.Main/Public/Styles/DarkTheme.axaml")) as
-                        ResourceDictionary)!;
-                Application.Current!.Resources.MergedDictionaries.Add(rd);
                 Application.Current.RequestedThemeVariant = ThemeVariant.Dark;
             }
         }
@@ -216,15 +208,24 @@ public class Method
             if (setting.EnableCustomBackGroundImg && !string.IsNullOrWhiteSpace(setting.WindowBackGroundImgData))
             {
                 Application.Current.Resources["Opacity"] = 0.875;
-                var bitmap = Value.Base64ToBitmap(setting.WindowBackGroundImgData);
-                Const.Window.main.BackGroundImg.Source = bitmap;
-                Const.Window.taskCenter.BackGroundImg.Source = bitmap;
+                try
+                {
+                    var bitmap = Value.Base64ToBitmap(setting.WindowBackGroundImgData);
+                    Const.Window.main.BackGroundImg.Source = bitmap;
+                }
+                catch
+                {
+                    Const.Data.Setting.WindowBackGroundImgData = null;
+                    File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(Const.Data.Setting, Formatting.Indented));
+                    Toast(MainLang.LoadBackGroudFromPicFailTip,type: NotificationType.Error);
+                    Application.Current.Resources["Opacity"] = 1.0;
+                    Const.Window.main.BackGroundImg.Source = null;
+                }
             }
             else
             {
                 Application.Current.Resources["Opacity"] = 1.0;
                 Const.Window.main.BackGroundImg.Source = null;
-                Const.Window.taskCenter.BackGroundImg.Source = null;
             }
         }
 
@@ -465,7 +466,8 @@ public class Method
                     else
                     {
                         var dialog = Ui.ShowDialogAsync(MainLang.DownloadFinish,
-                            MainLang.CurrectSystemNoSupportAutoUpdateTip+"\n"+Path.Combine(Const.String.UpdateFolderPath, fileName), b_primary: MainLang.OpenFolder,
+                            MainLang.CurrectSystemNoSupportAutoUpdateTip + "\n" +
+                            Path.Combine(Const.String.UpdateFolderPath, fileName), b_primary: MainLang.OpenFolder,
                             b_cancel: MainLang.Cancel);
                         if (dialog.Result == ContentDialogResult.Primary)
                         {
@@ -475,7 +477,8 @@ public class Method
                             await Task.Delay(1000);
                             var clipboard = TopLevel.GetTopLevel(Const.Window.main)?.Clipboard;
                             await clipboard.SetTextAsync(Path.Combine(Const.String.UpdateFolderPath, fileName));
-                            Toast(MainLang.AlreadyCopyToClipBoard+$" : {Path.Combine(Const.String.UpdateFolderPath, fileName)}");
+                            Toast(MainLang.AlreadyCopyToClipBoard +
+                                  $" : {Path.Combine(Const.String.UpdateFolderPath, fileName)}");
                         }
                     }
                 }

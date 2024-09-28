@@ -411,6 +411,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 无法加载.
+        /// </summary>
+        public static string CannotLoad {
+            get {
+                return ResourceManager.GetString("CannotLoad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 无法打开基岩版设置.
         /// </summary>
         public static string CannotOpenBedRockSetting {
@@ -492,6 +501,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 复制.
+        /// </summary>
+        public static string Copy {
+            get {
+                return ResourceManager.GetString("Copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 复制代码并打开浏览器.
         /// </summary>
         public static string CopyCodeAndOPenBrowser {
@@ -506,6 +524,15 @@ namespace YMCL.Main.Public.Langs {
         public static string CopyUrlAndManualOpen {
             get {
                 return ResourceManager.GetString("CopyUrlAndManualOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 崩溃啦！ヾ(•ω•`)o.
+        /// </summary>
+        public static string CrashLa {
+            get {
+                return ResourceManager.GetString("CrashLa", resourceCulture);
             }
         }
         
@@ -660,6 +687,15 @@ namespace YMCL.Main.Public.Langs {
         public static string DeskLyricSize {
             get {
                 return ResourceManager.GetString("DeskLyricSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 详细信息.
+        /// </summary>
+        public static string DetailedInfo {
+            get {
+                return ResourceManager.GetString("DetailedInfo", resourceCulture);
             }
         }
         
@@ -840,6 +876,15 @@ namespace YMCL.Main.Public.Langs {
         public static string ExistingNow {
             get {
                 return ResourceManager.GetString("ExistingNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 退出应用.
+        /// </summary>
+        public static string ExitApp {
+            get {
+                return ResourceManager.GetString("ExitApp", resourceCulture);
             }
         }
         
@@ -1306,6 +1351,24 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 从图像文件加载背景图失败 , 检查图片格式是否正确 .
+        /// </summary>
+        public static string LoadBackGroudFromPicFailTip {
+            get {
+                return ResourceManager.GetString("LoadBackGroudFromPicFailTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 加载失败.
+        /// </summary>
+        public static string LoadFail {
+            get {
+                return ResourceManager.GetString("LoadFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 加载中....
         /// </summary>
         public static string Loading {
@@ -1606,6 +1669,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  关于.
+        /// </summary>
+        public static string NavAbout {
+            get {
+                return ResourceManager.GetString("NavAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  账户.
         /// </summary>
         public static string NavAccount {
@@ -1768,11 +1840,29 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 忽略错误 , 强制继续运行.
+        /// </summary>
+        public static string NoMatterErrorAndKeepOnRun {
+            get {
+                return ResourceManager.GetString("NoMatterErrorAndKeepOnRun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 现不支持.
         /// </summary>
         public static string NoSupportNow {
             get {
                 return ResourceManager.GetString("NoSupportNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 暂无运行中任务.
+        /// </summary>
+        public static string NoWorkingTask {
+            get {
+                return ResourceManager.GetString("NoWorkingTask", resourceCulture);
             }
         }
         
@@ -1980,6 +2070,15 @@ namespace YMCL.Main.Public.Langs {
         public static string ResourcepacksFolder {
             get {
                 return ResourceManager.GetString("ResourcepacksFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 重启应用.
+        /// </summary>
+        public static string RestartApp {
+            get {
+                return ResourceManager.GetString("RestartApp", resourceCulture);
             }
         }
         
@@ -2408,6 +2507,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 切换导航.
+        /// </summary>
+        public static string ToggleNav {
+            get {
+                return ResourceManager.GetString("ToggleNav", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 模组总数量.
         /// </summary>
         public static string TotalNumberOfMod {
@@ -2431,6 +2539,15 @@ namespace YMCL.Main.Public.Langs {
         public static string UnableToAddModsForBedrockEdition {
             get {
                 return ResourceManager.GetString("UnableToAddModsForBedrockEdition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yu Minecraft Launcher 遇到了没有处理的异常 , 可能无法继续运行 , 下方为异常的详细信息.
+        /// </summary>
+        public static string UnhandledErrorTip {
+            get {
+                return ResourceManager.GetString("UnhandledErrorTip", resourceCulture);
             }
         }
         
@@ -2531,6 +2648,15 @@ namespace YMCL.Main.Public.Langs {
         public static string UpgradeToAdministratorPrivilegesTip {
             get {
                 return ResourceManager.GetString("UpgradeToAdministratorPrivilegesTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 已用内存.
+        /// </summary>
+        public static string UsedMem {
+            get {
+                return ResourceManager.GetString("UsedMem", resourceCulture);
             }
         }
         
@@ -2697,6 +2823,15 @@ namespace YMCL.Main.Public.Langs {
         public static string YggdrasilServerUrlIsEmpty {
             get {
                 return ResourceManager.GetString("YggdrasilServerUrlIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yu Minecraft Launcher 发生未处理异常.
+        /// </summary>
+        public static string YMCLHappenError {
+            get {
+                return ResourceManager.GetString("YMCLHappenError", resourceCulture);
             }
         }
         

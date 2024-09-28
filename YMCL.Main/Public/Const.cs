@@ -59,7 +59,6 @@ public abstract class Const
     {
         public static InitializeWindow initialize = new();
         public static MainWindow main;
-        public static TaskCenterWindow taskCenter = new();
         public static DeskLyric deskLyric = new();
     }
 

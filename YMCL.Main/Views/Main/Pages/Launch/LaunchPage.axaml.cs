@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using Avalonia.Interactivity;
 using Avalonia.Media;
+using Avalonia.Platform;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
@@ -21,6 +24,7 @@ using Newtonsoft.Json;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Langs;
+using YMCL.Main.Views.Crash;
 using SearchOption = System.IO.SearchOption;
 
 namespace YMCL.Main.Views.Main.Pages.Launch;
@@ -48,7 +52,6 @@ public partial class LaunchPage : UserControl
     private void ControlProperty()
     {
     }
-
     private void BindingEvent()
     {
         Loaded += async (s, e) =>

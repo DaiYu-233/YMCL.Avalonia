@@ -121,33 +121,57 @@
                         </DockPanel>
                     </Border>
                     <Border
-                        Height="40"
                         Padding="6.5"
                         Background="{DynamicResource 1x}"
                         CornerRadius="5"
                         Opacity="{DynamicResource Opacity}">
-                        <DockPanel>
-                            <TextBlock
-                                Margin="10,0,20,0"
-                                VerticalAlignment="Center"
-                                FontFamily="{DynamicResource Font}"
-                                FontSize="14"
-                                Text="{x:Static properties:MainLang.MaxMem}" />
-                            <TextBlock
-                                Name="MaxMemText"
-                                Width="65"
-                                Margin="6.5,0,6.5,0"
-                                VerticalAlignment="Center"
-                                DockPanel.Dock="Right"
-                                FontFamily="{DynamicResource Font}"
-                                FontSize="14"
-                                Text="∞"
-                                TextAlignment="Center" />
-                            <Slider
-                                Name="MaxMemSlider"
-                                Margin="0,0,0,0"
-                                VerticalAlignment="Center" />
-                        </DockPanel>
+                        <StackPanel Margin="0,5" Spacing="5">
+                            <DockPanel>
+                                <TextBlock
+                                    Margin="10,0,20,0"
+                                    VerticalAlignment="Center"
+                                    FontFamily="{DynamicResource Font}"
+                                    FontSize="14"
+                                    Text="{x:Static properties:MainLang.MaxMem}" />
+                                <TextBlock
+                                    Name="MaxMemText"
+                                    Width="65"
+                                    Margin="6.5,0,6.5,0"
+                                    VerticalAlignment="Center"
+                                    DockPanel.Dock="Right"
+                                    FontFamily="{DynamicResource Font}"
+                                    FontSize="14"
+                                    Text="∞"
+                                    TextAlignment="Center" />
+                                <Slider
+                                    Name="MaxMemSlider"
+                                    Margin="0,0,0,0"
+                                    VerticalAlignment="Center" />
+                            </DockPanel>
+                            <DockPanel Name="UsedMemRoot">
+                                <TextBlock
+                                    Margin="10,0,20,0"
+                                    VerticalAlignment="Center"
+                                    FontFamily="{DynamicResource Font}"
+                                    FontSize="14"
+                                    Text="{x:Static properties:MainLang.UsedMem}" />
+                                <TextBlock
+                                    Name="UsedMemText"
+                                    Width="65"
+                                    Margin="6.5,0,6.5,0"
+                                    VerticalAlignment="Center"
+                                    DockPanel.Dock="Right"
+                                    FontFamily="{DynamicResource Font}"
+                                    FontSize="14"
+                                    Text="∞"
+                                    TextAlignment="Center" />
+                                <ProgressBar
+                                    Name="UsedMemProgressBar"
+                                    Margin="0,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Maximum="100" />
+                            </DockPanel>
+                        </StackPanel>
                     </Border>
                     <Border
                         Height="40"

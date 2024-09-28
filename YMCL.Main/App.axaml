@@ -5,12 +5,12 @@
     xmlns:semi="https://irihi.tech/semi"
     xmlns:sty="using:FluentAvalonia.Styling"
     xmlns:u-semi="https://irihi.tech/ursa/themes/semi"
-    RequestedThemeVariant="Default">
+    RequestedThemeVariant="Light">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceInclude Source="/Public/Styles/IconPath.axaml" />
-                <ResourceInclude Source="/Public/Styles/LightTheme.axaml" />
+                <ResourceInclude Source="/Public/Styles/Theme.axaml" />
             </ResourceDictionary.MergedDictionaries>
             <Color x:Key="SystemAccentColor">#00feff</Color>
             <Color x:Key="SystemAccentColorLight1">#00feff</Color>
@@ -26,7 +26,6 @@
     <Application.Styles>
         <sty:FluentAvaloniaTheme />
         <StyleInclude Source="/Public/Styles/Style.axaml" />
-        <StyleInclude Source="avares://Semi.Avalonia/Themes/Index.axaml" />
         <semi:SemiTheme Locale="zh-cn" />
         <u-semi:SemiTheme Locale="zh-CN" />
         <StyleInclude Source="avares://AsyncImageLoader.Avalonia/AdvancedImage.axaml" />

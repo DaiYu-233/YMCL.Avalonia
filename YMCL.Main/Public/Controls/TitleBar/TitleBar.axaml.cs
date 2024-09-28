@@ -20,6 +20,9 @@ public partial class TitleBar : UserControl
 
     public static readonly StyledProperty<bool> IsMaxBtnShowProperty =
         AvaloniaProperty.Register<TitleBar, bool>(nameof(IsMaxBtnShow), true);
+    
+    public static readonly StyledProperty<bool> IsMinBtnShowProperty =
+        AvaloniaProperty.Register<TitleBar, bool>(nameof(IsMinBtnShow), true);
 
     private DateTime? lastClickTime;
 
@@ -35,6 +38,7 @@ public partial class TitleBar : UserControl
             TitleText.Text = Title;
             CloseButton.IsVisible = IsCloseBtnShow;
             MaximizeButton.IsVisible = IsMaxBtnShow;
+            MinimizeButton.IsVisible = IsMinBtnShow;
         };
     }
 
@@ -60,6 +64,11 @@ public partial class TitleBar : UserControl
     {
         get => GetValue(IsMaxBtnShowProperty);
         set => SetValue(IsMaxBtnShowProperty, value);
+    }
+    public bool IsMinBtnShow
+    {
+        get => GetValue(IsMinBtnShowProperty);
+        set => SetValue(IsMinBtnShowProperty, value);
     }
 
     private void MoveDragArea_PointerPressed(object? sender, PointerPressedEventArgs e)

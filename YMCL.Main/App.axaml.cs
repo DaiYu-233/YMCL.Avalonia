@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -6,8 +7,11 @@ using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Threading;
+using Newtonsoft.Json;
 using YMCL.Main.Public;
+using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Langs;
+using YMCL.Main.Views.Crash;
 
 namespace YMCL.Main;
 
@@ -20,11 +24,23 @@ public class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        Const.Data.Setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = Const.Window.initialize;
-            Const.Window.initialize.Hide();
-
+            if (Const.Data.Setting.Language != "Unset" &&
+                Const.Data.Setting.WindowTitleBarStyle != WindowTitleBarStyle.Unset &&
+                Const.Data.Setting.IsCompleteMinecraftFolderInitialize &&
+                Const.Data.Setting.IsCompleteJavaInitialize &&
+                Const.Data.Setting.IsCompleteAccountInitialize)
+            {
+                desktop.MainWindow = Const.Window.main;
+                Const.Window.main._needInit = true;
+            }
+            else
+            {
+                desktop.MainWindow = Const.Window.initialize;
+            }
+            
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Dispatcher.UIThread.UnhandledException += UIThread_UnhandledException;
         }
@@ -38,7 +54,9 @@ public class App : Application
     {
         try
         {
-            Method.Ui.ShowLongException(MainLang.UnhandledException, e.Exception);
+            var win = new CrashWindow(e.Exception.ToString());
+            win.Hide();
+            win.ShowDialog(Const.Window.main);
         }
         finally
         {
@@ -50,13 +68,9 @@ public class App : Application
     {
         try
         {
-            var textBox = new TextBox
-            {
-                FontFamily = (FontFamily)Current.Resources["Font"], TextWrapping = TextWrapping.Wrap,
-                Text = $"{MainLang.UnhandledException}\n\n{e.ExceptionObject}", IsReadOnly = true,
-                HorizontalAlignment = HorizontalAlignment.Center
-            };
-            await Method.Ui.ShowDialogAsync(MainLang.GetException, p_content: textBox, b_primary: MainLang.Ok);
+            var win = new CrashWindow(e.ToString()!);
+            win.Hide();
+            _ = win.ShowDialog(Const.Window.main);
         }
         catch
         {

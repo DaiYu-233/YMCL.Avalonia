@@ -997,4 +997,49 @@ MacOs 不支持自动更新
     <data name="AlreadyCopyToClipBoard" xml:space="preserve">
       <value>已复制到剪切板</value>
     </data>
+    <data name="NavAbout" xml:space="preserve">
+      <value> 关于</value>
+    </data>
+    <data name="UsedMem" xml:space="preserve">
+      <value>已用内存</value>
+    </data>
+    <data name="CannotLoad" xml:space="preserve">
+      <value>无法加载</value>
+    </data>
+    <data name="LoadFail" xml:space="preserve">
+      <value>加载失败</value>
+    </data>
+    <data name="ToggleNav" xml:space="preserve">
+      <value>切换导航</value>
+    </data>
+    <data name="NoWorkingTask" xml:space="preserve">
+      <value>暂无运行中任务</value>
+    </data>
+    <data name="CrashLa" xml:space="preserve">
+      <value>崩溃啦！ヾ(•ω•`)o</value>
+    </data>
+    <data name="YMCLHappenError" xml:space="preserve">
+      <value>Yu Minecraft Launcher 发生未处理异常</value>
+    </data>
+    <data name="DetailedInfo" xml:space="preserve">
+      <value>详细信息</value>
+    </data>
+    <data name="UnhandledErrorTip" xml:space="preserve">
+      <value>Yu Minecraft Launcher 遇到了没有处理的异常 , 可能无法继续运行 , 下方为异常的详细信息</value>
+    </data>
+    <data name="Copy" xml:space="preserve">
+      <value>复制</value>
+    </data>
+    <data name="NoMatterErrorAndKeepOnRun" xml:space="preserve">
+      <value>忽略错误 , 强制继续运行</value>
+    </data>
+    <data name="ExitApp" xml:space="preserve">
+      <value>退出应用</value>
+    </data>
+    <data name="RestartApp" xml:space="preserve">
+      <value>重启应用</value>
+    </data>
+    <data name="LoadBackGroudFromPicFailTip" xml:space="preserve">
+      <value>从图像文件加载背景图失败 , 检查图片格式是否正确 </value>
+    </data>
 </root>

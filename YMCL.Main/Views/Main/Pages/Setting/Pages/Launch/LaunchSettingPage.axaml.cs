@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Management;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using Avalonia.Platform.Storage;
+using Avalonia.Threading;
 using MinecraftLaunch.Classes.Models.Game;
 using MinecraftLaunch.Components.Fetcher;
 using MinecraftLaunch.Utilities;
@@ -32,25 +36,49 @@ public partial class LaunchSettingPage : UserControl
 
     private void BindingEvent()
     {
-        Loaded += (s, e) =>
+        Loaded += async (s, e) =>
         {
             Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
-            var totalMemory = Method.Value.GetTotalMemory(Const.Data.Platform);
             var setting = Const.Data.Setting;
+            if (setting.MinecraftFolder == null || !minecraftFolders.Contains(setting.MinecraftFolder))
+                MinecraftFolderComboBox.SelectedIndex = 0;
+            else
+                MinecraftFolderComboBox.SelectedItem = setting.MinecraftFolder;
             if (_firstLoad)
             {
                 _firstLoad = false;
+                var totalMemory = Method.Value.GetTotalMemory(Const.Data.Platform);
                 if (totalMemory != 0)
                     MaxMemSlider.Maximum = totalMemory / 1024;
                 else
                     MaxMemSlider.Maximum = 65536;
                 MaxMemSlider.Value = setting.MaxMem;
-            }
 
-            if (setting.MinecraftFolder == null || !minecraftFolders.Contains(setting.MinecraftFolder))
-                MinecraftFolderComboBox.SelectedIndex = 0;
-            else
-                MinecraftFolderComboBox.SelectedItem = setting.MinecraftFolder;
+                while (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    await Task.Run(() =>
+                    {
+                        using var managementClass = new ManagementClass("Win32_PerfFormattedData_PerfOS_Memory");
+                        using var instances = managementClass.GetInstances();
+                        foreach (var mo in instances)
+                        {
+                            var size = long.Parse(mo.Properties["AvailableMBytes"].Value.ToString()!);
+                            var used = Math.Round(size / (totalMemory / 1024) * 100, 2);
+                            Dispatcher.UIThread.Invoke(() =>
+                            {
+                                UsedMemText.Text = $"{used}%";
+                                UsedMemProgressBar.Value = used;
+                            });
+                        }
+                    });
+                    await Task.Delay(500);
+                }
+
+                if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    UsedMemRoot.IsVisible = false;
+                }
+            }
         };
         IndependencyCoreSwitch.Click += (s, e) =>
         {
@@ -58,7 +86,8 @@ public partial class LaunchSettingPage : UserControl
             if (IndependencyCoreSwitch.IsChecked != setting.EnableIndependencyCore)
             {
                 setting.EnableIndependencyCore = (bool)IndependencyCoreSwitch.IsChecked!;
-                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
         };
         ShowGameOutputSwitch.Click += (s, e) =>
@@ -67,7 +96,8 @@ public partial class LaunchSettingPage : UserControl
             if (ShowGameOutputSwitch.IsChecked != setting.ShowGameOutput)
             {
                 setting.ShowGameOutput = (bool)ShowGameOutputSwitch.IsChecked!;
-                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
         };
         AddMinecraftFolderBtn.Click += async (s, e) =>
@@ -202,7 +232,8 @@ public partial class LaunchSettingPage : UserControl
             if (setting.MaxMem != MaxMemSlider.Value)
             {
                 setting.MaxMem = Math.Round(MaxMemSlider.Value);
-                File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
         };
     }

@@ -53,10 +53,12 @@ public partial class TaskCenterPage : UserControl
                     {
                         Const.Window.main.TaskInfoBadge.IsVisible = true;
                         Const.Window.main.TaskInfoBadge.Value = tasks.Count;
+                        NoTaskTip.IsVisible = false;
                     }
                     else
                     {
                         Const.Window.main.TaskInfoBadge.IsVisible = false;
+                        NoTaskTip.IsVisible = true;
                     }
                 });
             }

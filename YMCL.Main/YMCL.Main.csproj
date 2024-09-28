@@ -52,6 +52,7 @@
         <PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.2.0" />
         <PackageReference Include="MinecraftLaunch" Version="3.1.0-preview07" />
         <PackageReference Include="MinecraftLaunch.Skin" Version="1.0.1" />
+        <PackageReference Include="Modrinth.Net" Version="3.4.5" />
         <PackageReference Include="NAudio" Version="2.2.1" />
         <PackageReference Include="NAudio.Wasapi" Version="2.2.1" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

@@ -66,8 +66,11 @@ public partial class LaunchSettingPage : UserControl
                             var used = Math.Round(size / (totalMemory / 1024) * 100, 2);
                             Dispatcher.UIThread.Invoke(() =>
                             {
+                                var free = Math.Round(100 - (size / (totalMemory / 1024) * 100) -
+                                                      (MaxMemSlider.Value / MaxMemSlider.Maximum * 100), 2);
                                 UsedMemText.Text = $"{used}%";
                                 UsedMemProgressBar.Value = used;
+                                CanUseMemText.Text = $"{free}%";
                             });
                         }
                     });
@@ -77,6 +80,7 @@ public partial class LaunchSettingPage : UserControl
                 if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
                     UsedMemRoot.IsVisible = false;
+                    CanUseMemText.IsVisible = false;
                 }
             }
         };

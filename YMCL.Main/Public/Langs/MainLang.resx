@@ -1042,4 +1042,19 @@ MacOs 不支持自动更新
     <data name="LoadBackGroudFromPicFailTip" xml:space="preserve">
       <value>从图像文件加载背景图失败 , 检查图片格式是否正确 </value>
     </data>
+    <data name="CustomBackground" xml:space="preserve">
+      <value>自定义背景</value>
+    </data>
+    <data name="Default" xml:space="preserve">
+      <value>默认</value>
+    </data>
+    <data name="BackGroundImg" xml:space="preserve">
+      <value>背景图</value>
+    </data>
+    <data name="AcrylicBlur" xml:space="preserve">
+      <value>亚克力</value>
+    </data>
+    <data name="Transparent" xml:space="preserve">
+      <value>透明</value>
+    </data>
 </root>

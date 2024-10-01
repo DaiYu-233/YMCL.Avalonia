@@ -36,6 +36,7 @@ public partial class InitializeWindow : Window
         Init();
         InitializeComponent();
         EventBinding();
+        Method.Ui.InitStyle();
     }
 
     private void EventBinding()
@@ -72,7 +73,7 @@ public partial class InitializeWindow : Window
             setting1.MinecraftFolder = path;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting1, Formatting.Indented));
         }
-        
+        Const.Data.Setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
         if (!File.Exists(Const.String.JavaDataPath))
             File.WriteAllText(Const.String.JavaDataPath,
                 JsonConvert.SerializeObject(new List<JavaEntry>(), Formatting.Indented));
@@ -143,10 +144,8 @@ public partial class InitializeWindow : Window
             CornerRadius = new CornerRadius(8), FontSize = 14, Margin = new Thickness(0),
             Position = NotificationPosition.TopRight
         };
-        Method.Ui.SetAccentColor(setting.AccentColor);
-        if (setting.Theme == Public.Theme.Light)
-            Method.Ui.ToggleTheme(Public.Theme.Light);
-        else if (setting.Theme == Public.Theme.Dark) Method.Ui.ToggleTheme(Public.Theme.Dark);
+        Method.Ui.SetAccentColor(setting.AccentColor); 
+        Method.Ui.ToggleTheme(setting.Theme);
     }
 
     public static void DetectPlatform()

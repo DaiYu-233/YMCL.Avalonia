@@ -27,6 +27,10 @@ public partial class PathIcon : UserControl
                 Reload();
             }
         };
+        Application.Current.ActualThemeVariantChanged += (_, _) =>
+        {
+            Reload();
+        };
     }
 
     public string Path
@@ -49,7 +53,7 @@ public partial class PathIcon : UserControl
     {
         IBrush? brush;
         if (Color == null)
-            brush = App.Current.RequestedThemeVariant == ThemeVariant.Light ? Brush.Parse("#333333") : Brush.Parse("#ffffff");
+            brush = App.Current.ActualThemeVariant == ThemeVariant.Light ? Brush.Parse("#333333") : Brush.Parse("#ffffff");
         else
             brush = Color;
         var drawingImage = new DrawingImage();

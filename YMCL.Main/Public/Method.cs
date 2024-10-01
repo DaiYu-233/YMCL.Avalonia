@@ -27,6 +27,7 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
 using Avalonia.Styling;
 using Avalonia.Threading;
+using Avalonia.VisualTree;
 using CurseForge.APIClient;
 using FluentAvalonia.UI.Controls;
 using MinecraftLaunch;
@@ -175,6 +176,49 @@ public class Method
 
         public static void ToggleTheme(Theme theme)
         {
+            if (theme == Theme.Light)
+            {
+                Application.Current.RequestedThemeVariant = ThemeVariant.Light;
+            }
+            else if (theme == Theme.Dark)
+            {
+                Application.Current.RequestedThemeVariant = ThemeVariant.Dark;
+            }
+            else if (theme == Theme.System)
+            {
+                Application.Current.RequestedThemeVariant = ThemeVariant.Default;
+            }
+        }
+
+        public static void UpdateTheme()
+        {
+            var visuals = new Queue<Visual>();
+            visuals.Enqueue(Const.Window.main);
+
+            while (visuals.Count > 0)
+            {
+                var current = visuals.Dequeue();
+                var control = current as Control;
+
+                if (control != null)
+                {
+                    foreach (var child in control.GetVisualChildren())
+                    {
+                        visuals.Enqueue((Visual)child);
+                    }
+
+                    var imageControl = control as Image;
+                    if (imageControl != null && imageControl.Source is DrawingImage)
+                    {
+                        imageControl.InvalidateVisual();
+                        Console.WriteLine(imageControl.GetVisualRoot());
+                    }
+                }
+            }
+        }
+
+        public static void InitStyle()
+        {
             Application.Current!.Resources.MergedDictionaries.Add(
                 (AvaloniaXamlLoader.Load(
                         new Uri("avares://FluentAvalonia/Styling/ControlThemes/BasicControls/ToggleSwitchStyles.axaml"))
@@ -192,20 +236,29 @@ public class Method
                 (AvaloniaXamlLoader.Load(
                         new Uri("avares://FluentAvalonia/Styling/ControlThemes/BasicControls/ExpanderStyles.axaml")) as
                     ResourceDictionary)!);
-            if (theme == Theme.Light)
-            {
-                Application.Current.RequestedThemeVariant = ThemeVariant.Light;
-            }
-            else if (theme == Theme.Dark)
-            {
-                Application.Current.RequestedThemeVariant = ThemeVariant.Dark;
-            }
         }
 
         public static void SetWindowBackGroundImg()
         {
+            Const.Window.main.TransparencyLevelHint = new[] { WindowTransparencyLevel.Mica };
+            Application.Current.Resources["Opacity"] = 1.0;
+            Const.Window.main.BackGroundImg.Source = null;
+            Const.Window.main.Root.Background = Application.Current.ActualThemeVariant == ThemeVariant.Dark
+                ? SolidColorBrush.Parse("#262626")
+                : SolidColorBrush.Parse("#f6fafd");
+            Const.Window.main.TitleBar.Root.Background = Application.Current.ActualThemeVariant == ThemeVariant.Dark
+                ? SolidColorBrush.Parse("#2c2c2c")
+                : SolidColorBrush.Parse("#FFE9F6FF");
+            
             var setting = Const.Data.Setting;
-            if (setting.EnableCustomBackGroundImg && !string.IsNullOrWhiteSpace(setting.WindowBackGroundImgData))
+
+            if (setting.CustomBackGround == CustomBackGroundWay.Default)
+            {
+                return;
+            }
+            
+            if (setting.CustomBackGround == CustomBackGroundWay.Image &&
+                !string.IsNullOrWhiteSpace(setting.WindowBackGroundImgData))
             {
                 Application.Current.Resources["Opacity"] = 0.875;
                 try
@@ -216,16 +269,31 @@ public class Method
                 catch
                 {
                     Const.Data.Setting.WindowBackGroundImgData = null;
-                    File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(Const.Data.Setting, Formatting.Indented));
-                    Toast(MainLang.LoadBackGroudFromPicFailTip,type: NotificationType.Error);
+                    File.WriteAllText(Const.String.SettingDataPath,
+                        JsonConvert.SerializeObject(Const.Data.Setting, Formatting.Indented));
+                    Toast(MainLang.LoadBackGroudFromPicFailTip, type: NotificationType.Error);
                     Application.Current.Resources["Opacity"] = 1.0;
                     Const.Window.main.BackGroundImg.Source = null;
                 }
+
+                return;
             }
-            else
+
+            Const.Window.main.Background = Brushes.Transparent;
+            Application.Current.Resources["Opacity"] = 0.75;
+            Const.Window.main.Root.Background = Brushes.Transparent;
+            Const.Window.main.TitleBar.Root.Background =
+                Application.Current.ActualThemeVariant == ThemeVariant.Dark
+                    ? SolidColorBrush.Parse("#a8242424")
+                    : SolidColorBrush.Parse("#a8e7f5ff");
+
+            if (setting.CustomBackGround == CustomBackGroundWay.AcrylicBlur)
             {
-                Application.Current.Resources["Opacity"] = 1.0;
-                Const.Window.main.BackGroundImg.Source = null;
+                Const.Window.main.TransparencyLevelHint = new[] { WindowTransparencyLevel.AcrylicBlur };
+            }
+            if (setting.CustomBackGround == CustomBackGroundWay.Transparent)
+            {
+                Const.Window.main.TransparencyLevelHint = new[] { WindowTransparencyLevel.Transparent };
             }
         }
 

@@ -30,7 +30,7 @@ public class Setting
     public bool EnableCustomUpdateUrl { get; set; } = false;
     public string CustomUpdateUrl { get; set; } = "https://gh.api.99988866.xyz/{%url%}";
     public string MusicApi { get; set; } = "http://music.api.daiyu.fun/";
-    public bool EnableCustomBackGroundImg { get; set; } = false;
+    public CustomBackGroundWay CustomBackGround { get; set; } = CustomBackGroundWay.Default;
     public bool EnableDisplayIndependentTaskWindow { get; set; } = false;
     public bool ShowGameOutput { get; set; } = false;
     public WindowTitleBarStyle WindowTitleBarStyle { get; set; } = WindowTitleBarStyle.Unset;

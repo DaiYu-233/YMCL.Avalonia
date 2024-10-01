@@ -4,6 +4,7 @@ using System.IO;
 using Avalonia.Controls.Notifications;
 using MinecraftLaunch.Classes.Models.Game;
 using YMCL.Main.Public.Classes;
+using YMCL.Main.Views.Crash;
 using YMCL.Main.Views.DeskLyric;
 using YMCL.Main.Views.Initialize;
 using YMCL.Main.Views.Main;
@@ -18,6 +19,7 @@ public abstract class Const
         public static JavaEntry AutoJava { get; set; } = new() { JavaPath = "Auto", JavaVersion = "All" };
         public static List<UrlImageDataListEntry> UrlImageDataList { get; set; } = new();
         public static Platform Platform { get; set; }
+        public static CrashWindow LastCrashInfoWindow { get; set; } = null;
     }
 
     public abstract class String

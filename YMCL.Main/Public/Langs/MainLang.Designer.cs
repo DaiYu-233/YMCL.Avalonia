@@ -105,6 +105,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 亚克力.
+        /// </summary>
+        public static string AcrylicBlur {
+            get {
+                return ResourceManager.GetString("AcrylicBlur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 激活Windows/Office.
         /// </summary>
         public static string ActivateWinOffice {
@@ -339,6 +348,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 背景图.
+        /// </summary>
+        public static string BackGroundImg {
+            get {
+                return ResourceManager.GetString("BackGroundImg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 基岩版.
         /// </summary>
         public static string BedRockVersion {
@@ -565,6 +583,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 自定义背景.
+        /// </summary>
+        public static string CustomBackground {
+            get {
+                return ResourceManager.GetString("CustomBackground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 自定义背景图.
         /// </summary>
         public static string CustomBackGroundImg {
@@ -624,6 +651,15 @@ namespace YMCL.Main.Public.Langs {
         public static string DataPack {
             get {
                 return ResourceManager.GetString("DataPack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 默认.
+        /// </summary>
+        public static string Default {
+            get {
+                return ResourceManager.GetString("Default", resourceCulture);
             }
         }
         
@@ -2521,6 +2557,15 @@ namespace YMCL.Main.Public.Langs {
         public static string TotalNumberOfMod {
             get {
                 return ResourceManager.GetString("TotalNumberOfMod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 透明.
+        /// </summary>
+        public static string Transparent {
+            get {
+                return ResourceManager.GetString("Transparent", resourceCulture);
             }
         }
         

@@ -12,7 +12,13 @@ public partial class CrashWindow : Window
     public CrashWindow(string exception)
     {
         InitializeComponent();
-        Info.Text = exception.ToString();
+        Info.Text = exception;
+        if (Const.Data.LastCrashInfoWindow != null)
+        {
+            Info.Text += "\n\n---------\n\n" + Const.Data.LastCrashInfoWindow.Info.Text;
+            Const.Data.LastCrashInfoWindow.Close();
+        }
+        Const.Data.LastCrashInfoWindow = this;
         switch (Const.Data.Setting.WindowTitleBarStyle)
         {
             case WindowTitleBarStyle.System:

@@ -10,7 +10,7 @@ public enum Platform
 
 public enum Theme
 {
-    //System,
+    System,
     Light,
     Dark
 }
@@ -92,3 +92,12 @@ public enum ModSource
     Modrinth,
     CurseForge
 }
+
+public enum CustomBackGroundWay
+{
+    Default,
+    Image,
+    AcrylicBlur,
+    Transparent
+}
+

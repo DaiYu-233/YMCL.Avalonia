@@ -29,6 +29,8 @@
     <Border
         x:Name="Root"
         Background="{DynamicResource 2x}"
+        BorderBrush="{DynamicResource 2x}"
+        BorderThickness="0"
         ClipToBounds="True"
         CornerRadius="8">
         <Grid>

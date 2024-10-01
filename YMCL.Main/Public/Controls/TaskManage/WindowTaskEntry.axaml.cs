@@ -68,7 +68,7 @@ public partial class WindowTaskEntry : Window
                 Root.CornerRadius = new CornerRadius(0, 0, 8, 8);
                 RootGrid.Margin = new Thickness(0, 10, 0, 0);
             }
-            else if (setting.WindowTitleBarStyle == WindowTitleBarStyle.Ymcl && setting.EnableCustomBackGroundImg)
+            else if (setting.WindowTitleBarStyle == WindowTitleBarStyle.Ymcl && setting.CustomBackGround == CustomBackGroundWay.Image)
             {
                 TitleBar.Margin = new Thickness(0, 0, 0, 10);
                 WindowState = WindowState.Maximized;
@@ -80,7 +80,7 @@ public partial class WindowTaskEntry : Window
                 WindowState = WindowState.Normal;
             }
 
-            if (setting.EnableCustomBackGroundImg && !string.IsNullOrWhiteSpace(setting.WindowBackGroundImgData))
+            if (setting.CustomBackGround == CustomBackGroundWay.Image && !string.IsNullOrWhiteSpace(setting.WindowBackGroundImgData))
             {
                 var bitmap = Method.Value.Base64ToBitmap(setting.WindowBackGroundImgData);
                 BackGroundImg.Source = bitmap;

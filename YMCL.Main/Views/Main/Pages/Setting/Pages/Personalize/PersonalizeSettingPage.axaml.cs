@@ -30,37 +30,14 @@ public partial class PersonalizeSettingPage : UserControl
 
     private void BindingEvent()
     {
-        Application.Current.PropertyChanged += async (_, e) =>
+        Application.Current.ActualThemeVariantChanged += async (_, _) =>
         {
-            if (e.Property.Name == nameof(App.RequestedThemeVariant))
-            {
-                var visuals = new Queue<Visual>();
-                visuals.Enqueue(Const.Window.main);
-
-                while (visuals.Count > 0)
-                {
-                    var current = visuals.Dequeue();
-                    var control = current as Control;
-
-                    if (control != null)
-                    {
-                        foreach (var child in control.GetVisualChildren())
-                        {
-                            visuals.Enqueue((Visual)child);
-                        }
-
-                        var imageControl = control as Image;
-                        if (imageControl != null && imageControl.Source is DrawingImage)
-                        {
-                            imageControl.InvalidateVisual();
-                            Console.WriteLine(imageControl.GetVisualRoot());
-                        }
-                    }
-                }
-            }
+            Method.Ui.UpdateTheme();
+            await Task.Delay(20);
+            Method.Ui.SetWindowBackGroundImg();
         };
-        
-        
+
+
         Loaded += async (s, e) =>
         {
             Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);
@@ -109,9 +86,18 @@ public partial class PersonalizeSettingPage : UserControl
         CustomBackGroundImgComboBox.SelectionChanged += (s, e) =>
         {
             var setting = Const.Data.Setting;
+            if (setting.CustomBackGround == CustomBackGroundWay.AcrylicBlur && false &&
+                CustomBackGroundImgComboBox.SelectedIndex == 0)
+            {
+                setting.CustomBackGround = CustomBackGroundWay.Default;
+                File.WriteAllText(Const.String.SettingDataPath,
+                    JsonConvert.SerializeObject(setting, Formatting.Indented));
+                Method.Ui.RestartApp();
+            }
+
             EditCustomBackGroundImgBtn.IsVisible = CustomBackGroundImgComboBox.SelectedIndex == 1;
-            if (CustomBackGroundImgComboBox.SelectedIndex == 1 == setting.EnableCustomBackGroundImg) return;
-            setting.EnableCustomBackGroundImg = CustomBackGroundImgComboBox.SelectedIndex == 1;
+            if (CustomBackGroundImgComboBox.SelectedIndex == (int)setting.CustomBackGround) return;
+            setting.CustomBackGround = (CustomBackGroundWay)CustomBackGroundImgComboBox.SelectedIndex;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             Method.Ui.SetWindowBackGroundImg();
         };
@@ -289,7 +275,10 @@ public partial class PersonalizeSettingPage : UserControl
                     JsonConvert.SerializeObject(setting, Formatting.Indented));
                 if (setting.Theme == Public.Theme.Light)
                     Method.Ui.ToggleTheme(Public.Theme.Light);
-                else if (setting.Theme == Public.Theme.Dark) Method.Ui.ToggleTheme(Public.Theme.Dark);
+                else if (setting.Theme == Public.Theme.Dark)
+                    Method.Ui.ToggleTheme(Public.Theme.Dark);
+                else if (setting.Theme == Public.Theme.System)
+                    Method.Ui.ToggleTheme(Public.Theme.System);
             }
 
             // Method.Ui.RestartApp();
@@ -357,7 +346,7 @@ public partial class PersonalizeSettingPage : UserControl
         LyricColorPicker.Color = setting.DeskLyricColor;
         LyricSizeSlider.Value = setting.DeskLyricSize;
         LyricSizeSliderText.Text = Math.Round(setting.DeskLyricSize).ToString();
-        CustomBackGroundImgComboBox.SelectedIndex = setting.EnableCustomBackGroundImg ? 1 : 0;
+        CustomBackGroundImgComboBox.SelectedIndex = (int)setting.CustomBackGround;
         EditCustomBackGroundImgBtn.IsVisible = CustomBackGroundImgComboBox.SelectedIndex == 1;
     }
 }

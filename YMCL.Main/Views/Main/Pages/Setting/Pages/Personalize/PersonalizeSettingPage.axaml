@@ -80,7 +80,7 @@
                                 DockPanel.Dock="Left"
                                 FontFamily="{DynamicResource Font}">
                                 <ComboBox.Items>
-                                    <!-- <ComboBoxItem Content="{x:Static properties:MainLang.FollowSystem}" /> -->
+                                    <ComboBoxItem Content="{x:Static properties:MainLang.FollowSystem}" />
                                     <ComboBoxItem Content="{x:Static properties:MainLang.Light}" />
                                     <ComboBoxItem Content="{x:Static properties:MainLang.Dark}" />
                                 </ComboBox.Items>
@@ -98,7 +98,7 @@
                                 VerticalAlignment="Center"
                                 FontFamily="{DynamicResource Font}"
                                 FontSize="14"
-                                Text="{x:Static properties:MainLang.CustomBackGroundImg}" />
+                                Text="{x:Static properties:MainLang.CustomBackground}" />
                             <Button
                                 Name="EditCustomBackGroundImgBtn"
                                 Margin="5,0,0,0"
@@ -111,8 +111,10 @@
                                 FontFamily="{DynamicResource Font}"
                                 SelectedIndex="0">
                                 <ComboBox.Items>
-                                    <ComboBoxItem Content="{x:Static properties:MainLang.Off}" />
-                                    <ComboBoxItem Content="{x:Static properties:MainLang.On}" />
+                                    <ComboBoxItem Content="{x:Static properties:MainLang.Default}" />
+                                    <ComboBoxItem Content="{x:Static properties:MainLang.BackGroundImg}" />
+                                    <ComboBoxItem Content="{x:Static properties:MainLang.AcrylicBlur}" />
+                                    <ComboBoxItem Content="{x:Static properties:MainLang.Transparent}" />
                                 </ComboBox.Items>
                             </ComboBox>
                         </DockPanel>

@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Border
+        Name="Root"
         Height="30"
         VerticalAlignment="Top"
         Background="{DynamicResource TitleBarColor}"
@@ -13,7 +14,7 @@
         <Grid
             Name="MoveDragArea"
             Margin="8,0,8,0"
-            Background="{DynamicResource TitleBarColor}">
+            Background="#00242424">
             <TextBlock />
             <TextBlock
                 Name="TitleText"

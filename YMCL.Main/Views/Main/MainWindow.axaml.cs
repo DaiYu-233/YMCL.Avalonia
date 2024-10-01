@@ -67,7 +67,7 @@ public partial class MainWindow : Window
             Method.Ui.CheckLauncher();
             await Task.Delay(200);
             _ = Const.Window.main.settingPage.launcherSettingPage.AutoUpdate();
-            
+
             if (_needInit) LoadWindow();
         };
         Activated += (_, _) =>
@@ -91,9 +91,11 @@ public partial class MainWindow : Window
                 {
                     case WindowState.Normal:
                         Root.Margin = new Thickness(0);
+                        Root.BorderThickness = new Thickness(0);
                         break;
                     case WindowState.Maximized:
                         Root.Margin = new Thickness(20);
+                        Root.BorderThickness = new Thickness(2);
                         break;
                 }
         };

@@ -12,6 +12,7 @@ using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Langs;
 using YMCL.Main.Views.Crash;
+using YMCL.Main.Views.Main;
 
 namespace YMCL.Main;
 
@@ -24,23 +25,9 @@ public class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        Const.Data.Setting = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.String.SettingDataPath));
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            if (Const.Data.Setting.Language != "Unset" &&
-                Const.Data.Setting.WindowTitleBarStyle != WindowTitleBarStyle.Unset &&
-                Const.Data.Setting.IsCompleteMinecraftFolderInitialize &&
-                Const.Data.Setting.IsCompleteJavaInitialize &&
-                Const.Data.Setting.IsCompleteAccountInitialize)
-            {
-                desktop.MainWindow = Const.Window.main;
-                Const.Window.main._needInit = true;
-            }
-            else
-            {
-                desktop.MainWindow = Const.Window.initialize;
-            }
-            
+            desktop.MainWindow = Const.Window.initialize;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Dispatcher.UIThread.UnhandledException += UIThread_UnhandledException;
         }

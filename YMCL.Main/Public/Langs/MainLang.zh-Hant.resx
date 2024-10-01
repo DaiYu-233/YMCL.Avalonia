@@ -963,7 +963,7 @@ win10 以下系统(不包括10)不支持自动更新
       <value> 搜索</value>
     </data>
   <data name="Music" xml:space="preserve">
-      <value>音樂</value>
+      <value>音乐</value>
     </data>
   <data name="ExistAccount" xml:space="preserve">
       <value>现存账户</value>

@@ -658,19 +658,19 @@ sudo apt install vlc</value>
     <value>Choose language/language</value>
   </data>
   <data name="zh_CN" xml:space="preserve">
-    <value>Chinese Simplia</value>
+    <value>简体中文</value>
   </data>
   <data name="zh_Hant" xml:space="preserve">
-    <value>Traditional Chinese</value>
+    <value>繁體中文</value>
   </data>
   <data name="en_US" xml:space="preserve">
     <value>English</value>
   </data>
   <data name="ja_JP" xml:space="preserve">
-    <value>Japanese</value>
+    <value>日本語</value>
   </data>
   <data name="ru_RU" xml:space="preserve">
-    <value>Khatikhakkshiskhalev</value>
+    <value>Русский язык</value>
   </data>
   <data name="ReleaseTheMouseAndLetYmclProcessThisFile" xml:space="preserve">
     <value>Release the mouse to let YMCL process this file</value>
@@ -981,7 +981,7 @@ Go to Settings-Download-Auto Update can disable auto check update.</value>
       <value>Below are sponsors. Thank you for your support to Yu Minecraft Launcher!</value>
     </data>
   <data name="CNYSymbol" xml:space="preserve">
-      <value>CNY</value>
+      <value>￥</value>
     </data>
   <data name="MacOsUpdateTip" xml:space="preserve">
       <value>New version:{version}

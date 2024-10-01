@@ -878,7 +878,7 @@ sudo apt install vlc</value>
       <value>Для запуска игры требуется хотя бы одна учетная запись. Если вы используете автономную учетную запись, вы не сможете войти на сервер с подлинной аутентификацией.</value>
     </data>
   <data name="MusicApi" xml:space="preserve">
-      <value>音乐Api</value>
+      <value>Музыка Api</value>
     </data>
   <data name="ProjectInfo" xml:space="preserve">
       <value>项目信息</value>

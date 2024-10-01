@@ -878,13 +878,13 @@ Redirect to https://ymcl.daiyu.fun/ to download the official version.</value>
       <value>At least one account is required to launch the game. If you use an offline account, you will not be able to log in to a server with genuine authentication.</value>
     </data>
   <data name="MusicApi" xml:space="preserve">
-      <value>音乐Api</value>
+      <value>Music Api</value>
     </data>
   <data name="ProjectInfo" xml:space="preserve">
       <value>项目信息</value>
     </data>
   <data name="SaveAs" xml:space="preserve">
-      <value>另存为</value>
+      <value>Save As</value>
     </data>
   <data name="DeskLyricColor" xml:space="preserve">
       <value>桌面歌词颜色</value>

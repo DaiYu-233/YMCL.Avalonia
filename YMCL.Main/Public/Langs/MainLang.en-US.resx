@@ -881,86 +881,86 @@ Redirect to https://ymcl.daiyu.fun/ to download the official version.</value>
       <value>Music Api</value>
     </data>
   <data name="ProjectInfo" xml:space="preserve">
-      <value>项目信息</value>
+      <value>Project Info</value>
     </data>
   <data name="SaveAs" xml:space="preserve">
       <value>Save As</value>
     </data>
   <data name="DeskLyricColor" xml:space="preserve">
-      <value>桌面歌词颜色</value>
+      <value>Desktop Lyrics Color</value>
     </data>
   <data name="DeskLyricAlignment" xml:space="preserve">
-      <value>桌面歌词对齐</value>
+      <value>Desktop Lyrics Align</value>
     </data>
   <data name="AlignLeft" xml:space="preserve">
-      <value>居左对齐</value>
+      <value>Align Left</value>
     </data>
   <data name="AlignCenter" xml:space="preserve">
-      <value>居中对齐</value>
+      <value>Align center</value>
     </data>
   <data name="AlignRight" xml:space="preserve">
-      <value>居右对齐</value>
+      <value>Align Right</value>
     </data>
   <data name="DeskLyricSize" xml:space="preserve">
-      <value>桌面歌词大小</value>
+      <value>Desktop Lyrics Size</value>
     </data>
   <data name="AutoUpdate" xml:space="preserve">
-      <value>自动更新</value>
+      <value>Auto Update</value>
     </data>
   <data name="SkipThisVersion" xml:space="preserve">
-      <value>跳过此版本</value>
+      <value>Skip This Version</value>
     </data>
   <data name="SkipVersionTip" xml:space="preserve">
-      <value>已跳过版本 : {version}
-前往 设置-启动器-检查更新 可再次获取此版本</value>
+      <value>Skip version:{version}.
+Go to Settings-Launcher-Check Updates to download this version.</value>
     </data>
   <data name="WinSevenAutoUpdateTip" xml:space="preserve">
-      <value>发现新版本 : {version}
-win10 以下系统(不包括10)不支持自动更新
-前往以下链接下载新版本 :  “{url}”
-前往 设置-下载-自动更新 可关闭自动检查更新</value>
+      <value>New version:{version}
+Above Windows 10 can't auto updates.
+Go to "{url}" download new version.
+Go to Settings-Download-Auto Update can disable auto check update.</value>
     </data>
   <data name="OpenBrowser" xml:space="preserve">
-      <value>打开浏览器</value>
+      <value>Open Browser</value>
     </data>
   <data name="CustomHomePageWay_Presetting_JavaNews" xml:space="preserve">
-      <value>预设-Java新闻</value>
+      <value>Preset - Minecraft: Java Edition News</value>
     </data>
   <data name="NetworkSource" xml:space="preserve">
-      <value>网络源</value>
+      <value>Network Source</value>
     </data>
   <data name="NoSupportNow" xml:space="preserve">
-      <value>现不支持</value>
+      <value>Not supported</value>
     </data>
   <data name="AggregateSearchTip" xml:space="preserve">
-      <value>输入关键词以在YMCL中搜索 </value>
+      <value>Enter keyword to search in Ymcl </value>
     </data>
   <data name="CannotRecognitionTheVersion" xml:space="preserve">
-      <value>无法识别选中版本</value>
+      <value>Can't Recognition The Version</value>
     </data>
   <data name="LocalResource" xml:space="preserve">
-      <value>本地资源</value>
+      <value>Local Resources</value>
     </data>
   <data name="InstallVersion" xml:space="preserve">
-      <value>安装版本</value>
+      <value>Install Version</value>
     </data>
   <data name="JumpSearch" xml:space="preserve">
-      <value>跳转搜索</value>
+      <value>Jump Search</value>
     </data>
   <data name="AggregateSearchWatermark" xml:space="preserve">
-      <value>输入关键词以在YMCL中搜索</value>
+      <value>Enter keyword to search in Ymcl</value>
     </data>
   <data name="SwitchedTo" xml:space="preserve">
-      <value>已切换到</value>
+      <value>Switched to</value>
     </data>
   <data name="JumpToSearchTip" xml:space="preserve">
-      <value>将会跳转到 {target} 搜索此关键词</value>
+      <value>Jump to {target} to search</value>
     </data>
   <data name="SearchInTip" xml:space="preserve">
-      <value>在 {target} 中搜索</value>
+      <value>Search in {target}</value>
     </data>
   <data name="NavSearch" xml:space="preserve">
-      <value> 搜索</value>
+      <value> Search</value>
     </data>
   <data name="Music" xml:space="preserve">
       <value>音乐</value>

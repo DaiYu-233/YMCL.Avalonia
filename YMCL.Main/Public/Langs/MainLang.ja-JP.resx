@@ -111,7 +111,7 @@
     <value> ダウンロード</value>
   </data>
   <data name="NavMore" xml:space="preserve">
-    <value> より多く</value>
+    <value> さらに表示</value>
   </data>
   <data name="NavMusic" xml:space="preserve">
     <value> 音楽</value>
@@ -120,125 +120,125 @@
     <value>起動</value>
   </data>
   <data name="MinecraftFolder" xml:space="preserve">
-    <value>Minecraftフォルダー</value>
+    <value>Minecraft フォルダ</value>
   </data>
   <data name="DelSeletedItem" xml:space="preserve">
-    <value>選択したものを削除</value>
+    <value>選択項目を削除</value>
   </data>
   <data name="AddFolder" xml:space="preserve">
-    <value>フォルダーを追加</value>
+    <value>フォルダを追加</value>
   </data>
   <data name="SelectMinecraftFolder" xml:space="preserve">
-    <value>'.minecraft'フォルダーを選択します</value>
+    <value>ターゲットフォルダを選択 '.minecraft'フォルダ'</value>
   </data>
   <data name="NeedToSelectMinecraftFolder" xml:space="preserve">
-    <value>'.minecraft 'フォルダーを選択する必要があります</value>
+    <value>ターゲットフォルダは「.minecraft'」フォルダを選択する必要があります</value>
   </data>
   <data name="SuccessAdd" xml:space="preserve">
-    <value>正常に追加されました</value>
+    <value>追加終了</value>
   </data>
   <data name="TheItemAlreadyExist" xml:space="preserve">
-    <value>このアイテムはすでに存在します</value>
+    <value>このプロジェクトはすでに存在します</value>
   </data>
   <data name="SuccessRemove" xml:space="preserve">
-    <value>削除に成功しました</value>
+    <value>削除成功</value>
   </data>
   <data name="AutoScan" xml:space="preserve">
     <value>自動スキャン</value>
   </data>
   <data name="LetYMCLChooseJava" xml:space="preserve">
-    <value>YMCLに適切なJavaを選ばせましょう</value>
+    <value>YMCLでのカスタム値 Java を利用する</value>
   </data>
   <data name="ScanJavaSuccess" xml:space="preserve">
-    <value>Javaのスキャンに成功しました</value>
+    <value>Javaのスキャンが完了しました。</value>
   </data>
   <data name="RepeatItem" xml:space="preserve">
-    <value>アイテムが重複しています</value>
+    <value>プロジェクトの複製</value>
   </data>
   <data name="NavLauncher" xml:space="preserve">
     <value> ランチャー</value>
   </data>
   <data name="OpenFileWay" xml:space="preserve">
-    <value>ファイルを開く方法</value>
+    <value>ファイルを開く</value>
   </data>
   <data name="FileSelectWindow" xml:space="preserve">
     <value>ファイル選択ウィンドウ</value>
   </data>
   <data name="ManualInput" xml:space="preserve">
-    <value>手動入力</value>
+    <value>手入力</value>
   </data>
   <data name="Ok" xml:space="preserve">
-    <value>確認</value>
+    <value>はい</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>キャンセル</value>
   </data>
   <data name="InputFolderPath" xml:space="preserve">
-    <value>フォルダパスを入力してください</value>
+    <value>フォルダパスを入力</value>
   </data>
   <data name="FolderNotExist" xml:space="preserve">
-    <value>ディレクトリはありません</value>
+    <value>フォルダーが存在しません</value>
   </data>
   <data name="InputFilePath" xml:space="preserve">
-    <value>ファイルパスを入力してください</value>
+    <value>ファイルパスを入力</value>
   </data>
   <data name="FileNotExist" xml:space="preserve">
-    <value>ファイルが存在しません。ローカルファイルの場所を確認してください</value>
+    <value>ファイルが存在しません</value>
   </data>
   <data name="ManualAdd" xml:space="preserve">
-    <value>手動で追加してください</value>
+    <value>手動で追加</value>
   </data>
   <data name="SelectJava" xml:space="preserve">
-    <value>Javaを選択してください</value>
+    <value>Java の選択</value>
   </data>
   <data name="TheJavaIsError" xml:space="preserve">
-    <value>Javaが正しくありません</value>
+    <value>Javaが正しくない</value>
   </data>
   <data name="NavAccount" xml:space="preserve">
     <value> アカウント</value>
   </data>
   <data name="AddNewAccount" xml:space="preserve">
-    <value>新しいアカウントを追加</value>
+    <value>新規アカウントを追加</value>
   </data>
   <data name="OfflineLogin" xml:space="preserve">
     <value>オフラインでログイン</value>
   </data>
   <data name="MicrosoftLogin" xml:space="preserve">
-    <value>Microsoftログイン</value>
+    <value>マイクロソフト ログイン</value>
   </data>
   <data name="ThirdPartyLogin" xml:space="preserve">
-    <value>サードパーティのログイン</value>
+    <value>サードパーティーログイン</value>
   </data>
   <data name="SelectAccountType" xml:space="preserve">
-    <value>アカウントの種類を選択してください</value>
+    <value>アカウントの種類を選択</value>
   </data>
   <data name="AccountNameCannotBeNull" xml:space="preserve">
-    <value>アカウント名を空白にすることはできません</value>
+    <value>アカウント名が空白にはできません。</value>
   </data>
   <data name="InputAccountName" xml:space="preserve">
-    <value>アカウント名を入力してください</value>
+    <value>アカウント名を入力</value>
   </data>
   <data name="VerificationCode" xml:space="preserve">
-    <value>コードを確認してください</value>
+    <value>認証コード</value>
   </data>
   <data name="Loading" xml:space="preserve">
-    <value>読み込み中...</value>
+    <value>読み込んでいます...</value>
   </data>
   <data name="CopyCodeAndOPenBrowser" xml:space="preserve">
-    <value>コードをコピーしてブラウザを開きます</value>
+    <value>コードをコピーしてブラウザを開く</value>
   </data>
   <data name="WaitForMicrosoftVerification" xml:space="preserve">
     <value>Microsoftアカウントの認証が完了するのを待っています
 ブラウザに移動して認証を完了してください</value>
   </data>
   <data name="LoginFail" xml:space="preserve">
-    <value>ログイン失敗</value>
+    <value>ログインに失敗しました</value>
   </data>
   <data name="VerifyingAccount" xml:space="preserve">
-    <value>アカウントを認証しています</value>
+    <value>アカウントを確認中</value>
   </data>
   <data name="VerificationServer" xml:space="preserve">
-    <value>認証サーバー</value>
+    <value>サーバーを確認</value>
   </data>
   <data name="EmailAddress" xml:space="preserve">
     <value>メールアドレス</value>
@@ -247,16 +247,16 @@
     <value>アカウントパスワード</value>
   </data>
   <data name="YggdrasilServerUrlIsEmpty" xml:space="preserve">
-    <value>検証サーバーを空にすることはできません</value>
+    <value>確認サーバーは空欄にできません</value>
   </data>
   <data name="YggdrasilPasswordIsEmpty" xml:space="preserve">
-    <value>パスワードを空にすることはできません</value>
+    <value>パスワードを空白にすることはできません</value>
   </data>
   <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
-    <value>メールアドレスを空にすることはできません</value>
+    <value>メールボックスは空欄にできません</value>
   </data>
   <data name="NavPersonalize" xml:space="preserve">
-    <value> パーソナライズ</value>
+    <value> 個人設定</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>言語</value>
@@ -271,67 +271,67 @@
     <value>ライト</value>
   </data>
   <data name="Dark" xml:space="preserve">
-    <value>深い色合い</value>
+    <value>ダーク</value>
   </data>
   <data name="MaxMem" xml:space="preserve">
     <value>最大メモリ</value>
   </data>
   <data name="CannotOpenBrowser" xml:space="preserve">
-    <value>ブラウザを開けません</value>
+    <value>ブラウザを開くことができませんでした</value>
   </data>
   <data name="ManualOpen" xml:space="preserve">
-    <value>手動で開きます</value>
+    <value>手動で開く</value>
   </data>
   <data name="CopyUrlAndManualOpen" xml:space="preserve">
-    <value>Ctrl + C 次のリンクをコピーしてブラウザに貼り付けてください</value>
+    <value>Ctrl + C は次のリンクをコピーしブラウザーに貼り付けてください。</value>
   </data>
   <data name="VersionList" xml:space="preserve">
-    <value>バージョンリスト</value>
+    <value>リリース一覧</value>
   </data>
   <data name="VersionSetting" xml:space="preserve">
     <value>バージョン設定</value>
   </data>
   <data name="LaunchGame" xml:space="preserve">
-    <value>ゲームを起動してください</value>
+    <value>ロード</value>
   </data>
   <data name="NoChooseGame" xml:space="preserve">
     <value>ゲームが選択されていません</value>
   </data>
   <data name="ReturnWithIcon" xml:space="preserve">
-    <value>← 戻る</value>
+    <value>← 戻す</value>
   </data>
   <data name="CreateGameEntryFail" xml:space="preserve">
     <value>ゲームインスタンスの作成に失敗しました</value>
   </data>
   <data name="NoChooseGameOrCannotFindGame" xml:space="preserve">
-    <value>ゲームが選択されていないか、見つかりませんでした</value>
+    <value>ゲームが選択されていないか、ゲームが見つかりませんでした.</value>
   </data>
   <data name="AccountError" xml:space="preserve">
     <value>アカウントエラー</value>
   </data>
   <data name="LaunchProgress" xml:space="preserve">
-    <value>ローンチの進行状況</value>
+    <value>プログレスを起動</value>
   </data>
   <data name="BuildLaunchConfigFail" xml:space="preserve">
-    <value>スタートアップ構成の構築に失敗しました</value>
+    <value>構成のビルド開始に失敗しました</value>
   </data>
   <data name="GameExited" xml:space="preserve">
     <value>ゲームが終了しました</value>
   </data>
   <data name="WaitForGameWindowAppear" xml:space="preserve">
-    <value>ゲームウィンドウが表示されるまでお待ちください</value>
+    <value>ゲームウィンドウ接近を待機中</value>
   </data>
   <data name="LaunchFinish" xml:space="preserve">
-    <value>スタートアップが完了しました</value>
+    <value>開始終了</value>
   </data>
   <data name="LaunchFail" xml:space="preserve">
     <value>起動に失敗しました</value>
   </data>
   <data name="UserDataFolder" xml:space="preserve">
-    <value>ユーザーデータフォルダ</value>
+    <value>ユーザー データ フォルダ</value>
   </data>
   <data name="OpenFolder" xml:space="preserve">
-    <value>フォルダーを開きます</value>
+    <value>フォルダを開く</value>
   </data>
   <data name="AutoInstall" xml:space="preserve">
     <value>自動インストール</value>
@@ -340,73 +340,73 @@
       <value>最新バージョン</value>
     </data>
   <data name="PreviewVersion" xml:space="preserve">
-    <value>プレビュー版</value>
+    <value>バージョンをプレビュー</value>
   </data>
   <data name="ReleaseVersion" xml:space="preserve">
-    <value>公式リリース</value>
+    <value>リリースチャンネル</value>
   </data>
   <data name="GetInstallableVersionFail" xml:space="preserve">
-    <value>インストール可能なリストの取得に失敗しました</value>
+    <value>インストールできるリストの取得に失敗しました</value>
   </data>
   <data name="OldVersion" xml:space="preserve">
-    <value>古代バージョン</value>
+    <value>古いバージョン</value>
   </data>
   <data name="AllVersion" xml:space="preserve">
-    <value>すべてのバージョン</value>
+    <value>全てのバージョン</value>
   </data>
   <data name="SearchKeyword" xml:space="preserve">
-    <value>キーワードを検索...</value>
+    <value>検索キーワード...</value>
   </data>
   <data name="InstallPreview" xml:space="preserve">
-    <value>プレビューをインストール</value>
+    <value>インストールのプレビュー</value>
   </data>
   <data name="NoAdditionalInstall" xml:space="preserve">
-    <value>追加のインストールはありません</value>
+    <value>空のインストール</value>
   </data>
   <data name="BeginInstall" xml:space="preserve">
-    <value>インストールを開始してください</value>
+    <value>インストールの開始</value>
   </data>
   <data name="ViewUpdatedContent" xml:space="preserve">
-    <value>新着情報をチェック</value>
+    <value>更新を見る</value>
   </data>
   <data name="Reload" xml:space="preserve">
-    <value>リロード</value>
+    <value>再読み込み</value>
   </data>
   <data name="GetFail" xml:space="preserve">
-    <value>取得に失敗しました</value>
+    <value>フェッチに失敗しました</value>
   </data>
   <data name="NoAvailableItem" xml:space="preserve">
-    <value>利用可能なアイテムがありません</value>
+    <value>利用可能なプロジェクトがありません</value>
   </data>
   <data name="MineratCrashed" xml:space="preserve">
-    <value>マインクラットが墜落しました</value>
+    <value>Minecratrでクラッシュしました</value>
   </data>
   <data name="TheVersionNameWillBeRenamedTo" xml:space="preserve">
-    <value>バージョン名は次の名前に変更されます: </value>
+    <value>バージョン名が変更されます: </value>
   </data>
   <data name="IncludeSpecialWord" xml:space="preserve">
-    <value>スペシャルキャラクター入り</value>
+    <value>特殊文字が含まれています</value>
   </data>
   <data name="FolderAlreadyExists" xml:space="preserve">
-    <value>フォルダーは既に存在します</value>
+    <value>フォルダは既に存在します</value>
   </data>
   <data name="InstallFail" xml:space="preserve">
-    <value>インストール失敗</value>
+    <value>インストールに失敗しました</value>
   </data>
   <data name="Install" xml:space="preserve">
     <value>インストール</value>
   </data>
   <data name="InstallFinish" xml:space="preserve">
-    <value>インストールが完了しました</value>
+    <value>インストール完了</value>
   </data>
   <data name="CannotFandRightJava" xml:space="preserve">
-    <value>適切なJavaが見つかりませんでした</value>
+    <value>該当するJavaは見つかりませんでした</value>
   </data>
   <data name="Refresh" xml:space="preserve">
-    <value>リフレッシュ</value>
+    <value>更新</value>
   </data>
   <data name="Mod" xml:space="preserve">
-    <value>モッド</value>
+    <value>モジュール</value>
   </data>
   <data name="Overview" xml:space="preserve">
     <value>概要</value>
@@ -418,19 +418,19 @@
     <value>アーカイブフォルダ</value>
   </data>
   <data name="ModsFolder" xml:space="preserve">
-    <value>モジュールフォルダ</value>
+    <value>MODフォルダー</value>
   </data>
   <data name="ResourcepacksFolder" xml:space="preserve">
-    <value>資源パックフォルダ</value>
+    <value>リソース パック フォルダ</value>
   </data>
   <data name="ShaderpacksFolder" xml:space="preserve">
-    <value>ライトパックフォルダ</value>
+    <value>影パッケージフォルダ</value>
   </data>
   <data name="VersionFolder" xml:space="preserve">
     <value>バージョンフォルダ</value>
   </data>
   <data name="EnableIndependencyCore" xml:space="preserve">
-    <value>スタンドアロンコアを有効にします</value>
+    <value>スタンドアロンコアを有効化</value>
   </data>
   <data name="UseGlobalSetting" xml:space="preserve">
     <value>グローバル設定を使用</value>
@@ -439,43 +439,43 @@
     <value>閉じる</value>
   </data>
   <data name="On" xml:space="preserve">
-    <value>開放する</value>
+    <value>オン</value>
   </data>
   <data name="AutoJoinServer" xml:space="preserve">
-    <value>サーバーに自動的に参加します</value>
+    <value>サーバーを自動登録</value>
   </data>
   <data name="EnableSelect" xml:space="preserve">
-    <value>チェックを有効にします</value>
+    <value>選択を有効</value>
   </data>
   <data name="DisableSelect" xml:space="preserve">
-    <value>選択したものを無効にします</value>
+    <value>選択項目の無効化</value>
   </data>
   <data name="DeleteSelect" xml:space="preserve">
-    <value>選択したものを削除</value>
+    <value>選択項目を削除</value>
   </data>
   <data name="SelectAll" xml:space="preserve">
     <value>すべて選択</value>
   </data>
   <data name="DeselectAll" xml:space="preserve">
-    <value>何も選択しないでください</value>
+    <value>選択を解除</value>
   </data>
   <data name="SelectedItem" xml:space="preserve">
-    <value>選択したアイテム: </value>
+    <value>選択された項目: </value>
   </data>
   <data name="MoveToRecycleBin" xml:space="preserve">
     <value>ゴミ箱に移動</value>
   </data>
   <data name="WindowTitleBarStyle" xml:space="preserve">
-    <value>ウィンドウタイトルバーのスタイル</value>
+    <value>ウインドウのタイトルバーのスタイル</value>
   </data>
   <data name="GetException" xml:space="preserve">
-    <value>異常があります</value>
+    <value>例外が発生しました</value>
   </data>
   <data name="UnhandledException" xml:space="preserve">
-    <value>未処理の例外</value>
+    <value>未処理例外:</value>
   </data>
   <data name="CustomHomePage" xml:space="preserve">
-    <value>メインページをカスタマイズしましょう</value>
+    <value>メインページ</value>
   </data>
   <data name="LocalSourceCode" xml:space="preserve">
     <value>ローカルソースコード</value>
@@ -484,70 +484,70 @@
     <value>編集</value>
   </data>
   <data name="CustomHomePageSourceCodeError" xml:space="preserve">
-    <value>カスタムメインページソースコードエラー</value>
+    <value>メインページのソースの編集エラー</value>
   </data>
   <data name="CheckUpdate" xml:space="preserve">
-    <value>アップデートを確認する</value>
+    <value>更新を確認</value>
   </data>
   <data name="ChooseArchitecture" xml:space="preserve">
-    <value>プラットフォームを選択してください</value>
+    <value>プラットフォームを選ぶ</value>
   </data>
   <data name="CheckUpdateFail" xml:space="preserve">
-    <value>アップデートの確認に失敗しました</value>
+    <value>更新のチェックに失敗しました</value>
   </data>
   <data name="FoundNewVersion" xml:space="preserve">
-    <value>新しいバージョンを発見する</value>
+    <value>新しいバージョンが利用可能</value>
   </data>
   <data name="GetUpdateUrl" xml:space="preserve">
-    <value>更新された統一資源ロケーターをゲット</value>
+    <value>統一リソースの位置を更新</value>
   </data>
   <data name="BeginDownload" xml:space="preserve">
-    <value>ダウンロードを開始してください</value>
+    <value>ダウンロードを開始中</value>
   </data>
   <data name="UpdateFail" xml:space="preserve">
     <value>更新に失敗しました</value>
   </data>
   <data name="ThisArchitectureCannotAutoUpdate" xml:space="preserve">
-    <value>このプラットフォームは自動更新をサポートしていません。次のパスを開いて手動で交換してください</value>
+    <value>このプラットフォームは自動的に更新されません。次のパスを手動で置き換えてください</value>
   </data>
   <data name="Update" xml:space="preserve">
-    <value>更新</value>
+    <value>アップデート</value>
   </data>
   <data name="DownloadFinish" xml:space="preserve">
-    <value>ダウンロードが完了しました</value>
+    <value>ダウンロード完了</value>
   </data>
   <data name="CurrentlyTheLatestVersion" xml:space="preserve">
-    <value>現在のバージョンは最新です</value>
+    <value>お使いのバージョンは最新です。</value>
   </data>
   <data name="OpenSourceProjectUsageTable" xml:space="preserve">
-    <value>オープンソースプロジェクト使用シート</value>
+    <value>オープンソースプロジェクト用テーブル</value>
   </data>
   <data name="GPL3Text" xml:space="preserve">
-    <value>YMCLはApacheライセンスの下でオープンソースであり、変更および配布することができますが、ソフトウェアには元のコードの著作権およびライセンス通知、およびライセンス情報を含む通知ファイルが含まれている必要があります。</value>
+    <value>YMCLは Apache License プロトコルのソースコードとしてオープンソース化できますが、ライセンスキーの登録およびライセンス規約を含める必要があります。また、ライセンス情報含む通知ファイルが必要です。</value>
   </data>
   <data name="ShowGameOutput" xml:space="preserve">
-    <value>ゲーム出力を表示</value>
+    <value>ゲームエクスポートを表示</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>検索</value>
   </data>
   <data name="LoadMore" xml:space="preserve">
-    <value>もっと読み込む</value>
+    <value>もっと表示</value>
   </data>
   <data name="ErrorCallingApi" xml:space="preserve">
-    <value>Apiの呼び出し中にエラーが発生しました</value>
+    <value>API 呼び出し時にエラー</value>
   </data>
   <data name="SearchNoResult" xml:space="preserve">
-    <value>結果が見つかりません</value>
+    <value>結果が見つかりませんでした</value>
   </data>
   <data name="AddLocalSong" xml:space="preserve">
-    <value>オーディオファイルを追加</value>
+    <value>音声ファイルを追加</value>
   </data>
   <data name="SelectMusicFile" xml:space="preserve">
     <value>オーディオファイルを選択してください</value>
   </data>
   <data name="ThemeColor" xml:space="preserve">
-    <value>テーマカラー</value>
+    <value>アクセント色</value>
   </data>
   <data name="InitAudioLibraryFail" xml:space="preserve">
     <value>オーディオライブラリの初期化に失敗しました</value>
@@ -559,40 +559,40 @@ sudo apt install libvlc - dev
 sudo apt install vlc</value>
   </data>
   <data name="ThisFeatureIsCurrentlyUnderDevelopment" xml:space="preserve">
-    <value>この機能は開発中です</value>
+    <value>この機能は現在開発中です</value>
   </data>
   <data name="TreasureBox" xml:space="preserve">
-    <value>宝箱</value>
+    <value>百箱</value>
   </data>
   <data name="ActivateWinOffice" xml:space="preserve">
-    <value>Windows/Officeを有効にしてください</value>
+    <value>Windows/Office の利用</value>
   </data>
   <data name="Run" xml:space="preserve">
     <value>実行</value>
   </data>
   <data name="ThisFeatureOnlySupportsWindowsPlatform" xml:space="preserve">
-    <value>この機能はWindowsでのみ利用できます</value>
+    <value>この機能はWindowsプラットフォームでのみサポートされています。</value>
   </data>
   <data name="RunCommandFail" xml:space="preserve">
-    <value>コマンドの実行に失敗しました</value>
+    <value>コマンドを実行できません</value>
   </data>
   <data name="RunActivate" xml:space="preserve">
-    <value>アクティベーションを実行</value>
+    <value>アクティベート</value>
   </data>
   <data name="CancelActivateWin" xml:space="preserve">
-    <value>Windowsを無効にしてください</value>
+    <value>Windows の有効化をキャンセル</value>
   </data>
   <data name="CancelActivateWinTip" xml:space="preserve">
-    <value>このアクションを実行すると、Windowsのアクティベーションステータスが削除され、Windowsのパーソナライゼーションなどの機能が使用できなくなります。続行しますか？</value>
+    <value>Windowsの有効化状態を削除し、Windows パーソナライゼーション機能では使用できません。続行しますか。</value>
   </data>
   <data name="ThisFeatureOnlySupportsWindows10AndAbove" xml:space="preserve">
-    <value>この機能はWindows 10以降のみをサポートしており、このバージョンよりも前のシステムが正常にアクティベートされることは保証されていません</value>
+    <value>この機能はWindows10以降でのみサポートされています。最新のバージョンでは有効にする必要があります。</value>
   </data>
   <data name="PlayList" xml:space="preserve">
-    <value>放映リスト</value>
+    <value>プレイリスト</value>
   </data>
   <data name="ModName" xml:space="preserve">
-    <value>モジュール名</value>
+    <value>MOD名</value>
   </data>
   <data name="GameVersion" xml:space="preserve">
     <value>ゲームバージョン</value>
@@ -601,7 +601,7 @@ sudo apt install vlc</value>
     <value>任意のローダー</value>
   </data>
   <data name="AnySource" xml:space="preserve">
-    <value>すべての情報源</value>
+    <value>すべてのソース</value>
   </data>
   <data name="Download" xml:space="preserve">
     <value>ダウンロード</value>
@@ -610,52 +610,52 @@ sudo apt install vlc</value>
     <value>ファイルを保存</value>
   </data>
   <data name="DownloadFail" xml:space="preserve">
-    <value>ダウンロード失敗</value>
+    <value>ダウンロードに失敗しました</value>
   </data>
   <data name="MatchingVersion" xml:space="preserve">
-    <value>バージョンが一致しています</value>
+    <value>一致するバージョン</value>
   </data>
   <data name="ModifyMicrosoftSkin" xml:space="preserve">
-    <value>マイクロソフト</value>
+    <value>スキン変更 (Microsoft)</value>
   </data>
   <data name="SkinModel" xml:space="preserve">
-    <value>スキンモデル</value>
+    <value>皮膚モデル</value>
   </data>
   <data name="InputSkinFilePath" xml:space="preserve">
-    <value>スキンファイルのパスを入力してください</value>
+    <value>スキンファイルパスを入力...</value>
   </data>
   <data name="SelectSkinFile" xml:space="preserve">
-    <value>スキンファイルを選択してください</value>
+    <value>スキンファイルを選択</value>
   </data>
   <data name="RefreshMicrosoftSkin" xml:space="preserve">
-    <value>マイクロソフト</value>
+    <value>ウィンドウを更新 (Microsoft)</value>
   </data>
   <data name="ModifySuccess" xml:space="preserve">
-    <value>正常に変更されました</value>
+    <value>修正終了</value>
   </data>
   <data name="ModifyFail" xml:space="preserve">
-    <value>編集に失敗しました</value>
+    <value>更新に失敗しました</value>
   </data>
   <data name="IfInstallBedRock" xml:space="preserve">
-    <value>基盤バージョンがインストールされていない場合、起動しません</value>
+    <value>Blect がインストールされていない場合は起動できません。</value>
   </data>
   <data name="BedRockVersion" xml:space="preserve">
-    <value>岩盤エディション</value>
+    <value>BE版 バージョン</value>
   </data>
   <data name="CannotOpenBedRockSetting" xml:space="preserve">
-    <value>岩盤設定を開けませんでした</value>
+    <value>ベースロック設定を開けませんでした</value>
   </data>
   <data name="UpgradeToAdministratorPrivileges" xml:space="preserve">
-    <value>管理者権限にアップグレード</value>
+    <value>管理者の権限を上げる</value>
   </data>
   <data name="UpgradeToAdministratorPrivilegesFail" xml:space="preserve">
-    <value>管理者権限へのアップグレードに失敗しました</value>
+    <value>管理者への昇格が失敗しました</value>
   </data>
   <data name="UpgradeToAdministratorPrivilegesTip" xml:space="preserve">
-    <value>操作を実行するには、管理者権限にアップグレードする必要があります。[OK]をクリックして、管理者権限でプログラムを再起動します</value>
+    <value>操作を実行するために管理者権限が必要です。OKを押すとアプリケーションを再起動します。</value>
   </data>
   <data name="ChooseLanguage" xml:space="preserve">
-    <value>选择语言/Choose Language</value>
+    <value>言語/Choose Language を選択してください</value>
   </data>
   <data name="zh_CN" xml:space="preserve">
     <value>简体中文</value>
@@ -670,73 +670,73 @@ sudo apt install vlc</value>
     <value>日本語</value>
   </data>
   <data name="ru_RU" xml:space="preserve">
-    <value>Русский язык</value>
+    <value>Русскиからささやかれるなど反意識を求める者へ。</value>
   </data>
   <data name="ReleaseTheMouseAndLetYmclProcessThisFile" xml:space="preserve">
-    <value>マウスを離して、YMCLがこのファイルを処理できるようにします</value>
+    <value>YMCLを使用してこのファイルを処理するマウス</value>
   </data>
   <data name="UnableToAddModsForBedrockEdition" xml:space="preserve">
-    <value>モジュールをBedrock Editionに追加することはできません</value>
+    <value>Modを作成できませんでした</value>
   </data>
   <data name="AddTheFollowingFilesAsModsToTheCurrentVersion" xml:space="preserve">
-    <value>次のファイルをモジュールとして現在のバージョンに追加します</value>
+    <value>以下のファイルをMODとして追加</value>
   </data>
   <data name="UnsupportedFileType" xml:space="preserve">
-    <value>サポートされていないファイルタイプです</value>
+    <value>対応していないファイルタイプです。</value>
   </data>
   <data name="InstallTheFollowingFilesAsAnIntegrationPackageCurseforgeFormat" xml:space="preserve">
     <value>以下のファイルを統合パッケージ（ CurseForge形式）としてインストールしてください</value>
   </data>
   <data name="Unzip" xml:space="preserve">
-    <value>荷造りを始めましょう</value>
+    <value>解凍</value>
   </data>
   <data name="UnzipingModPack" xml:space="preserve">
-    <value>インテグレーションパックを展開しています</value>
+    <value>Modパックを展開中</value>
   </data>
   <data name="FinsihUnzipModPack" xml:space="preserve">
-    <value>インテグレーションパックの開梱が完了しました</value>
+    <value>統合されたパックの解凍が完了しました。</value>
   </data>
   <data name="GetModPackInfo" xml:space="preserve">
-    <value>インテグレーションパックの情報を入手してください</value>
+    <value>Modパック情報の取得</value>
   </data>
   <data name="ModPackInfo" xml:space="preserve">
-    <value>パッケージ情報を統合</value>
+    <value>バンドル情報</value>
   </data>
   <data name="ImportFailed" xml:space="preserve">
-    <value>インポートに失敗しました</value>
+    <value>インポートできません</value>
   </data>
   <data name="ImportSuccess" xml:space="preserve">
-    <value>インポートに成功しました</value>
+    <value>インポート成功</value>
   </data>
   <data name="NoCrashInfo" xml:space="preserve">
-    <value>衝突情報はありません</value>
+    <value>クラッシュ情報はありません</value>
   </data>
   <data name="DownloadModPackMod" xml:space="preserve">
-    <value>インテグレーションパックモジュールをダウンロードしてください</value>
+    <value>ModとModをダウンロード</value>
   </data>
   <data name="TotalNumberOfMod" xml:space="preserve">
-    <value>モジュールの総数</value>
+    <value>MOD合計</value>
   </data>
   <data name="DownloadSuccess" xml:space="preserve">
     <value>ダウンロードに成功しました</value>
   </data>
   <data name="OverrideModPack" xml:space="preserve">
-    <value>インテグレーションパックを上書きします</value>
+    <value>Modパック</value>
   </data>
   <data name="DownloadFailedFileAgain" xml:space="preserve">
-    <value>ファイルの再ダウンロードに失敗しました</value>
+    <value>失敗したファイルの再ダウンロード中...</value>
   </data>
   <data name="Plugin" xml:space="preserve">
     <value>プラグイン</value>
   </data>
   <data name="EnableAll" xml:space="preserve">
-    <value>全員発動</value>
+    <value>すべて有効にする</value>
   </data>
   <data name="DisableAll" xml:space="preserve">
-    <value>すべて無効にします</value>
+    <value>すべて無効にする</value>
   </data>
   <data name="Author" xml:space="preserve">
-    <value>作家</value>
+    <value>著者</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>バージョン</value>
@@ -745,104 +745,104 @@ sudo apt install vlc</value>
     <value>説明</value>
   </data>
   <data name="NeedRestartApp" xml:space="preserve">
-    <value>YMCLを再起動する必要があります</value>
+    <value>YMCL の再起動が必要です</value>
   </data>
   <data name="OnlySupportsWindows10AndAboveSystems" xml:space="preserve">
-    <value>Windows 10以降のみをサポートしています</value>
+    <value>Windows 10以降でのみ対応</value>
   </data>
   <data name="NavTask" xml:space="preserve">
-    <value> タスク</value>
+    <value> 開くべきクリック ギルドVault 4</value>
   </data>
   <data name="TaskCenter" xml:space="preserve">
     <value>タスクセンター</value>
   </data>
   <data name="AllType" xml:space="preserve">
-    <value>すべてのジャンル</value>
+    <value>すべてのタイプ</value>
   </data>
   <data name="MaterialPack" xml:space="preserve">
-    <value>素材パック</value>
+    <value>テクスチャ パック</value>
   </data>
   <data name="Map" xml:space="preserve">
     <value>地図</value>
   </data>
   <data name="CustomBackGroundImg" xml:space="preserve">
-    <value>カスタム背景画像</value>
+    <value>背景をカスタマイズします</value>
   </data>
   <data name="SelectImgFile" xml:space="preserve">
-    <value>画像ファイルを選択してください</value>
+    <value>イメージ ファイルの選択</value>
   </data>
   <data name="MusicNotAvailable" xml:space="preserve">
       <value>音楽は利用できません</value>
     </data>
   <data name="MusicGetFail" xml:space="preserve">
-      <value>音楽の取得に失敗しました</value>
+      <value>音楽が取得できませんでした</value>
     </data>
   <data name="DownloadSource" xml:space="preserve">
       <value>ソースをダウンロード</value>
     </data>
   <data name="MaximumDownloadThread" xml:space="preserve">
-      <value>最大ダウンロードスレッド数</value>
+      <value>スレッドの最大ダウンロード</value>
     </data>
   <data name="DownloadThreadTooBigTip" xml:space="preserve">
-      <value>ダウンロードスレッドが大きすぎるため、デバイスがクラッシュする可能性があります</value>
+      <value>スレッドが大きすぎる場合、デバイスカードトンネリングが発生します</value>
     </data>
   <data name="Unknown" xml:space="preserve">
       <value>不明</value>
     </data>
   <data name="ShaderPack" xml:space="preserve">
-      <value>ライトパック</value>
+      <value>フォトパック</value>
     </data>
   <data name="DataPack" xml:space="preserve">
       <value>パケット</value>
     </data>
   <data name="Api" xml:space="preserve">
-      <value>API</value>
+      <value>アプリケーション インターフェイス</value>
     </data>
   <data name="ModPack" xml:space="preserve">
-      <value>インテグレーションパッケージ</value>
+      <value>Modパック</value>
     </data>
   <data name="SaveAudioFile" xml:space="preserve">
-      <value>オーディオファイルを保存します</value>
+      <value>音声ファイルの保存</value>
     </data>
   <data name="CustomUpdateUrl" xml:space="preserve">
-      <value>カスタム更新URL</value>
+      <value>カスタムアップデートURL</value>
     </data>
   <data name="LyricTip" xml:space="preserve">
-      <value>私が歌詞▽(≧≦*) o</value>
+      <value>私が歌詞  ヾ(≧▽≦*)o</value>
     </data>
   <data name="MusicPlayerOnlySupportWindows" xml:space="preserve">
-      <value>音楽プレーヤーはWindowsのみをサポートしています</value>
+      <value>音楽プレーヤーは Windows のみ対応です。</value>
     </data>
   <data name="LoadAudioFileFail" xml:space="preserve">
-      <value>オーディオファイルの読み込みに失敗しました</value>
+      <value>音声ファイルの読み込みに失敗しました</value>
     </data>
   <data name="LaunchCore" xml:space="preserve">
-      <value>Coreを起動してください</value>
+      <value>コア</value>
     </data>
   <data name="AfterLaunchKeepLauncherVisible" xml:space="preserve">
-      <value>起動が完了した後は変更しないでください</value>
+      <value>起動時に変更しない</value>
     </data>
   <data name="AfterLaunchMakeLauncherMinimize" xml:space="preserve">
-      <value>起動完了後に最小化</value>
+      <value>開始後に最小化</value>
     </data>
   <data name="AfterLaunchExitLauncher" xml:space="preserve">
-      <value>起動が完了したら閉じます</value>
+      <value>起動後に終了</value>
     </data>
   <data name="AfterLaunchHideAndShowWhenGameExit" xml:space="preserve">
-      <value>起動が完了したら非表示にし、ゲーム終了後に表示します</value>
+      <value>起動完了後に非表示にします。ゲームの終了後表示</value>
     </data>
   <data name="LauncherVisibility" xml:space="preserve">
-      <value>ランチャーの可視性</value>
+      <value>ランチャーの表示</value>
     </data>
   <data name="AfterLaunchMinimizeAndShowWhenGameExit" xml:space="preserve">
-      <value>起動後に最小化し、ゲーム終了後に表示します</value>
+      <value>ブート時に最小化して開始する時間</value>
     </data>
   <data name="UnofficialTip" xml:space="preserve">
       <value>現在のバージョンは非公式であり、ウイルスに対して脆弱である可能性があります。
 公式バージョンをダウンロードするには、https://ymcl.daiyu.fun/にリダイレクトしてください。</value>
     </data>
   <data name="LanguageTip" xml:space="preserve">
-      <value>Yu Minecraft Launcherのセットアップを開始する前に、言語を選択する必要があります。</value>
+      <value>言語を選択するために Yu Minecraft ランチャーを準備します。</value>
     </data>
   <data name="RightArrow" xml:space="preserve">
       <value>→</value>
@@ -854,206 +854,206 @@ sudo apt install vlc</value>
       <value>←</value>
     </data>
   <data name="WindowTitleBarStyleTip" xml:space="preserve">
-    <value>ランチャーウィンドウのタイトルバーのスタイルを設定します。場合によっては、ランチャーのスタイルはサポートされていません。</value>
+    <value>特定の場合においてランチャーウィンドウのタイトルバーに表示されるスタイルを設定します。特定のケースでは、ランチャー形式がサポートされません。</value>
   </data>
   <data name="SystemStyle" xml:space="preserve">
-      <value>システムスタイル</value>
+      <value>システム</value>
     </data>
   <data name="LauncherStyle" xml:space="preserve">
       <value>ランチャースタイル</value>
     </data>
   <data name="MinecraftFolderTip" xml:space="preserve">
-      <value>Minecraftデータ用フォルダ（.minecraft ）</value>
+      <value>Minecraftデータフォルダ(.minecraft) をホストしています</value>
     </data>
   <data name="ExistingNow" xml:space="preserve">
-      <value>既存</value>
+      <value>利用可能</value>
     </data>
   <data name="JavaRuntime" xml:space="preserve">
-      <value>Javaランタイム</value>
+      <value>テスト実行時に</value>
     </data>
   <data name="JavaRuntimeTip" xml:space="preserve">
-      <value>ゲームを開始するには、少なくとも1つのJavaランタイムが必要です。</value>
+      <value>ゲームを起動するには少なくともJavaランタイムが必要です。</value>
     </data>
   <data name="AccountTip" xml:space="preserve">
-      <value>ゲームを起動するには、少なくとも1つのアカウントが必要です。オフラインアカウントを使用している場合、本物の認証を使用してサーバーにログインすることはできません。</value>
+      <value>ゲームを起動するには最低1度以上アカウントが必要です。認証済みのサーバーにログインできません。</value>
     </data>
   <data name="MusicApi" xml:space="preserve">
-      <value>音乐Api</value>
+      <value>音楽Api</value>
     </data>
   <data name="ProjectInfo" xml:space="preserve">
-      <value>项目信息</value>
+      <value>プロジェクト情報</value>
     </data>
   <data name="SaveAs" xml:space="preserve">
-      <value>另存为</value>
+      <value>名前を付けて保存</value>
     </data>
   <data name="DeskLyricColor" xml:space="preserve">
-      <value>桌面歌词颜色</value>
+      <value>デスクトップの歌詞の色</value>
     </data>
   <data name="DeskLyricAlignment" xml:space="preserve">
-      <value>桌面歌词对齐</value>
+      <value>デスクトップの歌詞整列</value>
     </data>
   <data name="AlignLeft" xml:space="preserve">
-      <value>居左对齐</value>
+      <value>左揃え</value>
     </data>
   <data name="AlignCenter" xml:space="preserve">
-      <value>居中对齐</value>
+      <value>中央揃え</value>
     </data>
   <data name="AlignRight" xml:space="preserve">
-      <value>居右对齐</value>
+      <value>右揃え</value>
     </data>
   <data name="DeskLyricSize" xml:space="preserve">
-      <value>桌面歌词大小</value>
+      <value>デスクトップの歌詞のサイズ</value>
     </data>
   <data name="AutoUpdate" xml:space="preserve">
-      <value>自动更新</value>
+      <value>自動更新</value>
     </data>
   <data name="SkipThisVersion" xml:space="preserve">
-      <value>跳过此版本</value>
+      <value>このバージョンをスキップ</value>
     </data>
   <data name="SkipVersionTip" xml:space="preserve">
-      <value>已跳过版本 : {version}
-前往 设置-启动器-检查更新 可再次获取此版本</value>
+      <value>スキップされたバージョン : {version}
+設定へ移動-イニシエータ-更新をチェックしてこのバージョンを再取得します</value>
     </data>
   <data name="WinSevenAutoUpdateTip" xml:space="preserve">
-      <value>发现新版本 : {version}
-win10 以下系统(不包括10)不支持自动更新
-前往以下链接下载新版本 :  “{url}”
-前往 设置-下载-自动更新 可关闭自动检查更新</value>
+      <value>新しいバージョンが見つかりました: {version}
+win 10以下のシステム（10を除く）は自動更新をサポートしていない
+次のリンクに移動して新しいバージョンをダウンロードします:「{url}」
+設定へ移動-ダウンロード-自動更新により自動チェック更新をオフにする</value>
     </data>
   <data name="OpenBrowser" xml:space="preserve">
-      <value>打开浏览器</value>
+      <value>ブラウザーを開く</value>
     </data>
   <data name="CustomHomePageWay_Presetting_JavaNews" xml:space="preserve">
-      <value>预设-Java新闻</value>
+      <value>プリセット - Javaニュース</value>
     </data>
   <data name="NetworkSource" xml:space="preserve">
-      <value>网络源</value>
+      <value>ネットワークプロバイダー</value>
     </data>
   <data name="NoSupportNow" xml:space="preserve">
-      <value>现不支持</value>
+      <value>現在サポートされていません</value>
     </data>
   <data name="AggregateSearchTip" xml:space="preserve">
-      <value>输入关键词以在YMCL中搜索 </value>
+      <value>キーワードを入力してYMCLで検索 </value>
     </data>
   <data name="CannotRecognitionTheVersion" xml:space="preserve">
-      <value>无法识别选中版本</value>
+      <value>選択したバージョンを認識できません。</value>
     </data>
   <data name="LocalResource" xml:space="preserve">
-      <value>本地资源</value>
+      <value>ローカルリソース</value>
     </data>
   <data name="InstallVersion" xml:space="preserve">
-      <value>安装版本</value>
+      <value>バージョンをインストールする</value>
     </data>
   <data name="JumpSearch" xml:space="preserve">
-      <value>跳转搜索</value>
+      <value>ジャンプ検索</value>
     </data>
   <data name="AggregateSearchWatermark" xml:space="preserve">
-      <value>输入关键词以在YMCL中搜索</value>
+      <value>キーワードを入力してYMCLで検索</value>
     </data>
   <data name="SwitchedTo" xml:space="preserve">
-      <value>已切换到</value>
+      <value>切り替え済み</value>
     </data>
   <data name="JumpToSearchTip" xml:space="preserve">
-      <value>将会跳转到 {target} 搜索此关键词</value>
+      <value>このキーワードは {target} にて検索されます</value>
     </data>
   <data name="SearchInTip" xml:space="preserve">
-      <value>在 {target} 中搜索</value>
+      <value>{target} 内を検索</value>
     </data>
   <data name="NavSearch" xml:space="preserve">
-      <value> 搜索</value>
+      <value> 検索</value>
     </data>
   <data name="Music" xml:space="preserve">
-      <value>音乐</value>
+      <value>音楽</value>
     </data>
   <data name="ExistAccount" xml:space="preserve">
-      <value>现存账户</value>
+      <value>既存のアカウント</value>
     </data>
   <data name="DisplayIndependentTaskWindow" xml:space="preserve">
-      <value>显示独立任务窗口</value>
+      <value>独立タスクウィンドウを表示</value>
     </data>
   <data name="Sponsor" xml:space="preserve">
-      <value>赞助</value>
+      <value>スポンサー</value>
     </data>
   <data name="Sponsors" xml:space="preserve">
-      <value>赞助者</value>
+      <value>サポーター</value>
     </data>
   <data name="SponsorsTip" xml:space="preserve">
-      <value>以下是发电的赞助者，感谢对 Yu Minecraft Launcher 的支持 ！</value>
+      <value>以下はローンチされた運営者です。YuMinecraft ランチャーへの感謝の意しを持ちます！</value>
     </data>
   <data name="CNYSymbol" xml:space="preserve">
-      <value>￥</value>
+      <value>¥</value>
     </data>
   <data name="MacOsUpdateTip" xml:space="preserve">
-      <value>发现新版本 : {version}
-MacOs 不支持自动更新
-前往以下链接下载新版本 :  “{url}”
-前往 设置-下载-自动更新 可关闭自动检查更新</value>
+      <value>新しいバージョンが見つかりました : {version}
+MacOsは自動更新をサポートしていません
+次のリンクに移動して新しいバージョンをダウンロードします:「{url}」
+設定へ移動-ダウンロード-自動更新により自動チェック更新をオフにする</value>
     </data>
   <data name="CurrectSystemNoSupportAutoUpdateTip" xml:space="preserve">
-      <value>当前系统不支持自动更新
-可手动打开以下目录复制最新版本并替换当前版本</value>
+      <value>現在のシステムでは自動更新はサポートされていません
+次のディレクトリを手動で開いて最新バージョンをコピーし、現在のバージョンを置き換えることができます</value>
     </data>
   <data name="AlreadyCopyToClipBoard" xml:space="preserve">
-      <value>已复制到剪切板</value>
+      <value>クリップボードにコピーしました</value>
     </data>
   <data name="NavAbout" xml:space="preserve">
-      <value> 关于</value>
+      <value> アプリについて</value>
     </data>
   <data name="UsedMem" xml:space="preserve">
-      <value>已用内存</value>
+      <value>使用メモリ</value>
     </data>
   <data name="CannotLoad" xml:space="preserve">
-      <value>无法加载</value>
+      <value>読み込めませんでした</value>
     </data>
   <data name="LoadFail" xml:space="preserve">
-      <value>加载失败</value>
+      <value>読み込みに失敗しました</value>
     </data>
   <data name="ToggleNav" xml:space="preserve">
-      <value>切换导航</value>
+      <value>ナビゲーションの切り替え</value>
     </data>
   <data name="NoWorkingTask" xml:space="preserve">
-      <value>暂无运行中任务</value>
+      <value>実行中のタスクはありません</value>
     </data>
   <data name="CrashLa" xml:space="preserve">
-      <value>崩溃啦！ヾ(•ω•`)o</value>
+      <value>おっと！解釈のための特殊ファイル (•ω`)</value>
     </data>
   <data name="YMCLHappenError" xml:space="preserve">
-      <value>Yu Minecraft Launcher 发生未处理异常</value>
+      <value>YuMinecraft ランチャーが例外を処理していません</value>
     </data>
   <data name="DetailedInfo" xml:space="preserve">
-      <value>详细信息</value>
+      <value>詳細</value>
     </data>
   <data name="UnhandledErrorTip" xml:space="preserve">
-      <value>Yu Minecraft Launcher 遇到了没有处理的异常 , 可能无法继续运行 , 下方为异常的详细信息</value>
+      <value>YuMinecraft ランチャーで処理できない例外が発生しました。サーバを起動できないため、例外の詳細は動作しません。</value>
     </data>
   <data name="Copy" xml:space="preserve">
-      <value>复制</value>
+      <value>コピー</value>
     </data>
   <data name="NoMatterErrorAndKeepOnRun" xml:space="preserve">
-      <value>忽略错误 , 强制继续运行</value>
+      <value>エラーを無視して、強制し続けます</value>
     </data>
   <data name="ExitApp" xml:space="preserve">
-      <value>退出应用</value>
+      <value>アプリケーションを終了します。</value>
     </data>
   <data name="RestartApp" xml:space="preserve">
-      <value>重启应用</value>
+      <value>アプリを再起動</value>
     </data>
   <data name="LoadBackGroudFromPicFailTip" xml:space="preserve">
-      <value>从图像文件加载背景图失败 , 检查图片格式是否正确 </value>
+      <value>画像ファイルの背景画像ファイルの読み込みに失敗。 画像が正しい形式になっているかどうかを確認してください。 </value>
     </data>
   <data name="CustomBackground" xml:space="preserve">
-      <value>自定义背景</value>
+      <value>カスタム背景</value>
     </data>
   <data name="Default" xml:space="preserve">
-      <value>默认</value>
+      <value>デフォルト</value>
     </data>
   <data name="BackGroundImg" xml:space="preserve">
-      <value>背景图</value>
+      <value>背景画像</value>
     </data>
   <data name="AcrylicBlur" xml:space="preserve">
-      <value>亚克力</value>
+      <value>亜克力</value>
     </data>
   <data name="Transparent" xml:space="preserve">
-      <value>透明</value>
+      <value>アルファ</value>
     </data>
 </root>

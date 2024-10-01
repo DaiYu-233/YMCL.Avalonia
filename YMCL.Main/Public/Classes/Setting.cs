@@ -28,7 +28,7 @@ public class Setting
     public string Version { get; set; }
     public bool EnableIndependencyCore { get; set; } = true;
     public bool EnableCustomUpdateUrl { get; set; } = false;
-    public string CustomUpdateUrl { get; set; } = "https://gh.api.99988866.xyz/{%url%}";
+    public string CustomUpdateUrl { get; set; } = "https://github.moeyy.xyz/{%url%}";
     public string MusicApi { get; set; } = "http://music.api.daiyu.fun/";
     public CustomBackGroundWay CustomBackGround { get; set; } = CustomBackGroundWay.Default;
     public bool EnableDisplayIndependentTaskWindow { get; set; } = false;

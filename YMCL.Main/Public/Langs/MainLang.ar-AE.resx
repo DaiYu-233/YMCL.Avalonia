@@ -102,13 +102,13 @@
         </value>
   </resheader>
   <data name="NavLaunch" xml:space="preserve">
-    <value> 启动</value>
+    <value> بَدْء</value>
   </data>
   <data name="NavSetting" xml:space="preserve">
-    <value> 设置</value>
+    <value> ضبط</value>
   </data>
   <data name="NavDownload" xml:space="preserve">
-    <value> 下载</value>
+    <value> للتحميل</value>
   </data>
   <data name="NavMore" xml:space="preserve">
     <value> 更多</value>
@@ -117,7 +117,7 @@
     <value> 音乐</value>
   </data>
   <data name="Launch" xml:space="preserve">
-    <value>启动</value>
+    <value>بدء</value>
   </data>
   <data name="MinecraftFolder" xml:space="preserve">
     <value>Minecraft文件夹</value>

@@ -34,6 +34,8 @@
     <ItemGroup>
         <None Include="..\.editorconfig" Link=".editorconfig" />
         <None Remove="Public\Texts\Default.isl" />
+        <None Remove="Public\Controls\WindowTask\**" />
+        <None Remove="Public\Controls\PageTaskEntry\**" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Afdian.Sdk" Version="0.3.1" />
@@ -88,21 +90,29 @@
           <DependentUpon>WindowTask.axaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
+        <Compile Remove="Public\Controls\WindowTask\**" />
+        <Compile Remove="Public\Controls\PageTaskEntry\**" />
     </ItemGroup>
     <ItemGroup>
         <EmbeddedResource Update="Public\Langs\MainLang.resx">
             <Generator>PublicResXFileCodeGenerator</Generator>
             <LastGenOutput>MainLang.Designer.cs</LastGenOutput>
         </EmbeddedResource>
+        <EmbeddedResource Remove="Public\Controls\WindowTask\**" />
+        <EmbeddedResource Remove="Public\Controls\PageTaskEntry\**" />
     </ItemGroup>
     <ItemGroup>
         <AvaloniaResource Remove="Public\Assets\YMCL-Icon.ico" />
+        <AvaloniaResource Remove="Public\Controls\WindowTask\**" />
+        <AvaloniaResource Remove="Public\Controls\PageTaskEntry\**" />
     </ItemGroup>
     <ItemGroup>
         <AvaloniaResource Remove="Public\Assets\YMCL-Icon.ico" />
     </ItemGroup>
     <ItemGroup>
         <AvaloniaXaml Remove="Public\Texts\CustomHomePageDefault.axaml" />
+        <AvaloniaXaml Remove="Public\Controls\WindowTask\**" />
+        <AvaloniaXaml Remove="Public\Controls\PageTaskEntry\**" />
     </ItemGroup>
     <ItemGroup>
         <None Remove="Public\Assets\bass.dll" />
@@ -146,7 +156,7 @@
       <UpToDateCheckInput Remove="Public\Controls\TaskEntry\TaskEntry.axaml" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Public\Controls\PageTaskEntry\" />
-      <Folder Include="Public\Controls\WindowTask\" />
+      <AdditionalFiles Remove="Public\Controls\WindowTask\**" />
+      <AdditionalFiles Remove="Public\Controls\PageTaskEntry\**" />
     </ItemGroup>
 </Project>

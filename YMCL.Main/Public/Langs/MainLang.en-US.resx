@@ -1056,4 +1056,7 @@ to manually open the following directory to copy the latest version and replace 
   <data name="Transparent" xml:space="preserve">
       <value>Transparent</value>
     </data>
+  <data name="CannotFindMinecraftFolder" xml:space="preserve">
+      <value>无法找到Minecraft文件夹</value>
+    </data>
 </root>

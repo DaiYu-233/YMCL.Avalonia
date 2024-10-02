@@ -102,158 +102,157 @@
         </value>
   </resheader>
   <data name="NavLaunch" xml:space="preserve">
-    <value> 启动</value>
+    <value> démarrer</value>
   </data>
   <data name="NavSetting" xml:space="preserve">
-    <value> 设置</value>
+    <value> Paramètres</value>
   </data>
   <data name="NavDownload" xml:space="preserve">
-    <value> 下载</value>
+    <value> Télécharger</value>
   </data>
   <data name="NavMore" xml:space="preserve">
-    <value> 更多</value>
+    <value> Plus</value>
   </data>
   <data name="NavMusic" xml:space="preserve">
-    <value> 音乐</value>
+    <value> Musique</value>
   </data>
   <data name="Launch" xml:space="preserve">
-    <value>启动</value>
+    <value>Démarrer</value>
   </data>
   <data name="MinecraftFolder" xml:space="preserve">
-    <value>Minecraft文件夹</value>
+    <value>Dossier .minecraft</value>
   </data>
   <data name="DelSeletedItem" xml:space="preserve">
-    <value>删除选中项</value>
+    <value>Supprimer l'élément sélectionné</value>
   </data>
   <data name="AddFolder" xml:space="preserve">
-    <value>添加文件夹</value>
+    <value>Ajouter un dossier</value>
   </data>
   <data name="SelectMinecraftFolder" xml:space="preserve">
-    <value>选择'.minecraft'文件夹</value>
+    <value> Sélectionnez le dossier .minecraft</value>
   </data>
   <data name="NeedToSelectMinecraftFolder" xml:space="preserve">
-    <value>需选择'.minecraft'文件夹</value>
+    <value>Vous devez sélectionner le dossier .minecraft</value>
   </data>
   <data name="SuccessAdd" xml:space="preserve">
-    <value>添加成功</value>
+    <value>Ajout réussi</value>
   </data>
   <data name="TheItemAlreadyExist" xml:space="preserve">
-    <value>已存在此项目</value>
+    <value>Cet élément existe déjà</value>
   </data>
   <data name="SuccessRemove" xml:space="preserve">
-    <value>移除成功</value>
+    <value>Suppression réussie</value>
   </data>
   <data name="AutoScan" xml:space="preserve">
-    <value>自动扫描</value>
+    <value>Analyse automatique</value>
   </data>
   <data name="LetYMCLChooseJava" xml:space="preserve">
-    <value>让YMCL选择合适的Java</value>
+    <value>Laissez YMCL choisir la version Java appropriée</value>
   </data>
   <data name="ScanJavaSuccess" xml:space="preserve">
-    <value>扫描Java成功</value>
+    <value>Analyse de Java réussie</value>
   </data>
   <data name="RepeatItem" xml:space="preserve">
-    <value>重复的项目</value>
+    <value>Élément en double</value>
   </data>
   <data name="NavLauncher" xml:space="preserve">
-    <value> 启动器</value>
+    <value> démarreur</value>
   </data>
   <data name="OpenFileWay" xml:space="preserve">
-    <value>打开文件方式</value>
+    <value> Méthode d'ouverture de fichier</value>
   </data>
   <data name="FileSelectWindow" xml:space="preserve">
-    <value>文件选择窗口</value>
+    <value>Fenêtre de sélection de fichier</value>
   </data>
   <data name="ManualInput" xml:space="preserve">
-    <value>手动输入</value>
+    <value>Saisie manuelle</value>
   </data>
   <data name="Ok" xml:space="preserve">
-    <value>确定</value>
+    <value>OK</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>取消</value>
+    <value>Annuler</value>
   </data>
   <data name="InputFolderPath" xml:space="preserve">
-    <value>输入文件夹路径</value>
+    <value>Entrez le chemin du dossier</value>
   </data>
   <data name="FolderNotExist" xml:space="preserve">
-    <value>文件夹不存在</value>
+    <value>Le dossier n'existe pas</value>
   </data>
   <data name="InputFilePath" xml:space="preserve">
-    <value>输入文件路径</value>
+    <value>Entrez le chemin du fichier</value>
   </data>
   <data name="FileNotExist" xml:space="preserve">
-    <value>文件不存在</value>
+    <value>Le dossier n'existe pas</value>
   </data>
   <data name="ManualAdd" xml:space="preserve">
-    <value>手动添加</value>
+    <value>Ajout manuel</value>
   </data>
   <data name="SelectJava" xml:space="preserve">
-    <value>选择Java</value>
+    <value>Sélectionner Java</value>
   </data>
   <data name="TheJavaIsError" xml:space="preserve">
-    <value>Java不正确</value>
+    <value>Java incorrect</value>
   </data>
   <data name="NavAccount" xml:space="preserve">
-    <value> 账户</value>
+    <value>Compte</value>
   </data>
   <data name="AddNewAccount" xml:space="preserve">
-    <value>添加新账户</value>
+    <value>Ajouter un nouveau compte</value>
   </data>
   <data name="OfflineLogin" xml:space="preserve">
-    <value>离线登录</value>
+    <value>Connexion hors ligne</value>
   </data>
   <data name="MicrosoftLogin" xml:space="preserve">
-    <value>微软登录</value>
+    <value> Connexion Microsoft</value>
   </data>
   <data name="ThirdPartyLogin" xml:space="preserve">
-    <value>第三方登录</value>
+    <value>Connexion tierce</value>
   </data>
   <data name="SelectAccountType" xml:space="preserve">
-    <value>选择账户类型</value>
+    <value>Choisir le type de compte</value>
   </data>
   <data name="AccountNameCannotBeNull" xml:space="preserve">
-    <value>账户名称不可为空</value>
+    <value>Le nom du compte ne peut pas être vide</value>
   </data>
   <data name="InputAccountName" xml:space="preserve">
-    <value>输入账户名称</value>
+    <value>Entrez le nom du compte</value>
   </data>
   <data name="VerificationCode" xml:space="preserve">
-    <value>验证代码</value>
+    <value>Code de vérification</value>
   </data>
   <data name="Loading" xml:space="preserve">
-    <value>加载中...</value>
+    <value>Chargement...</value>
   </data>
   <data name="CopyCodeAndOPenBrowser" xml:space="preserve">
-    <value>复制代码并打开浏览器</value>
+    <value>Copiez le code et ouvrez le navigateur</value>
   </data>
   <data name="WaitForMicrosoftVerification" xml:space="preserve">
-    <value>正在等待微软账户验证完成
-跳转至浏览器完成验证</value>
+    <value>En attente de la validation du compte Microsoft Rediriger vers le navigateur pour terminer la validation</value>
   </data>
   <data name="LoginFail" xml:space="preserve">
-    <value>登录失败</value>
+    <value> Échec de la connexion</value>
   </data>
   <data name="VerifyingAccount" xml:space="preserve">
-    <value>正在验证账户</value>
+    <value>Vérification du compte en cours</value>
   </data>
   <data name="VerificationServer" xml:space="preserve">
-    <value>验证服务器</value>
+    <value>Serveur de vérification</value>
   </data>
   <data name="EmailAddress" xml:space="preserve">
-    <value>邮箱地址</value>
+    <value>Adresse e-mail</value>
   </data>
   <data name="AccountPassword" xml:space="preserve">
-    <value>账户密码</value>
+    <value>Mot de passe du compte</value>
   </data>
   <data name="YggdrasilServerUrlIsEmpty" xml:space="preserve">
-    <value>验证服务器不可为空</value>
+    <value>Le serveur de vérification ne peut pas être vide</value>
   </data>
   <data name="YggdrasilPasswordIsEmpty" xml:space="preserve">
-    <value>密码不可为空</value>
+    <value>Le mot de passe ne peut pas être vide</value>
   </data>
   <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
-    <value>邮箱不可为空</value>
+    <value>La boîte aux lettres ne peut pas être vide</value>
   </data>
   <data name="NavPersonalize" xml:space="preserve">
     <value> 个性化</value>

@@ -1056,4 +1056,7 @@ MacOs 不支持自动更新
   <data name="Transparent" xml:space="preserve">
       <value>透明</value>
     </data>
+  <data name="CannotFindMinecraftFolder" xml:space="preserve">
+      <value>无法找到Minecraft文件夹</value>
+    </data>
 </root>

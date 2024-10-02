@@ -1057,6 +1057,6 @@ MacOsは自動更新をサポートしていません
       <value>アルファ</value>
     </data>
   <data name="CannotFindMinecraftFolder" xml:space="preserve">
-      <value>无法找到Minecraft文件夹</value>
+      <value>Minecraft フォルダを見つけることができません</value>
     </data>
 </root>

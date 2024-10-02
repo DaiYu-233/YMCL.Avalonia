@@ -19,7 +19,10 @@
         CornerRadius="5">
         <Border.Transitions>
             <Transitions>
-                <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
+                <ThicknessTransition
+                    Easing="BounceEaseIn"
+                    Property="Margin"
+                    Duration="0:0:0.45" />
             </Transitions>
         </Border.Transitions>
         <Border

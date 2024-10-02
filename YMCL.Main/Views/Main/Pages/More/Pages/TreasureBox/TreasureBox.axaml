@@ -13,7 +13,10 @@
     <Border x:Name="Root">
         <Border.Transitions>
             <Transitions>
-                <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
+                <ThicknessTransition
+                    Easing="BounceEaseIn"
+                    Property="Margin"
+                    Duration="0:0:0.45" />
             </Transitions>
         </Border.Transitions>
         <StackPanel Margin="10,0,10,10" Spacing="10">

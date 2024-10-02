@@ -17,7 +17,10 @@
     <Border x:Name="Root">
         <Border.Transitions>
             <Transitions>
-                <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
+                <ThicknessTransition
+                    Easing="BounceEaseIn"
+                    Property="Margin"
+                    Duration="0:0:0.45" />
             </Transitions>
         </Border.Transitions>
         <Grid>
@@ -381,7 +384,10 @@
                                 Spacing="0">
                                 <StackPanel.Transitions>
                                     <Transitions>
-                                        <ThicknessTransition Property="Margin" Duration="0:0:0.2" />
+                                        <ThicknessTransition
+                                            Easing="BounceEaseIn"
+                                            Property="Margin"
+                                            Duration="0:0:0.2" />
                                     </Transitions>
                                 </StackPanel.Transitions>
                             </StackPanel>
@@ -441,7 +447,10 @@
                 Severity="Success">
                 <ui:InfoBar.Transitions>
                     <Transitions>
-                        <ThicknessTransition Property="Margin" Duration="0:0:0.20" />
+                        <ThicknessTransition
+                            Easing="BounceEaseIn"
+                            Property="Margin"
+                            Duration="0:0:0.20" />
                         <DoubleTransition Property="Opacity" Duration="0:0:0.20" />
                     </Transitions>
                 </ui:InfoBar.Transitions>

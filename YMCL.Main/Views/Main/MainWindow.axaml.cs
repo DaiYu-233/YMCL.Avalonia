@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -12,8 +13,10 @@ using Avalonia.Controls.Notifications;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Platform.Storage;
+using Avalonia.Styling;
 using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using Microsoft.Win32;
@@ -32,6 +35,7 @@ using YMCL.Main.Views.Main.Pages.Search;
 using YMCL.Main.Views.Main.Pages.Setting;
 using YMCL.Main.Views.Main.Pages.TaskCenter;
 using static YMCL.Main.Public.Classes.PlaySongListViewItemEntry;
+using Brushes = System.Drawing.Brushes;
 using FileInfo = YMCL.Main.Public.Classes.FileInfo;
 
 namespace YMCL.Main.Views.Main;
@@ -60,15 +64,31 @@ public partial class MainWindow : Window
 
     private void EventBinding()
     {
+        /*Nav.PaneOpened += (_, _) => { NavRoot.Width = Nav.OpenPaneLength; };
+        Nav.PaneClosed += (_, _) => { NavRoot.Width = Nav.CompactPaneLength; };*/
         Loaded += async (_, _) =>
         {
             if (!Const.Window.main._firstLoad) return;
+            
+            try
+            {
+                (Method.Ui.FindControlByName(this, "ContentGridBorder") as Border).Background = null;
+                (Method.Ui.FindControlByName(this, "ContentGridBorder") as Border).BorderThickness = new Thickness(0);
+                (Method.Ui.FindControlByName(Const.Window.main, "PART_PaneRoot") as Panel).Background =
+                    Application.Current.ActualThemeVariant == ThemeVariant.Dark
+                        ? SolidColorBrush.Parse("#2c2c2c")
+                        : SolidColorBrush.Parse("#FFE9F6FF");
+            }
+            catch
+            { }
+            
             Const.Window.main._firstLoad = false;
             Method.Ui.CheckLauncher();
             await Task.Delay(200);
             _ = Const.Window.main.settingPage.launcherSettingPage.AutoUpdate();
 
             if (_needInit) LoadWindow();
+            Nav.IsPaneOpen = true;
         };
         Activated += (_, _) =>
         {

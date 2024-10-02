@@ -80,6 +80,7 @@ public partial class MusicPage : UserControl
     }
     private void BindingEvent()
     {
+        
         NextSongBtn.PointerPressed += async (_, _) => { NextSong(); };
         DeskLyricBtn.PointerPressed += (_, _) => { Const.Window.deskLyric.Toggle(); };
         PreviousSongBtn.PointerPressed += async (_, _) => { PreviousSong(); };

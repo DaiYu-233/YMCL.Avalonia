@@ -11,7 +11,10 @@
     <Border x:Name="Root" CornerRadius="8">
         <Border.Transitions>
             <Transitions>
-                <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
+                <ThicknessTransition
+                    Easing="BounceEaseIn"
+                    Property="Margin"
+                    Duration="0:0:0.45" />
             </Transitions>
         </Border.Transitions>
         <ScrollViewer>
@@ -119,7 +122,7 @@
                             DockPanel.Dock="Right"
                             FontFamily="{DynamicResource Font}"
                             FontSize="14"
-                            Text="¡Þ"
+                            Text="ï¿½ï¿½"
                             TextAlignment="Center" />
                         <Slider
                             Name="MaximumDownloadThreadSlider"

@@ -99,6 +99,34 @@ public class Method
             }
         }
 
+        public static Control FindControlByName(Visual parent, string name)
+        {
+            var visuals = new Queue<Visual>();
+            visuals.Enqueue(parent);
+
+            while (visuals.Count > 0)
+            {
+                var current = visuals.Dequeue();
+                var control = current as Control;
+
+                if (control != null)
+                {
+                    foreach (var child in control.GetVisualChildren())
+                    {
+                        visuals.Enqueue((Visual)child);
+                    }
+
+                    var result = control;
+                    if (result != null && result.Name == name)
+                    {
+                        return result;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         public static void Toast(string msg, WindowNotificationManager p_notification = null,
             NotificationType type = NotificationType.Information, bool time = true,
             string title = "Yu Minecraft Launcher")
@@ -192,28 +220,39 @@ public class Method
 
         public static void UpdateTheme()
         {
-            var visuals = new Queue<Visual>();
-            visuals.Enqueue(Const.Window.main);
-
-            while (visuals.Count > 0)
+            try
             {
-                var current = visuals.Dequeue();
-                var control = current as Control;
+                (FindControlByName(Const.Window.main, "PART_PaneRoot") as Panel).Background =
+                    Application.Current.ActualThemeVariant == ThemeVariant.Dark
+                        ? SolidColorBrush.Parse("#2c2c2c")
+                        : SolidColorBrush.Parse("#FFE9F6FF");
+                var visuals = new Queue<Visual>();
+                visuals.Enqueue(Const.Window.main);
 
-                if (control != null)
+                while (visuals.Count > 0)
                 {
-                    foreach (var child in control.GetVisualChildren())
-                    {
-                        visuals.Enqueue((Visual)child);
-                    }
+                    var current = visuals.Dequeue();
+                    var control = current as Control;
 
-                    var imageControl = control as Image;
-                    if (imageControl != null && imageControl.Source is DrawingImage)
+                    if (control != null)
                     {
-                        imageControl.InvalidateVisual();
-                        Console.WriteLine(imageControl.GetVisualRoot());
+                        foreach (var child in control.GetVisualChildren())
+                        {
+                            visuals.Enqueue((Visual)child);
+                        }
+
+                        var imageControl = control as Image;
+                        if (imageControl != null && imageControl.Source is DrawingImage)
+                        {
+                            imageControl.InvalidateVisual();
+                            Console.WriteLine(imageControl.GetVisualRoot());
+                        }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
         }
 
@@ -249,14 +288,16 @@ public class Method
             Const.Window.main.TitleBar.Root.Background = Application.Current.ActualThemeVariant == ThemeVariant.Dark
                 ? SolidColorBrush.Parse("#2c2c2c")
                 : SolidColorBrush.Parse("#FFE9F6FF");
-            
+            (Method.Ui.FindControlByName(Const.Window.main, "PART_PaneRoot") as Panel).Opacity =
+                (double)Application.Current.Resources["Opacity"]!;
+
             var setting = Const.Data.Setting;
 
             if (setting.CustomBackGround == CustomBackGroundWay.Default)
             {
                 return;
             }
-            
+
             if (setting.CustomBackGround == CustomBackGroundWay.Image &&
                 !string.IsNullOrWhiteSpace(setting.WindowBackGroundImgData))
             {
@@ -275,7 +316,8 @@ public class Method
                     Application.Current.Resources["Opacity"] = 1.0;
                     Const.Window.main.BackGroundImg.Source = null;
                 }
-
+                (Method.Ui.FindControlByName(Const.Window.main, "PART_PaneRoot") as Panel).Opacity =
+                    (double)Application.Current.Resources["Opacity"]!;
                 return;
             }
 
@@ -286,11 +328,14 @@ public class Method
                 Application.Current.ActualThemeVariant == ThemeVariant.Dark
                     ? SolidColorBrush.Parse("#a8242424")
                     : SolidColorBrush.Parse("#a8e7f5ff");
+            (Method.Ui.FindControlByName(Const.Window.main, "PART_PaneRoot") as Panel).Opacity =
+                (double)Application.Current.Resources["Opacity"]!;
 
             if (setting.CustomBackGround == CustomBackGroundWay.AcrylicBlur)
             {
                 Const.Window.main.TransparencyLevelHint = new[] { WindowTransparencyLevel.AcrylicBlur };
             }
+
             if (setting.CustomBackGround == CustomBackGroundWay.Transparent)
             {
                 Const.Window.main.TransparencyLevelHint = new[] { WindowTransparencyLevel.Transparent };

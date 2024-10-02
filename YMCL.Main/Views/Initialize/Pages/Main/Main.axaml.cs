@@ -149,9 +149,29 @@ public partial class Main : UserControl
                 }
                 else
                 {
-                    if (!string.IsNullOrWhiteSpace(item.Path))
-                        Method.Ui.Toast(MainLang.NeedToSelectMinecraftFolder, Const.Notification.initialize,
-                            NotificationType.Error);
+                    if (Directory.Exists(Path.Combine(item.Path, ".minecraft")))
+                    {
+                        if (!_mcFolderList.Contains(Path.Combine(item.Path, ".minecraft")))
+                        {
+                            _mcFolderList.Add(Path.Combine(item.Path, ".minecraft"));
+                            File.WriteAllText(Const.String.MinecraftFolderDataPath,
+                                JsonConvert.SerializeObject(_mcFolderList, Formatting.Indented));
+                            MinecraftFolderListBox.Items.Clear();
+                            _mcFolderList.ForEach(folder => { MinecraftFolderListBox.Items.Add(folder); });
+                            MinecraftFolderListBox.SelectedIndex = MinecraftFolderListBox.ItemCount - 1;
+                            Method.Ui.Toast(MainLang.SuccessAdd + ": " + Path.Combine(item.Path, ".minecraft"), Const.Notification.initialize,
+                                NotificationType.Success);
+                        }
+                        else
+                        {
+                            Method.Ui.Toast(MainLang.TheItemAlreadyExist, Const.Notification.initialize,
+                                NotificationType.Error);
+                        }
+                    }
+                    else
+                    {
+                          Method.Ui.Toast(MainLang.CannotFindMinecraftFolder, Const.Notification.initialize, NotificationType.Error);
+                    }
                 }
             }
         };

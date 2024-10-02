@@ -131,9 +131,28 @@ public partial class LaunchSettingPage : UserControl
                 }
                 else
                 {
-                    if (!string.IsNullOrWhiteSpace(item.Path))
-                        Method.Ui.Toast(MainLang.NeedToSelectMinecraftFolder, Const.Notification.main,
-                            NotificationType.Error);
+                    if (Directory.Exists(Path.Combine(item.Path, ".minecraft")))
+                    {
+                        if (!minecraftFolders.Contains(Path.Combine(item.Path, ".minecraft")))
+                        {
+                            minecraftFolders.Add(Path.Combine(item.Path, ".minecraft"));
+                            File.WriteAllText(Const.String.MinecraftFolderDataPath,
+                                JsonConvert.SerializeObject(minecraftFolders, Formatting.Indented));
+                            MinecraftFolderComboBox.Items.Clear();
+                            minecraftFolders.ForEach(folder => { MinecraftFolderComboBox.Items.Add(folder); });
+                            MinecraftFolderComboBox.SelectedIndex = MinecraftFolderComboBox.ItemCount - 1;
+                            Method.Ui.Toast(MainLang.SuccessAdd + ": " + Path.Combine(item.Path, ".minecraft"), Const.Notification.main,
+                                NotificationType.Success);
+                        }
+                        else
+                        {
+                            Method.Ui.Toast(MainLang.TheItemAlreadyExist, Const.Notification.main, NotificationType.Error);
+                        }
+                    }
+                    else
+                    {
+                          Method.Ui.Toast(MainLang.CannotFindMinecraftFolder, Const.Notification.main, NotificationType.Error);
+                    }
                 }
             }
         };

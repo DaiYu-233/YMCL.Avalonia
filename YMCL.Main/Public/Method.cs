@@ -316,6 +316,7 @@ public class Method
                     Application.Current.Resources["Opacity"] = 1.0;
                     Const.Window.main.BackGroundImg.Source = null;
                 }
+
                 (Method.Ui.FindControlByName(Const.Window.main, "PART_PaneRoot") as Panel).Opacity =
                     (double)Application.Current.Resources["Opacity"]!;
                 return;
@@ -346,8 +347,11 @@ public class Method
         {
             async void UnofficialToast()
             {
-                await Method.Ui.ShowDialogAsync("Error !", MainLang.UnofficialTip);
-                UnofficialToast();
+                while (true)
+                {
+                    await ShowDialogAsync("Error !", MainLang.UnofficialTip, b_primary: MainLang.Ok,
+                        b_cancel: MainLang.Cancel);
+                }
             }
 
             var name = Const.Window.main.settingPage.launcherSettingPage.Version.Text;
@@ -363,19 +367,10 @@ public class Method
                     response.EnsureSuccessStatusCode();
                     string responseBody = await response.Content.ReadAsStringAsync();
                     var list = JsonConvert.DeserializeObject<List<string>>(responseBody);
-                    foreach (var se in list)
+                    if (list.Contains(name!) || list.Contains(author))
                     {
-                        if (se.Equals(name))
-                        {
-                            Dispatcher.UIThread.Invoke(
-                                () => { UnofficialToast(); });
-                        }
-
-                        if (se.Equals(author))
-                        {
-                            Dispatcher.UIThread.Invoke(
-                                () => { UnofficialToast(); });
-                        }
+                        Dispatcher.UIThread.Invoke(
+                            () => { UnofficialToast(); });
                     }
                 }
                 catch

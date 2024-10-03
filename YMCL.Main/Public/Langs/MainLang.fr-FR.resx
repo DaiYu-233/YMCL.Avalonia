@@ -120,7 +120,7 @@
     <value>Démarrer</value>
   </data>
   <data name="MinecraftFolder" xml:space="preserve">
-    <value>Dossier .minecraft</value>
+    <value>Dossier de Minecraft</value>
   </data>
   <data name="DelSeletedItem" xml:space="preserve">
     <value>Supprimer l'élément sélectionné</value>
@@ -129,10 +129,10 @@
     <value>Ajouter un dossier</value>
   </data>
   <data name="SelectMinecraftFolder" xml:space="preserve">
-    <value> Sélectionnez le dossier .minecraft</value>
+    <value>Vous devez sélectionner le dossier '.minecraft'</value>
   </data>
   <data name="NeedToSelectMinecraftFolder" xml:space="preserve">
-    <value>Vous devez sélectionner le dossier .minecraft</value>
+    <value>Vous devez sélectionner le dossier '.minecraft'</value>
   </data>
   <data name="SuccessAdd" xml:space="preserve">
     <value>Ajout réussi</value>
@@ -159,7 +159,7 @@
     <value> démarreur</value>
   </data>
   <data name="OpenFileWay" xml:space="preserve">
-    <value> Méthode d'ouverture de fichier</value>
+    <value>Méthode d'ouverture de fichier</value>
   </data>
   <data name="FileSelectWindow" xml:space="preserve">
     <value>Fenêtre de sélection de fichier</value>
@@ -195,7 +195,7 @@
     <value>Java incorrect</value>
   </data>
   <data name="NavAccount" xml:space="preserve">
-    <value>Compte</value>
+    <value> Compte</value>
   </data>
   <data name="AddNewAccount" xml:space="preserve">
     <value>Ajouter un nouveau compte</value>
@@ -204,7 +204,7 @@
     <value>Connexion hors ligne</value>
   </data>
   <data name="MicrosoftLogin" xml:space="preserve">
-    <value> Connexion Microsoft</value>
+    <value>Connexion Microsoft</value>
   </data>
   <data name="ThirdPartyLogin" xml:space="preserve">
     <value>Connexion tierce</value>
@@ -231,7 +231,7 @@
     <value>En attente de la validation du compte Microsoft Rediriger vers le navigateur pour terminer la validation</value>
   </data>
   <data name="LoginFail" xml:space="preserve">
-    <value> Échec de la connexion</value>
+    <value>Échec de la connexion</value>
   </data>
   <data name="VerifyingAccount" xml:space="preserve">
     <value>Vérification du compte en cours</value>

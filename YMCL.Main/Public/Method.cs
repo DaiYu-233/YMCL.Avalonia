@@ -354,29 +354,34 @@ public class Method
                 }
             }
 
-            var name = Const.Window.main.settingPage.launcherSettingPage.Version.Text;
-            var author = Const.Window.main.settingPage.launcherSettingPage.AuthorLabel.Content;
-            Task.Run(async () =>
+            try
             {
-                string url = "https://player.daiyu.fun/a.json";
-                HttpClient client = new HttpClient();
+                var name = Const.Window.main.settingPage.launcherSettingPage.FindControl<TextBlock>("Version").Text;
+                var author = Const.Window.main.settingPage.launcherSettingPage.FindControl<Label>("AuthorLabel").Content;
+                var title = Const.Window.main.FindControl<TextBlock>("TitleText").Text;
+                Task.Run(async () =>
+                {
+                    string url = "https://player.daiyu.fun/a.json";
+                    HttpClient client = new HttpClient();
 
-                try
-                {
-                    HttpResponseMessage response = await client.GetAsync(url);
-                    response.EnsureSuccessStatusCode();
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                    var list = JsonConvert.DeserializeObject<List<string>>(responseBody);
-                    if (list.Contains(name!) || list.Contains(author))
+                    try
                     {
-                        Dispatcher.UIThread.Invoke(
-                            () => { UnofficialToast(); });
+                        HttpResponseMessage response = await client.GetAsync(url);
+                        response.EnsureSuccessStatusCode();
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        var list = JsonConvert.DeserializeObject<List<string>>(responseBody);
+                        if (list.Contains(name!) || list.Contains(author) || list.Contains(title!))
+                        {
+                            Dispatcher.UIThread.Invoke(
+                                () => { UnofficialToast(); });
+                        }
                     }
-                }
-                catch
-                {
-                }
-            });
+                    catch
+                    {
+                    }
+                });
+            }
+            catch { }
         }
 
         public static void ShowShortException(string msg, Exception ex)

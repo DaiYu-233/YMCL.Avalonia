@@ -255,10 +255,10 @@
     <value>La boîte aux lettres ne peut pas être vide</value>
   </data>
   <data name="NavPersonalize" xml:space="preserve">
-    <value> 个性化</value>
+    <value> Personnalisation</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>语言</value>
+    <value>Langue</value>
   </data>
   <data name="ColorMode" xml:space="preserve">
     <value>色彩模式</value>

@@ -8,6 +8,7 @@ using System.Management;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
@@ -24,6 +25,7 @@ using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 using Avalonia.Platform.Storage;
 using Avalonia.Styling;
 using Avalonia.Threading;
@@ -357,7 +359,8 @@ public class Method
             try
             {
                 var name = Const.Window.main.settingPage.launcherSettingPage.FindControl<TextBlock>("Version").Text;
-                var author = Const.Window.main.settingPage.launcherSettingPage.FindControl<Label>("AuthorLabel").Content;
+                var author = Const.Window.main.settingPage.launcherSettingPage.FindControl<Label>("AuthorLabel")
+                    .Content;
                 var title = Const.Window.main.FindControl<TextBlock>("TitleText").Text;
                 Task.Run(async () =>
                 {
@@ -381,7 +384,9 @@ public class Method
                     }
                 });
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         public static void ShowShortException(string msg, Exception ex)
@@ -609,10 +614,108 @@ public class Method
                 return false;
             }
         }
+
+        public static void AppStrangeEffect()
+        {
+            List<Action> methods = new List<Action>();
+
+            //NeverGiveUp
+            methods.Add(() =>
+            {
+                var launcher = TopLevel.GetTopLevel(Const.Window.main).Launcher;
+                launcher.LaunchUriAsync(new Uri("https://www.bilibili.com/video/BV1GJ411x7h7/"));
+            });
+
+            //Transform180deg
+            methods.Add(() =>
+            {
+                var rotateTransform = new RotateTransform(180);
+                Const.Window.main.Root.RenderTransform = rotateTransform;
+            });
+
+            //WindowMove
+            methods.Add(() =>
+            {
+                double _velocityX = 20; // 水平速度
+                double _velocityY = 20; // 垂直速度
+
+                // 使用DispatcherTimer来周期性地更新窗口位置
+                DispatcherTimer timer = new DispatcherTimer
+                {
+                    Interval = TimeSpan.FromMilliseconds(10) // 设置定时器的时间间隔
+                };
+                var _screenBounds = Const.Window.main.Screens.All.FirstOrDefault()?.WorkingArea ??
+                                    new PixelRect(0, 0, 800, 600);
+                timer.Tick += Timer_Tick;
+                timer.Start();
+
+                void Timer_Tick(object sender, EventArgs e)
+                {
+                    var newPosition = new PixelPoint((int)(Const.Window.main.Position.X + _velocityX),
+                        (int)(Const.Window.main.Position.Y + _velocityY));
+
+                    // 检查窗口是否即将超出屏幕边界
+                    if (newPosition.X < _screenBounds.X || newPosition.X + Const.Window.main.Width >
+                        _screenBounds.X + _screenBounds.Width)
+                    {
+                        _velocityX = -_velocityX; // 改变水平方向
+                    }
+
+                    if (newPosition.Y < _screenBounds.Y || newPosition.Y + Const.Window.main.Height >
+                        _screenBounds.Y + _screenBounds.Height)
+                    {
+                        _velocityY = -_velocityY; // 改变垂直方向
+                    }
+
+                    // 设置新位置
+                    Const.Window.main.Position = newPosition;
+                }
+            });
+            
+            //KeepSpinning
+            methods.Add(async () =>
+            {
+                var deg = 0;
+                while (true)
+                {
+                    Dispatcher.UIThread.Invoke(() =>
+                    {
+                        if (deg > 360)
+                        {
+                            deg = 0;
+                        }
+
+                        var rotateTransform = new RotateTransform(deg);
+                        Const.Window.main.RenderTransform = rotateTransform;
+                        deg += 2;
+                    });
+                    await Task.Delay(10);
+                }
+            });
+
+            Random random = new Random();
+            //methods[^1]();
+            methods[random.Next(methods.Count)]();
+        }
     }
 
     public static class IO
     {
+        public static string GetMacAddress()
+        {
+            string macAddress = string.Empty;
+            foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (ni.OperationalStatus == OperationalStatus.Up)
+                {
+                    macAddress = ni.GetPhysicalAddress().ToString();
+                    break;
+                }
+            }
+
+            return macAddress.Replace("-", "").ToLower(); // 移除MAC地址中的"-"并转为小写
+        }
+
         public static async Task<List<FolderInfo>> OpenFolderPicker(TopLevel topLevel = null,
             FolderPickerOpenOptions options = null)
         {
@@ -1149,17 +1252,24 @@ public class Method
     {
         public static VersionSetting GetVersionSetting(GameEntry entry)
         {
-            if (entry == null)
+            try
             {
-                Ui.Toast(MainLang.NoChooseGameOrCannotFindGame, Const.Notification.main, NotificationType.Error);
+                if (entry == null)
+                {
+                    Ui.Toast(MainLang.NoChooseGameOrCannotFindGame, Const.Notification.main, NotificationType.Error);
+                    return null;
+                }
+
+                var filePath = Path.Combine(Path.GetDirectoryName(entry.JarPath)!, Const.String.VersionSettingFileName);
+                if (!File.Exists(filePath))
+                    File.WriteAllText(filePath, JsonConvert.SerializeObject(new VersionSetting(), Formatting.Indented));
+                var versionSetting = JsonConvert.DeserializeObject<VersionSetting>(File.ReadAllText(filePath));
+                return versionSetting;
+            }
+            catch
+            {
                 return null;
             }
-
-            var filePath = Path.Combine(Path.GetDirectoryName(entry.JarPath)!, Const.String.VersionSettingFileName);
-            if (!File.Exists(filePath))
-                File.WriteAllText(filePath, JsonConvert.SerializeObject(new VersionSetting(), Formatting.Indented));
-            var versionSetting = JsonConvert.DeserializeObject<VersionSetting>(File.ReadAllText(filePath));
-            return versionSetting;
         }
 
         public static async Task<bool> InstallClientUsingMinecraftLaunchAsync(string versionId, string customId = null,
@@ -1542,6 +1652,13 @@ public class Method
             }
 
             var versionSetting = GetVersionSetting(gameEntry);
+            if (versionSetting == null)
+            {
+                Ui.Toast(MainLang.CannotLoadVersionSetting, Const.Notification.main, NotificationType.Error);
+                Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+                return false;
+            }
+
             var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.String.JavaDataPath));
             if (javas.Count == 0)
             {
@@ -1791,7 +1908,7 @@ public class Method
                                     Const.Window.main.Activate();
                                 }
 
-                                Ui.Toast($"{MainLang.GameExited}: {args.ExitCode}", Const.Notification.main);
+                                Ui.Toast($"{MainLang.GameExited} - {l_id} : {args.ExitCode}", Const.Notification.main);
 
                                 if (args.ExitCode == 0)
                                 {
@@ -1904,7 +2021,8 @@ public class Method
                     });
                 }
             });
-            Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+            await Dispatcher.UIThread.InvokeAsync(() => { Const.Window.main.launchPage.LaunchBtn.IsEnabled = true; });
+            await Task.Delay(20);
             return true;
         }
 
@@ -1956,6 +2074,12 @@ public class Method
             }
 
             var versionSetting = GetVersionSetting(gameEntry);
+            if (versionSetting == null)
+            {
+                Ui.Toast(MainLang.CannotLoadVersionSetting, Const.Notification.main, NotificationType.Error);
+                Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
+                return false;
+            }
             var javas = JsonConvert.DeserializeObject<List<JavaEntry>>(File.ReadAllText(Const.String.JavaDataPath));
             if (javas.Count == 0)
             {
@@ -2080,8 +2204,13 @@ public class Method
                 }
             }
 
+            var homePageTask = new TextBox()
+                { IsReadOnly = true, FontFamily = (FontFamily)Application.Current.Resources["Font"]!, FontSize = 14 };
+            Const.Window.main.launchPage.LaunchingPanel.Children.Add(homePageTask);
+            homePageTask.Text += $"{MainLang.Launch} - {gameEntry.Id}";
             var task = new TaskManager.TaskEntry($"{MainLang.Launch} - {gameEntry.Id}", false);
             task.UpdateTextProgress("-----> YMCL", false);
+            homePageTask.Text += $"\n[{DateTime.Now:HH:mm:ss}]" + $"{MainLang.VerifyingAccount}";
             task.UpdateTextProgress(MainLang.VerifyingAccount);
 
             var accountData =
@@ -2092,6 +2221,7 @@ public class Method
                 Ui.Toast(MainLang.AccountError, Const.Notification.main, NotificationType.Error);
                 Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                 task.Destory();
+                Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                 return false;
             }
 
@@ -2108,6 +2238,7 @@ public class Method
                         Ui.Toast(MainLang.AccountError, Const.Notification.main, NotificationType.Error);
                         Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                         task.Destory();
+                        Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                         return false;
                     }
 
@@ -2129,6 +2260,7 @@ public class Method
                         Ui.ShowShortException(MainLang.LoginFail, ex);
                         Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                         task.Destory();
+                        Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                         return false;
                     }
 
@@ -2151,6 +2283,7 @@ public class Method
                 Ui.Toast(MainLang.AccountError, Const.Notification.main, NotificationType.Error);
                 Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                 task.Destory();
+                Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                 return false;
             }
 
@@ -2162,6 +2295,7 @@ public class Method
                 Ui.Toast(MainLang.BuildLaunchConfigFail, Const.Notification.main, NotificationType.Error);
                 Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                 task.Destory();
+                Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                 return false;
             }
 
@@ -2188,6 +2322,7 @@ public class Method
                 Ui.Toast(MainLang.BuildLaunchConfigFail, Const.Notification.main, NotificationType.Error);
                 Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                 task.Destory();
+                Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                 return false;
             }
 
@@ -2227,6 +2362,7 @@ public class Method
                         await Dispatcher.UIThread.InvokeAsync(() =>
                         {
                             task.UpdateTextProgress(MainLang.WaitForGameWindowAppear);
+                            homePageTask.Text += $"\n[{DateTime.Now:HH:mm:ss}]" + $"{MainLang.WaitForGameWindowAppear}";
                             if (setting.ShowGameOutput)
                             {
                                 task.UpdateTextProgress("\n", false);
@@ -2241,6 +2377,11 @@ public class Method
 
                             Dispatcher.UIThread.Invoke(() =>
                             {
+                                Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
+                                if (!setting.ShowGameOutput)
+                                {
+                                    task.Hide();
+                                }
                                 switch (setting.LauncherVisibility)
                                 {
                                     case LauncherVisibility.AfterLaunchExitLauncher:
@@ -2276,8 +2417,9 @@ public class Method
                                         Const.Window.main.Activate();
                                     }
 
-                                    Ui.Toast($"{MainLang.GameExited}", Const.Notification.main);
+                                    Ui.Toast($"{MainLang.GameExited} - {l_id}", Const.Notification.main);
                                     task.Destory();
+                                    Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                                 });
                             };
                             if (!setting.ShowGameOutput)
@@ -2292,6 +2434,7 @@ public class Method
                         Ui.ShowShortException(MainLang.LaunchFail, ex);
                         Const.Window.main.launchPage.LaunchBtn.IsEnabled = true;
                         task.Destory();
+                        Const.Window.main.launchPage.LaunchingPanel.Children.Remove(homePageTask);
                     });
                 }
             });

@@ -69,7 +69,7 @@ public partial class MainWindow : Window
         Loaded += async (_, _) =>
         {
             if (!Const.Window.main._firstLoad) return;
-            
+
             try
             {
                 (Method.Ui.FindControlByName(this, "ContentGridBorder") as Border).Background = null;
@@ -80,8 +80,9 @@ public partial class MainWindow : Window
                         : SolidColorBrush.Parse("#FFE9F6FF");
             }
             catch
-            { }
-            
+            {
+            }
+
             Const.Window.main._firstLoad = false;
             Method.Ui.CheckLauncher();
             await Task.Delay(200);
@@ -89,6 +90,11 @@ public partial class MainWindow : Window
 
             if (_needInit) LoadWindow();
             Nav.IsPaneOpen = true;
+
+            if (Const.Data.Setting.DownloadSource != DownloadSource.Mojang)
+            {
+                MinecraftLaunch.MirrorDownloadManager.IsUseMirrorDownloadSource = true;
+            }
         };
         Activated += (_, _) =>
         {

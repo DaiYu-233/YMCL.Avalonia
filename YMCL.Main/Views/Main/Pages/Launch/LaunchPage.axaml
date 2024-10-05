@@ -17,10 +17,7 @@
     <Border x:Name="Root">
         <Border.Transitions>
             <Transitions>
-                <ThicknessTransition
-                    Easing="BounceEaseIn"
-                    Property="Margin"
-                    Duration="0:0:0.45" />
+                <ThicknessTransition Property="Margin" Duration="0:0:0.45" />
             </Transitions>
         </Border.Transitions>
         <Grid>
@@ -156,10 +153,7 @@
                 Opacity="{DynamicResource Opacity}">
                 <Border.Transitions>
                     <Transitions>
-                        <ThicknessTransition
-                            Easing="BounceEaseIn"
-                            Property="Margin"
-                            Duration="0:0:0.25" />
+                        <ThicknessTransition Property="Margin" Duration="0:0:0.25" />
                     </Transitions>
                 </Border.Transitions>
                 <DockPanel>
@@ -225,10 +219,7 @@
                 Opacity="{DynamicResource Opacity}">
                 <Border.Transitions>
                     <Transitions>
-                        <ThicknessTransition
-                            Easing="BounceEaseIn"
-                            Property="Margin"
-                            Duration="0:0:0.25" />
+                        <ThicknessTransition Property="Margin" Duration="0:0:0.25" />
                     </Transitions>
                 </Border.Transitions>
                 <DockPanel>

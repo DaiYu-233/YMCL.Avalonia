@@ -52,6 +52,7 @@ public partial class LaunchPage : UserControl
     private void ControlProperty()
     {
     }
+
     private void BindingEvent()
     {
         Loaded += async (s, e) =>
@@ -149,13 +150,31 @@ public partial class LaunchPage : UserControl
                         VersionSettingRoot.Margin = new Thickness(Root.Bounds.Width, 10, -1 * Root.Bounds.Width, 10);
                         await Task.Delay(260);
                         _firstOpenVersionSetting = false;
-                        OpenVersionSetting();
-                        LoadVersionSettingUI(entry);
+                        try
+                        {
+                            LoadVersionSettingUI(entry);
+                            OpenVersionSetting();
+                        }
+                        catch
+                        {
+                            CloseVersionSetting(null, null);
+                            Method.Ui.Toast(MainLang.CannotLoadVersionSetting, Const.Notification.main,
+                                NotificationType.Error);
+                        }
                     }
                     else
                     {
-                        OpenVersionSetting();
-                        LoadVersionSettingUI(entry);
+                        try
+                        {
+                            LoadVersionSettingUI(entry);
+                            OpenVersionSetting();
+                        }
+                        catch
+                        {
+                            CloseVersionSetting(null, null);
+                            Method.Ui.Toast(MainLang.CannotLoadVersionSetting, Const.Notification.main,
+                                NotificationType.Error);
+                        }
                     }
                 }
                 else
@@ -210,7 +229,14 @@ public partial class LaunchPage : UserControl
                 }
                 else
                 {
-                    _ = Method.Mc.LaunchClientUsingMinecraftLaunchAsync();
+                    if (Const.Data.Setting.LaunchCore == LaunchCore.MinecraftLaunch)
+                    {
+                        _ = Method.Mc.LaunchClientUsingMinecraftLaunchAsync();
+                    }
+                    else
+                    {
+                        _ = Method.Mc.LaunchClientUsingStarLightAsync();
+                    }
                 }
             }
         };

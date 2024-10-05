@@ -110,9 +110,6 @@
   <data name="NavDownload" xml:space="preserve">
     <value> 下載</value>
   </data>
-  <data name="NavMore" xml:space="preserve">
-    <value> 更多</value>
-  </data>
   <data name="NavMusic" xml:space="preserve">
     <value> 音樂</value>
   </data>
@@ -133,9 +130,6 @@
   </data>
   <data name="NeedToSelectMinecraftFolder" xml:space="preserve">
     <value>需選擇'.minecraft'資料夾</value>
-  </data>
-  <data name="SuccessAdd" xml:space="preserve">
-    <value>添加成功</value>
   </data>
   <data name="TheItemAlreadyExist" xml:space="preserve">
     <value>已存在此項目</value>
@@ -169,9 +163,6 @@
   </data>
   <data name="Ok" xml:space="preserve">
     <value>確定</value>
-  </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>取消</value>
   </data>
   <data name="InputFolderPath" xml:space="preserve">
     <value>輸入資料夾路徑</value>
@@ -261,17 +252,11 @@
   <data name="Language" xml:space="preserve">
     <value>語言</value>
   </data>
-  <data name="ColorMode" xml:space="preserve">
-    <value>色彩模式</value>
-  </data>
   <data name="FollowSystem" xml:space="preserve">
     <value>跟隨系統</value>
   </data>
   <data name="Light" xml:space="preserve">
     <value>淺色</value>
-  </data>
-  <data name="Dark" xml:space="preserve">
-    <value>深色</value>
   </data>
   <data name="MaxMem" xml:space="preserve">
     <value>最大記憶體</value>
@@ -336,23 +321,14 @@
   <data name="AutoInstall" xml:space="preserve">
     <value>自動安裝</value>
   </data>
-  <data name="LatestVersion" xml:space="preserve">
-      <value>最新版本</value>
-    </data>
   <data name="PreviewVersion" xml:space="preserve">
     <value>預覽版本</value>
-  </data>
-  <data name="ReleaseVersion" xml:space="preserve">
-    <value>正式版本</value>
   </data>
   <data name="GetInstallableVersionFail" xml:space="preserve">
     <value>取得可安裝清單失敗</value>
   </data>
   <data name="OldVersion" xml:space="preserve">
     <value>遠古版</value>
-  </data>
-  <data name="AllVersion" xml:space="preserve">
-    <value>所有版本</value>
   </data>
   <data name="SearchKeyword" xml:space="preserve">
     <value>搜尋關鍵字...</value>
@@ -401,9 +377,6 @@
   </data>
   <data name="CannotFandRightJava" xml:space="preserve">
     <value>無法找到合適Java</value>
-  </data>
-  <data name="Refresh" xml:space="preserve">
-    <value>刷新</value>
   </data>
   <data name="Mod" xml:space="preserve">
     <value>模組</value>
@@ -510,9 +483,6 @@
   <data name="ThisArchitectureCannotAutoUpdate" xml:space="preserve">
     <value>此平台不支援自動更新，開啟以下路徑手動替換</value>
   </data>
-  <data name="Update" xml:space="preserve">
-    <value>更新</value>
-  </data>
   <data name="DownloadFinish" xml:space="preserve">
     <value>下載完成</value>
   </data>
@@ -564,9 +534,6 @@ sudo apt install vlc</value>
   <data name="TreasureBox" xml:space="preserve">
     <value>百寶箱</value>
   </data>
-  <data name="ActivateWinOffice" xml:space="preserve">
-    <value>激活Windows/Office</value>
-  </data>
   <data name="Run" xml:space="preserve">
     <value>運行</value>
   </data>
@@ -578,9 +545,6 @@ sudo apt install vlc</value>
   </data>
   <data name="RunActivate" xml:space="preserve">
     <value>運行激活</value>
-  </data>
-  <data name="CancelActivateWin" xml:space="preserve">
-    <value>取消激活Windows</value>
   </data>
   <data name="CancelActivateWinTip" xml:space="preserve">
     <value>此操作會移除Windows啟動狀態，導致Windows個人化等功能無法使用，是否繼續？</value>
@@ -612,9 +576,6 @@ sudo apt install vlc</value>
   <data name="DownloadFail" xml:space="preserve">
     <value>下載失敗</value>
   </data>
-  <data name="MatchingVersion" xml:space="preserve">
-    <value>匹配的版本</value>
-  </data>
   <data name="ModifyMicrosoftSkin" xml:space="preserve">
     <value>修改皮膚(微軟)</value>
   </data>
@@ -629,9 +590,6 @@ sudo apt install vlc</value>
   </data>
   <data name="RefreshMicrosoftSkin" xml:space="preserve">
     <value>刷新皮膚(微軟)</value>
-  </data>
-  <data name="ModifySuccess" xml:space="preserve">
-    <value>修改成功</value>
   </data>
   <data name="ModifyFail" xml:space="preserve">
     <value>修改失敗</value>
@@ -735,9 +693,6 @@ sudo apt install vlc</value>
   <data name="DisableAll" xml:space="preserve">
     <value>停用所有</value>
   </data>
-  <data name="Author" xml:space="preserve">
-    <value>作者</value>
-  </data>
   <data name="Version" xml:space="preserve">
     <value>版本</value>
   </data>
@@ -786,20 +741,11 @@ sudo apt install vlc</value>
   <data name="DownloadThreadTooBigTip" xml:space="preserve">
       <value>下載線程過大可能導致設備卡頓</value>
     </data>
-  <data name="Unknown" xml:space="preserve">
-      <value>未知</value>
-    </data>
-  <data name="ShaderPack" xml:space="preserve">
-      <value>光影包</value>
-    </data>
   <data name="DataPack" xml:space="preserve">
       <value>數據包</value>
     </data>
   <data name="Api" xml:space="preserve">
       <value>應用程式介面</value>
-    </data>
-  <data name="ModPack" xml:space="preserve">
-      <value>整合包</value>
     </data>
   <data name="SaveAudioFile" xml:space="preserve">
       <value>儲存音訊檔案</value>

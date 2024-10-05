@@ -1060,30 +1060,30 @@ MacOsは自動更新をサポートしていません
       <value>Minecraft フォルダを見つけることができません</value>
     </data>
   <data name="OneSentence" xml:space="preserve">
-      <value>一言</value>
+      <value>記事</value>
     </data>
   <data name="TodayLuckyValue" xml:space="preserve">
-      <value>今日人品</value>
+      <value>今日の人物</value>
     </data>
   <data name="CannotLoadVersionSetting" xml:space="preserve">
-      <value>无法加载版本设置</value>
+      <value>バージョン設定を読み込めませんでした</value>
     </data>
   <data name="TodayLuckyValueTip" xml:space="preserve">
-      <value>今日的人品值是 : {value} ! </value>
+      <value>本日の値： {value}! </value>
     </data>
   <data name="IKnow" xml:space="preserve">
-      <value>我知道了</value>
+      <value>了解</value>
     </data>
   <data name="LuckyValueTip" xml:space="preserve">
-      <value>今天的运气可能不太好，但别灰心，明天会更好！/n今天的运气有点差呢。/n今天的运气一般般。/n今天的运气还行。/n今天的运气不错呢！/n今天的运气非常好！/n今天的运气简直爆棚！/n</value>
+      <value>今日は悪い幸いだ！でもうまく運べないよ!/n今日の運はちょっと遅くなってきます。/n今日の予想がうまくいきません。/n幸いだんび。/n今日の運がいいです!/n今日の運がいいです!/n今日の運はちょっと運のバラです!/n</value>
     </data>
   <data name="NeverClick" xml:space="preserve">
-      <value>千万别点</value>
+      <value>ヘマするなよ</value>
     </data>
   <data name="NeverClickTip" xml:space="preserve">
-      <value>此操作可能会发生奇奇怪怪的问题，确定要继续吗？</value>
+      <value>このアクションが奇怪な問題が発生するだろう。続けてもよろしいですか？</value>
     </data>
   <data name="Tip" xml:space="preserve">
-      <value>提示</value>
+      <value>ヒント</value>
     </data>
 </root>

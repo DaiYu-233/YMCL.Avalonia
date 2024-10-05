@@ -564,16 +564,16 @@ sudo apt install vlc</value>
     <value>百宝箱</value>
   </data>
   <data name="ActivateWinOffice" xml:space="preserve">
-    <value>激活Windows/Office</value>
+    <value>Activer Windows/Office</value>
   </data>
   <data name="Run" xml:space="preserve">
     <value>运行</value>
   </data>
   <data name="ThisFeatureOnlySupportsWindowsPlatform" xml:space="preserve">
-    <value>该功能仅支持Windows平台</value>
+    <value>Cette fonctionnalité n’est disponible que sur la plate-forme Windows</value>
   </data>
   <data name="RunCommandFail" xml:space="preserve">
-    <value>运行命令失败</value>
+    <value>Echec de l’exécution de la commande</value>
   </data>
   <data name="RunActivate" xml:space="preserve">
     <value>运行激活</value>
@@ -675,64 +675,64 @@ sudo apt install vlc</value>
     <value>释放鼠标让YMCL处理此文件</value>
   </data>
   <data name="UnableToAddModsForBedrockEdition" xml:space="preserve">
-    <value>无法为基岩版添加模组</value>
+    <value>Les Mode ne peuvent pas être ajoutés à Bedrock Edition</value>
   </data>
   <data name="AddTheFollowingFilesAsModsToTheCurrentVersion" xml:space="preserve">
-    <value>将以下文件作为模组添加至当前版本</value>
+    <value>Ajouter les fichiers suivants en tant que Mode à la version actuelle</value>
   </data>
   <data name="UnsupportedFileType" xml:space="preserve">
-    <value>不支持的文件类型</value>
+    <value>Types de fichiers non pris en charge</value>
   </data>
   <data name="InstallTheFollowingFilesAsAnIntegrationPackageCurseforgeFormat" xml:space="preserve">
-    <value>将以下文件作为整合包(CurseForge格式)安装</value>
+    <value>Types de fichiers non pris en charge</value>
   </data>
   <data name="Unzip" xml:space="preserve">
-    <value>解压</value>
+    <value>déballer</value>
   </data>
   <data name="UnzipingModPack" xml:space="preserve">
-    <value>正在解压整合包</value>
+    <value>Le Mode pack est en cours de déballage</value>
   </data>
   <data name="FinsihUnzipModPack" xml:space="preserve">
-    <value>解压整合包完成</value>
+    <value>Le package d’intégration est décompressé</value>
   </data>
   <data name="GetModPackInfo" xml:space="preserve">
-    <value>获取整合包信息</value>
+    <value>Obtenir les informations sur le Mode pack</value>
   </data>
   <data name="ModPackInfo" xml:space="preserve">
-    <value>整合包信息</value>
+    <value>Informations sur l’offre groupée</value>
   </data>
   <data name="ImportFailed" xml:space="preserve">
-    <value>导入失败</value>
+    <value>L’importation a échoué</value>
   </data>
   <data name="ImportSuccess" xml:space="preserve">
-    <value>导入成功</value>
+    <value>L’importation a été un succès</value>
   </data>
   <data name="NoCrashInfo" xml:space="preserve">
-    <value>无崩溃信息</value>
+    <value>Pas d’informations sur le crash</value>
   </data>
   <data name="DownloadModPackMod" xml:space="preserve">
-    <value>下载整合包模组</value>
+    <value>Télécharger le mode pack</value>
   </data>
   <data name="TotalNumberOfMod" xml:space="preserve">
-    <value>模组总数量</value>
+    <value>Le nombre total de modules</value>
   </data>
   <data name="DownloadSuccess" xml:space="preserve">
-    <value>下载成功</value>
+    <value>Le téléchargement a été un succès</value>
   </data>
   <data name="OverrideModPack" xml:space="preserve">
-    <value>覆盖整合包</value>
+    <value>Remplacer le Mode pack</value>
   </data>
   <data name="DownloadFailedFileAgain" xml:space="preserve">
-    <value>重新下载失败文件</value>
+    <value>Téléchargez à nouveau le fichier ayant échoué</value>
   </data>
   <data name="Plugin" xml:space="preserve">
-    <value>插件</value>
+    <value>Modules d’extension</value>
   </data>
   <data name="EnableAll" xml:space="preserve">
-    <value>启用所有</value>
+    <value>Tout activer</value>
   </data>
   <data name="DisableAll" xml:space="preserve">
-    <value>禁用所有</value>
+    <value>Désactiver tout</value>
   </data>
   <data name="Author" xml:space="preserve">
     <value>作者</value>

@@ -1058,4 +1058,31 @@ MacOs 不支持自动更新
   <data name="CannotFindMinecraftFolder" xml:space="preserve">
       <value>无法找到Minecraft文件夹</value>
     </data>
+  <data name="OneSentence" xml:space="preserve">
+      <value>一言</value>
+    </data>
+  <data name="TodayLuckyValue" xml:space="preserve">
+      <value>今日人品</value>
+    </data>
+  <data name="CannotLoadVersionSetting" xml:space="preserve">
+      <value>无法加载版本设置</value>
+    </data>
+  <data name="TodayLuckyValueTip" xml:space="preserve">
+      <value>今日的人品值是 : {value} ! </value>
+    </data>
+  <data name="IKnow" xml:space="preserve">
+      <value>我知道了</value>
+    </data>
+  <data name="LuckyValueTip" xml:space="preserve">
+      <value>今天的运气可能不太好，但别灰心，明天会更好！/n今天的运气有点差呢。/n今天的运气一般般。/n今天的运气还行。/n今天的运气不错呢！/n今天的运气非常好！/n今天的运气简直爆棚！/n</value>
+    </data>
+  <data name="NeverClick" xml:space="preserve">
+      <value>千万别点</value>
+    </data>
+  <data name="NeverClickTip" xml:space="preserve">
+      <value>此操作可能会发生奇奇怪怪的问题，确定要继续吗？</value>
+    </data>
+  <data name="Tip" xml:space="preserve">
+      <value>提示</value>
+    </data>
 </root>

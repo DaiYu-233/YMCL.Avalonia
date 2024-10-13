@@ -228,7 +228,7 @@ public partial class PersonalizeSettingPage : UserControl
                         File.WriteAllText(Const.String.SettingDataPath,
                             JsonConvert.SerializeObject(setting, Formatting.Indented));
                     };
-                    await dialog.ShowAsync();
+                    await dialog.ShowAsync(Const.Window.main);
                     break;
                 case WindowTitleBarStyle.System:
                     Const.Window.main.TitleBar.IsVisible = false;

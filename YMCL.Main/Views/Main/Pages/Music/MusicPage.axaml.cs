@@ -29,7 +29,7 @@ namespace YMCL.Main.Views.Main.Pages.Music;
 
 public partial class MusicPage : UserControl
 {
-    private readonly Method.Debouncer _debouncer;
+    private readonly Method.Module.Debouncer _debouncer;
     private bool _firstLoad = true;
     private bool _isHoldingSlider;
     private bool _isPlaying;
@@ -53,7 +53,7 @@ public partial class MusicPage : UserControl
     {
         InitializeComponent();
         BindingEvent();
-        _debouncer = new Method.Debouncer(async () =>
+        _debouncer = new Method.Module.Debouncer(async () =>
         {
             await Dispatcher.UIThread.InvokeAsync(() =>
             {

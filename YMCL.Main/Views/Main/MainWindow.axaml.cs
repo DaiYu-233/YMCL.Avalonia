@@ -125,8 +125,8 @@ public partial class MainWindow : Window
                         break;
                 }
         };
-        AddHandler(DragDrop.DragLeaveEvent, (_, e_) => { DragTip.IsOpen = false; }, RoutingStrategies.Bubble);
-        AddHandler(DragDrop.DragEnterEvent, (_, _) => { DragTip.IsOpen = true; }, RoutingStrategies.Bubble);
+        /*AddHandler(DragDrop.DragLeaveEvent, (_, e_) => { DragTip.IsOpen = false; }, RoutingStrategies.Bubble);
+        AddHandler(DragDrop.DragEnterEvent, (_, _) => { DragTip.IsOpen = true; }, RoutingStrategies.Bubble);*/
         AddHandler(DragDrop.DropEvent, (s, e) => { HandleDrop(s!, e); }, RoutingStrategies.Bubble);
         Nav.SelectionChanged += async (s, e) =>
         {
@@ -254,8 +254,15 @@ public partial class MainWindow : Window
                 launchPage.CustomPageRoot.Child = viewer;
                 var news = JsonConvert.DeserializeObject<MojangJavaNews.Root>(
                     await File.ReadAllTextAsync(Const.String.JavaNewsDataPath));
-                news.entries.ForEach(v =>
-                    container.Children.Add(new JavaNewsEntry(v.image.url, v.body)));
+                // news.entries.ForEach(v =>
+                //     container.Children.Add(new JavaNewsEntry(v.image.url, v.body)));
+                foreach (MojangJavaNews.EntriesItem item in news.entries)
+                {
+                    Dispatcher.UIThread.InvokeAsync((() =>
+                    {
+                        container.Children.Add(new JavaNewsEntry(item.image.url, item.body));
+                    }), DispatcherPriority.ApplicationIdle);
+                }
             }
             catch (Exception ex)
             {
@@ -266,125 +273,16 @@ public partial class MainWindow : Window
     public async void HandleDrop(object sender, DragEventArgs e)
     {
         DragTip.IsOpen = false;
-        if (!e.Data.GetDataFormats().Contains(DataFormats.Files) || null == e.Data.GetFiles()) return;
-        var items = e.Data.GetFiles()!.ToList();
-        var files = new List<FileInfo>();
-        items.ForEach(item =>
+        if (null == e.Data) return;
+        var text = e.Data.GetText();
+        if (!string.IsNullOrWhiteSpace(text))
         {
-            var path = item.TryGetLocalPath();
-            if (Directory.Exists(path))
-            {
-                var dirInfo = new DirectoryInfo(path);
-                var files1 = dirInfo.GetFiles();
-                foreach (var file in files1) files.Add(Method.IO.GetFileInfoFromPath(file.FullName));
-            }
-            else if (File.Exists(path))
-            {
-                files.Add(Method.IO.GetFileInfoFromPath(path));
-            }
-        });
-
-        if (files.Count == 0) return;
-        var jarFile = new List<FileInfo>();
-        var zipFile = new List<FileInfo>();
-        var audioFile = new List<FileInfo>();
-        files.ForEach(file =>
-        {
-            switch (file.Extension)
-            {
-                case ".jar":
-                    jarFile.Add(file);
-                    break;
-                case ".zip":
-                    zipFile.Add(file);
-                    break;
-                case ".mp3":
-                case ".ogg":
-                case ".flac":
-                case ".wav":
-                    audioFile.Add(file);
-                    break;
-                default:
-                    Method.Ui.Toast($"{MainLang.UnsupportedFileType} - {file.Extension}\n{file.Path}",
-                        type: NotificationType.Error);
-                    break;
-            }
-        });
-        if (jarFile.Count > 0)
-        {
-            var entry = launchPage.VersionListView.SelectedItem as GameEntry;
-            if (entry.Type == "BedRock")
-            {
-                Method.Ui.Toast(MainLang.UnableToAddModsForBedrockEdition, type: NotificationType.Error);
-                return;
-            }
-
-            if (null == entry)
-            {
-                Method.Ui.Toast(MainLang.NoChooseGameOrCannotFindGame, type: NotificationType.Error);
-                return;
-            }
-
-            Nav.SelectedItem = NavLaunch;
-            var text = string.Empty;
-            jarFile.ForEach(jar => { text += $"{jar.FullName}\n"; });
-            var result = await Method.Ui.ShowDialogAsync(MainLang.AddTheFollowingFilesAsModsToTheCurrentVersion + "?",
-                text, b_cancel: MainLang.Cancel, b_primary: MainLang.Ok);
-            if (result == ContentDialogResult.Primary)
-            {
-                Method.IO.TryCreateFolder(Path.Combine(Path.GetDirectoryName(entry.JarPath)!, "mods"));
-                jarFile.ForEach(jar =>
-                {
-                    File.Copy(jar.Path, Path.Combine(Path.GetDirectoryName(entry.JarPath)!, "mods", jar.FullName),
-                        true);
-                });
-                Method.Ui.Toast(MainLang.SuccessAdd, type: NotificationType.Success);
-            }
+            await Method.IO.HandleTextDrop(text);
         }
-
-        if (zipFile.Count > 0)
+        var files = e.Data.GetFiles();
+        if (files != null)
         {
-            Nav.SelectedItem = NavLaunch;
-            var text = string.Empty;
-            zipFile.ForEach(zip => { text += $"{zip.FullName}\n"; });
-            var result = await Method.Ui.ShowDialogAsync(
-                MainLang.InstallTheFollowingFilesAsAnIntegrationPackageCurseforgeFormat + "?", text,
-                b_cancel: MainLang.Cancel, b_primary: MainLang.Ok);
-            if (result == ContentDialogResult.Primary)
-                foreach (var file in zipFile)
-                {
-                    var importResult = await Method.Mc.ImportModPackFromLocal(file.Path);
-                    if (!importResult)
-                        Method.Ui.Toast($"{MainLang.ImportFailed}: {file.FullName}", type: NotificationType.Error);
-                    else
-                        Method.Ui.Toast($"{MainLang.ImportSuccess}: {file.FullName}", type: NotificationType.Success);
-                }
-        }
-
-        if (audioFile.Count > 0)
-        {
-            Nav.SelectedItem = NavMusic;
-            foreach (var file in audioFile)
-                using (var reader = new MediaFoundationReader(file.Path))
-                {
-                    var time = Method.Value.MsToTime(reader.TotalTime.TotalMilliseconds);
-                    var song = new PlaySongListViewItemEntry
-                    {
-                        DisplayDuration = time,
-                        Duration = reader.TotalTime.TotalMilliseconds,
-                        Img = null,
-                        SongName = file.Name,
-                        Authors = file.Extension.TrimStart('.'),
-                        Path = file.Path,
-                        Type = PlaySongListViewItemEntryType.Local
-                    };
-                    musicPage.playSongList.Add(song);
-                    musicPage.PlayListView.Items.Add(song);
-                }
-
-            File.WriteAllText(Const.String.PlayerDataPath,
-                JsonConvert.SerializeObject(musicPage.playSongList, Formatting.Indented));
-            musicPage.PlayListView.SelectedIndex = musicPage.PlayListView.Items.Count - 1;
+            await Method.IO.HandleFileDrop(files.ToList());
         }
     }
 

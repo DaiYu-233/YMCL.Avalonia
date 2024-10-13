@@ -116,7 +116,7 @@ public partial class AccountSettingPage : UserControl
                 DefaultButton = ContentDialogButton.Primary,
                 Content = comboBox
             };
-            var dialogResult = await dialog.ShowAsync();
+            var dialogResult = await dialog.ShowAsync(Const.Window.main);
             if (dialogResult == ContentDialogResult.Primary)
                 switch (comboBox.SelectedIndex)
                 {
@@ -135,7 +135,7 @@ public partial class AccountSettingPage : UserControl
                             DefaultButton = ContentDialogButton.Primary,
                             Content = textBox
                         };
-                        var dialogResult1 = await offlineDialog.ShowAsync();
+                        var dialogResult1 = await offlineDialog.ShowAsync(Const.Window.main);
                         if (dialogResult1 == ContentDialogResult.Primary)
                         {
                             if (!string.IsNullOrWhiteSpace(textBox.Text) && !string.IsNullOrWhiteSpace(textBox.Text))
@@ -228,9 +228,9 @@ public partial class AccountSettingPage : UserControl
                                 Content = stackPanel
                             };
                             urlBox.Text = verificationUrl;
-                            _ = urlDialog.ShowAsync();
+                            _ = urlDialog.ShowAsync(Const.Window.main);
                         };
-                        _ = microsoftDialog.ShowAsync();
+                        _ = microsoftDialog.ShowAsync(Const.Window.main);
                         try
                         {
                             await authenticator.DeviceFlowAuthAsync(device =>
@@ -383,7 +383,7 @@ public partial class AccountSettingPage : UserControl
         }
     }
 
-    private async void YggdrasilLogin(string server1 = "", string email1 = "", string password1 = "")
+    public async void YggdrasilLogin(string server1 = "", string email1 = "", string password1 = "")
     {
         var stackPanel = new StackPanel { Spacing = 10, Width = 580 };
         var verificationSeverUrlTextBox = new TextBox
@@ -416,7 +416,7 @@ public partial class AccountSettingPage : UserControl
             DefaultButton = ContentDialogButton.Primary,
             Content = stackPanel
         };
-        var thirdPartyDialogResult = await thirdPartyDialog.ShowAsync();
+        var thirdPartyDialogResult = await thirdPartyDialog.ShowAsync(Const.Window.main);
         if (thirdPartyDialogResult == ContentDialogResult.Primary)
         {
             var server = verificationSeverUrlTextBox.Text;

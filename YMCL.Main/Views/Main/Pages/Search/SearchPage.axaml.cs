@@ -20,7 +20,7 @@ namespace YMCL.Main.Views.Main.Pages.Search;
 
 public partial class SearchPage : UserControl
 {
-    private Method.Debouncer _debouncer;
+    private Method.Module.Debouncer _debouncer;
     public List<AggregateSearch> aggregateSearchList = new();
     public List<VersionManifestEntry> versionManifestEntries = null;
 
@@ -76,7 +76,7 @@ public partial class SearchPage : UserControl
 
     private void InitAggregateSearch()
     {
-        _debouncer = new Method.Debouncer(async () =>
+        _debouncer = new Method.Module.Debouncer(async () =>
         {
             await Dispatcher.UIThread.InvokeAsync(async () =>
             {

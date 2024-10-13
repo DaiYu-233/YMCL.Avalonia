@@ -1015,6 +1015,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 游戏主要文件缺失.
+        /// </summary>
+        public static string GameMainFileDeletion {
+            get {
+                return ResourceManager.GetString("GameMainFileDeletion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 游戏版本.
         /// </summary>
         public static string GameVersion {

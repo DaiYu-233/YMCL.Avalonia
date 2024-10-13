@@ -21,7 +21,7 @@ public partial class JavaNewsEntry : UserControl
 
         var wrapPanel = WrapPanelC;
 
-        // ½âÎö²¢Ìí¼Ó¶ÎÂä
+        // è§£æå¹¶æ·»åŠ æ®µè½
         var paragraphs = htmlDoc.DocumentNode.SelectNodes("//p");
         if (paragraphs != null)
         {
@@ -36,7 +36,7 @@ public partial class JavaNewsEntry : UserControl
             }
         }
 
-        // ½âÎö²¢Ìí¼Ó±êÌâ
+        // è§£æå¹¶æ·»åŠ æ ‡é¢˜
         var h1 = htmlDoc.DocumentNode.SelectSingleNode("//h1");
         if (h1 != null)
         {
@@ -49,7 +49,7 @@ public partial class JavaNewsEntry : UserControl
             wrapPanel.Children.Add(textBlock);
         }
 
-        // ½âÎö²¢Ìí¼ÓÊµÑéÌØĞÔ
+        // è§£æå¹¶æ·»åŠ å®éªŒç‰¹æ€§
         var h2 = htmlDoc.DocumentNode.SelectSingleNode("//h2");
         if (h2 != null)
         {
@@ -62,7 +62,7 @@ public partial class JavaNewsEntry : UserControl
             wrapPanel.Children.Add(textBlock);
         }
 
-        // ½âÎö²¢Ìí¼ÓÁĞ±íÏî
+        // è§£æå¹¶æ·»åŠ åˆ—è¡¨é¡¹
         var listItems = htmlDoc.DocumentNode.SelectNodes("//ul/li");
         if (listItems != null)
         {
@@ -72,11 +72,11 @@ public partial class JavaNewsEntry : UserControl
                     { Text = item.InnerText, FontFamily = (FontFamily)Application.Current.Resources["Font"]!,
                         TextWrapping = TextWrapping.Wrap };
                 wrapPanel.Children.Add(textBlock);
-                wrapPanel.Children.Add(new TextBlock { Text = "\n" }); // Ìí¼Ó»»ĞĞ
+                wrapPanel.Children.Add(new TextBlock { Text = "\n" }); // æ·»åŠ æ¢è¡Œ
             }
         }
 
-        // ½âÎö²¢Ìí¼Ó³¬Á´½Ó
+        // è§£æå¹¶æ·»åŠ è¶…é“¾æ¥
         var links = htmlDoc.DocumentNode.SelectNodes("//a[@href]");
         if (links != null)
         {

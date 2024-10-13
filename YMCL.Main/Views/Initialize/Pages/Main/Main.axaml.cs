@@ -243,7 +243,7 @@ public partial class Main : UserControl
                 DefaultButton = ContentDialogButton.Primary,
                 Content = comboBox
             };
-            var dialogResult = await dialog.ShowAsync();
+            var dialogResult = await dialog.ShowAsync(Const.Window.initialize);
             if (dialogResult == ContentDialogResult.Primary)
                 switch (comboBox.SelectedIndex)
                 {
@@ -262,7 +262,7 @@ public partial class Main : UserControl
                             DefaultButton = ContentDialogButton.Primary,
                             Content = textBox
                         };
-                        var dialogResult1 = await offlineDialog.ShowAsync();
+                        var dialogResult1 = await offlineDialog.ShowAsync(Const.Window.initialize);
                         if (dialogResult1 == ContentDialogResult.Primary)
                         {
                             if (!string.IsNullOrWhiteSpace(textBox.Text) && !string.IsNullOrWhiteSpace(textBox.Text))
@@ -369,9 +369,9 @@ public partial class Main : UserControl
                                 Content = stackPanel
                             };
                             urlBox.Text = verificationUrl;
-                            _ = urlDialog.ShowAsync();
+                            _ = urlDialog.ShowAsync(Const.Window.initialize);
                         };
-                        _ = microsoftDialog.ShowAsync();
+                        _ = microsoftDialog.ShowAsync(Const.Window.initialize);
                         try
                         {
                             await authenticator.DeviceFlowAuthAsync(device =>
@@ -646,7 +646,7 @@ public partial class Main : UserControl
             DefaultButton = ContentDialogButton.Primary,
             Content = stackPanel
         };
-        var thirdPartyDialogResult = await thirdPartyDialog.ShowAsync();
+        var thirdPartyDialogResult = await thirdPartyDialog.ShowAsync(Const.Window.initialize);
         if (thirdPartyDialogResult == ContentDialogResult.Primary)
         {
             var server = verificationSeverUrlTextBox.Text;

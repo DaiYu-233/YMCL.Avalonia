@@ -1085,4 +1085,7 @@ MacOs 不支持自动更新
   <data name="Tip" xml:space="preserve">
       <value>提示</value>
     </data>
+  <data name="GameMainFileDeletion" xml:space="preserve">
+      <value>游戏主要文件缺失</value>
+    </data>
 </root>

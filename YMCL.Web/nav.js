@@ -1,3 +1,6 @@
+console.log("Developed By DaiYu (daiyu.fun)");
+
+
 window.addEventListener(
   "scroll",
   function (e) {

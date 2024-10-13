@@ -1086,4 +1086,7 @@ MacOsは自動更新をサポートしていません
   <data name="Tip" xml:space="preserve">
       <value>ヒント</value>
     </data>
+  <data name="GameMainFileDeletion" xml:space="preserve">
+      <value>游戏主要文件缺失</value>
+    </data>
 </root>

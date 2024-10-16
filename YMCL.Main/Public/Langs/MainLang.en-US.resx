@@ -1063,7 +1063,7 @@ to manually open the following directory to copy the latest version and replace 
       <value>One hand</value>
     </data>
   <data name="TodayLuckyValue" xml:space="preserve">
-      <value>People Today</value>
+      <value>Today's fortune</value>
     </data>
   <data name="CannotLoadVersionSetting" xml:space="preserve">
       <value>Unable to load version settings</value>
@@ -1078,13 +1078,13 @@ to manually open the following directory to copy the latest version and replace 
       <value>Today’s luck may not be good, but don't be discouraged and better tomorrow!/nToday is something bad today./nIt is good today./nGood luck!/nGood luck today!/n</value>
     </data>
   <data name="NeverClick" xml:space="preserve">
-      <value>Dots</value>
+      <value>Do Not Click</value>
     </data>
   <data name="NeverClickTip" xml:space="preserve">
-      <value>This operation may have a strange problem. Are you sure you want to continue?</value>
+      <value>This operation may produce weird problems. Are you sure you want to continue?</value>
     </data>
   <data name="Tip" xml:space="preserve">
-      <value>Prompt</value>
+      <value>Tips</value>
     </data>
   <data name="GameMainFileDeletion" xml:space="preserve">
       <value>游戏主要文件缺失</value>

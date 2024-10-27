@@ -202,7 +202,7 @@ public partial class Main : UserControl
         ManualAddJavaRuntimeBtn.Click += async (_, _) =>
         {
             var list = await Method.IO.OpenFilePicker(TopLevel.GetTopLevel(this)!,
-                new FilePickerOpenOptions { AllowMultiple = false, Title = MainLang.SelectJava });
+                new FilePickerOpenOptions() { AllowMultiple = false, Title = MainLang.SelectJava });
             list.ForEach(java =>
             {
                 var javaInfo = JavaUtil.GetJavaInfo(java.Path);

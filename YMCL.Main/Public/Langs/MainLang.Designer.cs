@@ -1024,6 +1024,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 更新日志.
+        /// </summary>
+        public static string GameUpdateLog {
+            get {
+                return ResourceManager.GetString("GameUpdateLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 游戏版本.
         /// </summary>
         public static string GameVersion {

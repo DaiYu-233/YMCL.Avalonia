@@ -112,7 +112,7 @@ public partial class MainWindow : Window
                 }
             }
 
-            if (titleBarStyle == WindowTitleBarStyle.Ymcl && e.Property.Name == nameof(WindowState))
+            if (Const.Data.Setting.WindowTitleBarStyle == WindowTitleBarStyle.Ymcl && e.Property.Name == nameof(WindowState))
                 switch (WindowState)
                 {
                     case WindowState.Normal:
@@ -211,20 +211,13 @@ public partial class MainWindow : Window
         Const.Window.main.Show();
         /*Const.Window.initialize.Close();*/
 
-        _ = FetchJavaNews();
         _ = LoadCustomHomePage();
+        _ = morePage._gameUpdateLog.LoadNews();
 
         _ = downloadPage.curseForgeFetcherPage.InitModFromCurseForge();
         Method.Ui.SetWindowBackGroundImg();
     }
-
-    private async Task FetchJavaNews()
-    {
-        using var client = new HttpClient();
-        var json = await client.GetStringAsync("https://launchercontent.mojang.com/javaPatchNotes.json");
-        await File.WriteAllTextAsync(Const.String.JavaNewsDataPath, json);
-        // _ = LoadCustomHomePage();
-    }
+    
 
     private async Task LoadCustomHomePage()
     {
@@ -239,33 +232,6 @@ public partial class MainWindow : Window
             catch (Exception ex)
             {
                 Method.Ui.ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
-            }
-        }
-        else if (Const.Data.Setting.CustomHomePage == CustomHomePageWay.Presetting_JavaNews)
-        {
-            try
-            {
-                var viewer = new ScrollViewer();
-                var container = new StackPanel()
-                {
-                    Spacing = 10
-                };
-                viewer.Content = container;
-                launchPage.CustomPageRoot.Child = viewer;
-                var news = JsonConvert.DeserializeObject<MojangJavaNews.Root>(
-                    await File.ReadAllTextAsync(Const.String.JavaNewsDataPath));
-                // news.entries.ForEach(v =>
-                //     container.Children.Add(new JavaNewsEntry(v.image.url, v.body)));
-                foreach (MojangJavaNews.EntriesItem item in news.entries)
-                {
-                    Dispatcher.UIThread.InvokeAsync((() =>
-                    {
-                        container.Children.Add(new JavaNewsEntry(item.image.url, item.body));
-                    }), DispatcherPriority.ApplicationIdle);
-                }
-            }
-            catch (Exception ex)
-            {
             }
         }
     }

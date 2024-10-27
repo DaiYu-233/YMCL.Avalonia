@@ -248,9 +248,9 @@ public partial class Method
             Const.Window.main.TransparencyLevelHint = new[] { WindowTransparencyLevel.Mica };
             Application.Current.Resources["Opacity"] = 1.0;
             Const.Window.main.BackGroundImg.Source = null;
-            Const.Window.main.Root.Background = Application.Current.ActualThemeVariant == ThemeVariant.Dark
+            /*Const.Window.main.Root.Background = Application.Current.ActualThemeVariant == ThemeVariant.Dark
                 ? SolidColorBrush.Parse("#262626")
-                : SolidColorBrush.Parse("#f6fafd");
+                : SolidColorBrush.Parse("#f6fafd");*/
             Const.Window.main.TitleBar.Root.Background = Application.Current.ActualThemeVariant == ThemeVariant.Dark
                 ? SolidColorBrush.Parse("#2c2c2c")
                 : SolidColorBrush.Parse("#FFE9F6FF");

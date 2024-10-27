@@ -1089,4 +1089,7 @@ MacOs 不支持自动更新
   <data name="GameMainFileDeletion" xml:space="preserve">
       <value>游戏主要文件缺失</value>
     </data>
+  <data name="GameUpdateLog" xml:space="preserve">
+      <value>更新日志</value>
+    </data>
 </root>

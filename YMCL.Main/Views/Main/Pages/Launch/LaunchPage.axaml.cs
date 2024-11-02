@@ -386,7 +386,7 @@ public partial class LaunchPage : UserControl
         var index = 0;
         var a = 0;
         VersionListView.Items.Add(new GameEntry
-            { Id = MainLang.BedRockVersion, Type = "BedRock", MainClass = MainLang.IfInstallBedRock });
+            { Id = MainLang.BedRockVersion, Type = "BedRock", Version = MainLang.IfInstallBedRock });
         foreach (var version in list)
         {
             VersionListView.Items.Add(version);

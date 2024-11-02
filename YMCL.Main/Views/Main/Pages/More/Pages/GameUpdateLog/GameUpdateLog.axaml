@@ -1,54 +1,85 @@
 <UserControl
+    FontFamily="{DynamicResource Font}"
+    FontWeight="{DynamicResource FontWeight}"
+    d:DesignHeight="800"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
     x:Class="YMCL.Main.Views.Main.Pages.More.Pages.GameUpdateLog.GameUpdateLog"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
     xmlns:uc="clr-namespace:YMCL.Main.Public.Controls"
     xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
-    d:DesignHeight="800"
-    d:DesignWidth="800"
-    FontFamily="{DynamicResource Font}"
-    FontWeight="{DynamicResource FontWeight}"
-    mc:Ignorable="d">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Border x:Name="Root">
         <Border.Transitions>
             <Transitions>
                 <ThicknessTransition
+                    Duration="0:0:0.45"
                     Easing="BounceEaseIn"
-                    Property="Margin"
-                    Duration="0:0:0.45" />
+                    Property="Margin" />
             </Transitions>
         </Border.Transitions>
         <Grid>
             <ScrollViewer>
                 <WrapPanel
-                    Name="Container"
-                    Margin="10,0,10,10"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Top" />
+                    Margin="10,0,10,10"
+                    Name="Container"
+                    VerticalAlignment="Top">
+                    <WrapPanel.Transitions>
+                        <Transitions>
+                            <DoubleTransition Duration="0:0:0.3" Property="Opacity" />
+                        </Transitions>
+                    </WrapPanel.Transitions>
+                </WrapPanel>
             </ScrollViewer>
             <ui:ProgressRing
+                Height="48"
                 Name="Loading"
-                Width="48"
-                Height="48" />
+                Width="48" />
             <ui:InfoBar
-                Name="LoadErrorInfoBar"
-                Margin="10,0"
                 FontWeight="Light"
                 IsClosable="False"
                 IsOpen="True"
                 IsVisible="False"
+                Margin="10,0"
                 Message="{x:Static properties:MainLang.LoadFail}"
+                Name="LoadErrorInfoBar"
                 Severity="Error">
                 <ui:InfoBar.ActionButton>
                     <Button
-                        Name="ReloadBtn"
+                        Content="{x:Static properties:MainLang.Reload}"
                         HorizontalAlignment="Right"
-                        Content="{x:Static properties:MainLang.Reload}" />
+                        Name="ReloadBtn" />
                 </ui:InfoBar.ActionButton>
             </ui:InfoBar>
+            <Border
+                Background="{DynamicResource 1x}"
+                CornerRadius="8"
+                IsVisible="False"
+                Margin="10,0,10,10"
+                Opacity="{DynamicResource Opacity}"
+                x:Name="Detail">
+                <Grid>
+                    <Button
+                        Classes="custom-button"
+                        Content="F1 M 20 8.75 C 20 8.925781 19.967447 9.088542 19.902344 9.238281 C 19.837238 9.388021 19.747721 9.519857 19.633789 9.633789 C 19.519855 9.747722 19.38802 9.83724 19.238281 9.902344 C 19.088541 9.967448 18.925781 10 18.75 10 L 4.267578 10 L 9.638672 15.361328 C 9.749349 15.472006 9.838867 15.605469 9.907227 15.761719 C 9.975586 15.917969 10.009766 16.077475 10.009766 16.240234 C 10.009766 16.409506 9.975586 16.570639 9.907227 16.723633 C 9.838867 16.876629 9.747721 17.010092 9.633789 17.124023 C 9.519856 17.237955 9.386393 17.329102 9.233398 17.397461 C 9.080403 17.46582 8.919271 17.5 8.75 17.5 C 8.411458 17.5 8.118489 17.376303 7.871094 17.128906 L 0.371094 9.628906 C 0.123698 9.381511 0 9.085287 0 8.740234 C 0 8.577475 0.03418 8.417969 0.102539 8.261719 C 0.170898 8.105469 0.260417 7.972006 0.371094 7.861328 L 7.871094 0.361328 C 8.118489 0.113934 8.414713 -0.009766 8.759766 -0.009766 C 8.929036 -0.009766 9.088541 0.024414 9.238281 0.092773 C 9.388021 0.161133 9.519856 0.252279 9.633789 0.366211 C 9.747721 0.480145 9.838867 0.61198 9.907227 0.761719 C 9.975586 0.911459 10.009766 1.070965 10.009766 1.240234 C 10.009766 1.585287 9.886067 1.881512 9.638672 2.128906 L 4.267578 7.5 L 18.75 7.5 C 18.91927 7.5 19.080402 7.532553 19.233398 7.597656 C 19.386393 7.662762 19.519855 7.752279 19.633789 7.866211 C 19.747721 7.980144 19.837238 8.113607 19.902344 8.266602 C 19.967447 8.419597 20 8.580729 20 8.75 Z "
+                        HorizontalAlignment="Left"
+                        Margin="5,2,0,0"
+                        Name="CloseButton"
+                        VerticalAlignment="Top" />
+                    <ScrollViewer Margin="80,30,20,20">
+                        <StackPanel Name="DataPanel" />
+                    </ScrollViewer>
+                    <ui:ProgressRing
+                        Height="48"
+                        Name="DetailLoading"
+                        Width="48" />
+                </Grid>
+            </Border>
         </Grid>
     </Border>
 </UserControl>

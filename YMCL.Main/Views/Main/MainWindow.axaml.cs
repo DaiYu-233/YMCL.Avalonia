@@ -54,8 +54,6 @@ public partial class MainWindow : Window
     public bool _firstLoad = true;
     public bool _needInit = false;
 
-    public event EventHandler AppThemeChanged;
-
     public MainWindow()
     {
         InitializeComponent();
@@ -70,31 +68,10 @@ public partial class MainWindow : Window
         {
             if (!Const.Window.main._firstLoad) return;
 
-            try
-            {
-                (Method.Ui.FindControlByName(this, "ContentGridBorder") as Border).Background = null;
-                (Method.Ui.FindControlByName(this, "ContentGridBorder") as Border).BorderThickness = new Thickness(0);
-                (Method.Ui.FindControlByName(Const.Window.main, "PART_PaneRoot") as Panel).Background =
-                    Application.Current.ActualThemeVariant == ThemeVariant.Dark
-                        ? SolidColorBrush.Parse("#2c2c2c")
-                        : SolidColorBrush.Parse("#FFE9F6FF");
-            }
-            catch
-            {
-            }
-
-            Const.Window.main._firstLoad = false;
-            Method.Ui.CheckLauncher();
-            await Task.Delay(200);
-            _ = Const.Window.main.settingPage.launcherSettingPage.AutoUpdate();
-
             if (_needInit) LoadWindow();
             Nav.IsPaneOpen = true;
-
-            if (Const.Data.Setting.DownloadSource != DownloadSource.Mojang)
-            {
-                MinecraftLaunch.MirrorDownloadManager.IsUseMirrorDownloadSource = true;
-            }
+            _ = Method.App.AppLoaded();
+            Const.Window.main._firstLoad = false;
         };
         Activated += (_, _) =>
         {
@@ -207,19 +184,15 @@ public partial class MainWindow : Window
                 break;
         }
 
+        _ = Method.App.MainWindowLoading();
+        
         Const.Window.initialize.Hide();
         Const.Window.main.Show();
         /*Const.Window.initialize.Close();*/
-
-        _ = LoadCustomHomePage();
-        _ = morePage._gameUpdateLog.LoadNews();
-
-        _ = downloadPage.curseForgeFetcherPage.InitModFromCurseForge();
-        Method.Ui.SetWindowBackGroundImg();
     }
-    
 
-    private async Task LoadCustomHomePage()
+
+    public async Task LoadCustomHomePage()
     {
         if (Const.Data.Setting.CustomHomePage == CustomHomePageWay.Local)
         {

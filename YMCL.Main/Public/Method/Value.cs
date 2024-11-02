@@ -206,11 +206,11 @@ public partial class Method
                     }
 
                     Console.WriteLine($"Failed to load image. Status code: {response.StatusCode}");
+
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
-                    Console.WriteLine($"Error loading image: {ex.Message}");
-                    return null;
+                    Console.WriteLine(e);
                 }
             }
 

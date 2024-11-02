@@ -26,7 +26,7 @@ public partial class UrlImage : UserControl
     public async Task LoadImgAsync()
     {
         var index = 0;
-        while (Url == "null" && index < 20)
+        while (Url is "null" or "Url" && index < 20)
         {
             await Task.Delay(500);
             index++;

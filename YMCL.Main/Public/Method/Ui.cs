@@ -254,8 +254,16 @@ public partial class Method
             Const.Window.main.TitleBar.Root.Background = Application.Current.ActualThemeVariant == ThemeVariant.Dark
                 ? SolidColorBrush.Parse("#2c2c2c")
                 : SolidColorBrush.Parse("#FFE9F6FF");
-            (Method.Ui.FindControlByName(Const.Window.main, "PART_PaneRoot") as Panel).Opacity =
-                (double)Application.Current.Resources["Opacity"]!;
+            
+            try
+            {
+                (FindControlByName(Const.Window.main, "PART_PaneRoot") as Panel).Opacity =
+                    (double)Application.Current.Resources["Opacity"]!;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
 
             var setting = Const.Data.Setting;
 

@@ -776,6 +776,11 @@ public class UrlImageDataListEntry()
     public string Url { get; set; }
     public Bitmap Bitmap { get; set; }
 }
+public class NewsDataListEntry()
+{
+    public string Url { get; set; }
+    public string Data { get; set; }
+}
 
 public class MojangJavaNews()
 {
@@ -784,52 +789,47 @@ public class MojangJavaNews()
         /// <summary>
         /// 
         /// </summary>
-        public string url { get; set; }
-
+        public string title { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public string title { get; set; }
+        public string url { get; set; }
     }
 
     public class EntriesItem
     {
-        public string BitmapBase64 { get; set; }
-
         /// <summary>
         /// 
         /// </summary>
         public string title { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string type { get; set; }
-
         /// <summary>
         /// 
         /// </summary>
         public string version { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public string type { get; set; }
         /// <summary>
         /// 
         /// </summary>
         public Image image { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string body { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string id { get; set; }
-
         /// <summary>
         /// 
         /// </summary>
         public string contentPath { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string id { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string date { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string shortText { get; set; }
     }
 
     public class Root
@@ -838,10 +838,10 @@ public class MojangJavaNews()
         /// 
         /// </summary>
         public int version { get; set; }
-
         /// <summary>
         /// 
         /// </summary>
-        public List<EntriesItem> entries { get; set; }
+        public List <EntriesItem > entries { get; set; }
     }
+
 }

@@ -16,6 +16,7 @@ public partial class MorePage : UserControl
     {
         InitializeComponent();
         BindingEvent();
+        FrameView.Content = _treasureBoxPage;
     }
 
     private void BindingEvent()
@@ -23,7 +24,6 @@ public partial class MorePage : UserControl
         Loaded += (s, e) =>
         {
             Method.Ui.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
-            FrameView.Content = _treasureBoxPage;
         };
         Nav.SelectionChanged += async (s, e) =>
         {

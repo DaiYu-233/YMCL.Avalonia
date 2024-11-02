@@ -78,9 +78,9 @@ public partial class MusicPage : UserControl
         keyword = SearchBox.Text;
         _ = SearchForListViewAsync(keyword!, page);
     }
+
     private void BindingEvent()
     {
-        
         NextSongBtn.PointerPressed += async (_, _) => { NextSong(); };
         DeskLyricBtn.PointerPressed += (_, _) => { Const.Window.deskLyric.Toggle(); };
         PreviousSongBtn.PointerPressed += async (_, _) => { PreviousSong(); };
@@ -164,12 +164,14 @@ public partial class MusicPage : UserControl
             }
             else
             {
-                var task = new TaskManager.TaskEntry($"{MainLang.Download} - {_selectedItem.SongName}.mp3", true, false);
+                var task = new TaskManager.TaskEntry($"{MainLang.Download} - {_selectedItem.SongName}.mp3", true,
+                    false);
                 Method.Ui.Toast($"{MainLang.BeginDownload}: {_selectedItem.SongName}.mp3");
                 try
                 {
                     using var client = new HttpClient();
-                    var response = await client.GetAsync($"{Const.String.MusicApiUrl}/song/url?id={_selectedItem.SongId}");
+                    var response =
+                        await client.GetAsync($"{Const.String.MusicApiUrl.TrimEnd('/')}/song/url?id={_selectedItem.SongId}");
                     response.EnsureSuccessStatusCode();
                     var jObject1 = JObject.Parse(await response.Content.ReadAsStringAsync());
                     if (jObject1 == null)
@@ -236,6 +238,7 @@ public partial class MusicPage : UserControl
                 {
                     Method.Ui.Toast(MainLang.MusicPlayerOnlySupportWindows, type: NotificationType.Error);
                 }
+
                 var list = JsonConvert.DeserializeObject<List<PlaySongListViewItemEntry>>(
                     File.ReadAllText(Const.String.PlayerDataPath));
                 list.ForEach(list =>
@@ -354,7 +357,8 @@ public partial class MusicPage : UserControl
                 Type = PlaySongListViewItemEntryType.Network
             });
             PlayListView.SelectedIndex = PlayListView.Items.Count - 1;
-            File.WriteAllText(Const.String.PlayerDataPath, JsonConvert.SerializeObject(playSongList, Formatting.Indented));
+            File.WriteAllText(Const.String.PlayerDataPath,
+                JsonConvert.SerializeObject(playSongList, Formatting.Indented));
             await Task.Delay(250);
             SearchSongListView.SelectedIndex = -1;
         };
@@ -363,7 +367,8 @@ public partial class MusicPage : UserControl
             if (PlayListView.Items.Count == 0 || PlayListView.SelectedIndex == -1) return;
             playSongList.RemoveAt(PlayListView.SelectedIndex);
             PlayListView.Items.RemoveAt(PlayListView.SelectedIndex);
-            File.WriteAllText(Const.String.PlayerDataPath, JsonConvert.SerializeObject(playSongList, Formatting.Indented));
+            File.WriteAllText(Const.String.PlayerDataPath,
+                JsonConvert.SerializeObject(playSongList, Formatting.Indented));
             PlayListView.SelectedIndex = PlayListView.Items.Count - 1;
         };
         var _theLastLocalSong = string.Empty;
@@ -394,7 +399,8 @@ public partial class MusicPage : UserControl
                 }
             }
 
-            File.WriteAllText(Const.String.PlayerDataPath, JsonConvert.SerializeObject(playSongList, Formatting.Indented));
+            File.WriteAllText(Const.String.PlayerDataPath,
+                JsonConvert.SerializeObject(playSongList, Formatting.Indented));
             PlayListView.SelectedIndex = PlayListView.Items.Count - 1;
         };
         PlayBtn.PointerPressed += (s, e) =>
@@ -524,7 +530,7 @@ public partial class MusicPage : UserControl
         var json = string.Empty;
         try
         {
-            var url = $"{Const.String.MusicApiUrl}/cloudsearch?keywords={keyword}&offset={page * 30}";
+            var url = $"{Const.String.MusicApiUrl.TrimEnd('/')}/cloudsearch?keywords={keyword}&offset={page * 30}";
             var response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             json = await response.Content.ReadAsStringAsync();
@@ -589,7 +595,7 @@ public partial class MusicPage : UserControl
         var json = string.Empty;
         try
         {
-            var url = $"{Const.String.MusicApiUrl}/cloudsearch?keywords={keyword}&offset={page * 30}";
+            var url = $"{Const.String.MusicApiUrl.TrimEnd('/')}/cloudsearch?keywords={keyword}&offset={page * 30}";
             var response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             json = await response.Content.ReadAsStringAsync();
@@ -707,56 +713,65 @@ public partial class MusicPage : UserControl
                 SongImg.Source = data.Bitmap;
             }
 
-            using var client = new HttpClient();
-            var response = await client.GetAsync($"{Const.String.MusicApiUrl}/check/music?id={entry.SongId}");
-            response.EnsureSuccessStatusCode();
-            var jObject = JObject.Parse(await response.Content.ReadAsStringAsync());
-            var availability = (bool)jObject["success"]!;
-            if (!availability)
+            try
             {
-                Method.Ui.Toast(MainLang.MusicNotAvailable, type: NotificationType.Error);
-                return;
-            }
-
-            var response1 = await client.GetAsync($"{Const.String.MusicApiUrl}/song/url?id={entry.SongId}");
-            response1.EnsureSuccessStatusCode();
-            var jObject1 = JObject.Parse(await response1.Content.ReadAsStringAsync());
-            if (jObject1 == null)
-            {
-                Method.Ui.Toast(MainLang.MusicGetFail, type: NotificationType.Error);
-                return;
-            }
-
-            var url = (string)((JObject)((JArray)jObject1["data"])[0])["url"];
-            LyricUi(entry);
-
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            using (var response4 = (HttpWebResponse)request.GetResponse())
-            using (var responseStream = response4.GetResponseStream())
-            {
-                var memoryStream = new MemoryStream();
-                responseStream.CopyTo(memoryStream);
-                memoryStream.Position = 0;
-
-                _waveStream = new Mp3FileReader(memoryStream);
-
-                var selectedItem = PlayListView.SelectedItem as PlaySongListViewItemEntry;
-                if (selectedItem.SongName != entry.SongName || selectedItem.SongId != entry.SongId) return;
-
-                PlayerSlider.Maximum = _waveStream.TotalTime.TotalMilliseconds;
-                ControlPlayerSlider.Maximum = _waveStream.TotalTime.TotalMilliseconds;
-                TotalTimeText.Text = Method.Value.MsToTime(_waveStream.TotalTime.TotalMilliseconds);
-                if (_waveOut != null)
+                var handler = new HttpClientHandler();
+                handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
+                using var client = new HttpClient(handler);
+                var response = await client.GetAsync($"{Const.String.MusicApiUrl.TrimEnd('/')}/check/music?id={entry.SongId}");
+                response.EnsureSuccessStatusCode();
+                var jObject = JObject.Parse(await response.Content.ReadAsStringAsync());
+                var availability = (bool)jObject["success"]!;
+                if (!availability)
                 {
-                    _waveOut.Stop();
-                    _waveOut.Dispose();
+                    Method.Ui.Toast(MainLang.MusicNotAvailable, type: NotificationType.Error);
+                    return;
                 }
 
-                _waveOut = new WaveOutEvent();
-                _waveOut.Volume = _volume;
-                _waveOut.PlaybackStopped += PlayerEnded;
-                _waveOut.Init(_waveStream);
-                BeginPlaying();
+                var response1 = await client.GetAsync($"{Const.String.MusicApiUrl.TrimEnd('/')}/song/url?id={entry.SongId}");
+                response1.EnsureSuccessStatusCode();
+                var jObject1 = JObject.Parse(await response1.Content.ReadAsStringAsync());
+                if (jObject1 == null)
+                {
+                    Method.Ui.Toast(MainLang.MusicGetFail, type: NotificationType.Error);
+                    return;
+                }
+
+                var url = (string)((JObject)((JArray)jObject1["data"])[0])["url"];
+                LyricUi(entry);
+
+                var request = (HttpWebRequest)WebRequest.Create(url);
+                using (var response4 = (HttpWebResponse)request.GetResponse())
+                using (var responseStream = response4.GetResponseStream())
+                {
+                    var memoryStream = new MemoryStream();
+                    responseStream.CopyTo(memoryStream);
+                    memoryStream.Position = 0;
+
+                    _waveStream = new Mp3FileReader(memoryStream);
+
+                    var selectedItem = PlayListView.SelectedItem as PlaySongListViewItemEntry;
+                    if (selectedItem.SongName != entry.SongName || selectedItem.SongId != entry.SongId) return;
+
+                    PlayerSlider.Maximum = _waveStream.TotalTime.TotalMilliseconds;
+                    ControlPlayerSlider.Maximum = _waveStream.TotalTime.TotalMilliseconds;
+                    TotalTimeText.Text = Method.Value.MsToTime(_waveStream.TotalTime.TotalMilliseconds);
+                    if (_waveOut != null)
+                    {
+                        _waveOut.Stop();
+                        _waveOut.Dispose();
+                    }
+
+                    _waveOut = new WaveOutEvent();
+                    _waveOut.Volume = _volume;
+                    _waveOut.PlaybackStopped += PlayerEnded;
+                    _waveOut.Init(_waveStream);
+                    BeginPlaying();
+                }
+            }
+            catch (Exception e)
+            {
+                Const.Notification.main.Show(MainLang.LoadFail, NotificationType.Error);
             }
         }
     }
@@ -767,7 +782,7 @@ public partial class MusicPage : UserControl
         var res2 = string.Empty;
         try
         {
-            var url2 = $"{Const.String.MusicApiUrl}/lyric?id={entry.SongId}";
+            var url2 = $"{Const.String.MusicApiUrl.TrimEnd('/')}/lyric?id={entry.SongId}";
             var response3 = await client2.GetAsync(url2);
             response3.EnsureSuccessStatusCode();
             res2 = await response3.Content.ReadAsStringAsync();

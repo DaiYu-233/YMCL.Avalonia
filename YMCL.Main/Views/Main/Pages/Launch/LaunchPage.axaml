@@ -184,24 +184,34 @@
                         FontFamily="{DynamicResource Font}">
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="ml:GameEntry">
-                                <StackPanel Margin="0,3">
-                                    <TextBlock FontFamily="{DynamicResource Font}" Text="{Binding Id}" />
-                                    <TextBlock
-                                        FontFamily="{DynamicResource Font}"
-                                        FontSize="12"
-                                        Foreground="{DynamicResource GrayColor}">
-                                        <Run Text="{Binding Type}" />
-                                        <Run Text=" " />
-                                        <Run Text="{Binding Version}" />
-                                        <Run Text=" " />
-                                        <Run Text="{Binding MainLoaderType}" />
-                                        <Run Text=" " />
-                                        <Run Text="Java" />
-                                        <Run Text="{Binding JavaVersion}" />
-                                        <Run Text=" " />
-                                        <Run Text="{Binding MainClass}" />
-                                    </TextBlock>
-                                </StackPanel>
+                                <DockPanel>
+                                    <StackPanel Margin="0,3">
+                                        <TextBlock FontFamily="{DynamicResource Font}" Text="{Binding Id}" />
+                                        <TextBlock
+                                            FontFamily="{DynamicResource Font}"
+                                            FontSize="12"
+                                            Foreground="{DynamicResource GrayColor}">
+                                            <Run Text="{Binding Version}" />
+                                            <Run Text=" " />
+                                            <Run Text="{Binding MainLoaderType}" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <!--<StackPanel
+                                        HorizontalAlignment="Right"
+                                        Orientation="Horizontal"
+                                        Spacing="10">
+                                        <Button Content="{x:Static properties:MainLang.Setting}" FontFamily="{DynamicResource Font}" />
+                                        <Button Content="直接启动" FontFamily="{DynamicResource Font}" />
+                                    </StackPanel>-->
+                                    <!--<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                        <Button
+                                            Name="MinimizeButton"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Center"
+                                            Classes="listbox-button"
+                                            Content="{DynamicResource SettingPageIcon}" />
+                                    </StackPanel>-->
+                                </DockPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

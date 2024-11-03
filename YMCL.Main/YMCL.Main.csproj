@@ -63,6 +63,7 @@
         <PackageReference Include="Semi.Avalonia.ColorPicker" Version="11.1.0.5-beta1" />
         <PackageReference Include="Semi.Avalonia.DataGrid" Version="11.1.0.5-beta1" />
         <PackageReference Include="Semi.Avalonia.TreeDataGrid" Version="11.0.10" />
+        <PackageReference Include="SharpZipLib" Version="1.4.2" />
         <PackageReference Include="StarLight_Core" Version="2.0.2-preview6" />
         <PackageReference Include="System.Management" Version="9.0.0-rc.2.24473.5" />
     </ItemGroup>

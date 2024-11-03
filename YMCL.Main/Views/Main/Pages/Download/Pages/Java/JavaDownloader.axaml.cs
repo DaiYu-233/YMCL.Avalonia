@@ -16,6 +16,8 @@ using Avalonia.Media;
 using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using HtmlAgilityPack;
+using ICSharpCode.SharpZipLib.GZip;
+using ICSharpCode.SharpZipLib.Tar;
 using YMCL.Main.Public;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Controls.TaskManage;
@@ -279,7 +281,21 @@ public partial class JavaDownloader : UserControl
             var path = Path.Combine(Const.String.UserDataRootPath, "Java",
                 Path.GetFileNameWithoutExtension(destinationPath));
             Method.IO.TryCreateFolder(path);
-            ZipFile.ExtractToDirectory(destinationPath, path);
+            if (Path.GetExtension(destinationPath) == ".zip")
+            {
+                ZipFile.ExtractToDirectory(destinationPath, path);
+            }
+            if (Path.GetExtension(destinationPath) == ".gz")
+            {
+                string tempTarFilePath = Path.Combine(path, Path.GetFileNameWithoutExtension(destinationPath));
+                ExtractGZipFile(destinationPath, tempTarFilePath);
+
+                // 解压.tar文件
+                ExtractTarFile(tempTarFilePath, path);
+
+                // 清理临时的.tar文件
+                File.Delete(tempTarFilePath);
+            }
             Dispatcher.UIThread.Invoke(() =>
             {
                 task.UpdateTextProgress($"{MainLang.InstallFinish} : {item.FileName}");
@@ -296,6 +312,36 @@ public partial class JavaDownloader : UserControl
                     NotificationType.Error);
                 task.Destory();
             });
+        }
+    }
+    
+    static void ExtractGZipFile(string sourceGZipFilePath, string destinationTarFilePath)
+    {
+        using (FileStream inFile = File.OpenRead(sourceGZipFilePath))
+        using (FileStream outFile = File.Create(destinationTarFilePath))
+        using (GZipInputStream gzipStream = new GZipInputStream(inFile))
+        {
+            gzipStream.CopyTo(outFile);
+        }
+    }
+
+    static void ExtractTarFile(string sourceTarFilePath, string destinationDirectory)
+    {
+        using (TarInputStream tarInputStream = new TarInputStream(File.OpenRead(sourceTarFilePath)))
+        {
+            TarEntry tarEntry;
+            while ((tarEntry = tarInputStream.GetNextEntry()) != null)
+            {
+                if (!tarEntry.IsDirectory)
+                {
+                    string filePath = Path.Combine(destinationDirectory, tarEntry.Name);
+                    Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+                    using (FileStream outputFileStream = File.Create(filePath))
+                    {
+                        tarInputStream.CopyEntryContents(outputFileStream);
+                    }
+                }
+            }
         }
     }
 }

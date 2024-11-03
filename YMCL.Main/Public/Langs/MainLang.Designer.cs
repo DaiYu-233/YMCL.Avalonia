@@ -2516,6 +2516,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 确定要安装 Java : {Java}？.
+        /// </summary>
+        public static string SureToInstallTheJava {
+            get {
+                return ResourceManager.GetString("SureToInstallTheJava", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 已切换到.
         /// </summary>
         public static string SwitchedTo {

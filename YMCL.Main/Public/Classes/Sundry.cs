@@ -782,6 +782,13 @@ public class NewsDataListEntry()
     public string Data { get; set; }
 }
 
+public class JavaDownloaderEntry()
+{
+    public string Version { get; set; }
+    public string Url { get; set; }
+    public string FileName { get; set; }
+}
+
 public class MojangJavaNews()
 {
     public class Image

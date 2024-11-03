@@ -201,7 +201,7 @@ public partial class CurseForgeFetcher : UserControl
                 //         }
                 //     }
                 // });
-                
+
                 foreach (var file in modFiles)
                     if (file.GameVersions[0] == mcVersion)
                     {
@@ -344,7 +344,7 @@ public partial class CurseForgeFetcher : UserControl
             if (string.IsNullOrWhiteSpace(Const.Data.TranslateToken)) return;
             try
             {
-                var translatedText = await Method.IO.TranslateStringAsync(entry.Summary);
+                var translatedText = await Method.IO.TranslateStringAsync(entry.Summary, Const.Data.Setting.Language);
                 if (!string.IsNullOrWhiteSpace(translatedText))
                 {
                     entry.Summary = translatedText;
@@ -363,7 +363,7 @@ public partial class CurseForgeFetcher : UserControl
                 var task = new List<Task>();
                 _translateList.ForEach(x => { task.Add(Translate(x)); });
                 Task.WhenAll(task.ToArray());
-            },DispatcherPriority.ApplicationIdle);
+            }, DispatcherPriority.ApplicationIdle);
         });
     }
 
@@ -647,7 +647,7 @@ public partial class CurseForgeFetcher : UserControl
             SearchBtn.IsEnabled = true;
             Loading.IsVisible = false;
             LoadMoreBtn.IsVisible = false;
-            Method.Ui.ShowShortException(MainLang.ErrorCallingApi, ex);
+            // Method.Ui.ShowShortException(MainLang.ErrorCallingApi, ex);
         }
     }
 

@@ -5,7 +5,7 @@ public class TaskManager
     public class TaskEntry
     {
         public PageTaskEntry _pageTaskEntry;
-        public WindowTaskEntry _windowTaskEntry;
+        public WindowTaskEntry? _windowTaskEntry;
 
         public TaskEntry(string name, bool valueProgress = true, bool textProgress = true)
         {
@@ -17,47 +17,47 @@ public class TaskManager
         public void UpdateTitle(string title)
         {
             _pageTaskEntry.UpdateTitle(title);
-            if (Const.Data.Setting.EnableDisplayIndependentTaskWindow) _windowTaskEntry.UpdateTitle(title);
+            if (_windowTaskEntry != null) _windowTaskEntry.UpdateTitle(title);
         }
 
         public void UpdateValueProgress(double progress)
         {
             _pageTaskEntry.UpdateValueProgress(progress);
-            if (Const.Data.Setting.EnableDisplayIndependentTaskWindow) _windowTaskEntry.UpdateValueProgress(progress);
+            if (_windowTaskEntry != null) _windowTaskEntry.UpdateValueProgress(progress);
         }
 
         public void UpdateTextProgress(string text, bool includeTime = true)
         {
             _pageTaskEntry.UpdateTextProgress(text, includeTime);
-            if (Const.Data.Setting.EnableDisplayIndependentTaskWindow)
+            if (_windowTaskEntry != null)
                 _windowTaskEntry.UpdateTextProgress(text, includeTime);
         }
 
         public void Finish()
         {
             _pageTaskEntry.Finish();
-            if (Const.Data.Setting.EnableDisplayIndependentTaskWindow) _windowTaskEntry.Finish();
+            if (_windowTaskEntry != null) _windowTaskEntry.Finish();
         }
 
         public void Destory()
         {
             _pageTaskEntry.Destory();
-            if (Const.Data.Setting.EnableDisplayIndependentTaskWindow) _windowTaskEntry.Destory();
+            if (_windowTaskEntry != null) _windowTaskEntry.Destory();
         }
 
         public void Show()
         {
-            if (Const.Data.Setting.EnableDisplayIndependentTaskWindow) _windowTaskEntry.Show();
+            if (_windowTaskEntry != null) _windowTaskEntry.Show();
         }
 
         public void Activate()
         {
-            if (Const.Data.Setting.EnableDisplayIndependentTaskWindow) _windowTaskEntry.Activate();
+            if (_windowTaskEntry != null) _windowTaskEntry.Activate();
         }
 
         public void Hide()
         {
-            if (Const.Data.Setting.EnableDisplayIndependentTaskWindow) _windowTaskEntry.Hide();
+            if (_windowTaskEntry != null) _windowTaskEntry.Hide();
         }
     }
 }

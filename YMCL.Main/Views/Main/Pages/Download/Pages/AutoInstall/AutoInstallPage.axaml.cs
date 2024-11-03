@@ -38,7 +38,6 @@ public partial class AutoInstallPage : UserControl
             if (_firstLoad)
             {
                 _firstLoad = false;
-                LoadVanlliaVersion();
             }
         };
         BedrockRoot.PointerPressed += (_, e) =>
@@ -133,8 +132,7 @@ public partial class AutoInstallPage : UserControl
         ReloadLoadnstallableVersionListBtn.Click += (s, e) =>
         {
             LoadInstallableVersionListErrorInfoBar.IsVisible = false;
-            LoadInstallableVersionListErrorInfoBar.Margin = new Thickness(0);
-            LoadVanlliaVersion();
+            _ = LoadVanlliaVersion();
         };
         OptiFineListView.SelectionChanged += HandleSelectedLoaderName;
         FabricListView.SelectionChanged += HandleSelectedLoaderName;
@@ -146,7 +144,7 @@ public partial class AutoInstallPage : UserControl
     {
     }
 
-    private async void LoadVanlliaVersion()
+    public async Task LoadVanlliaVersion()
     {
         try
         {
@@ -175,8 +173,11 @@ public partial class AutoInstallPage : UserControl
 
                             Const.Window.main.searchPage.aggregateSearchList.Add(new AggregateSearch()
                             {
-                                Tag = "jump", Text = $"{MainLang.ReleaseVersion} - {item.Id}", Type = MainLang.InstallVersion, Target = "auto-install",
-                                Summary = $"{MainLang.JumpToSearchTip.Replace("{target}",$"{MainLang.Download}-{MainLang.AutoInstall}")}", Order = 70, InstallVersionId = item.Id
+                                Tag = "jump", Text = $"{MainLang.ReleaseVersion} - {item.Id}",
+                                Type = MainLang.InstallVersion, Target = "auto-install",
+                                Summary =
+                                    $"{MainLang.JumpToSearchTip.Replace("{target}", $"{MainLang.Download}-{MainLang.AutoInstall}")}",
+                                Order = 70, InstallVersionId = item.Id
                             });
                         }
                         else if (item.Type == "snapshot")
@@ -191,8 +192,11 @@ public partial class AutoInstallPage : UserControl
 
                             Const.Window.main.searchPage.aggregateSearchList.Add(new AggregateSearch()
                             {
-                                Tag = "jump", Text = $"{MainLang.PreviewVersion} - {item.Id}", Type =MainLang.InstallVersion, Target = "auto-install",
-                                Summary =  $"{MainLang.JumpToSearchTip.Replace("{target}",$"{MainLang.Download}-{MainLang.AutoInstall}")}", Order = 70, InstallVersionId = item.Id
+                                Tag = "jump", Text = $"{MainLang.PreviewVersion} - {item.Id}",
+                                Type = MainLang.InstallVersion, Target = "auto-install",
+                                Summary =
+                                    $"{MainLang.JumpToSearchTip.Replace("{target}", $"{MainLang.Download}-{MainLang.AutoInstall}")}",
+                                Order = 70, InstallVersionId = item.Id
                             });
                         }
                         else
@@ -200,8 +204,11 @@ public partial class AutoInstallPage : UserControl
                             OldVersionListView.Items.Add(item);
                             Const.Window.main.searchPage.aggregateSearchList.Add(new AggregateSearch()
                             {
-                                Tag = "jump", Text = $"{MainLang.OldVersion} - {item.Id}", Type = MainLang.InstallVersion, Target = "auto-install",
-                                Summary =  $"{MainLang.JumpToSearchTip.Replace("{target}",$"{MainLang.Download}-{MainLang.AutoInstall}")}", Order = 70, InstallVersionId = item.Id
+                                Tag = "jump", Text = $"{MainLang.OldVersion} - {item.Id}",
+                                Type = MainLang.InstallVersion, Target = "auto-install",
+                                Summary =
+                                    $"{MainLang.JumpToSearchTip.Replace("{target}", $"{MainLang.Download}-{MainLang.AutoInstall}")}",
+                                Order = 70, InstallVersionId = item.Id
                             });
                         }
                     }
@@ -219,9 +226,8 @@ public partial class AutoInstallPage : UserControl
         }
         catch (Exception ex)
         {
-            Method.Ui.ShowShortException(MainLang.GetInstallableVersionFail, ex);
+            // Method.Ui.ShowShortException(MainLang.GetInstallableVersionFail, ex);
             LoadInstallableVersionListErrorInfoBar.IsVisible = true;
-            LoadInstallableVersionListErrorInfoBar.Margin = new Thickness(0, 10, 0, 0);
         }
     }
 
@@ -236,7 +242,7 @@ public partial class AutoInstallPage : UserControl
         LoadLoaderList();
         CustomIdWarning.IsVisible = false;
     }
-    
+
     private void LoadLoaderList()
     {
         var id = InstallPreviewIdText.Text;

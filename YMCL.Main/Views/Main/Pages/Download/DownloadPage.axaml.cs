@@ -4,6 +4,7 @@ using FluentAvalonia.UI.Controls;
 using YMCL.Main.Public;
 using YMCL.Main.Views.Main.Pages.Download.Pages.AutoInstall;
 using YMCL.Main.Views.Main.Pages.Download.Pages.CurseForgeFetcher;
+using YMCL.Main.Views.Main.Pages.Download.Pages.Java;
 using YMCL.Main.Views.Main.Pages.Download.Pages.Modrinch;
 
 namespace YMCL.Main.Views.Main.Pages.Download;
@@ -13,6 +14,7 @@ public partial class DownloadPage : UserControl
     public AutoInstallPage autoInstallPage = new();
     public CurseForgeFetcher curseForgeFetcherPage = new();
     public ModrinchFetcher modrinchFetcherPage = new();
+    public JavaDownloader javaDownloaderPage = new();
 
     public DownloadPage()
     {
@@ -43,6 +45,10 @@ public partial class DownloadPage : UserControl
                 case "curseforgefetcher":
                     curseForgeFetcherPage.Root.IsVisible = false;
                     FrameView.Content = curseForgeFetcherPage;
+                    break;
+                case "javadownloader":
+                    javaDownloaderPage.Root.IsVisible = false;
+                    FrameView.Content = javaDownloaderPage;
                     break;
                 case "modrinchfetcher":
                     /*curseForgeFetcherPage.Root.IsVisible = false;

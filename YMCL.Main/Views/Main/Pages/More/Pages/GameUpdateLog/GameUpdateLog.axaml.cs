@@ -92,6 +92,7 @@ public partial class GameUpdateLog : UserControl
         catch (Exception ex)
         {
             LoadErrorInfoBar.IsVisible = true;
+            Loading.IsVisible = false;
         }
     }
 
@@ -103,6 +104,8 @@ public partial class GameUpdateLog : UserControl
 
     private void StartTranslate()
     {
+        if (Const.Data.Setting.Language == "en-US") return;
+
         async Task Translate(TextBlock textBlock)
         {
             if (string.IsNullOrWhiteSpace(Const.Data.TranslateToken)) return;
@@ -115,7 +118,7 @@ public partial class GameUpdateLog : UserControl
                 client.DefaultRequestHeaders.Add("Authorization", Const.Data.TranslateToken);
                 var response =
                     await client.PostAsync(
-                        "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=zh-Hans&textType=plain",
+                        $"https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to={Const.Data.Setting.Language}&textType=plain",
                         new StringContent($"[{{\"Text\": \"{textBlock.Text}\"}}]", Encoding.UTF8, "application/json"));
                 var responseContent = await response.Content.ReadAsStringAsync();
                 string translatedText =
@@ -138,7 +141,7 @@ public partial class GameUpdateLog : UserControl
                 var task = new List<Task>();
                 _translateList.ForEach(x => { task.Add(Translate(x)); });
                 Task.WhenAll(task.ToArray());
-            },DispatcherPriority.ApplicationIdle);
+            }, DispatcherPriority.ApplicationIdle);
         });
     }
 
@@ -275,6 +278,7 @@ public partial class GameUpdateLog : UserControl
             await Task.Delay(TimeSpan.FromSeconds(0.30));
             Detail.IsVisible = false;
         };
+        ReloadBtn.Click += (_, _) => { _ = LoadNews(); };
     }
 
     private void ControlProperty()

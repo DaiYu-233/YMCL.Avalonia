@@ -1,90 +1,96 @@
 <UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
     x:Class="YMCL.Main.Views.Main.Pages.Setting.Pages.Launch.LaunchSettingPage"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ml="clr-namespace:MinecraftLaunch.Classes.Models.Game;assembly=MinecraftLaunch"
     xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
     xmlns:uc="clr-namespace:YMCL.Main.Public.Controls"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    mc:Ignorable="d">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Border
-        x:Name="Root"
+        CornerRadius="8"
         Margin="0,0,0,0"
-        CornerRadius="8">
+        x:Name="Root">
         <Border.Transitions>
             <Transitions>
                 <ThicknessTransition
+                    Duration="0:0:0.45"
                     Easing="BounceEaseIn"
-                    Property="Margin"
-                    Duration="0:0:0.45" />
+                    Property="Margin" />
             </Transitions>
         </Border.Transitions>
         <Border Margin="0,10,0,0">
             <ScrollViewer>
                 <StackPanel Margin="10,0,10,10" Spacing="10">
                     <Border
-                        Padding="6.5"
                         Background="{DynamicResource 1x}"
                         CornerRadius="5"
-                        Opacity="{DynamicResource Opacity}">
+                        Opacity="{DynamicResource Opacity}"
+                        Padding="6.5">
                         <DockPanel>
                             <TextBlock
-                                Margin="10,0,20,0"
-                                VerticalAlignment="Center"
                                 FontFamily="{DynamicResource Font}"
                                 FontSize="14"
-                                Text="{x:Static properties:MainLang.MinecraftFolder}" />
+                                Margin="10,0,20,0"
+                                Text="{x:Static properties:MainLang.MinecraftFolder}"
+                                VerticalAlignment="Center" />
                             <Button
-                                x:Name="DelSeletedMinecraftFolderBtn"
-                                Margin="6.5,0,0,0"
                                 Content="{x:Static properties:MainLang.DelSeletedItem}"
                                 DockPanel.Dock="Right"
-                                FontFamily="{DynamicResource Font}" />
-                            <Button
-                                x:Name="AddMinecraftFolderBtn"
+                                FontFamily="{DynamicResource Font}"
                                 Margin="6.5,0,0,0"
+                                x:Name="DelSeletedMinecraftFolderBtn" />
+                            <Button
                                 Content="{x:Static properties:MainLang.AddFolder}"
                                 DockPanel.Dock="Right"
-                                FontFamily="{DynamicResource Font}" />
+                                FontFamily="{DynamicResource Font}"
+                                Margin="6.5,0,0,0"
+                                x:Name="AddMinecraftFolderBtn" />
                             <ComboBox
-                                x:Name="MinecraftFolderComboBox"
-                                HorizontalAlignment="Stretch"
                                 DockPanel.Dock="Left"
-                                FontFamily="{DynamicResource Font}" />
+                                FontFamily="{DynamicResource Font}"
+                                HorizontalAlignment="Stretch"
+                                x:Name="MinecraftFolderComboBox" />
                         </DockPanel>
                     </Border>
                     <Border
-                        Padding="6.5"
                         Background="{DynamicResource 1x}"
                         CornerRadius="5"
-                        Opacity="{DynamicResource Opacity}">
+                        Opacity="{DynamicResource Opacity}"
+                        Padding="6.5">
                         <DockPanel>
                             <TextBlock
-                                Margin="10,0,20,0"
-                                VerticalAlignment="Center"
                                 FontFamily="{DynamicResource Font}"
                                 FontSize="14"
-                                Text="Java" />
+                                Margin="10,0,20,0"
+                                Text="Java"
+                                VerticalAlignment="Center" />
                             <Button
-                                x:Name="AutoScanBtn"
+                                Content="{x:Static properties:MainLang.DeleteSelect}"
+                                DockPanel.Dock="Right"
+                                FontFamily="{DynamicResource Font}"
                                 Margin="6.5,0,0,0"
+                                x:Name="RemoveJavaBtn" />
+                            <Button
                                 Content="{x:Static properties:MainLang.AutoScan}"
                                 DockPanel.Dock="Right"
-                                FontFamily="{DynamicResource Font}" />
-                            <Button
-                                x:Name="ManualAddBtn"
+                                FontFamily="{DynamicResource Font}"
                                 Margin="6.5,0,0,0"
+                                x:Name="AutoScanBtn" />
+                            <Button
                                 Content="{x:Static properties:MainLang.ManualAdd}"
                                 DockPanel.Dock="Right"
-                                FontFamily="{DynamicResource Font}" />
+                                FontFamily="{DynamicResource Font}"
+                                Margin="6.5,0,0,0"
+                                x:Name="ManualAddBtn" />
                             <ComboBox
-                                Name="JavaComboBox"
-                                HorizontalAlignment="Stretch"
                                 DockPanel.Dock="Left"
                                 FontFamily="{DynamicResource Font}"
+                                HorizontalAlignment="Stretch"
+                                Name="JavaComboBox"
                                 SelectedIndex="0">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate DataType="ml:JavaEntry">
@@ -100,21 +106,21 @@
                         </DockPanel>
                     </Border>
                     <Border
-                        Padding="6.5"
                         Background="{DynamicResource 1x}"
                         CornerRadius="5"
-                        Opacity="{DynamicResource Opacity}">
+                        Opacity="{DynamicResource Opacity}"
+                        Padding="6.5">
                         <DockPanel>
                             <TextBlock
-                                Margin="10,0,20,0"
-                                VerticalAlignment="Center"
                                 FontFamily="{DynamicResource Font}"
                                 FontSize="14"
-                                Text="{x:Static properties:MainLang.LaunchCore}" />
+                                Margin="10,0,20,0"
+                                Text="{x:Static properties:MainLang.LaunchCore}"
+                                VerticalAlignment="Center" />
                             <ComboBox
-                                Name="LaunchCoreComboBox"
-                                HorizontalAlignment="Stretch"
                                 FontFamily="{DynamicResource Font}"
+                                HorizontalAlignment="Stretch"
+                                Name="LaunchCoreComboBox"
                                 SelectedIndex="0">
                                 <ComboBox.Items>
                                     <ComboBoxItem>MinecraftLaunch</ComboBoxItem>
@@ -124,110 +130,110 @@
                         </DockPanel>
                     </Border>
                     <Border
-                        Padding="6.5"
                         Background="{DynamicResource 1x}"
                         CornerRadius="5"
-                        Opacity="{DynamicResource Opacity}">
+                        Opacity="{DynamicResource Opacity}"
+                        Padding="6.5">
                         <StackPanel Margin="0,5" Spacing="5">
                             <DockPanel>
                                 <TextBlock
+                                    FontFamily="{DynamicResource Font}"
+                                    FontSize="14"
                                     Margin="10,0,20,0"
-                                    VerticalAlignment="Center"
+                                    Text="{x:Static properties:MainLang.MaxMem}"
+                                    VerticalAlignment="Center" />
+                                <TextBlock
+                                    DockPanel.Dock="Right"
                                     FontFamily="{DynamicResource Font}"
                                     FontSize="14"
-                                    Text="{x:Static properties:MainLang.MaxMem}" />
-                                <TextBlock
+                                    Margin="6.5,0,6.5,0"
                                     Name="CanUseMemText"
-                                    Width="65"
-                                    Margin="6.5,0,6.5,0"
-                                    VerticalAlignment="Center"
-                                    DockPanel.Dock="Right"
-                                    FontFamily="{DynamicResource Font}"
-                                    FontSize="14"
                                     Text="∞"
-                                    TextAlignment="Center" />
+                                    TextAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Width="65" />
                                 <TextBlock
-                                    Name="MaxMemText"
-                                    Width="65"
-                                    Margin="6.5,0,6.5,0"
-                                    VerticalAlignment="Center"
                                     DockPanel.Dock="Right"
                                     FontFamily="{DynamicResource Font}"
                                     FontSize="14"
+                                    Margin="6.5,0,6.5,0"
+                                    Name="MaxMemText"
                                     Text="∞"
-                                    TextAlignment="Center" />
+                                    TextAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Width="65" />
                                 <Slider
-                                    Name="MaxMemSlider"
                                     Margin="0,0,0,0"
+                                    Name="MaxMemSlider"
                                     VerticalAlignment="Center" />
                             </DockPanel>
                             <DockPanel Name="UsedMemRoot">
                                 <TextBlock
-                                    Margin="10,0,20,0"
-                                    VerticalAlignment="Center"
                                     FontFamily="{DynamicResource Font}"
                                     FontSize="14"
-                                    Text="{x:Static properties:MainLang.UsedMem}" />
+                                    Margin="10,0,20,0"
+                                    Text="{x:Static properties:MainLang.UsedMem}"
+                                    VerticalAlignment="Center" />
                                 <TextBlock
-                                    Name="UsedMemText"
-                                    Width="65"
-                                    Margin="6.5,0,6.5,0"
-                                    VerticalAlignment="Center"
                                     DockPanel.Dock="Right"
                                     FontFamily="{DynamicResource Font}"
                                     FontSize="14"
+                                    Margin="6.5,0,6.5,0"
+                                    Name="UsedMemText"
                                     Text="∞"
-                                    TextAlignment="Center" />
-                                <ProgressBar
-                                    Name="UsedMemProgressBar"
-                                    Margin="0,0,0,0"
+                                    TextAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Maximum="100" />
+                                    Width="65" />
+                                <ProgressBar
+                                    Margin="0,0,0,0"
+                                    Maximum="100"
+                                    Name="UsedMemProgressBar"
+                                    VerticalAlignment="Center" />
                             </DockPanel>
                         </StackPanel>
                     </Border>
                     <Border
-                        Height="40"
-                        Padding="6.5"
                         Background="{DynamicResource 1x}"
                         CornerRadius="5"
-                        Opacity="{DynamicResource Opacity}">
+                        Height="40"
+                        Opacity="{DynamicResource Opacity}"
+                        Padding="6.5">
                         <DockPanel>
                             <TextBlock
-                                Margin="10,0,20,0"
-                                VerticalAlignment="Center"
                                 FontFamily="{DynamicResource Font}"
                                 FontSize="14"
-                                Text="{x:Static properties:MainLang.EnableIndependencyCore}" />
+                                Margin="10,0,20,0"
+                                Text="{x:Static properties:MainLang.EnableIndependencyCore}"
+                                VerticalAlignment="Center" />
                             <ToggleSwitch
-                                Name="IndependencyCoreSwitch"
-                                Height="40"
-                                Margin="0,-10,10,0"
-                                HorizontalAlignment="Right"
                                 FontFamily="{DynamicResource Font}"
+                                Height="40"
+                                HorizontalAlignment="Right"
+                                Margin="0,-10,10,0"
+                                Name="IndependencyCoreSwitch"
                                 OffContent="{x:Static properties:MainLang.Off}"
                                 OnContent="{x:Static properties:MainLang.On}" />
                         </DockPanel>
                     </Border>
                     <Border
-                        Height="40"
-                        Padding="6.5"
                         Background="{DynamicResource 1x}"
                         CornerRadius="5"
-                        Opacity="{DynamicResource Opacity}">
+                        Height="40"
+                        Opacity="{DynamicResource Opacity}"
+                        Padding="6.5">
                         <DockPanel>
                             <TextBlock
-                                Margin="10,0,20,0"
-                                VerticalAlignment="Center"
                                 FontFamily="{DynamicResource Font}"
                                 FontSize="14"
-                                Text="{x:Static properties:MainLang.ShowGameOutput}" />
+                                Margin="10,0,20,0"
+                                Text="{x:Static properties:MainLang.ShowGameOutput}"
+                                VerticalAlignment="Center" />
                             <ToggleSwitch
-                                Name="ShowGameOutputSwitch"
-                                Height="40"
-                                Margin="0,-10,10,0"
-                                HorizontalAlignment="Right"
                                 FontFamily="{DynamicResource Font}"
+                                Height="40"
+                                HorizontalAlignment="Right"
+                                Margin="0,-10,10,0"
+                                Name="ShowGameOutputSwitch"
                                 OffContent="{x:Static properties:MainLang.Off}"
                                 OnContent="{x:Static properties:MainLang.On}" />
                         </DockPanel>

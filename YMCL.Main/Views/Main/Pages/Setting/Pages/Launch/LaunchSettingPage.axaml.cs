@@ -141,17 +141,20 @@ public partial class LaunchSettingPage : UserControl
                             MinecraftFolderComboBox.Items.Clear();
                             minecraftFolders.ForEach(folder => { MinecraftFolderComboBox.Items.Add(folder); });
                             MinecraftFolderComboBox.SelectedIndex = MinecraftFolderComboBox.ItemCount - 1;
-                            Method.Ui.Toast(MainLang.SuccessAdd + ": " + Path.Combine(item.Path, ".minecraft"), Const.Notification.main,
+                            Method.Ui.Toast(MainLang.SuccessAdd + ": " + Path.Combine(item.Path, ".minecraft"),
+                                Const.Notification.main,
                                 NotificationType.Success);
                         }
                         else
                         {
-                            Method.Ui.Toast(MainLang.TheItemAlreadyExist, Const.Notification.main, NotificationType.Error);
+                            Method.Ui.Toast(MainLang.TheItemAlreadyExist, Const.Notification.main,
+                                NotificationType.Error);
                         }
                     }
                     else
                     {
-                          Method.Ui.Toast(MainLang.CannotFindMinecraftFolder, Const.Notification.main, NotificationType.Error);
+                        Method.Ui.Toast(MainLang.CannotFindMinecraftFolder, Const.Notification.main,
+                            NotificationType.Error);
                     }
                 }
             }
@@ -186,32 +189,21 @@ public partial class LaunchSettingPage : UserControl
             File.WriteAllText(Const.String.MinecraftFolderDataPath,
                 JsonConvert.SerializeObject(minecraftFolders, Formatting.Indented));
         };
-        AutoScanBtn.Click += async (s, e) =>
+        RemoveJavaBtn.Click += (_, _) =>
         {
-            var javaFetcher = new JavaFetcher();
-            var javaList = await javaFetcher.FetchAsync();
-            var repeatJavaCount = 0;
-            var successAddCount = 0;
-            foreach (var java in javaList)
-                if (!javas.Contains(java))
-                {
-                    javas.Add(java);
-                    successAddCount++;
-                }
-                else
-                {
-                    repeatJavaCount++;
-                }
-
+            if(JavaComboBox.SelectedIndex==0)return;
+            var item = JavaComboBox.SelectedItem as JavaEntry;
+            if (item == null) return;
+            javas.Remove(item);
+            Method.Ui.Toast(MainLang.SuccessRemove + ": " + item.JavaVersion, Const.Notification.main,
+                NotificationType.Success);
             JavaComboBox.Items.Clear();
             JavaComboBox.Items.Add(new JavaEntry { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "All" });
             javas.ForEach(java => { JavaComboBox.Items.Add(java); });
             JavaComboBox.SelectedIndex = 0;
             File.WriteAllText(Const.String.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
-            Method.Ui.Toast(
-                $"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}: {successAddCount}\n{MainLang.RepeatItem}: {repeatJavaCount}",
-                Const.Notification.main, NotificationType.Success);
         };
+        AutoScanBtn.Click += async (s, e) => { await AutoSacnJava(); };
         ManualAddBtn.Click += async (s, e) =>
         {
             var list = await Method.IO.OpenFilePicker(TopLevel.GetTopLevel(this)!,
@@ -237,6 +229,7 @@ public partial class LaunchSettingPage : UserControl
             JavaComboBox.SelectedIndex = 0;
             File.WriteAllText(Const.String.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
         };
+
         JavaComboBox.SelectionChanged += (s, e) =>
         {
             // JavaComboBox.IsVisible = false;
@@ -259,6 +252,33 @@ public partial class LaunchSettingPage : UserControl
                     JsonConvert.SerializeObject(setting, Formatting.Indented));
             }
         };
+    }
+
+    public async Task AutoSacnJava()
+    {
+        var javaFetcher = new JavaFetcher();
+        var javaList = await javaFetcher.FetchAsync();
+        var repeatJavaCount = 0;
+        var successAddCount = 0;
+        foreach (var java in javaList)
+            if (!javas.Contains(java))
+            {
+                javas.Add(java);
+                successAddCount++;
+            }
+            else
+            {
+                repeatJavaCount++;
+            }
+
+        JavaComboBox.Items.Clear();
+        JavaComboBox.Items.Add(new JavaEntry { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "All" });
+        javas.ForEach(java => { JavaComboBox.Items.Add(java); });
+        JavaComboBox.SelectedIndex = 0;
+        File.WriteAllText(Const.String.JavaDataPath, JsonConvert.SerializeObject(javas, Formatting.Indented));
+        Method.Ui.Toast(
+            $"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}: {successAddCount}\n{MainLang.RepeatItem}: {repeatJavaCount}",
+            Const.Notification.main, NotificationType.Success);
     }
 
     private void ControlProperty()

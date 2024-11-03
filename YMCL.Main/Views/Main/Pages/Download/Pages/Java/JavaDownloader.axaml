@@ -1,0 +1,93 @@
+<UserControl
+    FontFamily="{DynamicResource Font}"
+    FontWeight="{DynamicResource FontWeight}"
+    d:DesignHeight="800"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="YMCL.Main.Views.Main.Pages.Download.Pages.Java.JavaDownloader"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:cl="clr-namespace:YMCL.Main.Public.Classes;assembly=YMCL.Main"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pathIcon="clr-namespace:YMCL.Main.Public.Controls"
+    xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
+    xmlns:uc="clr-namespace:YMCL.Main.Public.Controls"
+    xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border CornerRadius="5" x:Name="Root">
+        <Border.Transitions>
+            <Transitions>
+                <ThicknessTransition Duration="0:0:0.45" Property="Margin" />
+            </Transitions>
+        </Border.Transitions>
+        <Grid>
+            <ScrollViewer>
+                <StackPanel
+                    Margin="10,0,10,10"
+                    Name="Container"
+                    Spacing="10">
+                    <Expander Header="Java 8">
+                        <ListBox
+                            FontFamily="{DynamicResource Font}"
+                            Name="Java8"
+                            SelectionChanged="JavaOnSelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="cl:JavaDownloaderEntry">
+                                    <TextBlock
+                                        FontFamily="{DynamicResource Font}"
+                                        Foreground="{DynamicResource TextColor}"
+                                        Text="{Binding FileName}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Expander>
+                    <Expander Header="Java 11">
+                        <ListBox
+                            FontFamily="{DynamicResource Font}"
+                            Name="Java11"
+                            SelectionChanged="JavaOnSelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="cl:JavaDownloaderEntry">
+                                    <TextBlock
+                                        FontFamily="{DynamicResource Font}"
+                                        Foreground="{DynamicResource TextColor}"
+                                        Text="{Binding FileName}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Expander>
+                    <Expander Header="Java 17">
+                        <ListBox
+                            FontFamily="{DynamicResource Font}"
+                            Name="Java17"
+                            SelectionChanged="JavaOnSelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="cl:JavaDownloaderEntry">
+                                    <TextBlock
+                                        FontFamily="{DynamicResource Font}"
+                                        Foreground="{DynamicResource TextColor}"
+                                        Text="{Binding FileName}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Expander>
+                    <Expander Header="Java 22">
+                        <ListBox
+                            FontFamily="{DynamicResource Font}"
+                            Name="Java22"
+                            SelectionChanged="JavaOnSelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="cl:JavaDownloaderEntry">
+                                    <TextBlock
+                                        FontFamily="{DynamicResource Font}"
+                                        Foreground="{DynamicResource TextColor}"
+                                        Text="{Binding FileName}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</UserControl>

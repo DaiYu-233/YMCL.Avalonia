@@ -32,6 +32,8 @@ public partial class Method
             Ui.CheckLauncher();
             await Task.Delay(200);
             _ = Const.Window.main.settingPage.launcherSettingPage.AutoUpdate();
+            _=Const.Window.main.downloadPage.autoInstallPage.LoadVanlliaVersion();
+            _=Const.Window.main.downloadPage.javaDownloaderPage.LoadJava();
 
             if (Const.Data.Setting.DownloadSource != DownloadSource.Mojang)
             {

@@ -1092,4 +1092,7 @@ MacOsは自動更新をサポートしていません
   <data name="GameUpdateLog" xml:space="preserve">
       <value>更新日志</value>
     </data>
+  <data name="SureToInstallTheJava" xml:space="preserve">
+      <value>确定要安装 Java : {Java}？</value>
+    </data>
 </root>

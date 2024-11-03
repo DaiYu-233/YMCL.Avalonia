@@ -20,6 +20,7 @@ public abstract class Const
         public static List<UrlImageDataListEntry> UrlImageDataList { get; set; } = new();
         public static List<NewsDataListEntry> NewsDataList { get; set; } = new();
         public static Platform Platform { get; set; }
+        public static string TranslateToken { get; set; }
         public static CrashWindow LastCrashInfoWindow { get; set; } = null;
     }
 

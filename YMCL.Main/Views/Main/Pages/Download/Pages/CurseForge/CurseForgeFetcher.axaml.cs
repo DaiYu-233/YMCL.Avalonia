@@ -189,6 +189,19 @@ public partial class CurseForgeFetcher : UserControl
                 expander.Name = $"mod_{mcVersion.Replace(".", "_")}";
                 var classId = GetClassIdFromResultTypeComboBoxSelectedIndex(ResultTypeComboBox.SelectedIndex);
 
+                //TODO 处理MoD的前置MoD
+                // _ = Task.Run(() =>
+                // {
+                //     var dependencies = await cfApiClient.(modId, file.Id);
+                //     foreach (var dependency in dependencies)
+                //     {
+                //         if (dependency.IsPrerequiredMod)
+                //         {
+                //             // 这里处理前置MoD的逻辑
+                //         }
+                //     }
+                // });
+                
                 foreach (var file in modFiles)
                     if (file.GameVersions[0] == mcVersion)
                     {
@@ -279,6 +292,7 @@ public partial class CurseForgeFetcher : UserControl
                         searchFilter: _keyword, modLoaderType: _loaderType, index: _page * 25, pageSize: 25,
                         categoryId: -1, classId: classId);
 
+                _translateList.Clear();
                 mods.Data.ForEach(mod =>
                 {
                     var entry = new SearchModListViewItemEntry(mod);
@@ -289,11 +303,14 @@ public partial class CurseForgeFetcher : UserControl
                     entry.StringDateTime = formattedDateTime;
                     entry.ModSource = ModSource.CurseForge;
                     ModListView.Items.Add(entry);
+                    AddToTranslate(entry);
                 });
+                _ = StartTranslate();
                 ModNameTextBox.IsEnabled = true;
                 ModVersionTextBox.IsEnabled = true;
                 SearchBtn.IsEnabled = true;
                 Loading.IsVisible = false;
+
                 LoadMoreBtn.IsVisible = true;
                 if (mods.Data.Count == 0)
                 {
@@ -311,6 +328,43 @@ public partial class CurseForgeFetcher : UserControl
                 Method.Ui.ShowShortException(MainLang.ErrorCallingApi, ex);
             }
         };
+    }
+
+    List<SearchModListViewItemEntry> _translateList = new();
+
+    public void AddToTranslate(SearchModListViewItemEntry entry)
+    {
+        _translateList.Add(entry);
+    }
+
+    public async Task StartTranslate()
+    {
+        async Task Translate(SearchModListViewItemEntry entry)
+        {
+            if (string.IsNullOrWhiteSpace(Const.Data.TranslateToken)) return;
+            try
+            {
+                var translatedText = await Method.IO.TranslateStringAsync(entry.Summary);
+                if (!string.IsNullOrWhiteSpace(translatedText))
+                {
+                    entry.Summary = translatedText;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        Task.Run(() =>
+        {
+            Dispatcher.UIThread.Invoke(() =>
+            {
+                var task = new List<Task>();
+                _translateList.ForEach(x => { task.Add(Translate(x)); });
+                Task.WhenAll(task.ToArray());
+            },DispatcherPriority.ApplicationIdle);
+        });
     }
 
     public void ExternalCallSearchModFromCurseForge()
@@ -498,7 +552,7 @@ public partial class CurseForgeFetcher : UserControl
                     categoryId: -1, classId: classId);
 
             if (ModNameTextBox.Text != keyword) return;
-
+            _translateList.Clear();
             mods.Data.ForEach(mod =>
             {
                 var entry = new SearchModListViewItemEntry(mod);
@@ -508,7 +562,9 @@ public partial class CurseForgeFetcher : UserControl
                 entry.StringDateTime = formattedDateTime;
                 entry.ModSource = ModSource.CurseForge;
                 ModListView.Items.Add(entry);
+                AddToTranslate(entry);
             });
+            _ = StartTranslate();
             ModNameTextBox.IsEnabled = true;
             ModVersionTextBox.IsEnabled = true;
             SearchBtn.IsEnabled = true;
@@ -560,7 +616,7 @@ public partial class CurseForgeFetcher : UserControl
                     categoryId: -1, classId: classId);
 
             if (ModNameTextBox.Text != keyword) return;
-
+            _translateList.Clear();
             mods.Data.ForEach(mod =>
             {
                 var entry = new SearchModListViewItemEntry(mod);
@@ -570,7 +626,9 @@ public partial class CurseForgeFetcher : UserControl
                 entry.StringDateTime = formattedDateTime;
                 entry.ModSource = ModSource.CurseForge;
                 ModListView.Items.Add(entry);
+                AddToTranslate(entry);
             });
+            _ = StartTranslate();
             ModNameTextBox.IsEnabled = true;
             ModVersionTextBox.IsEnabled = true;
             SearchBtn.IsEnabled = true;

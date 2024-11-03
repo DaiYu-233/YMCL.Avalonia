@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading.Tasks;
 using AsyncImageLoader;
 using Avalonia;
@@ -100,14 +101,45 @@ public partial class GameUpdateLog : UserControl
         return textBlock;
     }
 
-    private async void StartTranslate()
+    private void StartTranslate()
     {
         async Task Translate(TextBlock textBlock)
         {
-            // textBlock.Text = "aaa";
+            if (string.IsNullOrWhiteSpace(Const.Data.TranslateToken)) return;
+            try
+            {
+                var handler = new HttpClientHandler();
+                handler.ServerCertificateCustomValidationCallback =
+                    (_, _, _, _) => true;
+                using var client = new HttpClient(handler);
+                client.DefaultRequestHeaders.Add("Authorization", Const.Data.TranslateToken);
+                var response =
+                    await client.PostAsync(
+                        "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=zh-Hans&textType=plain",
+                        new StringContent($"[{{\"Text\": \"{textBlock.Text}\"}}]", Encoding.UTF8, "application/json"));
+                var responseContent = await response.Content.ReadAsStringAsync();
+                string translatedText =
+                    ((JObject)JArray.Parse(responseContent)[0]["translations"][0])["text"].ToString();
+                if (!string.IsNullOrWhiteSpace(translatedText))
+                {
+                    textBlock.Text = translatedText;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
-        _translateList.ForEach(x => { _ = Translate(x); });
+        Task.Run(() =>
+        {
+            Dispatcher.UIThread.Invoke(() =>
+            {
+                var task = new List<Task>();
+                _translateList.ForEach(x => { task.Add(Translate(x)); });
+                Task.WhenAll(task.ToArray());
+            },DispatcherPriority.ApplicationIdle);
+        });
     }
 
 
@@ -155,7 +187,7 @@ public partial class GameUpdateLog : UserControl
                     case "p":
                         // 解析P标签
                         dataContainer.Children.Add(AddToTranslate(new TextBlock
-                            { Text = node.InnerText,TextWrapping = TextWrapping.Wrap ,Margin = new Thickness(0, 5) }));
+                            { Text = node.InnerText, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 5) }));
                         break;
                     case "h1":
                     case "h2":
@@ -165,7 +197,7 @@ public partial class GameUpdateLog : UserControl
                     case "h6":
                         // 解析H1-H6标签，并根据H的级别调整文字大小
                         var header = AddToTranslate(new TextBlock
-                            { Text = node.InnerText, Margin = new Thickness(0, 5),TextWrapping = TextWrapping.Wrap });
+                            { Text = node.InnerText, Margin = new Thickness(0, 5), TextWrapping = TextWrapping.Wrap });
                         switch (node.Name)
                         {
                             case "h1":
@@ -195,14 +227,11 @@ public partial class GameUpdateLog : UserControl
                         // 解析UL和OL标签
                         foreach (var listItem in node.Descendants("li"))
                         {
-                            var listParagraph = AddToTranslate(new TextBlock() { Margin = new Thickness(0, 5) ,TextWrapping = TextWrapping.Wrap});
-                            if (node.Name == "ul")
+                            var listParagraph = AddToTranslate(new TextBlock()
                             {
-                                // 列表前面添加圆点
-                                listParagraph.Inlines.Add(new Run("• ") { FontSize = 12 });
-                            }
-
-                            listParagraph.Inlines.Add(new Run(listItem.InnerText));
+                                Margin = new Thickness(0, 5), Text = "• " + listItem.InnerText,
+                                TextWrapping = TextWrapping.Wrap
+                            });
                             dataContainer.Children.Add(listParagraph);
                         }
 
@@ -212,12 +241,12 @@ public partial class GameUpdateLog : UserControl
                         var hyperlink = new HyperlinkButton()
                         {
                             NavigateUri = new Uri(node.GetAttributeValue("href", "#")),
-                            Content = AddToTranslate(new TextBlock
+                            Content = new TextBlock
                             {
-                                Text = node.InnerText,TextWrapping = TextWrapping.Wrap, TextDecorations = null,
+                                Text = node.InnerText, TextWrapping = TextWrapping.Wrap, TextDecorations = null,
                                 Foreground =
                                     new SolidColorBrush((Color)Application.Current.Resources["SystemAccentColor"]!)
-                            })
+                            }
                         };
                         dataContainer.Children.Add(hyperlink);
                         break;

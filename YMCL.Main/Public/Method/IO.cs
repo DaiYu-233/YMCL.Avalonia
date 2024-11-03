@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -7,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.NetworkInformation;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Avalonia;
@@ -18,6 +20,7 @@ using FluentAvalonia.UI.Controls;
 using MinecraftLaunch.Classes.Models.Game;
 using NAudio.Wave;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using YMCL.Main.Public.Classes;
 using YMCL.Main.Public.Langs;
 using FileInfo = YMCL.Main.Public.Classes.FileInfo;
@@ -41,6 +44,38 @@ public partial class Method
             }
 
             return macAddress.Replace("-", "").ToLower(); // 移除MAC地址中的"-"并转为小写
+        }
+
+        public static async Task<string> TranslateStringAsync(string text, string lang = "zh-Hans", int timeout = 5)
+        {
+            string result = null;
+            try
+            {
+                var handler = new HttpClientHandler();
+                handler.ServerCertificateCustomValidationCallback =
+                    (_, _, _, _) => true;
+                using var client = new HttpClient(handler);
+                client.Timeout = TimeSpan.FromSeconds(timeout);
+                client.DefaultRequestHeaders.Add("Authorization", Const.Data.TranslateToken);
+                var json = $"[{{\"Text\": \"{text}\"}}]";
+                var response =
+                    await client.PostAsync(
+                        $"https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to={lang}&textType=plain",
+                        new StringContent(json, Encoding.UTF8, "application/json"));
+                var responseContent = await response.Content.ReadAsStringAsync();
+                string translatedText =
+                    ((JObject)JArray.Parse(responseContent)[0]["translations"][0])["text"].ToString();
+                if (!string.IsNullOrWhiteSpace(translatedText))
+                {
+                    result = translatedText;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+
+            return result;
         }
 
         public static async Task HandleFileDrop(List<IStorageItem> items)

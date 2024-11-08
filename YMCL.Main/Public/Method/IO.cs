@@ -192,12 +192,12 @@ public partial class Method
                             Path = file.Path,
                             Type = PlaySongListViewItemEntry.PlaySongListViewItemEntryType.Local
                         };
-                        Const.Window.main.musicPage.playSongList.Add(song);
+                        Const.Window.main.musicPage.PlaySongList.Add(song);
                         Const.Window.main.musicPage.PlayListView.Items.Add(song);
                     }
 
                 File.WriteAllText(Const.String.PlayerDataPath,
-                    JsonConvert.SerializeObject(Const.Window.main.musicPage.playSongList, Formatting.Indented));
+                    JsonConvert.SerializeObject(Const.Window.main.musicPage.PlaySongList, Formatting.Indented));
                 Const.Window.main.musicPage.PlayListView.SelectedIndex =
                     Const.Window.main.musicPage.PlayListView.Items.Count - 1;
             }

@@ -31,7 +31,6 @@ public partial class MusicPage : UserControl
 {
     private readonly Method.Module.Debouncer _debouncer;
     private bool _firstLoad = true;
-    private bool _isHoldingSlider;
     private bool _isPlaying;
     private Repeat _repeat;
     private PlaySongListViewItemEntry _selectedItem;
@@ -40,14 +39,14 @@ public partial class MusicPage : UserControl
     private IWavePlayer _waveOut;
     private AudioFileReader _waveSource;
     private WaveStream _waveStream;
-    public List<UrlImageDataListEntry> BitmapDataList = new();
-    private string keyword = string.Empty;
-    private List<TextBlock> lyricRuns;
-    private List<Lyrics> lyrics;
-    private int page;
-    public List<PlaySongListViewItemEntry> playSongList = new();
-    private Timer timer;
-    private DispatcherTimer timerForLyric;
+    private readonly List<UrlImageDataListEntry> _bitmapDataList = new();
+    private string _keyword = string.Empty;
+    private List<TextBlock> _lyricRuns;
+    private List<Lyrics> _lyrics;
+    private int _page;
+    public readonly List<PlaySongListViewItemEntry> PlaySongList = new();
+    private Timer _timer;
+    private DispatcherTimer _timerForLyric;
 
     public MusicPage()
     {
@@ -74,9 +73,9 @@ public partial class MusicPage : UserControl
 
     public void ExternalCall()
     {
-        page = 0;
-        keyword = SearchBox.Text;
-        _ = SearchForListViewAsync(keyword!, page);
+        _page = 0;
+        _keyword = SearchBox.Text;
+        _ = SearchForListViewAsync(_keyword!, _page);
     }
 
     private void BindingEvent()
@@ -243,14 +242,14 @@ public partial class MusicPage : UserControl
                     File.ReadAllText(Const.String.PlayerDataPath));
                 list.ForEach(list =>
                 {
-                    playSongList.Add(list);
+                    PlaySongList.Add(list);
                     PlayListView.Items.Add(list);
                 });
 
-                timer = new Timer(300);
-                timer.Elapsed += OnTimedEvent;
-                timer.AutoReset = true;
-                timer.Enabled = true;
+                _timer = new Timer(300);
+                _timer.Elapsed += OnTimedEvent;
+                _timer.AutoReset = true;
+                _timer.Enabled = true;
 
                 var setting = Const.Data.Setting;
                 _solidColorBrush = setting.Theme == Public.Theme.Light
@@ -317,16 +316,16 @@ public partial class MusicPage : UserControl
         {
             if (e.Key == Key.Enter)
             {
-                page = 0;
-                keyword = SearchBox.Text;
-                _ = SearchForListViewAsync(keyword!, page);
+                _page = 0;
+                _keyword = SearchBox.Text;
+                _ = SearchForListViewAsync(_keyword!, _page);
             }
         };
         SearchBtn.Click += (s, e) =>
         {
-            page = 0;
-            keyword = SearchBox.Text;
-            _ = SearchForListViewAsync(keyword!, page);
+            _page = 0;
+            _keyword = SearchBox.Text;
+            _ = SearchForListViewAsync(_keyword!, _page);
         };
         LoadMoreBtn.Click += (s, e) => { _ = LoadMoreAsync(); };
         SearchSongListView.SelectionChanged += async (_, _) =>
@@ -345,7 +344,7 @@ public partial class MusicPage : UserControl
                 Path = null,
                 Type = PlaySongListViewItemEntryType.Network
             });
-            playSongList.Add(new PlaySongListViewItemEntry
+            PlaySongList.Add(new PlaySongListViewItemEntry
             {
                 SongName = song.SongName,
                 SongId = song.SongId,
@@ -358,17 +357,17 @@ public partial class MusicPage : UserControl
             });
             PlayListView.SelectedIndex = PlayListView.Items.Count - 1;
             File.WriteAllText(Const.String.PlayerDataPath,
-                JsonConvert.SerializeObject(playSongList, Formatting.Indented));
+                JsonConvert.SerializeObject(PlaySongList, Formatting.Indented));
             await Task.Delay(250);
             SearchSongListView.SelectedIndex = -1;
         };
         DelSelectedSong.Click += (s, e) =>
         {
             if (PlayListView.Items.Count == 0 || PlayListView.SelectedIndex == -1) return;
-            playSongList.RemoveAt(PlayListView.SelectedIndex);
+            PlaySongList.RemoveAt(PlayListView.SelectedIndex);
             PlayListView.Items.RemoveAt(PlayListView.SelectedIndex);
             File.WriteAllText(Const.String.PlayerDataPath,
-                JsonConvert.SerializeObject(playSongList, Formatting.Indented));
+                JsonConvert.SerializeObject(PlaySongList, Formatting.Indented));
             PlayListView.SelectedIndex = PlayListView.Items.Count - 1;
         };
         var _theLastLocalSong = string.Empty;
@@ -394,13 +393,13 @@ public partial class MusicPage : UserControl
                         Path = file.Path,
                         Type = PlaySongListViewItemEntryType.Local
                     };
-                    playSongList.Add(song);
+                    PlaySongList.Add(song);
                     PlayListView.Items.Add(song);
                 }
             }
 
             File.WriteAllText(Const.String.PlayerDataPath,
-                JsonConvert.SerializeObject(playSongList, Formatting.Indented));
+                JsonConvert.SerializeObject(PlaySongList, Formatting.Indented));
             PlayListView.SelectedIndex = PlayListView.Items.Count - 1;
         };
         PlayBtn.PointerPressed += (s, e) =>
@@ -425,7 +424,7 @@ public partial class MusicPage : UserControl
                 return;
             }
 
-            if (lyrics != null) lyrics.Clear();
+            if (_lyrics != null) _lyrics.Clear();
 
             LyricBlock.Children.Clear();
             LyricBlock.Children.Add(new TextBlock
@@ -586,7 +585,7 @@ public partial class MusicPage : UserControl
         Loading.IsVisible = true;
         LoadMoreBtn.IsVisible = false;
         SongListViewScroll.ScrollToEnd();
-        page++;
+        _page++;
         SearchBox.IsEnabled = false;
         SearchBtn.IsEnabled = false;
         using var client = new HttpClient();
@@ -595,7 +594,7 @@ public partial class MusicPage : UserControl
         var json = string.Empty;
         try
         {
-            var url = $"{Const.String.MusicApiUrl.TrimEnd('/')}/cloudsearch?keywords={keyword}&offset={page * 30}";
+            var url = $"{Const.String.MusicApiUrl.TrimEnd('/')}/cloudsearch?keywords={_keyword}&offset={_page * 30}";
             var response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             json = await response.Content.ReadAsStringAsync();
@@ -700,13 +699,13 @@ public partial class MusicPage : UserControl
         {
             LoadingUi();
             var data =
-                BitmapDataList.Find(UrlImageDataListEntry => UrlImageDataListEntry.Url == entry.Img);
+                _bitmapDataList.Find(UrlImageDataListEntry => UrlImageDataListEntry.Url == entry.Img);
             if (data == null)
             {
                 var bitmap = await Method.Value.LoadImageFromUrlAsync(entry.Img!);
                 if (bitmap != null) SongImg.Source = bitmap;
 
-                BitmapDataList.Add(new UrlImageDataListEntry { Url = entry.Img, Bitmap = bitmap });
+                _bitmapDataList.Add(new UrlImageDataListEntry { Url = entry.Img, Bitmap = bitmap });
             }
             else
             {
@@ -796,11 +795,11 @@ public partial class MusicPage : UserControl
             var obj2 = JsonConvert.DeserializeObject<LyricApi>(res2);
             var lyricData = obj2.lrc.lyric;
 
-            lyrics = ParseLyrics(lyricData);
+            _lyrics = ParseLyrics(lyricData);
 
-            lyricRuns = new List<TextBlock>();
+            _lyricRuns = new List<TextBlock>();
             LyricBlock.Children.Clear();
-            foreach (var lyric in lyrics)
+            foreach (var lyric in _lyrics)
             {
                 var tra = new Transitions();
                 var run = new TextBlock { Text = lyric.Text + "\n", Height = 22 };
@@ -826,15 +825,15 @@ public partial class MusicPage : UserControl
                 run.Foreground = _solidColorBrush;
                 run.PointerPressed += RunOnPointerPressed;
                 LyricBlock.Children.Add(run);
-                lyricRuns.Add(run);
+                _lyricRuns.Add(run);
             }
 
-            if (timerForLyric != null) timerForLyric.Stop();
+            if (_timerForLyric != null) _timerForLyric.Stop();
 
-            timerForLyric = new DispatcherTimer();
-            timerForLyric.Interval = TimeSpan.FromSeconds(0.2);
-            timerForLyric.Tick += TimerForLyric_Tick;
-            timerForLyric.Start();
+            _timerForLyric = new DispatcherTimer();
+            _timerForLyric.Interval = TimeSpan.FromSeconds(0.2);
+            _timerForLyric.Tick += TimerForLyric_Tick;
+            _timerForLyric.Start();
         }
     }
 
@@ -857,15 +856,15 @@ public partial class MusicPage : UserControl
     }
 
     private async void TimerForLyric_Tick(object? sender, EventArgs e)
-    {
-        async void DefaultUi(TextBlock x)
+    { 
+        void DefaultUi(TextBlock x)
         {
             x.FontSize = 14;
             x.Height = 22;
             x.Foreground = _solidColorBrush;
         }
-
-        async void AccentUi(TextBlock x)
+        
+        void AccentUi(TextBlock x)
         {
             x.Foreground = new SolidColorBrush((Color)Application.Current.Resources["SystemAccentColor"]!);
             x.FontSize = 18;
@@ -884,22 +883,23 @@ public partial class MusicPage : UserControl
             return;
         }
 
-        for (var i = 1; i < lyrics.Count; i++)
-            if (lyrics[i].Time > currentTime)
+        for (var i = 1; i < _lyrics.Count; i++)
+            if (_lyrics[i].Time > currentTime)
             {
                 if (i + 1 > LyricBlock.Children.Count) return;
-                foreach (var x in lyricRuns)
+                foreach (var x in _lyricRuns)
                 {
-                    if (x == lyricRuns[i - 1]) continue;
+                    if (x == _lyricRuns[i - 1]) continue;
 
                     DefaultUi(x);
                 }
 
-                AccentUi(lyricRuns[i - 1]);
-                Const.Window.deskLyric.LyricText.Text = lyricRuns[i - 1].Text;
+                AccentUi(_lyricRuns[i - 1]);
+                Const.Window.deskLyric.LyricText.Text = _lyricRuns[i - 1].Text;
 
                 await Task.Delay(210);
-                var offset = lyricRuns[i - 1].Bounds.Top * -1;
+                var offset = _lyricRuns[i - 1].Bounds.Top * -1;
+                // var offset = lyricRuns[i - 1].Bounds.Top * -1;
                 LyricBlock.Margin = new Thickness(0, offset, 0, 0);
                 break;
             }

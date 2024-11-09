@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using Avalonia;
@@ -182,6 +183,11 @@ public partial class MainWindow : Window
                 ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
                 ExtendClientAreaToDecorationsHint = true;
                 break;
+        }
+        
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            NavMusic.IsVisible = false;
         }
 
         _ = Method.App.MainWindowLoading();

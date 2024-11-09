@@ -21,7 +21,7 @@ public partial class AutoInstallPage : UserControl
     private bool _firstLoad = true;
     private bool latestRelease;
     private bool latestSnapshot;
-    public ObservableCollection<VersionManifestEntry> versionManifestEntries = new();
+    public ObservableCollection<VersionManifestEntry> versionManifestEntries = [];
 
     public AutoInstallPage()
     {

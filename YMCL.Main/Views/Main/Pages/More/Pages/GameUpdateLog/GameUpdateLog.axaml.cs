@@ -32,7 +32,7 @@ namespace YMCL.Main.Views.Main.Pages.More.Pages.GameUpdateLog;
 
 public partial class GameUpdateLog : UserControl
 {
-    List<TextBlock> _translateList = new();
+    List<TextBlock> _translateList = [];
     string _nowJsonPath = "";
 
     public GameUpdateLog()

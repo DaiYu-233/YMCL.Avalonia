@@ -21,7 +21,7 @@ namespace YMCL.Main.Views.Main.Pages.Search;
 public partial class SearchPage : UserControl
 {
     private Method.Module.Debouncer _debouncer;
-    public List<AggregateSearch> aggregateSearchList = new();
+    public List<AggregateSearch> aggregateSearchList = [];
     public List<VersionManifestEntry> versionManifestEntries = null;
 
     public SearchPage()

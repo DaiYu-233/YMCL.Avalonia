@@ -17,8 +17,8 @@ public abstract class Const
     {
         public static Setting Setting { get; set; } = null;
         public static JavaEntry AutoJava { get; set; } = new() { JavaPath = "Auto", JavaVersion = "All" };
-        public static List<UrlImageDataListEntry> UrlImageDataList { get; set; } = new();
-        public static List<NewsDataListEntry> NewsDataList { get; set; } = new();
+        public static List<UrlImageDataListEntry> UrlImageDataList { get; set; } = [];
+        public static List<NewsDataListEntry> NewsDataList { get; set; } = [];
         public static Platform Platform { get; set; }
         public static string TranslateToken { get; set; }
         public static CrashWindow LastCrashInfoWindow { get; set; } = null;

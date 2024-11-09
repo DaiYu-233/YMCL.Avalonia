@@ -580,14 +580,14 @@ public class SearchModListViewItemEntry
     public double DownloadCount { get; set; }
     public bool IsFeatured { get; set; }
     public int PrimaryCategoryId { get; set; }
-    public List<Category> Categories { get; set; } = new();
+    public List<Category> Categories { get; set; } = [];
     public int? ClassId { get; set; }
-    public List<ModAuthor> Authors { get; set; } = new();
+    public List<ModAuthor> Authors { get; set; } = [];
     public ModAsset Logo { get; set; }
-    public List<ModAsset> Screenshots { get; set; } = new();
+    public List<ModAsset> Screenshots { get; set; } = [];
     public int MainFileId { get; set; }
-    public List<File> LatestFiles { get; set; } = new();
-    public List<FileIndex> LatestFilesIndexes { get; set; } = new();
+    public List<File> LatestFiles { get; set; } = [];
+    public List<FileIndex> LatestFilesIndexes { get; set; } = [];
     public DateTimeOffset DateCreated { get; set; }
     public DateTimeOffset DateModified { get; set; }
     public DateTimeOffset DateReleased { get; set; }
@@ -648,7 +648,7 @@ public class ModFileListViewItemEntry
 
     public FileStatus FileStatus { get; set; }
 
-    public List<FileHash> Hashes { get; set; } = new();
+    public List<FileHash> Hashes { get; set; } = [];
 
 
     public DateTimeOffset FileDate { get; set; }
@@ -661,13 +661,13 @@ public class ModFileListViewItemEntry
 
     public string DownloadUrl { get; set; }
 
-    public List<string> GameVersions { get; set; } = new();
+    public List<string> GameVersions { get; set; } = [];
 
 
-    public List<SortableGameVersion> SortableGameVersions { get; set; } = new();
+    public List<SortableGameVersion> SortableGameVersions { get; set; } = [];
 
 
-    public List<FileDependency> Dependencies { get; set; } = new();
+    public List<FileDependency> Dependencies { get; set; } = [];
 
 
     public bool? ExposeAsAlternative { get; set; }
@@ -686,7 +686,7 @@ public class ModFileListViewItemEntry
 
     public long FileFingerprint { get; set; }
 
-    public List<FileModule> Modules { get; set; } = new();
+    public List<FileModule> Modules { get; set; } = [];
 
     public string StringDownloadCount { get; set; }
     public string StringDateTime { get; set; }

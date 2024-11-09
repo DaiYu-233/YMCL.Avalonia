@@ -174,7 +174,7 @@ public partial class LauncherSettingPage : UserControl
                 AfdianClient afdianClient =
                     new AfdianClient("5f710d20e0aa11edb6cf5254001e7c00", "FseYBK8u9Vvr7CJxhk4Dw6aMN5WcqgUf");
                 var page = 1;
-                List<AfdianSponsor.ListItem> list = new();
+                List<AfdianSponsor.ListItem> list = [];
                 while (true)
                 {
                     var json = afdianClient.QuerySponsor(page);

@@ -174,7 +174,7 @@ public partial class CurseForgeFetcher : UserControl
 
             ModFileLoading.IsVisible = false;
             if (shouldReturn) return;
-            List<string> mcVersions = new();
+            List<string> mcVersions = [];
             foreach (var file in modFiles)
                 if (!mcVersions.Contains(file.SortableGameVersions[0].GameVersion!))
                     mcVersions.Add(file.SortableGameVersions[0].GameVersion!);
@@ -330,7 +330,7 @@ public partial class CurseForgeFetcher : UserControl
         };
     }
 
-    List<SearchModListViewItemEntry> _translateList = new();
+    List<SearchModListViewItemEntry> _translateList = [];
 
     public void AddToTranslate(SearchModListViewItemEntry entry)
     {

@@ -14,7 +14,9 @@ using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
+using Avalonia.Styling;
 using Avalonia.Threading;
+using LyricsPlayerControl;
 using NAudio.Wave;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -38,13 +40,13 @@ public partial class MusicPage : UserControl
     private float _volume;
     private IWavePlayer _waveOut;
     private AudioFileReader _waveSource;
-    private WaveStream _waveStream;
-    private readonly List<UrlImageDataListEntry> _bitmapDataList = new();
+    public WaveStream _waveStream;
+    private readonly List<UrlImageDataListEntry> _bitmapDataList = [];
     private string _keyword = string.Empty;
     private List<TextBlock> _lyricRuns;
     private List<Lyrics> _lyrics;
     private int _page;
-    public readonly List<PlaySongListViewItemEntry> PlaySongList = new();
+    public readonly List<PlaySongListViewItemEntry> PlaySongList = [];
     private Timer _timer;
     private DispatcherTimer _timerForLyric;
 
@@ -131,7 +133,7 @@ public partial class MusicPage : UserControl
                 SearchRoot.IsVisible = false;
             }
         };
-        ControlPlayerSlider.ValueChanged += (_, _) =>
+        ControlPlayerSlider.ValueChanged += (_, e) =>
         {
             _debouncer.Trigger();
             PlayerSlider.Value = ControlPlayerSlider.Value;
@@ -170,7 +172,8 @@ public partial class MusicPage : UserControl
                 {
                     using var client = new HttpClient();
                     var response =
-                        await client.GetAsync($"{Const.String.MusicApiUrl.TrimEnd('/')}/song/url?id={_selectedItem.SongId}");
+                        await client.GetAsync(
+                            $"{Const.String.MusicApiUrl.TrimEnd('/')}/song/url?id={_selectedItem.SongId}");
                     response.EnsureSuccessStatusCode();
                     var jObject1 = JObject.Parse(await response.Content.ReadAsStringAsync());
                     if (jObject1 == null)
@@ -252,7 +255,7 @@ public partial class MusicPage : UserControl
                 _timer.Enabled = true;
 
                 var setting = Const.Data.Setting;
-                _solidColorBrush = setting.Theme == Public.Theme.Light
+                _solidColorBrush = Application.Current.ActualThemeVariant == ThemeVariant.Light
                     ? new SolidColorBrush(Color.FromArgb((byte)(255 * 0.3), 0x33, 0x33, 0x33))
                     : new SolidColorBrush(Color.FromArgb((byte)(255 * 0.3), 255, 255, 255));
 
@@ -717,7 +720,8 @@ public partial class MusicPage : UserControl
                 var handler = new HttpClientHandler();
                 handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
                 using var client = new HttpClient(handler);
-                var response = await client.GetAsync($"{Const.String.MusicApiUrl.TrimEnd('/')}/check/music?id={entry.SongId}");
+                var response =
+                    await client.GetAsync($"{Const.String.MusicApiUrl.TrimEnd('/')}/check/music?id={entry.SongId}");
                 response.EnsureSuccessStatusCode();
                 var jObject = JObject.Parse(await response.Content.ReadAsStringAsync());
                 var availability = (bool)jObject["success"]!;
@@ -727,7 +731,8 @@ public partial class MusicPage : UserControl
                     return;
                 }
 
-                var response1 = await client.GetAsync($"{Const.String.MusicApiUrl.TrimEnd('/')}/song/url?id={entry.SongId}");
+                var response1 =
+                    await client.GetAsync($"{Const.String.MusicApiUrl.TrimEnd('/')}/song/url?id={entry.SongId}");
                 response1.EnsureSuccessStatusCode();
                 var jObject1 = JObject.Parse(await response1.Content.ReadAsStringAsync());
                 if (jObject1 == null)
@@ -797,8 +802,9 @@ public partial class MusicPage : UserControl
 
             _lyrics = ParseLyrics(lyricData);
 
-            _lyricRuns = new List<TextBlock>();
+            _lyricRuns = [];
             LyricBlock.Children.Clear();
+            LyricBlock.Height = _lyricRuns.Count * 22 + 30;
             foreach (var lyric in _lyrics)
             {
                 var tra = new Transitions();
@@ -855,15 +861,19 @@ public partial class MusicPage : UserControl
         });
     }
 
+    private int last = -2;
+
     private async void TimerForLyric_Tick(object? sender, EventArgs e)
-    { 
+    {
+        // lyricsViewer.Progress = PlayerSlider.Value;
+
         void DefaultUi(TextBlock x)
         {
             x.FontSize = 14;
             x.Height = 22;
             x.Foreground = _solidColorBrush;
         }
-        
+
         void AccentUi(TextBlock x)
         {
             x.Foreground = new SolidColorBrush((Color)Application.Current.Resources["SystemAccentColor"]!);
@@ -898,9 +908,18 @@ public partial class MusicPage : UserControl
                 Const.Window.deskLyric.LyricText.Text = _lyricRuns[i - 1].Text;
 
                 await Task.Delay(210);
-                var offset = _lyricRuns[i - 1].Bounds.Top * -1;
-                // var offset = lyricRuns[i - 1].Bounds.Top * -1;
+                // var offset = LyricRoot.Bounds.Height / 2 - 22*i - 1;
+                // Console.WriteLine($"------\n{i - 1}\n{offset}\n");
+                // var offset = _lyricRuns[i - 1].Bounds.Top * -1;
+                var offset = LyricRoot.Bounds.Height / 2 - _lyricRuns[i - 1].Bounds.Top ;
                 LyricBlock.Margin = new Thickness(0, offset, 0, 0);
+
+                // if (last != i)
+                // {
+                //     last = i;
+                //     lyricsViewer.Progress = TimeSpan.FromMilliseconds(PlayerSlider.Value).TotalSeconds;
+                // }
+
                 break;
             }
     }
@@ -943,6 +962,7 @@ public partial class MusicPage : UserControl
 
     public List<Lyrics> ParseLyrics(string lyricsText)
     {
+        List<LyricStruct> lyrics1 = [];
         var lines = lyricsText.Split('\n');
         var lyrics = new List<Lyrics>();
         for (var i = 0; i < lines.Length; i++)
@@ -953,9 +973,14 @@ public partial class MusicPage : UserControl
             var timeText = parts[0].TrimStart('[');
             var time = ParseTime(timeText);
             var text = parts[1];
-            if (!string.IsNullOrWhiteSpace(text)) lyrics.Add(new Lyrics { Time = time, Text = text, Index = i });
+            if (!string.IsNullOrWhiteSpace(text))
+            {
+                lyrics.Add(new Lyrics { Time = time, Text = text, Index = i });
+                lyrics1.Add(new LyricStruct() { Ticks = time.Ticks, Text = text });
+            }
         }
 
+        // lyricsViewer.Lyrics = lyrics1;
         return lyrics;
     }
 

@@ -589,81 +589,79 @@ public partial class Method
 
         public static void AppStrangeEffect()
         {
-            List<Action> methods = new List<Action>();
-
-            //NeverGiveUp
-            methods.Add(() =>
-            {
-                var launcher = TopLevel.GetTopLevel(Const.Window.main).Launcher;
-                launcher.LaunchUriAsync(new Uri("https://www.bilibili.com/video/BV1GJ411x7h7/"));
-            });
-
-            //Transform180deg
-            methods.Add(() =>
-            {
-                var rotateTransform = new RotateTransform(180);
-                Const.Window.main.Root.RenderTransform = rotateTransform;
-            });
-
-            //WindowMove
-            methods.Add(() =>
-            {
-                double _velocityX = 20; // 水平速度
-                double _velocityY = 20; // 垂直速度
-
-                // 使用DispatcherTimer来周期性地更新窗口位置
-                DispatcherTimer timer = new DispatcherTimer
+            List<Action> methods =
+            [
+                //NeverGiveUp
+                () =>
                 {
-                    Interval = TimeSpan.FromMilliseconds(10) // 设置定时器的时间间隔
-                };
-                var _screenBounds = Const.Window.main.Screens.All.FirstOrDefault()?.WorkingArea ??
-                                    new PixelRect(0, 0, 800, 600);
-                timer.Tick += Timer_Tick;
-                timer.Start();
-
-                void Timer_Tick(object sender, EventArgs e)
+                    var launcher = TopLevel.GetTopLevel(Const.Window.main).Launcher;
+                    launcher.LaunchUriAsync(new Uri("https://www.bilibili.com/video/BV1GJ411x7h7/"));
+                },
+                //Transform180deg
+                () =>
                 {
-                    var newPosition = new PixelPoint((int)(Const.Window.main.Position.X + _velocityX),
-                        (int)(Const.Window.main.Position.Y + _velocityY));
-
-                    // 检查窗口是否即将超出屏幕边界
-                    if (newPosition.X < _screenBounds.X || newPosition.X + Const.Window.main.Width >
-                        _screenBounds.X + _screenBounds.Width)
-                    {
-                        _velocityX = -_velocityX; // 改变水平方向
-                    }
-
-                    if (newPosition.Y < _screenBounds.Y || newPosition.Y + Const.Window.main.Height >
-                        _screenBounds.Y + _screenBounds.Height)
-                    {
-                        _velocityY = -_velocityY; // 改变垂直方向
-                    }
-
-                    // 设置新位置
-                    Const.Window.main.Position = newPosition;
-                }
-            });
-
-            //KeepSpinning
-            methods.Add(async () =>
-            {
-                var deg = 0;
-                while (true)
+                    var rotateTransform = new RotateTransform(180);
+                    Const.Window.main.Root.RenderTransform = rotateTransform;
+                },
+                //WindowMove
+                () =>
                 {
-                    Dispatcher.UIThread.Invoke(() =>
+                    double _velocityX = 20; // 水平速度
+                    double _velocityY = 20; // 垂直速度
+
+                    // 使用DispatcherTimer来周期性地更新窗口位置
+                    DispatcherTimer timer = new DispatcherTimer
                     {
-                        if (deg > 360)
+                        Interval = TimeSpan.FromMilliseconds(10) // 设置定时器的时间间隔
+                    };
+                    var _screenBounds = Const.Window.main.Screens.All.FirstOrDefault()?.WorkingArea ??
+                                        new PixelRect(0, 0, 800, 600);
+                    timer.Tick += Timer_Tick;
+                    timer.Start();
+
+                    void Timer_Tick(object sender, EventArgs e)
+                    {
+                        var newPosition = new PixelPoint((int)(Const.Window.main.Position.X + _velocityX),
+                            (int)(Const.Window.main.Position.Y + _velocityY));
+
+                        // 检查窗口是否即将超出屏幕边界
+                        if (newPosition.X < _screenBounds.X || newPosition.X + Const.Window.main.Width >
+                            _screenBounds.X + _screenBounds.Width)
                         {
-                            deg = 0;
+                            _velocityX = -_velocityX; // 改变水平方向
                         }
 
-                        var rotateTransform = new RotateTransform(deg);
-                        Const.Window.main.RenderTransform = rotateTransform;
-                        deg += 2;
-                    });
-                    await Task.Delay(10);
-                }
-            });
+                        if (newPosition.Y < _screenBounds.Y || newPosition.Y + Const.Window.main.Height >
+                            _screenBounds.Y + _screenBounds.Height)
+                        {
+                            _velocityY = -_velocityY; // 改变垂直方向
+                        }
+
+                        // 设置新位置
+                        Const.Window.main.Position = newPosition;
+                    }
+                },
+                //KeepSpinning
+                async () =>
+                {
+                    var deg = 0;
+                    while (true)
+                    {
+                        Dispatcher.UIThread.Invoke(() =>
+                        {
+                            if (deg > 360)
+                            {
+                                deg = 0;
+                            }
+
+                            var rotateTransform = new RotateTransform(deg);
+                            Const.Window.main.RenderTransform = rotateTransform;
+                            deg += 2;
+                        });
+                        await Task.Delay(10);
+                    }
+                },
+            ];
 
             Random random = new Random();
             //methods[^1]();

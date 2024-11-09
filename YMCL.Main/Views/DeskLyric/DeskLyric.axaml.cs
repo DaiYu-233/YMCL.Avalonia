@@ -49,12 +49,14 @@ public partial class DeskLyric : Window
             LyricText.Transitions = null;
             Const.Window.deskLyric.Height = 92;
             LyricText.FontSize = 72;
-            var tr = new Transitions();
-            tr.Add(new DoubleTransition()
+            var tr = new Transitions
             {
-                Property = FontSizeProperty,
-                Duration = TimeSpan.FromMilliseconds(300)
-            });
+                new DoubleTransition()
+                {
+                    Property = FontSizeProperty,
+                    Duration = TimeSpan.FromMilliseconds(300)
+                }
+            };
             Show();
             LyricText.Transitions = tr;
             LyricText.FontSize = setting.DeskLyricSize;

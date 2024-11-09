@@ -471,7 +471,7 @@ public partial class LaunchPage : UserControl
 
     private void LoadVersionMods(GameEntry version)
     {
-        modManageEntries = new ObservableCollection<ModManageEntry>();
+        modManageEntries = [];
         var disabledMod = new List<ModManageEntry>();
         if (version != null)
         {

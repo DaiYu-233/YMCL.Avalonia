@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -39,11 +40,16 @@ public class App : Application
 
     private void UIThread_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
+        Console.WriteLine(e.Exception);
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) return;
         try
         {
-            var win = new CrashWindow(e.Exception.ToString());
-            win.Hide();
-            win.ShowDialog(Const.Window.main);
+            var win = new CrashWindow(e.Exception.ToString())
+            {
+                Topmost = true
+            };
+            // win.Hide();
+            // win.ShowDialog(Const.Window.main);
         }
         finally
         {
@@ -51,16 +57,22 @@ public class App : Application
         }
     }
 
-    private async void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+    private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
+        Console.WriteLine(e);
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) return;
         try
         {
-            var win = new CrashWindow(e.ToString()!);
-            win.Hide();
-            _ = win.ShowDialog(Const.Window.main);
+            var win = new CrashWindow(e.ToString()!)
+            {
+                Topmost = true
+            };
+            // win.Hide();
+            // win.ShowDialog(Const.Window.main);
         }
         catch
         {
+            // ignored
         }
     }
 }

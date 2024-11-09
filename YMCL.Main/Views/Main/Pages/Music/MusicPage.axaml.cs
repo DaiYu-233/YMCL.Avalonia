@@ -230,6 +230,12 @@ public partial class MusicPage : UserControl
             setting.Volume = VolumeSlider.Value;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
+        Application.Current.ActualThemeVariantChanged += (_, _) =>
+        {
+            _solidColorBrush = Application.Current.ActualThemeVariant == ThemeVariant.Light
+                ? new SolidColorBrush(Color.FromArgb((byte)(255 * 0.3), 0x33, 0x33, 0x33))
+                : new SolidColorBrush(Color.FromArgb((byte)(255 * 0.3), 255, 255, 255));
+        };
         Loaded += (s, e) =>
         {
             Method.Ui.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
@@ -673,12 +679,14 @@ public partial class MusicPage : UserControl
             if (entry.Path == null)
             {
                 Method.Ui.Toast(MainLang.MusicGetFail, type: NotificationType.Error);
+                PlayListView.SelectedIndex = -1;
                 return;
             }
 
             if (!File.Exists(entry.Path))
             {
                 Method.Ui.Toast(MainLang.FileNotExist, type: NotificationType.Error);
+                PlayListView.SelectedIndex = -1;
                 return;
             }
 
@@ -728,6 +736,7 @@ public partial class MusicPage : UserControl
                 if (!availability)
                 {
                     Method.Ui.Toast(MainLang.MusicNotAvailable, type: NotificationType.Error);
+                    PlayListView.SelectedIndex = -1;
                     return;
                 }
 
@@ -738,6 +747,7 @@ public partial class MusicPage : UserControl
                 if (jObject1 == null)
                 {
                     Method.Ui.Toast(MainLang.MusicGetFail, type: NotificationType.Error);
+                    PlayListView.SelectedIndex = -1;
                     return;
                 }
 
@@ -776,6 +786,7 @@ public partial class MusicPage : UserControl
             catch (Exception e)
             {
                 Const.Notification.main.Show(MainLang.LoadFail, NotificationType.Error);
+                PlayListView.SelectedIndex = -1;
             }
         }
     }

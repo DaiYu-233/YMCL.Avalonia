@@ -1,6 +1,13 @@
 ﻿#pragma warning disable CS8618
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Windows.Input;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
+using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using CurseForge.APIClient.Models;
@@ -10,6 +17,7 @@ using CurseForge.APIClient.Models.Mods;
 using MinecraftLaunch.Classes.Models.Game;
 using Newtonsoft.Json;
 using YMCL.Main.Public.Langs;
+using File = CurseForge.APIClient.Models.Files.File;
 
 namespace YMCL.Main.Public.Classes;
 
@@ -776,6 +784,7 @@ public class UrlImageDataListEntry()
     public string Url { get; set; }
     public Bitmap Bitmap { get; set; }
 }
+
 public class NewsDataListEntry()
 {
     public string Url { get; set; }
@@ -789,6 +798,63 @@ public class JavaDownloaderEntry()
     public string FileName { get; set; }
 }
 
+public class GameListEntry
+{
+    public int IsFavourite { get; set; } = 0;
+    public bool IsSettingVisible { get; set; } = true;
+    public string FavouriteIcon { get; set; }
+    public string Version { get; set; }
+    public string Id { get; set; }
+    public string Type { get; set; }
+    public Bitmap Icon { get; set; }
+    public GameEntry Entry { get; set; }
+
+    public void SettingAction()
+    {
+        Const.Window.main.launchPage.IsVersionSettingOpenByVersionList = true;
+        Const.Window.main.launchPage.LoadVersionSettingUI(Entry);
+        Const.Window.main.launchPage.VersionSettingRoot.IsVisible = true;
+        Const.Window.main.launchPage.VersionSettingRoot.Margin = new Thickness(10);
+        Const.Window.main.launchPage.VersionSettingRoot.Opacity = (double)Application.Current.Resources["Opacity"]!;
+    }
+
+    public void FavouriteAction()
+    {
+        if (Type == "BedRock" || string.IsNullOrWhiteSpace(Entry.JarPath)) return;
+        var filePath = Path.Combine(Path.GetDirectoryName(Entry.JarPath)!, "YMCL.Favourite");
+        if (IsFavourite == 1)
+        {
+            System.IO.File.WriteAllText(filePath, "YMCL By DaiYu");
+        }
+        else
+        {
+            System.IO.File.Delete(filePath);
+        }
+
+        IsFavourite = System.IO.File.Exists(Path.Combine(Path.GetDirectoryName(Entry.JarPath)!, "YMCL.Favourite"))
+            ? 0
+            : 1;
+
+        Const.Window.main.launchPage.LoadVersions();
+    }
+
+    public void LaunchAction()
+    {
+        if (Type == "BedRock")
+        {
+            var launcher = TopLevel.GetTopLevel(Const.Window.main.launchPage).Launcher;
+            launcher.LaunchUriAsync(new Uri("minecraft://play"));
+            Method.Ui.Toast(MainLang.LaunchFinish, type: NotificationType.Success);
+        }
+        else
+        {
+            _ = Const.Data.Setting.LaunchCore == LaunchCore.MinecraftLaunch
+                ? Method.Mc.LaunchClientUsingMinecraftLaunchAsync(p_id: Entry.Id)
+                : Method.Mc.LaunchClientUsingStarLightAsync(p_id: Entry.Id);
+        }
+    }
+}
+
 public class MojangJavaNews()
 {
     public class Image
@@ -797,6 +863,7 @@ public class MojangJavaNews()
         /// 
         /// </summary>
         public string title { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -809,30 +876,37 @@ public class MojangJavaNews()
         /// 
         /// </summary>
         public string title { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public string version { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public string type { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public Image image { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public string contentPath { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public string id { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
         public string date { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -845,10 +919,10 @@ public class MojangJavaNews()
         /// 
         /// </summary>
         public int version { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
-        public List <EntriesItem > entries { get; set; }
+        public List<EntriesItem> entries { get; set; }
     }
-
 }

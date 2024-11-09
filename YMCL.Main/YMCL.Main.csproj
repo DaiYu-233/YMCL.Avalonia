@@ -107,6 +107,26 @@
         <AvaloniaResource Remove="Public\Assets\YMCL-Icon.ico" />
         <AvaloniaResource Remove="Public\Controls\WindowTask\**" />
         <AvaloniaResource Remove="Public\Controls\PageTaskEntry\**" />
+        <None Remove="Public\Assets\McIcons\dirt_path_side.png" />
+        <EmbeddedResource Include="Public\Assets\McIcons\dirt_path_side.png" />
+        <None Remove="Public\Assets\McIcons\crafting_table_front.png" />
+        <EmbeddedResource Include="Public\Assets\McIcons\crafting_table_front.png" />
+        <None Remove="Public\Assets\McIcons\FabricIcon.png" />
+        <EmbeddedResource Include="Public\Assets\McIcons\FabricIcon.png" />
+        <None Remove="Public\Assets\McIcons\furnace_front.png" />
+        <EmbeddedResource Include="Public\Assets\McIcons\furnace_front.png" />
+        <None Remove="Public\Assets\McIcons\OptiFabricIcon.png" />
+        <EmbeddedResource Include="Public\Assets\McIcons\OptiFabricIcon.png" />
+        <None Remove="Public\Assets\McIcons\QuiltIcon.png" />
+        <EmbeddedResource Include="Public\Assets\McIcons\QuiltIcon.png" />
+        <None Remove="Public\Assets\McIcons\OptiFineIcon.png" />
+        <EmbeddedResource Include="Public\Assets\McIcons\OptiFineIcon.png" />
+        <None Remove="Public\Assets\McIcons\NeoForgeIcon.png" />
+        <EmbeddedResource Include="Public\Assets\McIcons\NeoForgeIcon.png" />
+        <None Remove="Public\Assets\McIcons\grass_block_side.png" />
+        <EmbeddedResource Include="Public\Assets\McIcons\grass_block_side.png" />
+        <None Remove="Public\Assets\McIcons\ForgeIcon.png" />
+        <EmbeddedResource Include="Public\Assets\McIcons\ForgeIcon.png" />
     </ItemGroup>
     <ItemGroup>
         <AvaloniaResource Remove="Public\Assets\YMCL-Icon.ico" />

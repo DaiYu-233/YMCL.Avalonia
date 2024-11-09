@@ -211,7 +211,7 @@ public partial class Method
                         if (imageControl != null && imageControl.Source is DrawingImage)
                         {
                             imageControl.InvalidateVisual();
-                            Console.WriteLine(imageControl.GetVisualRoot());
+                            // Console.WriteLine(imageControl.GetVisualRoot());
                         }
                     }
                 }
@@ -254,7 +254,7 @@ public partial class Method
             Const.Window.main.TitleBar.Root.Background = Application.Current.ActualThemeVariant == ThemeVariant.Dark
                 ? SolidColorBrush.Parse("#2c2c2c")
                 : SolidColorBrush.Parse("#FFE9F6FF");
-            
+
             try
             {
                 (FindControlByName(Const.Window.main, "PART_PaneRoot") as Panel).Opacity =
@@ -291,8 +291,16 @@ public partial class Method
                     Const.Window.main.BackGroundImg.Source = null;
                 }
 
-                (Method.Ui.FindControlByName(Const.Window.main, "PART_PaneRoot") as Panel).Opacity =
-                    (double)Application.Current.Resources["Opacity"]!;
+                try
+                {
+                    (FindControlByName(Const.Window.main, "PART_PaneRoot") as Panel).Opacity =
+                        (double)Application.Current.Resources["Opacity"]!;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+
                 return;
             }
 

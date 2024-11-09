@@ -15,6 +15,8 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 using Avalonia.Platform.Storage;
 using FluentAvalonia.UI.Controls;
 using MinecraftLaunch.Classes.Models.Game;
@@ -46,6 +48,15 @@ public partial class Method
             return macAddress.Replace("-", "").ToLower(); // 移除MAC地址中的"-"并转为小写
         }
 
+        public static Bitmap LoadBitmapFromAppFile(string uri)
+        {
+            var memoryStream = new MemoryStream();
+            var stream = AssetLoader.Open(new Uri("resm:"+uri));
+            stream!.CopyTo(memoryStream);
+            memoryStream.Position = 0;
+            return new Bitmap(memoryStream);
+        }
+        
         public static async Task<string> TranslateStringAsync(string text, string lang = "zh-Hans", int timeout = 5)
         {
             string result = null;

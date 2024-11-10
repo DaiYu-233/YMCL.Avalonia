@@ -1094,4 +1094,19 @@ MacOs 不支持自动更新
   <data name="SureToInstallTheJava" xml:space="preserve">
       <value>确定要安装 Java : {Java}？</value>
     </data>
+  <data name="MaxFileFragmentation" xml:space="preserve">
+      <value>最大文件分片</value>
+    </data>
+  <data name="CreateDownloadTask" xml:space="preserve">
+      <value>创建下载任务</value>
+    </data>
+  <data name="CustomDownload" xml:space="preserve">
+      <value>自定义下载</value>
+    </data>
+  <data name="Locate" xml:space="preserve">
+      <value>定位</value>
+    </data>
+  <data name="DownloadUrl" xml:space="preserve">
+      <value>下载链接</value>
+    </data>
 </root>

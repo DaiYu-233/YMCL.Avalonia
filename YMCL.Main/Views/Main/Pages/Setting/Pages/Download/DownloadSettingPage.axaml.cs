@@ -106,6 +106,17 @@ public partial class DownloadSettingPage : UserControl
             setting.MaximumDownloadThread = value;
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
         };
+        MaxFileFragmentationSlider.ValueChanged += (_, _) =>
+        {
+            var value = Math.Round(MaxFileFragmentationSlider.Value);
+            MaxFileFragmentationText.Text = value.ToString();
+            MaxFileFragmentationSlider.Value = value;
+            DownloadThreadWarning.IsVisible = MaxFileFragmentationSlider.Value > 100;
+            var setting = Const.Data.Setting;
+            if (setting.MaxFileFragmentation == value) return;
+            setting.MaxFileFragmentation = Convert.ToInt32(value);
+            File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
+        };
     }
 
     private void ControlProperty()
@@ -114,6 +125,8 @@ public partial class DownloadSettingPage : UserControl
         DownloadSourceComboBox.SelectedIndex = (int)setting.DownloadSource;
         MaximumDownloadThreadText.Text = setting.MaximumDownloadThread.ToString();
         MaximumDownloadThreadSlider.Value = setting.MaximumDownloadThread;
+        MaxFileFragmentationText.Text = setting.MaxFileFragmentation.ToString();
+        MaxFileFragmentationSlider.Value = setting.MaxFileFragmentation;
         DownloadThreadWarning.IsVisible = MaximumDownloadThreadSlider.Value > 100;
         CustomUpdateUrlEnableComboBox.SelectedIndex = setting.EnableCustomUpdateUrl ? 1 : 0;
         AutoUpdateSwitch.IsChecked = setting.EnableAutoCheckUpdate;

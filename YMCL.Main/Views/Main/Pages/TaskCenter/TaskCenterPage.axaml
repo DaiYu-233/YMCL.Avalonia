@@ -1,39 +1,50 @@
 <UserControl
+    FontFamily="{DynamicResource Font}"
+    FontWeight="{DynamicResource FontWeight}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
     x:Class="YMCL.Main.Views.Main.Pages.TaskCenter.TaskCenterPage"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Main.Public.Langs"
     xmlns:uc="clr-namespace:YMCL.Main.Public.Controls"
     xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    FontFamily="{DynamicResource Font}"
-    FontWeight="{DynamicResource FontWeight}"
-    mc:Ignorable="d">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Border x:Name="Root">
         <Border.Transitions>
             <Transitions>
                 <ThicknessTransition
+                    Duration="0:0:0.45"
                     Easing="BounceEaseIn"
-                    Property="Margin"
-                    Duration="0:0:0.45" />
+                    Property="Margin" />
             </Transitions>
         </Border.Transitions>
         <ScrollViewer>
             <Grid>
                 <StackPanel
-                    Name="TaskContainer"
                     Margin="10,10,10,10"
+                    Name="TaskContainer"
                     Spacing="10" />
-                <TextBlock
-                    Name="NoTaskTip"
-                    Margin="0,70,0,0"
+                <StackPanel
                     HorizontalAlignment="Center"
-                    FontFamily="{DynamicResource Font}"
-                    Foreground="{DynamicResource GrayColor}"
-                    Text="{x:Static properties:MainLang.NoWorkingTask}" />
+                    Name="NoTaskTip"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center">
+                    <uc:PathIcon
+                        Color="{DynamicResource GrayColor}"
+                        Height="64"
+                        Path="F1 M 18.75 6.25 C 18.75 6.490887 18.701172 6.730145 18.603516 6.967773 C 18.505859 7.205404 18.372395 7.408854 18.203125 7.578125 L 15.771484 10.009766 C 16.012369 10.029297 16.238605 10.091146 16.450195 10.195312 C 16.661783 10.299479 16.845703 10.43457 17.001953 10.600586 C 17.158203 10.766602 17.280273 10.960287 17.368164 11.181641 C 17.456055 11.402995 17.5 11.634115 17.5 11.875 L 17.5 16.875 C 17.5 17.135416 17.451172 17.379557 17.353516 17.607422 C 17.255859 17.835287 17.122395 18.033854 16.953125 18.203125 C 16.783854 18.372396 16.585285 18.505859 16.357422 18.603516 C 16.129557 18.701172 15.885416 18.75 15.625 18.75 L 3.125 18.75 C 2.864583 18.75 2.620443 18.701172 2.392578 18.603516 C 2.164713 18.505859 1.966146 18.372396 1.796875 18.203125 C 1.627604 18.033854 1.494141 17.835287 1.396484 17.607422 C 1.298828 17.379557 1.25 17.135416 1.25 16.875 L 1.25 4.375 C 1.25 4.114584 1.298828 3.870443 1.396484 3.642578 C 1.494141 3.414715 1.627604 3.216146 1.796875 3.046875 C 1.966146 2.877605 2.164713 2.744141 2.392578 2.646484 C 2.620443 2.548828 2.864583 2.5 3.125 2.5 L 8.125 2.5 C 8.365885 2.5 8.597005 2.543945 8.818359 2.631836 C 9.039713 2.719727 9.233398 2.841797 9.399414 2.998047 C 9.56543 3.154297 9.700521 3.338217 9.804688 3.549805 C 9.908854 3.761395 9.970703 3.987631 9.990234 4.228516 L 12.421875 1.796875 C 12.591146 1.627605 12.792969 1.494141 13.027344 1.396484 C 13.261719 1.298828 13.502604 1.25 13.75 1.25 C 13.997395 1.25 14.23828 1.298828 14.472656 1.396484 C 14.70703 1.494141 14.908854 1.627605 15.078125 1.796875 L 18.203125 4.921875 C 18.372395 5.091146 18.505859 5.29297 18.603516 5.527344 C 18.701172 5.76172 18.75 6.002605 18.75 6.25 Z M 17.5 6.25 C 17.5 6.08073 17.43815 5.934246 17.314453 5.810547 L 14.189453 2.685547 C 14.065754 2.56185 13.91927 2.5 13.75 2.5 C 13.580729 2.5 13.434244 2.56185 13.310547 2.685547 L 10.185547 5.810547 C 10.061849 5.934246 10 6.08073 10 6.25 C 10 6.419271 10.061849 6.565756 10.185547 6.689453 L 13.310547 9.814453 C 13.434244 9.938151 13.580729 10 13.75 10 C 13.91927 10 14.065754 9.938151 14.189453 9.814453 L 17.314453 6.689453 C 17.43815 6.565756 17.5 6.419271 17.5 6.25 Z M 8.75 10 L 8.75 4.375 C 8.75 4.20573 8.68815 4.059246 8.564453 3.935547 C 8.440755 3.81185 8.294271 3.75 8.125 3.75 L 3.125 3.75 C 2.955729 3.75 2.809245 3.81185 2.685547 3.935547 C 2.561849 4.059246 2.5 4.20573 2.5 4.375 L 2.5 10 Z M 11.71875 10 L 10 8.28125 L 10 10 Z M 8.75 17.5 L 8.75 11.25 L 2.5 11.25 L 2.5 16.875 C 2.5 17.044271 2.561849 17.190756 2.685547 17.314453 C 2.809245 17.43815 2.955729 17.5 3.125 17.5 Z M 16.25 11.875 C 16.25 11.705729 16.18815 11.559245 16.064453 11.435547 C 15.940754 11.31185 15.79427 11.25 15.625 11.25 L 10 11.25 L 10 17.5 L 15.625 17.5 C 15.79427 17.5 15.940754 17.43815 16.064453 17.314453 C 16.18815 17.190756 16.25 17.044271 16.25 16.875 Z "
+                        Width="64" />
+                    <StackPanel Margin="15,0,0,0" VerticalAlignment="Center">
+                        <TextBlock
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="18"
+                            Foreground="{DynamicResource GrayColor}"
+                            Text="{x:Static properties:MainLang.NoWorkingTask}" />
+                    </StackPanel>
+                </StackPanel>
             </Grid>
         </ScrollViewer>
     </Border>

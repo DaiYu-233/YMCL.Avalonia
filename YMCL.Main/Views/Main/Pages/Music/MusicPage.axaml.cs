@@ -383,7 +383,22 @@ public partial class MusicPage : UserControl
         AddLocalSong.Click += async (s, e) =>
         {
             var files = await Method.IO.OpenFilePicker(TopLevel.GetTopLevel(this)!,
-                new FilePickerOpenOptions { AllowMultiple = true, Title = MainLang.SelectMusicFile });
+                new FilePickerOpenOptions { AllowMultiple = true, Title = MainLang.SelectMusicFile, FileTypeFilter =  [new FilePickerFileType("All Audio Files")
+                {
+                    Patterns =
+                    [
+                        "*.mp3",
+                        "*.wav",
+                        "*.aac",
+                        "*.flac",
+                        "*.ogg",
+                        "*.alac",
+                        "*.m4a",
+                        "*.wma",
+                        "*.aiff",
+                        "*.mid"
+                    ]
+                }]});
             if (files == null) return;
             foreach (var file in files)
             {

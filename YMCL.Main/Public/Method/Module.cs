@@ -3,7 +3,7 @@ using System.Timers;
 
 namespace YMCL.Main.Public;
 
-public partial class Method
+public abstract partial class Method
 {
     public static class Module
     {

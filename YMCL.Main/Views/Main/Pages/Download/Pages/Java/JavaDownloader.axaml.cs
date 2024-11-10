@@ -225,7 +225,11 @@ public partial class JavaDownloader : UserControl
         var dialog = await Method.Ui.ShowDialogAsync(MainLang.Install,
             MainLang.SureToInstallTheJava.Replace("{Java}", item.FileName), b_primary: MainLang.Ok,
             b_cancel: MainLang.Cancel);
-        if (dialog != ContentDialogResult.Primary) return;
+        if (dialog != ContentDialogResult.Primary)
+        {
+            ((ListBox)sender).SelectedIndex = -1;
+            return;
+        }
 
         var task = new TaskManager.TaskEntry($"{MainLang.Download} : {item.FileName}");
         Method.IO.TryCreateFolder(Const.String.TempFolderPath);
@@ -235,41 +239,7 @@ public partial class JavaDownloader : UserControl
         {
             string destinationPath = Path.Combine(Const.String.TempFolderPath, item.FileName);
 
-            var handler = new HttpClientHandler();
-            handler.ServerCertificateCustomValidationCallback = (_, _, _, _) => true;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12;
-            using var client = new HttpClient(handler);
-            client.DefaultRequestHeaders.Add("User-Agent",
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0");
-            using (var response = await client.GetAsync(item.Url, HttpCompletionOption.ResponseHeadersRead))
-            {
-                response.EnsureSuccessStatusCode();
-
-                await using (var downloadStream = await response.Content.ReadAsStreamAsync())
-                {
-                    await using (var fileStream = new FileStream(
-                                     Path.Combine(Const.String.UpdateFolderPath, destinationPath), FileMode.Create,
-                                     FileAccess.Write))
-                    {
-                        var buffer = new byte[8192];
-                        int bytesRead;
-                        long totalBytesRead = 0;
-                        var totalBytes = response.Content.Headers.ContentLength.HasValue
-                            ? response.Content.Headers.ContentLength.Value
-                            : -1;
-
-                        while ((bytesRead = await downloadStream.ReadAsync(buffer)) > 0)
-                        {
-                            await fileStream.WriteAsync(buffer.AsMemory(0, bytesRead));
-                            totalBytesRead += bytesRead;
-
-                            if (totalBytes <= 0) continue;
-                            var progress = (double)totalBytesRead / totalBytes * 100;
-                            task.UpdateValueProgress(progress);
-                        }
-                    }
-                }
-            }
+            await Method.IO.DownloadFileAsync(item.Url, destinationPath, task);
 
             Dispatcher.UIThread.Invoke(() =>
             {
@@ -285,6 +255,7 @@ public partial class JavaDownloader : UserControl
             {
                 ZipFile.ExtractToDirectory(destinationPath, path);
             }
+
             if (Path.GetExtension(destinationPath) == ".gz")
             {
                 string tempTarFilePath = Path.Combine(path, Path.GetFileNameWithoutExtension(destinationPath));
@@ -296,6 +267,7 @@ public partial class JavaDownloader : UserControl
                 // 清理临时的.tar文件
                 File.Delete(tempTarFilePath);
             }
+
             Dispatcher.UIThread.Invoke(() =>
             {
                 task.UpdateTextProgress($"{MainLang.InstallFinish} : {item.FileName}");
@@ -312,9 +284,10 @@ public partial class JavaDownloader : UserControl
                     NotificationType.Error);
                 task.Destory();
             });
+            ((ListBox)sender).SelectedIndex = -1;
         }
     }
-    
+
     static void ExtractGZipFile(string sourceGZipFilePath, string destinationTarFilePath)
     {
         using (FileStream inFile = File.OpenRead(sourceGZipFilePath))

@@ -38,14 +38,14 @@ public partial class LaunchPage : UserControl
     private bool _firstLoad = true;
     private bool _firstOpenVersionList = true;
     private bool _firstOpenVersionSetting = true;
-    public bool _shouldCloseVersuionList;
+    public bool ShouldCloseVersionList;
     private bool _isSelectioningVersionFolder = false;
     public bool IsVersionSettingOpenByVersionList = false;
 
-    private List<string> minecraftFolders =
+    private List<string> _minecraftFolders =
         JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.MinecraftFolderDataPath));
 
-    private ObservableCollection<ModManageEntry> modManageEntries;
+    private ObservableCollection<ModManageEntry> _modManageEntries;
 
     public LaunchPage()
     {
@@ -64,12 +64,12 @@ public partial class LaunchPage : UserControl
         {
             Method.Ui.PageLoadAnimation((-50, 0, 50, 0), (0, 0, 0, 0), TimeSpan.FromSeconds(0.45), Root, true);
             LoadAccounts();
-            minecraftFolders =
+            _minecraftFolders =
                 JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.MinecraftFolderDataPath));
             MinecraftFolderComboBox.Items.Clear();
             var setting = Const.Data.Setting;
-            foreach (var item in minecraftFolders) MinecraftFolderComboBox.Items.Add(item);
-            if (setting.MinecraftFolder == null || !minecraftFolders.Contains(setting.MinecraftFolder))
+            foreach (var item in _minecraftFolders) MinecraftFolderComboBox.Items.Add(item);
+            if (setting.MinecraftFolder == null || !_minecraftFolders.Contains(setting.MinecraftFolder))
                 MinecraftFolderComboBox.SelectedIndex = 0;
             else
                 MinecraftFolderComboBox.SelectedItem = setting.MinecraftFolder;
@@ -114,14 +114,14 @@ public partial class LaunchPage : UserControl
             setting.MinecraftFolder = MinecraftFolderComboBox.SelectedItem.ToString();
             File.WriteAllText(Const.String.SettingDataPath, JsonConvert.SerializeObject(setting, Formatting.Indented));
             _isSelectioningVersionFolder = true;
-            _shouldCloseVersuionList = false;
+            ShouldCloseVersionList = false;
             LoadVersions();
             VersionListView.SelectedIndex = 0;
         };
         VersionListBtn.Click += async (s, e) =>
         {
             LaunchConsoleRoot.Opacity = 0;
-            _shouldCloseVersuionList = false;
+            ShouldCloseVersionList = false;
             if (_firstOpenVersionList)
             {
                 await Task.Delay(260);
@@ -199,7 +199,7 @@ public partial class LaunchPage : UserControl
                 _isSelectioningVersionFolder = false;
             }
 
-            _shouldCloseVersuionList = true;
+            ShouldCloseVersionList = true;
         };
         VersionListView.SelectionChanged += async (s, e) =>
         {
@@ -216,7 +216,7 @@ public partial class LaunchPage : UserControl
             }
 
             await Task.Delay(100);
-            if (_shouldCloseVersuionList)
+            if (ShouldCloseVersionList)
                 CloseVersionList();
         };
         LaunchBtn.Click += (s, e) =>
@@ -249,7 +249,7 @@ public partial class LaunchPage : UserControl
         };
         RefreshVersionListBtn.Click += (s, e) =>
         {
-            _shouldCloseVersuionList = false;
+            ShouldCloseVersionList = false;
             LoadVersions();
         };
         VersionTabViewItemOverview.CloseRequested += CloseVersionSetting;
@@ -299,7 +299,7 @@ public partial class LaunchPage : UserControl
         };
         ModSearchBox.TextChanged += (_, _) =>
         {
-            var filteredItems = modManageEntries
+            var filteredItems = _modManageEntries
                 .Where(item => item.Name.Contains(ModSearchBox.Text!, StringComparison.OrdinalIgnoreCase)).ToList();
             ModManageList.Items.Clear();
             filteredItems.ForEach(version => { ModManageList.Items.Add(version); });
@@ -385,8 +385,7 @@ public partial class LaunchPage : UserControl
         IGameResolver gameResolver = new GameResolver(setting.MinecraftFolder);
         var list = gameResolver.GetGameEntitys();
         VersionListView.Items.Clear();
-        var index = 0;
-        var a = 0;
+        GameListEntry savedVersion = null;
         var vlist = new List<GameListEntry>();
         vlist.Add(new GameListEntry()
         {
@@ -430,8 +429,6 @@ public partial class LaunchPage : UserControl
                     ? "F1 M 4.21875 19.53125 C 4.049479 19.53125 3.902995 19.467773 3.779297 19.34082 C 3.655599 19.213867 3.59375 19.065756 3.59375 18.896484 C 3.59375 18.850912 3.597005 18.815104 3.603516 18.789062 L 4.648438 12.675781 L 0.205078 8.349609 C 0.08138 8.225912 0.019531 8.079428 0.019531 7.910156 C 0.019531 7.760417 0.071615 7.623698 0.175781 7.5 C 0.279948 7.376303 0.406901 7.301434 0.556641 7.275391 L 6.689453 6.386719 L 9.443359 0.820312 C 9.495442 0.716146 9.571939 0.633139 9.672852 0.571289 C 9.773763 0.509441 9.879557 0.478516 9.990234 0.478516 C 10.107422 0.478516 10.218099 0.507812 10.322266 0.566406 C 10.426432 0.625 10.504557 0.709637 10.556641 0.820312 L 13.310547 6.386719 L 19.443359 7.275391 C 19.599609 7.301434 19.728189 7.373048 19.829102 7.490234 C 19.930012 7.607423 19.980469 7.744142 19.980469 7.900391 C 19.980469 8.082683 19.918619 8.232422 19.794922 8.349609 L 15.351562 12.675781 L 16.396484 18.789062 C 16.402994 18.815104 16.40625 18.850912 16.40625 18.896484 C 16.40625 19.065756 16.3444 19.21224 16.220703 19.335938 C 16.097004 19.459635 15.950521 19.521484 15.78125 19.521484 C 15.670572 19.521484 15.572916 19.498697 15.488281 19.453125 L 10 16.5625 L 4.511719 19.453125 C 4.420573 19.505209 4.322917 19.53125 4.21875 19.53125 Z "
                     : "F1 M 4.648438 12.675781 L 0.205078 8.349609 C 0.08138 8.225912 0.019531 8.079428 0.019531 7.910156 C 0.019531 7.760417 0.071615 7.623698 0.175781 7.5 C 0.279948 7.376303 0.406901 7.301434 0.556641 7.275391 L 6.689453 6.386719 L 9.443359 0.820312 C 9.495442 0.716146 9.573567 0.633139 9.677734 0.571289 C 9.7819 0.509441 9.889322 0.478516 10 0.478516 C 10.110677 0.478516 10.218099 0.509441 10.322266 0.571289 C 10.426432 0.633139 10.504557 0.716146 10.556641 0.820312 L 13.310547 6.386719 L 19.443359 7.275391 C 19.599609 7.301434 19.728189 7.373048 19.829102 7.490234 C 19.930012 7.607423 19.980469 7.744142 19.980469 7.900391 C 19.980469 8.076172 19.918619 8.225912 19.794922 8.349609 L 15.351562 12.675781 L 16.396484 18.789062 C 16.402994 18.815104 16.40625 18.850912 16.40625 18.896484 C 16.40625 19.065756 16.3444 19.21224 16.220703 19.335938 C 16.097004 19.459635 15.950521 19.521484 15.78125 19.521484 C 15.670572 19.521484 15.572916 19.498697 15.488281 19.453125 L 10 16.5625 L 4.511719 19.453125 C 4.427083 19.498697 4.329427 19.521484 4.21875 19.521484 C 4.049479 19.521484 3.902995 19.459635 3.779297 19.335938 C 3.655599 19.21224 3.59375 19.065756 3.59375 18.896484 C 3.59375 18.850912 3.597005 18.815104 3.603516 18.789062 Z M 5.048828 17.753906 L 10 15.146484 L 14.951172 17.753906 C 14.794922 16.829428 14.640299 15.909831 14.487305 14.995117 C 14.33431 14.080404 14.173177 13.160808 14.003906 12.236328 L 18.017578 8.330078 L 12.480469 7.529297 C 12.057291 6.689453 11.642252 5.852865 11.235352 5.019531 C 10.82845 4.186199 10.416666 3.349609 10 2.509766 C 9.583333 3.349609 9.171549 4.186199 8.764648 5.019531 C 8.357747 5.852865 7.942708 6.689453 7.519531 7.529297 L 1.982422 8.330078 L 5.996094 12.236328 C 5.826823 13.160808 5.66569 14.080404 5.512695 14.995117 C 5.3597 15.909831 5.205078 16.829428 5.048828 17.753906 Z "
             });
-            if (setting.Version != null && version.Id == setting.Version) index = a;
-            a++;
         }
 
 
@@ -441,21 +438,16 @@ public partial class LaunchPage : UserControl
         foreach (var item in olist)
         {
             Const.Window.main.launchPage.VersionListView.Items.Add(item);
+            if (setting.Version != null && item.Entry.Id == setting.Version) savedVersion = item;
         }
 
-        if (setting.Version == "BedRock")
-            index = 0;
-        else
-            index++;
-        _shouldCloseVersuionList = false;
-        if (setting.Version != null)
+        if (savedVersion != null)
         {
-            VersionListView.SelectedIndex = index;
+            VersionListView.SelectedItem = savedVersion;
         }
         else
         {
-            if (!VersionListView.Items.Contains(setting.Version) && VersionListView.Items.Count > 0)
-                VersionListView.SelectedIndex = 0;
+            VersionListView.SelectedIndex = 0;
         }
     }
 
@@ -520,11 +512,11 @@ public partial class LaunchPage : UserControl
 
     private void LoadVersionMods(GameEntry version)
     {
-        modManageEntries = [];
+        _modManageEntries = [];
         var disabledMod = new List<ModManageEntry>();
         if (version != null)
         {
-            modManageEntries.Clear();
+            _modManageEntries.Clear();
             disabledMod.Clear();
             Task.Run(async () =>
             {
@@ -534,7 +526,7 @@ public partial class LaunchPage : UserControl
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
                         if (Path.GetExtension(mod) == ".jar")
-                            modManageEntries.Add(new ModManageEntry
+                            _modManageEntries.Add(new ModManageEntry
                             {
                                 Name = Path.GetFileName(mod).Substring(0, Path.GetFileName(mod).Length - 4),
                                 File = mod
@@ -550,15 +542,15 @@ public partial class LaunchPage : UserControl
                 var i = 0;
                 foreach (var item in disabledMod)
                 {
-                    await Dispatcher.UIThread.InvokeAsync(() => { modManageEntries.Insert(i, item); });
+                    await Dispatcher.UIThread.InvokeAsync(() => { _modManageEntries.Insert(i, item); });
                     i++;
                 }
 
-                foreach (var item in modManageEntries) ModManageList.Items.Add(item);
+                foreach (var item in _modManageEntries) ModManageList.Items.Add(item);
             });
         }
 
-        var filteredItems = modManageEntries
+        var filteredItems = _modManageEntries
             .Where(item => item.Name.Contains(ModSearchBox.Text!, StringComparison.OrdinalIgnoreCase)).ToList();
         ModManageList.Items.Clear();
         filteredItems.ForEach(version => { ModManageList.Items.Add(version); });
@@ -671,12 +663,12 @@ public partial class LaunchPage : UserControl
     public async void ReLoadPage()
     {
         LoadAccounts();
-        minecraftFolders =
+        _minecraftFolders =
             JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.MinecraftFolderDataPath));
         MinecraftFolderComboBox.Items.Clear();
         var setting = Const.Data.Setting;
-        foreach (var item in minecraftFolders) MinecraftFolderComboBox.Items.Add(item);
-        if (setting.MinecraftFolder == null || !minecraftFolders.Contains(setting.MinecraftFolder))
+        foreach (var item in _minecraftFolders) MinecraftFolderComboBox.Items.Add(item);
+        if (setting.MinecraftFolder == null || !_minecraftFolders.Contains(setting.MinecraftFolder))
             MinecraftFolderComboBox.SelectedIndex = 0;
         else
             MinecraftFolderComboBox.SelectedItem = setting.MinecraftFolder;

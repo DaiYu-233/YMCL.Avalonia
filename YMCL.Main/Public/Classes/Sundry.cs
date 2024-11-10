@@ -835,6 +835,7 @@ public class GameListEntry
             ? 0
             : 1;
 
+        Const.Window.main.launchPage.ShouldCloseVersionList = false;
         Const.Window.main.launchPage.LoadVersions();
     }
 

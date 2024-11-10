@@ -33,6 +33,8 @@ namespace YMCL.Main.Views.Main.Pages.More.Pages.GameUpdateLog;
 public partial class GameUpdateLog : UserControl
 {
     List<TextBlock> _translateList = [];
+    List<TextBlock> _tbList = [];
+    List<Border> _bList = [];
     string _nowJsonPath = "";
 
     public GameUpdateLog()
@@ -46,6 +48,8 @@ public partial class GameUpdateLog : UserControl
     {
         try
         {
+            _tbList.Clear();
+            _bList.Clear();
             LoadErrorInfoBar.IsVisible = false;
             Loading.IsVisible = true;
             using var client = new HttpClient();
@@ -64,6 +68,7 @@ public partial class GameUpdateLog : UserControl
                         CornerRadius = new CornerRadius(8), ClipToBounds = true,
                         Opacity = (double)Application.Current.Resources["Opacity"]!
                     };
+                    _bList.Add(root);
                     root.PointerPressed += NewsEntryClick;
                     var panel = new StackPanel();
                     root.Child = panel;
@@ -77,12 +82,14 @@ public partial class GameUpdateLog : UserControl
                             Width = 160, Height = 160
                         }
                     });
-                    panel.Children.Add(AddToTranslate(new TextBlock()
+                    var tb = new TextBlock()
                     {
                         Text = item.title, FontSize = 14, Margin = new Thickness(5, 10, 5, 5),
                         HorizontalAlignment = HorizontalAlignment.Center, MaxWidth = 170,
                         TextTrimming = TextTrimming.LeadingCharacterEllipsis
-                    }));
+                    };
+                    _tbList.Add(tb);
+                    panel.Children.Add(tb);
                     Container.Children.Add(root);
                 });
             }
@@ -267,6 +274,18 @@ public partial class GameUpdateLog : UserControl
 
     private void BindingEvent()
     {
+        Application.Current.ActualThemeVariantChanged += (_, _) =>
+        {
+            Application.Current.TryGetResource("TextColor", Application.Current.ActualThemeVariant,
+                out var c);
+            Application.Current.TryGetResource("1x", Application.Current.ActualThemeVariant,
+                out var c1);
+            var color = (SolidColorBrush)c;
+            var color1 = (SolidColorBrush)c1;
+            _tbList.ForEach(a => { a.Foreground = color!; });
+            _bList.ForEach(a => { a.Background = color1!; });
+            _translateList.ForEach(a => { a.Foreground = color!; });
+        };
         Loaded += (_, _) =>
         {
             Method.Ui.PageLoadAnimation((0, 50, 0, -50), (0, 0, 0, 0), TimeSpan.FromSeconds(0.30), Root, true);

@@ -18,20 +18,24 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Platform.Storage;
+using Avalonia.Threading;
+using Downloader;
 using FluentAvalonia.UI.Controls;
 using MinecraftLaunch.Classes.Models.Game;
 using NAudio.Wave;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using YMCL.Main.Public.Classes;
+using YMCL.Main.Public.Controls.TaskManage;
 using YMCL.Main.Public.Langs;
 using FileInfo = YMCL.Main.Public.Classes.FileInfo;
 
 namespace YMCL.Main.Public;
 
-public partial class Method
+public abstract partial class Method
 {
-    public static partial class IO
+    // ReSharper disable once InconsistentNaming
+    public static class IO
     {
         public static string GetMacAddress()
         {
@@ -48,15 +52,60 @@ public partial class Method
             return macAddress.Replace("-", "").ToLower(); // 移除MAC地址中的"-"并转为小写
         }
 
+        public static async Task DownloadFileAsync(string url, string file, TaskManager.TaskEntry? task = null)
+        {
+            var downloadOpt = new DownloadConfiguration()
+            {
+                ChunkCount = Const.Data.Setting.MaxFileFragmentation,
+                ParallelDownload = true
+            };
+            var downloader = new DownloadService(downloadOpt);
+
+            if (task != null)
+            {
+                downloader.DownloadProgressChanged += (sender, args) =>
+                {
+                    Dispatcher.UIThread.Invoke(() =>
+                    {
+                        task.UpdateValueProgress(args.ProgressPercentage);
+                    });
+                };
+            }
+            
+            await downloader.DownloadFileTaskAsync(url, file);
+        }
+        public static async Task DownloadFileWithoutFileNameAsync(string url, DirectoryInfo file, TaskManager.TaskEntry? task = null)
+        {
+            var downloadOpt = new DownloadConfiguration()
+            {
+                ChunkCount = Const.Data.Setting.MaxFileFragmentation,
+                ParallelDownload = true
+            };
+            var downloader = new DownloadService(downloadOpt);
+
+            if (task != null)
+            {
+                downloader.DownloadProgressChanged += (sender, args) =>
+                {
+                    Dispatcher.UIThread.Invoke(() =>
+                    {
+                        task.UpdateValueProgress(args.ProgressPercentage);
+                    });
+                };
+            }
+            
+            await downloader.DownloadFileTaskAsync(url, file);
+        }
+
         public static Bitmap LoadBitmapFromAppFile(string uri)
         {
             var memoryStream = new MemoryStream();
-            var stream = AssetLoader.Open(new Uri("resm:"+uri));
+            var stream = AssetLoader.Open(new Uri("resm:" + uri));
             stream!.CopyTo(memoryStream);
             memoryStream.Position = 0;
             return new Bitmap(memoryStream);
         }
-        
+
         public static async Task<string> TranslateStringAsync(string text, string lang = "zh-Hans", int timeout = 5)
         {
             string result = null;
@@ -214,7 +263,7 @@ public partial class Method
             }
         }
 
-        public static async Task<List<FolderInfo>> OpenFolderPicker(TopLevel topLevel = null,
+        public static async Task<List<FolderInfo>?> OpenFolderPicker(TopLevel topLevel = null,
             FolderPickerOpenOptions options = null)
         {
             var isPrimaryButtonClick = false;
@@ -328,7 +377,7 @@ public partial class Method
             }
         }
 
-        public static async Task<string> SaveFilePicker(TopLevel topLevel = null, FilePickerSaveOptions options = null)
+        public static async Task<string> SaveFilePicker(TopLevel? topLevel = null, FilePickerSaveOptions? options = null)
         {
             var isPrimaryButtonClick = false;
             var setting = Const.Data.Setting;

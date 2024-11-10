@@ -10,7 +10,7 @@ using Avalonia.Media.Imaging;
 
 namespace YMCL.Main.Public;
 
-public partial class Method
+public abstract partial class Method
 {
     public static partial class Value
     {

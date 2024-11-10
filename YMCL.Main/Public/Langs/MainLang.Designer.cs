@@ -573,6 +573,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 创建下载任务.
+        /// </summary>
+        public static string CreateDownloadTask {
+            get {
+                return ResourceManager.GetString("CreateDownloadTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 创建游戏实例失败.
         /// </summary>
         public static string CreateGameEntryFail {
@@ -615,6 +624,15 @@ namespace YMCL.Main.Public.Langs {
         public static string CustomBackGroundImg {
             get {
                 return ResourceManager.GetString("CustomBackGroundImg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 自定义下载.
+        /// </summary>
+        public static string CustomDownload {
+            get {
+                return ResourceManager.GetString("CustomDownload", resourceCulture);
             }
         }
         
@@ -849,6 +867,15 @@ namespace YMCL.Main.Public.Langs {
         public static string DownloadThreadTooBigTip {
             get {
                 return ResourceManager.GetString("DownloadThreadTooBigTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 下载链接.
+        /// </summary>
+        public static string DownloadUrl {
+            get {
+                return ResourceManager.GetString("DownloadUrl", resourceCulture);
             }
         }
         
@@ -1486,6 +1513,15 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 定位.
+        /// </summary>
+        public static string Locate {
+            get {
+                return ResourceManager.GetString("Locate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 登录失败.
         /// </summary>
         public static string LoginFail {
@@ -1575,6 +1611,15 @@ namespace YMCL.Main.Public.Langs {
         public static string MaterialPack {
             get {
                 return ResourceManager.GetString("MaterialPack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 最大文件分片.
+        /// </summary>
+        public static string MaxFileFragmentation {
+            get {
+                return ResourceManager.GetString("MaxFileFragmentation", resourceCulture);
             }
         }
         

@@ -108,55 +108,24 @@ public partial class LaunchSettingPage : UserControl
         {
             var result = await Method.IO.OpenFolderPicker(TopLevel.GetTopLevel(this)!,
                 new FolderPickerOpenOptions { AllowMultiple = false, Title = MainLang.SelectMinecraftFolder });
-            if (result != null && result.Count > 0)
+            if (result is not { Count: > 0 }) return;
+            var item = result[0];
+            var path = item.Path;
+            if (Directory.Exists(Path.Combine(item.Path, ".minecraft"))) path = Path.Combine(item.Path, ".minecraft");
+            if (!minecraftFolders.Contains(path))
             {
-                var item = result[0];
-                if (item.Name == ".minecraft")
-                {
-                    if (!minecraftFolders.Contains(item.Path))
-                    {
-                        minecraftFolders.Add(item.Path);
-                        File.WriteAllText(Const.String.MinecraftFolderDataPath,
-                            JsonConvert.SerializeObject(minecraftFolders, Formatting.Indented));
-                        MinecraftFolderComboBox.Items.Clear();
-                        minecraftFolders.ForEach(folder => { MinecraftFolderComboBox.Items.Add(folder); });
-                        MinecraftFolderComboBox.SelectedIndex = MinecraftFolderComboBox.ItemCount - 1;
-                        Method.Ui.Toast(MainLang.SuccessAdd + ": " + item.Path, Const.Notification.main,
-                            NotificationType.Success);
-                    }
-                    else
-                    {
-                        Method.Ui.Toast(MainLang.TheItemAlreadyExist, Const.Notification.main, NotificationType.Error);
-                    }
-                }
-                else
-                {
-                    if (Directory.Exists(Path.Combine(item.Path, ".minecraft")))
-                    {
-                        if (!minecraftFolders.Contains(Path.Combine(item.Path, ".minecraft")))
-                        {
-                            minecraftFolders.Add(Path.Combine(item.Path, ".minecraft"));
-                            File.WriteAllText(Const.String.MinecraftFolderDataPath,
-                                JsonConvert.SerializeObject(minecraftFolders, Formatting.Indented));
-                            MinecraftFolderComboBox.Items.Clear();
-                            minecraftFolders.ForEach(folder => { MinecraftFolderComboBox.Items.Add(folder); });
-                            MinecraftFolderComboBox.SelectedIndex = MinecraftFolderComboBox.ItemCount - 1;
-                            Method.Ui.Toast(MainLang.SuccessAdd + ": " + Path.Combine(item.Path, ".minecraft"),
-                                Const.Notification.main,
-                                NotificationType.Success);
-                        }
-                        else
-                        {
-                            Method.Ui.Toast(MainLang.TheItemAlreadyExist, Const.Notification.main,
-                                NotificationType.Error);
-                        }
-                    }
-                    else
-                    {
-                        Method.Ui.Toast(MainLang.CannotFindMinecraftFolder, Const.Notification.main,
-                            NotificationType.Error);
-                    }
-                }
+                minecraftFolders.Add(path);
+                File.WriteAllText(Const.String.MinecraftFolderDataPath,
+                    JsonConvert.SerializeObject(minecraftFolders, Formatting.Indented));
+                MinecraftFolderComboBox.Items.Clear();
+                minecraftFolders.ForEach(folder => { MinecraftFolderComboBox.Items.Add(folder); });
+                MinecraftFolderComboBox.SelectedIndex = MinecraftFolderComboBox.ItemCount - 1;
+                Method.Ui.Toast(MainLang.SuccessAdd + ": " + path, Const.Notification.main,
+                    NotificationType.Success);
+            }
+            else
+            {
+                Method.Ui.Toast(MainLang.TheItemAlreadyExist, Const.Notification.main, NotificationType.Error);
             }
         };
         MinecraftFolderComboBox.SelectionChanged += (s, e) =>

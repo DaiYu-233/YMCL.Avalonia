@@ -28,7 +28,7 @@ using YMCL.Main.Public.Langs;
 
 namespace YMCL.Main.Public;
 
-public partial class Method
+public abstract partial class Method
 {
     public static partial class Ui
     {

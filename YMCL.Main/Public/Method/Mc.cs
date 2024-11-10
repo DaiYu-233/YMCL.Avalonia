@@ -40,7 +40,7 @@ using YggdrasilAccount = MinecraftLaunch.Classes.Models.Auth.YggdrasilAccount;
 
 namespace YMCL.Main.Public;
 
-public partial class Method
+public abstract partial class Method
 {
     public static partial class Mc
     {
@@ -416,9 +416,9 @@ public partial class Method
             var setting = Const.Data.Setting;
             if (string.IsNullOrWhiteSpace(p_id))
             {
-                if (Const.Window.main.launchPage.VersionListView.SelectedItem as GameEntry != null)
+                if ((Const.Window.main.launchPage.VersionListView.SelectedItem as GameListEntry).Entry != null)
                 {
-                    l_id = (Const.Window.main.launchPage.VersionListView.SelectedItem as GameEntry).Id;
+                    l_id = ((Const.Window.main.launchPage.VersionListView.SelectedItem as GameListEntry).Entry).Id;
                 }
                 else
                 {
@@ -852,9 +852,9 @@ public partial class Method
             var setting = Const.Data.Setting;
             if (string.IsNullOrWhiteSpace(p_id))
             {
-                if (Const.Window.main.launchPage.VersionListView.SelectedItem as GameEntry != null)
+                if ((Const.Window.main.launchPage.VersionListView.SelectedItem as GameListEntry).Entry != null)
                 {
-                    l_id = (Const.Window.main.launchPage.VersionListView.SelectedItem as GameEntry).Id;
+                    l_id = ((Const.Window.main.launchPage.VersionListView.SelectedItem as GameListEntry).Entry).Id;
                 }
                 else
                 {

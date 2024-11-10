@@ -20,6 +20,7 @@ public class Setting
     public int AccountSelectionIndex { get; set; }
     public Theme Theme { get; set; } = Theme.Light;
     public double MaxMem { get; set; } = 1024;
+    public int MaxFileFragmentation { get; set; } = 8;
     public double Volume { get; set; } = 50;
     public double DeskLyricSize { get; set; } = 16;
     public Repeat Repeat { get; set; } = Repeat.RepeatAll;

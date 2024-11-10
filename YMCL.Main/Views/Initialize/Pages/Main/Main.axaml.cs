@@ -125,54 +125,26 @@ public partial class Main : UserControl
         {
             var result = await Method.IO.OpenFolderPicker(TopLevel.GetTopLevel(this)!,
                 new FolderPickerOpenOptions { AllowMultiple = false, Title = MainLang.SelectMinecraftFolder });
-            if (result != null && result.Count > 0)
+            if (result is not { Count: > 0 }) return;
+            var item = result[0];
+            var path = item.Path;
+            if (Directory.Exists(Path.Combine(item.Path, ".minecraft"))) path = Path.Combine(item.Path, ".minecraft");
+                
+            if (!_mcFolderList.Contains(path))
             {
-                var item = result[0];
-                if (item.Name == ".minecraft")
-                {
-                    if (!_mcFolderList.Contains(item.Path))
-                    {
-                        _mcFolderList.Add(item.Path);
-                        File.WriteAllText(Const.String.MinecraftFolderDataPath,
-                            JsonConvert.SerializeObject(_mcFolderList, Formatting.Indented));
-                        MinecraftFolderListBox.Items.Clear();
-                        _mcFolderList.ForEach(folder => { MinecraftFolderListBox.Items.Add(folder); });
-                        MinecraftFolderListBox.SelectedIndex = MinecraftFolderListBox.ItemCount - 1;
-                        Method.Ui.Toast(MainLang.SuccessAdd + ": " + item.Path, Const.Notification.initialize,
-                            NotificationType.Success);
-                    }
-                    else
-                    {
-                        Method.Ui.Toast(MainLang.TheItemAlreadyExist, Const.Notification.initialize,
-                            NotificationType.Error);
-                    }
-                }
-                else
-                {
-                    if (Directory.Exists(Path.Combine(item.Path, ".minecraft")))
-                    {
-                        if (!_mcFolderList.Contains(Path.Combine(item.Path, ".minecraft")))
-                        {
-                            _mcFolderList.Add(Path.Combine(item.Path, ".minecraft"));
-                            File.WriteAllText(Const.String.MinecraftFolderDataPath,
-                                JsonConvert.SerializeObject(_mcFolderList, Formatting.Indented));
-                            MinecraftFolderListBox.Items.Clear();
-                            _mcFolderList.ForEach(folder => { MinecraftFolderListBox.Items.Add(folder); });
-                            MinecraftFolderListBox.SelectedIndex = MinecraftFolderListBox.ItemCount - 1;
-                            Method.Ui.Toast(MainLang.SuccessAdd + ": " + Path.Combine(item.Path, ".minecraft"), Const.Notification.initialize,
-                                NotificationType.Success);
-                        }
-                        else
-                        {
-                            Method.Ui.Toast(MainLang.TheItemAlreadyExist, Const.Notification.initialize,
-                                NotificationType.Error);
-                        }
-                    }
-                    else
-                    {
-                          Method.Ui.Toast(MainLang.CannotFindMinecraftFolder, Const.Notification.initialize, NotificationType.Error);
-                    }
-                }
+                _mcFolderList.Add(path);
+                File.WriteAllText(Const.String.MinecraftFolderDataPath,
+                    JsonConvert.SerializeObject(_mcFolderList, Formatting.Indented));
+                MinecraftFolderListBox.Items.Clear();
+                _mcFolderList.ForEach(folder => { MinecraftFolderListBox.Items.Add(folder); });
+                MinecraftFolderListBox.SelectedIndex = MinecraftFolderListBox.ItemCount - 1;
+                Method.Ui.Toast(MainLang.SuccessAdd + ": " + path, Const.Notification.initialize,
+                    NotificationType.Success);
+            }
+            else
+            {
+                Method.Ui.Toast(MainLang.TheItemAlreadyExist, Const.Notification.initialize,
+                    NotificationType.Error);
             }
         };
         AutoScanJavaRuntimeBtn.Click += async (_, _) =>

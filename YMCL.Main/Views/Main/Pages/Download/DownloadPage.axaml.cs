@@ -117,21 +117,22 @@ public partial class DownloadPage : UserControl
                                                         !string.IsNullOrWhiteSpace(path.Text);
                     };
                     var dr = await dialog.ShowAsync(Const.Window.main);
-                    StringBuilder result = new StringBuilder(6);
-                    const string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-                    var random = new Random();
-                    for (int i = 0; i < 6; i++)
-                    {
-                        var index = random.Next(chars.Length);
-                        result.Append(chars[index]);
-                    }
-                    var task = new TaskManager.TaskEntry($"{MainLang.Download} : {result}",
-                        textProgress: false);
                     if (dr == ContentDialogResult.Primary)
                     {
+                        StringBuilder result = new StringBuilder(6);
+                        const string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+                        var random = new Random();
+                        for (int i = 0; i < 6; i++)
+                        {
+                            var index = random.Next(chars.Length);
+                            result.Append(chars[index]);
+                        }
+                        var task = new TaskManager.TaskEntry($"{MainLang.Download} : {result}",
+                            textProgress: false);
                         try
                         {
-                            await Method.IO.DownloadFileWithoutFileNameAsync(url.Text!, new DirectoryInfo(path.Text!),
+                            await Method.IO.DownloadFileWithoutFileNameAsync(url.Text!,
+                                new DirectoryInfo(path.Text!),
                                 task);
                             task.Destory();
                         }

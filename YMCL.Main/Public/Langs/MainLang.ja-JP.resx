@@ -1087,27 +1087,27 @@ MacOsは自動更新をサポートしていません
       <value>ヒント</value>
     </data>
   <data name="GameMainFileDeletion" xml:space="preserve">
-      <value>游戏主要文件缺失</value>
+      <value>ゲームメトリックファイルがありません。</value>
     </data>
   <data name="GameUpdateLog" xml:space="preserve">
-      <value>更新日志</value>
+      <value>更新履歴</value>
     </data>
   <data name="SureToInstallTheJava" xml:space="preserve">
-      <value>确定要安装 Java : {Java}？</value>
+      <value>Java : {Java} をインストールしてもよろしいですか？</value>
     </data>
   <data name="MaxFileFragmentation" xml:space="preserve">
-      <value>最大文件分片</value>
+      <value>最大ファイル破片</value>
     </data>
   <data name="CreateDownloadTask" xml:space="preserve">
-      <value>创建下载任务</value>
+      <value>ダウンロードタスクの作成</value>
     </data>
   <data name="CustomDownload" xml:space="preserve">
-      <value>自定义下载</value>
+      <value>カスタムダウンロード</value>
     </data>
   <data name="Locate" xml:space="preserve">
-      <value>定位</value>
+      <value>位置情報</value>
     </data>
   <data name="DownloadUrl" xml:space="preserve">
-      <value>下载链接</value>
+      <value>ダウンロード URL</value>
     </data>
 </root>

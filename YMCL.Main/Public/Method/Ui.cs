@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Security.Principal;
+using System.Text;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Animation;
@@ -327,36 +328,54 @@ public abstract partial class Method
 
         public static void CheckLauncher()
         {
+            if (Debugger.IsAttached) return;
+
             async void UnofficialToast()
             {
                 while (true)
                 {
-                    await ShowDialogAsync("Error !", MainLang.UnofficialTip, b_primary: MainLang.Ok,
+                    var cR = await ShowDialogAsync("Error !", MainLang.UnofficialTip, b_primary: MainLang.Ok,
                         b_cancel: MainLang.Cancel);
+                    if (cR != ContentDialogResult.Primary) continue;
+                    var launcher = TopLevel.GetTopLevel(Const.Window.main).Launcher;
+                    _ = launcher.LaunchUriAsync(new Uri("http://ymcl.daiyu.fun/"));
                 }
+                // ReSharper disable once FunctionNeverReturns
             }
 
             try
             {
-                var name = Const.Window.main.settingPage.launcherSettingPage.FindControl<TextBlock>("Version").Text;
+                var name = Const.Window.main.settingPage.launcherSettingPage.FindControl<TextBlock>("Version")
+                    ?.Text;
                 var author = Const.Window.main.settingPage.launcherSettingPage.FindControl<Label>("AuthorLabel")
                     .Content;
                 var title = Const.Window.main.FindControl<TextBlock>("TitleText").Text;
+                var requestUrl = "https://api.daiyu.fun/ymcl/check-launcher";
+
+                var postData = new
+                {
+                    name, author, title
+                };
+
+                var content = new StringContent(JsonConvert.SerializeObject(postData), Encoding.UTF8,
+                    "application/json");
+
                 Task.Run(async () =>
                 {
-                    string url = "https://player.daiyu.fun/a.json";
                     HttpClient client = new HttpClient();
-
                     try
                     {
-                        HttpResponseMessage response = await client.GetAsync(url);
-                        response.EnsureSuccessStatusCode();
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        var list = JsonConvert.DeserializeObject<List<string>>(responseBody);
-                        if (list.Contains(name!) || list.Contains(author) || list.Contains(title!))
+                        var response = await client.PostAsync(requestUrl, content);
+                        if (response.IsSuccessStatusCode)
                         {
-                            Dispatcher.UIThread.Invoke(
-                                () => { UnofficialToast(); });
+                            var responseContent = await response.Content.ReadAsStringAsync();
+                            var result = JsonConvert.DeserializeObject<dynamic>(responseContent);
+                            var match = (bool)result["success"]!;
+
+                            if (match)
+                            {
+                                Dispatcher.UIThread.Invoke(UnofficialToast);
+                            }
                         }
                     }
                     catch

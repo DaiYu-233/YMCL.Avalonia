@@ -71,7 +71,7 @@ public partial class DownloadPage : UserControl
                     var root = new StackPanel() { Spacing = 10 };
                     var url = new TextBox
                     {
-                        FontFamily = (FontFamily)Application.Current.Resources["Font"], Width = 475,
+                        FontFamily = (FontFamily)Application.Current.Resources["Font"], 
                         TextWrapping = TextWrapping.Wrap, Watermark = MainLang.DownloadUrl
                     };
                     var btn = new Button
@@ -103,8 +103,12 @@ public partial class DownloadPage : UserControl
                     };
                     btn.Click += async (_, _) =>
                     {
-                        path.Text = (await Method.IO.OpenFolderPicker(TopLevel.GetTopLevel(this)!,
-                            new FolderPickerOpenOptions() { Title = MainLang.OpenFolder }))[0].Path;
+                        var result = (await Method.IO.OpenFolderPicker(TopLevel.GetTopLevel(this)!,
+                            new FolderPickerOpenOptions() { Title = MainLang.OpenFolder }));
+                        if (result.Count > 0)
+                        {
+                            path.Text = result[0].Path;
+                        }
                     };
                     path.TextChanged += (_, _) =>
                     {
@@ -127,6 +131,7 @@ public partial class DownloadPage : UserControl
                             var index = random.Next(chars.Length);
                             result.Append(chars[index]);
                         }
+
                         var task = new TaskManager.TaskEntry($"{MainLang.Download} : {result}",
                             textProgress: false);
                         try

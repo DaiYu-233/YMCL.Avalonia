@@ -12,7 +12,7 @@ Free, Cross-Platform, Fully-Open-Source Minecraft Launcher
 
 ![Downloads](https://img.shields.io/github/downloads/DaiYu-233/YMCL.Avalonia/total?logo=github&label=Download&style=for-the-badge&color=44cc11)
 ![Star](https://img.shields.io/github/stars/DaiYu-233/YMCL.Avalonia?logo=github&label=Star&style=for-the-badge)
-![License](https://img.shields.io/github/license/DaiYu-233/YMCL.Avalonia?logo=github&label=LICENSE&style=for-the-badge&color=ff7a35)
+![License](https://img.shields.io/badge/Apache%20License%202.0-%20?logo=github&label=License&style=for-the-badge&color=ff7a35)
 
 </div>
 
@@ -23,10 +23,6 @@ Yu Minecraft Launcher is a cross-platform Minecraft launcher that supports opera
 Yu Minecraft Launcher offers features like mod management, game customization, automatic game installation (Forge, Fabric, Quilt, OptiFine), and custom interface capabilities. <del>It can even activate Windows !</del>
 
 Ymcl uses **Apache License 2.0** open source code, which requires **to retain the original copyright statement, license statement, and disclaimer when modifying and distributing software**; Allow users to freely use, modify, copy, and distribute Apache licensed software, whether for commercial or non-commercial purposes; Allow users to publish modified products or derivatives under different licenses, but the unmodified portion must retain the Apache license; The Apache license does not provide any form of guarantee, and users are fully responsible for any damage caused by the use of the software.
-
-## Plugin repository
-
-→ https://github.com/DaiYu-233/YMCL.Plugin
 
 ## Platform Support
 

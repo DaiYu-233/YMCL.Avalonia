@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Threading;
 using Newtonsoft.Json;
 using YMCL.Main.Public;
 using static YMCL.Main.Public.Plugin;
@@ -36,7 +37,7 @@ public partial class PluginSettingPage : UserControl
         };
     }
 
-    private void ControlProperty()
+    private static void ControlProperty()
     {
     }
 
@@ -46,8 +47,7 @@ public partial class PluginSettingPage : UserControl
         var list1 = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.PluginDataPath));
         var directoryInfo = new DirectoryInfo(Const.String.PluginFolderPath);
         var dlls = directoryInfo.GetFiles();
-        var paths = new List<string>();
-        foreach (var item in dlls) paths.Add(item.FullName);
+        var paths = dlls.Select(item => item.FullName).ToList();
         list1.ForEach(x =>
         {
             if (!paths.Contains(x)) list.Remove(x);
@@ -57,28 +57,45 @@ public partial class PluginSettingPage : UserControl
             try
             {
                 var asm = Assembly.LoadFrom(item.FullName);
-                var manifestModuleName = asm.ManifestModule.ScopeName;
                 var type = asm.GetType("YMCL.Plugin.Main");
-                if (!typeof(IPlugin).IsAssignableFrom(type))
-                {
-                    Console.WriteLine("δ??в?????");
-                    continue;
-                }
-
-                var instance = Activator.CreateInstance(type) as IPlugin;
+                if (type == null || !typeof(IPlugin).IsAssignableFrom(type)) continue;
+                if (Activator.CreateInstance(type) is not IPlugin instance) continue;
                 var protocolInfo = instance.GetPluginInformation();
-                var control = new PluginInfo();
-                control.PluginName.Text = protocolInfo.Name;
-                control.PluginPath.Text = item.FullName;
-                control.PluginAuthor.Text = protocolInfo.Author;
-                control.PluginDescription.Text = protocolInfo.Description;
-                control.PluginVersion.Text = protocolInfo.Version;
-                control.PluginTime.Text = protocolInfo.Time.ToString("yyyy-MM-ddTHH:mm:sszzz");
-                Container.Children.Add(control);
-                if (list.Contains(item.FullName))
+                var control = new PluginInfo
                 {
-                    control.PluginSwitch.IsChecked = true;
-                    _ = Task.Run(() => { instance.OnLoad(); });
+                    PluginName =
+                    {
+                        Text = protocolInfo.Name
+                    },
+                    PluginPath =
+                    {
+                        Text = item.FullName
+                    },
+                    PluginAuthor =
+                    {
+                        Text = protocolInfo.Author
+                    },
+                    PluginDescription =
+                    {
+                        Text = protocolInfo.Description
+                    },
+                    PluginVersion =
+                    {
+                        Text = protocolInfo.Version
+                    },
+                    PluginTime =
+                    {
+                        Text = protocolInfo.Time.ToString("yyyy-MM-ddTHH:mm:sszzz")
+                    }
+                };
+                Container.Children.Add(control);
+
+                if (!list.Contains(item.FullName)) continue;
+                control.PluginSwitch.IsChecked = true;
+                var onLoadMethod = type.GetMethod("OnLoad");
+                if (onLoadMethod != null)
+                {
+                    _ = Task.Run(() => { Dispatcher.UIThread.Invoke(() => { onLoadMethod.Invoke(instance, null); }); });
                 }
             }
             catch
@@ -104,26 +121,39 @@ public partial class PluginSettingPage : UserControl
             try
             {
                 var asm = Assembly.LoadFrom(item.FullName);
-                var manifestModuleName = asm.ManifestModule.ScopeName;
                 var type = asm.GetType("YMCL.Plugin.Main");
-                if (!typeof(IPlugin).IsAssignableFrom(type))
-                {
-                    Console.WriteLine("δ??в?????");
-                    continue;
-                }
-
+                if (!typeof(IPlugin).IsAssignableFrom(type)) continue;
                 var instance = Activator.CreateInstance(type) as IPlugin;
                 var protocolInfo = instance.GetPluginInformation();
-                var control = new PluginInfo();
-                control.PluginName.Text = protocolInfo.Name;
-                control.PluginPath.Text = item.FullName;
-                control.PluginAuthor.Text = protocolInfo.Author;
-                control.PluginDescription.Text = protocolInfo.Description;
-                control.PluginVersion.Text = protocolInfo.Version;
-                control.PluginTime.Text = protocolInfo.Time.ToString("yyyy-MM-ddTHH:mm:sszzz");
+                var control = new PluginInfo
+                {
+                    PluginName =
+                    {
+                        Text = protocolInfo.Name
+                    },
+                    PluginPath =
+                    {
+                        Text = item.FullName
+                    },
+                    PluginAuthor =
+                    {
+                        Text = protocolInfo.Author
+                    },
+                    PluginDescription =
+                    {
+                        Text = protocolInfo.Description
+                    },
+                    PluginVersion =
+                    {
+                        Text = protocolInfo.Version
+                    },
+                    PluginTime =
+                    {
+                        Text = protocolInfo.Time.ToString("yyyy-MM-ddTHH:mm:sszzz")
+                    }
+                };
                 Container.Children.Add(control);
                 if (list.Contains(item.FullName)) control.PluginSwitch.IsChecked = true;
-                instance = null;
             }
             catch
             {

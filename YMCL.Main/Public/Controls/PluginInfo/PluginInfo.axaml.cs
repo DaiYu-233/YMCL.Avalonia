@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Threading;
 using Newtonsoft.Json;
 using static YMCL.Main.Public.Plugin;
 
@@ -17,19 +18,26 @@ public partial class PluginInfo : UserControl
         PluginSwitch.Click += (_, _) =>
         {
             var asm = Assembly.LoadFrom(PluginPath.Text!);
-            var manifestModuleName = asm.ManifestModule.ScopeName;
             var type = asm.GetType("YMCL.Plugin.Main");
             var instance = Activator.CreateInstance(type!) as IPlugin;
             var list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.PluginDataPath));
             if (PluginSwitch.IsChecked == true)
             {
                 list.Add(PluginPath.Text!);
-                _ = Task.Run(() => { instance.OnEnable(); });
+                var method = type.GetMethod("OnEnable");
+                if (method != null)
+                {
+                    _ = Task.Run(() => { Dispatcher.UIThread.Invoke(() => { method.Invoke(instance, null); }); });
+                }
             }
             else
             {
                 list.Remove(PluginPath.Text!);
-                _ = Task.Run(() => { instance.OnDisable(); });
+                var method = type.GetMethod("OnDisable");
+                if (method != null)
+                {
+                    _ = Task.Run(() => { Dispatcher.UIThread.Invoke(() => { method.Invoke(instance, null); }); });
+                }
             }
 
             File.WriteAllText(Const.String.PluginDataPath, JsonConvert.SerializeObject(list, Formatting.Indented));

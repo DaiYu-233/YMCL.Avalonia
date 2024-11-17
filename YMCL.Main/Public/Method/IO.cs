@@ -65,16 +65,15 @@ public abstract partial class Method
             {
                 downloader.DownloadProgressChanged += (sender, args) =>
                 {
-                    Dispatcher.UIThread.Invoke(() =>
-                    {
-                        task.UpdateValueProgress(args.ProgressPercentage);
-                    });
+                    Dispatcher.UIThread.Invoke(() => { task.UpdateValueProgress(args.ProgressPercentage); });
                 };
             }
-            
+
             await downloader.DownloadFileTaskAsync(url, file);
         }
-        public static async Task DownloadFileWithoutFileNameAsync(string url, DirectoryInfo file, TaskManager.TaskEntry? task = null)
+
+        public static async Task DownloadFileWithoutFileNameAsync(string url, DirectoryInfo file,
+            TaskManager.TaskEntry? task = null)
         {
             var downloadOpt = new DownloadConfiguration()
             {
@@ -87,13 +86,10 @@ public abstract partial class Method
             {
                 downloader.DownloadProgressChanged += (sender, args) =>
                 {
-                    Dispatcher.UIThread.Invoke(() =>
-                    {
-                        task.UpdateValueProgress(args.ProgressPercentage);
-                    });
+                    Dispatcher.UIThread.Invoke(() => { task.UpdateValueProgress(args.ProgressPercentage); });
                 };
             }
-            
+
             await downloader.DownloadFileTaskAsync(url, file);
         }
 
@@ -377,7 +373,8 @@ public abstract partial class Method
             }
         }
 
-        public static async Task<string> SaveFilePicker(TopLevel? topLevel = null, FilePickerSaveOptions? options = null)
+        public static async Task<string> SaveFilePicker(TopLevel? topLevel = null,
+            FilePickerSaveOptions? options = null)
         {
             var isPrimaryButtonClick = false;
             var setting = Const.Data.Setting;
@@ -484,8 +481,7 @@ public abstract partial class Method
             var list1 = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(Const.String.PluginDataPath));
             var directoryInfo = new DirectoryInfo(Const.String.PluginFolderPath);
             var dlls = directoryInfo.GetFiles();
-            var paths = new List<string>();
-            foreach (var item in dlls) paths.Add(item.FullName);
+            var paths = dlls.Select(item => item.FullName).ToList();
             list1.ForEach(x =>
             {
                 if (!paths.Contains(x)) list.Remove(x);
@@ -493,26 +489,22 @@ public abstract partial class Method
             File.WriteAllText(Const.String.PluginDataPath, JsonConvert.SerializeObject(list, Formatting.Indented));
             foreach (var item in dlls)
             {
-                if (list.Contains(item.FullName))
+                if (!list.Contains(item.FullName)) continue;
+                try
                 {
-                    try
+                    var asm = Assembly.LoadFrom(item.FullName);
+                    var type = asm.GetType("YMCL.Plugin.Main");
+                    if (!typeof(Plugin.IPlugin).IsAssignableFrom(type)) continue;
+                    var instance = Activator.CreateInstance(type) as Plugin.IPlugin;
+                    if (!list.Contains(item.FullName)) continue;
+                    var method = type.GetMethod("OnLaunch");
+                    if (method != null)
                     {
-                        var asm = Assembly.LoadFrom(item.FullName);
-                        var manifestModuleName = asm.ManifestModule.ScopeName;
-                        var type = asm.GetType("YMCL.Plugin.Main");
-                        if (!typeof(Plugin.IPlugin).IsAssignableFrom(type))
-                        {
-                            Console.WriteLine("未继承插件接口");
-                            continue;
-                        }
-
-                        var instance = Activator.CreateInstance(type) as Plugin.IPlugin;
-                        var protocolInfo = instance.GetPluginInformation();
-                        if (list.Contains(item.FullName)) instance.OnLaunch();
+                        _ = Task.Run(() => { Dispatcher.UIThread.Invoke(() => { method.Invoke(instance, null); }); });
                     }
-                    catch
-                    {
-                    }
+                }
+                catch
+                {
                 }
             }
         }

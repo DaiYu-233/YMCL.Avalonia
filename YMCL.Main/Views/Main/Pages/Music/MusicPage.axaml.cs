@@ -16,7 +16,6 @@ using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using Avalonia.Styling;
 using Avalonia.Threading;
-using LyricsPlayerControl;
 using NAudio.Wave;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -988,7 +987,6 @@ public partial class MusicPage : UserControl
 
     public List<Lyrics> ParseLyrics(string lyricsText)
     {
-        List<LyricStruct> lyrics1 = [];
         var lines = lyricsText.Split('\n');
         var lyrics = new List<Lyrics>();
         for (var i = 0; i < lines.Length; i++)
@@ -1002,7 +1000,6 @@ public partial class MusicPage : UserControl
             if (!string.IsNullOrWhiteSpace(text))
             {
                 lyrics.Add(new Lyrics { Time = time, Text = text, Index = i });
-                lyrics1.Add(new LyricStruct() { Ticks = time.Ticks, Text = text });
             }
         }
 

@@ -382,22 +382,28 @@ public partial class MusicPage : UserControl
         AddLocalSong.Click += async (s, e) =>
         {
             var files = await Method.IO.OpenFilePicker(TopLevel.GetTopLevel(this)!,
-                new FilePickerOpenOptions { AllowMultiple = true, Title = MainLang.SelectMusicFile, FileTypeFilter =  [new FilePickerFileType("All Audio Files")
+                new FilePickerOpenOptions
                 {
-                    Patterns =
+                    AllowMultiple = true, Title = MainLang.SelectMusicFile, FileTypeFilter =
                     [
-                        "*.mp3",
-                        "*.wav",
-                        "*.aac",
-                        "*.flac",
-                        "*.ogg",
-                        "*.alac",
-                        "*.m4a",
-                        "*.wma",
-                        "*.aiff",
-                        "*.mid"
+                        new FilePickerFileType("All Audio Files")
+                        {
+                            Patterns =
+                            [
+                                "*.mp3",
+                                "*.wav",
+                                "*.aac",
+                                "*.flac",
+                                "*.ogg",
+                                "*.alac",
+                                "*.m4a",
+                                "*.wma",
+                                "*.aiff",
+                                "*.mid"
+                            ]
+                        }
                     ]
-                }]});
+                });
             if (files == null) return;
             foreach (var file in files)
             {
@@ -727,14 +733,19 @@ public partial class MusicPage : UserControl
                 _bitmapDataList.Find(UrlImageDataListEntry => UrlImageDataListEntry.Url == entry.Img);
             if (data == null)
             {
-                var bitmap = await Method.Value.LoadImageFromUrlAsync(entry.Img!);
-                if (bitmap != null) SongImg.Source = bitmap;
-
-                _bitmapDataList.Add(new UrlImageDataListEntry { Url = entry.Img, Bitmap = bitmap });
+                _ = LoadingImg();
             }
             else
             {
                 SongImg.Source = data.Bitmap;
+            }
+
+            async Task LoadingImg()
+            {
+                var bitmap = await Method.Value.LoadImageFromUrlAsync(entry.Img!);
+                if (bitmap != null) SongImg.Source = bitmap;
+
+                _bitmapDataList.Add(new UrlImageDataListEntry { Url = entry.Img, Bitmap = bitmap });
             }
 
             try
@@ -936,7 +947,7 @@ public partial class MusicPage : UserControl
                 // var offset = LyricRoot.Bounds.Height / 2 - 22*i - 1;
                 // Console.WriteLine($"------\n{i - 1}\n{offset}\n");
                 // var offset = _lyricRuns[i - 1].Bounds.Top * -1;
-                var offset = LyricRoot.Bounds.Height / 2 - _lyricRuns[i - 1].Bounds.Top ;
+                var offset = LyricRoot.Bounds.Height / 2 - _lyricRuns[i - 1].Bounds.Top;
                 LyricBlock.Margin = new Thickness(0, offset, 0, 0);
 
                 // if (last != i)

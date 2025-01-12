@@ -328,7 +328,7 @@ public abstract partial class Method
 
         public static void CheckLauncher()
         {
-            if (Debugger.IsAttached) return;
+            // if (Debugger.IsAttached) return;
 
             async void UnofficialToast()
             {
@@ -345,12 +345,12 @@ public abstract partial class Method
 
             try
             {
-                var name = Const.Window.main.settingPage.launcherSettingPage.FindControl<TextBlock>("Version")
+                var name = Const.Window.main.settingPage.launcherSettingPage.FindControl<TextBlock>("Vers1ion")
                     ?.Text;
                 var author = Const.Window.main.settingPage.launcherSettingPage.FindControl<Label>("AuthorLabel")
-                    .Content;
-                var title = Const.Window.main.FindControl<TextBlock>("TitleText").Text;
-                var requestUrl = "https://api.daiyu.fun/ymcl/check-launcher";
+                    ?.Content;
+                var title = Const.Window.main.FindControl<TextBlock>("TitleText")?.Text;
+                const string requestUrl = "https://api.daiyu.fun/ymcl/check-launcher";
 
                 var postData = new
                 {

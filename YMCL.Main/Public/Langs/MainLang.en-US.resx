@@ -523,7 +523,7 @@ Jump to the browser to complete verification</value>
     <value>Open Source Project Usage Sheet</value>
   </data>
   <data name="GPL3Text" xml:space="preserve">
-    <value>The YMCL is open source under the Apache License and may be modified and distributed, but the software must contain the copyright and license notices for the original code, as well as a notification file containing the license information.</value>
+    <value>The YMCL is open source under the GPL 3.0 License and may be modified and distributed, but the software must contain the copyright and license notices for the original code, as well as a notification file containing the license information.</value>
   </data>
   <data name="ShowGameOutput" xml:space="preserve">
     <value>Show Game Output</value>

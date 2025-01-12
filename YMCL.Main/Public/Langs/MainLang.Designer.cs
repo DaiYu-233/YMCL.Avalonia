@@ -1114,7 +1114,7 @@ namespace YMCL.Main.Public.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to YMCL 以 Apache License 协议开放源代码，可以修改且分发，但软件必须包含原始代码的版权声明和许可声明，以及一个包含许可信息的通知文件。.
+        ///   Looks up a localized string similar to YMCL 以 GPL 3.0 License 协议开放源代码，可以修改且分发，但软件必须包含原始代码的版权声明和许可声明，以及一个包含许可信息的通知文件。.
         /// </summary>
         public static string GPL3Text {
             get {

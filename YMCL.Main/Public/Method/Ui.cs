@@ -345,7 +345,7 @@ public abstract partial class Method
 
             try
             {
-                var name = Const.Window.main.settingPage.launcherSettingPage.FindControl<TextBlock>("Vers1ion")
+                var name = Const.Window.main.settingPage.launcherSettingPage.FindControl<TextBlock>("Version")
                     ?.Text;
                 var author = Const.Window.main.settingPage.launcherSettingPage.FindControl<Label>("AuthorLabel")
                     ?.Content;

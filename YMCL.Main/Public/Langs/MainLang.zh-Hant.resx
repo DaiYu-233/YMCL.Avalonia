@@ -523,8 +523,8 @@
     <value>開源項目使用表</value>
   </data>
   <data name="GPL3Text" xml:space="preserve">
-    <value>YMCL 以GPL-3.0 協議開放原始碼，可以修改且分發，但不得刪除原作品的標記，修改後的作品必須也採用GPL 協定進行開源。</value>
-  </data>
+      <value>YMCL 以 GPL 3.0 License 协议开放源代码，可以修改且分发，但软件必须包含原始代码的版权声明和许可声明，以及一个包含许可信息的通知文件。</value>
+    </data>
   <data name="ShowGameOutput" xml:space="preserve">
     <value>顯示遊戲輸出</value>
   </data>

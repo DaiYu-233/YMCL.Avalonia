@@ -523,8 +523,8 @@
     <value>オープンソースプロジェクト用テーブル</value>
   </data>
   <data name="GPL3Text" xml:space="preserve">
-    <value>YMCLは Apache License プロトコルのソースコードとしてオープンソース化できますが、ライセンスキーの登録およびライセンス規約を含める必要があります。また、ライセンス情報含む通知ファイルが必要です。</value>
-  </data>
+      <value>YMCLは GPL 3.0 License プロトコルのソースコードとしてオープンソース化できますが、ライセンスキーの登録およびライセンス規約を含める必要があります。また、ライセンス情報含む通知ファイルが必要です。</value>
+    </data>
   <data name="ShowGameOutput" xml:space="preserve">
     <value>ゲームエクスポートを表示</value>
   </data>

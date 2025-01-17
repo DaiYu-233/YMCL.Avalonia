@@ -80,6 +80,7 @@
                 <Border
                     Background="{DynamicResource 1x}"
                     CornerRadius="5"
+                    Name="MusicApiRoot"
                     Opacity="{DynamicResource Opacity}"
                     Padding="6.5">
                     <DockPanel>

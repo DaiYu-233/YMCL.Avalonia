@@ -53,19 +53,17 @@ public abstract partial class Method
                         {
                             ServerCertificateCustomValidationCallback = (_, _, _, _) => true
                         };
-                        using (var client = new HttpClient(handler))
-                        {
-                            client.DefaultRequestHeaders.Add("User-Agent", "Apifox/1.0.0 (https://apifox.com)");
-                            client.DefaultRequestHeaders.Add("Accept", "*/*");
-                            client.DefaultRequestHeaders.Add("Host", "edge.microsoft.com");
-                            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
+                        using var client = new HttpClient(handler);
+                        client.DefaultRequestHeaders.Add("User-Agent", "Apifox/1.0.0 (https://apifox.com)");
+                        client.DefaultRequestHeaders.Add("Accept", "*/*");
+                        client.DefaultRequestHeaders.Add("Host", "edge.microsoft.com");
+                        client.DefaultRequestHeaders.Add("Connection", "keep-alive");
 
-                            HttpResponseMessage response =
-                                await client.GetAsync("https://edge.microsoft.com/translate/auth");
-                            response.EnsureSuccessStatusCode();
-                            string responseBody = await response.Content.ReadAsStringAsync();
-                            Const.Data.TranslateToken = responseBody;
-                        }
+                        HttpResponseMessage response =
+                            await client.GetAsync("https://edge.microsoft.com/translate/auth");
+                        response.EnsureSuccessStatusCode();
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        Const.Data.TranslateToken = responseBody;
                     }
                     catch (Exception e)
                     {
@@ -80,14 +78,15 @@ public abstract partial class Method
         }
 
 
-        public static async Task MainWindowLoading()
+        public static Task MainWindowLoading()
         {
             ServicePointManager.ServerCertificateValidationCallback = (_, _, _, _) => true;
 
-            _ = Const.Window.main.LoadCustomHomePage();
+            Const.Window.main.LoadCustomHomePage();
             _ = Const.Window.main.morePage._gameUpdateLog.LoadNews();
 
             _ = Const.Window.main.downloadPage.curseForgeFetcherPage.InitModFromCurseForge();
+            return Task.CompletedTask;
         }
     }
 }

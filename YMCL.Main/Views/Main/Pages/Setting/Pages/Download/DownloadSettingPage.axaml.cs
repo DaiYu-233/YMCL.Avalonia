@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Newtonsoft.Json;
@@ -133,5 +134,9 @@ public partial class DownloadSettingPage : UserControl
         CustomUpdateUrlTextBox.Text = setting.CustomUpdateUrl;
         Const.String.MusicApiUrl = setting.MusicApi;
         MusicApiTextBox.Text = setting.MusicApi;
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            MusicApiRoot.IsVisible = false;
+        }
     }
 }

@@ -198,20 +198,18 @@ public partial class MainWindow : Window
     }
 
 
-    public async Task LoadCustomHomePage()
+    public void LoadCustomHomePage()
     {
-        if (Const.Data.Setting.CustomHomePage == CustomHomePageWay.Local)
+        if (Const.Data.Setting.CustomHomePage != CustomHomePageWay.Local) return;
+        try
         {
-            try
-            {
-                var c = (Control)AvaloniaRuntimeXamlLoader.Load(
-                    File.ReadAllText(Const.String.CustomHomePageXamlDataPath));
-                launchPage.CustomPageRoot.Child = c;
-            }
-            catch (Exception ex)
-            {
-                Method.Ui.ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
-            }
+            var c = (Control)AvaloniaRuntimeXamlLoader.Load(
+                File.ReadAllText(Const.String.CustomHomePageXamlDataPath));
+            launchPage.CustomPageRoot.Child = c;
+        }
+        catch (Exception ex)
+        {
+            Method.Ui.ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
         }
     }
 

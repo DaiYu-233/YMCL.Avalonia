@@ -232,6 +232,13 @@ ErrorFileHash2=无效的文件哈希：预期为 %1，实际为 %2
 ErrorProgress=无效的进度：%1，总共%2
 ErrorFileSize=文件大小错误：预期为 %1，实际为 %2
 
+; *** TExtractionWizardPage 界面和 Extract7ZipArchive
+ExtractionLabel=正在提取其他文件...
+ButtonStopExtraction=&停止提取
+StopExtraction=你确定要停止提取吗？
+ErrorExtractionAborted=提取已终止
+ErrorExtractionFailed=提取失败：%1
+
 ; *** “正在准备安装”向导页
 WizardPreparing=正在准备安装
 PreparingDesc=安装程序正在准备安装 [name] 到您的电脑中。

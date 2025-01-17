@@ -30,7 +30,7 @@ jobs:
           echo "The current time is: ${{ steps.date.outputs.time }}"
 
   linux:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: time
     steps:
       - name: Checkout

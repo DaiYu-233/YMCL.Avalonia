@@ -21,14 +21,14 @@ public class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        Init.BeforeCreateUi();
+        InitDispatcher.BeforeCreateUi();
         var ifShowInit = Decision.WhetherToShowInitView();
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             DisableAvaloniaDataAnnotationValidation();
             if (ifShowInit.ifShow)
             {
-                desktop.MainWindow = new InitializeWindow();
+                desktop.MainWindow = new InitializeWindow(ifShowInit.page);
             }
             else
             {
@@ -39,7 +39,7 @@ public class App : Application
         {
             if (ifShowInit.ifShow)
             {
-                singleViewPlatform.MainView = new InitializeView();
+                singleViewPlatform.MainView = new InitializeView(ifShowInit.page);
             }
             else
             {

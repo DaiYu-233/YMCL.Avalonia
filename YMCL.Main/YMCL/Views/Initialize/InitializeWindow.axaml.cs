@@ -6,8 +6,9 @@ namespace YMCL.Views.Initialize;
 
 public partial class InitializeWindow : Window
 {
-    public InitializeWindow()
+    public InitializeWindow(int page)
     {
         InitializeComponent();
+        InitializeView.UpdatePage(page);
     }
 }

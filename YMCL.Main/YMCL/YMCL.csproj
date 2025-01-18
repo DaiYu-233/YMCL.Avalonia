@@ -22,6 +22,7 @@
   
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
+    <AvaloniaResource Include="Public\Assets\MiSans-Regular.otf" />
   </ItemGroup>
   
   <ItemGroup>
@@ -40,6 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AsyncImageLoader.Avalonia" />
     <PackageReference Include="Avalonia" />
     <PackageReference Include="Avalonia.Themes.Fluent" />
     <PackageReference Include="Avalonia.Fonts.Inter" />
@@ -49,13 +51,21 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="FluentAvaloniaUI" />
+    <PackageReference Include="Irihi.Ursa" />
+    <PackageReference Include="Irihi.Ursa.Themes.Semi" />
     <PackageReference Include="MinecraftLaunch" />
     <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="Semi.Avalonia" />
   </ItemGroup>
 
   <ItemGroup>
     <AvaloniaXaml Remove="Public\Texts\CustomHomePageDefault.axaml" />
     <EmbeddedResource Include="Public\Texts\CustomHomePageDefault.axaml" />
+    <EmbeddedResource Update="Public\Langs\MainLang.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainLang.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -67,5 +77,21 @@
       <DependentUpon>MainView.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Public\Controls\TitleBar.axaml.cs">
+      <DependentUpon>TitleBar.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Public\Langs\MainLang.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MainLang.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Public\Controls\ModFileView\ModFileView.axaml" />
+    <UpToDateCheckInput Remove="Public\Controls\PluginInfo\PluginInfo.axaml" />
+    <UpToDateCheckInput Remove="Public\Controls\UrlImage\UrlImage.axaml" />
+    <UpToDateCheckInput Remove="Assets\MiSans-Regular.otf" />
   </ItemGroup>
 </Project>

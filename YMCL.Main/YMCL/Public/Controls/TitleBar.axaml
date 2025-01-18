@@ -1,0 +1,49 @@
+<UserControl
+    mc:Ignorable="d"
+    x:Class="YMCL.Public.Controls.TitleBar"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border
+        Background="{DynamicResource TitleBarColor}"
+        CornerRadius="8,8,0,0"
+        Height="30"
+        Name="Root"
+        VerticalAlignment="Top">
+        <Grid
+            Background="#00242424"
+            Margin="8,0,8,0"
+            Name="MoveDragArea">
+            <TextBlock />
+            <TextBlock
+                FontFamily="{DynamicResource Font}"
+                FontSize="16"
+                HorizontalAlignment="Left"
+                Name="TitleText"
+                Text=""
+                VerticalAlignment="Center" />
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button
+                    Classes="icon-button"
+                    Content="{DynamicResource Minimize}"
+                    HorizontalAlignment="Right"
+                    Margin="0,6,0,0"
+                    Name="MinimizeButton"
+                    VerticalAlignment="Center" />
+                <Button
+                    Classes="icon-button"
+                    Content="{DynamicResource Maximize}"
+                    HorizontalAlignment="Right"
+                    Name="MaximizeButton"
+                    VerticalAlignment="Center" />
+                <Button
+                    Classes="icon-button"
+                    Content="{DynamicResource Close}"
+                    HorizontalAlignment="Right"
+                    Name="CloseButton"
+                    VerticalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

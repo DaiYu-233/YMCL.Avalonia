@@ -3,6 +3,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Avalonia.Markup.Xaml;
 using YMCL.ViewModels;
 using YMCL.Views;
@@ -18,10 +19,10 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        Public.Module.App.Init.BeforeCreateUi();
+        
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
-            // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
             desktop.MainWindow = new MainWindow
             {

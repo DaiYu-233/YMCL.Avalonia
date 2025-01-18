@@ -49,5 +49,12 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="MinecraftLaunch" />
+    <PackageReference Include="Newtonsoft.Json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaXaml Remove="Public\Texts\CustomHomePageDefault.axaml" />
+    <EmbeddedResource Include="Public\Texts\CustomHomePageDefault.axaml" />
   </ItemGroup>
 </Project>

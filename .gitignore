@@ -4,3 +4,4 @@ obj/
 .idea/*
 *.suo
 *.bin
+*.user

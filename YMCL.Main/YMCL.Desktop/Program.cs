@@ -1,5 +1,7 @@
 ﻿using System;
 using Avalonia;
+using YMCL.Public.Const;
+using YMCL.Public.Enum;
 
 namespace YMCL.Desktop;
 
@@ -14,8 +16,12 @@ sealed class Program
 
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
-        => AppBuilder.Configure<App>()
+    {
+        Data.RunnerType = RunnerType.Desktop;
+        ConfigPath.InitPath();
+        return AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .WithInterFont()
             .LogToTrace();
+    }
 }

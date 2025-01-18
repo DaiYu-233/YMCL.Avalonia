@@ -5,6 +5,7 @@ using System.Reflection;
 using MinecraftLaunch.Classes.Models.Game;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
+using YMCL.Public.Langs;
 using YMCL.Public.Module.IO;
 
 namespace YMCL.Public.Module.App;
@@ -16,6 +17,7 @@ public static class InitConfig
         CreateFolder();
         CreateFile();
     }
+
     public static void CreateFolder()
     {
         Disk.TryCreateFolder(Const.ConfigPath.UserDataRootPath);
@@ -30,17 +32,22 @@ public static class InitConfig
             File.WriteAllText(Const.ConfigPath.SettingDataPath,
                 JsonConvert.SerializeObject(new Setting(), Formatting.Indented));
         if (!File.Exists(Const.ConfigPath.MinecraftFolderDataPath) || JsonConvert
-                .DeserializeObject<List<string>>(File.ReadAllText(Const.ConfigPath.MinecraftFolderDataPath)).Count == 0)
+                .DeserializeObject<List<MinecraftFolder>>(
+                    File.ReadAllText(Const.ConfigPath.MinecraftFolderDataPath)).Count == 0)
         {
             var path = Path.Combine(Const.ConfigPath.UserDataRootPath, ".minecraft");
             Disk.TryCreateFolder(path);
             File.WriteAllText(Const.ConfigPath.MinecraftFolderDataPath,
-                JsonConvert.SerializeObject(new List<string> { path }, Formatting.Indented));
+                JsonConvert.SerializeObject(
+                    new List<MinecraftFolder>([
+                        new MinecraftFolder { Name = MainLang.MinecraftFolder, Path = path }
+                    ]), Formatting.Indented));
             var setting1 = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.ConfigPath.SettingDataPath));
-            setting1.MinecraftFolder = path;
+            setting1.MinecraftFolder = new MinecraftFolder { Name = MainLang.MinecraftFolder, Path = path };
             File.WriteAllText(Const.ConfigPath.SettingDataPath,
                 JsonConvert.SerializeObject(setting1, Formatting.Indented));
         }
+
         if (!File.Exists(Const.ConfigPath.JavaDataPath))
             File.WriteAllText(Const.ConfigPath.JavaDataPath,
                 JsonConvert.SerializeObject(new List<JavaEntry>(), Formatting.Indented));
@@ -68,5 +75,6 @@ public static class InitConfig
         using var reader = new StreamReader(stream!);
         var result = reader.ReadToEnd();
         File.WriteAllText(Const.ConfigPath.CustomHomePageXamlDataPath, result);
+        
     }
 }

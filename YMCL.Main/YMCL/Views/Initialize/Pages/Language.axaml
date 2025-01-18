@@ -22,14 +22,14 @@
                 <TextBlock
                     DockPanel.Dock="Top"
                     FontSize="24"
-                    Text="{x:Static properties:MainLang.Language}" />
+                    Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Language}" />
                 <TextBlock
                     DockPanel.Dock="Top"
                     FontSize="16"
                     Foreground="{DynamicResource GrayColor}"
                     HorizontalAlignment="Left"
                     Margin="5,5,0,0"
-                    Text="{x:Static properties:MainLang.LanguageTip}"
+                    Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.LanguageTip}"
                     TextWrapping="Wrap"
                     Width="280" />
             </DockPanel>

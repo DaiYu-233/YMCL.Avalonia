@@ -7,9 +7,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+    xmlns:vm="clr-namespace:YMCL.ViewModels"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid>
-        <ui:Frame Name="Frame" />
+        <ContentControl Name="Frame" Opacity="0">
+            <ContentControl.Transitions>
+                <Transitions>
+                    <DoubleTransition Duration="0:0:0.25" Property="Opacity" />
+                </Transitions>
+            </ContentControl.Transitions>
+        </ContentControl>
         <Border
             CornerRadius="5"
             HorizontalAlignment="Left"
@@ -83,5 +90,21 @@
                     VerticalAlignment="Center" />
             </DockPanel>
         </Border>
+        <StackPanel
+            HorizontalAlignment="Right"
+            Margin="25"
+            Orientation="Horizontal"
+            Spacing="10"
+            VerticalAlignment="Bottom">
+            <Button
+                Content="←"
+                Name="Precious"
+                Width="90" />
+            <Button
+                Classes="Success"
+                Content="→"
+                Name="Next"
+                Width="90" />
+        </StackPanel>
     </Grid>
 </UserControl>

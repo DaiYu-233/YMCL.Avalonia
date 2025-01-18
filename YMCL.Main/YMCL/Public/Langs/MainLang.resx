@@ -979,4 +979,7 @@ MacOs 不支持自动更新
   <data name="DownloadUrl" xml:space="preserve">
     <value>下载链接</value>
   </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>显示名称</value>
+  </data>
 </root>

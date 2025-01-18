@@ -4,17 +4,32 @@ using System.Runtime.CompilerServices;
 
 namespace YMCL.Public.Langs;
 
-public class LangHelper : INotifyPropertyChanged
+public sealed class LangHelper : INotifyPropertyChanged
 {
     public static LangHelper Current { get; } = new();
 
-    public MainLang Resources { get; } = new();
+    private MainLang _resources;
+    public MainLang Resources
+    {
+        get => _resources;
+        private set
+        {
+            if (_resources == value) return;
+            _resources = value;
+            OnPropertyChanged();
+        }
+    }
 
     public event PropertyChangedEventHandler PropertyChanged;
 
-    protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+    private LangHelper()
     {
-        PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        _resources = new MainLang();
+    }
+
+    private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
     public void ChangedCulture(string name)
@@ -23,15 +38,12 @@ public class LangHelper : INotifyPropertyChanged
             MainLang.Culture = CultureInfo.GetCultureInfo("zh-CN");
         else
             MainLang.Culture = CultureInfo.GetCultureInfo(name);
-        RaisePropertyChanged(nameof(Resources));
+
+        Resources = new MainLang();
     }
 
-    public static string GetText(string name, string culture = "")
+    public string GetString(string key)
     {
-        var setting = Const.Data.Setting;
-        var cultureInfo = culture == "" ? CultureInfo.GetCultureInfo(setting.Language is "zh-CN" or null ? "" : setting.Language) : CultureInfo.GetCultureInfo(culture);
-
-        var res = MainLang.ResourceManager.GetObject(name, cultureInfo).ToString();
-        return res ?? "Null";
+        return MainLang.ResourceManager.GetString(key, MainLang.Culture) ?? $"[{key}]";
     }
 }

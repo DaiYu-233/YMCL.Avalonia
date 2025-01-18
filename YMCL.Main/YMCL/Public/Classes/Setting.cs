@@ -1,12 +1,13 @@
 ﻿using Avalonia.Media;
 using MinecraftLaunch.Classes.Models.Game;
+using YMCL.Views.Initialize.Pages;
 
 namespace YMCL.Public.Classes;
 
 public class Setting
 {
     public string Language { get; set; } = "Unset";
-    public string MinecraftFolder { get; set; }
+    public MinecraftFolder MinecraftFolder { get; set; }
     public string SkipUpdateVersion { get; set; } = string.Empty;
     public bool EnableAutoCheckUpdate { get; set; } = true;
     public double MaximumDownloadThread { get; set; } = 64;

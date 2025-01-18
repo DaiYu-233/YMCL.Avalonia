@@ -66,6 +66,10 @@
     </Style>
     <Style Selector="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Font}" />
+    </Style>
+    <Style Selector="TextBox">
+        <Setter Property="FontFamily" Value="{DynamicResource Font}" />
     </Style>
     <Style Selector="Rectangle#HCPaneBorder">
         <Setter Property="IsVisible" Value="False" />

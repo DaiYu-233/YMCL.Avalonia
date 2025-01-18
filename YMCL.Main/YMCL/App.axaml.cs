@@ -28,7 +28,7 @@ public class App : Application
             DisableAvaloniaDataAnnotationValidation();
             if (ifShowInit.ifShow)
             {
-                desktop.MainWindow = new InitializeWindow(ifShowInit.page);
+                desktop.MainWindow = new InitializeWindow(ifShowInit.page) { IsVisible = false };
             }
             else
             {

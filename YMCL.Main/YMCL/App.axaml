@@ -12,6 +12,7 @@
                 <ResourceInclude Source="/Public/Styles/IconPath.axaml" />
                 <ResourceInclude Source="/Public/Styles/Theme.axaml" />
                 <ResourceInclude Source="avares://FluentAvalonia/Styling/ControlThemes/BasicControls/ListBoxStyles.axaml" />
+                <ResourceInclude Source="avares://FluentAvalonia/Styling/ControlThemes/BasicControls/HyperlinkButtonStyles.axaml" />
             </ResourceDictionary.MergedDictionaries>
             <Color x:Key="SystemAccentColor">#00feff</Color>
             <Color x:Key="SystemAccentColorLight1">#00feff</Color>

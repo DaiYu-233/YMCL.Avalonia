@@ -1,4 +1,6 @@
 using UIKit;
+using YMCL.Public.Const;
+using YMCL.Public.Enum;
 
 namespace YMCL.iOS;
 
@@ -9,6 +11,7 @@ public class Application
     {
         // if you want to use a different Application Delegate class from "AppDelegate"
         // you can specify it here.
+        Data.RunnerType = RunnerType.Android;
         UIApplication.Main(args, null, typeof(AppDelegate));
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Browser;
+using YMCL.Public.Const;
+using YMCL.Public.Enum;
 
 namespace YMCL.Browser;
 
@@ -11,5 +13,8 @@ internal sealed class Program
         .StartBrowserAppAsync("out");
 
     public static AppBuilder BuildAvaloniaApp()
-        => AppBuilder.Configure<App>();
+    {
+        Data.RunnerType = RunnerType.Android;
+        return AppBuilder.Configure<App>();
+    }
 }

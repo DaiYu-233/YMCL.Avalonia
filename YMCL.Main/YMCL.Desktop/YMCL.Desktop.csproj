@@ -6,6 +6,20 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+	<ApplicationIcon>YMCL-Icon.ico</ApplicationIcon>
+	<Authors>DaiYu | http://daiyu.fun</Authors>
+	<Product>Yu Minecraft Launcher</Product>
+	<Description>Yu Minecraft Launcher</Description>
+	<Title>Yu Minecraft Launcher</Title>
+	<Copyright>DaiYu | http://daiyu.fun</Copyright>
+	<PackageProjectUrl>http://ymcl.daiyu.fun</PackageProjectUrl>
+	<PackageIcon>YMCL-Icon.png</PackageIcon>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<RepositoryUrl>https://github.com/DaiYu-233/YMCL.Avalonia</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+	<PackageTags>DaiYu;YMCL</PackageTags>
+	<PackageReleaseNotes>Yu Minecraft Launcher</PackageReleaseNotes>
+	<PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -13,9 +27,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="YMCL-Icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\Assets\YMCL-Icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-    <PackageReference Include="Avalonia.Diagnostics" >
+    <PackageReference Include="Avalonia.Diagnostics">
       <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>

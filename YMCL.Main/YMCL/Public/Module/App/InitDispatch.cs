@@ -9,5 +9,6 @@ public static class Init
         ConfigPath.InitPath();
         InitConfig.CreateFolder();
         InitConfig.CreateFile();
+        InitData.GetSettingData();
     }
 }

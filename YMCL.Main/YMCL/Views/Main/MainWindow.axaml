@@ -1,0 +1,16 @@
+<Window
+    Icon="/Assets/avalonia-logo.ico"
+    Title="YMCL"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="YMCL.Views.Main.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:main="clr-namespace:YMCL.Views.Main"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:YMCL.Views"
+    xmlns:vm="using:YMCL.ViewModels"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <main:MainView />
+</Window>

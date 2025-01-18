@@ -57,4 +57,15 @@
     <AvaloniaXaml Remove="Public\Texts\CustomHomePageDefault.axaml" />
     <EmbeddedResource Include="Public\Texts\CustomHomePageDefault.axaml" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Main\MainWindow.axaml.cs">
+      <DependentUpon>MainWindow.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Main\MainView.axaml.cs">
+      <DependentUpon>MainView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

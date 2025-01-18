@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace YMCL.Views;
+namespace YMCL.Views.Main;
 
 public partial class MainView : UserControl
 {

@@ -1,16 +1,18 @@
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
-using System.Linq;
-using System.Runtime.InteropServices;
 using Avalonia.Markup.Xaml;
+using YMCL.Public.Module.App;
 using YMCL.ViewModels;
 using YMCL.Views;
+using YMCL.Views.Initialize;
+using MainView = YMCL.Views.Main.MainView;
+using MainWindow = YMCL.Views.Main.MainWindow;
 
 namespace YMCL;
 
-public partial class App : Application
+public class App : Application
 {
     public override void Initialize()
     {
@@ -19,22 +21,30 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        Public.Module.App.Init.BeforeCreateUi();
-        
+        Init.BeforeCreateUi();
+        var ifShowInit = Decision.WhetherToShowInitView();
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             DisableAvaloniaDataAnnotationValidation();
-            desktop.MainWindow = new MainWindow
+            if (ifShowInit.ifShow)
             {
-                DataContext = new MainViewModel()
-            };
+                desktop.MainWindow = new InitializeWindow();
+            }
+            else
+            {
+                desktop.MainWindow = new MainWindow();
+            }
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
-            singleViewPlatform.MainView = new MainView
+            if (ifShowInit.ifShow)
             {
-                DataContext = new MainViewModel()
-            };
+                singleViewPlatform.MainView = new InitializeView();
+            }
+            else
+            {
+                singleViewPlatform.MainView = new MainView();
+            }
         }
 
         base.OnFrameworkInitializationCompleted();

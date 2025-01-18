@@ -1,8 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using CommunityToolkit.Mvvm.ComponentModel;
-using YMCL.Public.Const;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.App;
 

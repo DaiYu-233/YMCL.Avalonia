@@ -1,0 +1,132 @@
+﻿<UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="YMCL.Views.Initialize.Pages.Account"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:cl="clr-namespace:YMCL.Public.Classes"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Public.Langs"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid
+        Margin="10"
+        Name="AccountRoot"
+        VerticalAlignment="Stretch">
+        <Grid.Transitions>
+            <Transitions>
+                <DoubleTransition Duration="0:0:0.30" Property="Opacity" />
+            </Transitions>
+        </Grid.Transitions>
+        <DockPanel>
+            <DockPanel Margin="60,50,20,50">
+                <TextBlock
+                    DockPanel.Dock="Top"
+                    FontSize="24"
+                    Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Account}" />
+                <TextBlock
+                    DockPanel.Dock="Top"
+                    FontSize="16"
+                    Foreground="{DynamicResource GrayColor}"
+                    HorizontalAlignment="Left"
+                    Margin="5,5,0,0"
+                    Name="AccountTipTextBlock"
+                    Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.AccountTip}"
+                    TextWrapping="Wrap"
+                    Width="270" />
+                <WrapPanel
+                    Margin="-15,10,0,0"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Top"
+                    Width="270">
+                    <HyperlinkButton Margin="3" Name="AddAccountBtn">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Image Margin="0,0,3,0" Width="16">
+                                <Image.Source>
+                                    <DrawingImage>
+                                        <DrawingImage.Drawing>
+                                            <DrawingGroup>
+                                                <DrawingGroup.Children>
+                                                    <GeometryDrawing Brush="{DynamicResource SystemAccentColor}">
+                                                        <GeometryDrawing.Geometry>
+                                                            <PathGeometry Figures="M472.6,535.2C534.3,501.1 576,435.5 576,360 576,249.5 486.5,160 376,160 265.5,160 176,249.5 176,360 176,435.5 217.7,501.1 279.4,535.2 233.09999999999997,550.2 190.79999999999998,576 155.39999999999998,611.4000000000001 96.5,670.3 64,748.6 64,831.9 64,849.6 78.4,864 96.1,864 113.8,864 128.2,849.6 128.2,831.9 128.2,765.8 154,703.5 200.79999999999998,656.8 247.59999999999997,610.0999999999999 309.79999999999995,584.3 376,584.3 442.20000000000005,584.3 504.4,610 551.2,656.8 598,703.5 623.8000000000001,765.6999999999999 623.8000000000001,831.9 623.8000000000001,849.6 638.2,864 655.9000000000001,864 673.6000000000001,864 688.0000000000001,849.6 688.0000000000001,831.9 688.0000000000001,748.6 655.5000000000001,670.3 596.6000000000001,611.4 561.2000000000002,576 518.9000000000001,550.1999999999999 472.60000000000014,535.1999999999999z M280.9,264.9C306.29999999999995,239.49999999999997 340.09999999999997,225.49999999999997 376,225.49999999999997 411.9,225.49999999999997 445.7,239.49999999999997 471.1,264.9 496.5,290.29999999999995 510.5,324.09999999999997 510.5,360 510.5,395.9 496.5,429.7 471.1,455.1 445.70000000000005,480.5 411.90000000000003,494.5 376,494.5 340.1,494.5 306.3,480.5 280.9,455.1 255.49999999999997,429.70000000000005 241.49999999999997,395.90000000000003 241.49999999999997,360 241.49999999999997,324.1 255.49999999999997,290.3 280.9,264.9z M728,384L928,384C945.7,384 960,369.7 960,352 960,334.3 945.7,320 928,320L728,320C710.3,320 696,334.3 696,352 696,369.7 710.3,384 728,384z" />
+                                                        </GeometryDrawing.Geometry>
+                                                    </GeometryDrawing>
+                                                    <GeometryDrawing Brush="{DynamicResource SystemAccentColor}">
+                                                        <GeometryDrawing.Geometry>
+                                                            <PathGeometry Figures="M928,480L648,480C630.3,480 616,494.3 616,512 616,529.7 630.3,544 648,544L928,544C945.7,544 960,529.7 960,512 960,494.29999999999995 945.7,480 928,480z M928,640L760,640C742.3,640 728,654.3 728,672 728,689.7 742.3,704 760,704L928,704C945.7,704 960,689.7 960,672 960,654.3 945.7,640 928,640z" />
+                                                        </GeometryDrawing.Geometry>
+                                                    </GeometryDrawing>
+                                                </DrawingGroup.Children>
+                                                <DrawingGroup.ClipGeometry>
+                                                    <RectangleGeometry Rect="0,0,1024,1024" />
+                                                </DrawingGroup.ClipGeometry>
+                                            </DrawingGroup>
+                                        </DrawingImage.Drawing>
+                                    </DrawingImage>
+                                </Image.Source>
+                            </Image>
+                            <TextBlock
+                                FontFamily="{DynamicResource Font}"
+                                Foreground="{DynamicResource SystemAccentColor}"
+                                Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.AddNewAccount}"
+                                TextDecorations="{x:Null}" />
+                        </StackPanel>
+                    </HyperlinkButton>
+                </WrapPanel>
+            </DockPanel>
+            <DockPanel>
+                <StackPanel Margin="0,10,25,80" VerticalAlignment="Center">
+                    <TextBlock DockPanel.Dock="Top" FontFamily="{DynamicResource Font}">
+                        <Run Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.ExistingNow}" />
+                        <Run Text=":" />
+                    </TextBlock>
+                    <ListBox
+                        DockPanel.Dock="Top"
+                        Margin="0,10,20,0"
+                        MaxHeight="320"
+                        Name="AccountListBox"
+                        SelectedIndex="0"
+                        VerticalAlignment="Top">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="cl:AccountInfo">
+                                <Border BorderThickness="0,6,0,6">
+                                    <DockPanel>
+                                        <Border
+                                            ClipToBounds="True"
+                                            CornerRadius="3,3,3,3"
+                                            Height="28"
+                                            Margin="2,0,6.5,0"
+                                            Width="28">
+                                            <Image Source="{Binding Bitmap}" />
+                                        </Border>
+                                        <Grid>
+                                            <TextBlock
+                                                FontFamily="{DynamicResource Font}"
+                                                FontSize="14"
+                                                Text="{Binding Name}" />
+                                            <StackPanel Margin="0,17,0,0" Orientation="Horizontal">
+                                                <TextBlock
+                                                    FontFamily="{DynamicResource Font}"
+                                                    FontSize="11"
+                                                    Foreground="{DynamicResource GrayColor}"
+                                                    Margin="0,0,0,0"
+                                                    Text="{Binding AccountType}" />
+                                                <TextBlock
+                                                    FontFamily="{DynamicResource Font}"
+                                                    FontSize="11"
+                                                    Foreground="{DynamicResource GrayColor}"
+                                                    Margin="5,0,0,0"
+                                                    Text="{Binding AddTime}" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </DockPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

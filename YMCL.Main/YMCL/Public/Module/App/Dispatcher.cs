@@ -1,6 +1,4 @@
-﻿using YMCL.Public.Const;
-
-namespace YMCL.Public.Module.App;
+﻿namespace YMCL.Public.Module.App;
 
 public static class InitDispatcher
 {

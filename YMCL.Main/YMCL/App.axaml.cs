@@ -1,8 +1,7 @@
 using System.Linq;
-using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Controls.Notifications;
 using Avalonia.Data.Core.Plugins;
-using Avalonia.Markup.Xaml;
 using YMCL.Public.Module.App;
 using YMCL.ViewModels;
 using YMCL.Views;
@@ -28,22 +27,30 @@ public class App : Application
             DisableAvaloniaDataAnnotationValidation();
             if (ifShowInit.ifShow)
             {
-                desktop.MainWindow = new InitializeWindow(ifShowInit.page) { IsVisible = false };
+                var view = new InitializeWindow(ifShowInit.page) { IsVisible = false };
+                Data.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
+                desktop.MainWindow = view;
             }
             else
             {
-                desktop.MainWindow = new MainWindow();
+                var view = new MainWindow();
+                Data.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
+                desktop.MainWindow = view;
             }
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
             if (ifShowInit.ifShow)
             {
-                singleViewPlatform.MainView = new InitializeView(ifShowInit.page);
+                var view = new InitializeView(ifShowInit.page);
+                Data.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
+                singleViewPlatform.MainView = view;
             }
             else
             {
-                singleViewPlatform.MainView = new MainView();
+                var view = new MainView();
+                Data.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
+                singleViewPlatform.MainView = view;
             }
         }
 

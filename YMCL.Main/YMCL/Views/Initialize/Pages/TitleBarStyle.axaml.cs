@@ -1,8 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using YMCL.Public.Const;
-using YMCL.Public.Enum;
+﻿using YMCL.Public.Enum;
 using YMCL.Public.Module.App;
 
 namespace YMCL.Views.Initialize.Pages;

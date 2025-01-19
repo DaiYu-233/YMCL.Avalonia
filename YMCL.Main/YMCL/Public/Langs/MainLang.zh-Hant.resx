@@ -156,9 +156,6 @@
   <data name="RepeatItem" xml:space="preserve">
     <value>重複的項目</value>
   </data>
-  <data name="NavLauncher" xml:space="preserve">
-    <value> 啟動器</value>
-  </data>
   <data name="OpenFileWay" xml:space="preserve">
     <value>開啟檔案方式</value>
   </data>
@@ -194,9 +191,6 @@
   </data>
   <data name="TheJavaIsError" xml:space="preserve">
     <value>Java不正確</value>
-  </data>
-  <data name="NavAccount" xml:space="preserve">
-    <value> 帳戶</value>
   </data>
   <data name="AddNewAccount" xml:space="preserve">
     <value>新增帳戶</value>
@@ -255,9 +249,6 @@
   </data>
   <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
     <value>信箱不可為空</value>
-  </data>
-  <data name="NavPersonalize" xml:space="preserve">
-    <value> 個性化</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>語言</value>
@@ -735,9 +726,6 @@ sudo apt install vlc</value>
   </data>
   <data name="OnlySupportsWindows10AndAboveSystems" xml:space="preserve">
     <value>僅支援Windows 10 以上系統</value>
-  </data>
-  <data name="NavTask" xml:space="preserve">
-    <value> 任務</value>
   </data>
   <data name="TaskCenter" xml:space="preserve">
     <value>任務中心</value>

@@ -156,9 +156,6 @@
   <data name="RepeatItem" xml:space="preserve">
     <value>Дублировать элемент</value>
   </data>
-  <data name="NavLauncher" xml:space="preserve">
-    <value> Пусковая установка</value>
-  </data>
   <data name="OpenFileWay" xml:space="preserve">
     <value>Как открыть файл</value>
   </data>
@@ -194,9 +191,6 @@
   </data>
   <data name="TheJavaIsError" xml:space="preserve">
     <value>Java неверна</value>
-  </data>
-  <data name="NavAccount" xml:space="preserve">
-    <value> Аккаунты</value>
   </data>
   <data name="AddNewAccount" xml:space="preserve">
     <value>Добавить новую учетную запись</value>
@@ -255,9 +249,6 @@
   </data>
   <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
     <value>Адрес электронной почты не может быть пустым</value>
-  </data>
-  <data name="NavPersonalize" xml:space="preserve">
-    <value> Персонализация</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
@@ -735,9 +726,6 @@ sudo apt install vlc</value>
   </data>
   <data name="OnlySupportsWindows10AndAboveSystems" xml:space="preserve">
     <value>Поддерживает только Windows 10 и выше</value>
-  </data>
-  <data name="NavTask" xml:space="preserve">
-    <value> Миссии</value>
   </data>
   <data name="TaskCenter" xml:space="preserve">
     <value>Центр задач</value>

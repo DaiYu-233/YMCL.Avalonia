@@ -156,9 +156,6 @@
   <data name="RepeatItem" xml:space="preserve">
     <value>Repeating event</value>
   </data>
-  <data name="NavLauncher" xml:space="preserve">
-    <value> Launcher</value>
-  </data>
   <data name="OpenFileWay" xml:space="preserve">
     <value>How to open a file</value>
   </data>
@@ -194,9 +191,6 @@
   </data>
   <data name="TheJavaIsError" xml:space="preserve">
     <value>Java is incorrect</value>
-  </data>
-  <data name="NavAccount" xml:space="preserve">
-    <value> Account</value>
   </data>
   <data name="AddNewAccount" xml:space="preserve">
     <value>Add New Account</value>
@@ -255,9 +249,6 @@ Jump to the browser to complete verification</value>
   </data>
   <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
     <value>Email cannot be empty</value>
-  </data>
-  <data name="NavPersonalize" xml:space="preserve">
-    <value> Customization</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
@@ -735,9 +726,6 @@ sudo apt install vlc</value>
   </data>
   <data name="OnlySupportsWindows10AndAboveSystems" xml:space="preserve">
     <value>Only supports Windows 10 and above</value>
-  </data>
-  <data name="NavTask" xml:space="preserve">
-    <value> TaskManage</value>
   </data>
   <data name="TaskCenter" xml:space="preserve">
     <value>task center</value>

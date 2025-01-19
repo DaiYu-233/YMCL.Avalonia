@@ -6,7 +6,11 @@ public static class InitDispatcher
     {
         InitConfig.Dispatch();
         InitData.GetSettingData();
-        InitUi.Dispatch();
         InitLang.Dispatch();
+    }
+
+    public static void OnMainViewLoaded()
+    {
+        InitUi.Dispatch();
     }
 }

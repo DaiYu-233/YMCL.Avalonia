@@ -60,6 +60,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 关于.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 账户.
         /// </summary>
         public static string Account {
@@ -1723,6 +1732,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 更多.
+        /// </summary>
+        public static string More {
+            get {
+                return ResourceManager.GetString("More", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 移动到回收站.
         /// </summary>
         public static string MoveToRecycleBin {
@@ -1773,42 +1791,6 @@ namespace YMCL.Public.Langs {
         public static string MusicPlayerOnlySupportWindows {
             get {
                 return ResourceManager.GetString("MusicPlayerOnlySupportWindows", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to  账户.
-        /// </summary>
-        public static string NavAccount {
-            get {
-                return ResourceManager.GetString("NavAccount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to  启动器.
-        /// </summary>
-        public static string NavLauncher {
-            get {
-                return ResourceManager.GetString("NavLauncher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to  个性化.
-        /// </summary>
-        public static string NavPersonalize {
-            get {
-                return ResourceManager.GetString("NavPersonalize", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to  任务.
-        /// </summary>
-        public static string NavTask {
-            get {
-                return ResourceManager.GetString("NavTask", resourceCulture);
             }
         }
         
@@ -2476,6 +2458,15 @@ namespace YMCL.Public.Langs {
         public static string SystemStyle {
             get {
                 return ResourceManager.GetString("SystemStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 任务.
+        /// </summary>
+        public static string Task {
+            get {
+                return ResourceManager.GetString("Task", resourceCulture);
             }
         }
         

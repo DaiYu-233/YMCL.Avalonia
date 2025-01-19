@@ -13,6 +13,7 @@ namespace YMCL;
 
 public class App : Application
 {
+    public static MainView? UiRoot { get; private set; }
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -33,7 +34,8 @@ public class App : Application
             }
             else
             {
-                var view = new MainWindow();
+                var view = new MainWindow(out var mainView);
+                UiRoot = mainView;
                 Data.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
                 desktop.MainWindow = view;
             }
@@ -49,6 +51,7 @@ public class App : Application
             else
             {
                 var view = new MainView();
+                UiRoot = view;
                 Data.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
                 singleViewPlatform.MainView = view;
             }

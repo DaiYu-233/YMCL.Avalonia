@@ -156,9 +156,6 @@
   <data name="RepeatItem" xml:space="preserve">
     <value>プロジェクトの複製</value>
   </data>
-  <data name="NavLauncher" xml:space="preserve">
-    <value> ランチャー</value>
-  </data>
   <data name="OpenFileWay" xml:space="preserve">
     <value>ファイルを開く</value>
   </data>
@@ -194,9 +191,6 @@
   </data>
   <data name="TheJavaIsError" xml:space="preserve">
     <value>Javaが正しくない</value>
-  </data>
-  <data name="NavAccount" xml:space="preserve">
-    <value> アカウント</value>
   </data>
   <data name="AddNewAccount" xml:space="preserve">
     <value>新規アカウントを追加</value>
@@ -255,9 +249,6 @@
   </data>
   <data name="YggdrasilEmailIsEmpty" xml:space="preserve">
     <value>メールボックスは空欄にできません</value>
-  </data>
-  <data name="NavPersonalize" xml:space="preserve">
-    <value> 個人設定</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>言語</value>
@@ -735,9 +726,6 @@ sudo apt install vlc</value>
   </data>
   <data name="OnlySupportsWindows10AndAboveSystems" xml:space="preserve">
     <value>Windows 10以降でのみ対応</value>
-  </data>
-  <data name="NavTask" xml:space="preserve">
-    <value> 開くべきクリック ギルドVault 4</value>
   </data>
   <data name="TaskCenter" xml:space="preserve">
     <value>タスクセンター</value>

@@ -67,6 +67,7 @@
     <Style Selector="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
         <Setter Property="FontFamily" Value="{DynamicResource Font}" />
+        <Setter Property="FontWeight" Value="{DynamicResource FontWeight}" />
     </Style>
     <Style Selector="TextBox">
         <Setter Property="FontFamily" Value="{DynamicResource Font}" />

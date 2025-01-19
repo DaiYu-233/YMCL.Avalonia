@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Irihi.Avalonia.Shared.Helpers;
+using YMCL.Public.Enum;
 using YMCL.Public.Module.App;
 using YMCL.Views.Initialize.Pages;
 
@@ -49,6 +50,16 @@ public partial class InitializeView : UserControl
 
     private void FinishInit(int page)
     {
+        if (page == 2 && Data.Setting.Language == "Unset")
+        {
+            Data.Setting.Language = "zh-CN";
+            Method.SaveSetting();
+        }
+        if (page == 3 && Data.Setting.WindowTitleBarStyle == Setting.WindowTitleBarStyle.Unset)
+        {
+            Data.Setting.WindowTitleBarStyle = Setting.WindowTitleBarStyle.System;
+            Method.SaveSetting();
+        }
         if (page == 4)
         {
             Data.Setting.IsCompleteMinecraftFolderInitialize = true;

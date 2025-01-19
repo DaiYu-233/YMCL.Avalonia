@@ -19,45 +19,45 @@ public static class InitConfig
 
     public static void CreateFolder()
     {
-        Disk.TryCreateFolder(Const.ConfigPath.UserDataRootPath);
-        Disk.TryCreateFolder(Const.ConfigPath.PluginFolderPath);
-        Disk.TryCreateFolder(Const.ConfigPath.TempFolderPath);
-        Disk.TryCreateFolder(Const.ConfigPath.UpdateFolderPath);
+        Disk.TryCreateFolder(ConfigPath.UserDataRootPath);
+        Disk.TryCreateFolder(ConfigPath.PluginFolderPath);
+        Disk.TryCreateFolder(ConfigPath.TempFolderPath);
+        Disk.TryCreateFolder(ConfigPath.UpdateFolderPath);
     }
 
     public static void CreateFile()
     {
-        if (!File.Exists(Const.ConfigPath.SettingDataPath))
-            File.WriteAllText(Const.ConfigPath.SettingDataPath,
+        if (!File.Exists(ConfigPath.SettingDataPath))
+            File.WriteAllText(ConfigPath.SettingDataPath,
                 JsonConvert.SerializeObject(new Setting(), Formatting.Indented));
-        if (!File.Exists(Const.ConfigPath.MinecraftFolderDataPath) || JsonConvert
+        if (!File.Exists(ConfigPath.MinecraftFolderDataPath) || JsonConvert
                 .DeserializeObject<List<MinecraftFolder>>(
-                    File.ReadAllText(Const.ConfigPath.MinecraftFolderDataPath)).Count == 0)
+                    File.ReadAllText(ConfigPath.MinecraftFolderDataPath)).Count == 0)
         {
-            var path = Path.Combine(Const.ConfigPath.UserDataRootPath, ".minecraft");
+            var path = Path.Combine(ConfigPath.UserDataRootPath, ".minecraft");
             Disk.TryCreateFolder(path);
-            File.WriteAllText(Const.ConfigPath.MinecraftFolderDataPath,
+            File.WriteAllText(ConfigPath.MinecraftFolderDataPath,
                 JsonConvert.SerializeObject(
                     new List<MinecraftFolder>([
-                        new MinecraftFolder { Name = MainLang.MinecraftFolder, Path = path }
+                        new MinecraftFolder { Name = "Minecraft Folder", Path = path }
                     ]), Formatting.Indented));
-            var setting1 = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Const.ConfigPath.SettingDataPath));
+            var setting1 = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(ConfigPath.SettingDataPath));
             setting1.MinecraftFolder = new MinecraftFolder { Name = MainLang.MinecraftFolder, Path = path };
-            File.WriteAllText(Const.ConfigPath.SettingDataPath,
+            File.WriteAllText(ConfigPath.SettingDataPath,
                 JsonConvert.SerializeObject(setting1, Formatting.Indented));
         }
 
-        if (!File.Exists(Const.ConfigPath.JavaDataPath))
-            File.WriteAllText(Const.ConfigPath.JavaDataPath,
+        if (!File.Exists(ConfigPath.JavaDataPath))
+            File.WriteAllText(ConfigPath.JavaDataPath,
                 JsonConvert.SerializeObject(new List<JavaEntry>(), Formatting.Indented));
-        if (!File.Exists(Const.ConfigPath.PluginDataPath))
-            File.WriteAllText(Const.ConfigPath.PluginDataPath,
+        if (!File.Exists(ConfigPath.PluginDataPath))
+            File.WriteAllText(ConfigPath.PluginDataPath,
                 JsonConvert.SerializeObject(new List<string>(), Formatting.Indented));
-        if (!File.Exists(Const.ConfigPath.PlayerDataPath))
-            File.WriteAllText(Const.ConfigPath.PlayerDataPath,
+        if (!File.Exists(ConfigPath.PlayerDataPath))
+            File.WriteAllText(ConfigPath.PlayerDataPath,
                 JsonConvert.SerializeObject(new List<Player.PlaySongListViewItemEntry>(), Formatting.Indented));
-        if (!File.Exists(Const.ConfigPath.AccountDataPath))
-            File.WriteAllText(Const.ConfigPath.AccountDataPath,
+        if (!File.Exists(ConfigPath.AccountDataPath))
+            File.WriteAllText(ConfigPath.AccountDataPath,
                 JsonConvert.SerializeObject(
                     new List<AccountInfo>
                     {
@@ -67,13 +67,13 @@ public static class InitConfig
                             AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")
                         }
                     }, Formatting.Indented));
-        if (File.Exists(Const.ConfigPath.CustomHomePageXamlDataPath)) return;
+        if (File.Exists(ConfigPath.CustomHomePageXamlDataPath)) return;
         const string resourceName = "YMCL.Public.Texts.CustomHomePageDefault.axaml";
         var _assembly = Assembly.GetExecutingAssembly();
         var stream = _assembly.GetManifestResourceStream(resourceName);
         using var reader = new StreamReader(stream!);
         var result = reader.ReadToEnd();
-        File.WriteAllText(Const.ConfigPath.CustomHomePageXamlDataPath, result);
+        File.WriteAllText(ConfigPath.CustomHomePageXamlDataPath, result);
         
     }
 }

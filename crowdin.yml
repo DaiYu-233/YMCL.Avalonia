@@ -1,0 +1,3 @@
+files:
+  - source: /YMCL.Main/YMCL/Public/Langs/MainLang.resx
+    translation: /YMCL.Main/YMCL/Public/Langs/MainLang.%language%.resx

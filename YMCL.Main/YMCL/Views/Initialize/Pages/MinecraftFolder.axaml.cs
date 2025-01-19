@@ -16,7 +16,7 @@ public partial class MinecraftFolder : UserControl
     public MinecraftFolder()
     {
         InitializeComponent();
-        MinecraftFolderListBox.ItemsSource = Data.MinecraftFolders;
+        MinecraftFolderListBox.ItemsSource = Data.Instance.MinecraftFolders;
         ManualAddMinecraftFolderBtn.Click += async (_, _) =>
         {
             var list = await TopLevel.GetTopLevel(this).StorageProvider.OpenFolderPickerAsync(
@@ -55,15 +55,14 @@ public partial class MinecraftFolder : UserControl
             };
             var result = await dialog.ShowAsync();
             if (result != ContentDialogResult.Primary) return;
-            Data.MinecraftFolders.Add(new Public.Classes.MinecraftFolder
+            Data.Instance.MinecraftFolders.Add(new Public.Classes.MinecraftFolder
                 { Name = textbox.Text, Path = list[0].Path.LocalPath });
             File.WriteAllText(ConfigPath.MinecraftFolderDataPath,
-                JsonConvert.SerializeObject(Data.MinecraftFolders, Formatting.Indented));
+                JsonConvert.SerializeObject(Data.Instance.MinecraftFolders, Formatting.Indented));
         };
         MinecraftFolderListBox.SelectionChanged += (_, _) =>
         {
-            Data.Setting.MinecraftFolder = MinecraftFolderListBox.SelectedItem as Public.Classes.MinecraftFolder;
-            Method.SaveSetting();
+            Data.Instance.Setting.MinecraftFolder = MinecraftFolderListBox.SelectedItem as Public.Classes.MinecraftFolder;
         };
     }
 }

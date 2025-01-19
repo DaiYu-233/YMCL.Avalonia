@@ -8,10 +8,11 @@ public class Method
 {
     public static void SaveSetting()
     {
+        if (Data.Instance.Setting is null) return;
         File.WriteAllText(ConfigPath.SettingDataPath,
-            JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
+            JsonConvert.SerializeObject(Data.Instance.Setting, Formatting.Indented));
     }
-    
+
     public static void RestartApp()
     {
         var startInfo = new ProcessStartInfo

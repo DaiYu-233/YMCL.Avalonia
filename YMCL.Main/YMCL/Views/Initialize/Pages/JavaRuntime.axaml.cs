@@ -15,7 +15,7 @@ public partial class JavaRuntime : UserControl
     {
         InitializeComponent();
         BindingEvent();
-        JavaRuntimeListBox.ItemsSource = Data.JavaRuntimes;
+        JavaRuntimeListBox.ItemsSource = Data.Instance.JavaRuntimes;
     }
 
     private void BindingEvent()
@@ -27,9 +27,9 @@ public partial class JavaRuntime : UserControl
             var successAddCount = 0;
             foreach (var java in fetcher.Fetch())
             {
-                if (!Data.JavaRuntimes.Contains(java))
+                if (!Data.Instance.JavaRuntimes.Contains(java))
                 {
-                    Data.JavaRuntimes.Add(java);
+                    Data.Instance.JavaRuntimes.Add(java);
                     successAddCount++;
                 }
                 else
@@ -40,7 +40,7 @@ public partial class JavaRuntime : UserControl
 
             Toast($"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}: {successAddCount}\n{MainLang.RepeatItem}: {repeatJavaCount}",
                 NotificationType.Success);
-            File.WriteAllText(ConfigPath.JavaDataPath, JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
+            File.WriteAllText(ConfigPath.JavaDataPath, JsonConvert.SerializeObject(Data.Instance.JavaRuntimes, Formatting.Indented));
         };
         ManualAddJavaRuntimeBtn.Click += async (_, _) =>
         {
@@ -54,12 +54,12 @@ public partial class JavaRuntime : UserControl
             }
             else
             {
-                if (Data.JavaRuntimes.Contains(javaInfo!))
+                if (Data.Instance.JavaRuntimes.Contains(javaInfo!))
                     Toast(MainLang.TheItemAlreadyExist ,NotificationType.Error);
                 else
-                    Data.JavaRuntimes.Add(javaInfo!);
+                    Data.Instance.JavaRuntimes.Add(javaInfo!);
             }
-            await File.WriteAllTextAsync(ConfigPath.JavaDataPath, JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
+            await File.WriteAllTextAsync(ConfigPath.JavaDataPath, JsonConvert.SerializeObject(Data.Instance.JavaRuntimes, Formatting.Indented));
         };
     }
 }

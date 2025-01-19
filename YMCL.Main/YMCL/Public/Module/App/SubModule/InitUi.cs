@@ -8,7 +8,7 @@ public class InitUi
 {
     public static void Dispatch()
     {
-        Ui.Setter.SetAccentColor(Data.Setting.AccentColor);
+        Ui.Setter.SetAccentColor(Data.Instance.Setting.AccentColor);
         DisplaceDefaultUi();
     }
 

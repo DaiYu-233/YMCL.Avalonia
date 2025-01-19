@@ -10,7 +10,7 @@ public class Shower
         var showTitle = Const.String.AppTitle;
         if (!string.IsNullOrWhiteSpace(title)) showTitle = title;
         if (time) showTitle += $" - {DateTime.Now:HH:mm:ss}";
-        Data.Notification.Show(new Notification(showTitle, msg, type));
+        Data.Instance.Notification.Show(new Notification(showTitle, msg, type));
     }
     
     public static void ShowShortException(string msg, Exception ex)

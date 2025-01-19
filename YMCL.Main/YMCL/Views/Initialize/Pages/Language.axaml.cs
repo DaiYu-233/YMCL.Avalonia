@@ -11,11 +11,12 @@ public partial class Language : UserControl
         InitializeComponent();
         ControlProperty();
         EventBinding();
+        DataContext = Data.Instance.Setting;
     }
 
     private void ControlProperty()
     {
-        var lang = Data.Setting.Language;
+        var lang = Data.Instance.Setting.Language;
         if (lang == "Unset") return;
         LanguageListBox.SelectedIndex = lang switch
         {
@@ -35,8 +36,7 @@ public partial class Language : UserControl
             var selectedItem = (StackPanel)LanguageListBox.SelectedItem;
             var cultureCode = ((TextBlock)selectedItem.Children[1]).Text;
             LangHelper.Current.ChangedCulture(cultureCode!);
-            Data.Setting.Language = cultureCode;
-            Method.SaveSetting();
+            Data.Instance.Setting.Language = cultureCode;
         };
     }
 }

@@ -17,7 +17,7 @@ public partial class MainWindow : Window
     {
         PropertyChanged += (_, e) =>
         {
-            if (Data.Setting.WindowTitleBarStyle != Setting.WindowTitleBarStyle.Ymcl ||
+            if (Data.Instance.Setting.WindowTitleBarStyle != Setting.WindowTitleBarStyle.Ymcl ||
                 e.Property.Name != nameof(WindowState)) return;
             switch (WindowState)
             {

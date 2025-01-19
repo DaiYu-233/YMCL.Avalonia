@@ -29,7 +29,7 @@ public partial class Account : UserControl
     {
         InitializeComponent();
         BindingEvent();
-        AccountListBox.ItemsSource = Data.Accounts;
+        AccountListBox.ItemsSource = Data.Instance.Accounts;
     }
 
     private async void YggdrasilLogin(string server1 = "", string email1 = "", string password1 = "")
@@ -120,7 +120,7 @@ public partial class Account : UserControl
                             var bytes = await skinFetcher.GetSkinAsync();
                             await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Data.Accounts.Add(new AccountInfo
+                                Data.Instance.Accounts.Add(new AccountInfo
                                 {
                                     AccountType = Setting.AccountType.ThirdParty,
                                     AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
@@ -134,7 +134,7 @@ public partial class Account : UserControl
                         {
                             await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Data.Accounts.Add(new AccountInfo
+                                Data.Instance.Accounts.Add(new AccountInfo
                                 {
                                     AccountType = Setting.AccountType.ThirdParty,
                                     AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
@@ -146,7 +146,7 @@ public partial class Account : UserControl
                     }
 
                     await File.WriteAllTextAsync(ConfigPath.AccountDataPath,
-                        JsonConvert.SerializeObject(Data.Accounts, Formatting.Indented));
+                        JsonConvert.SerializeObject(Data.Instance.Accounts, Formatting.Indented));
                     if (TopLevel.GetTopLevel(this) is Window window)
                     {
                         window.Activate();
@@ -207,7 +207,7 @@ public partial class Account : UserControl
                             if (!string.IsNullOrWhiteSpace(textBox.Text) && !string.IsNullOrWhiteSpace(textBox.Text))
                             {
                                 var now = DateTime.Now;
-                                Data.Accounts.Add(new AccountInfo
+                                Data.Instance.Accounts.Add(new AccountInfo
                                 {
                                     AccountType = Setting.AccountType.Offline,
                                     AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
@@ -215,7 +215,7 @@ public partial class Account : UserControl
                                     Name = textBox.Text
                                 });
                                 await File.WriteAllTextAsync(ConfigPath.AccountDataPath,
-                                    JsonConvert.SerializeObject(Data.Accounts, Formatting.Indented));
+                                    JsonConvert.SerializeObject(Data.Instance.Accounts, Formatting.Indented));
                             }
                             else
                             {
@@ -223,7 +223,7 @@ public partial class Account : UserControl
                             }
                         }
                         await File.WriteAllTextAsync(ConfigPath.AccountDataPath,
-                            JsonConvert.SerializeObject(Data.Accounts, Formatting.Indented));
+                            JsonConvert.SerializeObject(Data.Instance.Accounts, Formatting.Indented));
                         break;
                     case 1:
                         var verificationUrl = string.Empty;
@@ -319,7 +319,7 @@ public partial class Account : UserControl
                             MicrosoftSkinFetcher skinFetcher = new(userProfile.Uuid.ToString());
                             var bytes = await skinFetcher.GetSkinAsync();
                             var now = DateTime.Now;
-                            Data.Accounts.Add(new AccountInfo
+                            Data.Instance.Accounts.Add(new AccountInfo
                             {
                                 AccountType = Setting.AccountType.Microsoft,
                                 AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
@@ -329,7 +329,7 @@ public partial class Account : UserControl
                             });
                             AccountListBox.Items.Clear();
                             await File.WriteAllTextAsync(ConfigPath.AccountDataPath,
-                                JsonConvert.SerializeObject(Data.Accounts, Formatting.Indented));
+                                JsonConvert.SerializeObject(Data.Instance.Accounts, Formatting.Indented));
                             if (TopLevel.GetTopLevel(this) is Window window)
                             {
                                 window.Activate();
@@ -340,7 +340,7 @@ public partial class Account : UserControl
                             ShowShortException(MainLang.LoginFail, ex);
                         }
                         await File.WriteAllTextAsync(ConfigPath.AccountDataPath,
-                            JsonConvert.SerializeObject(Data.Accounts, Formatting.Indented));
+                            JsonConvert.SerializeObject(Data.Instance.Accounts, Formatting.Indented));
                         break;
                     case 2:
                         YggdrasilLogin();

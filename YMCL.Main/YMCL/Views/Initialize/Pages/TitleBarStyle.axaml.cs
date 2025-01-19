@@ -8,7 +8,7 @@ public partial class TitleBarStyle : UserControl
     public TitleBarStyle()
     {
         InitializeComponent();
-        WindowTitleBarStyleListBox.SelectedIndex = Data.Setting.WindowTitleBarStyle == Setting.WindowTitleBarStyle.Ymcl ? 1 : 0;
+        WindowTitleBarStyleListBox.SelectedIndex = Data.Instance.Setting.WindowTitleBarStyle == Setting.WindowTitleBarStyle.Ymcl ? 1 : 0;
         WindowTitleBarStyleListBox.SelectionChanged += (_, _) =>
         {
             var toplevel = TopLevel.GetTopLevel(this);
@@ -17,11 +17,10 @@ public partial class TitleBarStyle : UserControl
                 WindowTitleBarStyleListBox.SelectedIndex == 1
                     ? Setting.WindowTitleBarStyle.Ymcl
                     : Setting.WindowTitleBarStyle.System);
-            Data.Setting.WindowTitleBarStyle =
+            Data.Instance.Setting.WindowTitleBarStyle =
                 WindowTitleBarStyleListBox.SelectedIndex == 1
                     ? Setting.WindowTitleBarStyle.Ymcl
                     : Setting.WindowTitleBarStyle.System;
-            Method.SaveSetting();
         };
     }
 }

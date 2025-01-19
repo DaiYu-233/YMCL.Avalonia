@@ -59,6 +59,8 @@
     <PackageReference Include="MinecraftLaunch" />
     <PackageReference Include="MinecraftLaunch.Skin" />
     <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="ReactiveUI" />
+    <PackageReference Include="ReactiveUI.Fody" />
     <PackageReference Include="Semi.Avalonia" />
   </ItemGroup>
 

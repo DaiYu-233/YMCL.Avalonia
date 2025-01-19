@@ -14,7 +14,7 @@ internal sealed class Program
 
     public static AppBuilder BuildAvaloniaApp()
     {
-        Data.RunnerType = RunnerType.Android;
+        Data.Instance.RunnerType = RunnerType.Android;
         return AppBuilder.Configure<App>();
     }
 }

@@ -23,6 +23,8 @@
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
     <AvaloniaResource Include="Public\Assets\MiSans-Regular.otf" />
+    <None Remove="Public\Assets\TitleBar-Icon.png" />
+    <AvaloniaResource Include="Public\Assets\TitleBar-Icon.png" />
   </ItemGroup>
   
   <ItemGroup>
@@ -87,6 +89,22 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>MainLang.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\Main\Pages\Download.axaml.cs">
+      <DependentUpon>Download.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Main\Pages\More.axaml.cs">
+      <DependentUpon>More.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Main\Pages\Music.axaml.cs">
+      <DependentUpon>Music.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Main\Pages\Setting.axaml.cs">
+      <DependentUpon>Setting.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -94,5 +112,11 @@
     <UpToDateCheckInput Remove="Public\Controls\PluginInfo\PluginInfo.axaml" />
     <UpToDateCheckInput Remove="Public\Controls\UrlImage\UrlImage.axaml" />
     <UpToDateCheckInput Remove="Assets\MiSans-Regular.otf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Main\Pages\Download\" />
+    <Folder Include="Views\Main\Pages\More\" />
+    <Folder Include="Views\Main\Pages\Setting\" />
   </ItemGroup>
 </Project>

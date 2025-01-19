@@ -45,8 +45,24 @@
                     IsMaxBtnShow="True"
                     IsVisible="False"
                     Name="TitleBar"
-                    Title="Yu Minecraft Launcher" />
+                    Title="" />
                 <main:MainView Name="View" />
+            </DockPanel>
+            <DockPanel Name="TitleRoot">
+                <Image
+                    Height="20"
+                    Margin="10,6,2,0"
+                    Source="/Public/Assets/TitleBar-Icon.png"
+                    VerticalAlignment="Top"
+                    Width="20" />
+                <TextBlock
+                    FontFamily="{DynamicResource Font}"
+                    FontSize="16"
+                    HorizontalAlignment="Left"
+                    Margin="0,5,0,0"
+                    Text=" Yu Minecraft Launcher"
+                    VerticalAlignment="Top"
+                    x:Name="TitleText" />
             </DockPanel>
         </Grid>
     </Border>

@@ -4,8 +4,10 @@ public static class InitDispatcher
 {
     public static void BeforeCreateUi()
     {
+        DetectPlatform.Main();
         InitConfig.Dispatch();
         InitData.GetSettingData();
+        InitData.VerifyData();
         InitLang.Dispatch();
     }
 

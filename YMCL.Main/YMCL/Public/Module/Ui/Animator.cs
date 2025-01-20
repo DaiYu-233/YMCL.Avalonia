@@ -35,5 +35,32 @@ public class Animator
                 await Task.Delay(TimeSpan.FromSeconds(0.45));
             }
         }
+        
+        public static async Task LevelTwoPage(UserControl? control)
+        {
+            if (control != null)
+            {
+                control.IsVisible = false;
+                control.Transitions = [];
+                control.Margin = new Thickness(0, 50, 0, -50);
+                control.Opacity = 0;
+                control.Transitions.Add(new ThicknessTransition
+                {
+                    Duration = TimeSpan.FromSeconds(0.45),
+                    Easing = new SineEaseInOut(),
+                    Property = Layoutable.MarginProperty
+                });
+                control.Transitions.Add(new DoubleTransition
+                {
+                    Duration = TimeSpan.FromSeconds(0.45),
+                    Easing = new SineEaseInOut(),
+                    Property = Visual.OpacityProperty
+                });
+                control.IsVisible = true;
+                control.Margin = new Thickness(0);
+                control.Opacity = 1;
+                await Task.Delay(TimeSpan.FromSeconds(0.45));
+            }
+        }
     }
 }

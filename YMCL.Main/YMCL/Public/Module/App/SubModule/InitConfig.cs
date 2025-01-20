@@ -42,7 +42,7 @@ public static class InitConfig
                         new MinecraftFolder { Name = "Minecraft Folder", Path = path }
                     ]), Formatting.Indented));
             var setting1 = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(ConfigPath.SettingDataPath));
-            setting1.MinecraftFolder = new MinecraftFolder { Name = MainLang.MinecraftFolder, Path = path };
+            setting1.MinecraftFolder = new MinecraftFolder { Name = "Minecraft Folder", Path = path };
             File.WriteAllText(ConfigPath.SettingDataPath,
                 JsonConvert.SerializeObject(setting1, Formatting.Indented));
         }

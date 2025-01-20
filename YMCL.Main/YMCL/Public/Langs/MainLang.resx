@@ -24,7 +24,7 @@
   <data name="MinecraftFolder" xml:space="preserve">
     <value>Minecraft文件夹</value>
   </data>
-  <data name="DelSeletedItem" xml:space="preserve">
+  <data name="DelSelectedItem" xml:space="preserve">
     <value>删除选中项</value>
   </data>
   <data name="AddFolder" xml:space="preserve">
@@ -978,5 +978,11 @@ MacOs 不支持自动更新
   </data>
   <data name="About" xml:space="preserve">
     <value>关于</value>
+  </data>
+  <data name="Personalize" xml:space="preserve">
+    <value>个性化</value>
+  </data>
+  <data name="Launcher" xml:space="preserve">
+    <value>启动器</value>
   </data>
 </root>

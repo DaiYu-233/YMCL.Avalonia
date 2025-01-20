@@ -123,7 +123,7 @@
   <data name="MinecraftFolder" xml:space="preserve">
     <value>Minecraft資料夾</value>
   </data>
-  <data name="DelSeletedItem" xml:space="preserve">
+  <data name="DelSelectedItem" xml:space="preserve">
     <value>刪除選取項目</value>
   </data>
   <data name="AddFolder" xml:space="preserve">

@@ -322,6 +322,7 @@
                         </ui:NavigationViewItem>
                     </ui:NavigationView.MenuItems>
                     <ContentControl
+                        Background="{DynamicResource 2x}"
                         Content="{Binding CurrentPage}"
                         DockPanel.Dock="Right"
                         Name="FrameView"
@@ -329,5 +330,15 @@
                 </ui:NavigationView>
             </Grid>
         </Border>
+        <Button
+            MaxHeight="1"
+            MaxWidth="1"
+            Name="FocusButton1"
+            Opacity="0" />
+        <Button
+            MaxHeight="1"
+            MaxWidth="1"
+            Name="FocusButton2"
+            Opacity="0" />
     </Grid>
 </UserControl>

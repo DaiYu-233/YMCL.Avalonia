@@ -123,7 +123,7 @@
   <data name="MinecraftFolder" xml:space="preserve">
     <value>Папка Minecraft</value>
   </data>
-  <data name="DelSeletedItem" xml:space="preserve">
+  <data name="DelSelectedItem" xml:space="preserve">
     <value>Удалить выбранное</value>
   </data>
   <data name="AddFolder" xml:space="preserve">

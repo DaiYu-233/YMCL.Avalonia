@@ -1,4 +1,5 @@
-﻿using Avalonia.Media;
+﻿using System.Threading.Tasks;
+using Avalonia.Media;
 using Avalonia.Platform;
 using YMCL.Public.Enum;
 

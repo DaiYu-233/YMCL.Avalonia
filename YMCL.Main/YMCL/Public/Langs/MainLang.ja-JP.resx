@@ -123,7 +123,7 @@
   <data name="MinecraftFolder" xml:space="preserve">
     <value>Minecraft フォルダ</value>
   </data>
-  <data name="DelSeletedItem" xml:space="preserve">
+  <data name="DelSelectedItem" xml:space="preserve">
     <value>選択項目を削除</value>
   </data>
   <data name="AddFolder" xml:space="preserve">

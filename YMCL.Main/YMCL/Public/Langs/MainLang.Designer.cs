@@ -711,9 +711,9 @@ namespace YMCL.Public.Langs {
         /// <summary>
         ///   Looks up a localized string similar to 删除选中项.
         /// </summary>
-        public static string DelSeletedItem {
+        public static string DelSelectedItem {
             get {
-                return ResourceManager.GetString("DelSeletedItem", resourceCulture);
+                return ResourceManager.GetString("DelSelectedItem", resourceCulture);
             }
         }
         
@@ -1356,6 +1356,15 @@ namespace YMCL.Public.Langs {
         public static string LaunchCore {
             get {
                 return ResourceManager.GetString("LaunchCore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 启动器.
+        /// </summary>
+        public static string Launcher {
+            get {
+                return ResourceManager.GetString("Launcher", resourceCulture);
             }
         }
         
@@ -2025,6 +2034,15 @@ namespace YMCL.Public.Langs {
         public static string Overview {
             get {
                 return ResourceManager.GetString("Overview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 个性化.
+        /// </summary>
+        public static string Personalize {
+            get {
+                return ResourceManager.GetString("Personalize", resourceCulture);
             }
         }
         

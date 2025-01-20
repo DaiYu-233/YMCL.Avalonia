@@ -62,6 +62,7 @@
     <PackageReference Include="ReactiveUI" />
     <PackageReference Include="ReactiveUI.Fody" />
     <PackageReference Include="Semi.Avalonia" />
+    <PackageReference Include="System.Management" />
   </ItemGroup>
 
   <ItemGroup>
@@ -119,6 +120,5 @@
   <ItemGroup>
     <Folder Include="Views\Main\Pages\Download\" />
     <Folder Include="Views\Main\Pages\More\" />
-    <Folder Include="Views\Main\Pages\Setting\" />
   </ItemGroup>
 </Project>

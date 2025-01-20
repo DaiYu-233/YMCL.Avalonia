@@ -7,6 +7,7 @@ using MinecraftLaunch.Classes.Models.Game;
 using ReactiveUI;
 using YMCL.Public.Classes;
 using YMCL.Public.Enum;
+using YMCL.Public.Langs;
 using YMCL.Public.Module.App;
 using YMCL.ViewModels;
 using YMCL.Views.Initialize.Pages;
@@ -17,6 +18,7 @@ namespace YMCL.Public.Const;
 public sealed class Data : ReactiveObject
 {
     private static Data? _instance;
+    public static readonly JavaEntry AutoJava = new() { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "Auto" };
     public RunnerType RunnerType { get; set; }
     public DesktopRunnerType DesktopType { get; set; } = DesktopRunnerType.NotDesktop;
     public WindowNotificationManager Notification { get; set; }
@@ -30,7 +32,7 @@ public sealed class Data : ReactiveObject
     {
         get { return _instance ??= new Data(); }
     }
-    
+
     public new event PropertyChangedEventHandler? PropertyChanged;
 
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null)

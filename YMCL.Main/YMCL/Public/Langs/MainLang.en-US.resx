@@ -123,7 +123,7 @@
   <data name="MinecraftFolder" xml:space="preserve">
     <value>Minecraft Folder</value>
   </data>
-  <data name="DelSeletedItem" xml:space="preserve">
+  <data name="DelSelectedItem" xml:space="preserve">
     <value>Delete Selected</value>
   </data>
   <data name="AddFolder" xml:space="preserve">

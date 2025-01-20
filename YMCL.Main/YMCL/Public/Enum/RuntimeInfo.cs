@@ -14,5 +14,6 @@ public enum DesktopRunnerType
     Windows,
     MacOs,
     Linux,
-    FreeBSD
+    FreeBSD,
+    Unknown
 }

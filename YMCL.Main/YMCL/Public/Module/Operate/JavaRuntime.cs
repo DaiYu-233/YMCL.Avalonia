@@ -18,9 +18,9 @@ public class JavaRuntime
         var successAddCount = 0;
         foreach (var java in fetcher.Fetch())
         {
-            if (!Data.Instance.JavaRuntimes.Contains(java))
+            if (!Data.JavaRuntimes.Contains(java))
             {
-                Data.Instance.JavaRuntimes.Add(java);
+                Data.JavaRuntimes.Add(java);
                 successAddCount++;
             }
             else
@@ -31,7 +31,7 @@ public class JavaRuntime
 
         Toast($"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}: {successAddCount}\n{MainLang.RepeatItem}: {repeatJavaCount}",
             NotificationType.Success);
-        File.WriteAllText(ConfigPath.JavaDataPath, JsonConvert.SerializeObject(Data.Instance.JavaRuntimes, Formatting.Indented));
+        File.WriteAllText(ConfigPath.JavaDataPath, JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
     }
     
     public static async Task AddByUi(Control sender)
@@ -46,21 +46,21 @@ public class JavaRuntime
         }
         else
         {
-            if (Data.Instance.JavaRuntimes.Contains(javaInfo!))
+            if (Data.JavaRuntimes.Contains(javaInfo!))
                 Toast(MainLang.TheItemAlreadyExist ,NotificationType.Error);
             else
-                Data.Instance.JavaRuntimes.Add(javaInfo!);
+                Data.JavaRuntimes.Add(javaInfo!);
         }
-        await File.WriteAllTextAsync(ConfigPath.JavaDataPath, JsonConvert.SerializeObject(Data.Instance.JavaRuntimes, Formatting.Indented));
+        await File.WriteAllTextAsync(ConfigPath.JavaDataPath, JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
     }
 
     public static void RemoveSelected()
     {
-        if (Data.Instance.Setting.Java != null && Data.Instance.Setting.Java.JavaPath != "All")
+        if (Data.Setting.Java != null && Data.Setting.Java.JavaPath != "All")
         {
-            Data.Instance.JavaRuntimes.Remove(Data.Instance.Setting.Java);
+            Data.JavaRuntimes.Remove(Data.Setting.Java);
             File.WriteAllText(ConfigPath.JavaDataPath,
-                JsonConvert.SerializeObject(Data.Instance.JavaRuntimes, Formatting.Indented));
+                JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
         }
     }
 }

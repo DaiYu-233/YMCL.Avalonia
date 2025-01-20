@@ -17,7 +17,7 @@ sealed class Program
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
     {
-        Data.Instance.RunnerType = RunnerType.Desktop;
+        Data.RunnerType = RunnerType.Desktop;
         ConfigPath.InitPath();
         return AppBuilder.Configure<App>()
             .UsePlatformDetect()

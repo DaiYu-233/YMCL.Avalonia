@@ -16,14 +16,14 @@ public partial class MinecraftFolder : UserControl
     public MinecraftFolder()
     {
         InitializeComponent();
-        MinecraftFolderListBox.ItemsSource = Data.Instance.MinecraftFolders;
+        MinecraftFolderListBox.ItemsSource = Data.MinecraftFolders;
         ManualAddMinecraftFolderBtn.Click += async (_, _) =>
         {
             await Public.Module.Operate.MinecraftFolder.AddByUi(this);
         };
         MinecraftFolderListBox.SelectionChanged += (_, _) =>
         {
-            Data.Instance.Setting.MinecraftFolder = MinecraftFolderListBox.SelectedItem as Public.Classes.MinecraftFolder;
+            Data.Setting.MinecraftFolder = MinecraftFolderListBox.SelectedItem as Public.Classes.MinecraftFolder;
         };
     }
 }

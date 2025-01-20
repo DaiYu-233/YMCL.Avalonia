@@ -29,7 +29,7 @@ public partial class Account : UserControl
     {
         InitializeComponent();
         BindingEvent();
-        AccountListBox.ItemsSource = Data.Instance.Accounts;
+        AccountListBox.ItemsSource = Data.Accounts;
     }
     
     private void BindingEvent()

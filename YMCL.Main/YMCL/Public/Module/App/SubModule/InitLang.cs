@@ -6,9 +6,9 @@ public class InitLang
 {
     public static void Dispatch()
     {
-        if (Data.Instance.Setting.Language == null || Data.Instance.Setting.Language == "zh-CN")
+        if (Data.Setting.Language == null || Data.Setting.Language == "zh-CN")
             LangHelper.Current.ChangedCulture("");
         else
-            LangHelper.Current.ChangedCulture(Data.Instance.Setting.Language);
+            LangHelper.Current.ChangedCulture(Data.Setting.Language);
     }
 }

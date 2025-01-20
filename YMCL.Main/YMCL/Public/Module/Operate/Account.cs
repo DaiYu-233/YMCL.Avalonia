@@ -66,7 +66,7 @@ public class Account
                         if (!string.IsNullOrWhiteSpace(textBox.Text) && !string.IsNullOrWhiteSpace(textBox.Text))
                         {
                             var now = DateTime.Now;
-                            Data.Instance.Accounts.Add(new AccountInfo
+                            Data.Accounts.Add(new AccountInfo
                             {
                                 AccountType = Setting.AccountType.Offline,
                                 AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
@@ -74,7 +74,7 @@ public class Account
                                 Name = textBox.Text
                             });
                             await File.WriteAllTextAsync(ConfigPath.AccountDataPath,
-                                JsonConvert.SerializeObject(Data.Instance.Accounts, Formatting.Indented));
+                                JsonConvert.SerializeObject(Data.Accounts, Formatting.Indented));
                         }
                         else
                         {
@@ -83,7 +83,7 @@ public class Account
                     }
 
                     await File.WriteAllTextAsync(ConfigPath.AccountDataPath,
-                        JsonConvert.SerializeObject(Data.Instance.Accounts, Formatting.Indented));
+                        JsonConvert.SerializeObject(Data.Accounts, Formatting.Indented));
                     break;
                 case 1:
                     var verificationUrl = string.Empty;
@@ -179,7 +179,7 @@ public class Account
                         MicrosoftSkinFetcher skinFetcher = new(userProfile.Uuid.ToString());
                         var bytes = await skinFetcher.GetSkinAsync();
                         var now = DateTime.Now;
-                        Data.Instance.Accounts.Add(new AccountInfo
+                        Data.Accounts.Add(new AccountInfo
                         {
                             AccountType = Setting.AccountType.Microsoft,
                             AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
@@ -188,7 +188,7 @@ public class Account
                             Skin = Converter.BytesToBase64(bytes)
                         });
                         await File.WriteAllTextAsync(ConfigPath.AccountDataPath,
-                            JsonConvert.SerializeObject(Data.Instance.Accounts, Formatting.Indented));
+                            JsonConvert.SerializeObject(Data.Accounts, Formatting.Indented));
                         if (TopLevel.GetTopLevel(sender) is Window window)
                         {
                             window.Activate();
@@ -200,7 +200,7 @@ public class Account
                     }
 
                     await File.WriteAllTextAsync(ConfigPath.AccountDataPath,
-                        JsonConvert.SerializeObject(Data.Instance.Accounts, Formatting.Indented));
+                        JsonConvert.SerializeObject(Data.Accounts, Formatting.Indented));
                     break;
                 case 2:
                     YggdrasilLogin(sender);
@@ -296,7 +296,7 @@ public class Account
                             var bytes = await skinFetcher.GetSkinAsync();
                             await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Data.Instance.Accounts.Add(new AccountInfo
+                                Data.Accounts.Add(new AccountInfo
                                 {
                                     AccountType = Setting.AccountType.ThirdParty,
                                     AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
@@ -310,7 +310,7 @@ public class Account
                         {
                             await Dispatcher.UIThread.InvokeAsync(() =>
                             {
-                                Data.Instance.Accounts.Add(new AccountInfo
+                                Data.Accounts.Add(new AccountInfo
                                 {
                                     AccountType = Setting.AccountType.ThirdParty,
                                     AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
@@ -322,7 +322,7 @@ public class Account
                     }
 
                     await File.WriteAllTextAsync(ConfigPath.AccountDataPath,
-                        JsonConvert.SerializeObject(Data.Instance.Accounts, Formatting.Indented));
+                        JsonConvert.SerializeObject(Data.Accounts, Formatting.Indented));
                     if (TopLevel.GetTopLevel(sender) is Window window)
                     {
                         window.Activate();

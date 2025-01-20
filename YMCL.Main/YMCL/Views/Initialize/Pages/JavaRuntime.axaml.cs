@@ -15,7 +15,7 @@ public partial class JavaRuntime : UserControl
     {
         InitializeComponent();
         BindingEvent();
-        JavaRuntimeListBox.ItemsSource = Data.Instance.JavaRuntimes;
+        JavaRuntimeListBox.ItemsSource = Data.JavaRuntimes;
     }
 
     private void BindingEvent()

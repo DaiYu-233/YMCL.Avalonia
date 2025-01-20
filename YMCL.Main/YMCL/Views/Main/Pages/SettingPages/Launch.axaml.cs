@@ -19,7 +19,7 @@ public partial class Launch : UserControl
 
     private async System.Threading.Tasks.Task ControlProperty()
     {
-        var totalMemory = Disk.GetTotalMemory(Data.Instance.DesktopType);
+        var totalMemory = Disk.GetTotalMemory(Data.DesktopType);
         if (totalMemory != 0)
             MaxMemSlider.Maximum = Math.Floor(totalMemory / 1024);
         else

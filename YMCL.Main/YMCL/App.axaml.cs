@@ -29,14 +29,14 @@ public class App : Application
             if (ifShowInit.ifShow)
             {
                 var view = new InitializeWindow(ifShowInit.page) { IsVisible = false };
-                Data.Instance.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
+                Data.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
                 desktop.MainWindow = view;
             }
             else
             {
                 var view = new MainWindow(out var mainView);
                 UiRoot = mainView;
-                Data.Instance.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
+                Data.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
                 desktop.MainWindow = view;
             }
         }
@@ -45,14 +45,14 @@ public class App : Application
             if (ifShowInit.ifShow)
             {
                 var view = new InitializeView(ifShowInit.page);
-                Data.Instance.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
+                Data.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
                 singleViewPlatform.MainView = view;
             }
             else
             {
                 var view = new MainView();
                 UiRoot = view;
-                Data.Instance.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
+                Data.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
                 singleViewPlatform.MainView = view;
             }
         }

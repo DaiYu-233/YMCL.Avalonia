@@ -6,27 +6,27 @@ public class Decision
 {
     public static (bool ifShow, int page) WhetherToShowInitView()
     {
-        if (Data.Instance.Setting.Language == "Unset")
+        if (Data.Setting.Language == "Unset")
         {
             return (true, 1);
         }
 
-        if (Data.Instance.Setting.WindowTitleBarStyle == Setting.WindowTitleBarStyle.Unset)
+        if (Data.Setting.WindowTitleBarStyle == Setting.WindowTitleBarStyle.Unset)
         {
             return (true, 2);
         }
 
-        if (!Data.Instance.Setting.IsCompleteMinecraftFolderInitialize)
+        if (!Data.Setting.IsCompleteMinecraftFolderInitialize)
         {
             return (true, 3);
         }
 
-        if (!Data.Instance.Setting.IsCompleteJavaInitialize)
+        if (!Data.Setting.IsCompleteJavaInitialize)
         {
             return (true, 4);
         }
 
-        if (!Data.Instance.Setting.IsCompleteAccountInitialize)
+        if (!Data.Setting.IsCompleteAccountInitialize)
         {
             return (true, 5);
         } 

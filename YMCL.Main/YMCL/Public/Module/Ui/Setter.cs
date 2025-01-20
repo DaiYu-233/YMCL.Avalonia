@@ -34,7 +34,7 @@ public class Setter
         Action? systemAction = null, Action? launcherAction = null)
     {
         if (window == null) return;
-        var style = windowTitleBarStyle ?? Data.Instance.Setting.WindowTitleBarStyle;
+        var style = windowTitleBarStyle ?? Data.Setting.WindowTitleBarStyle;
         if (style == Setting.WindowTitleBarStyle.System)
         {
             window.FindControl<Controls.TitleBar>("TitleBar").IsVisible = false;

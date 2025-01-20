@@ -19,32 +19,17 @@ public sealed class Data : ReactiveObject
 {
     private static Data? _instance;
     public static readonly JavaEntry AutoJava = new() { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "Auto" };
-    public RunnerType RunnerType { get; set; }
-    public DesktopRunnerType DesktopType { get; set; } = DesktopRunnerType.NotDesktop;
-    public WindowNotificationManager Notification { get; set; }
-    public ObservableCollection<Classes.MinecraftFolder> MinecraftFolders { get; set; }
-    public ObservableCollection<JavaEntry> JavaRuntimes { get; set; }
-    public ObservableCollection<AccountInfo> Accounts { get; set; }
+    public static RunnerType RunnerType { get; set; }
+    public static DesktopRunnerType DesktopType { get; set; } = DesktopRunnerType.NotDesktop;
+    public static WindowNotificationManager Notification { get; set; }
+    public static ObservableCollection<Classes.MinecraftFolder> MinecraftFolders { get; set; }
+    public static ObservableCollection<JavaEntry> JavaRuntimes { get; set; }
+    public static ObservableCollection<AccountInfo> Accounts { get; set; }
 
-    public Setting Setting { get; set; }
+    public static Setting Setting { get; set; }
 
     public static Data Instance
     {
         get { return _instance ??= new Data(); }
-    }
-
-    public new event PropertyChangedEventHandler? PropertyChanged;
-
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    private bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-    {
-        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-        field = value;
-        OnPropertyChanged(propertyName);
-        return true;
     }
 }

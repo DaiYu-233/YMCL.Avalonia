@@ -45,18 +45,18 @@ public class MinecraftFolder
         textbox.TextChanged += (_, _) => { dialog.IsPrimaryButtonEnabled = !string.IsNullOrWhiteSpace(textbox.Text); };
         var result = await dialog.ShowAsync();
         if (result != ContentDialogResult.Primary) return;
-        Data.Instance.MinecraftFolders.Add(new Public.Classes.MinecraftFolder
+        Data.MinecraftFolders.Add(new Public.Classes.MinecraftFolder
             { Name = textbox.Text, Path = list[0].Path.LocalPath });
         await File.WriteAllTextAsync(ConfigPath.MinecraftFolderDataPath,
-            JsonConvert.SerializeObject(Data.Instance.MinecraftFolders, Formatting.Indented));
+            JsonConvert.SerializeObject(Data.MinecraftFolders, Formatting.Indented));
     }
 
     public static void RemoveSelected()
     {
-        var item = Data.Instance.Setting.MinecraftFolder;
+        var item = Data.Setting.MinecraftFolder;
         if (item == null) return;
-        Data.Instance.MinecraftFolders.Remove(item);
+        Data.MinecraftFolders.Remove(item);
         File.WriteAllText(ConfigPath.MinecraftFolderDataPath,
-            JsonConvert.SerializeObject(Data.Instance.MinecraftFolders, Formatting.Indented));
+            JsonConvert.SerializeObject(Data.MinecraftFolders, Formatting.Indented));
     }
 }

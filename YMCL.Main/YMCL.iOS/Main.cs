@@ -11,7 +11,7 @@ public class Application
     {
         // if you want to use a different Application Delegate class from "AppDelegate"
         // you can specify it here.
-        Data.Instance.RunnerType = RunnerType.Android;
+        Data.RunnerType = RunnerType.Android;
         UIApplication.Main(args, null, typeof(AppDelegate));
     }
 }

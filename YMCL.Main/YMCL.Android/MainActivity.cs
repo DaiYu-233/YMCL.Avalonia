@@ -19,7 +19,7 @@ public class MainActivity : AvaloniaMainActivity<App>
 {
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
-        Data.Instance.RunnerType = RunnerType.Android;
+        Data.RunnerType = RunnerType.Android;
         return base.CustomizeAppBuilder(builder)
             .WithInterFont();
     }

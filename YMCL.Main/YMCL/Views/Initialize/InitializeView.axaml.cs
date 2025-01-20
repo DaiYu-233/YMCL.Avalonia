@@ -50,25 +50,25 @@ public partial class InitializeView : UserControl
 
     private void FinishInit(int page)
     {
-        if (page == 2 && Data.Instance.Setting.Language == "Unset")
+        if (page == 2 && Data.Setting.Language == "Unset")
         {
-            Data.Instance.Setting.Language = "zh-CN";
+            Data.Setting.Language = "zh-CN";
         }
-        if (page == 3 && Data.Instance.Setting.WindowTitleBarStyle == Setting.WindowTitleBarStyle.Unset)
+        if (page == 3 && Data.Setting.WindowTitleBarStyle == Setting.WindowTitleBarStyle.Unset)
         {
-            Data.Instance.Setting.WindowTitleBarStyle = Setting.WindowTitleBarStyle.System;
+            Data.Setting.WindowTitleBarStyle = Setting.WindowTitleBarStyle.System;
         }
         if (page == 4)
         {
-            Data.Instance.Setting.IsCompleteMinecraftFolderInitialize = true;
+            Data.Setting.IsCompleteMinecraftFolderInitialize = true;
         }
         if (page == 5)
         {
-            Data.Instance.Setting.IsCompleteJavaInitialize = true;
+            Data.Setting.IsCompleteJavaInitialize = true;
         }
         if (page == 6)
         {
-            Data.Instance.Setting.IsCompleteAccountInitialize = true;
+            Data.Setting.IsCompleteAccountInitialize = true;
             Method.RestartApp();
         }
     }

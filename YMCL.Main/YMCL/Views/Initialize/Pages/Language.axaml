@@ -3,9 +3,11 @@
     d:DesignWidth="800"
     mc:Ignorable="d"
     x:Class="YMCL.Views.Initialize.Pages.Language"
+    x:DataType="da:Data"
     xmlns="https://github.com/avaloniaui"
     xmlns:cl="clr-namespace:YMCL.Public.Classes"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:da="clr-namespace:YMCL.Public.Const"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
@@ -35,71 +37,26 @@
                     Width="280" />
             </DockPanel>
             <ListBox
+                ItemsSource="{Binding Langs}"
                 Margin="0,25,50,0"
                 Name="LanguageListBox"
-                SelectedIndex="0">
-                <ListBox.Items>
-                    <StackPanel Margin="0,7,0,7">
-                        <TextBlock
-                            FontFamily="{DynamicResource Font}"
-                            FontSize="16"
-                            Text="简体中文" />
-                        <TextBlock
-                            FontFamily="{DynamicResource Font}"
-                            FontSize="14"
-                            Foreground="{DynamicResource GrayColor}"
-                            Margin="0,-4,0,0"
-                            Text="zh-CN" />
-                    </StackPanel>
-                    <StackPanel Margin="0,7,0,7">
-                        <TextBlock
-                            FontFamily="{DynamicResource Font}"
-                            FontSize="16"
-                            Text="繁體中文" />
-                        <TextBlock
-                            FontFamily="{DynamicResource Font}"
-                            FontSize="14"
-                            Foreground="{DynamicResource GrayColor}"
-                            Margin="0,-4,0,0"
-                            Text="zh-Hant" />
-                    </StackPanel>
-                    <StackPanel Margin="0,7,0,7">
-                        <TextBlock
-                            FontFamily="{DynamicResource Font}"
-                            FontSize="16"
-                            Text="English" />
-                        <TextBlock
-                            FontFamily="{DynamicResource Font}"
-                            FontSize="14"
-                            Foreground="{DynamicResource GrayColor}"
-                            Margin="0,-4,0,0"
-                            Text="en-US" />
-                    </StackPanel>
-                    <StackPanel Margin="0,7,0,7">
-                        <TextBlock
-                            FontFamily="{DynamicResource Font}"
-                            FontSize="16"
-                            Text="日本語" />
-                        <TextBlock
-                            FontFamily="{DynamicResource Font}"
-                            FontSize="14"
-                            Foreground="{DynamicResource GrayColor}"
-                            Margin="0,-4,0,0"
-                            Text="ja-JP" />
-                    </StackPanel>
-                    <StackPanel Margin="0,7,0,7">
-                        <TextBlock
-                            FontFamily="{DynamicResource Font}"
-                            FontSize="16"
-                            Text="Русский язык" />
-                        <TextBlock
-                            FontFamily="{DynamicResource Font}"
-                            FontSize="14"
-                            Foreground="{DynamicResource GrayColor}"
-                            Margin="0,-4,0,0"
-                            Text="ru-RU" />
-                    </StackPanel>
-                </ListBox.Items>
+                SelectedItem="{Binding Setting.Language}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="cl:Language">
+                        <StackPanel Margin="0,7,0,7">
+                            <TextBlock
+                                FontFamily="{DynamicResource Font}"
+                                FontSize="16"
+                                Text="{Binding Label}" />
+                            <TextBlock
+                                FontFamily="{DynamicResource Font}"
+                                FontSize="14"
+                                Foreground="{DynamicResource GrayColor}"
+                                Margin="0,-4,0,0"
+                                Text="{Binding Code}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
         </DockPanel>
     </Grid>

@@ -5,8 +5,10 @@ namespace YMCL.Views.Main.Pages;
 
 public partial class Setting : UserControl
 {
-    private readonly SettingPages.Launch _launch = new();
-    private readonly SettingPages.Account _account = new();
+    public readonly SettingPages.Launch _launch = new();
+    public readonly SettingPages.Account _account = new();
+    public readonly SettingPages.Personalize _personalize = new();
+    public readonly SettingPages.Download _download = new();
 
     public Setting()
     {
@@ -24,6 +26,8 @@ public partial class Setting : UserControl
             {
                 "launch" => _launch,
                 "account" => _account,
+                "personalize" => _personalize,
+                "download" => _download,
                 _ => FrameView.Content as UserControl
             };
             FrameView.Content = page;

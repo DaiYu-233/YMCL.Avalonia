@@ -23,8 +23,11 @@ public class Disk
                 using (var searcher =
                        new ManagementObjectSearcher("select TotalVisibleMemorySize from Win32_OperatingSystem"))
                 {
-                    foreach (ManagementObject share in searcher.Get())
+                    foreach (var o in searcher.Get())
+                    {
+                        var share = (ManagementObject)o;
                         totalMemory = Convert.ToInt64(share["TotalVisibleMemorySize"]);
+                    }
                 }
 
                 Console.WriteLine("系统最大内存: " + totalMemory);

@@ -5,22 +5,31 @@ namespace YMCL.ViewModels;
 
 public class MainViewModel : NotifyPropertyModelBase
 {
-    private static readonly About _about = new();
-    private static readonly Search _search = new();
-    private static readonly Download _download = new();
-    private static readonly More _more = new();
-    private static readonly Music _music = new();
-    private static readonly Setting _setting = new();
-    private static readonly Task _task = new();
-    private static readonly Launch _launch = new();
-    private UserControl _currentPage = _launch;
+    public static readonly About _about = new();
+    public static readonly Search _search = new();
+    public static readonly Download _download = new();
+    public static readonly More _more = new();
+    public static readonly Music _music = new();
+    public static readonly Setting _setting = new();
+    public static readonly Task _task = new();
+    public static readonly Launch _launch = new();
+    public UserControl _currentPage = _launch;
 
     public UserControl CurrentPage
     {
         get => _currentPage;
         set => SetField(ref _currentPage, value);
     }
-    
+
+    public About About => _about;
+    public Search Search => _search;
+    public Download Download =>_download ;
+    public More More =>_more ;
+    public Music  Music =>_music ;
+    public Setting  Setting =>_setting ;
+    public Task  Task =>_task ;
+    public Launch Launch =>_launch ;
+
     public void TogglePage(string page)
     {
         CurrentPage = page switch

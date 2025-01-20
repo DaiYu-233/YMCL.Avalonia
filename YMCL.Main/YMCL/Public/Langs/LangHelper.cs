@@ -1,14 +1,30 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using Avalonia.Media;
+using Avalonia.VisualTree;
+using YMCL.Public.Classes;
 
 namespace YMCL.Public.Langs;
 
 public sealed class LangHelper : INotifyPropertyChanged
 {
+    public static ObservableCollection<Language> Langs { get; } =
+    [
+        new() { Label = "简体中文", Code = "zh-CN" },
+        new() { Label = "繁體中文", Code = "zh-Hant" },
+        new() { Label = "English", Code = "en-US" },
+        new() { Label = "日本語", Code = "ja-JP" },
+        new() { Label = "Русский язык", Code = "ru-RU" },
+    ];
+
     public static LangHelper Current { get; } = new();
 
     private MainLang _resources;
+
     public MainLang Resources
     {
         get => _resources;
@@ -32,13 +48,9 @@ public sealed class LangHelper : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    public void ChangedCulture(string name)
+    public async void ChangedCulture(string? name)
     {
-        if (string.IsNullOrEmpty(name) || name == "Unset")
-            MainLang.Culture = CultureInfo.GetCultureInfo("zh-CN");
-        else
-            MainLang.Culture = CultureInfo.GetCultureInfo(name);
-
+        MainLang.Culture = CultureInfo.GetCultureInfo(string.IsNullOrEmpty(name) ? "zh-CN" : name);
         Resources = new MainLang();
     }
 

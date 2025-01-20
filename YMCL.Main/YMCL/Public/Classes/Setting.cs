@@ -11,8 +11,8 @@ namespace YMCL.Public.Classes;
 
 public class Setting : ReactiveObject
 {
-    [Reactive] [JsonProperty] public string Language { get; set; } = "Unset";
-    [Reactive] [JsonProperty] public MinecraftFolder MinecraftFolder { get; set; } 
+    [Reactive] [JsonProperty] public Language Language { get; set; } = new();
+    [Reactive] [JsonProperty] public MinecraftFolder MinecraftFolder { get; set; }
     [Reactive] [JsonProperty] public string SkipUpdateVersion { get; set; } = string.Empty;
     [Reactive] [JsonProperty] public bool EnableAutoCheckUpdate { get; set; } = true;
     [Reactive] [JsonProperty] public double MaximumDownloadThread { get; set; } = 64;
@@ -45,7 +45,7 @@ public class Setting : ReactiveObject
 
     [Reactive] [JsonProperty] public string Version { get; set; }
     [Reactive] [JsonProperty] public bool EnableIndependencyCore { get; set; } = true;
-    [Reactive] [JsonProperty] public bool EnableCustomUpdateUrl { get; set; } = false;
+    [Reactive] [JsonProperty] public bool EnableCustomUpdateUrl { get; set; }
     [Reactive] [JsonProperty] public string CustomUpdateUrl { get; set; } = "https://github.moeyy.xyz/{%url%}";
     [Reactive] [JsonProperty] public string MusicApi { get; set; } = "http://music.api.daiyu.fun/";
 
@@ -53,8 +53,8 @@ public class Setting : ReactiveObject
     [JsonProperty]
     public Enum.Setting.CustomBackGroundWay CustomBackGround { get; set; } = Enum.Setting.CustomBackGroundWay.Default;
 
-    [Reactive] [JsonProperty] public bool EnableDisplayIndependentTaskWindow { get; set; } = false;
-    [Reactive] [JsonProperty] public bool ShowGameOutput { get; set; } = false;
+    [Reactive] [JsonProperty] public bool EnableDisplayIndependentTaskWindow { get; set; }
+    [Reactive] [JsonProperty] public bool ShowGameOutput { get; set; }
 
     [Reactive]
     [JsonProperty]
@@ -66,11 +66,22 @@ public class Setting : ReactiveObject
 
     [Reactive] [JsonProperty] public Color AccentColor { get; set; } = Color.Parse("#d64eff");
     [Reactive] [JsonProperty] public Color DeskLyricColor { get; set; } = Color.FromRgb(22, 233, 184);
-    [Reactive] [JsonProperty] public JavaEntry Java { get; set; } = new() { JavaPath = "让YMCL选择合适的Java", JavaVersion = "Auto" };
+
+    [Reactive]
+    [JsonProperty]
+    public JavaEntry Java { get; set; } = new() { JavaPath = "让YMCL选择合适的Java", JavaVersion = "Auto" };
+
     [Reactive] [JsonProperty] public string WindowBackGroundImgData { get; set; } = string.Empty;
 
     public Setting()
     {
-        PropertyChanged += (s, e) => { Method.SaveSetting(); };
+        PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(Language))
+            {
+                LangHelper.Current.ChangedCulture(Data.Setting.Language.Code);
+            }
+            Method.SaveSetting();
+        };
     }
 }

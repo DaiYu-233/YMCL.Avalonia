@@ -11,7 +11,7 @@ public class Method
         if (Data.Setting is null) return;
         File.WriteAllText(ConfigPath.SettingDataPath,
             JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
-    }, 500);
+    }, 100);
 
     public static void SaveSetting()
     {
@@ -20,6 +20,9 @@ public class Method
 
     public static void RestartApp()
     {
+        if (Data.Setting is null) return;
+        File.WriteAllText(ConfigPath.SettingDataPath,
+            JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
         var startInfo = new ProcessStartInfo
         {
             UseShellExecute = true,

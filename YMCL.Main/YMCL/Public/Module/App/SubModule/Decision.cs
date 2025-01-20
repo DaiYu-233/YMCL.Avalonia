@@ -6,7 +6,7 @@ public class Decision
 {
     public static (bool ifShow, int page) WhetherToShowInitView()
     {
-        if (Data.Setting.Language == "Unset")
+        if (Data.Setting.Language.Code == null)
         {
             return (true, 1);
         }

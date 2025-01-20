@@ -24,7 +24,10 @@ public class InitData
 
     public static void InitCollection()
     {
-        Data.JavaRuntimes.Insert(0, new JavaEntry { JavaPath = "让YMCL选择合适的Java", JavaVersion = "Auto" });
+        if (!Data.JavaRuntimes.Contains(new JavaEntry { JavaPath = "让YMCL选择合适的Java", JavaVersion = "Auto" }))
+        {
+            Data.JavaRuntimes.Insert(0, new JavaEntry { JavaPath = "让YMCL选择合适的Java", JavaVersion = "Auto" });
+        }
     }
     
     public static void VerifyData()

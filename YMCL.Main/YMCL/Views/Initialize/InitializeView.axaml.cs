@@ -43,6 +43,8 @@ public partial class InitializeView : UserControl
             5 => _account,
             _ => Frame.Content
         };
+        if (page == 1 && Data.Setting.Language == new Public.Classes.Language())
+            Data.Setting.Language = Data.Langs[0];
         Frame.Transitions.Add(animation);
         Frame.Opacity = 1;
         FinishInit(page);
@@ -50,9 +52,9 @@ public partial class InitializeView : UserControl
 
     private void FinishInit(int page)
     {
-        if (page == 2 && Data.Setting.Language == "Unset")
+        if (page == 2 && Data.Setting.Language.Code == null)
         {
-            Data.Setting.Language = "zh-CN";
+            Data.Setting.Language = Data.Langs[0];
         }
         if (page == 3 && Data.Setting.WindowTitleBarStyle == Setting.WindowTitleBarStyle.Unset)
         {

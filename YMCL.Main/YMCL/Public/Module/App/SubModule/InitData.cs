@@ -6,6 +6,7 @@ using MinecraftLaunch.Classes.Models.Game;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
 using YMCL.Public.Enum;
+using YMCL.Public.Langs;
 using Setting = YMCL.Public.Classes.Setting;
 
 namespace YMCL.Public.Module.App;
@@ -23,7 +24,7 @@ public class InitData
 
     public static void InitCollection()
     {
-        Data.JavaRuntimes.Insert(0, Data.AutoJava);
+        Data.JavaRuntimes.Insert(0, new JavaEntry { JavaPath = "让YMCL选择合适的Java", JavaVersion = "Auto" });
     }
     
     public static void VerifyData()

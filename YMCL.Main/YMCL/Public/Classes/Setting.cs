@@ -3,6 +3,7 @@ using MinecraftLaunch.Classes.Models.Game;
 using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using YMCL.Public.Langs;
 using YMCL.Public.Module.App;
 using YMCL.Views.Initialize.Pages;
 
@@ -29,7 +30,7 @@ public class Setting : ReactiveObject
     public Enum.Setting.LauncherVisibility LauncherVisibility { get; set; } =
         Enum.Setting.LauncherVisibility.AfterLaunchKeepLauncherVisible;
 
-    [Reactive] [JsonProperty] public int AccountSelectionIndex { get; set; }
+    [Reactive] [JsonProperty] public AccountInfo Account { get; set; }
     [Reactive] [JsonProperty] public Enum.Setting.Theme Theme { get; set; } = Enum.Setting.Theme.Light;
     [Reactive] [JsonProperty] public double MaxMem { get; set; } = 1024;
     [Reactive] [JsonProperty] public int MaxFileFragmentation { get; set; } = 8;
@@ -65,7 +66,7 @@ public class Setting : ReactiveObject
 
     [Reactive] [JsonProperty] public Color AccentColor { get; set; } = Color.Parse("#d64eff");
     [Reactive] [JsonProperty] public Color DeskLyricColor { get; set; } = Color.FromRgb(22, 233, 184);
-    [Reactive] [JsonProperty] public JavaEntry Java { get; set; } = Data.AutoJava;
+    [Reactive] [JsonProperty] public JavaEntry Java { get; set; } = new() { JavaPath = "让YMCL选择合适的Java", JavaVersion = "Auto" };
     [Reactive] [JsonProperty] public string WindowBackGroundImgData { get; set; } = string.Empty;
 
     public Setting()

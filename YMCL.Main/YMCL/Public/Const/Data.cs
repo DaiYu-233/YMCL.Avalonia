@@ -18,7 +18,6 @@ namespace YMCL.Public.Const;
 public sealed class Data : ReactiveObject
 {
     private static Data? _instance;
-    public static readonly JavaEntry AutoJava = new() { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "Auto" };
     public static RunnerType RunnerType { get; set; }
     public static DesktopRunnerType DesktopType { get; set; } = DesktopRunnerType.NotDesktop;
     public static WindowNotificationManager Notification { get; set; }

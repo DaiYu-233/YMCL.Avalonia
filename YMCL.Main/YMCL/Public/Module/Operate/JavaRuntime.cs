@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using Avalonia.Platform.Storage;
+using MinecraftLaunch.Classes.Models.Game;
 using MinecraftLaunch.Components.Fetcher;
 using MinecraftLaunch.Utilities;
 using Newtonsoft.Json;
@@ -29,11 +30,12 @@ public class JavaRuntime
             }
         }
 
-        Toast($"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}: {successAddCount}\n{MainLang.RepeatItem}: {repeatJavaCount}",
+        Toast(
+            $"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}: {successAddCount}\n{MainLang.RepeatItem}: {repeatJavaCount}",
             NotificationType.Success);
         File.WriteAllText(ConfigPath.JavaDataPath, JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
     }
-    
+
     public static async Task AddByUi(Control sender)
     {
         var list = await TopLevel.GetTopLevel(sender).StorageProvider.OpenFilePickerAsync(
@@ -47,20 +49,21 @@ public class JavaRuntime
         else
         {
             if (Data.JavaRuntimes.Contains(javaInfo!))
-                Toast(MainLang.TheItemAlreadyExist ,NotificationType.Error);
+                Toast(MainLang.TheItemAlreadyExist, NotificationType.Error);
             else
                 Data.JavaRuntimes.Add(javaInfo!);
         }
-        await File.WriteAllTextAsync(ConfigPath.JavaDataPath, JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
+
+        await File.WriteAllTextAsync(ConfigPath.JavaDataPath,
+            JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
     }
 
     public static void RemoveSelected()
     {
-        if (Data.Setting.Java != null && Data.Setting.Java.JavaPath != "All")
-        {
-            Data.JavaRuntimes.Remove(Data.Setting.Java);
-            File.WriteAllText(ConfigPath.JavaDataPath,
-                JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
-        }
+        if (Data.Setting.Java == null || Data.Setting.Java.JavaPath == "Auto") return;
+        Data.JavaRuntimes.Remove(Data.Setting.Java);
+        Data.Setting.Java = new JavaEntry { JavaPath = "让YMCL选择合适的Java", JavaVersion = "Auto" };
+        File.WriteAllText(ConfigPath.JavaDataPath,
+            JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
     }
 }

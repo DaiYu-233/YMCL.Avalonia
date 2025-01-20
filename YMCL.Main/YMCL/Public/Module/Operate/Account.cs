@@ -9,10 +9,13 @@ using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using MinecraftLaunch.Classes.Models.Auth;
 using MinecraftLaunch.Components.Authenticator;
+using MinecraftLaunch.Skin;
 using MinecraftLaunch.Skin.Class.Fetchers;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using YMCL.Public.Classes;
 using YMCL.Public.Langs;
+using YMCL.Public.Module.App;
 using YMCL.Public.Module.Value;
 using Setting = YMCL.Public.Enum.Setting;
 using String = YMCL.Public.Const.String;
@@ -208,7 +211,8 @@ public class Account
             }
     }
 
-    private static async void YggdrasilLogin(Control sender, string server1 = "", string email1 = "", string password1 = "")
+    private static async void YggdrasilLogin(Control sender, string server1 = "", string email1 = "",
+        string password1 = "")
     {
         var stackPanel = new StackPanel { Spacing = 10, Width = 580 };
         var verificationSeverUrlTextBox = new TextBox
@@ -333,6 +337,39 @@ public class Account
                     ShowShortException(MainLang.LoginFail, ex);
                 }
             }
+        }
+    }
+
+    public static void RemoveSelected()
+    {
+        var item = Data.Setting.Account;
+        if (item == null) return;
+        Data.Accounts.Remove(item);
+        if (Data.Accounts.Count == 0)
+        {
+            var account = new AccountInfo
+            {
+                Name = "Steve", AccountType = Setting.AccountType.Offline,
+                AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")
+            };
+            Data.Accounts.Add(account);
+            Data.Setting.Account = account;
+        }
+
+        File.WriteAllText(ConfigPath.AccountDataPath,
+            JsonConvert.SerializeObject(Data.Accounts, Formatting.Indented));
+    }
+
+    public static async Task RefreshSelectedMicrosoftAccountSkin()
+    {
+        if (Data.Setting.Account is not { AccountType: Setting.AccountType.Microsoft }) return;
+        if (Data.Setting.Account.Data != null)
+        {
+            var obj = JObject.Parse(Data.Setting.Account.Data);
+            var uuid = obj["Uuid"].ToString();
+            MicrosoftSkinFetcher skinFetcher = new(uuid);
+            var skin = await skinFetcher.GetSkinAsync();
+            Data.Setting.Account.UpdateSkin(skin);
         }
     }
 }

@@ -1,0 +1,90 @@
+﻿<UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="YMCL.Views.Main.Pages.SettingPages.Account"
+    x:DataType="da:Data"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:classes="clr-namespace:YMCL.Public.Classes"
+    xmlns:converters="clr-namespace:YMCL.Public.Module.Ui.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:da="clr-namespace:YMCL.Public.Const"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Public.Langs"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <converters:AccountTypeIsMicrosoftConverter x:Key="AccountTypeIsMicrosoftConverter" />
+    </UserControl.Resources>
+    <Border
+        Background="{DynamicResource 1x}"
+        ClipToBounds="True"
+        CornerRadius="5"
+        Opacity="{DynamicResource Opacity}"
+        Padding="0,10,0,0">
+        <ScrollViewer>
+            <StackPanel Margin="5,0,10,10" Spacing="10">
+                <DockPanel LastChildFill="False">
+                    <Button
+                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.AddNewAccount}"
+                        FontFamily="{DynamicResource Font}"
+                        Margin="6.5,0,0,0"
+                        x:Name="AddAccountBtn" />
+                    <Button
+                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.DelSelectedItem}"
+                        FontFamily="{DynamicResource Font}"
+                        Margin="6.5,0,0,0"
+                        x:Name="DelSelectedAccountBtn" />
+                    <Button
+                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.RefreshMicrosoftSkin}"
+                        FontFamily="{DynamicResource Font}"
+                        IsEnabled="{Binding Setting.Account, Converter={StaticResource AccountTypeIsMicrosoftConverter}}"
+                        IsVisible="{Binding Setting.Account, Converter={StaticResource AccountTypeIsMicrosoftConverter}}"
+                        Margin="6.5,0,0,0"
+                        x:Name="RefreshMicrosoftSkinBtn" />
+                </DockPanel>
+                <ListBox
+                    ItemsSource="{Binding Accounts}"
+                    Margin="0,-5,0,0"
+                    SelectedItem="{Binding Setting.Account}"
+                    x:Name="AccountsListView">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="classes:AccountInfo">
+                            <Border Margin="0,6">
+                                <DockPanel>
+                                    <Border
+                                        ClipToBounds="True"
+                                        CornerRadius="3,3,3,3"
+                                        Height="28"
+                                        Margin="2,0,6.5,0"
+                                        Width="28">
+                                        <Image Source="{Binding Bitmap}" />
+                                    </Border>
+                                    <Grid>
+                                        <TextBlock
+                                            FontFamily="{DynamicResource Font}"
+                                            FontSize="14"
+                                            Text="{Binding Name}" />
+                                        <StackPanel Margin="0,17,0,0" Orientation="Horizontal">
+                                            <TextBlock
+                                                FontFamily="{DynamicResource Font}"
+                                                FontSize="11"
+                                                Foreground="{DynamicResource GrayColor}"
+                                                Margin="0,0,0,0"
+                                                Text="{Binding AccountType}" />
+                                            <TextBlock
+                                                FontFamily="{DynamicResource Font}"
+                                                FontSize="11"
+                                                Foreground="{DynamicResource GrayColor}"
+                                                Margin="5,0,0,0"
+                                                Text="{Binding AddTime}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </DockPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </ScrollViewer>
+    </Border>
+</UserControl>

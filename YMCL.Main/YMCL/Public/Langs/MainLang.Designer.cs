@@ -2092,7 +2092,7 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 刷新皮肤(微软).
+        ///   Looks up a localized string similar to 刷新皮肤.
         /// </summary>
         public static string RefreshMicrosoftSkin {
             get {

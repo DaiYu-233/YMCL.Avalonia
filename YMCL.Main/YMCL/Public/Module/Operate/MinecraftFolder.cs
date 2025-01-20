@@ -1,10 +1,12 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json;
 using YMCL.Public.Langs;
+using YMCL.Public.Module.IO;
 
 namespace YMCL.Public.Module.Operate;
 
@@ -56,6 +58,14 @@ public class MinecraftFolder
         var item = Data.Setting.MinecraftFolder;
         if (item == null) return;
         Data.MinecraftFolders.Remove(item);
+        if (Data.MinecraftFolders.Count == 0)
+        {
+            var path = Path.Combine(ConfigPath.UserDataRootPath, ".minecraft");
+            Disk.TryCreateFolder(path);
+            var folder = new Classes.MinecraftFolder() { Name = "Minecraft Folder", Path = path };
+            Data.MinecraftFolders.Add(folder);
+            Data.Setting.MinecraftFolder = folder;
+        }
         File.WriteAllText(ConfigPath.MinecraftFolderDataPath,
             JsonConvert.SerializeObject(Data.MinecraftFolders, Formatting.Indented));
     }

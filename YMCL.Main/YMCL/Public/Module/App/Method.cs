@@ -6,11 +6,16 @@ namespace YMCL.Public.Module.App;
 
 public class Method
 {
-    public static void SaveSetting()
+    private static readonly Debouncer _debouncer = new(() =>
     {
         if (Data.Setting is null) return;
         File.WriteAllText(ConfigPath.SettingDataPath,
             JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
+    }, 500);
+
+    public static void SaveSetting()
+    {
+        _debouncer.Trigger();
     }
 
     public static void RestartApp()

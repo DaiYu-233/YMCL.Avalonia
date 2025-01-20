@@ -9,6 +9,7 @@ charset = utf-8
 dotnet_diagnostic.CS8600.severity = none
 dotnet_diagnostic.CA1416.severity = none
 dotnet_diagnostic.CS8602.severity = none
+dotnet_diagnostic.CS8851.severity = none
 dotnet_diagnostic.CA1822.severity = none
 dotnet_diagnostic.CA1839.severity = none
 dotnet_diagnostic.IDE0090.severity = none

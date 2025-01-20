@@ -6,6 +6,7 @@ namespace YMCL.Views.Main.Pages;
 public partial class Setting : UserControl
 {
     private readonly SettingPages.Launch _launch = new();
+    private readonly SettingPages.Account _account = new();
 
     public Setting()
     {
@@ -22,6 +23,7 @@ public partial class Setting : UserControl
             var page = tag switch
             {
                 "launch" => _launch,
+                "account" => _account,
                 _ => FrameView.Content as UserControl
             };
             FrameView.Content = page;

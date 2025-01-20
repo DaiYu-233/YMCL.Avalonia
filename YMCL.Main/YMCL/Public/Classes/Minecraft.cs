@@ -1,6 +1,6 @@
 ﻿namespace YMCL.Public.Classes;
 
-public class MinecraftFolder
+public sealed record MinecraftFolder
 {
     public string Path { get; set; }
     public string Name { get; set; }

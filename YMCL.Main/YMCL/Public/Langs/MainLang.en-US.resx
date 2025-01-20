@@ -518,7 +518,7 @@ sudo apt install vlc</value>
     <value>选择皮肤文件</value>
   </data>
   <data name="RefreshMicrosoftSkin" xml:space="preserve">
-    <value>刷新皮肤(微软)</value>
+    <value>刷新皮肤</value>
   </data>
   <data name="ModifySuccess" xml:space="preserve">
     <value>修改成功</value>

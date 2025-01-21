@@ -985,4 +985,37 @@ MacOs 不支持自动更新
   <data name="Launcher" xml:space="preserve">
     <value>启动器</value>
   </data>
+  <data name="ServerUrlError" xml:space="preserve">
+    <value>服务器Url错误</value>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>等待中</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>运行中</value>
+  </data>
+  <data name="Paused" xml:space="preserve">
+    <value>已暂停</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="BuildLaunchConfig" xml:space="preserve">
+    <value>构建启动配置项</value>
+  </data>
+  <data name="CheckLaunchArg" xml:space="preserve">
+    <value>检查启动参数</value>
+  </data>
+  <data name="RefreshAccountToken" xml:space="preserve">
+    <value>刷新用户令牌</value>
+  </data>
+  <data name="LaunchMinecraftProcess" xml:space="preserve">
+    <value>启动 Minecraft 进程</value>
+  </data>
 </root>

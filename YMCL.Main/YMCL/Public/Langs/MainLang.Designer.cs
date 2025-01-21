@@ -393,6 +393,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 构建启动配置项.
+        /// </summary>
+        public static string BuildLaunchConfig {
+            get {
+                return ResourceManager.GetString("BuildLaunchConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 构建启动配置失败.
         /// </summary>
         public static string BuildLaunchConfigFail {
@@ -488,6 +497,15 @@ namespace YMCL.Public.Langs {
         public static string CannotRecognitionTheVersion {
             get {
                 return ResourceManager.GetString("CannotRecognitionTheVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 检查启动参数.
+        /// </summary>
+        public static string CheckLaunchArg {
+            get {
+                return ResourceManager.GetString("CheckLaunchArg", resourceCulture);
             }
         }
         
@@ -934,6 +952,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 错误.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 调用Api时出错.
         /// </summary>
         public static string ErrorCallingApi {
@@ -984,6 +1011,15 @@ namespace YMCL.Public.Langs {
         public static string FileSelectWindow {
             get {
                 return ResourceManager.GetString("FileSelectWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 已完成.
+        /// </summary>
+        public static string Finished {
+            get {
+                return ResourceManager.GetString("Finished", resourceCulture);
             }
         }
         
@@ -1410,6 +1446,15 @@ namespace YMCL.Public.Langs {
         public static string LaunchGame {
             get {
                 return ResourceManager.GetString("LaunchGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 启动 Minecraft 进程.
+        /// </summary>
+        public static string LaunchMinecraftProcess {
+            get {
+                return ResourceManager.GetString("LaunchMinecraftProcess", resourceCulture);
             }
         }
         
@@ -2038,6 +2083,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 已暂停.
+        /// </summary>
+        public static string Paused {
+            get {
+                return ResourceManager.GetString("Paused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 个性化.
         /// </summary>
         public static string Personalize {
@@ -2092,6 +2146,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 刷新用户令牌.
+        /// </summary>
+        public static string RefreshAccountToken {
+            get {
+                return ResourceManager.GetString("RefreshAccountToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 刷新皮肤.
         /// </summary>
         public static string RefreshMicrosoftSkin {
@@ -2124,6 +2187,15 @@ namespace YMCL.Public.Langs {
         public static string Reload {
             get {
                 return ResourceManager.GetString("Reload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 移除.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
             }
         }
         
@@ -2187,6 +2259,15 @@ namespace YMCL.Public.Langs {
         public static string RunCommandFail {
             get {
                 return ResourceManager.GetString("RunCommandFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 运行中.
+        /// </summary>
+        public static string Running {
+            get {
+                return ResourceManager.GetString("Running", resourceCulture);
             }
         }
         
@@ -2340,6 +2421,15 @@ namespace YMCL.Public.Langs {
         public static string SelectSkinFile {
             get {
                 return ResourceManager.GetString("SelectSkinFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 服务器Url错误.
+        /// </summary>
+        public static string ServerUrlError {
+            get {
+                return ResourceManager.GetString("ServerUrlError", resourceCulture);
             }
         }
         
@@ -2874,6 +2964,15 @@ namespace YMCL.Public.Langs {
         public static string WaitForMicrosoftVerification {
             get {
                 return ResourceManager.GetString("WaitForMicrosoftVerification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 等待中.
+        /// </summary>
+        public static string Waiting {
+            get {
+                return ResourceManager.GetString("Waiting", resourceCulture);
             }
         }
         

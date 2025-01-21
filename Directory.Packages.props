@@ -6,6 +6,7 @@
   <ItemGroup>
     <!-- Avalonia packages -->
     <!-- Important: keep version in sync! -->
+    <PackageVersion Include="Afdian.Sdk" Version="0.3.1" />
     <PackageVersion Include="AsyncImageLoader.Avalonia" Version="3.3.0" />
     <PackageVersion Include="Avalonia" Version="11.2.3" />
     <PackageVersion Include="Avalonia.Themes.Fluent" Version="11.2.3" />
@@ -25,6 +26,7 @@
     <PackageVersion Include="ReactiveUI" Version="20.1.63" />
     <PackageVersion Include="ReactiveUI.Fody" Version="19.5.41" />
     <PackageVersion Include="Semi.Avalonia" Version="11.2.1.3" />
+    <PackageVersion Include="Semi.Avalonia.ColorPicker" Version="11.2.1.3" />
     <PackageVersion Include="System.Management" Version="9.0.0" />
     <PackageVersion Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.13" />
   </ItemGroup>

@@ -31,6 +31,14 @@ public partial class MainWindow : Window
                     break;
             }
         };
-        
+        Data.Setting.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(Setting.WindowTitleBarStyle))
+            {
+                Public.Module.Ui.Setter.UpdateWindowStyle(this, Data.Setting.WindowTitleBarStyle,
+                    systemAction: () => { TitleRoot.IsVisible = false; },
+                    launcherAction: () => { TitleRoot.IsVisible = true; });
+            }
+        };
     }
 }

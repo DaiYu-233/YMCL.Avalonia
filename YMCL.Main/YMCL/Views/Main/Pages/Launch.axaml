@@ -1,8 +1,161 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="YMCL.Views.Main.Pages.Launch">
-    Welcome to Avalonia!
+﻿<UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="YMCL.Views.Main.Pages.Launch"
+    x:DataType="da:Data"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:classes="clr-namespace:YMCL.Public.Classes"
+    xmlns:converter="clr-namespace:YMCL.Public.Module.Ui.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:da="clr-namespace:YMCL.Public.Const"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Public.Langs"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <converter:SelectedGameIsBedrock x:Key="SelectedGameIsBedrock" />
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel>
+            <Border
+                Background="{DynamicResource 1x}"
+                ClipToBounds="True"
+                CornerRadius="5"
+                DockPanel.Dock="Right"
+                HorizontalAlignment="Right"
+                Margin="10"
+                Name="LaunchConsoleRoot"
+                Opacity="{DynamicResource MainOpacity}"
+                Padding="10"
+                Width="270">
+                <Border.Transitions>
+                    <Transitions>
+                        <DoubleTransition Duration="0:0:0.20" Property="Opacity" />
+                    </Transitions>
+                </Border.Transitions>
+                <DockPanel>
+                    <DockPanel
+                        DockPanel.Dock="Bottom"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Bottom">
+                        <ComboBox
+                            DockPanel.Dock="Top"
+                            FontFamily="{DynamicResource Font}"
+                            HorizontalAlignment="Stretch"
+                            ItemsSource="{Binding Accounts}"
+                            Margin="0,0,0,5"
+                            Name="AccountComboBox"
+                            SelectedItem="{Binding Setting.Account}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate DataType="classes:AccountInfo">
+                                    <TextBlock>
+                                        <Run Text="[" />
+                                        <Run Text="{Binding AccountType}" />
+                                        <Run Text="]" />
+                                        <Run Text="{Binding Name}" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <DockPanel
+                            DockPanel.Dock="Top"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Bottom">
+                            <Button
+                                DockPanel.Dock="Top"
+                                HorizontalContentAlignment="Stretch"
+                                Margin="0,0,0,5"
+                                Name="LaunchBtn"
+                                Width="{Binding $parent.Bounds.Width}">
+                                <StackPanel>
+                                    <TextBlock
+                                        FontFamily="{DynamicResource Font}"
+                                        FontSize="14"
+                                        HorizontalAlignment="Center"
+                                        Margin="0,3,0,0"
+                                        Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.LaunchGame}"
+                                        VerticalAlignment="Center" />
+                                    <TextBlock
+                                        FontFamily="{DynamicResource Font}"
+                                        FontSize="12"
+                                        HorizontalAlignment="Center"
+                                        Margin="0,2,0,3"
+                                        Text="{Binding Setting.SelectedGame.Id}"
+                                        TextAlignment="Center"
+                                        TextWrapping="Wrap"
+                                        VerticalAlignment="Center"
+                                        x:Name="GameCoreText" />
+                                </StackPanel>
+                            </Button>
+                            <UniformGrid
+                                Columns="2"
+                                DockPanel.Dock="Bottom"
+                                Height="34"
+                                Rows="1">
+                                <Button
+                                    Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.VersionList}"
+                                    FontFamily="{DynamicResource Font}"
+                                    HorizontalAlignment="Stretch"
+                                    Margin="0,0,3.25,0"
+                                    Name="GameListBtn"
+                                    VerticalAlignment="Stretch" />
+                                <Button
+                                    Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.VersionSetting}"
+                                    FontFamily="{DynamicResource Font}"
+                                    HorizontalAlignment="Stretch"
+                                    IsEnabled="{Binding Setting.SelectedGame, Converter={StaticResource SelectedGameIsBedrock}}"
+                                    Margin="3.25,0,0,0"
+                                    Name="VersionSettingBtn"
+                                    VerticalAlignment="Stretch" />
+                            </UniformGrid>
+                        </DockPanel>
+                    </DockPanel>
+                    <Border
+                        Background="{DynamicResource 2x}"
+                        ClipToBounds="True"
+                        CornerRadius="5"
+                        DockPanel.Dock="Top"
+                        Height="90"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Width="90">
+                        <Image Name="Head" Source="{Binding Setting.Account.Bitmap}" />
+                    </Border>
+                </DockPanel>
+            </Border>
+            <DockPanel>
+                <StackPanel
+                    DockPanel.Dock="Top"
+                    HorizontalAlignment="Stretch"
+                    Margin="10,10,0,0"
+                    Name="LaunchingPanel"
+                    Spacing="10"
+                    VerticalAlignment="Top" />
+                <Border
+                    ClipToBounds="True"
+                    CornerRadius="5"
+                    HorizontalAlignment="Stretch"
+                    Margin="10,0,0,10"
+                    Name="CustomPageRoot"
+                    VerticalAlignment="Stretch" />
+            </DockPanel>
+        </DockPanel>
+        <ContentControl
+            IsVisible="False"
+            Margin="30"
+            Name="GameListFrame"
+            Opacity="{DynamicResource MainOpacity}">
+            <ContentControl.Transitions>
+                <Transitions>
+                    <ThicknessTransition Duration="0:0:0.20" Property="Margin" />
+                    <DoubleTransition Duration="0:0:0.20" Property="Opacity" />
+                </Transitions>
+            </ContentControl.Transitions>
+        </ContentControl>
+        <ContentControl
+            IsVisible="False"
+            Margin="30"
+            Name="GameSettingFrame"
+            Opacity="{DynamicResource MainOpacity}" />
+    </Grid>
 </UserControl>

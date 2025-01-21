@@ -60,7 +60,7 @@ public class JavaRuntime
 
     public static void RemoveSelected()
     {
-        if (Data.Setting.Java == null || Data.Setting.Java.JavaPath == "Auto") return;
+        if (Data.Setting.Java == null || Data.Setting.Java.JavaVersion == "Auto") return;
         Data.JavaRuntimes.Remove(Data.Setting.Java);
         Data.Setting.Java = new JavaEntry { JavaPath = "让YMCL选择合适的Java", JavaVersion = "Auto" };
         File.WriteAllText(ConfigPath.JavaDataPath,

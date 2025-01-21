@@ -3,7 +3,7 @@ using Avalonia.Data.Converters;
 
 namespace YMCL.Public.Module.Ui.Converter;
 
-public class MaxThreadOverSafe: IValueConverter
+public class MaxThreadOverSafeConverter: IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {

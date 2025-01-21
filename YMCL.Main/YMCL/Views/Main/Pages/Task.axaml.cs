@@ -1,6 +1,9 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using YMCL.Public.Classes;
+using YMCL.Public.Controls;
+using YMCL.Public.Enum;
 
 namespace YMCL.Views.Main.Pages;
 

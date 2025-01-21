@@ -43,6 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Afdian.Sdk" />
     <PackageReference Include="AsyncImageLoader.Avalonia" />
     <PackageReference Include="Avalonia" />
     <PackageReference Include="Avalonia.Themes.Fluent" />
@@ -62,6 +63,7 @@
     <PackageReference Include="ReactiveUI" />
     <PackageReference Include="ReactiveUI.Fody" />
     <PackageReference Include="Semi.Avalonia" />
+    <PackageReference Include="Semi.Avalonia.ColorPicker" />
     <PackageReference Include="System.Management" />
   </ItemGroup>
 
@@ -72,6 +74,28 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MainLang.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Remove="Public\Texts\DateTime.txt" />
+    <EmbeddedResource Include="Public\Texts\DateTime.txt" />
+    <None Remove="Public\Assets\McIcons\crafting_table_front.png" />
+    <EmbeddedResource Include="Public\Assets\McIcons\crafting_table_front.png" />
+    <None Remove="Public\Assets\McIcons\dirt_path_side.png" />
+    <EmbeddedResource Include="Public\Assets\McIcons\dirt_path_side.png" />
+    <None Remove="Public\Assets\McIcons\FabricIcon.png" />
+    <EmbeddedResource Include="Public\Assets\McIcons\FabricIcon.png" />
+    <None Remove="Public\Assets\McIcons\furnace_front.png" />
+    <EmbeddedResource Include="Public\Assets\McIcons\furnace_front.png" />
+    <None Remove="Public\Assets\McIcons\QuiltIcon.png" />
+    <EmbeddedResource Include="Public\Assets\McIcons\QuiltIcon.png" />
+    <None Remove="Public\Assets\McIcons\OptiFineIcon.png" />
+    <EmbeddedResource Include="Public\Assets\McIcons\OptiFineIcon.png" />
+    <None Remove="Public\Assets\McIcons\OptiFabricIcon.png" />
+    <EmbeddedResource Include="Public\Assets\McIcons\OptiFabricIcon.png" />
+    <None Remove="Public\Assets\McIcons\NeoForgeIcon.png" />
+    <EmbeddedResource Include="Public\Assets\McIcons\NeoForgeIcon.png" />
+    <None Remove="Public\Assets\McIcons\grass_block_side.png" />
+    <EmbeddedResource Include="Public\Assets\McIcons\grass_block_side.png" />
+    <None Remove="Public\Assets\McIcons\ForgeIcon.png" />
+    <EmbeddedResource Include="Public\Assets\McIcons\ForgeIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -115,10 +139,5 @@
     <UpToDateCheckInput Remove="Public\Controls\PluginInfo\PluginInfo.axaml" />
     <UpToDateCheckInput Remove="Public\Controls\UrlImage\UrlImage.axaml" />
     <UpToDateCheckInput Remove="Assets\MiSans-Regular.otf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Main\Pages\Download\" />
-    <Folder Include="Views\Main\Pages\More\" />
   </ItemGroup>
 </Project>

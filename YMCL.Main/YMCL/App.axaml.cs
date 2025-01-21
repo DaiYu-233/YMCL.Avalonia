@@ -3,6 +3,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Notifications;
 using Avalonia.Data.Core.Plugins;
 using YMCL.Public.Module.App;
+using YMCL.Public.Module.App.SubModule;
 using YMCL.ViewModels;
 using YMCL.Views;
 using YMCL.Views.Initialize;

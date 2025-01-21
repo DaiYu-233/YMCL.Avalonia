@@ -17,7 +17,7 @@
             DockPanel.Dock="Top"
             Height="40"
             Margin="10,10,10,0"
-            Opacity="{DynamicResource Opacity}"
+            Opacity="{DynamicResource MainOpacity}"
             VerticalAlignment="Top">
             <ui:NavigationView
                 AlwaysShowHeader="False"
@@ -26,7 +26,7 @@
                 IsBackEnabled="False"
                 IsPaneToggleButtonVisible="False"
                 IsSettingsVisible="False"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 PaneDisplayMode="Top"
                 SelectionFollowsFocus="False"
                 x:Name="Nav">
@@ -157,51 +157,6 @@
                                 FontFamily="{DynamicResource Font}"
                                 FontSize="14"
                                 Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Plugin}" />
-                        </DockPanel>
-                    </ui:NavigationViewItem>
-                    <ui:NavigationViewItem
-                        IsSelected="True"
-                        Margin="0,0,0,7"
-                        Tag="launcher">
-                        <DockPanel>
-                            <Image
-                                Height="14.5"
-                                Margin="0,0,3,0"
-                                Width="14.5">
-                                <Image.Source>
-                                    <DrawingImage>
-                                        <DrawingImage.Drawing>
-                                            <DrawingGroup>
-                                                <DrawingGroup.Children>
-                                                    <GeometryDrawing Brush="{DynamicResource TextColor}">
-                                                        <GeometryDrawing.Geometry>
-                                                            <PathGeometry Figures="M512,64C264.6,64 64,264.6 64,512 64,759.4 264.6,960 512,960 759.4,960 960,759.4 960,512 960,264.6 759.4,64 512,64z M512,884C306.6,884 140,717.4 140,512 140,306.6 306.6,140 512,140 717.4,140 884,306.6 884,512 884,717.4 717.4,884 512,884z" />
-                                                        </GeometryDrawing.Geometry>
-                                                    </GeometryDrawing>
-                                                    <GeometryDrawing Brush="{DynamicResource TextColor}">
-                                                        <GeometryDrawing.Geometry>
-                                                            <PathGeometry Figures="M512,336 M464,336A48,48,0,1,0,560,336A48,48,0,1,0,464,336z" />
-                                                        </GeometryDrawing.Geometry>
-                                                    </GeometryDrawing>
-                                                    <GeometryDrawing Brush="{DynamicResource TextColor}">
-                                                        <GeometryDrawing.Geometry>
-                                                            <PathGeometry Figures="M536,448L488,448C483.6,448,480,451.6,480,456L480,728C480,732.4,483.6,736,488,736L536,736C540.4,736,544,732.4,544,728L544,456C544,451.6,540.4,448,536,448z" />
-                                                        </GeometryDrawing.Geometry>
-                                                    </GeometryDrawing>
-                                                </DrawingGroup.Children>
-                                                <DrawingGroup.ClipGeometry>
-                                                    <RectangleGeometry Rect="0,0,1024,1024" />
-                                                </DrawingGroup.ClipGeometry>
-                                            </DrawingGroup>
-                                        </DrawingImage.Drawing>
-                                    </DrawingImage>
-                                </Image.Source>
-                            </Image>
-                            <TextBlock
-                                FontFamily="{DynamicResource Font}"
-                                FontSize="14"
-                                Margin="5,0,0,0"
-                                Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Launcher}" />
                         </DockPanel>
                     </ui:NavigationViewItem>
                 </ui:NavigationView.MenuItems>

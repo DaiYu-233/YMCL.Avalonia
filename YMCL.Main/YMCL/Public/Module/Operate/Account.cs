@@ -355,6 +355,10 @@ public class Account
             Data.Accounts.Add(account);
             Data.Setting.Account = account;
         }
+        else
+        {
+            Data.Setting.Account = Data.Accounts[0];
+        }
 
         File.WriteAllText(ConfigPath.AccountDataPath,
             JsonConvert.SerializeObject(Data.Accounts, Formatting.Indented));

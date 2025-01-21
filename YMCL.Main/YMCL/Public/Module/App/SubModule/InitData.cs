@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
-using CommunityToolkit.Mvvm.ComponentModel.__Internals;
 using MinecraftLaunch.Classes.Models.Game;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
-using YMCL.Public.Enum;
-using YMCL.Public.Langs;
 using Setting = YMCL.Public.Classes.Setting;
 
-namespace YMCL.Public.Module.App;
+namespace YMCL.Public.Module.App.SubModule;
 
 public class InitData
 {

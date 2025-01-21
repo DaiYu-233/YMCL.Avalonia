@@ -18,4 +18,22 @@ public class Converter
         var bitmap = new Bitmap(ms);
         return bitmap;
     }
+    
+    public static string MsToTime(double ms)
+    {
+        var minute = 0;
+        var second = 0;
+        second = (int)(ms / 1000);
+
+        if (second > 60)
+        {
+            minute = second / 60;
+            second = second % 60;
+        }
+
+        var secondStr = second < 10 ? $"0{second}" : $"{second}";
+        var minuteStr = minute < 10 ? $"0{minute}" : $"{minute}";
+
+        return $"{minuteStr}:{secondStr}";
+    }
 }

@@ -1,16 +1,16 @@
 ﻿using Avalonia.Media;
 using Avalonia.Styling;
 using FluentAvalonia.Core;
-using Newtonsoft.Json.Serialization;
 using YMCL.Public.Module.Ui;
 
-namespace YMCL.Public.Module.App;
+namespace YMCL.Public.Module.App.SubModule;
 
 public class InitUi
 {
     public static void Dispatch()
     {
         Ui.Setter.SetAccentColor(Data.Setting.AccentColor);
+        Application.Current.Resources["MainOpacity"] = 1.0;
         DisplaceDefaultUi();
     }
 

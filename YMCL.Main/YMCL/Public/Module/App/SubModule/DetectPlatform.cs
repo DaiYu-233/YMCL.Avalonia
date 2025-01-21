@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using YMCL.Public.Enum;
 
-namespace YMCL.Public.Module.App;
+namespace YMCL.Public.Module.App.SubModule;
 
 public class DetectPlatform
 {

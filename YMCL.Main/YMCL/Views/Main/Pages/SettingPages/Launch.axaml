@@ -17,7 +17,7 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -64,7 +64,7 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -114,7 +114,7 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -138,7 +138,7 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <StackPanel Margin="0,5" Spacing="5">
                     <DockPanel>
@@ -207,7 +207,7 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Height="40"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -231,7 +231,7 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Height="40"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock

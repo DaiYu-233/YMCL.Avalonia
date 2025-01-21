@@ -4,10 +4,8 @@ using System.Reflection;
 using MinecraftLaunch.Classes.Models.Game;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
-using YMCL.Public.Langs;
-using YMCL.Public.Module.IO;
 
-namespace YMCL.Public.Module.App;
+namespace YMCL.Public.Module.App.SubModule;
 
 public static class InitConfig
 {
@@ -19,10 +17,10 @@ public static class InitConfig
 
     public static void CreateFolder()
     {
-        Disk.TryCreateFolder(ConfigPath.UserDataRootPath);
-        Disk.TryCreateFolder(ConfigPath.PluginFolderPath);
-        Disk.TryCreateFolder(ConfigPath.TempFolderPath);
-        Disk.TryCreateFolder(ConfigPath.UpdateFolderPath);
+        IO.Disk.Setter.TryCreateFolder(ConfigPath.UserDataRootPath);
+        IO.Disk.Setter.TryCreateFolder(ConfigPath.PluginFolderPath);
+        IO.Disk.Setter.TryCreateFolder(ConfigPath.TempFolderPath);
+        IO.Disk.Setter.TryCreateFolder(ConfigPath.UpdateFolderPath);
     }
 
     public static void CreateFile()
@@ -35,7 +33,7 @@ public static class InitConfig
                     File.ReadAllText(ConfigPath.MinecraftFolderDataPath)).Count == 0)
         {
             var path = Path.Combine(ConfigPath.UserDataRootPath, ".minecraft");
-            Disk.TryCreateFolder(path);
+            IO.Disk.Setter.TryCreateFolder(path);
             File.WriteAllText(ConfigPath.MinecraftFolderDataPath,
                 JsonConvert.SerializeObject(
                     new List<MinecraftFolder>([

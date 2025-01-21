@@ -1,4 +1,5 @@
 using FluentAvalonia.UI.Controls;
+using ReactiveUI;
 using YMCL.Public.Module.App;
 using YMCL.ViewModels;
 
@@ -21,6 +22,10 @@ public partial class MainView : UserControl
         Nav.SelectionChanged += (_, e) =>
         {
             ViewModel.TogglePage(((e.SelectedItem as NavigationViewItem).Tag as string)!);
+        };
+        SizeChanged += (s, e) =>
+        {
+            Data.UiProperty.TaskEntryHeaderWidth = e.NewSize.Width - 230;
         };
     }
 }

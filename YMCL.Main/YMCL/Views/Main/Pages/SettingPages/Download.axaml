@@ -14,14 +14,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
         <converter:BoolToIntConverter x:Key="BoolIntConverter" />
-        <converter:MaxThreadOverSafe x:Key="MaxThreadOverSafeConverter" />
+        <converter:MaxThreadOverSafeConverter x:Key="MaxThreadOverSafeConverter" />
     </UserControl.Resources>
     <ScrollViewer>
         <StackPanel Margin="10,0,10,10" Spacing="10">
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -47,7 +47,7 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Name="CustomUpdateUrlRoot"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -82,7 +82,7 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Name="MusicApiRoot"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -108,7 +108,7 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Height="40"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <DockPanel>
@@ -143,7 +143,7 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Height="40"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -179,13 +179,13 @@
                 IsVisible="{Binding Setting.MaximumDownloadThread, Converter={StaticResource MaxThreadOverSafeConverter}}"
                 Message="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.DownloadThreadTooBigTip}"
                 Name="DownloadThreadWarning"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Severity="Warning" />
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Height="40"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock

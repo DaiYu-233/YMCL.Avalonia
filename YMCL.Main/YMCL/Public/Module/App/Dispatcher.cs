@@ -1,4 +1,6 @@
-﻿namespace YMCL.Public.Module.App;
+﻿using YMCL.Public.Module.App.SubModule;
+
+namespace YMCL.Public.Module.App;
 
 public static class InitDispatcher
 {

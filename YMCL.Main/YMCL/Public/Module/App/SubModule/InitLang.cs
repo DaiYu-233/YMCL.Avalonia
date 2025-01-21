@@ -1,6 +1,6 @@
 ﻿using YMCL.Public.Langs;
 
-namespace YMCL.Public.Module.App;
+namespace YMCL.Public.Module.App.SubModule;
 
 public class InitLang
 {

@@ -46,9 +46,9 @@ public class Setting
 
     public enum WindowTitleBarStyle
     {
-        Unset,
         System,
-        Ymcl
+        Ymcl,
+        Unset
     }
 
     public enum CustomHomePageWay

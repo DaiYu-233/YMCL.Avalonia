@@ -1,19 +1,14 @@
 ﻿using System.IO;
 using System.Linq;
-using YMCL.Public.Enum;
 using System.Management;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using YMCL.Public.Enum;
 
-namespace YMCL.Public.Module.IO;
+namespace YMCL.Public.Module.IO.Disk;
 
-public class Disk
+public class Getter
 {
-    public static void TryCreateFolder(string path)
-    {
-        if (Directory.Exists(path)) return;
-        var directoryInfo = new DirectoryInfo(path);
-        directoryInfo.Create();
-    }
-    
     public static double GetTotalMemory(DesktopRunnerType platform)
     {
         if (platform == DesktopRunnerType.Windows)
@@ -66,5 +61,33 @@ public class Disk
             }
 
         return 0;
+    }
+    
+    public static double GetDirectoryLength(string dirPath)
+    {
+        //判断给定的路径是否存在,如果不存在则退出
+        if (!Directory.Exists(dirPath))
+            return 0;
+
+        //定义一个DirectoryInfo对象
+        var di = new DirectoryInfo(dirPath);
+
+        //通过GetFiles方法,获取di目录中的所有文件的大小
+        var len = di.GetFiles().Aggregate<FileInfo, double>(0, (current, fi) => current + fi.Length);
+
+        //获取di中所有的文件夹,并存到一个新的对象数组中,以进行递归
+        var dis = di.GetDirectories();
+        if (dis.Length <= 0) return len;
+        len += dis.Sum(t => GetDirectoryLength(t.FullName));
+        return len;
+    }
+    
+    public static Bitmap LoadBitmapFromAppFile(string uri)
+    {
+        var memoryStream = new MemoryStream();
+        var stream = AssetLoader.Open(new Uri("resm:" + uri));
+        stream.CopyTo(memoryStream);
+        memoryStream.Position = 0;
+        return new Bitmap(memoryStream);
     }
 }

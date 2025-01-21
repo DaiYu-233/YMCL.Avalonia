@@ -4,7 +4,9 @@ using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using YMCL.Public.Langs;
+using YMCL.Public.Module;
 using YMCL.Public.Module.App;
+using YMCL.Public.Module.Ui.Special;
 using YMCL.Views.Initialize.Pages;
 
 namespace YMCL.Public.Classes;
@@ -43,7 +45,7 @@ public class Setting : ReactiveObject
     [JsonProperty]
     public Enum.Setting.LaunchCore LaunchCore { get; set; } = Enum.Setting.LaunchCore.MinecraftLaunch;
 
-    [Reactive] [JsonProperty] public string Version { get; set; }
+    [Reactive] [JsonProperty] public GameDataEntry SelectedGame { get; set; }
     [Reactive] [JsonProperty] public bool EnableIndependencyCore { get; set; } = true;
     [Reactive] [JsonProperty] public bool EnableCustomUpdateUrl { get; set; }
     [Reactive] [JsonProperty] public string CustomUpdateUrl { get; set; } = "https://github.moeyy.xyz/{%url%}";
@@ -75,11 +77,21 @@ public class Setting : ReactiveObject
 
     public Setting()
     {
+        var accentColorSetter = new Debouncer(() => { Public.Module.Ui.Setter.SetAccentColor(AccentColor); }, 5);
         PropertyChanged += (_, e) =>
         {
             if (e.PropertyName == nameof(Language))
             {
                 LangHelper.Current.ChangedCulture(Data.Setting.Language.Code);
+            }
+
+            if (e.PropertyName == nameof(AccentColor))
+            {
+                accentColorSetter.Trigger();
+            }
+            if (e.PropertyName == nameof(MinecraftFolder))
+            {
+                LaunchUi.LoadGames();
             }
             Method.SaveSetting();
         };

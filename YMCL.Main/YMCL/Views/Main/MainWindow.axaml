@@ -34,7 +34,7 @@
         Background="{DynamicResource 1x}"
         ClipToBounds="True"
         CornerRadius="0,0,8,8"
-        Opacity="{DynamicResource Opacity}"
+        Opacity="{DynamicResource MainOpacity}"
         x:Name="Root">
         <Grid>
             <DockPanel>

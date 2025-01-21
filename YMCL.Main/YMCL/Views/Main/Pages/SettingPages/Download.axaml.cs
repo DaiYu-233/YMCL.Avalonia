@@ -10,5 +10,10 @@ public partial class Download : UserControl
     {
         InitializeComponent();
         DataContext = Data.Instance;
+        MusicApiButton.Click += (_, _) =>
+        {
+            var launcher = TopLevel.GetTopLevel(this).Launcher;
+            launcher.LaunchUriAsync(new Uri("https://gitlab.com/Binaryify/neteasecloudmusicapi"));
+        };
     }
 }

@@ -326,7 +326,7 @@
                         Content="{Binding CurrentPage}"
                         DockPanel.Dock="Right"
                         Name="FrameView"
-                        Opacity="{DynamicResource Opacity}" />
+                        Opacity="{DynamicResource MainOpacity}" />
                 </ui:NavigationView>
             </Grid>
         </Border>

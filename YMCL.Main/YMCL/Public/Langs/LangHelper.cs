@@ -48,7 +48,7 @@ public sealed class LangHelper : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    public async void ChangedCulture(string? name)
+    public void ChangedCulture(string? name)
     {
         MainLang.Culture = CultureInfo.GetCultureInfo(string.IsNullOrEmpty(name) ? "zh-CN" : name);
         Resources = new MainLang();

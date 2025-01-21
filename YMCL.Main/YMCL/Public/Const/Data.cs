@@ -6,6 +6,7 @@ using Avalonia.Controls.Notifications;
 using MinecraftLaunch.Classes.Models.Game;
 using ReactiveUI;
 using YMCL.Public.Classes;
+using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.App;
@@ -26,8 +27,10 @@ public sealed class Data : ReactiveObject
     public static ObservableCollection<Classes.MinecraftFolder> MinecraftFolders { get; set; }
     public static ObservableCollection<JavaEntry> JavaRuntimes { get; set; }
     public static ObservableCollection<AccountInfo> Accounts { get; set; }
-
+    public static ObservableCollection<GameDataEntry> CurrentFolderGames { get; set; } = [];
+    public static ObservableCollection<TaskEntry> TaskEntrys  { get; set; } = [];
     public static Setting Setting { get; set; }
+    public static UiProperty UiProperty { get; } = new();
 
     public static Data Instance
     {

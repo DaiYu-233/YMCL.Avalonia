@@ -6,6 +6,7 @@
     x:DataType="da:Data"
     xmlns="https://github.com/avaloniaui"
     xmlns:classes="clr-namespace:YMCL.Public.Classes"
+    xmlns:colorPicker="clr-namespace:Semi.Avalonia.ColorPicker;assembly=Semi.Avalonia.ColorPicker"
     xmlns:converter="clr-namespace:YMCL.Public.Module.Ui.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:da="clr-namespace:YMCL.Public.Const"
@@ -21,7 +22,7 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Name="ColorPickerRoot"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -36,13 +37,20 @@
                         ColorSpectrumShape="Box"
                         HorizontalAlignment="Stretch"
                         Name="ColorPicker"
-                        Theme="{DynamicResource HexColorPicker}" />
+                        Theme="{DynamicResource HexColorPicker}"
+                        Width="{x:Static x:Double.NaN}">
+                        <ColorPicker.Styles>
+                            <Style Selector="DropDownButton">
+                                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            </Style>
+                        </ColorPicker.Styles>
+                    </ColorPicker>
                 </DockPanel>
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -74,7 +82,7 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -100,7 +108,7 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -133,7 +141,7 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Name="LyricRoot"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <StackPanel Margin="0,1" Spacing="6">
                     <DockPanel>
@@ -146,8 +154,15 @@
                             VerticalAlignment="Center" />
                         <ColorPicker
                             Color="{Binding Setting.DeskLyricColor}"
-                            HorizontalAlignment="Right"
-                            Name="LyricColorPicker" />
+                            HorizontalAlignment="Stretch"
+                            Name="LyricColorPicker"
+                            Width="{x:Static x:Double.NaN}">
+                            <ColorPicker.Styles>
+                                <Style Selector="DropDownButton">
+                                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                                </Style>
+                            </ColorPicker.Styles>
+                        </ColorPicker>
                     </DockPanel>
                     <DockPanel>
                         <TextBlock
@@ -200,7 +215,7 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -228,7 +243,7 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -253,7 +268,7 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -287,7 +302,7 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Height="40"
-                Opacity="{DynamicResource Opacity}"
+                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock

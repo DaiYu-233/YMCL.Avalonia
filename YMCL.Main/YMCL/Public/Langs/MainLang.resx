@@ -1018,4 +1018,10 @@ MacOs 不支持自动更新
   <data name="LaunchMinecraftProcess" xml:space="preserve">
     <value>启动 Minecraft 进程</value>
   </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>已取消</value>
+  </data>
+  <data name="Canceling" xml:space="preserve">
+    <value>取消中</value>
+  </data>
 </root>

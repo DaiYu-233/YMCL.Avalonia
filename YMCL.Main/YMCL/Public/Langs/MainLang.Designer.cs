@@ -438,6 +438,24 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 已取消.
+        /// </summary>
+        public static string Canceled {
+            get {
+                return ResourceManager.GetString("Canceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 取消中.
+        /// </summary>
+        public static string Canceling {
+            get {
+                return ResourceManager.GetString("Canceling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 无法找到合适Java.
         /// </summary>
         public static string CannotFandRightJava {

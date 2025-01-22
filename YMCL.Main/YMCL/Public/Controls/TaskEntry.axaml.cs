@@ -25,6 +25,11 @@ public partial class TaskEntry : UserControl
         Data.TaskEntrys.Add(this);
     }
 
+    public void UpdateAction(Action action)
+    {
+        Model.ButtonAction = action;
+    }
+
     public void UpdateValue(double value)
     {
         Model.NumberValue = true;
@@ -57,6 +62,7 @@ public partial class TaskEntry : UserControl
     public void FinishWithSuccess()
     {
         Model.CanRemove = true;
+        Model.ButtonIsEnable = true;
         Model.State = TaskState.Finished;
     }
     public void FinishWithError()
@@ -74,5 +80,31 @@ public partial class TaskEntry : UserControl
             Model.SubTasks[index + 1].State = TaskState.Running;
         }
         index++;
+    }
+
+    public void Cancel()
+    {
+        Model.State = TaskState.Canceled;
+        Model.CanRemove = true;
+    }
+    
+    public void CancelWaitFinish()
+    {
+        Model.State = TaskState.Canceling;
+        Model.ButtonIsEnable = false;
+    }
+    
+    public void CancelWithSuccess()
+    {
+        Model.State = TaskState.Canceling;
+        Model.ButtonIsEnable = false;
+        FinishWithSuccess();
+    }
+    
+    public void CancelFinish()
+    {
+        Model.State = TaskState.Canceled;
+        Model.ButtonIsEnable = true;
+        Model.CanRemove = true;
     }
 }

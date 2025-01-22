@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using Avalonia.Threading;
@@ -16,6 +17,7 @@ using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using Setting = YMCL.Public.Enum.Setting;
+using String = YMCL.Public.Const.String;
 
 namespace YMCL.Public.Module.Mc.Launcher;
 
@@ -24,6 +26,8 @@ public class LaunchJavaClientByMinecraftLaunch
     public static async Task<bool> Launch(string p_id, string p_mcPath, double p_maxMem, string p_javaPath,
         string? p_fullUrl = null, bool p_enableIndependencyCore = true, bool p_isDebug = false)
     {
+        var cts = new CancellationTokenSource();
+        var token = cts.Token;
         Data.UiProperty.LaunchBtnIsEnable = false;
 
         object[] args = [p_id, p_mcPath, p_maxMem, p_javaPath];
@@ -61,6 +65,15 @@ public class LaunchJavaClientByMinecraftLaunch
         ];
         var task = new TaskEntry($"{MainLang.Launch}: {entry.Id}", subTasks, TaskState.Running);
 
+        var canceled = false;
+
+        task.UpdateAction(() =>
+        {
+            canceled = true;
+            task.CancelWaitFinish();
+            cts.Cancel();
+        });
+
         var host = string.Empty;
         var port = 25565;
         if (!string.IsNullOrWhiteSpace(p_fullUrl))
@@ -92,6 +105,13 @@ public class LaunchJavaClientByMinecraftLaunch
 
         task.AdvanceSubTask();
 
+        if (canceled)
+        {
+            Toast($"{MainLang.Canceled}: {MainLang.Launch} - {entry.Id}");
+            task.CancelFinish();
+            return false;
+        }
+
         Account? account = null!;
         switch (Data.Setting.Account.AccountType)
         {
@@ -112,7 +132,7 @@ public class LaunchJavaClientByMinecraftLaunch
                 break;
             case Setting.AccountType.Microsoft:
                 var profile = JsonConvert.DeserializeObject<MicrosoftAccount>(Data.Setting.Account.Data!);
-                MicrosoftAuthenticator authenticator2 = new(profile, Const.String.AzureClientId, true);
+                MicrosoftAuthenticator authenticator2 = new(profile, String.AzureClientId, true);
                 try
                 {
                     account = await authenticator2.AuthenticateAsync();
@@ -129,6 +149,13 @@ public class LaunchJavaClientByMinecraftLaunch
             case Setting.AccountType.ThirdParty:
                 account = JsonConvert.DeserializeObject<YggdrasilAccount>(Data.Setting.Account.Data!);
                 break;
+        }
+
+        if (canceled)
+        {
+            Toast($"{MainLang.Canceled}: {MainLang.Launch} - {entry.Id}");
+            task.CancelFinish();
+            return false;
         }
 
         if (account == null)
@@ -154,122 +181,146 @@ public class LaunchJavaClientByMinecraftLaunch
         };
 
         task.AdvanceSubTask();
-        
+
         MinecraftLaunch.Components.Launcher.Launcher launcher = new(resolver, config);
 
-        await Task.Run(async () =>
+        var isKillByYmcl = false;
+
+        try
         {
-            try
+            await Task.Run(async () =>
             {
-                await Dispatcher.UIThread.InvokeAsync(async () =>
+                try
                 {
-                    var watcher = await launcher.LaunchAsync(p_id);
-                    watcher.Exited += async (_, eventArgs) =>
+                    await Dispatcher.UIThread.InvokeAsync(async () =>
                     {
-                        await Dispatcher.UIThread.InvokeAsync(async () =>
+                        var watcher = await launcher.LaunchAsync(p_id);
+                        watcher.Exited += async (_, eventArgs) =>
                         {
-                            Data.UiProperty.LaunchBtnIsEnable = true;
-                            if (Data.Setting.LauncherVisibility !=
-                                Setting.LauncherVisibility.AfterLaunchMakeLauncherMinimize)
+                            await Dispatcher.UIThread.InvokeAsync(async () =>
                             {
-                                if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window)
+                                Data.UiProperty.LaunchBtnIsEnable = true;
+                                if (Data.Setting.LauncherVisibility !=
+                                    Setting.LauncherVisibility.AfterLaunchMakeLauncherMinimize)
                                 {
-                                    window.Show();
-                                    window.WindowState = WindowState.Normal;
-                                    window.Activate();
-                                }
-                            }
-
-                            Toast($"{MainLang.GameExited} - {p_id} : {eventArgs.ExitCode}");
-
-                            if (eventArgs.ExitCode == 0)
-                            {
-                                task.FinishWithSuccess();
-                                await Task.Delay(2000);
-                                if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window)
-                                {
-                                    window.Activate();
-                                    window.Focus();
-                                }
-                            }
-                            else
-                            {
-                                var crashAnalyzer = new GameCrashAnalyzer(entry, p_enableIndependencyCore);
-                                var reports = crashAnalyzer.AnalysisLogs();
-                                var msg = string.Empty;
-                                try
-                                {
-                                    var crashReports = reports.ToList();
-                                    if (reports == null || crashReports.Count == 0)
-                                        msg = MainLang.NoCrashInfo;
-                                    else
-                                        msg = crashReports.Aggregate(msg, (current, report) => current + $"\n{report.CrashCauses}");
-                                }
-                                catch
-                                {
-                                    msg = MainLang.NoCrashInfo;
-                                }
-                                
-                                task.FinishWithError();
-                                await ShowDialogAsync(MainLang.MineratCrashed, msg,
-                                    b_primary: MainLang.Ok);
-                                task.FinishWithError();
-                            }
-                        });
-                    };
-
-                    watcher.OutputLogReceived += (_, eventArgs) =>
-                    {
-                        Console.WriteLine(eventArgs.Log);
-                    };
-
-                    await Dispatcher.UIThread.InvokeAsync(() =>
-                    {
-                        task.AdvanceSubTask();
-                        Toast(MainLang.LaunchFinish);
-                        Data.UiProperty.LaunchBtnIsEnable = true;
-                    });
-                    _ = Task.Run(() =>
-                    {
-                        watcher.Process.WaitForInputIdle();
-                        Dispatcher.UIThread.Invoke(() =>
-                        {
-                            switch (Data.Setting.LauncherVisibility)
-                            {
-                                case Setting.LauncherVisibility.AfterLaunchExitLauncher:
-                                    Environment.Exit(0);
-                                    break;
-                                case Setting.LauncherVisibility.AfterLaunchMakeLauncherMinimize:
-                                case Setting.LauncherVisibility.AfterLaunchMinimizeAndShowWhenGameExit:
                                     if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window)
                                     {
-                                        window.WindowState = WindowState.Minimized;
+                                        window.Show();
+                                        window.WindowState = WindowState.Normal;
+                                        window.Activate();
                                     }
-                                    break;
-                                case Setting.LauncherVisibility.AfterLaunchHideAndShowWhenGameExit:
-                                    if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window1)
+                                }
+
+                                Toast($"{MainLang.GameExited} - {p_id} : {eventArgs.ExitCode}");
+
+
+                                if (eventArgs.ExitCode == 0)
+                                {
+                                    task.FinishWithSuccess();
+                                    await Task.Delay(2000);
+                                    if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window)
                                     {
-                                        window1.Hide();
+                                        window.Activate();
+                                        window.Focus();
                                     }
-                                    break;
-                                case Setting.LauncherVisibility.AfterLaunchKeepLauncherVisible:
-                                default:
-                                    break;
-                            }
+                                }
+                                else
+                                {
+                                    if (!isKillByYmcl)
+                                    {
+                                        var crashAnalyzer = new GameCrashAnalyzer(entry, p_enableIndependencyCore);
+                                        var reports = crashAnalyzer.AnalysisLogs();
+                                        var msg = string.Empty;
+                                        try
+                                        {
+                                            var crashReports = reports.ToList();
+                                            if (reports == null || crashReports.Count == 0)
+                                                msg = MainLang.NoCrashInfo;
+                                            else
+                                                msg = crashReports.Aggregate(msg,
+                                                    (current, report) => current + $"\n{report.CrashCauses}");
+                                        }
+                                        catch
+                                        {
+                                            msg = MainLang.NoCrashInfo;
+                                        }
+
+                                        task.FinishWithError();
+                                        await ShowDialogAsync(MainLang.MineratCrashed, msg,
+                                            b_primary: MainLang.Ok);
+                                        task.FinishWithError();
+                                    }
+                                }
+                            });
+                        };
+
+                        watcher.OutputLogReceived += (_, eventArgs) => { Console.WriteLine(eventArgs.Log); };
+
+                        await Dispatcher.UIThread.InvokeAsync(() =>
+                        {
+                            task.AdvanceSubTask();
+                            Toast(MainLang.LaunchFinish);
+                            Data.UiProperty.LaunchBtnIsEnable = true;
+                        });
+                        _ = Task.Run(async () =>
+                        {
+                            task.UpdateAction(() =>
+                            {
+                                canceled = true;
+                                isKillByYmcl = true;
+                                watcher.Process.Close();
+                                task.CancelWithSuccess();
+                                cts.Cancel();
+                            });
+                            await Task.Delay(8000);
+                            Dispatcher.UIThread.Invoke(() =>
+                            {
+                                switch (Data.Setting.LauncherVisibility)
+                                {
+                                    case Setting.LauncherVisibility.AfterLaunchExitLauncher:
+                                        Environment.Exit(0);
+                                        break;
+                                    case Setting.LauncherVisibility.AfterLaunchMakeLauncherMinimize:
+                                    case Setting.LauncherVisibility.AfterLaunchMinimizeAndShowWhenGameExit:
+                                        if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window)
+                                        {
+                                            window.WindowState = WindowState.Minimized;
+                                        }
+
+                                        break;
+                                    case Setting.LauncherVisibility.AfterLaunchHideAndShowWhenGameExit:
+                                        if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window1)
+                                        {
+                                            window1.Hide();
+                                        }
+
+                                        break;
+                                    case Setting.LauncherVisibility.AfterLaunchKeepLauncherVisible:
+                                    default:
+                                        break;
+                                }
+                            });
                         });
                     });
-                });
-            }
-            catch (Exception ex)
-            {
-                await Dispatcher.UIThread.InvokeAsync(() =>
+                }
+                catch (Exception ex)
                 {
-                    ShowShortException(MainLang.LaunchFail, ex);
-                    Data.UiProperty.LaunchBtnIsEnable = true;
-                    task.FinishWithError();
-                });
-            }
-        });
+                    await Dispatcher.UIThread.InvokeAsync(() =>
+                    {
+                        ShowShortException(MainLang.LaunchFail, ex);
+                        Data.UiProperty.LaunchBtnIsEnable = true;
+                        task.FinishWithError();
+                    });
+                }
+            }, token);
+        }
+        catch (OperationCanceledException)
+        {
+            Toast($"{MainLang.Canceled}: {MainLang.Launch} - {entry.Id}");
+            task.CancelFinish();
+            return false;
+        }
+
         await Dispatcher.UIThread.InvokeAsync(() => { Data.UiProperty.LaunchBtnIsEnable = true; });
         await Task.Delay(20);
         return true;

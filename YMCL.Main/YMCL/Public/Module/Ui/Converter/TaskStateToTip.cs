@@ -17,6 +17,8 @@ public class TaskStateToTip : IValueConverter
                 TaskState.Running => MainLang.Running,
                 TaskState.Paused => MainLang.Paused,
                 TaskState.Error => MainLang.Error,
+                TaskState.Canceled => MainLang.Canceled,
+                TaskState.Canceling => MainLang.Canceling,
                 TaskState.Finished => MainLang.Finished,
                 _ => state.ToString()
             };

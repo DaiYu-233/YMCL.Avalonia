@@ -15,7 +15,7 @@
     xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
-        <converter:TaskStateToColor x:Key="TaskStateToColor" />
+        <converter:TaskStateToColorConverter x:Key="TaskStateToColor" />
         <converter:TaskStateToTip x:Key="TaskStateToTip" />
         <converter:MsToTimeConverter x:Key="MsToTimeConverter" />
     </UserControl.Resources>
@@ -40,9 +40,22 @@
                     <Button
                         Command="{Binding ButtonActionCommand}"
                         Content="{Binding ButtonDisplay}"
-                        DockPanel.Dock="Right" />
+                        DockPanel.Dock="Right"
+                        IsEnabled="{Binding ButtonIsEnable}" />
                     <StackPanel Margin="10,0">
-                        <TextBlock Margin="1,0,0,0" Text="{Binding Name}" />
+                        <DockPanel>
+                            <TextBlock
+                                DockPanel.Dock="Left"
+                                HorizontalAlignment="Left"
+                                Margin="1,0,0,0"
+                                Text="{Binding Name}" />
+                            <TextBlock
+                                DockPanel.Dock="Right"
+                                HorizontalAlignment="Right"
+                                IsVisible="{Binding NumberValue}"
+                                Margin="0,0,1,0"
+                                Text="{Binding DisplayProgress}" />
+                        </DockPanel>
                         <ProgressBar
                             Foreground="{Binding State, Converter={StaticResource TaskStateToColor}}"
                             IsIndeterminate="{Binding DisplayIsIndeterminate}"

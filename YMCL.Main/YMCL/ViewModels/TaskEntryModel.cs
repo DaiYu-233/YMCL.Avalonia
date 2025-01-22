@@ -18,6 +18,7 @@ public class TaskEntryModel : ReactiveObject
     [Reactive] public TaskState State { get; set; }
     [Reactive] public bool NumberValue { get; set; }
     [Reactive] public bool CanRemove { get; set; }
+    [Reactive] public bool ButtonIsEnable { get; set; } = true;
     [Reactive] public double Value { get; set; }
     [Reactive] public string Name { get; set; }
     [Reactive] public double DisplayProgress { get; set; }
@@ -57,12 +58,15 @@ public class TaskEntryModel : ReactiveObject
         switch (newState)
         {
             case TaskState.Running:
+            case TaskState.Canceling:
+            case TaskState.Waiting:
                 _timer.Start();
                 break;
 
             case TaskState.Paused:
             case TaskState.Error:
             case TaskState.Finished:
+            case TaskState.Canceled:
                 _timer.Stop();
                 break;
         }
@@ -94,6 +98,7 @@ public class TaskEntryModel : ReactiveObject
             {
                 TaskState.Finished => 100,
                 TaskState.Error => 50,
+                TaskState.Canceled => 50,
                 TaskState.Paused => 50,
                 _ => Value
             };
@@ -112,6 +117,7 @@ public class TaskEntryModel : ReactiveObject
             {
                 TaskState.Finished => false,
                 TaskState.Error => false,
+                TaskState.Canceled => false,
                 TaskState.Paused => false,
                 _ => true
             };

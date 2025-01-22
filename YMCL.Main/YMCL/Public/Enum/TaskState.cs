@@ -6,5 +6,7 @@ public enum TaskState
     Running,
     Paused,
     Error,
+    Canceled,
+    Canceling,
     Finished
 }

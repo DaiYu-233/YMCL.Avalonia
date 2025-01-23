@@ -20,6 +20,17 @@
 	<PackageTags>DaiYu;YMCL</PackageTags>
 	<PackageReleaseNotes>Yu Minecraft Launcher</PackageReleaseNotes>
 	<PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
+  <CFBundleName>YMCL</CFBundleName>
+  <CFBundleDisplayName>YMCL</CFBundleDisplayName>
+  <CFBundleIdentifier>fun.daiyu.ymcl</CFBundleIdentifier>
+  <CFBundleVersion>1.0.0</CFBundleVersion>
+  <CFBundlePackageType>AAPL</CFBundlePackageType>
+  <CFBundleSignature>YuMinecraftLauncher</CFBundleSignature>
+  <CFBundleExecutable>YMCL.Desktop</CFBundleExecutable>
+  <CFBundleIconFile>Public/Assets/YMCL-Icon.icns</CFBundleIconFile>
+  <CFBundleShortVersionString>1.0</CFBundleShortVersionString>
+  <NSPrincipalClass>NSApplication</NSPrincipalClass>
+  <NSHighResolutionCapable>true</NSHighResolutionCapable>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -48,6 +59,7 @@
       <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Dotnet.Bundle" />
   </ItemGroup>
 
   <ItemGroup>

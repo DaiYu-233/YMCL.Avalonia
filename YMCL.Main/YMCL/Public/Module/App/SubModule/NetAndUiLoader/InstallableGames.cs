@@ -33,6 +33,7 @@ public class InstallableGame
                 }
             }
 
+            Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
             UiProperty.Instance.InstallableRingIsVisible = false;
         });
     }

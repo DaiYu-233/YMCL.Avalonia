@@ -209,6 +209,7 @@ public class Account
                     YggdrasilLogin(sender);
                     break;
             }
+        Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
     }
 
     private static async void YggdrasilLogin(Control sender, string server1 = "", string email1 = "",
@@ -362,6 +363,7 @@ public class Account
 
         File.WriteAllText(ConfigPath.AccountDataPath,
             JsonConvert.SerializeObject(Data.Accounts, Formatting.Indented));
+        Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
     }
 
     public static async Task RefreshSelectedMicrosoftAccountSkin()

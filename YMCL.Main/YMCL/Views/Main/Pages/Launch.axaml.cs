@@ -30,9 +30,9 @@ public partial class Launch : UserControl
         LaunchBtn.Click += (_, _) => { Data.Setting.SelectedGame.LaunchAction?.Invoke(); };
         Loaded += async (_, _) =>
         {
-            LaunchConsoleRoot.IsVisible = !GameSettingFrame.IsVisible;
-            LaunchConsoleRoot.Opacity =
-                GameSettingFrame.IsVisible ? 0 : (double)Application.Current.Resources["MainOpacity"]!;
+            if (!GameSettingFrame.IsVisible && !GameListFrame.IsVisible) return;
+            LaunchConsoleRoot.IsVisible = false;
+            LaunchConsoleRoot.Opacity = 0;
             await System.Threading.Tasks.Task.Delay(210);
             LaunchConsoleRoot.IsVisible = true;
         };

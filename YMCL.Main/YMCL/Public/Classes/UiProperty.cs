@@ -19,6 +19,7 @@ public sealed class UiProperty : ReactiveObject
     public static ObservableCollection<VersionManifestEntry> ReleaseInstallableGames { get; set; } = [];
     public static ObservableCollection<VersionManifestEntry> SnapshotInstallableGames { get; set; } = [];
     public static ObservableCollection<VersionManifestEntry> OldInstallableGames { get; set; } = [];
+    public ObservableCollection<AggregateSearchEntry> FilteredAggregateSearchEntries { get; } = [];
 
     [Reactive]
     public VersionManifestEntry LatestReleaseGame { get; set; } = new()
@@ -31,7 +32,20 @@ public sealed class UiProperty : ReactiveObject
     [Reactive] public bool InstallableRingIsVisible { get; set; } = true;
     [Reactive] public double TaskEntryHeaderWidth { get; set; }
     [Reactive] public double SystemMaxMem { get; set; }
+    [Reactive] public string AggregateSearchFilter { get; set; } = string.Empty;
 
+
+    public UiProperty()
+    {
+        PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(AggregateSearchFilter))
+            {
+                YMCL.Public.Module.Ui.Special.AggregateSearchUi.Filter(AggregateSearchFilter);
+            }
+        };
+    }
+    
     public static UiProperty Instance
     {
         get { return _instance ??= new UiProperty(); }

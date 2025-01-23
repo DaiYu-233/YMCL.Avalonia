@@ -35,6 +35,7 @@ public class JavaRuntime
             $"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}: {successAddCount}\n{MainLang.RepeatItem}: {repeatJavaCount}",
             NotificationType.Success);
         File.WriteAllText(ConfigPath.JavaDataPath, JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
+        Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
     }
 
     public static async Task AddByUi(Control sender)
@@ -57,6 +58,7 @@ public class JavaRuntime
 
         await File.WriteAllTextAsync(ConfigPath.JavaDataPath,
             JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
+        Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
     }
 
     public static void RemoveSelected()
@@ -66,5 +68,6 @@ public class JavaRuntime
         Data.Setting.Java = new JavaEntry { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "Auto" };
         File.WriteAllText(ConfigPath.JavaDataPath,
             JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
+        Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
     }
 }

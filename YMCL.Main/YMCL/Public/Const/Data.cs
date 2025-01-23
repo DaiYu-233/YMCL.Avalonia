@@ -29,6 +29,7 @@ public sealed class Data : ReactiveObject
     public static ObservableCollection<AccountInfo> Accounts { get; set; }
     public static ObservableCollection<GameDataEntry> CurrentFolderGames { get; set; } = [];
     public static ObservableCollection<TaskEntry> TaskEntrys  { get; set; } = [];
+    public static List<AggregateSearchEntry> AllAggregateSearchEntries  { get; set; } = [];
     public static Setting Setting { get; set; }
     public static UiProperty UiProperty { get; } = new();
 

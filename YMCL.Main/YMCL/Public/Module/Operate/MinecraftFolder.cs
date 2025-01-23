@@ -53,6 +53,7 @@ public class MinecraftFolder
         Data.Setting.MinecraftFolder = entry;
         await File.WriteAllTextAsync(ConfigPath.MinecraftFolderDataPath,
             JsonConvert.SerializeObject(Data.MinecraftFolders, Formatting.Indented));
+        Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
     }
 
     public static void RemoveSelected()
@@ -75,5 +76,6 @@ public class MinecraftFolder
 
         File.WriteAllText(ConfigPath.MinecraftFolderDataPath,
             JsonConvert.SerializeObject(Data.MinecraftFolders, Formatting.Indented));
+        Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
     }
 }

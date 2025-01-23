@@ -1,4 +1,5 @@
 ﻿using YMCL.Public.Module.App.SubModule;
+using String = System.String;
 
 namespace YMCL.Public.Module.App;
 
@@ -13,6 +14,8 @@ public static class InitDispatcher
         InitLang.Dispatch();
         InitData.InitCollection();
         InitData.VerifyData();
+        Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
+        Public.Module.Ui.Special.AggregateSearchUi.Filter(String.Empty);
     }
 
     public static void OnMainViewLoaded()

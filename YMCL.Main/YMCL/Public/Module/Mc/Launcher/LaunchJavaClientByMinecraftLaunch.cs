@@ -28,7 +28,6 @@ public class LaunchJavaClientByMinecraftLaunch
     {
         var cts = new CancellationTokenSource();
         var token = cts.Token;
-        Data.UiProperty.LaunchBtnIsEnable = false;
 
         object[] args = [p_id, p_mcPath, p_maxMem, p_javaPath];
         foreach (var t in args)
@@ -36,7 +35,6 @@ public class LaunchJavaClientByMinecraftLaunch
             if (t != null) continue;
             var exception = new ArgumentNullException(nameof(t), $"{nameof(t)} cannot be null.");
             Toast($"{MainLang.LaunchFail}\n{exception.Message}", NotificationType.Error);
-            Data.UiProperty.LaunchBtnIsEnable = true;
             return false;
         }
 
@@ -44,35 +42,15 @@ public class LaunchJavaClientByMinecraftLaunch
         var entry = resolver.GetGameEntity(p_id);
         if (entry == null)
         {
-            Data.UiProperty.LaunchBtnIsEnable = true;
             Toast(MainLang.CreateGameEntryFail, NotificationType.Error);
             return false;
         }
 
         if (string.IsNullOrWhiteSpace(entry.JarPath) || !File.Exists(entry.JarPath))
         {
-            Data.UiProperty.LaunchBtnIsEnable = true;
             Toast(MainLang.GameMainFileDeletion, NotificationType.Error);
             return false;
         }
-
-        ObservableCollection<SubTask> subTasks =
-        [
-            new(MainLang.CheckLaunchArg, 1),
-            new(MainLang.RefreshAccountToken, 1),
-            new(MainLang.BuildLaunchConfig, 1),
-            new(MainLang.LaunchMinecraftProcess, 1)
-        ];
-        var task = new TaskEntry($"{MainLang.Launch}: {entry.Id}", subTasks, TaskState.Running);
-
-        var canceled = false;
-
-        task.UpdateAction(() =>
-        {
-            canceled = true;
-            task.CancelWaitFinish();
-            cts.Cancel();
-        });
 
         var host = string.Empty;
         var port = 25565;
@@ -90,27 +68,34 @@ public class LaunchJavaClientByMinecraftLaunch
             catch (UriFormatException)
             {
                 Toast(MainLang.ServerUrlError, NotificationType.Error);
-                Data.UiProperty.LaunchBtnIsEnable = true;
                 return false;
             }
         }
 
         if (Data.Setting.Account == null)
         {
-            Data.UiProperty.LaunchBtnIsEnable = true;
             Toast(MainLang.AccountError);
-            task.FinishWithError();
             return false;
         }
+        
+        ObservableCollection<SubTask> subTasks =
+        [
+            new(MainLang.CheckLaunchArg, 1),
+            new(MainLang.RefreshAccountToken, 1),
+            new(MainLang.BuildLaunchConfig, 1),
+            new(MainLang.LaunchMinecraftProcess, 1)
+        ];
+        var task = new TaskEntry($"{MainLang.Launch}: {entry.Id}", subTasks, TaskState.Running);
+        YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavTask;
+        var canceled = false;
 
-        task.AdvanceSubTask();
-
-        if (canceled)
+        task.UpdateAction(() =>
         {
-            Toast($"{MainLang.Canceled}: {MainLang.Launch} - {entry.Id}");
-            task.CancelFinish();
-            return false;
-        }
+            canceled = true;
+            task.CancelWaitFinish();
+            cts.Cancel();
+        });
+        task.AdvanceSubTask();
 
         Account? account = null!;
         switch (Data.Setting.Account.AccountType)
@@ -123,7 +108,6 @@ public class LaunchJavaClientByMinecraftLaunch
                 }
                 else
                 {
-                    Data.UiProperty.LaunchBtnIsEnable = true;
                     Toast(MainLang.AccountError);
                     task.FinishWithError();
                     return false;
@@ -139,7 +123,6 @@ public class LaunchJavaClientByMinecraftLaunch
                 }
                 catch (Exception ex)
                 {
-                    Data.UiProperty.LaunchBtnIsEnable = true;
                     ShowShortException(MainLang.LoginFail, ex);
                     task.FinishWithError();
                     return false;
@@ -161,7 +144,6 @@ public class LaunchJavaClientByMinecraftLaunch
         if (account == null)
         {
             Toast(MainLang.AccountError);
-            Data.UiProperty.LaunchBtnIsEnable = true;
             task.FinishWithError();
             return false;
         }
@@ -199,7 +181,6 @@ public class LaunchJavaClientByMinecraftLaunch
                         {
                             await Dispatcher.UIThread.InvokeAsync(async () =>
                             {
-                                Data.UiProperty.LaunchBtnIsEnable = true;
                                 if (Data.Setting.LauncherVisibility !=
                                     Setting.LauncherVisibility.AfterLaunchMakeLauncherMinimize)
                                 {
@@ -260,7 +241,6 @@ public class LaunchJavaClientByMinecraftLaunch
                         {
                             task.AdvanceSubTask();
                             Toast(MainLang.LaunchFinish);
-                            Data.UiProperty.LaunchBtnIsEnable = true;
                         });
                         _ = Task.Run(async () =>
                         {
@@ -308,7 +288,6 @@ public class LaunchJavaClientByMinecraftLaunch
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
                         ShowShortException(MainLang.LaunchFail, ex);
-                        Data.UiProperty.LaunchBtnIsEnable = true;
                         task.FinishWithError();
                     });
                 }
@@ -321,7 +300,7 @@ public class LaunchJavaClientByMinecraftLaunch
             return false;
         }
 
-        await Dispatcher.UIThread.InvokeAsync(() => { Data.UiProperty.LaunchBtnIsEnable = true; });
+        await Dispatcher.UIThread.InvokeAsync(() => { });
         await Task.Delay(20);
         return true;
     }

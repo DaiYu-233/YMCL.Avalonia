@@ -7,6 +7,7 @@ using MinecraftLaunch.Components.Fetcher;
 using MinecraftLaunch.Utilities;
 using Newtonsoft.Json;
 using YMCL.Public.Langs;
+using ImmutableArrayExtensions = System.Linq.ImmutableArrayExtensions;
 
 namespace YMCL.Public.Module.Operate;
 
@@ -17,7 +18,7 @@ public class JavaRuntime
         var fetcher = new JavaFetcher();
         var repeatJavaCount = 0;
         var successAddCount = 0;
-        foreach (var java in fetcher.Fetch())
+        foreach (var java in ImmutableArrayExtensions.Select(fetcher.Fetch(), JavaEntry.MlToYmcl))
         {
             if (!Data.JavaRuntimes.Contains(java))
             {
@@ -48,10 +49,10 @@ public class JavaRuntime
         }
         else
         {
-            if (Data.JavaRuntimes.Contains(javaInfo!))
+            if (Data.JavaRuntimes.Contains(JavaEntry.MlToYmcl(javaInfo!)))
                 Toast(MainLang.TheItemAlreadyExist, NotificationType.Error);
             else
-                Data.JavaRuntimes.Add(javaInfo!);
+                Data.JavaRuntimes.Add(JavaEntry.MlToYmcl(javaInfo!));
         }
 
         await File.WriteAllTextAsync(ConfigPath.JavaDataPath,
@@ -62,7 +63,7 @@ public class JavaRuntime
     {
         if (Data.Setting.Java == null || Data.Setting.Java.JavaVersion == "Auto") return;
         Data.JavaRuntimes.Remove(Data.Setting.Java);
-        Data.Setting.Java = new JavaEntry { JavaPath = "让YMCL选择合适的Java", JavaVersion = "Auto" };
+        Data.Setting.Java = new JavaEntry { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "Auto" };
         File.WriteAllText(ConfigPath.JavaDataPath,
             JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
     }

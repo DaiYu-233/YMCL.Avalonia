@@ -142,6 +142,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Main\Pages\DownloadPages\" />
+    <Folder Include="Public\Module\IO\Network\Minecraft\" />
   </ItemGroup>
 </Project>

@@ -546,6 +546,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 检查版本资源.
+        /// </summary>
+        public static string CheckVersionResource {
+            get {
+                return ResourceManager.GetString("CheckVersionResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 选择平台.
         /// </summary>
         public static string ChooseArchitecture {
@@ -885,6 +894,15 @@ namespace YMCL.Public.Langs {
         public static string DownloadModPackMod {
             get {
                 return ResourceManager.GetString("DownloadModPackMod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 下载资源.
+        /// </summary>
+        public static string DownloadResource {
+            get {
+                return ResourceManager.GetString("DownloadResource", resourceCulture);
             }
         }
         
@@ -2241,6 +2259,15 @@ namespace YMCL.Public.Langs {
         public static string RestartApp {
             get {
                 return ResourceManager.GetString("RestartApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 返回.
+        /// </summary>
+        public static string Return {
+            get {
+                return ResourceManager.GetString("Return", resourceCulture);
             }
         }
         

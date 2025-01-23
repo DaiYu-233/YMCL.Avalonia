@@ -22,8 +22,7 @@ public class Converter
     public static string MsToTime(double ms)
     {
         var minute = 0;
-        var second = 0;
-        second = (int)(ms / 1000);
+        var second = (int)(ms / 1000);
 
         if (second > 60)
         {

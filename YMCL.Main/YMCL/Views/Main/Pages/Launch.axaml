@@ -105,7 +105,7 @@
                                     HorizontalAlignment="Stretch"
                                     IsEnabled="{Binding Setting.SelectedGame, Converter={StaticResource SelectedGameIsBedrock}}"
                                     Margin="3.25,0,0,0"
-                                    Name="VersionSettingBtn"
+                                    Name="GameSettingBtn"
                                     VerticalAlignment="Stretch" />
                             </UniformGrid>
                         </DockPanel>
@@ -156,6 +156,13 @@
             IsVisible="False"
             Margin="30"
             Name="GameSettingFrame"
-            Opacity="{DynamicResource MainOpacity}" />
+            Opacity="{DynamicResource MainOpacity}">
+            <ContentControl.Transitions>
+                <Transitions>
+                    <ThicknessTransition Duration="0:0:0.20" Property="Margin" />
+                    <DoubleTransition Duration="0:0:0.20" Property="Opacity" />
+                </Transitions>
+            </ContentControl.Transitions>
+        </ContentControl>
     </Grid>
 </UserControl>

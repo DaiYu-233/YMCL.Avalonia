@@ -1,4 +1,8 @@
-﻿using Avalonia.Media;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Avalonia.Media;
+using MinecraftLaunch.Classes.Models.Game;
+using MinecraftLaunch.Utilities;
 
 namespace YMCL.Public.Module.Value;
 
@@ -22,5 +26,26 @@ public class Calculator
 
         // 创建一个新的颜色（保持Alpha通道不变）  
         return Color.FromArgb(color.A, (byte)r, (byte)g, (byte)b);
+    }
+
+    public static JavaEntry? GetCurrentJava(List<JavaEntry> javaEntries, GameEntry game)
+    {
+        JavaEntry? result = null;
+        try
+        {
+            List<MinecraftLaunch.Classes.Models.Game.JavaEntry> list = [];
+            list.AddRange(javaEntries.Select(JavaEntry.YmclToMl));
+            result = JavaEntry.MlToYmcl(JavaUtil.GetCurrentJava(list, game));
+        }
+        catch
+        {
+            foreach (var javaEntry in javaEntries)
+            {
+                if (javaEntry.JavaSlugVersion != game.JavaVersion) continue;
+                result = javaEntry;
+                break;
+            }
+        }
+        return result;
     }
 }

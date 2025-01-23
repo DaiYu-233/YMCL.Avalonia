@@ -34,7 +34,7 @@
                         IsSelected="True"
                         Margin="0,0,0,7"
                         Name="NavAuto"
-                        Tag="auto">
+                        Tag="autoInstall">
                         <DockPanel>
                             <Image
                                 Height="15"

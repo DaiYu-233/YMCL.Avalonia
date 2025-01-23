@@ -17,7 +17,7 @@ public class Setting : ReactiveObject
     [Reactive] [JsonProperty] public MinecraftFolder MinecraftFolder { get; set; }
     [Reactive] [JsonProperty] public string SkipUpdateVersion { get; set; } = string.Empty;
     [Reactive] [JsonProperty] public bool EnableAutoCheckUpdate { get; set; } = true;
-    [Reactive] [JsonProperty] public double MaximumDownloadThread { get; set; } = 64;
+    [Reactive] [JsonProperty] public int MaximumDownloadThread { get; set; } = 64;
     [Reactive] [JsonProperty] public bool IsCompleteJavaInitialize { get; set; }
     [Reactive] [JsonProperty] public bool IsCompleteMinecraftFolderInitialize { get; set; }
     [Reactive] [JsonProperty] public bool IsCompleteAccountInitialize { get; set; }
@@ -71,7 +71,7 @@ public class Setting : ReactiveObject
 
     [Reactive]
     [JsonProperty]
-    public JavaEntry Java { get; set; } = new() { JavaPath = "让YMCL选择合适的Java", JavaVersion = "Auto" };
+    public JavaEntry Java { get; set; } = new() { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "Auto" };
 
     [Reactive] [JsonProperty] public string WindowBackGroundImgData { get; set; } = string.Empty;
 

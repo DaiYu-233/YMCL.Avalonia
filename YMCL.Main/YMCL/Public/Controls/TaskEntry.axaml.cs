@@ -34,6 +34,8 @@ public partial class TaskEntry : UserControl
     {
         Model.NumberValue = true;
         Model.Value = value;
+        Model.GetIsIndeterminate();
+        Model.GetDisplayProgress();
     }
 
     public void UpdateSubFinishTask(SubTask task, int count)
@@ -49,6 +51,13 @@ public partial class TaskEntry : UserControl
     public void AddSubTask(SubTask task)
     {
         Model.SubTasks.Add(task);
+    }
+    public void AddSubTaskRange(SubTask[] task)
+    {
+        foreach (var subTask in task)
+        {
+            Model.SubTasks.Add(subTask);
+        }
     }
 
     public void RemoveSubTask(SubTask task)

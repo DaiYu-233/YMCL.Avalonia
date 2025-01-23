@@ -83,14 +83,11 @@ public class TaskEntryModel : ReactiveObject
         ButtonDisplay = CanRemove ? MainLang.Remove : MainLang.Cancel;
         if (CanRemove)
         {
-            ButtonAction = () =>
-            {
-                Instance.Destory();
-            };
+            ButtonAction = () => { Instance.Destory(); };
         }
     }
 
-    private void GetDisplayProgress()
+    public void GetDisplayProgress()
     {
         if (!NumberValue)
         {
@@ -105,11 +102,11 @@ public class TaskEntryModel : ReactiveObject
         }
         else
         {
-            DisplayProgress = Value;
+            DisplayProgress = Math.Round(Value, 1);
         }
     }
 
-    private void GetIsIndeterminate()
+    public void GetIsIndeterminate()
     {
         if (!NumberValue)
         {
@@ -124,7 +121,11 @@ public class TaskEntryModel : ReactiveObject
         }
         else
         {
-            DisplayIsIndeterminate = false;
+            DisplayIsIndeterminate = State switch
+            {
+                TaskState.Canceling => true,
+                _ => false
+            };
         }
     }
 

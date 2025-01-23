@@ -1,5 +1,6 @@
 <Window
     DragDrop.AllowDrop="True"
+    FontFamily="{DynamicResource Font}"
     FontWeight="{DynamicResource FontWeight}"
     IsHitTestVisible="True"
     MinHeight="310"

@@ -23,7 +23,7 @@ public partial class MainView : UserControl
         {
             ViewModel.TogglePage(((e.SelectedItem as NavigationViewItem).Tag as string)!);
         };
-        SizeChanged += (s, e) =>
+        SizeChanged += (_, e) =>
         {
             Data.UiProperty.TaskEntryHeaderWidth = e.NewSize.Width - 230;
         };

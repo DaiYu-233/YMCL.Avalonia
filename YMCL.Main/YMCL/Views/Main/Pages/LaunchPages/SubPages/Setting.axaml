@@ -1,0 +1,150 @@
+﻿<UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="YMCL.Views.Main.Pages.LaunchPages.SubPages.Setting"
+    x:DataType="viewModels:GameSettingModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:classes="clr-namespace:YMCL.Public.Classes"
+    xmlns:converter="clr-namespace:YMCL.Public.Module.Ui.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Public.Langs"
+    xmlns:viewModels="clr-namespace:YMCL.ViewModels"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <converter:GameSettingMaxMemConverter x:Key="GameSettingMaxMemConverter" />
+    </UserControl.Resources>
+    <ScrollViewer>
+        <StackPanel>
+            <Border
+                Background="{DynamicResource 1x}"
+                CornerRadius="5"
+                Height="45"
+                Margin="0,0,0,10"
+                Opacity="{DynamicResource Opacity}">
+                <DockPanel>
+                    <Label
+                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.EnableIndependencyCore}"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="14"
+                        Foreground="{DynamicResource TextColor}"
+                        HorizontalAlignment="Left"
+                        Margin="18,0,0,0"
+                        VerticalAlignment="Center" />
+                    <ComboBox
+                        FontFamily="{DynamicResource Font}"
+                        HorizontalAlignment="Stretch"
+                        Margin="18,0,6.5,0"
+                        SelectedIndex="{Binding GameSetting.EnableIndependencyCore}"
+                        VerticalAlignment="Center"
+                        x:Name="EnableIndependencyCoreComboBox">
+                        <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.UseGlobalSetting}" />
+                        <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Off}" />
+                        <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.On}" />
+                    </ComboBox>
+                </DockPanel>
+            </Border>
+            <Border
+                Background="{DynamicResource 1x}"
+                CornerRadius="5"
+                Height="45"
+                Margin="0,0,0,10"
+                Opacity="{DynamicResource Opacity}">
+                <DockPanel>
+                    <Label
+                        Content="Java"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="15"
+                        Foreground="{DynamicResource TextColor}"
+                        HorizontalAlignment="Left"
+                        Margin="18,0,0,0"
+                        VerticalAlignment="Center" />
+                    <ComboBox
+                        FontFamily="{DynamicResource Font}"
+                        Height="32"
+                        HorizontalAlignment="Stretch"
+                        ItemsSource="{Binding JavaRuntimes}"
+                        Margin="18,0,6.5,0"
+                        SelectedItem="{Binding GameSetting.Java}"
+                        VerticalAlignment="Stretch"
+                        x:Name="JavaComboBox">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate DataType="classes:JavaEntry">
+                                <TextBlock>
+                                    <Run Text="[ Java" />
+                                    <Run Text="{Binding JavaVersion}" />
+                                    <Run Text="]" />
+                                    <Run Text="{Binding JavaPath}" />
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </DockPanel>
+            </Border>
+            <Border
+                Background="{DynamicResource 1x}"
+                CornerRadius="5"
+                Height="45"
+                Margin="0,0,0,10"
+                Opacity="{DynamicResource Opacity}">
+                <DockPanel>
+                    <Label
+                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.MaxMem}"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="15"
+                        Foreground="{DynamicResource TextColor}"
+                        HorizontalAlignment="Left"
+                        Margin="18,0,0,0"
+                        VerticalAlignment="Center" />
+                    <TextBlock
+                        DockPanel.Dock="Right"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="14"
+                        Foreground="{DynamicResource TextColor}"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,18,0"
+                        RenderTransformOrigin="0.5,0.5"
+                        TextAlignment="Center"
+                        VerticalAlignment="Center">
+                        <Run Text="{Binding GameSetting.MaxMem, Converter={StaticResource GameSettingMaxMemConverter}}" />
+                        <Run Text="Mib" />
+                    </TextBlock>
+                    <Slider
+                        IsSnapToTickEnabled="True"
+                        Margin="18,0,18,0"
+                        Maximum="{Binding SystemMaxMem}"
+                        Minimum="-2"
+                        TickFrequency="1"
+                        Value="{Binding GameSetting.MaxMem}"
+                        VerticalAlignment="Center"
+                        x:Name="SliderBox" />
+                </DockPanel>
+            </Border>
+            <Border
+                Background="{DynamicResource 1x}"
+                CornerRadius="5"
+                Height="45"
+                Opacity="{DynamicResource Opacity}">
+                <DockPanel>
+                    <Label
+                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.AutoJoinServer}"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="15"
+                        Foreground="{DynamicResource TextColor}"
+                        HorizontalAlignment="Left"
+                        Margin="18,0,0,0"
+                        VerticalAlignment="Center" />
+                    <TextBox
+                        FontFamily="{DynamicResource Font}"
+                        Height="32"
+                        Margin="18,0,6.5,0"
+                        Text="{Binding GameSetting.AutoJoinServerIp}"
+                        VerticalAlignment="Center"
+                        Watermark="example.com:25565"
+                        x:Name="AutoJoinServerTextBox" />
+                </DockPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

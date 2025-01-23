@@ -99,7 +99,7 @@
                         Name="JavaComboBox"
                         SelectedItem="{Binding Setting.Java}">
                         <ComboBox.ItemTemplate>
-                            <DataTemplate DataType="game:JavaEntry">
+                            <DataTemplate DataType="classes:JavaEntry">
                                 <TextBlock>
                                     <Run Text="[ Java" />
                                     <Run Text="{Binding JavaVersion}" />
@@ -168,11 +168,12 @@
                             VerticalAlignment="Center"
                             Width="65">
                             <Run Text="{Binding Setting.MaxMem}" />
-                            <Run Text="M" />
+                            <Run Text="Mib" />
                         </TextBlock>
                         <Slider
                             IsSnapToTickEnabled="True"
                             Margin="0,0,0,0"
+                            Maximum="{Binding UiProperty.Instance.SystemMaxMem}"
                             Name="MaxMemSlider"
                             TickFrequency="1"
                             Value="{Binding Setting.MaxMem}"

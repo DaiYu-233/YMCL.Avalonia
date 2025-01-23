@@ -74,5 +74,11 @@ public class Setting
         Microsoft,
         ThirdParty
     }
-
+    
+    public enum VersionSettingEnableIndependencyCore
+    {
+        Global,
+        Off,
+        On
+    }
 }

@@ -1,9 +1,11 @@
 ﻿using System.IO;
+using System.Linq;
 using Avalonia.Media.Imaging;
 using MinecraftLaunch.Classes.Enums;
 using MinecraftLaunch.Classes.Models.Game;
 using Newtonsoft.Json;
 using YMCL.Public.Module.App;
+using YMCL.Public.Module.Mc;
 using YMCL.Public.Module.Mc.Launcher;
 using YMCL.Public.Module.Ui.Special;
 
@@ -15,7 +17,6 @@ public sealed record GameDataEntry
     [JsonIgnore] public Action? LaunchAction { get; set; }
     [JsonIgnore] public bool IsSettingVisible { get; set; } = true;
     [JsonIgnore] public string FavouriteIcon { get; set; }
-    [JsonIgnore] public static bool LaunchBtnIsEnable => Data.UiProperty.LaunchBtnIsEnable;
     public string Version { get; set; }
     public string Id { get; set; }
     public string Type { get; set; }
@@ -85,9 +86,14 @@ public sealed record GameDataEntry
         {
             LaunchAction = () =>
             {
-                _ = LaunchJavaClientByMinecraftLaunch.Launch(Id, Data.Setting.MinecraftFolder.Path, Data.Setting.MaxMem,
-                    Data.Setting.Java.JavaPath);
-                App.UiRoot.Nav.SelectedItem = App.UiRoot.NavTask;
+                var setting = GameSetting.GetGameSetting(entry);
+                GameSetting.HandleGameSetting(setting);
+                if (setting.Java.JavaVersion == "Auto")
+                {
+                    setting.Java = YMCL.Public.Module.Value.Calculator.GetCurrentJava(Data.JavaRuntimes.ToList(), entry);
+                }
+                _ = LaunchJavaClientByMinecraftLaunch.Launch(Id, entry.GameFolderPath, setting.MaxMem,
+                    setting.Java.JavaPath);
             };
         }
     }

@@ -53,8 +53,10 @@
                                 DockPanel.Dock="Right"
                                 HorizontalAlignment="Right"
                                 IsVisible="{Binding NumberValue}"
-                                Margin="0,0,1,0"
-                                Text="{Binding DisplayProgress}" />
+                                Margin="0,0,1,0">
+                                <Run Text="{Binding DisplayProgress}" />
+                                <Run Text="%" />
+                            </TextBlock>
                         </DockPanel>
                         <ProgressBar
                             Foreground="{Binding State, Converter={StaticResource TaskStateToColor}}"

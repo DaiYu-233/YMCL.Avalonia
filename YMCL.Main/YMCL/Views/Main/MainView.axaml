@@ -323,11 +323,9 @@
                         </ui:NavigationViewItem>
                     </ui:NavigationView.MenuItems>
                     <ContentControl
-                        Background="{DynamicResource 2x}"
                         Content="{Binding CurrentPage}"
                         DockPanel.Dock="Right"
-                        Name="FrameView"
-                        Opacity="{DynamicResource MainOpacity}" />
+                        Name="FrameView" />
                 </ui:NavigationView>
             </Grid>
         </Border>

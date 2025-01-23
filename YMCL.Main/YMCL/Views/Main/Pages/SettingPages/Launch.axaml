@@ -165,8 +165,7 @@
                             Margin="6.5,0,6.5,0"
                             Name="MaxMemText"
                             TextAlignment="Center"
-                            VerticalAlignment="Center"
-                            Width="65">
+                            VerticalAlignment="Center">
                             <Run Text="{Binding Setting.MaxMem}" />
                             <Run Text="Mib" />
                         </TextBlock>

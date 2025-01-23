@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
+using Avalonia.Layout;
 using Avalonia.Media;
 using FluentAvalonia.UI.Controls;
+using YMCL.Public.Langs;
 
 namespace YMCL.Public.Module.Ui;
 
@@ -46,5 +48,18 @@ public class Shower
         };
         var result = await dialog.ShowAsync(TopLevel.GetTopLevel(YMCL.App.UiRoot));
         return result;
+    }
+    
+    public static async void ShowLongException(string msg, Exception ex)
+    {
+        var textBox = new TextBox
+        {
+            FontFamily = (FontFamily)Application.Current.Resources["Font"],
+            TextWrapping = TextWrapping.Wrap,
+            Text = $"{msg} - {ex.Message}\n\n{ex}",
+            HorizontalAlignment = HorizontalAlignment.Center,
+            IsReadOnly = true
+        };
+        await ShowDialogAsync(MainLang.GetException, p_content: textBox, b_primary: MainLang.Ok);
     }
 }

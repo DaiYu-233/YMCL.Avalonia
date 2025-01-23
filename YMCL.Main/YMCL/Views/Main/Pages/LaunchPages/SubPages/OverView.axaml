@@ -20,7 +20,6 @@
                 Background="{DynamicResource 1x}"
                 ClipToBounds="True"
                 CornerRadius="5"
-                Opacity="{DynamicResource Opacity}"
                 Padding="10">
                 <StackPanel Orientation="Horizontal">
                     <Border
@@ -55,7 +54,6 @@
                 Background="{DynamicResource 1x}"
                 ClipToBounds="True"
                 CornerRadius="5"
-                Opacity="{DynamicResource Opacity}"
                 Padding="10">
                 <WrapPanel>
                     <Button

@@ -39,8 +39,7 @@ public class LaunchUi
         });
         Data.CurrentFolderGames.Clear();
         games.OrderBy(entry => !entry.IsFavourite).ToList().ForEach(a => { Data.CurrentFolderGames.Add(a); });
-        var bedrock = new GameDataEntry(new GameEntry()
-                { Id = "基岩版", MainLoaderType = LoaderType.Vanilla, Type = "bedrock", Version = "如未安装基岩版则无法启动" }, true)
+        var bedrock = new GameDataEntry(new GameEntry { Id = "基岩版", MainLoaderType = LoaderType.Vanilla, Type = "bedrock", Version = "如未安装基岩版则无法启动" }, true)
             { IsSettingVisible = false };
         Data.CurrentFolderGames.Insert(0, bedrock);
         if (Data.Setting.SelectedGame == null || !Data.CurrentFolderGames.Contains(Data.Setting.SelectedGame))

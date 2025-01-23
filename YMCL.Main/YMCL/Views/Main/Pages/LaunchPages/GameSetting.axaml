@@ -17,7 +17,6 @@
             CornerRadius="5"
             DockPanel.Dock="Top"
             Height="40"
-            Opacity="{DynamicResource MainOpacity}"
             VerticalAlignment="Top">
             <ui:NavigationView
                 AlwaysShowHeader="False"
@@ -26,7 +25,6 @@
                 IsBackEnabled="False"
                 IsPaneToggleButtonVisible="False"
                 IsSettingsVisible="False"
-                Opacity="{DynamicResource MainOpacity}"
                 PaneDisplayMode="Top"
                 SelectionFollowsFocus="False"
                 x:Name="Nav">

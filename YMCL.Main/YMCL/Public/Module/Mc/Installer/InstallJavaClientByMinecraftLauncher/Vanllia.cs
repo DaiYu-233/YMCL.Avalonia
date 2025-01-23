@@ -25,7 +25,7 @@ public class Vanllia
         var shouldReturn = false;
         var resolver = new GameResolver(Data.Setting.MinecraftFolder.Path);
         var vanlliaInstaller = new VanlliaInstaller(resolver, id,
-            new DownloaderConfiguration()
+            new DownloaderConfiguration
             {
                 MaxThread = Data.Setting.MaximumDownloadThread,
                 IsEnableFragmentedDownload = Data.Setting.DownloadSource != Setting.DownloadSource.Mojang

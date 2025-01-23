@@ -40,7 +40,7 @@ public class JavaRuntime
     public static async Task AddByUi(Control sender)
     {
         var list = await TopLevel.GetTopLevel(sender).StorageProvider.OpenFilePickerAsync(
-            new FilePickerOpenOptions() { AllowMultiple = true, Title = MainLang.SelectJava });
+            new FilePickerOpenOptions { AllowMultiple = true, Title = MainLang.SelectJava });
         if (list.Count == 0) return;
         var javaInfo = JavaUtil.GetJavaInfo(list[0].Path.LocalPath);
         if (javaInfo == null && !string.IsNullOrWhiteSpace(list[0].Path.LocalPath))

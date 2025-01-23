@@ -21,8 +21,7 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Height="45"
-                Margin="0,0,0,10"
-                Opacity="{DynamicResource Opacity}">
+                Margin="0,0,0,10">
                 <DockPanel>
                     <Label
                         Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.EnableIndependencyCore}"
@@ -49,8 +48,7 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Height="45"
-                Margin="0,0,0,10"
-                Opacity="{DynamicResource Opacity}">
+                Margin="0,0,0,10">
                 <DockPanel>
                     <Label
                         Content="Java"
@@ -86,8 +84,7 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Height="45"
-                Margin="0,0,0,10"
-                Opacity="{DynamicResource Opacity}">
+                Margin="0,0,0,10">
                 <DockPanel>
                     <Label
                         Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.MaxMem}"
@@ -124,8 +121,7 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Height="45"
-                Opacity="{DynamicResource Opacity}">
+                Height="45">
                 <DockPanel>
                     <Label
                         Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.AutoJoinServer}"

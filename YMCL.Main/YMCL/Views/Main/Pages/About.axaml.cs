@@ -76,14 +76,14 @@ public partial class About : UserControl
                 {
                     Dispatcher.UIThread.Invoke(() =>
                     {
-                        var block = new TextBlock()
+                        var block = new TextBlock
                         {
                             FontFamily = (FontFamily)Application.Current.Resources["Font"], FontSize = 14,
                             TextWrapping = TextWrapping.Wrap, TextDecorations = null,
                             Foreground = new SolidColorBrush(Data.Setting.AccentColor),
                             Text = $"{x.user.name} ￥{x.all_sum_amount}"
                         };
-                        var link = new HyperlinkButton()
+                        var link = new HyperlinkButton
                         {
                             Margin = new Thickness(3), Content = block
                         };
@@ -95,14 +95,14 @@ public partial class About : UserControl
             {
                 Dispatcher.UIThread.Invoke(() =>
                 {
-                    var block = new TextBlock()
+                    var block = new TextBlock
                     {
                         FontFamily = (FontFamily)Application.Current.Resources["Font"], FontSize = 14,
                         TextWrapping = TextWrapping.Wrap, TextDecorations = null,
                         Foreground = new SolidColorBrush(Data.Setting.AccentColor),
                         Text = MainLang.LoadFail
                     };
-                    var link = new HyperlinkButton()
+                    var link = new HyperlinkButton
                     {
                         Margin = new Thickness(3), Content = block
                     };

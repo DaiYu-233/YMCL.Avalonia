@@ -21,6 +21,7 @@ public class Setting : ReactiveObject
     [Reactive] [JsonProperty] public bool IsCompleteJavaInitialize { get; set; }
     [Reactive] [JsonProperty] public bool IsCompleteMinecraftFolderInitialize { get; set; }
     [Reactive] [JsonProperty] public bool IsCompleteAccountInitialize { get; set; }
+    [Reactive] [JsonProperty] public string CustomHomePageUrl { get; set; }
     [Reactive] [JsonProperty] public Enum.Setting.OpenFileWay OpenFileWay { get; set; }
 
     [Reactive]
@@ -78,7 +79,7 @@ public class Setting : ReactiveObject
     public Setting()
     {
         var accentColorSetter = new Debouncer(() => { Public.Module.Ui.Setter.SetAccentColor(AccentColor); }, 5);
-        PropertyChanged += (_, e) =>
+        PropertyChanged += (o, e) =>
         {
             if (e.PropertyName == nameof(Language))
             {
@@ -89,10 +90,22 @@ public class Setting : ReactiveObject
             {
                 accentColorSetter.Trigger();
             }
+
             if (e.PropertyName == nameof(MinecraftFolder))
             {
                 LaunchUi.LoadGames();
             }
+
+            if (e.PropertyName == nameof(CustomHomePage))
+            {
+                _ = Public.Module.App.SubModule.InitUi.SetCustomHomePage();
+            }
+
+            if (e.PropertyName == nameof(CustomBackGround))
+            {
+                Public.Module.Ui.Setter.SetBackGround();
+            }
+
             Method.SaveSetting();
         };
     }

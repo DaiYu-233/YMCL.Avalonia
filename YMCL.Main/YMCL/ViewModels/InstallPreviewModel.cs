@@ -30,10 +30,10 @@ public sealed class InstallPreviewModel : ReactiveObject
     [Reactive] public string CustomId { get; set; }
     [Reactive] public string DisplaceId { get; set; }
     [Reactive] public bool IsDisplaceId { get; set; }
-    [Reactive] public bool OptifineLoading { get; set; }
-    [Reactive] public bool ForgeLoading { get; set; }
-    [Reactive] public bool QuiltLoading { get; set; }
-    [Reactive] public bool FabricLoading { get; set; }
+    [Reactive] public bool OptifineLoading { get; set; } = true;
+    [Reactive] public bool ForgeLoading { get; set; } = true;
+    [Reactive] public bool QuiltLoading { get; set; } = true;
+    [Reactive] public bool FabricLoading { get; set; } = true;
     [Reactive] public string SelectedOptiFine { get; set; }
     [Reactive] public string SelectedForge { get; set; }
     [Reactive] public string SelectedQuilt { get; set; }

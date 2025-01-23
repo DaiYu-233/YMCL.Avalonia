@@ -17,20 +17,20 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>DaiYu;YMCL</PackageTags>
     <PackageReleaseNotes>Yu Minecraft Launcher</PackageReleaseNotes>
-	<PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
+    <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
     <AvaloniaResource Include="Public\Assets\MiSans-Regular.otf" />
     <None Remove="Public\Assets\TitleBar-Icon.png" />
     <AvaloniaResource Include="Public\Assets\TitleBar-Icon.png" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <Content Include="YMCL-Icon.ico" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <None Include="..\..\..\YMCL.Avalonia\README.md">
       <Pack>True</Pack>

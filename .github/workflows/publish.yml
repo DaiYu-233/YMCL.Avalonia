@@ -15,7 +15,7 @@ jobs:
       hm: ${{ steps.date.outputs.hm }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Time
@@ -34,7 +34,7 @@ jobs:
     needs: time
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Time
@@ -88,7 +88,7 @@ jobs:
           cd ./win-arm64/publish/
           zip -9 -r "../../YMCL.Desktop.win7.arm64.exe.zip" "./YMCL.Desktop.win7.arm64.exe"
       - name: UploadArtifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: linux-artifacts
           path: |
@@ -100,7 +100,7 @@ jobs:
     needs: time
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Dependency-InnoSetup
         uses: ConorMacBride/install-package@v1
         with:
@@ -124,7 +124,7 @@ jobs:
           pupnet -r win-x86 -k setup -y -o YMCL.Desktop.win.x86.installer.exe --app-version ${{ needs.time.outputs.y }}.${{ needs.time.outputs.md }}.${{ needs.time.outputs.hm }}
           pupnet -r win-arm64 -k setup -y -o YMCL.Desktop.win.arm64.installer.exe --app-version ${{ needs.time.outputs.y }}.${{ needs.time.outputs.md }}.${{ needs.time.outputs.hm }}
       - name: UploadArtifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: win-artifacts
           path: |
@@ -140,12 +140,12 @@ jobs:
           echo "date=$(date +'%Y-%m-%d.%H-%M-%S')" >> $GITHUB_OUTPUT
           echo "title=$(date +'%Y.%m.%d.%H.%M')" >> $GITHUB_OUTPUT
       - name: Download-LinuxArtifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: linux-artifacts
           path: ./YMCL.Release/
       - name: Download-WindowsArtifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: win-artifacts
           path: ./YMCL.Release/

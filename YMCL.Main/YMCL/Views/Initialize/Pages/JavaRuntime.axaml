@@ -5,6 +5,7 @@
     x:Class="YMCL.Views.Initialize.Pages.JavaRuntime"
     xmlns="https://github.com/avaloniaui"
     xmlns:cl="clr-namespace:MinecraftLaunch.Classes.Models.Game;assembly=MinecraftLaunch"
+    xmlns:classes="clr-namespace:YMCL.Public.Classes"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
@@ -81,7 +82,7 @@
                         SelectedIndex="0"
                         VerticalAlignment="Top">
                         <ListBox.ItemTemplate>
-                            <DataTemplate DataType="cl:JavaEntry">
+                            <DataTemplate DataType="classes:JavaEntry">
                                 <TextBlock
                                     FontFamily="{DynamicResource Font}"
                                     Margin="0,5"

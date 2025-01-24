@@ -52,7 +52,6 @@ public sealed class LangHelper : INotifyPropertyChanged
     public void ChangedCulture(string? name)
     {
         MainLang.Culture = CultureInfo.GetCultureInfo(string.IsNullOrEmpty(name) ? "zh-CN" : name);
-        Data.JavaRuntimes.FirstOrDefault(java => java.JavaVersion == "Auto").JavaPath = MainLang.LetYMCLChooseJava;
         Resources = new MainLang();
     }
 

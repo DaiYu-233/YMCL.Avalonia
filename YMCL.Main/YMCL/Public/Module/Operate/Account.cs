@@ -103,7 +103,7 @@ public class Account
                         FontFamily = (FontFamily)Application.Current.Resources["Font"],
                         Title = MainLang.VerificationCode,
                         PrimaryButtonText = MainLang.CopyCodeAndOPenBrowser,
-                        SecondaryButtonText = MainLang.CannotOpenBrowser,
+                        SecondaryButtonText = MainLang.ManualOpen,
                         CloseButtonText = MainLang.Cancel,
                         DefaultButton = ContentDialogButton.Primary,
                         Content = textBlock,

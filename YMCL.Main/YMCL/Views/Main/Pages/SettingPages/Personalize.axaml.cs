@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -36,6 +37,10 @@ public partial class Personalize : UserControl
         {
             var launcher = TopLevel.GetTopLevel(this).Launcher;
             launcher.LaunchFileInfoAsync(new FileInfo(ConfigPath.CustomHomePageXamlDataPath));
+        };
+        LanguageComboBox.SelectionChanged += (_, _) =>
+        {
+            Data.JavaRuntimes.FirstOrDefault(java => java.JavaVersion == "Auto").JavaPath = MainLang.LetYMCLChooseJava;
         };
     }
 }

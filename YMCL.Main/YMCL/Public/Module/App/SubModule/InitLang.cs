@@ -1,4 +1,5 @@
-﻿using YMCL.Public.Langs;
+﻿using System.Linq;
+using YMCL.Public.Langs;
 
 namespace YMCL.Public.Module.App.SubModule;
 

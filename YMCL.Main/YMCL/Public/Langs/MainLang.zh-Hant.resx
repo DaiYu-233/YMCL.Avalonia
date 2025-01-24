@@ -412,10 +412,10 @@
   <data name="ModsFolder" xml:space="preserve">
     <value>模組資料夾</value>
   </data>
-  <data name="ResourcepacksFolder" xml:space="preserve">
+  <data name="ResourcePacksFolder" xml:space="preserve">
     <value>資源包資料夾</value>
   </data>
-  <data name="ShaderpacksFolder" xml:space="preserve">
+  <data name="ShaderPacksFolder" xml:space="preserve">
     <value>光影包資料夾</value>
   </data>
   <data name="VersionFolder" xml:space="preserve">

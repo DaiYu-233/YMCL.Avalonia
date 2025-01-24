@@ -636,6 +636,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 创建时间.
+        /// </summary>
+        public static string CreateTime {
+            get {
+                return ResourceManager.GetString("CreateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 当前系统不支持自动更新
         ///可手动打开以下目录复制最新版本并替换当前版本.
         /// </summary>
@@ -732,6 +741,15 @@ namespace YMCL.Public.Langs {
         public static string DataPack {
             get {
                 return ResourceManager.GetString("DataPack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 数据包数量.
+        /// </summary>
+        public static string DataPackCount {
+            get {
+                return ResourceManager.GetString("DataPackCount", resourceCulture);
             }
         }
         
@@ -1231,6 +1249,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 导入时间.
+        /// </summary>
+        public static string ImportTime {
+            get {
+                return ResourceManager.GetString("ImportTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 包含特殊字符.
         /// </summary>
         public static string IncludeSpecialWord {
@@ -1401,6 +1428,15 @@ namespace YMCL.Public.Langs {
         public static string LanguageTip {
             get {
                 return ResourceManager.GetString("LanguageTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 最后修改时间.
+        /// </summary>
+        public static string LastModifiedTime {
+            get {
+                return ResourceManager.GetString("LastModifiedTime", resourceCulture);
             }
         }
         
@@ -1885,6 +1921,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 名称.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 需要重启YMCL.
         /// </summary>
         public static string NeedRestartApp {
@@ -1971,6 +2016,15 @@ namespace YMCL.Public.Langs {
         public static string NoCrashInfo {
             get {
                 return ResourceManager.GetString("NoCrashInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 无匹配结果.
+        /// </summary>
+        public static string NoMatchResult {
+            get {
+                return ResourceManager.GetString("NoMatchResult", resourceCulture);
             }
         }
         
@@ -2137,6 +2191,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 玩家数量.
+        /// </summary>
+        public static string PlayerCount {
+            get {
+                return ResourceManager.GetString("PlayerCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 播放列表.
         /// </summary>
         public static string PlayList {
@@ -2245,11 +2308,20 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 资源包.
+        /// </summary>
+        public static string ResourcePacks {
+            get {
+                return ResourceManager.GetString("ResourcePacks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 资源包文件夹.
         /// </summary>
-        public static string ResourcepacksFolder {
+        public static string ResourcePacksFolder {
             get {
-                return ResourceManager.GetString("ResourcepacksFolder", resourceCulture);
+                return ResourceManager.GetString("ResourcePacksFolder", resourceCulture);
             }
         }
         
@@ -2344,6 +2416,24 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 存档信息.
+        /// </summary>
+        public static string SaveInfo {
+            get {
+                return ResourceManager.GetString("SaveInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 存档.
+        /// </summary>
+        public static string Saves {
+            get {
+                return ResourceManager.GetString("Saves", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 存档文件夹.
         /// </summary>
         public static string SavesFolder {
@@ -2358,6 +2448,24 @@ namespace YMCL.Public.Langs {
         public static string ScanJavaSuccess {
             get {
                 return ResourceManager.GetString("ScanJavaSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 截图.
+        /// </summary>
+        public static string Screenshots {
+            get {
+                return ResourceManager.GetString("Screenshots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 截图文件夹.
+        /// </summary>
+        public static string ScreenshotsFolder {
+            get {
+                return ResourceManager.GetString("ScreenshotsFolder", resourceCulture);
             }
         }
         
@@ -2499,9 +2607,9 @@ namespace YMCL.Public.Langs {
         /// <summary>
         ///   Looks up a localized string similar to 光影包文件夹.
         /// </summary>
-        public static string ShaderpacksFolder {
+        public static string ShaderPacksFolder {
             get {
-                return ResourceManager.GetString("ShaderpacksFolder", resourceCulture);
+                return ResourceManager.GetString("ShaderPacksFolder", resourceCulture);
             }
         }
         

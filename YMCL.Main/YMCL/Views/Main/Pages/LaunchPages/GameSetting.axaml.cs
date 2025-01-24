@@ -14,6 +14,10 @@ public partial class GameSetting : UserControl
     private readonly SubPages.Setting _setting;
     private readonly SubPages.Mod _mod;
     private readonly SubPages.OverView _overView;
+    private readonly SubPages.ResourcePack _resourcePack;
+    private readonly SubPages.ShaderPack _shaderPack;
+    private readonly SubPages.Save _save;
+    private readonly SubPages.Screenshot _screenshot;
 
     public GameSetting()
     {
@@ -24,6 +28,10 @@ public partial class GameSetting : UserControl
         _setting = new SubPages.Setting(Model);
         _mod = new SubPages.Mod(Model.GameEntry);
         _overView = new SubPages.OverView(Model);
+        _resourcePack = new SubPages.ResourcePack(Model.GameEntry);
+        _save = new SubPages.Save(Model.GameEntry);
+        _shaderPack = new SubPages.ShaderPack(Model.GameEntry);
+        _screenshot = new SubPages.Screenshot(Model.GameEntry);
         Nav.SelectionChanged += (o, e) =>
         {
             var tag = ((e.SelectedItem as NavigationViewItem).Tag as string)!;
@@ -38,6 +46,10 @@ public partial class GameSetting : UserControl
                 "overView" => _overView,
                 "setting" => _setting,
                 "mod" => _mod,
+                "saves" => _save,
+                "resourcePacks" => _resourcePack,
+                "screenshots" => _screenshot,
+                "shaderPack" => _shaderPack,
                 _ => FrameView.Content as UserControl
             };
             FrameView.Content = page;

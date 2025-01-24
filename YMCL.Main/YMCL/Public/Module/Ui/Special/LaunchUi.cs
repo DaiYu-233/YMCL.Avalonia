@@ -18,6 +18,7 @@ public class LaunchUi
     public static void LoadGames()
     {
         if (Data.Setting == null) return;
+        if (Data.Setting.MinecraftFolder == null) return;
         GameDataEntry? selected = null;
         if (Data.CurrentFolderGames.Count > 0)
         {

@@ -310,10 +310,10 @@
   <data name="ModsFolder" xml:space="preserve">
     <value>模组文件夹</value>
   </data>
-  <data name="ResourcepacksFolder" xml:space="preserve">
+  <data name="ResourcePacksFolder" xml:space="preserve">
     <value>资源包文件夹</value>
   </data>
-  <data name="ShaderpacksFolder" xml:space="preserve">
+  <data name="ShaderPacksFolder" xml:space="preserve">
     <value>光影包文件夹</value>
   </data>
   <data name="VersionFolder" xml:space="preserve">
@@ -1032,5 +1032,41 @@ MacOs 不支持自动更新
   </data>
   <data name="Return" xml:space="preserve">
     <value>返回</value>
+  </data>
+  <data name="ScreenshotsFolder" xml:space="preserve">
+    <value>截图文件夹</value>
+  </data>
+  <data name="Saves" xml:space="preserve">
+    <value>存档</value>
+  </data>
+  <data name="Screenshots" xml:space="preserve">
+    <value>截图</value>
+  </data>
+  <data name="ResourcePacks" xml:space="preserve">
+    <value>资源包</value>
+  </data>
+  <data name="NoMatchResult" xml:space="preserve">
+    <value>无匹配结果</value>
+  </data>
+  <data name="CreateTime" xml:space="preserve">
+    <value>创建时间</value>
+  </data>
+  <data name="LastModifiedTime" xml:space="preserve">
+    <value>最后修改时间</value>
+  </data>
+  <data name="SaveInfo" xml:space="preserve">
+    <value>存档信息</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="PlayerCount" xml:space="preserve">
+    <value>玩家数量</value>
+  </data>
+  <data name="DataPackCount" xml:space="preserve">
+    <value>数据包数量</value>
+  </data>
+  <data name="ImportTime" xml:space="preserve">
+    <value>导入时间</value>
   </data>
 </root>

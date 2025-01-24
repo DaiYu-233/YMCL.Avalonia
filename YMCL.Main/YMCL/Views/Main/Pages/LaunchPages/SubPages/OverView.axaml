@@ -79,18 +79,25 @@
                         Tag="mods" />
                     <Button
                         Click="OpenVersionFolder"
-                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.ResourcepacksFolder}"
+                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.ResourcePacksFolder}"
                         FontFamily="{DynamicResource Font}"
                         FontSize="13"
                         Margin="5,0,5,0"
                         Tag="resourcepacks" />
                     <Button
                         Click="OpenVersionFolder"
-                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.ShaderpacksFolder}"
+                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.ShaderPacksFolder}"
                         FontFamily="{DynamicResource Font}"
                         FontSize="13"
                         Margin="5,0,5,0"
                         Tag="shaderpacks" />
+                    <Button
+                        Click="OpenVersionFolder"
+                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.ScreenshotsFolder}"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="13"
+                        Margin="5,0,5,0"
+                        Tag="screenshots" />
                 </WrapPanel>
             </Border>
         </StackPanel>

@@ -33,7 +33,14 @@ public class Setting : ReactiveObject
     public Enum.Setting.LauncherVisibility LauncherVisibility { get; set; } =
         Enum.Setting.LauncherVisibility.AfterLaunchKeepLauncherVisible;
 
-    [Reactive] [JsonProperty] public AccountInfo Account { get; set; }
+    [Reactive]
+    [JsonProperty]
+    public AccountInfo Account { get; set; } = new()
+    {
+        Name = "Steve", AccountType = Enum.Setting.AccountType.Offline,
+        AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")
+    };
+
     [Reactive] [JsonProperty] public Enum.Setting.Theme Theme { get; set; } = Enum.Setting.Theme.Light;
     [Reactive] [JsonProperty] public double MaxMem { get; set; } = 1024;
     [Reactive] [JsonProperty] public int MaxFileFragmentation { get; set; } = 8;

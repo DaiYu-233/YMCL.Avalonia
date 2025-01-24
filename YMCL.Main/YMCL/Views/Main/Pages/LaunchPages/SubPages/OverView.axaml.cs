@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
+using YMCL.Public.Enum;
 using YMCL.ViewModels;
 
 namespace YMCL.Views.Main.Pages.LaunchPages.SubPages;
@@ -11,6 +12,7 @@ namespace YMCL.Views.Main.Pages.LaunchPages.SubPages;
 public partial class OverView : UserControl
 {
     private GameSettingModel _model;
+
     public OverView(GameSettingModel model)
     {
         InitializeComponent();
@@ -21,8 +23,21 @@ public partial class OverView : UserControl
     private void OpenVersionFolder(object? sender, RoutedEventArgs e)
     {
         var tag = ((Button)sender).Tag.ToString();
-        YMCL.Public.Module.IO.Disk.Setter.TryCreateFolder(Path.Combine(_model.GameEntry.GameFolderPath, "versions", _model.GameEntry.Id, tag!));
+        var path = tag switch
+        {
+            "mods" => Public.Module.Mc.GameSetting.GetGameSpecialFolder(_model.GameEntry, GameSpecialFolder.ModsFolder),
+            "saves" => Public.Module.Mc.GameSetting.GetGameSpecialFolder(_model.GameEntry,
+                GameSpecialFolder.SavesFolder),
+            "resourcepacks" => Public.Module.Mc.GameSetting.GetGameSpecialFolder(_model.GameEntry,
+                GameSpecialFolder.ResourcePacksFolder),
+            "shaderpacks" => Public.Module.Mc.GameSetting.GetGameSpecialFolder(_model.GameEntry,
+                GameSpecialFolder.ShaderPacksFolder),
+            "screenshots" => Public.Module.Mc.GameSetting.GetGameSpecialFolder(_model.GameEntry,
+                GameSpecialFolder.ScreenshotsFolder),
+            _ => Public.Module.Mc.GameSetting.GetGameSpecialFolder(_model.GameEntry, GameSpecialFolder.GameFolder)
+        };
+        YMCL.Public.Module.IO.Disk.Setter.TryCreateFolder(path);
         var launcher = TopLevel.GetTopLevel(this).Launcher;
-        launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(Path.Combine(_model.GameEntry.GameFolderPath, "versions", _model.GameEntry.Id, tag!)));
+        launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(path));
     }
 }

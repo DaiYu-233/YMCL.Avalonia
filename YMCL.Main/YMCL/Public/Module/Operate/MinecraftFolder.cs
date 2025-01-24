@@ -15,42 +15,69 @@ public class MinecraftFolder
     public static async Task AddByUi(Control sender)
     {
         var list = await TopLevel.GetTopLevel(sender).StorageProvider.OpenFolderPickerAsync(
-            new FolderPickerOpenOptions { Title = MainLang.SelectMinecraftFolder });
+            new FolderPickerOpenOptions { Title = MainLang.SelectMinecraftFolder, AllowMultiple = true });
         if (list.Count < 1) return;
-        var textbox = new TextBox
+        foreach (var storageFolder in list)
         {
-            Watermark = MainLang.DisplayName,
-            TextWrapping = TextWrapping.Wrap,
-            MaxLength = 60
-        };
-        var dialog = new ContentDialog
-        {
-            Title = MainLang.AddFolder,
-            Content = new StackPanel
+            var path = storageFolder.Path.LocalPath;
+            path = path.Trim().TrimEnd(Path.DirectorySeparatorChar);
+            var folder = Path.GetFileName(path);
+            var parentDirectoryPath = Path.GetDirectoryName(path);
+            var name = string.Empty;
+            if (parentDirectoryPath != null)
             {
-                Spacing = 10,
-                Children =
+                name = Path.GetFileName(parentDirectoryPath);
+            }
+
+            if (folder != ".minecraft")
+            {
+                if (Directory.Exists(Path.Combine(path, ".minecraft")))
                 {
-                    textbox,
-                    new TextBox
-                    {
-                        Text = list[0].Path.LocalPath,
-                        IsReadOnly = true,
-                        TextWrapping = TextWrapping.Wrap
-                    }
+                    path = Path.Combine(path, ".minecraft");
+                    name = folder;
                 }
-            },
-            PrimaryButtonText = MainLang.Ok,
-            CloseButtonText = MainLang.Cancel,
-            IsPrimaryButtonEnabled = false
-        };
-        textbox.TextChanged += (_, _) => { dialog.IsPrimaryButtonEnabled = !string.IsNullOrWhiteSpace(textbox.Text); };
-        var result = await dialog.ShowAsync();
-        if (result != ContentDialogResult.Primary) return;
-        var entry = new Public.Classes.MinecraftFolder
-            { Name = textbox.Text, Path = list[0].Path.LocalPath };
-        Data.MinecraftFolders.Add(entry);
-        Data.Setting.MinecraftFolder = entry;
+            }
+
+            var textbox = new TextBox
+            {
+                Watermark = MainLang.DisplayName,
+                TextWrapping = TextWrapping.Wrap,
+                MaxLength = 60, Text = name
+            };
+            var dialog = new ContentDialog
+            {
+                Title = MainLang.AddFolder,
+                Content = new StackPanel
+                {
+                    Spacing = 10,
+                    Children =
+                    {
+                        textbox,
+                        new TextBox
+                        {
+                            Text = path,
+                            IsReadOnly = true,
+                            TextWrapping = TextWrapping.Wrap
+                        }
+                    }
+                },
+                PrimaryButtonText = MainLang.Ok,
+                CloseButtonText = MainLang.Cancel,
+                IsPrimaryButtonEnabled = false
+            };
+            dialog.IsPrimaryButtonEnabled = !string.IsNullOrWhiteSpace(textbox.Text);
+            textbox.TextChanged += (_, _) =>
+            {
+                dialog.IsPrimaryButtonEnabled = !string.IsNullOrWhiteSpace(textbox.Text);
+            };
+            var result = await dialog.ShowAsync();
+            if (result != ContentDialogResult.Primary) return;
+            var entry = new Public.Classes.MinecraftFolder
+                { Name = textbox.Text, Path = path };
+            Data.MinecraftFolders.Add(entry);
+            Data.Setting.MinecraftFolder = entry;
+        }
+
         await File.WriteAllTextAsync(ConfigPath.MinecraftFolderDataPath,
             JsonConvert.SerializeObject(Data.MinecraftFolders, Formatting.Indented));
         Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();

@@ -30,7 +30,7 @@ public sealed partial class Mod : UserControl, INotifyPropertyChanged
     {
         _entry = entry;
         InitializeComponent();
-        _ = LoadMods();
+        LoadMods();
         PropertyChanged += (_, e) =>
         {
             if (e.PropertyName == nameof(Filter))
@@ -39,7 +39,8 @@ public sealed partial class Mod : UserControl, INotifyPropertyChanged
             }
         };
         DataContext = this;
-        RefreshModBtn.Click += (_, _) => { _ = LoadMods(); };
+        RefreshModBtn.Click += (_, _) => { LoadMods(); };
+        Loaded += (_, _) => { LoadMods(); };
         DeselectAllModBtn.Click += (_, _) => { ModManageList.SelectedIndex = -1; };
         SelectAllModBtn.Click += (_, _) => { ModManageList.SelectAll(); };
         DisableSelectModBtn.Click += (_, _) =>
@@ -53,7 +54,7 @@ public sealed partial class Mod : UserControl, INotifyPropertyChanged
                     File.Move(mod.Path, mod.Path + ".disabled");
             }
 
-            _ = LoadMods();
+            LoadMods();
         };
         EnableSelectModBtn.Click += (_, _) =>
         {
@@ -67,12 +68,13 @@ public sealed partial class Mod : UserControl, INotifyPropertyChanged
                     File.Move(mod.Path, Path.Combine(Path.GetDirectoryName(mod.Path)!, $"{mod.Name}.jar"));
             }
 
-            _ = LoadMods();
+            LoadMods();
         };
         DeleteSelectModBtn.Click += async (_, _) =>
         {
             var mods = ModManageList.SelectedItems;
-            var text = (from object? item in mods select item as LocalModEntry).Aggregate(string.Empty, (current, mod) => current + $"• {Path.GetFileName(mod.Name)}\n");
+            var text = (from object? item in mods select item as LocalModEntry).Aggregate(string.Empty,
+                (current, mod) => current + $"• {Path.GetFileName(mod.Name)}\n");
 
             var title = YMCL.Public.Const.Data.DesktopType == DesktopRunnerType.Windows
                 ? MainLang.MoveToRecycleBin
@@ -94,8 +96,13 @@ public sealed partial class Mod : UserControl, INotifyPropertyChanged
                 }
             }
 
-            _ = LoadMods();
+            LoadMods();
         };
+        ModManageList.SelectionChanged += (_, _) =>
+        {
+            SelectedModCount.Text = $"{MainLang.SelectedItem} {ModManageList.SelectedItems.Count}";
+        };
+        SelectedModCount.Text = $"{MainLang.SelectedItem} 0";
     }
 
     public string Filter
@@ -104,30 +111,28 @@ public sealed partial class Mod : UserControl, INotifyPropertyChanged
         set => SetField(ref _filter, value);
     }
 
-    private async System.Threading.Tasks.Task LoadMods()
+    private void LoadMods()
     {
         _mods.Clear();
-        await System.Threading.Tasks.Task.Run(async () =>
+
+        var mods = Directory.GetFiles(
+            Public.Module.Mc.GameSetting.GetGameSpecialFolder(_entry, GameSpecialFolder.ModsFolder)
+            , "*.*", SearchOption.AllDirectories);
+        foreach (var mod in mods)
         {
-            var mods = Directory.GetFiles(Path.Combine(_entry.GameFolderPath, "versions", _entry.Id, "mods")
-                , "*.*", SearchOption.AllDirectories);
-            foreach (var mod in mods)
-                await Dispatcher.UIThread.InvokeAsync(() =>
+            if (Path.GetExtension(mod) == ".jar")
+                _mods.Add(new LocalModEntry
                 {
-                    if (Path.GetExtension(mod) == ".jar")
-                        _mods.Add(new LocalModEntry
-                        {
-                            Name = Path.GetFileName(mod)[..(Path.GetFileName(mod).Length - 4)],
-                            IsEnable = true, Path = mod
-                        });
-                    if (Path.GetExtension(mod) == ".disabled")
-                        _mods.Add(new LocalModEntry
-                        {
-                            Name = Path.GetFileName(mod)[..(Path.GetFileName(mod).Length - 13)],
-                            IsEnable = false, Path = mod
-                        });
+                    Name = Path.GetFileName(mod)[..(Path.GetFileName(mod).Length - 4)],
+                    IsEnable = true, Path = mod, Callback = () => { LoadMods(); }
                 });
-        });
+            if (Path.GetExtension(mod) == ".disabled")
+                _mods.Add(new LocalModEntry
+                {
+                    Name = Path.GetFileName(mod)[..(Path.GetFileName(mod).Length - 13)],
+                    IsEnable = false, Path = mod, Callback = () => { LoadMods(); }
+                });
+        }
         FilterMods();
     }
 
@@ -136,6 +141,8 @@ public sealed partial class Mod : UserControl, INotifyPropertyChanged
         FilteredMods.Clear();
         _mods.Where(item => item.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase))
             .ToList().OrderBy(mod => mod.IsEnable).ToList().ForEach(mod => FilteredMods.Add(mod));
+        NoMatchResultTip.IsVisible = FilteredMods.Count == 0;
+        SelectedModCount.Text = $"{MainLang.SelectedItem} {ModManageList.SelectedItems.Count}";
     }
 
 

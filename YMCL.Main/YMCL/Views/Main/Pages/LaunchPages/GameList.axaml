@@ -6,6 +6,7 @@
     x:DataType="da:Data"
     xmlns="https://github.com/avaloniaui"
     xmlns:classes="clr-namespace:YMCL.Public.Classes"
+    xmlns:converter="clr-namespace:YMCL.Public.Module.Ui.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:da="clr-namespace:YMCL.Public.Const"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -101,6 +102,26 @@
                                 HorizontalAlignment="Right"
                                 Orientation="Horizontal"
                                 Spacing="15">
+                                <StackPanel.Styles>
+                                    <Style Selector="StackPanel">
+                                        <Setter Property="Opacity" Value="0" />
+                                        <Setter Property="Transitions">
+                                            <Transitions>
+                                                <DoubleTransition Duration="0:0:0.1" Property="Opacity" />
+                                            </Transitions>
+                                        </Setter>
+                                    </Style>
+                                </StackPanel.Styles>
+                                <StackPanel.IsVisible>
+                                    <Binding Path="IsPointerOver" RelativeSource="{RelativeSource AncestorType=ListBoxItem}" />
+                                </StackPanel.IsVisible>
+                                <StackPanel.Opacity>
+                                    <Binding Path="IsPointerOver" RelativeSource="{RelativeSource AncestorType=ListBoxItem}">
+                                        <Binding.Converter>
+                                            <converter:BoolToDoubleConverter FalseValue="0.5" TrueValue="1" />
+                                        </Binding.Converter>
+                                    </Binding>
+                                </StackPanel.Opacity>
                                 <Button
                                     Classes="custom-button"
                                     Command="{Binding SettingCommand}"

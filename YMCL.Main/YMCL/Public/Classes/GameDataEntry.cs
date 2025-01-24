@@ -4,6 +4,7 @@ using Avalonia.Media.Imaging;
 using MinecraftLaunch.Classes.Enums;
 using MinecraftLaunch.Classes.Models.Game;
 using Newtonsoft.Json;
+using YMCL.Public.Langs;
 using YMCL.Public.Module.App;
 using YMCL.Public.Module.Mc;
 using YMCL.Public.Module.Mc.Launcher;
@@ -91,6 +92,12 @@ public sealed record GameDataEntry
                 if (setting.Java.JavaVersion == "Auto")
                 {
                     setting.Java = YMCL.Public.Module.Value.Calculator.GetCurrentJava(Data.JavaRuntimes.ToList(), entry);
+                }
+
+                if (setting.Java == null)
+                {
+                    Toast(MainLang.CannotFandRightJava);
+                    return;
                 }
                 _ = LaunchJavaClientByMinecraftLaunch.Launch(Id, entry.GameFolderPath, setting.MaxMem,
                     setting.Java.JavaPath);

@@ -412,10 +412,10 @@ Jump to the browser to complete verification</value>
   <data name="ModsFolder" xml:space="preserve">
     <value>Module Folder</value>
   </data>
-  <data name="ResourcepacksFolder" xml:space="preserve">
+  <data name="ResourcePacksFolder" xml:space="preserve">
     <value>Resource Pack Folder</value>
   </data>
-  <data name="ShaderpacksFolder" xml:space="preserve">
+  <data name="ShaderPacksFolder" xml:space="preserve">
     <value>Light Pack Folder</value>
   </data>
   <data name="VersionFolder" xml:space="preserve">

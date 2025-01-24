@@ -23,6 +23,7 @@ public partial class TaskEntry : UserControl
         DataContext = Data.Instance;
         Model.Name = name;
         Data.TaskEntrys.Add(this);
+        App.UiRoot.ViewModel.Task.UpdateTasksTip();
     }
 
     public void UpdateAction(Action action)
@@ -67,6 +68,7 @@ public partial class TaskEntry : UserControl
     public void Destory()
     {
         Data.TaskEntrys.Remove(this);
+        App.UiRoot.ViewModel.Task.UpdateTasksTip();
     }
     public void FinishWithSuccess()
     {

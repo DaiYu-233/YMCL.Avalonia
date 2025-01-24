@@ -6,22 +6,37 @@
     x:DataType="da:Data"
     xmlns="https://github.com/avaloniaui"
     xmlns:controls="clr-namespace:YMCL.Public.Controls"
+    xmlns:converter="clr-namespace:YMCL.Public.Module.Ui.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:da="clr-namespace:YMCL.Public.Const"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Public.Langs"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <ScrollViewer>
-        <ItemsControl ItemsSource="{Binding TaskEntrys}" Margin="10">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Spacing="10" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="controls:TaskEntry">
-                    <ContentControl Content="{Binding Model.Instance}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </ScrollViewer>
+    <Grid>
+        <ScrollViewer>
+            <ItemsControl ItemsSource="{Binding TaskEntrys}" Margin="10">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Spacing="10" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="controls:TaskEntry">
+                        <ContentControl Content="{Binding Model.Instance}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Border
+            Background="{DynamicResource 1x}"
+            CornerRadius="9999"
+            HorizontalAlignment="Center"
+            Margin="0,100,0,0"
+            Name="NoTasksTip"
+            Opacity="{DynamicResource MainOpacity}"
+            Padding="10,7"
+            VerticalAlignment="Top">
+            <TextBlock Foreground="{DynamicResource GrayColor}" Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.NoWorkingTask}" />
+        </Border>
+    </Grid>
 </UserControl>

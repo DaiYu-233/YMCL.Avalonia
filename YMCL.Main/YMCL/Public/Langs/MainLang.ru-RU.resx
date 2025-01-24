@@ -412,10 +412,10 @@
   <data name="ModsFolder" xml:space="preserve">
     <value>Папка модуля</value>
   </data>
-  <data name="ResourcepacksFolder" xml:space="preserve">
+  <data name="ResourcePacksFolder" xml:space="preserve">
     <value>Папка пакета ресурсов</value>
   </data>
-  <data name="ShaderpacksFolder" xml:space="preserve">
+  <data name="ShaderPacksFolder" xml:space="preserve">
     <value>Папка Light Pack</value>
   </data>
   <data name="VersionFolder" xml:space="preserve">

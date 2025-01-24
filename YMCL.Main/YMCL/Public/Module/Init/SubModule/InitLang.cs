@@ -1,7 +1,6 @@
-﻿using System.Linq;
-using YMCL.Public.Langs;
+﻿using YMCL.Public.Langs;
 
-namespace YMCL.Public.Module.App.SubModule;
+namespace YMCL.Public.Module.Init.SubModule;
 
 public class InitLang
 {

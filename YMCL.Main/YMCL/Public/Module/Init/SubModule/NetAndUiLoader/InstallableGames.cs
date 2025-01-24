@@ -1,10 +1,8 @@
 ﻿using System.Linq;
-using MinecraftLaunch;
 using MinecraftLaunch.Components.Installer;
 using YMCL.Public.Classes;
-using YMCL.Public.Langs;
 
-namespace YMCL.Public.Module.App.SubModule.NetAndUiLoader;
+namespace YMCL.Public.Module.Init.SubModule.NetAndUiLoader;
 
 public class InstallableGame
 {

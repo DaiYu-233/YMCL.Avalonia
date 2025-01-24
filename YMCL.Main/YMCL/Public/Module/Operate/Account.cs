@@ -15,7 +15,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using YMCL.Public.Classes;
 using YMCL.Public.Langs;
-using YMCL.Public.Module.App;
 using YMCL.Public.Module.Value;
 using Setting = YMCL.Public.Enum.Setting;
 using String = YMCL.Public.Const.String;

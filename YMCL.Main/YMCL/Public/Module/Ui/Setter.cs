@@ -6,7 +6,6 @@ using Avalonia.Styling;
 using Newtonsoft.Json;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
-using YMCL.Public.Module.App;
 using YMCL.Public.Module.Value;
 using YMCL.Views.Main;
 

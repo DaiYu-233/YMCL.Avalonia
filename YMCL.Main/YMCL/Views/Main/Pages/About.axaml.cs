@@ -9,9 +9,11 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
+using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
 using YMCL.Public.Langs;
+using YMCL.Public.Module;
 
 namespace YMCL.Views.Main.Pages;
 
@@ -38,6 +40,80 @@ public partial class About : UserControl
         {
             var launcher = TopLevel.GetTopLevel(this).Launcher;
             await launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(ConfigPath.UserDataRootPath));
+        };
+        CheckUpdateBtn.Click += async (_, _) =>
+        {
+            CheckUpdateBtn.IsEnabled = false;
+            var ring = new ProgressRing();
+            CheckUpdateBtn.Width = CheckUpdateBtn.Bounds.Width;
+            CheckUpdateBtn.Content = ring;
+            ring.Height = 17;
+            ring.Width = 17;
+            var updateAvailable = await Public.Module.IO.Network.Update.CheckUpdateAsync();
+            if (!updateAvailable.Success)
+            {
+                CheckUpdateBtn.IsEnabled = true;
+                CheckUpdateBtn.Content = MainLang.CheckUpdate;
+                Toast(MainLang.CheckUpdateFail);
+                return;
+            }
+
+            if (!updateAvailable.IsNeedUpdate)
+            {
+                CheckUpdateBtn.IsEnabled = true;
+                CheckUpdateBtn.Content = MainLang.CheckUpdate;
+                Toast(MainLang.CurrentlyTheLatestVersion);
+                return;
+            }
+
+            CheckUpdateBtn.IsEnabled = true;
+            CheckUpdateBtn.Content = MainLang.CheckUpdate;
+            var dialog = ContentDialogResult.None;
+            if (Environment.OSVersion.Version.Major < 10)
+            {
+                await Dispatcher.UIThread.Invoke(async () =>
+                {
+                    dialog = await ShowDialogAsync(MainLang.FoundNewVersion,
+                        $"{MainLang.WinSevenAutoUpdateTip.Replace("{url}", updateAvailable.GithubUrl).Replace("{version}", updateAvailable.NewVersion)}"
+                        , b_cancel: MainLang.Cancel,
+                        b_primary: MainLang.OpenBrowser);
+                });
+            }
+            else
+            {
+                await Dispatcher.UIThread.Invoke(async () =>
+                {
+                    dialog = await ShowDialogAsync(MainLang.FoundNewVersion,
+                        $"{updateAvailable.NewVersion}\n\n{updateAvailable.GithubUrl}"
+                        , b_cancel: MainLang.Cancel,
+                        b_primary: MainLang.Update);
+                });
+            }
+
+            if (dialog == ContentDialogResult.Primary)
+            {
+                if (Environment.OSVersion.Version.Major < 10)
+                {
+                    await Dispatcher.UIThread.Invoke(async () =>
+                    {
+                        var launcher = TopLevel.GetTopLevel(App.UiRoot).Launcher;
+                        await launcher.LaunchUriAsync(new Uri(updateAvailable.GithubUrl));
+                    });
+                }
+                else
+                {
+                    var updateAppAsync = await Public.Module.IO.Network.Update.UpdateAppAsync();
+                    if (!updateAppAsync) Toast(MainLang.UpdateFail);
+                }
+            }
+            else if (dialog == ContentDialogResult.Secondary)
+            {
+                Dispatcher.UIThread.Invoke(() =>
+                {
+                    Data.Setting.SkipUpdateVersion = updateAvailable.NewVersion;
+                    Toast(MainLang.SkipVersionTip.Replace("{version}", updateAvailable.NewVersion));
+                });
+            }
         };
     }
 

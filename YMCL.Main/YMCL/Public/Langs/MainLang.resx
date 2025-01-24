@@ -1069,4 +1069,7 @@ MacOs 不支持自动更新
   <data name="ImportTime" xml:space="preserve">
     <value>导入时间</value>
   </data>
+  <data name="CanceledUpdate" xml:space="preserve">
+    <value>更新已取消</value>
+  </data>
 </root>

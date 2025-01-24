@@ -41,6 +41,10 @@ public class TaskEntryModel : ReactiveObject
             {
                 Refresh();
             }
+            if (e.PropertyName == nameof(CanRemove))
+            {
+                GetButtonDisplay();
+            }
         };
         Refresh();
     }

@@ -1,6 +1,6 @@
 using FluentAvalonia.UI.Controls;
 using ReactiveUI;
-using YMCL.Public.Module.App;
+using YMCL.Public.Module.Init;
 using YMCL.ViewModels;
 
 namespace YMCL.Views.Main;

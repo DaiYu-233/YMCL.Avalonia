@@ -1,21 +1,16 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
-using MinecraftLaunch;
 using MinecraftLaunch.Classes.Models.Download;
-using MinecraftLaunch.Classes.Models.Game;
 using MinecraftLaunch.Components.Installer;
 using MinecraftLaunch.Components.Resolver;
-using Newtonsoft.Json;
 using YMCL.Public.Classes;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using Setting = YMCL.Public.Enum.Setting;
 
-namespace YMCL.Public.Module.Mc.Installer.Game;
+namespace YMCL.Public.Module.Mc.Installer.InstallJavaClientByMinecraftLauncher;
 
 public class Vanllia
 {

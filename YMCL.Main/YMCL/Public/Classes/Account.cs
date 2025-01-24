@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 using Avalonia.Media.Imaging;
 using MinecraftLaunch.Skin;
 using Newtonsoft.Json;
-using YMCL.Public.Module.App;
 using YMCL.Public.Module.Value;
 
 namespace YMCL.Public.Classes;

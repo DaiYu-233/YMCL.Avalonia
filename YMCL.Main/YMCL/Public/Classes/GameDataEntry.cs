@@ -5,7 +5,6 @@ using MinecraftLaunch.Classes.Enums;
 using MinecraftLaunch.Classes.Models.Game;
 using Newtonsoft.Json;
 using YMCL.Public.Langs;
-using YMCL.Public.Module.App;
 using YMCL.Public.Module.Mc;
 using YMCL.Public.Module.Mc.Launcher;
 using YMCL.Public.Module.Ui.Special;

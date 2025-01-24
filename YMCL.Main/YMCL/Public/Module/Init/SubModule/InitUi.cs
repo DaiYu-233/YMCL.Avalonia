@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using Avalonia.Controls.Notifications;
 using Avalonia.Media;
 using Avalonia.Styling;
 using Avalonia.VisualTree;
@@ -9,11 +10,11 @@ using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Ui;
 
-namespace YMCL.Public.Module.App.SubModule;
+namespace YMCL.Public.Module.Init.SubModule;
 
 public class InitUi
 {
-    public static void Dispatch()
+    public static async Task Dispatch()
     {
         Ui.Setter.SetAccentColor(Data.Setting.AccentColor);
         Application.Current.Resources["MainOpacity"] = 1.0;
@@ -21,6 +22,14 @@ public class InitUi
         Ui.Setter.SetBackGround();
         _ = SetCustomHomePage();
         Application.Current.ActualThemeVariantChanged += (_, _) => { UpdateTheme(); };
+        if (Data.Setting.EnableAutoCheckUpdate)
+        {
+            var result = await IO.Network.Update.CheckUpdateAsync();
+            if (result is { Success: true, IsNeedUpdate: true })
+            {
+                _ = ShowAutoUpdateDialog(result);
+            }
+        }
     }
 
     public static void UpdateTheme()

@@ -5,7 +5,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using YMCL.Public.Langs;
 using YMCL.Public.Module;
-using YMCL.Public.Module.App;
+using YMCL.Public.Module.Init.SubModule;
 using YMCL.Public.Module.Ui.Special;
 using YMCL.Views.Initialize.Pages;
 
@@ -105,7 +105,7 @@ public class Setting : ReactiveObject
 
             if (e.PropertyName == nameof(CustomHomePage))
             {
-                _ = Public.Module.App.SubModule.InitUi.SetCustomHomePage();
+                _ = InitUi.SetCustomHomePage();
             }
 
             if (e.PropertyName == nameof(CustomBackGround))

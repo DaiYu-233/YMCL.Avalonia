@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using System.Management;
+using System.Runtime.InteropServices;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using YMCL.Public.Enum;
@@ -89,5 +90,37 @@ public class Getter
         stream.CopyTo(memoryStream);
         memoryStream.Position = 0;
         return new Bitmap(memoryStream);
+    }
+    
+    public static string GetCurrentPlatformAndArchitecture()
+    {
+        // 检测操作系统  
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            // 检测架构  
+            if (RuntimeInformation.ProcessArchitecture == Architecture.X64)
+                return "win-x64";
+            if (RuntimeInformation.ProcessArchitecture == Architecture.X86) return "win-x86";
+            // 其他的 Windows 架构可能也需要处理（比如 ARM）  
+        }
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+        {
+            if (RuntimeInformation.ProcessArchitecture == Architecture.X64)
+                return "osx-x64";
+            // 注意: OSX 上的 ARM 架构可能需要特定检测，因为目前可能是 Apple Silicon (M1/M2)  
+            if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64) return "osx-arm64";
+        }
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+        {
+            if (RuntimeInformation.ProcessArchitecture == Architecture.X64)
+                return "linux-x64";
+            if (RuntimeInformation.ProcessArchitecture == Architecture.Arm)
+                return "linux-arm"; // 注意: 这里应该是 linux-arm 而不是 liux-arm  
+            if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64) return "linux-arm64";
+        }
+        // 其他操作系统可能需要额外处理  
+
+        // 如果没有匹配项，返回未知或默认字符串  
+        return "unknown";
     }
 }

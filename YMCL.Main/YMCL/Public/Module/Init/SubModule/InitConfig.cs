@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using MinecraftLaunch.Classes.Models.Game;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
 
-namespace YMCL.Public.Module.App.SubModule;
+namespace YMCL.Public.Module.Init.SubModule;
 
 public static class InitConfig
 {

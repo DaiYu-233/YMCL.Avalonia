@@ -5,7 +5,6 @@ using MinecraftLaunch.Components.Fetcher;
 using MinecraftLaunch.Utilities;
 using Newtonsoft.Json;
 using YMCL.Public.Langs;
-using YMCL.Public.Module.App;
 
 namespace YMCL.Views.Initialize.Pages;
 

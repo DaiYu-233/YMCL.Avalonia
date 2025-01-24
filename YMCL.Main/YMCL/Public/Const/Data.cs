@@ -9,7 +9,6 @@ using YMCL.Public.Classes;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
-using YMCL.Public.Module.App;
 using YMCL.ViewModels;
 using YMCL.Views.Initialize.Pages;
 using Language = YMCL.Public.Classes.Language;

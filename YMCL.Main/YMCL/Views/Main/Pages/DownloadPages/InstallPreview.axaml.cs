@@ -7,7 +7,9 @@ using Avalonia.Markup.Xaml;
 using MinecraftLaunch.Classes.Models.Install;
 using ReactiveUI;
 using YMCL.Public.Langs;
+using YMCL.Public.Module.Init.SubModule.NetAndUiLoader;
 using YMCL.ViewModels;
+using Dispatcher = YMCL.Public.Module.Mc.Installer.InstallJavaClientByMinecraftLauncher.Dispatcher;
 using String = System.String;
 
 namespace YMCL.Views.Main.Pages.DownloadPages;
@@ -19,8 +21,7 @@ public sealed partial class InstallPreview : UserControl
     public InstallPreview(Action action, string id)
     {
         InitializeComponent();
-        YMCL.Public.Module.App.SubModule.NetAndUiLoader
-            .InstallPreviewModLoaders.Load(this, id);
+        InstallPreviewModLoaders.Load(this, id);
         Model = new InstallPreviewModel(this);
         DataContext = Model;
         ReturnToListRoot.PointerPressed += (_, _) => action();
@@ -41,7 +42,7 @@ public sealed partial class InstallPreview : UserControl
         };
         BeginInstallBtn.Click += (_, _) =>
         {
-            _ = YMCL.Public.Module.Mc.Installer.Game.Dispatcher.Install(Model.GameId, Model.IsDisplaceId ? Model.DisplaceId : Model.CustomId, ForgeListView.SelectedItem as ForgeInstallEntry,
+            _ = Dispatcher.Install(Model.GameId, Model.IsDisplaceId ? Model.DisplaceId : Model.CustomId, ForgeListView.SelectedItem as ForgeInstallEntry,
                 FabricListView.SelectedItem as FabricBuildEntry, QuiltListView.SelectedItem as QuiltBuildEntry, OptiFineListView.SelectedItem as OptiFineInstallEntity);
         };
     }

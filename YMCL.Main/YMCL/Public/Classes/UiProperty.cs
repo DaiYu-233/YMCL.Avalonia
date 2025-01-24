@@ -7,7 +7,6 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using YMCL.Public.Langs;
 using YMCL.Public.Module;
-using YMCL.Public.Module.App;
 using YMCL.Public.Module.Ui.Special;
 
 namespace YMCL.Public.Classes;

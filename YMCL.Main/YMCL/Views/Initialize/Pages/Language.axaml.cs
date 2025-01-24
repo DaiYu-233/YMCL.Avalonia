@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using YMCL.Public.Langs;
-using YMCL.Public.Module.App;
 
 namespace YMCL.Views.Initialize.Pages;
 

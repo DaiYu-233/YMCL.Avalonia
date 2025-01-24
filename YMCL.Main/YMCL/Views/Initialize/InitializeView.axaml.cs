@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Irihi.Avalonia.Shared.Helpers;
 using YMCL.Public.Enum;
-using YMCL.Public.Module.App;
+using YMCL.Public.Module;
 using YMCL.Views.Initialize.Pages;
 
 namespace YMCL.Views.Initialize;

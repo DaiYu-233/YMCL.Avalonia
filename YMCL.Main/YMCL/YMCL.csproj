@@ -141,8 +141,4 @@
     <UpToDateCheckInput Remove="Public\Controls\UrlImage\UrlImage.axaml" />
     <UpToDateCheckInput Remove="Assets\MiSans-Regular.otf" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Public\Module\IO\Network\Minecraft\" />
-  </ItemGroup>
 </Project>

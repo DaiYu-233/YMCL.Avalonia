@@ -81,7 +81,7 @@ public partial class Screenshot : UserControl, INotifyPropertyChanged
         Application.Current.TryGetResource("1x", Application.Current.ActualThemeVariant,
             out var c1);
         _items.Where(item => item.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase))
-            .ToList().OrderBy(mod => mod.Name).ToList().ForEach(mod => Container.Children.Add(new Border()
+            .ToList().OrderBy(mod => mod.Name).ToList().ForEach(mod => Container.Children.Add(new Border
             {
                 CornerRadius = new CornerRadius(5),
                 Margin = new Thickness(10, 5, 10, 5),
@@ -95,7 +95,7 @@ public partial class Screenshot : UserControl, INotifyPropertyChanged
                             HorizontalAlignment = HorizontalAlignment.Center,
                             Text = mod.Name, Margin = new Thickness(5, 3, 5, 3),
                         },
-                        new Border()
+                        new Border
                         {
                             ClipToBounds = true,
                             Margin = new Thickness(10, 0, 10, 10),

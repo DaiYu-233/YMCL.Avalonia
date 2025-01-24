@@ -9,7 +9,6 @@ using MinecraftLaunch.Classes.Models.Game;
 using MinecraftLaunch.Components.Resolver;
 using YMCL.Public.Classes;
 using YMCL.Public.Langs;
-using YMCL.Public.Module.App;
 
 namespace YMCL.Public.Module.Ui.Special;
 

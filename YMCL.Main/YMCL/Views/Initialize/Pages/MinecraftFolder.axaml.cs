@@ -7,7 +7,6 @@ using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
 using YMCL.Public.Langs;
-using YMCL.Public.Module.App;
 
 namespace YMCL.Views.Initialize.Pages;
 

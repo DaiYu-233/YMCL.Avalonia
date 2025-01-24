@@ -447,6 +447,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 更新已取消.
+        /// </summary>
+        public static string CanceledUpdate {
+            get {
+                return ResourceManager.GetString("CanceledUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 取消中.
         /// </summary>
         public static string Canceling {

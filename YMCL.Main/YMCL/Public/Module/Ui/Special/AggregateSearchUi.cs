@@ -5,7 +5,6 @@ using MinecraftLaunch.Components.Resolver;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
 using YMCL.Public.Langs;
-using YMCL.Public.Module.App;
 
 namespace YMCL.Public.Module.Ui.Special;
 
@@ -16,7 +15,7 @@ public class AggregateSearchUi
         Data.AllAggregateSearchEntries.Clear();
         foreach (var entry in UiProperty.AllInstallableGames)
         {
-            Data.AllAggregateSearchEntries.Add(new AggregateSearchEntry()
+            Data.AllAggregateSearchEntries.Add(new AggregateSearchEntry
             {
                 Tag = "jump", Text = $"{MainLang.ReleaseVersion} - {entry.Id}",
                 Type = MainLang.InstallVersion, Target = "auto-install",
@@ -32,7 +31,7 @@ public class AggregateSearchUi
             var entries = resolver.GetGameEntitys();
             foreach (var game in entries)
             {
-                Data.AllAggregateSearchEntries.Add(new AggregateSearchEntry()
+                Data.AllAggregateSearchEntries.Add(new AggregateSearchEntry
                 {
                     Tag = "change-selection", Text = $"{MainLang.GameVersion} - {game.Id}",
                     Type = MainLang.LocalResource, Target = "mc-version",
@@ -43,7 +42,7 @@ public class AggregateSearchUi
 
         foreach (var account in Data.Accounts)
         {
-            Data.AllAggregateSearchEntries.Add(new AggregateSearchEntry()
+            Data.AllAggregateSearchEntries.Add(new AggregateSearchEntry
             {
                 Tag = "change-selection", Text = $"{MainLang.ExistAccount} - {account.Name}",
                 Type = MainLang.LocalResource, Account = account,
@@ -53,7 +52,7 @@ public class AggregateSearchUi
 
         foreach (var java in Data.JavaRuntimes)
         {
-            Data.AllAggregateSearchEntries.Add(new AggregateSearchEntry()
+            Data.AllAggregateSearchEntries.Add(new AggregateSearchEntry
             {
                 Tag = "change-selection", Text = $"Java - {java.JavaVersion}", Type = MainLang.LocalResource,
                 Summary = java.JavaPath, Order = 50
@@ -69,7 +68,7 @@ public class AggregateSearchUi
         UiProperty.Instance.FilteredAggregateSearchEntries.Clear();
         if (!string.IsNullOrWhiteSpace(filter))
         {
-            UiProperty.Instance.FilteredAggregateSearchEntries.Add(new AggregateSearchEntry()
+            UiProperty.Instance.FilteredAggregateSearchEntries.Add(new AggregateSearchEntry
                 {
                     Tag = "jump", Text = $"{MainLang.SearchInTip.Replace("{target}", "CurseForge")} : {filter.Trim()}",
                     Type = MainLang.JumpSearch,
@@ -77,7 +76,7 @@ public class AggregateSearchUi
                     Target = "curse-forge", Order = 10
                 }
             );
-            UiProperty.Instance.FilteredAggregateSearchEntries.Add(new AggregateSearchEntry()
+            UiProperty.Instance.FilteredAggregateSearchEntries.Add(new AggregateSearchEntry
             {
                 Tag = "jump", Text = $"{MainLang.SearchInTip.Replace("{target}", MainLang.Music)} : {filter.Trim()}",
                 Type = MainLang.JumpSearch,

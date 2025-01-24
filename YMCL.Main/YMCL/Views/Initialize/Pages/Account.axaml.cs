@@ -15,7 +15,6 @@ using MinecraftLaunch.Skin.Class.Fetchers;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
 using YMCL.Public.Langs;
-using YMCL.Public.Module.App;
 using YMCL.Public.Module.Ui;
 using YMCL.Public.Module.Value;
 using Setting = YMCL.Public.Enum.Setting;

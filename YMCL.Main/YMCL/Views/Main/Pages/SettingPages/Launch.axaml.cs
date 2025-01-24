@@ -3,7 +3,6 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Avalonia.Threading;
 using YMCL.Public.Classes;
-using YMCL.Public.Module.App;
 using YMCL.Public.Module.IO;
 using YMCL.Public.Module.Operate;
 using MinecraftFolder = YMCL.Public.Module.Operate.MinecraftFolder;

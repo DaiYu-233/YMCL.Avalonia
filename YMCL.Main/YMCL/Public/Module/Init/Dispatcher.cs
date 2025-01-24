@@ -1,7 +1,8 @@
-﻿using YMCL.Public.Module.App.SubModule;
+﻿using YMCL.Public.Module.Init.SubModule;
+using YMCL.Public.Module.Init.SubModule.NetAndUiLoader;
 using String = System.String;
 
-namespace YMCL.Public.Module.App;
+namespace YMCL.Public.Module.Init;
 
 public static class InitDispatcher
 {
@@ -21,6 +22,6 @@ public static class InitDispatcher
     public static void OnMainViewLoaded()
     {
         InitUi.Dispatch();
-        YMCL.Public.Module.App.SubModule.NetAndUiLoader.Dispatcher.Dispatch();
+        Dispatcher.Dispatch();
     }
 }

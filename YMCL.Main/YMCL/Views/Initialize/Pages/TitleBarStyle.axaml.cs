@@ -1,5 +1,4 @@
 ﻿using YMCL.Public.Enum;
-using YMCL.Public.Module.App;
 
 namespace YMCL.Views.Initialize.Pages;
 

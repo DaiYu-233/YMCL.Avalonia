@@ -69,6 +69,22 @@ public class Setter
             launcherAction?.Invoke();
         }
     }
+    
+    public static void ToggleTheme(Setting.Theme theme)
+    {
+        if (theme == Setting.Theme.Light)
+        {
+            Application.Current.RequestedThemeVariant = ThemeVariant.Light;
+        }
+        else if (theme == Setting.Theme.Dark)
+        {
+            Application.Current.RequestedThemeVariant = ThemeVariant.Dark;
+        }
+        else if (theme == Setting.Theme.System)
+        {
+            Application.Current.RequestedThemeVariant = ThemeVariant.Default;
+        }
+    }
 
     public static void SetBackGround()
     {

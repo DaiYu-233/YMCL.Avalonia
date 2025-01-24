@@ -1,7 +1,9 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using Avalonia.Media;
 using Avalonia.Styling;
+using Avalonia.VisualTree;
 using FluentAvalonia.Core;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
@@ -18,7 +20,56 @@ public class InitUi
         DisplaceDefaultUi();
         Ui.Setter.SetBackGround();
         _ = SetCustomHomePage();
+        Application.Current.ActualThemeVariantChanged += (_, _) => { UpdateTheme(); };
     }
+
+    public static void UpdateTheme()
+    {
+        try
+        {
+            if (YMCL.App.UiRoot != null)
+                (Ui.Getter.FindControlByName(YMCL.App.UiRoot, "PART_PaneRoot") as Panel).Background =
+                    Application.Current.ActualThemeVariant == ThemeVariant.Dark
+                        ? SolidColorBrush.Parse("#2c2c2c")
+                        : SolidColorBrush.Parse("#FFE9F6FF");
+            var visuals = new Queue<Visual>();
+            if (YMCL.App.UiRoot != null) visuals.Enqueue(YMCL.App.UiRoot);
+
+            while (visuals.Count > 0)
+            {
+                var current = visuals.Dequeue();
+
+                if (current is not Control control) continue;
+                foreach (var child in control.GetVisualChildren())
+                {
+                    visuals.Enqueue(child);
+                }
+
+                if (control is Image { Source: DrawingImage } imageControl)
+                {
+                    imageControl.InvalidateVisual();
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
+        try
+        {
+            if (YMCL.App.UiRoot == null) return;
+            (Getter.FindControlByName(YMCL.App.UiRoot, "PART_PaneRoot") as Panel).Background =
+                Application.Current.ActualThemeVariant == ThemeVariant.Dark
+                    ? SolidColorBrush.Parse("#2c2c2c")
+                    : SolidColorBrush.Parse("#FFE9F6FF");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
+
 
     public static void DisplaceDefaultUi()
     {

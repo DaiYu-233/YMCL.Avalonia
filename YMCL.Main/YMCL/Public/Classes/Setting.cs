@@ -106,6 +106,11 @@ public class Setting : ReactiveObject
                 Public.Module.Ui.Setter.SetBackGround();
             }
 
+            if (e.PropertyName == nameof(Theme))
+            {
+                Public.Module.Ui.Setter.ToggleTheme(Theme);
+            }
+
             Method.SaveSetting();
         };
     }

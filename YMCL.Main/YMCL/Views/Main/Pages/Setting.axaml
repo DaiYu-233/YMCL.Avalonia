@@ -34,6 +34,7 @@
                     <ui:NavigationViewItem
                         IsSelected="True"
                         Margin="0,0,0,7"
+                        Name="NavLaunch"
                         Tag="launch">
                         <DockPanel>
                             <Image
@@ -103,6 +104,7 @@
                     <ui:NavigationViewItem
                         IsSelected="True"
                         Margin="0,0,0,7"
+                        Name="NavPersonalize"
                         Tag="personalize">
                         <DockPanel>
                             <Image

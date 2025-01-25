@@ -35,13 +35,13 @@ public class Dispatcher
 
         var setting = Const.Data.Setting;
         MirrorDownloadManager.IsUseMirrorDownloadSource = setting.DownloadSource == Setting.DownloadSource.BmclApi;
-        
+
         if (Directory.Exists(Path.Combine(setting.MinecraftFolder.Path, "versions", customId ?? versionId)))
         {
             Toast($"{MainLang.FolderAlreadyExists}: {customId ?? versionId}", NotificationType.Error);
             return false;
         }
-        
+
         var task = p_task ?? new TaskEntry($"{MainLang.Install}: {customId}(Minecraft {versionId})",
             state: TaskState.Running);
         YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavTask;
@@ -57,14 +57,49 @@ public class Dispatcher
             cts.Cancel();
         });
 
+        var forgeTask = new SubTask($"{MainLang.Install}: Forge", 1);
+        var optiFineTask = new SubTask($"{MainLang.Install}: OptiFine", 1);
+        var fabricTask = new SubTask($"{MainLang.Install}: Fabric", 1);
+        var quiltTask = new SubTask($"{MainLang.Install}: Quilt", 1);
+
+        if (forgeInstallEntry != null)
+            task.AddSubTask(forgeTask);
+
+        if (optiFineInstallEntity != null)
+            task.AddSubTask(optiFineTask);
+
+        if (fabricBuildEntry != null)
+            task.AddSubTask(fabricTask);
+
+        if (quiltBuildEntry != null)
+            task.AddSubTask(quiltTask);
 
         var vanllia = await Vanllia.Install(versionId, task, subTasks[0], subTasks[1], token);
         if (!vanllia)
         {
+            task.FinishWithError();
             return false;
         }
 
-        task.FinishWithSuccess();
+        subTasks[1].State = TaskState.Finished;
+        
+        if (forgeInstallEntry != null)
+        {
+            var forge = await Forge.Install(versionId, customId ?? versionId, forgeInstallEntry, forgeTask, task, token);
+            if (!forge)
+            {
+                task.FinishWithError();
+                return false;
+            }
+
+            forgeTask.State = TaskState.Finished;
+        }
+
+        if (closeTaskWhenFinish)
+        {
+            task.FinishWithSuccess();
+        }
+
         return true;
     }
 }

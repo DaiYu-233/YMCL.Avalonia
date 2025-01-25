@@ -2,6 +2,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using MinecraftLaunch.Classes.Models.Game;
 
 namespace YMCL.Views.Main.Pages;
 
@@ -56,9 +57,9 @@ public partial class Launch : UserControl
         GameListFrame.IsVisible = false;
     }
 
-    public async System.Threading.Tasks.Task OpenGameSetting()
+    public async System.Threading.Tasks.Task OpenGameSetting(GameEntry? entry = null)
     {
-        GameSettingFrame.Content = new LaunchPages.GameSetting();
+        GameSettingFrame.Content = new LaunchPages.GameSetting(entry);
         GameSettingFrame.IsVisible = true;
         LaunchConsoleRoot.Opacity = 0;
         GameSettingFrame.Margin = new Thickness(10);

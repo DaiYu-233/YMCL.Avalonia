@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using FluentAvalonia.UI.Controls;
+using MinecraftLaunch.Classes.Models.Game;
 using MinecraftLaunch.Components.Resolver;
 using YMCL.Public.Module.Ui;
 using YMCL.ViewModels;
@@ -19,11 +20,18 @@ public partial class GameSetting : UserControl
     private readonly SubPages.Save _save;
     private readonly SubPages.Screenshot _screenshot;
 
-    public GameSetting()
+    public GameSetting(GameEntry? entry = null)
     {
         InitializeComponent();
-        var resolver = new GameResolver(Data.Setting.MinecraftFolder.Path);
-        Model = new GameSettingModel(resolver.GetGameEntity(Data.Setting.SelectedGame.Id));
+        if (entry != null)
+        {
+            Model = new GameSettingModel(entry);
+        }
+        else
+        {
+            var resolver = new GameResolver(Data.Setting.MinecraftFolder.Path);
+            Model = new GameSettingModel(resolver.GetGameEntity(Data.Setting.SelectedGame.Id));
+        }
         DataContext = Model;
         _setting = new SubPages.Setting(Model);
         _mod = new SubPages.Mod(Model.GameEntry);

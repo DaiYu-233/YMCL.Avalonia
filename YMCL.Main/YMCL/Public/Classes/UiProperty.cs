@@ -15,6 +15,7 @@ public sealed class UiProperty : ReactiveObject
 {
     private static UiProperty? _instance;
     public static ObservableCollection<VersionManifestEntry> AllInstallableGames { get; set; } = [];
+    public static ObservableCollection<VersionManifestEntry> FilteredAllInstallableGames { get; set; } = [];
     public static ObservableCollection<VersionManifestEntry> ReleaseInstallableGames { get; set; } = [];
     public static ObservableCollection<VersionManifestEntry> SnapshotInstallableGames { get; set; } = [];
     public static ObservableCollection<VersionManifestEntry> OldInstallableGames { get; set; } = [];
@@ -32,6 +33,7 @@ public sealed class UiProperty : ReactiveObject
     [Reactive] public double TaskEntryHeaderWidth { get; set; }
     [Reactive] public double SystemMaxMem { get; set; }
     [Reactive] public string AggregateSearchFilter { get; set; } = string.Empty;
+    [Reactive] public string InstallableGameSearchFilter { get; set; } = string.Empty;
 
 
     public UiProperty()

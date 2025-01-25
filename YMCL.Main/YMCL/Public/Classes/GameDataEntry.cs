@@ -23,8 +23,10 @@ public sealed record GameDataEntry
     [JsonIgnore] public Bitmap Icon => GetGameIcon();
     public GameEntry Entry { get; set; }
 
-    public void SettingCommand()
+    public async Task SettingCommand()
     {
+        await App.UiRoot.ViewModel.Launch.CloseGameList();
+        _ = App.UiRoot.ViewModel.Launch.OpenGameSetting(Entry);
     }
 
     public void LaunchCommand()

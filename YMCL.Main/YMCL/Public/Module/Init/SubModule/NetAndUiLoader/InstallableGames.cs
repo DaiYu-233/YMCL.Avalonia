@@ -34,5 +34,6 @@ public class InstallableGame
             Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
             UiProperty.Instance.InstallableRingIsVisible = false;
         });
+        App.UiRoot.ViewModel.Download._autoInstall.InstallableGames.Filter();
     }
 }

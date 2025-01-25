@@ -77,7 +77,7 @@ public class LaunchJavaClientByMinecraftLaunch
             Toast(MainLang.AccountError);
             return false;
         }
-        
+
         ObservableCollection<SubTask> subTasks =
         [
             new(MainLang.CheckLaunchArg, 1),
@@ -174,112 +174,109 @@ public class LaunchJavaClientByMinecraftLaunch
             {
                 try
                 {
-                    await Dispatcher.UIThread.InvokeAsync(async () =>
+                    var watcher = await launcher.LaunchAsync(p_id);
+                    watcher.Exited += async (_, eventArgs) =>
                     {
-                        var watcher = await launcher.LaunchAsync(p_id);
-                        watcher.Exited += async (_, eventArgs) =>
+                        await Dispatcher.UIThread.InvokeAsync(async () =>
                         {
-                            await Dispatcher.UIThread.InvokeAsync(async () =>
+                            if (Data.Setting.LauncherVisibility !=
+                                Setting.LauncherVisibility.AfterLaunchMakeLauncherMinimize)
                             {
-                                if (Data.Setting.LauncherVisibility !=
-                                    Setting.LauncherVisibility.AfterLaunchMakeLauncherMinimize)
+                                if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window)
                                 {
-                                    if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window)
-                                    {
-                                        window.Show();
-                                        window.WindowState = WindowState.Normal;
-                                        window.Activate();
-                                    }
+                                    window.Show();
+                                    window.WindowState = WindowState.Normal;
+                                    window.Activate();
                                 }
+                            }
 
-                                Toast($"{MainLang.GameExited} - {p_id} : {eventArgs.ExitCode}");
+                            Toast($"{MainLang.GameExited} - {p_id} : {eventArgs.ExitCode}");
 
 
-                                if (eventArgs.ExitCode == 0)
+                            if (eventArgs.ExitCode == 0)
+                            {
+                                task.FinishWithSuccess();
+                                await Task.Delay(2000);
+                                if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window)
                                 {
-                                    task.FinishWithSuccess();
-                                    await Task.Delay(2000);
-                                    if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window)
-                                    {
-                                        window.Activate();
-                                        window.Focus();
-                                    }
+                                    window.Activate();
+                                    window.Focus();
                                 }
-                                else
+                            }
+                            else
+                            {
+                                if (!isKillByYmcl)
                                 {
-                                    if (!isKillByYmcl)
+                                    var crashAnalyzer = new GameCrashAnalyzer(entry, p_enableIndependencyCore);
+                                    var reports = crashAnalyzer.AnalysisLogs();
+                                    var msg = string.Empty;
+                                    try
                                     {
-                                        var crashAnalyzer = new GameCrashAnalyzer(entry, p_enableIndependencyCore);
-                                        var reports = crashAnalyzer.AnalysisLogs();
-                                        var msg = string.Empty;
-                                        try
-                                        {
-                                            var crashReports = reports.ToList();
-                                            if (reports == null || crashReports.Count == 0)
-                                                msg = MainLang.NoCrashInfo;
-                                            else
-                                                msg = crashReports.Aggregate(msg,
-                                                    (current, report) => current + $"\n{report.CrashCauses}");
-                                        }
-                                        catch
-                                        {
+                                        var crashReports = reports.ToList();
+                                        if (reports == null || crashReports.Count == 0)
                                             msg = MainLang.NoCrashInfo;
-                                        }
-
-                                        task.FinishWithError();
-                                        await ShowDialogAsync(MainLang.MineratCrashed, msg,
-                                            b_primary: MainLang.Ok);
-                                        task.FinishWithError();
+                                        else
+                                            msg = crashReports.Aggregate(msg,
+                                                (current, report) => current + $"\n{report.CrashCauses}");
                                     }
+                                    catch
+                                    {
+                                        msg = MainLang.NoCrashInfo;
+                                    }
+
+                                    task.FinishWithError();
+                                    await ShowDialogAsync(MainLang.MineratCrashed, msg,
+                                        b_primary: MainLang.Ok);
+                                    task.FinishWithError();
                                 }
-                            });
-                        };
-
-                        watcher.OutputLogReceived += (_, eventArgs) => { Console.WriteLine(eventArgs.Log); };
-
-                        await Dispatcher.UIThread.InvokeAsync(() =>
-                        {
-                            task.AdvanceSubTask();
-                            Toast(MainLang.LaunchFinish);
+                            }
                         });
-                        _ = Task.Run(async () =>
+                    };
+
+                    watcher.OutputLogReceived += (_, eventArgs) => { Console.WriteLine(eventArgs.Log); };
+
+                    await Dispatcher.UIThread.InvokeAsync(() =>
+                    {
+                        task.AdvanceSubTask();
+                        Toast(MainLang.LaunchFinish);
+                    });
+                    _ = Task.Run(async () =>
+                    {
+                        task.UpdateAction(() =>
                         {
-                            task.UpdateAction(() =>
+                            canceled = true;
+                            isKillByYmcl = true;
+                            watcher.Process.Close();
+                            task.CancelWithSuccess();
+                            cts.Cancel();
+                        });
+                        await Task.Delay(8000);
+                        Dispatcher.UIThread.Invoke(() =>
+                        {
+                            switch (Data.Setting.LauncherVisibility)
                             {
-                                canceled = true;
-                                isKillByYmcl = true;
-                                watcher.Process.Close();
-                                task.CancelWithSuccess();
-                                cts.Cancel();
-                            });
-                            await Task.Delay(8000);
-                            Dispatcher.UIThread.Invoke(() =>
-                            {
-                                switch (Data.Setting.LauncherVisibility)
-                                {
-                                    case Setting.LauncherVisibility.AfterLaunchExitLauncher:
-                                        Environment.Exit(0);
-                                        break;
-                                    case Setting.LauncherVisibility.AfterLaunchMakeLauncherMinimize:
-                                    case Setting.LauncherVisibility.AfterLaunchMinimizeAndShowWhenGameExit:
-                                        if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window)
-                                        {
-                                            window.WindowState = WindowState.Minimized;
-                                        }
+                                case Setting.LauncherVisibility.AfterLaunchExitLauncher:
+                                    Environment.Exit(0);
+                                    break;
+                                case Setting.LauncherVisibility.AfterLaunchMakeLauncherMinimize:
+                                case Setting.LauncherVisibility.AfterLaunchMinimizeAndShowWhenGameExit:
+                                    if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window)
+                                    {
+                                        window.WindowState = WindowState.Minimized;
+                                    }
 
-                                        break;
-                                    case Setting.LauncherVisibility.AfterLaunchHideAndShowWhenGameExit:
-                                        if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window1)
-                                        {
-                                            window1.Hide();
-                                        }
+                                    break;
+                                case Setting.LauncherVisibility.AfterLaunchHideAndShowWhenGameExit:
+                                    if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window1)
+                                    {
+                                        window1.Hide();
+                                    }
 
-                                        break;
-                                    case Setting.LauncherVisibility.AfterLaunchKeepLauncherVisible:
-                                    default:
-                                        break;
-                                }
-                            });
+                                    break;
+                                case Setting.LauncherVisibility.AfterLaunchKeepLauncherVisible:
+                                default:
+                                    break;
+                            }
                         });
                     });
                 }

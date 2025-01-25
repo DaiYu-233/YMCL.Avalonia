@@ -56,7 +56,7 @@ public class GameSetting
         var basePath = setting.IsEnableIndependencyCore
             ? Path.Combine(entry.GameFolderPath, "versions", entry.Id)
             : entry.GameFolderPath;
-        return folder switch
+        var path = folder switch
         {
             GameSpecialFolder.GameFolder => basePath,
             GameSpecialFolder.ModsFolder => Path.Combine(basePath, "mods"),
@@ -66,5 +66,7 @@ public class GameSetting
             GameSpecialFolder.ShaderPacksFolder => Path.Combine(basePath, "shaderpacks"),
             _ => basePath
         };
+        IO.Disk.Setter.TryCreateFolder(path);
+        return path;
     }
 }

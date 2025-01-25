@@ -1,8 +1,10 @@
-﻿using Avalonia;
+﻿using System.Linq;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using MinecraftLaunch.Classes.Models.Install;
 using YMCL.Public.Classes;
+using YMCL.Public.Langs;
 using YMCL.ViewModels;
 
 namespace YMCL.Views.Main.Pages.DownloadPages;
@@ -27,6 +29,13 @@ public partial class InstallableGames : UserControl
             if (UiProperty.Instance.LatestReleaseGame.Type == null) return;
             App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview(UiProperty.Instance.LatestReleaseGame.Id);
         };
+        UiProperty.Instance.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(UiProperty.Instance.InstallableGameSearchFilter))
+            {
+                Filter();
+            }
+        };
     }
 
     private void SelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -35,5 +44,13 @@ public partial class InstallableGames : UserControl
         (sender as ListBox).SelectedItem = null;
         Console.WriteLine(e.AddedItems[0]);
         App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview((e.AddedItems[0] as VersionManifestEntry).Id);
+    }
+
+    public void Filter()
+    {
+        UiProperty.FilteredAllInstallableGames.Clear();
+        UiProperty.AllInstallableGames.Where(item =>
+                item.Id.Contains(UiProperty.Instance.InstallableGameSearchFilter, StringComparison.OrdinalIgnoreCase))
+            .ToList().ForEach(item => UiProperty.FilteredAllInstallableGames.Add(item));
     }
 }

@@ -193,11 +193,12 @@
                             <TextBox
                                 DockPanel.Dock="Top"
                                 Name="AllVersionSearchBox"
+                                Text="{Binding InstallableGameSearchFilter}"
                                 Watermark="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.SearchKeyword}" />
                             <ListBox
                                 DockPanel.Dock="Bottom"
                                 FontFamily="{DynamicResource Font}"
-                                ItemsSource="{Binding AllInstallableGames}"
+                                ItemsSource="{Binding FilteredAllInstallableGames}"
                                 Margin="0,10,0,0"
                                 Name="AllVersionListView">
                                 <ListBox.ItemTemplate>

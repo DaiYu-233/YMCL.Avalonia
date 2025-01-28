@@ -65,7 +65,8 @@ public partial class GameUpdateLog : UserControl
                         Margin = new Thickness(20, 20, 20, 10),
                         Child = new AsyncImageLoader.AdvancedImage(new Uri("https://launchercontent.mojang.com" + item.image.url))
                         {
-                            Width = 160, Height = 160
+                            Width = 160, Height = 160,
+                            Source = "https://launchercontent.mojang.com" + item.image.url
                         }
                     });
                     var tb = new TextBlock()

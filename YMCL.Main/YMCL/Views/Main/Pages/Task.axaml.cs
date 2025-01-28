@@ -16,6 +16,6 @@ public partial class Task : UserControl
 
     public void UpdateTasksTip()
     {
-        NoTasksTip.IsVisible = Data.TaskEntrys.Count == 0;
+        NoTasksTip.IsVisible = Data.TaskEntries.Count == 0;
     }
 }

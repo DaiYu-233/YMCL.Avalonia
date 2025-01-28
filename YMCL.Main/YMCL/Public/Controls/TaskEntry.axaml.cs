@@ -22,7 +22,7 @@ public partial class TaskEntry : UserControl
         SubTaskContainer.DataContext = Model;
         DataContext = Data.Instance;
         Model.Name = name;
-        Data.TaskEntrys.Add(this);
+        Data.TaskEntries.Add(this);
         App.UiRoot.ViewModel.Task.UpdateTasksTip();
     }
 
@@ -67,7 +67,7 @@ public partial class TaskEntry : UserControl
     }
     public void Destory()
     {
-        Data.TaskEntrys.Remove(this);
+        Data.TaskEntries.Remove(this);
         App.UiRoot.ViewModel.Task.UpdateTasksTip();
     }
     public void FinishWithSuccess()

@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using System.Management;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
@@ -62,6 +63,19 @@ public class Getter
             }
 
         return 0;
+    }
+    
+    public static string GetMacAddress()
+    {
+        var macAddress = string.Empty;
+        foreach (var ni in NetworkInterface.GetAllNetworkInterfaces())
+        {
+            if (ni.OperationalStatus != OperationalStatus.Up) continue;
+            macAddress = ni.GetPhysicalAddress().ToString();
+            break;
+        }
+
+        return macAddress.Replace("-", "").ToLower(); // 移除MAC地址中的"-"并转为小写
     }
     
     public static double GetDirectoryLength(string dirPath)

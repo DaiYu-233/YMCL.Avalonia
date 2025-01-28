@@ -11,6 +11,7 @@ using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using YMCL.ViewModels;
 using YMCL.Views.Initialize.Pages;
+using YMCL.Views.Main.Pages.MorePages;
 using Language = YMCL.Public.Classes.Language;
 using Setting = YMCL.Public.Classes.Setting;
 
@@ -27,10 +28,12 @@ public sealed class Data : ReactiveObject
     public static ObservableCollection<JavaEntry> JavaRuntimes { get; set; }
     public static ObservableCollection<AccountInfo> Accounts { get; set; }
     public static ObservableCollection<GameDataEntry> CurrentFolderGames { get; set; } = [];
-    public static ObservableCollection<TaskEntry> TaskEntrys  { get; set; } = [];
+    public static ObservableCollection<TaskEntry> TaskEntries  { get; set; } = [];
     public static List<AggregateSearchEntry> AllAggregateSearchEntries  { get; set; } = [];
+    public static List<NewsDataListEntry> NewsDataList { get; set; } = [];
     public static Setting Setting { get; set; }
     public static UiProperty UiProperty { get; } = new();
+    public static string TranslateToken { get; set; }
 
     public static Data Instance
     {

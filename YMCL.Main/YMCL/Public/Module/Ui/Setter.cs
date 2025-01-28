@@ -1,8 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Styling;
+using Avalonia.Threading;
 using Newtonsoft.Json;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
@@ -174,4 +177,89 @@ public class Setter
             window2.TransparencyLevelHint = [WindowTransparencyLevel.Transparent];
         }
     }
+    
+    public static void AppStrangeEffect()
+        {
+            List<Action> methods =
+            [
+                //NeverGiveUp
+                () =>
+                {
+                    var launcher = TopLevel.GetTopLevel(App.UiRoot).Launcher;
+                    launcher.LaunchUriAsync(new Uri("https://www.bilibili.com/video/BV1GJ411x7h7/"));
+                },
+                //Transform180deg
+                () =>
+                {
+                    if (TopLevel.GetTopLevel(App.UiRoot) is not MainWindow window) return;
+                    var rotateTransform = new RotateTransform(180);
+                    window.Root.RenderTransform = rotateTransform;
+                },
+                //WindowMove
+                () =>
+                {
+                    if (TopLevel.GetTopLevel(App.UiRoot) is not MainWindow window) return;
+                    double velocityX = 20; // 水平速度
+                    double velocityY = 20; // 垂直速度
+
+                    // 使用DispatcherTimer来周期性地更新窗口位置
+                    DispatcherTimer timer = new DispatcherTimer
+                    {
+                        Interval = TimeSpan.FromMilliseconds(10) // 设置定时器的时间间隔
+                    };
+                    var _screenBounds = window.Screens.All.FirstOrDefault()?.WorkingArea ??
+                                        new PixelRect(0, 0, 800, 600);
+                    timer.Tick += Timer_Tick!;
+                    timer.Start();
+
+                    void Timer_Tick(object sender, EventArgs e)
+                    {
+                        if (TopLevel.GetTopLevel(App.UiRoot) is not MainWindow window) return;
+                        var newPosition = new PixelPoint((int)(window.Position.X + velocityX),
+                            (int)(window.Position.Y + velocityY));
+
+                        // 检查窗口是否即将超出屏幕边界
+                        if (newPosition.X < _screenBounds.X || newPosition.X + window.Width >
+                            _screenBounds.X + _screenBounds.Width)
+                        {
+                            velocityX = -velocityX; // 改变水平方向
+                        }
+
+                        if (newPosition.Y < _screenBounds.Y || newPosition.Y + window.Height >
+                            _screenBounds.Y + _screenBounds.Height)
+                        {
+                            velocityY = -velocityY; // 改变垂直方向
+                        }
+
+                        // 设置新位置
+                        window.Position = newPosition;
+                    }
+                },
+                //KeepSpinning
+                async () =>
+                {
+                    var deg = 0;
+                    if (TopLevel.GetTopLevel(App.UiRoot) is not MainWindow window) return;
+                    while (true)
+                    {
+                        Dispatcher.UIThread.Invoke(() =>
+                        {
+                            if (deg > 360)
+                            {
+                                deg = 0;
+                            }
+
+                            var rotateTransform = new RotateTransform(deg);
+                            window.RenderTransform = rotateTransform;
+                            deg += 2;
+                        });
+                        await Task.Delay(10);
+                    }
+                },
+            ];
+
+            Random random = new Random();
+            //methods[^1]();
+            methods[random.Next(methods.Count)]();
+        }
 }

@@ -25,6 +25,7 @@
     <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="1.7.0" />
     <PackageVersion Include="MinecraftLaunch" Version="3.1.0" />
     <PackageVersion Include="MinecraftLaunch.Skin" Version="1.0.1" />
+    <PackageVersion Include="NAudio" Version="2.2.1" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageVersion Include="ReactiveUI" Version="20.1.63" />
     <PackageVersion Include="ReactiveUI.Fody" Version="19.5.41" />

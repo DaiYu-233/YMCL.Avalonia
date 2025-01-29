@@ -61,6 +61,7 @@
     <PackageReference Include="Irihi.Ursa.Themes.Semi" />
     <PackageReference Include="MinecraftLaunch" />
     <PackageReference Include="MinecraftLaunch.Skin" />
+    <PackageReference Include="NAudio" />
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="ReactiveUI" />
     <PackageReference Include="ReactiveUI.Fody" />

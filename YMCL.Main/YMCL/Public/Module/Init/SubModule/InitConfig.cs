@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Netease;
 
 namespace YMCL.Public.Module.Init.SubModule;
 
@@ -52,7 +53,7 @@ public static class InitConfig
                 JsonConvert.SerializeObject(new List<string>(), Formatting.Indented));
         if (!File.Exists(ConfigPath.PlayerDataPath))
             File.WriteAllText(ConfigPath.PlayerDataPath,
-                JsonConvert.SerializeObject(new List<Player.PlaySongListViewItemEntry>(), Formatting.Indented));
+                JsonConvert.SerializeObject(new List<RecordSongEntry>(), Formatting.Indented));
         if (!File.Exists(ConfigPath.AccountDataPath))
             File.WriteAllText(ConfigPath.AccountDataPath,
                 JsonConvert.SerializeObject(

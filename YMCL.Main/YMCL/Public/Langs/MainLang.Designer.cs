@@ -312,6 +312,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Api错误.
+        /// </summary>
+        public static string ApiError {
+            get {
+                return ResourceManager.GetString("ApiError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 作者.
         /// </summary>
         public static string Author {
@@ -1953,6 +1962,15 @@ namespace YMCL.Public.Langs {
         public static string NeedToSelectMinecraftFolder {
             get {
                 return ResourceManager.GetString("NeedToSelectMinecraftFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 网络错误.
+        /// </summary>
+        public static string NetWorkError {
+            get {
+                return ResourceManager.GetString("NetWorkError", resourceCulture);
             }
         }
         

@@ -1072,4 +1072,10 @@ MacOs 不支持自动更新
   <data name="CanceledUpdate" xml:space="preserve">
     <value>更新已取消</value>
   </data>
+  <data name="ApiError" xml:space="preserve">
+    <value>Api错误</value>
+  </data>
+  <data name="NetWorkError" xml:space="preserve">
+    <value>网络错误</value>
+  </data>
 </root>

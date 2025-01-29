@@ -11,6 +11,26 @@ public class Converter
         return base64String;
     }
     
+    public static string StandardizeUrl(string url)
+    {
+        // 检查字符串是否以协议开始，如果没有，则添加http协议
+        if (!url.StartsWith("http://") && !url.StartsWith("https://"))
+        {
+            url = "http://" + url; // 默认添加http协议
+        }
+
+        try
+        {
+            Uri uriResult = new Uri(url);
+            return uriResult.AbsoluteUri; // 返回绝对URI，这将标准化URL
+        }
+        catch (UriFormatException e)
+        {
+            Console.WriteLine("The URL is still not valid: " + e.Message);
+            throw new FormatException("The URL is still not valid: " + e.Message);
+        }
+    }
+    
     public static Bitmap Base64ToBitmap(string base64)
     {
         var imageBytes = Convert.FromBase64String(base64);

@@ -35,6 +35,7 @@ public class AudioPlayer : IDisposable
                     }
                 }
             }
+
             return _instance;
         }
     }
@@ -104,8 +105,15 @@ public class AudioPlayer : IDisposable
     {
         if (_waveOut != null && !_isPlaying)
         {
-            _waveOut.Play();
-            _isPlaying = true;
+            try
+            {
+                _waveOut.Play();
+                _isPlaying = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 
@@ -129,6 +137,14 @@ public class AudioPlayer : IDisposable
         _waveSource?.Dispose();
         _waveStream?.Dispose();
         _timer?.Dispose();
+    }
+
+    public void UpdateProgress(double value)
+    {
+        if (_waveSource != null)
+            _waveSource.CurrentTime = TimeSpan.FromMilliseconds(value);
+        if (_waveStream != null)
+            _waveStream.CurrentTime = TimeSpan.FromMilliseconds(value);
     }
 }
 

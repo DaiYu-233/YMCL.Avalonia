@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls.Notifications;
+using Avalonia.Threading;
 using YMCL.Public.Classes;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
@@ -13,9 +14,14 @@ public partial class Music : UserControl
     public readonly MusicPages.PlayList Playlist = new();
     public readonly MusicPages.Search Search = new();
     private bool _isPlaying = false;
+    private Debouncer _debouncer;
 
     public Music()
     {
+        _debouncer = new Debouncer(async () =>
+        {
+            AudioPlayer.Instance.UpdateProgress(ControlPlayerSlider.Value);
+        }, 10);
         InitializeComponent();
         RightControl.Content = Playlist;
         LeftControl.Content = Search;
@@ -61,6 +67,11 @@ public partial class Music : UserControl
         {
             Data.UiProperty.MusicCurrentTime = e.CurrentTime;
         };
+        ControlPlayerSlider.ValueChanged += (_, _) =>
+        {
+            _debouncer.Trigger();
+            Data.UiProperty.MusicCurrentTime = ControlPlayerSlider.Value;
+        };
     }
 
     public void PlayUi()
@@ -68,6 +79,7 @@ public partial class Music : UserControl
         _isPlaying = true;
         PauseIcon.IsVisible = false;
         PlayingIcon.IsVisible = true;
+        AudioPlayer.Instance.Resume();
     }
 
     public void PauseUi()
@@ -75,5 +87,6 @@ public partial class Music : UserControl
         _isPlaying = false;
         PauseIcon.IsVisible = true;
         PlayingIcon.IsVisible = false;
+        AudioPlayer.Instance.Pause();
     }
 }

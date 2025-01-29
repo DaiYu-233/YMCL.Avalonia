@@ -13,4 +13,5 @@ public class RecordSongEntry
     public string DisplayDuration { get; set; } = string.Empty;
     public double AlbumId { get; set; } = -1;
     public string AlbumName { get; set; } = string.Empty;
+    public string Path { get; set; } = string.Empty;
 }

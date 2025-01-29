@@ -154,7 +154,10 @@
                 Opacity="{DynamicResource MainOpacity}">
                 <ContentControl Name="LeftControl" />
             </Border>
-            <GridSplitter Grid.Column="1" ResizeDirection="Columns" />
+            <GridSplitter
+                Background="Transparent"
+                Grid.Column="1"
+                ResizeDirection="Columns" />
             <Border
                 Background="{DynamicResource 1x}"
                 ClipToBounds="True"

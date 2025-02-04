@@ -45,7 +45,7 @@ public partial class GameUpdateLog : UserControl
             // var news = JsonConvert.DeserializeObject<MojangJavaNews.Root>(File.ReadAllText("E:\\Untitled-3.json"));
             foreach (var item in news.entries)
             {
-                Dispatcher.UIThread.InvokeAsync(() =>
+                await Dispatcher.UIThread.InvokeAsync(() =>
                 {
                     Application.Current.TryGetResource("1x", Application.Current.ActualThemeVariant, out var c);
                     var root = new Border()
@@ -63,7 +63,8 @@ public partial class GameUpdateLog : UserControl
                     {
                         CornerRadius = new CornerRadius(8), ClipToBounds = true, Width = 160, Height = 160,
                         Margin = new Thickness(20, 20, 20, 10),
-                        Child = new AsyncImageLoader.AdvancedImage(new Uri("https://launchercontent.mojang.com" + item.image.url))
+                        Child = new AsyncImageLoader.AdvancedImage(new Uri("https://launchercontent.mojang.com" +
+                                                                           item.image.url))
                         {
                             Width = 160, Height = 160,
                             Source = "https://launchercontent.mojang.com" + item.image.url
@@ -83,7 +84,7 @@ public partial class GameUpdateLog : UserControl
 
             Loading.IsVisible = false;
         }
-        catch (Exception ex)
+        catch
         {
             LoadErrorInfoBar.IsVisible = true;
             Loading.IsVisible = false;

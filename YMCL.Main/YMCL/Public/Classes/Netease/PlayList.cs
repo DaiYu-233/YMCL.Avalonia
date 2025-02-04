@@ -4,7 +4,7 @@ namespace YMCL.Public.Classes.Netease;
 
 public class PlayList
 {
-    public class creator
+    public class Creator
     {
         public string nickname { get; set; }
         public long userId { get; set; }
@@ -15,12 +15,12 @@ public class PlayList
         public object experts { get; set; }
     }
 
-    public class playlist
+    public class Playlist
     {
         public long id { get; set; }
         public string name { get; set; }
         public string coverImgUrl { get; set; }
-        public creator creator { get; set; }
+        public Creator creator { get; set; }
         public bool subscribed { get; set; }
         public int trackCount { get; set; }
         public long userId { get; set; }
@@ -36,16 +36,16 @@ public class PlayList
         public bool highQuality { get; set; }
     }
 
-    public class result
+    public class Result
     {
         public object searchQcReminder { get; set; }
-        public List<playlist> playlists { get; set; }
+        public List<Playlist> playlists { get; set; }
         public int playlistCount { get; set; }
     }
 
     public class Root
     {
-        public result result { get; set; }
+        public Result result { get; set; }
         public int code { get; set; }
     }
 

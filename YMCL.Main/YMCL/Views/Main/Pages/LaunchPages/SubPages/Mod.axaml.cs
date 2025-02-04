@@ -73,6 +73,7 @@ public sealed partial class Mod : UserControl, INotifyPropertyChanged
         DeleteSelectModBtn.Click += async (_, _) =>
         {
             var mods = ModManageList.SelectedItems;
+            if (mods is null) return;
             var text = (from object? item in mods select item as LocalModEntry).Aggregate(string.Empty,
                 (current, mod) => current + $"• {Path.GetFileName(mod.Name)}\n");
 
@@ -133,6 +134,7 @@ public sealed partial class Mod : UserControl, INotifyPropertyChanged
                     IsEnable = false, Path = mod, Callback = () => { LoadMods(); }
                 });
         }
+
         FilterMods();
     }
 

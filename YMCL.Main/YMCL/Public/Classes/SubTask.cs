@@ -12,7 +12,7 @@ namespace YMCL.Public.Classes;
 
 public sealed class SubTask : ReactiveObject
 {
-    public SubTask(string name, int totalTask, int finishedTask = 0)
+    public SubTask(string name, int totalTask = 1, int finishedTask = 0)
     {
         Name = name;
         TotalTask = totalTask;

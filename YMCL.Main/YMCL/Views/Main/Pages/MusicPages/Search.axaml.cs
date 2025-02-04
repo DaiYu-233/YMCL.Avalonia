@@ -1,3 +1,4 @@
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia;
@@ -5,6 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Newtonsoft.Json;
 using YMCL.Public.Classes.Netease;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
@@ -44,6 +46,8 @@ public partial class Search : UserControl
             await System.Threading.Tasks.Task.Delay(200);
             SearchSongListView.SelectedItem = null;
             Data.UiProperty.SelectedRecordSong = Data.RecordSongEntries.Last();
+            _ = File.WriteAllTextAsync(ConfigPath.PlayerDataPath,
+                JsonConvert.SerializeObject(Data.RecordSongEntries, Formatting.Indented));
         };
     }
 
@@ -84,7 +88,7 @@ public partial class Search : UserControl
             _number++;
         });
         Loading.IsVisible = false;
-        LoadMoreBtn.IsVisible = true;
+        LoadMoreBtn.IsVisible = songs.Count >= 30;
         SearchBox.IsEnabled = true;
         SearchBtn.IsEnabled = true;
     }
@@ -129,7 +133,7 @@ public partial class Search : UserControl
             _number++;
         });
         Loading.IsVisible = false;
-        LoadMoreBtn.IsVisible = true;
+        LoadMoreBtn.IsVisible = songs.Count >= 30;
         SearchBox.IsEnabled = true;
         SearchBtn.IsEnabled = true;
     }

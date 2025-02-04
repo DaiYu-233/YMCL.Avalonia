@@ -38,8 +38,7 @@ public sealed class UiProperty : ReactiveObject
     [Reactive] public double MusicCurrentTime { get; set; } 
     [Reactive] public string InstallableGameSearchFilter { get; set; } = string.Empty;
     [Reactive] public RecordSongEntry? SelectedRecordSong { get; set; } 
-    [Reactive] public RecordSongEntry? SelectedSearchSong { get; set; } 
-
+    [Reactive] public RecordSongEntry? SelectedSearchSong { get; set; }
 
     public UiProperty()
     {

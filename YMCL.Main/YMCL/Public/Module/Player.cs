@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Timers;
+using YMCL.Public.Classes;
 
 public class AudioPlayer : IDisposable
 {
@@ -15,10 +16,23 @@ public class AudioPlayer : IDisposable
     private bool _isPlaying;
 
     public event EventHandler<ProgressEventArgs>? ProgressChanged;
-    public event EventHandler? PlaybackCompleted;
+    public event EventHandler<StoppedEventArgs>? PlaybackCompleted;
 
     private AudioPlayer()
     {
+        Data.Setting.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName != nameof(Setting.Volume)) return;
+            if (_waveOut == null) return;
+            try
+            {
+                _waveOut.Volume = Convert.ToSingle(Data.Setting.Volume / 100);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
+        };
     }
 
     public static AudioPlayer Instance
@@ -40,18 +54,17 @@ public class AudioPlayer : IDisposable
         }
     }
 
-    public void PlayLocal(string localFilePath)
+    public double PlayLocal(string localFilePath)
     {
         Stop();
-        _waveOut = new WaveOutEvent();
         _waveSource = new AudioFileReader(localFilePath);
         InitializeAndPlay(_waveSource);
+        return _waveSource.TotalTime.TotalMilliseconds;
     }
 
     public async Task PlayNetwork(string networkUrl)
     {
         Stop();
-        _waveOut = new WaveOutEvent();
         using var client = new HttpClient();
         var response = await client.GetAsync(networkUrl, HttpCompletionOption.ResponseHeadersRead);
         response.EnsureSuccessStatusCode();
@@ -69,11 +82,14 @@ public class AudioPlayer : IDisposable
         _waveOut = new WaveOutEvent();
         _waveOut?.Init(waveStream);
         _waveOut?.Play();
+        _waveOut.Volume = Convert.ToSingle(Data.Setting.Volume / 100);
         _isPlaying = true;
 
-        _timer = new Timer(1000); // 每秒更新进度
+        _timer = new Timer(10); 
         _timer.Elapsed += OnTimedEvent;
         _timer.Start();
+
+        _waveOut.PlaybackStopped += (s, e) => { PlaybackCompleted?.Invoke(s, e); };
     }
 
     private void OnTimedEvent(object? sender, ElapsedEventArgs e)
@@ -94,7 +110,7 @@ public class AudioPlayer : IDisposable
 
     public void Pause()
     {
-        if (_waveOut != null && _isPlaying)
+        if (_waveOut != null)
         {
             _waveOut.Pause();
             _isPlaying = false;
@@ -103,7 +119,7 @@ public class AudioPlayer : IDisposable
 
     public void Resume()
     {
-        if (_waveOut != null && !_isPlaying)
+        if (_waveOut != null)
         {
             try
             {
@@ -128,7 +144,6 @@ public class AudioPlayer : IDisposable
         _timer?.Dispose();
         _timer = null;
         _isPlaying = false;
-        PlaybackCompleted?.Invoke(this, EventArgs.Empty);
     }
 
     public void Dispose()

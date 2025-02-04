@@ -65,6 +65,7 @@ public partial class ResourcePack : UserControl, INotifyPropertyChanged
         DeleteSelectModBtn.Click += async (_, _) =>
         {
             var items = ModManageList.SelectedItems;
+            if (items is null) return;
             var text = (from object? item in items select item as LocalResourcePackEntry).Aggregate(string.Empty,
                 (current, mod) => current + $"• {Path.GetFileName(mod.Name)}\n");
 

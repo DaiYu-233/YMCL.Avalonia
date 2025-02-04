@@ -13,9 +13,11 @@
     xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Border
+        Background="{DynamicResource 1x}"
         ClipToBounds="True"
         CornerRadius="5"
-        Name="SearchRoot">
+        Name="SearchRoot"
+        Opacity="{DynamicResource MainOpacity}">
         <Border.Transitions>
             <Transitions>
                 <DoubleTransition Duration="0:0:0.25" Property="Opacity" />

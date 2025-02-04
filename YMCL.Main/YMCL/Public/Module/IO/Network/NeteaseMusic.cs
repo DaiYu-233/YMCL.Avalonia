@@ -49,4 +49,14 @@ public class NeteaseMusic
         Toast(MainLang.ApiError, NotificationType.Error);
         return (string.Empty, 0);
     }
+    
+    public static async Task<Lyric.Root?> GetSongLyricById(double id)
+    {
+        var json = await Http.Get.GetStringAsync(
+            $"{Value.Converter.StandardizeUrl(Const.Data.Setting.MusicApi)}lyric?id={id}");
+        var entry = JsonConvert.DeserializeObject<Lyric.Root>(json);
+        if (entry is { code: 200 }) return entry;
+        Toast(MainLang.ApiError, NotificationType.Error);
+        return null;
+    }
 }

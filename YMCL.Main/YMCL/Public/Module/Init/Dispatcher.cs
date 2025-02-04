@@ -22,7 +22,7 @@ public static class InitDispatcher
 
     public static void OnMainViewLoaded()
     {
-        InitUi.Dispatch();
+        _ = InitUi.Dispatch();
         Dispatcher.Dispatch();
     }
 }

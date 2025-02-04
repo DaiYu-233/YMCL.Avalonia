@@ -80,10 +80,10 @@ public class LaunchJavaClientByMinecraftLaunch
 
         ObservableCollection<SubTask> subTasks =
         [
-            new(MainLang.CheckLaunchArg, 1),
-            new(MainLang.RefreshAccountToken, 1),
-            new(MainLang.BuildLaunchConfig, 1),
-            new(MainLang.LaunchMinecraftProcess, 1)
+            new(MainLang.CheckLaunchArg),
+            new(MainLang.RefreshAccountToken),
+            new(MainLang.BuildLaunchConfig),
+            new(MainLang.LaunchMinecraftProcess)
         ];
         var task = new TaskEntry($"{MainLang.Launch}: {entry.Id}", subTasks, TaskState.Running);
         YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavTask;

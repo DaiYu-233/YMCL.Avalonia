@@ -58,10 +58,10 @@ public class Update
         var token = cts.Token;
         var task = new TaskEntry(MainLang.CheckUpdate, 
         [
-            new SubTask(MainLang.CheckUpdate,1),
-            new SubTask(MainLang.GetUpdateUrl,1),
-            new SubTask(MainLang.DownloadResource,1),
-            new SubTask(MainLang.Update,1),
+            new SubTask(MainLang.CheckUpdate),
+            new SubTask(MainLang.GetUpdateUrl),
+            new SubTask(MainLang.DownloadResource),
+            new SubTask(MainLang.Update),
         ], TaskState.Running);
         task.UpdateAction(() =>
         {

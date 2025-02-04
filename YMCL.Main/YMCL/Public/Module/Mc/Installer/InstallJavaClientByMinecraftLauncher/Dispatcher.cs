@@ -47,8 +47,8 @@ public class Dispatcher
         YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavTask;
         SubTask[] subTasks =
         [
-            new(MainLang.CheckVersionResource, 1),
-            new($"{MainLang.DownloadResource}(Vanllia)", 1)
+            new(MainLang.CheckVersionResource),
+            new($"{MainLang.DownloadResource}(Vanllia)")
         ];
         task.AddSubTaskRange(subTasks);
         task.UpdateAction(() =>
@@ -57,10 +57,10 @@ public class Dispatcher
             cts.Cancel();
         });
 
-        var forgeTask = new SubTask($"{MainLang.Install}: Forge", 1);
-        var optiFineTask = new SubTask($"{MainLang.Install}: OptiFine", 1);
-        var fabricTask = new SubTask($"{MainLang.Install}: Fabric", 1);
-        var quiltTask = new SubTask($"{MainLang.Install}: Quilt", 1);
+        var forgeTask = new SubTask($"{MainLang.Install}: Forge");
+        var optiFineTask = new SubTask($"{MainLang.Install}: OptiFine");
+        var fabricTask = new SubTask($"{MainLang.Install}: Fabric");
+        var quiltTask = new SubTask($"{MainLang.Install}: Quilt");
 
         if (forgeInstallEntry != null)
             task.AddSubTask(forgeTask);

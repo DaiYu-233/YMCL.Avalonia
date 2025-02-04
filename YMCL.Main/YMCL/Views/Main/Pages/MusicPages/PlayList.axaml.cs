@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Avalonia.Platform.Storage;
@@ -16,6 +17,18 @@ public partial class PlayList : UserControl
     public PlayList()
     {
         InitializeComponent();
+        BindingEvent();
+        LoadPlayList();
+    }
+
+    private static void LoadPlayList()
+    {
+        var songs = JsonConvert.DeserializeObject<List<RecordSongEntry>>(File.ReadAllText(ConfigPath.PlayerDataPath));
+        songs.ForEach(song => Data.RecordSongEntries.Add(song));
+    }
+
+    private void BindingEvent()
+    {
         UpSong.Click += (_, _) =>
         {
             var index = PlayListView.SelectedIndex;
@@ -44,7 +57,6 @@ public partial class PlayList : UserControl
         DelSelectedSong.Click += (_, _) =>
         {
             if (Data.RecordSongEntries.Count == 0 || Data.UiProperty.SelectedRecordSong == null) return;
-            Data.RecordSongEntries.RemoveAt(PlayListView.SelectedIndex);
             Data.RecordSongEntries.RemoveAt(PlayListView.SelectedIndex);
             File.WriteAllText(ConfigPath.PlayerDataPath,
                 JsonConvert.SerializeObject(Data.RecordSongEntries, Formatting.Indented));
@@ -92,9 +104,26 @@ public partial class PlayList : UserControl
                 };
                 Data.RecordSongEntries.Add(song);
             }
-            File.WriteAllText(ConfigPath.PlayerDataPath,
+
+            await File.WriteAllTextAsync(ConfigPath.PlayerDataPath,
                 JsonConvert.SerializeObject(Data.RecordSongEntries, Formatting.Indented));
             Data.UiProperty.SelectedRecordSong = Data.RecordSongEntries.Last();
         };
+    }
+
+    public void NextSong()
+    {
+        if (Data.RecordSongEntries.Count <= 1) return;
+        Data.UiProperty.SelectedRecordSong = PlayListView.SelectedIndex == Data.RecordSongEntries.Count - 1
+            ? Data.RecordSongEntries.First()
+            : Data.RecordSongEntries[PlayListView.SelectedIndex + 1];
+    }
+
+    public void PreviousSong()
+    {
+        if (Data.RecordSongEntries.Count <= 1) return;
+        Data.UiProperty.SelectedRecordSong = PlayListView.SelectedIndex == 0
+            ? Data.RecordSongEntries.Last()
+            : Data.RecordSongEntries[PlayListView.SelectedIndex - 1];
     }
 }

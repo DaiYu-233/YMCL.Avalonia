@@ -1,0 +1,41 @@
+﻿<UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="YMCL.Views.Main.Pages.MusicPages.Lyric"
+    x:DataType="musicPages:Lyric"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:musicPages="clr-namespace:YMCL.Views.Main.Pages.MusicPages"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border
+        Background="{DynamicResource 1x}"
+        ClipToBounds="True"
+        CornerRadius="5"
+        Name="LyricRoot"
+        Opacity="{DynamicResource MainOpacity}">
+        <Border.Transitions>
+            <Transitions>
+                <DoubleTransition Duration="0:0:0.25" Property="Opacity" />
+            </Transitions>
+        </Border.Transitions>
+        <Grid>
+            <StackPanel
+                IsVisible="True"
+                Margin="10,10,10,10"
+                Spacing="0"
+                VerticalAlignment="Top"
+                x:Name="LyricBlock">
+                <StackPanel.Transitions>
+                    <Transitions>
+                        <ThicknessTransition
+                            Duration="0:0:0.2"
+                            Easing="BounceEaseIn"
+                            Property="Margin" />
+                    </Transitions>
+                </StackPanel.Transitions>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

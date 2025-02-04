@@ -62,6 +62,7 @@ public partial class Save : UserControl, INotifyPropertyChanged
         DeleteSelectModBtn.Click += async (_, _) =>
         {
             var items = ModManageList.SelectedItems;
+            if (items is null) return;
             var text = (from object? item in items select item as LocalSaveEntry).Aggregate(string.Empty,
                 (current, mod) => current + $"• {Path.GetFileName(mod.Name)}\n");
 

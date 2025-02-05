@@ -1,0 +1,57 @@
+@font-face {
+  font-family: "MiSans";
+  src: url(./MiSans-Demibold.woff2);
+}
+body {
+  font-family: "MiSans";
+  font-weight: normal;
+  font-style: normal;
+  color: #747e88;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "MiSans";
+  user-select: none;
+  cursor: url(./x1.cur), auto;
+}
+a {
+  color: #00b6ee;
+}
+body {
+  background: #fff;
+  position: relative;
+  overflow-x: hidden !important;
+}
+
+/* 基本的滚动条样式 */
+::-webkit-scrollbar {
+  width: 7px; /* 滚动条宽度 */
+}
+
+::-webkit-scrollbar-track {
+  background: #e6f2ff; /* 轨道背景颜色 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #85b4e5; /* 滑块颜色 */
+  border-radius: 10px; /* 滑块圆角 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5c93ca; /* 鼠标悬停时滑块颜色 */
+}
+a:hover {
+  color: #0898e7;
+}
+.afd-root {
+  background: url(https://pic1.afdiancdn.com/static/img/electriclove@2x.png);
+}
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}

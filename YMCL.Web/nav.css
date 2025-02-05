@@ -1,0 +1,119 @@
+.nav {
+  margin: 0 40px;
+  border-radius: 5px;
+  position: relative;
+  -webkit-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -ms-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+  padding: 35px 0;
+  z-index: 999;
+}
+#navbar {
+  width: 100vw;
+  max-height: 75px;
+  z-index: 500;
+  -webkit-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -ms-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+}
+.nav-container {
+  margin: 0 auto;
+}
+@media (min-width: 992px) {
+  .nav-container {
+    max-width: 1190px;
+  }
+}
+.nav-logo {
+  height: 45px;
+}
+.nav-a {
+  font-size: 16px;
+  font-weight: 600;
+  color: #38424d;
+  -webkit-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -ms-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+  cursor: url(./x2.cur), auto;
+}
+.nav-pc-a-jump {
+  margin: 0 15px;
+}
+.mobile-nav-ul-container {
+  display: none;
+  /* height: 0; */
+  margin: 20px;
+}
+.mobile-nav-ul {
+  display: block;
+  line-height: 1.5;
+}
+.mobile-nav-open-menu {
+  display: none;
+}
+.mobile-nav-ul-container {
+  margin: 20px 40px;
+  padding: 15px;
+  padding-left: 35px;
+  z-index: 1000;
+  background: #fff;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 0 20px 11px rgba(56, 66, 77, 0.1);
+  -webkit-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -ms-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+}
+@media (max-width: 810px) {
+  .mobile-nav-ul-container {
+    display: block;
+  }
+  .mobile-nav-open-menu {
+    display: unset;
+  }
+  .pc-nav-ul {
+    display: none;
+  }
+}
+@media (max-width: 440px) {
+  .nav-a {
+    font-size: 16px;
+  }
+}
+.title-s {
+  display: none;
+}
+@media (max-width: 390px) {
+  .title-s {
+    display: block;
+  }
+  .title-l {
+    display: none;
+  }
+}
+.list-root {
+  display: flow-root;
+  -webkit-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -ms-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+  border-radius: 8px;
+}
+.main-div {
+  z-index: 499;
+  position: relative;
+}

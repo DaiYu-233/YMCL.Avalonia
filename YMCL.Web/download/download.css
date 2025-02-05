@@ -1,0 +1,148 @@
+/* Basic styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 40px;
+    height: auto;
+    margin-right: 1rem;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 1rem;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: #333;
+    color: #fff;
+}
+
+.cta-button {
+    display: inline-block;
+    background: #ffcc00;
+    color: #333;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 2rem;
+}
+
+#download {
+    padding: 2rem;
+    text-align: center;
+    background: #333;
+    color: #fff;
+}
+
+.download-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+}
+
+.download-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #ffcc00;
+    color: #333;
+    padding: 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    min-width: 200px; /* Make sure it's a square */
+    min-height: 200px;
+    max-width: 200px; /* Limit the maximum size if needed */
+    max-height: 200px;
+}
+
+.download-button img {
+    width: 40px; /* Adjust the size as needed */
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+#contact {
+    padding: 2rem;
+    text-align: center;
+}
+
+#contact form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#contact input[type="email"] {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+#contact button {
+    background: #ffcc00;
+    color: #333;
+    padding: 1rem 2rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: #333;
+    color: #fff;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+    }
+
+    .nav-links {
+        flex-direction: column;
+    }
+
+    .nav-links li {
+        margin: 0.5rem 0;
+    }
+
+    .download-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

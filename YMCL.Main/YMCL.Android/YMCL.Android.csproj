@@ -22,7 +22,7 @@
 	  <RepositoryType>git</RepositoryType>
 	  <PackageTags>DaiYu;YMCL</PackageTags>
 	  <PackageReleaseNotes>Yu Minecraft Launcher</PackageReleaseNotes>
-	  <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
+	  <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-    <metadata_license>AGPL-3</metadata_license>
+    <metadata_license>GPL-3</metadata_license>
 
     <!-- Note the use of macros to automate most (but not all) content below -->
     <id>${APP_ID}</id>

@@ -34,6 +34,7 @@ public class InitUi
 
     public static void UpdateTheme()
     {
+        YMCL.Public.Module.Ui.Setter.SetBackGround();
         try
         {
             if (YMCL.App.UiRoot != null)

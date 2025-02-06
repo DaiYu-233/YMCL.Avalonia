@@ -95,9 +95,11 @@ public class Setter
         YMCL.App.UiRoot.BackGroundImg.Source = null;
         var topLevel = TopLevel.GetTopLevel(YMCL.App.UiRoot);
         Application.Current.TryGetResource("2x", Application.Current.ActualThemeVariant,
+            out var c2);
+        Application.Current.TryGetResource("1x", Application.Current.ActualThemeVariant,
             out var c1);
         YMCL.App.UiRoot.FrameView.Background = Data.Setting.CustomBackGround == Setting.CustomBackGroundWay.Default
-            ? (SolidColorBrush)c1 : null;
+            ? (SolidColorBrush)c2 : null;
         if (topLevel is MainWindow window)
         {
             window.TransparencyLevelHint = [WindowTransparencyLevel.Mica];
@@ -107,6 +109,7 @@ public class Setter
             window.TitleBar.Root.Background = Application.Current.ActualThemeVariant == ThemeVariant.Dark
                 ? SolidColorBrush.Parse("#2c2c2c")
                 : SolidColorBrush.Parse("#FFE9F6FF");
+            window.Root.Background = (SolidColorBrush)c1;
             try
             {
                 (Ui.Getter.FindControlByName(window, "PART_PaneRoot") as Panel).Opacity =

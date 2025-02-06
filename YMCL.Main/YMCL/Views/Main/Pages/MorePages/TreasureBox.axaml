@@ -61,7 +61,7 @@
                                     Width="12" />
                             </DockPanel>
                             <StackPanel DockPanel.Dock="Bottom">
-                                <TextBlock
+                                <SelectableTextBlock
                                     Margin="5"
                                     Name="Hitokoto"
                                     Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Loading}"
@@ -85,7 +85,7 @@
                                     Width="12" />
                             </DockPanel>
                             <StackPanel DockPanel.Dock="Bottom">
-                                <TextBlock
+                                <SelectableTextBlock
                                     Margin="5"
                                     Name="CodeLife"
                                     Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Loading}"

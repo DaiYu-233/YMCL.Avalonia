@@ -18,8 +18,8 @@ namespace YMCL.Views.Main.Pages.MorePages;
 
 public partial class GameUpdateLog : UserControl
 {
-    List<TextBlock> _translateList = [];
-    List<TextBlock> _tbList = [];
+    List<SelectableTextBlock> _translateList = [];
+    List<SelectableTextBlock> _tbList = [];
     List<Border> _bList = [];
     string _nowJsonPath = "";
 
@@ -70,7 +70,7 @@ public partial class GameUpdateLog : UserControl
                             Source = "https://launchercontent.mojang.com" + item.image.url
                         }
                     });
-                    var tb = new TextBlock()
+                    var tb = new SelectableTextBlock()
                     {
                         Text = item.title, FontSize = 14, Margin = new Thickness(5, 10, 5, 5),
                         HorizontalAlignment = HorizontalAlignment.Center, MaxWidth = 170,
@@ -91,7 +91,7 @@ public partial class GameUpdateLog : UserControl
         }
     }
 
-    private TextBlock AddToTranslate(TextBlock textBlock)
+    private SelectableTextBlock AddToTranslate(SelectableTextBlock textBlock)
     {
         _translateList.Add(textBlock);
         return textBlock;
@@ -101,7 +101,7 @@ public partial class GameUpdateLog : UserControl
     {
         if (Data.Setting.Language.Code == "en-US") return;
 
-        async System.Threading.Tasks.Task Translate(TextBlock textBlock)
+        async System.Threading.Tasks.Task Translate(SelectableTextBlock textBlock)
         {
             if (string.IsNullOrWhiteSpace(Data.TranslateToken)) return;
             try
@@ -184,7 +184,7 @@ public partial class GameUpdateLog : UserControl
                 {
                     case "p":
                         // 解析P标签
-                        dataContainer.Children.Add(AddToTranslate(new TextBlock
+                        dataContainer.Children.Add(AddToTranslate(new SelectableTextBlock
                             { Text = node.InnerText, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 5) }));
                         break;
                     case "h1":
@@ -194,7 +194,7 @@ public partial class GameUpdateLog : UserControl
                     case "h5":
                     case "h6":
                         // 解析H1-H6标签，并根据H的级别调整文字大小
-                        var header = AddToTranslate(new TextBlock
+                        var header = AddToTranslate(new SelectableTextBlock
                             { Text = node.InnerText, Margin = new Thickness(0, 5), TextWrapping = TextWrapping.Wrap });
                         switch (node.Name)
                         {
@@ -225,7 +225,7 @@ public partial class GameUpdateLog : UserControl
                         // 解析UL和OL标签
                         foreach (var listItem in node.Descendants("li"))
                         {
-                            var listParagraph = AddToTranslate(new TextBlock()
+                            var listParagraph = AddToTranslate(new SelectableTextBlock()
                             {
                                 Margin = new Thickness(0, 5), Text = "• " + listItem.InnerText,
                                 TextWrapping = TextWrapping.Wrap
@@ -239,7 +239,7 @@ public partial class GameUpdateLog : UserControl
                         var hyperlink = new HyperlinkButton()
                         {
                             NavigateUri = new Uri(node.GetAttributeValue("href", "#")),
-                            Content = new TextBlock
+                            Content = new SelectableTextBlock
                             {
                                 Text = node.InnerText, TextWrapping = TextWrapping.Wrap, TextDecorations = null,
                                 Foreground =

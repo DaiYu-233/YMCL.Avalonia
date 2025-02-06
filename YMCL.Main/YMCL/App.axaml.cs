@@ -18,18 +18,19 @@ namespace YMCL;
 public class App : Application
 {
     public static MainView? UiRoot { get; private set; }
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
     }
 
-    public override void OnFrameworkInitializationCompleted()
+    public override async void OnFrameworkInitializationCompleted()
     {
         AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         Dispatcher.UIThread.UnhandledException += UIThread_UnhandledException;
         try
         {
-            InitDispatcher.BeforeCreateUi();
+            if (!await InitDispatcher.BeforeCreateUi()) return;
         }
         catch (Exception e)
         {
@@ -38,13 +39,14 @@ public class App : Application
             win.Show();
             return;
         }
+
         var ifShowInit = Decision.WhetherToShowInitView();
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             DisableAvaloniaDataAnnotationValidation();
             if (ifShowInit.ifShow)
             {
-                var view = new InitializeWindow(ifShowInit.page) { IsVisible = false };
+                var view = new InitializeWindow(ifShowInit.page);
                 Data.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
                 desktop.MainWindow = view;
             }
@@ -54,6 +56,7 @@ public class App : Application
                 UiRoot = mainView;
                 Data.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
                 desktop.MainWindow = view;
+                view.Show();
             }
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
@@ -77,7 +80,7 @@ public class App : Application
 
         base.OnFrameworkInitializationCompleted();
     }
-    
+
     private void UIThread_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
         Console.WriteLine(e.Exception);
@@ -95,10 +98,9 @@ public class App : Application
     private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
         Console.WriteLine(e);
-        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) return;
         try
         {
-            var win = new CrashWindow(e.ToString()!);
+            var win = new CrashWindow(e.ToString() ?? "Unhandled Exception");
             win.Show();
         }
         catch
@@ -106,7 +108,7 @@ public class App : Application
             // ignored
         }
     }
-    
+
 
     private void DisableAvaloniaDataAnnotationValidation()
     {

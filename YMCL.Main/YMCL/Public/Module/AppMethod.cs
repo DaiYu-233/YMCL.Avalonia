@@ -20,9 +20,6 @@ public class AppMethod
 
     public static void RestartApp()
     {
-        if (Data.Setting is null) return;
-        File.WriteAllText(ConfigPath.SettingDataPath,
-            JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
         var startInfo = new ProcessStartInfo
         {
             UseShellExecute = true,

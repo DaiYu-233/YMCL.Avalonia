@@ -1,4 +1,5 @@
-﻿using YMCL.Public.Module.Init.SubModule;
+﻿using System.Threading.Tasks;
+using YMCL.Public.Module.Init.SubModule;
 using YMCL.Public.Module.Init.SubModule.NetAndUiLoader;
 using String = System.String;
 
@@ -6,18 +7,19 @@ namespace YMCL.Public.Module.Init;
 
 public static class InitDispatcher
 {
-    public static void BeforeCreateUi()
+    public static async Task<bool> BeforeCreateUi()
     {
         DetectPlatform.Main();
         InitData.InitSystemMaxMem();
         InitConfig.Dispatch();
-        InitData.GetSettingData();
+        if(!await InitData.GetSettingData()) return false;
         InitLang.Dispatch();
         InitData.InitCollection();
         InitData.VerifyData();
         TranslateToken.RefreshToken();
         Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
-        Public.Module.Ui.Special.AggregateSearchUi.Filter(String.Empty);
+        Public.Module.Ui.Special.AggregateSearchUi.Filter(string.Empty);
+        return true;
     }
 
     public static void OnMainViewLoaded()

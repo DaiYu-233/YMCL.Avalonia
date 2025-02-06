@@ -5,7 +5,7 @@
     MinHeight="310"
     MinWidth="450"
     SystemDecorations="Full"
-    Title="CrashWindow"
+    Title="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.UnhandledException}"
     WindowStartupLocation="CenterScreen"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -15,6 +15,7 @@
     xmlns:crash="clr-namespace:YMCL.Views.Crash"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Public.Langs"
     xmlns:u="https://irihi.tech/ursa"
     xmlns:uc="clr-namespace:YMCL.Public.Controls"
     xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
@@ -42,7 +43,7 @@
                 IsMaxBtnShow="False"
                 IsVisible="False"
                 Name="TitleBar"
-                Title="Yu Minecraft Launcher" />
+                Title="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.UnhandledException}" />
             <crash:CrashView Name="View" />
         </DockPanel>
     </Border>

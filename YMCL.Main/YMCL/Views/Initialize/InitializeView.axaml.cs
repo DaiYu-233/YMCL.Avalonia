@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using Irihi.Avalonia.Shared.Helpers;
+using Newtonsoft.Json;
 using YMCL.Public.Enum;
 using YMCL.Public.Module;
 using YMCL.Views.Initialize.Pages;
@@ -55,22 +57,32 @@ public partial class InitializeView : UserControl
         if (page == 2 && Data.Setting.Language.Code == null)
         {
             Data.Setting.Language = Data.Langs[0];
+            File.WriteAllText(ConfigPath.SettingDataPath,
+                JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
         }
         if (page == 3 && Data.Setting.WindowTitleBarStyle == Setting.WindowTitleBarStyle.Unset)
         {
             Data.Setting.WindowTitleBarStyle = Setting.WindowTitleBarStyle.System;
+            File.WriteAllText(ConfigPath.SettingDataPath,
+                JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
         }
         if (page == 4)
         {
             Data.Setting.IsCompleteMinecraftFolderInitialize = true;
+            File.WriteAllText(ConfigPath.SettingDataPath,
+                JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
         }
         if (page == 5)
         {
             Data.Setting.IsCompleteJavaInitialize = true;
+            File.WriteAllText(ConfigPath.SettingDataPath,
+                JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
         }
         if (page == 6)
         {
             Data.Setting.IsCompleteAccountInitialize = true;
+            File.WriteAllText(ConfigPath.SettingDataPath,
+                JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
             AppMethod.RestartApp();
         }
     }

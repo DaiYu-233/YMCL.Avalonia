@@ -34,13 +34,12 @@ public class Shower
 
     public static async Task<ContentDialogResult> ShowDialogAsync(string title = "Title", string msg = "Content",
         Control p_content = null, string b_primary = null, string b_cancel = null, string b_secondary = null,
-        Window p_window = null)
+        TopLevel? p_host = null)
     {
         var content = p_content == null
-            ? new TextBox
+            ? new SelectableTextBlock()
             {
                 TextWrapping = TextWrapping.Wrap,
-                IsReadOnly = true,
                 FontFamily = (FontFamily)Application.Current.Resources["Font"],
                 Text = msg
             }
@@ -55,7 +54,7 @@ public class Shower
             FontFamily = (FontFamily)Application.Current.Resources["Font"],
             Title = title
         };
-        var result = await dialog.ShowAsync(TopLevel.GetTopLevel(YMCL.App.UiRoot));
+        var result = await dialog.ShowAsync(p_host ?? TopLevel.GetTopLevel(YMCL.App.UiRoot));
         return result;
     }
 

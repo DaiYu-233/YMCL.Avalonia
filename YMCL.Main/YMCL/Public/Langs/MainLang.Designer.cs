@@ -1114,6 +1114,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 在加载数据时遇到异常，这可能是由于数据发生损坏导致的。是否重置YMCL数据以解决此问题？.
+        /// </summary>
+        public static string FixLoadDataFailTip {
+            get {
+                return ResourceManager.GetString("FixLoadDataFailTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 文件夹已存在.
         /// </summary>
         public static string FolderAlreadyExists {
@@ -2358,6 +2367,15 @@ namespace YMCL.Public.Langs {
         public static string RepeatItem {
             get {
                 return ResourceManager.GetString("RepeatItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 重置数据.
+        /// </summary>
+        public static string ResetData {
+            get {
+                return ResourceManager.GetString("ResetData", resourceCulture);
             }
         }
         

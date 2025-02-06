@@ -1087,4 +1087,10 @@ MacOs 不支持自动更新
   <data name="DisplayLaunchArguments" xml:space="preserve">
     <value>显示启动参数</value>
   </data>
+  <data name="ResetData" xml:space="preserve">
+    <value>重置数据</value>
+  </data>
+  <data name="FixLoadDataFailTip" xml:space="preserve">
+    <value>在加载数据时遇到异常，这可能是由于数据发生损坏导致的。是否重置YMCL数据以解决此问题？</value>
+  </data>
 </root>

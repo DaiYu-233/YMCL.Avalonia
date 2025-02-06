@@ -118,7 +118,7 @@ public class Setting : ReactiveObject
                 Public.Module.Ui.Setter.ToggleTheme(Theme);
             }
 
-            Method.SaveSetting();
+            AppMethod.SaveSetting();
         };
     }
 }

@@ -142,5 +142,10 @@
     <UpToDateCheckInput Remove="Public\Controls\PluginInfo\PluginInfo.axaml" />
     <UpToDateCheckInput Remove="Public\Controls\UrlImage\UrlImage.axaml" />
     <UpToDateCheckInput Remove="Assets\MiSans-Regular.otf" />
+    <UpToDateCheckInput Remove="Views\Main\Drawers\MsgHistory\MsgHistory.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Public\Controls\Drawers\MsgHistory\MsgHistory.axaml" />
   </ItemGroup>
 </Project>

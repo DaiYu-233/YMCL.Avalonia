@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace YMCL.Public.Module;
 
-public class Method
+public class AppMethod
 {
     private static readonly Debouncer _debouncer = new(() =>
     {

@@ -1,11 +1,14 @@
 using System.Linq;
+using System.Runtime.InteropServices;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Notifications;
 using Avalonia.Data.Core.Plugins;
+using Avalonia.Threading;
 using YMCL.Public.Module.Init;
 using YMCL.Public.Module.Init.SubModule;
 using YMCL.ViewModels;
 using YMCL.Views;
+using YMCL.Views.Crash;
 using YMCL.Views.Initialize;
 using MainView = YMCL.Views.Main.MainView;
 using MainWindow = YMCL.Views.Main.MainWindow;
@@ -22,7 +25,19 @@ public class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        InitDispatcher.BeforeCreateUi();
+        AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+        Dispatcher.UIThread.UnhandledException += UIThread_UnhandledException;
+        try
+        {
+            InitDispatcher.BeforeCreateUi();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            var win = new CrashWindow(e.ToString());
+            win.Show();
+            return;
+        }
         var ifShowInit = Decision.WhetherToShowInitView();
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -62,6 +77,36 @@ public class App : Application
 
         base.OnFrameworkInitializationCompleted();
     }
+    
+    private void UIThread_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+    {
+        Console.WriteLine(e.Exception);
+        try
+        {
+            var win = new CrashWindow(e.Exception.ToString());
+            win.Show();
+        }
+        finally
+        {
+            e.Handled = true;
+        }
+    }
+
+    private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+    {
+        Console.WriteLine(e);
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) return;
+        try
+        {
+            var win = new CrashWindow(e.ToString()!);
+            win.Show();
+        }
+        catch
+        {
+            // ignored
+        }
+    }
+    
 
     private void DisableAvaloniaDataAnnotationValidation()
     {

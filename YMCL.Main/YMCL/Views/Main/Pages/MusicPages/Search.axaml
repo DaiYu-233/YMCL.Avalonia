@@ -37,7 +37,7 @@
                             Width="20" />
                         <TextBlock
                             Margin="0,1,0,0"
-                            Text="{x:Static properties:MainLang.Search}"
+                            Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Search}"
                             VerticalAlignment="Center" />
                     </DockPanel>
                 </Button>
@@ -96,7 +96,7 @@
                         Name="LoadMoreBtn">
                         <TextBlock FontFamily="{DynamicResource Font}" TextDecorations="{x:Null}">
                             <Run Text="→" />
-                            <Run Text="{x:Static properties:MainLang.LoadMore}" />
+                            <Run Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.LoadMore}" />
                             <Run Text="←" />
                         </TextBlock>
                     </HyperlinkButton>

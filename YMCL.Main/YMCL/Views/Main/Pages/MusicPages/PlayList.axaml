@@ -22,7 +22,7 @@
                 <TextBlock
                     FontSize="15"
                     Margin="10,5,0,0"
-                    Text="{x:Static properties:MainLang.PlayList}" />
+                    Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.PlayList}" />
                 <StackPanel
                     DockPanel.Dock="Right"
                     HorizontalAlignment="Right"

@@ -71,7 +71,7 @@ public partial class InitializeView : UserControl
         if (page == 6)
         {
             Data.Setting.IsCompleteAccountInitialize = true;
-            Method.RestartApp();
+            AppMethod.RestartApp();
         }
     }
 

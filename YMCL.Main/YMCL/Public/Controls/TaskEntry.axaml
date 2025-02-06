@@ -85,6 +85,27 @@
         <StackPanel>
             <Border Name="TopContainer" />
             <ItemsControl
+                ItemsSource="{Binding OperateButtons}"
+                Margin="0,0,0,10"
+                Name="OperateButtonContainer"
+                x:DataType="ta:TaskEntryModel">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Left" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="classes:TaskEntryOperateButtonEntry">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Button
+                                Command="{Binding ActionInvoke}"
+                                Content="{Binding Content}"
+                                Margin="5" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <ItemsControl
                 ItemsSource="{Binding SubTasks}"
                 Name="SubTaskContainer"
                 x:DataType="ta:TaskEntryModel">

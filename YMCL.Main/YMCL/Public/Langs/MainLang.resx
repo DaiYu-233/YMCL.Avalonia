@@ -1078,4 +1078,13 @@ MacOs 不支持自动更新
   <data name="NetWorkError" xml:space="preserve">
     <value>网络错误</value>
   </data>
+  <data name="KillProcess" xml:space="preserve">
+    <value>结束进程</value>
+  </data>
+  <data name="LaunchArguments" xml:space="preserve">
+    <value>启动参数</value>
+  </data>
+  <data name="DisplayLaunchArguments" xml:space="preserve">
+    <value>显示启动参数</value>
+  </data>
 </root>

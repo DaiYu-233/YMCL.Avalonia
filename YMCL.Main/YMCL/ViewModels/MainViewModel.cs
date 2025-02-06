@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using YMCL.Views.Main.Drawers.MsgHistory;
 using YMCL.Views.Main.Pages;
 
 namespace YMCL.ViewModels;

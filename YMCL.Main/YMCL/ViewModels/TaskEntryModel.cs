@@ -14,6 +14,7 @@ public class TaskEntryModel : ReactiveObject
     private readonly Timer _timer = new();
     private double _totalTime;
     [Reactive] public ObservableCollection<SubTask> SubTasks { get; set; }
+    [Reactive] public ObservableCollection<TaskEntryOperateButtonEntry> OperateButtons { get; set; } = [];
     [Reactive] public double Time { get; set; }
     [Reactive] public TaskState State { get; set; }
     [Reactive] public bool NumberValue { get; set; }
@@ -43,7 +44,7 @@ public class TaskEntryModel : ReactiveObject
             }
             if (e.PropertyName == nameof(CanRemove))
             {
-                GetButtonDisplay();
+                UpdateButtonDisplay();
             }
         };
         Refresh();
@@ -53,7 +54,7 @@ public class TaskEntryModel : ReactiveObject
     {
         HandleStateChange(State);
         GetDisplayProgress();
-        GetButtonDisplay();
+        UpdateButtonDisplay();
         GetIsIndeterminate();
     }
 
@@ -82,7 +83,7 @@ public class TaskEntryModel : ReactiveObject
         Time = _totalTime;
     }
 
-    private void GetButtonDisplay()
+    private void UpdateButtonDisplay()
     {
         ButtonDisplay = CanRemove ? MainLang.Remove : MainLang.Cancel;
         if (CanRemove)

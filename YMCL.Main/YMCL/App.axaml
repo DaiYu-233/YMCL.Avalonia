@@ -30,7 +30,7 @@
     <Application.Styles>
         <sty:FluentAvaloniaTheme />
         <StyleInclude Source="/Public/Styles/Style.axaml" />
-        <semi:SemiTheme Locale="zh-cn" />
+        <semi:SemiTheme Locale="zh-CN" />
         <u-semi:SemiTheme Locale="zh-CN" />
         <StyleInclude Source="avares://AsyncImageLoader.Avalonia/AdvancedImage.axaml" />
     </Application.Styles>

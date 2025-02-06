@@ -27,13 +27,13 @@ public class Getter
                     }
                 }
 
-                Console.WriteLine("系统最大内存: " + totalMemory);
+                Console.WriteLine("MaxMem: " + totalMemory);
 
                 return totalMemory;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("获取系统内存信息时发生错误: " + ex.Message);
+                Console.WriteLine("Error: " + ex.Message);
                 return 0;
             }
 

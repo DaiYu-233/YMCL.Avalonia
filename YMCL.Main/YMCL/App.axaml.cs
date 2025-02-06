@@ -58,6 +58,8 @@ public class App : Application
             }
         }
 
+        Data.Notification.Position = NotificationPosition.BottomRight;
+
         base.OnFrameworkInitializationCompleted();
     }
 

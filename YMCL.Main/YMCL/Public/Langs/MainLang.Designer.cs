@@ -880,6 +880,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 显示启动参数.
+        /// </summary>
+        public static string DisplayLaunchArguments {
+            get {
+                return ResourceManager.GetString("DisplayLaunchArguments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 显示名称.
         /// </summary>
         public static string DisplayName {
@@ -1432,6 +1441,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 结束进程.
+        /// </summary>
+        public static string KillProcess {
+            get {
+                return ResourceManager.GetString("KillProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 语言.
         /// </summary>
         public static string Language {
@@ -1473,6 +1491,15 @@ namespace YMCL.Public.Langs {
         public static string Launch {
             get {
                 return ResourceManager.GetString("Launch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 启动参数.
+        /// </summary>
+        public static string LaunchArguments {
+            get {
+                return ResourceManager.GetString("LaunchArguments", resourceCulture);
             }
         }
         

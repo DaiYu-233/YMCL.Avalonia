@@ -20,6 +20,7 @@ public partial class TaskEntry : UserControl
         Model = new TaskEntryModel(this, state, subTasks);
         HeaderContent.DataContext = Model;
         SubTaskContainer.DataContext = Model;
+        OperateButtonContainer.DataContext = Model;
         DataContext = Data.Instance;
         Model.Name = name;
         Data.TaskEntries.Add(this);
@@ -29,6 +30,16 @@ public partial class TaskEntry : UserControl
     public void UpdateAction(Action action)
     {
         Model.ButtonAction = action;
+    }
+    
+    public void AddOperateButton(TaskEntryOperateButtonEntry entry)
+    {
+        Model.OperateButtons.Add(entry);
+    }
+    
+    public void UpdateButtonText(string text)
+    {
+        Model.ButtonDisplay = text;
     }
 
     public void UpdateValue(double value)
@@ -53,6 +64,7 @@ public partial class TaskEntry : UserControl
     {
         Model.SubTasks.Add(task);
     }
+
     public void AddSubTaskRange(SubTask[] task)
     {
         foreach (var subTask in task)
@@ -65,17 +77,20 @@ public partial class TaskEntry : UserControl
     {
         Model.SubTasks.Remove(task);
     }
+
     public void Destory()
     {
         Data.TaskEntries.Remove(this);
         App.UiRoot.ViewModel.Task.UpdateTasksTip();
     }
+
     public void FinishWithSuccess()
     {
         Model.CanRemove = true;
         Model.ButtonIsEnable = true;
         Model.State = TaskState.Finished;
     }
+
     public void FinishWithError()
     {
         Model.CanRemove = true;
@@ -83,6 +98,7 @@ public partial class TaskEntry : UserControl
     }
 
     private int index;
+
     public void AdvanceSubTask()
     {
         Model.SubTasks[index].Finish();
@@ -90,6 +106,7 @@ public partial class TaskEntry : UserControl
         {
             Model.SubTasks[index + 1].State = TaskState.Running;
         }
+
         index++;
     }
 
@@ -98,20 +115,20 @@ public partial class TaskEntry : UserControl
         Model.State = TaskState.Canceled;
         Model.CanRemove = true;
     }
-    
+
     public void CancelWaitFinish()
     {
         Model.State = TaskState.Canceling;
         Model.ButtonIsEnable = false;
     }
-    
+
     public void CancelWithSuccess()
     {
         Model.State = TaskState.Canceling;
         Model.ButtonIsEnable = false;
         FinishWithSuccess();
     }
-    
+
     public void CancelFinish()
     {
         Model.State = TaskState.Canceled;

@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using Avalonia.Threading;
+using FluentAvalonia.UI.Controls;
 using MinecraftLaunch.Classes.Models.Auth;
 using MinecraftLaunch.Classes.Models.Launch;
 using MinecraftLaunch.Components.Analyzer;
@@ -175,6 +176,7 @@ public class LaunchJavaClientByMinecraftLaunch
                 try
                 {
                     var watcher = await launcher.LaunchAsync(p_id);
+                    var copyArguments = string.Join(" ", watcher.Arguments);
                     watcher.Exited += async (_, eventArgs) =>
                     {
                         await Dispatcher.UIThread.InvokeAsync(async () =>
@@ -233,22 +235,57 @@ public class LaunchJavaClientByMinecraftLaunch
                         });
                     };
 
-                    watcher.OutputLogReceived += (_, eventArgs) => { Console.WriteLine(eventArgs.Log); };
+                    watcher.OutputLogReceived += (_, eventArgs) =>
+                    {
+                        //Console.WriteLine(eventArgs.Log);
+                    };
 
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
                         task.AdvanceSubTask();
-                        Toast(MainLang.LaunchFinish);
+                        Toast($"{MainLang.LaunchFinish} - {p_id}");
+                        task.AddOperateButton(new TaskEntryOperateButtonEntry(MainLang.DisplayLaunchArguments,
+                            async () =>
+                            {
+                                var dialog = await ShowDialogAsync(MainLang.LaunchArguments,
+                                    string.Join(" \n", watcher.Arguments), b_cancel: MainLang.Ok,
+                                    b_primary: MainLang.Copy);
+                                if(dialog != ContentDialogResult.Primary) return;
+                                var clipboard = TopLevel.GetTopLevel(App.UiRoot)?.Clipboard;
+                                await clipboard.SetTextAsync(copyArguments);
+                                Toast(MainLang.AlreadyCopyToClipBoard, NotificationType.Success);
+                            }));
+                        task.AddOperateButton(new TaskEntryOperateButtonEntry(MainLang.KillProcess, async () =>
+                        {
+                            try
+                            {
+                                canceled = true;
+                                isKillByYmcl = true;
+                                watcher.Process.Kill(true);
+                                task.CancelWithSuccess();
+                                await cts.CancelAsync();
+                            }
+                            catch
+                            {
+                            }
+                        }));
                     });
                     _ = Task.Run(async () =>
                     {
+                        task.UpdateButtonText(MainLang.KillProcess);
                         task.UpdateAction(() =>
                         {
-                            canceled = true;
-                            isKillByYmcl = true;
-                            watcher.Process.Close();
-                            task.CancelWithSuccess();
-                            cts.Cancel();
+                            try
+                            {
+                                canceled = true;
+                                isKillByYmcl = true;
+                                watcher.Process.Kill(true);
+                                task.CancelWithSuccess();
+                                cts.Cancel();
+                            }
+                            catch
+                            {
+                            }
                         });
                         await Task.Delay(8000);
                         Dispatcher.UIThread.Invoke(() =>

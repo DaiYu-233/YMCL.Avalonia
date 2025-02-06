@@ -9,13 +9,14 @@ using YMCL.Public.Classes.Netease;
 using YMCL.Public.Langs;
 using YMCL.Public.Module;
 using YMCL.Public.Module.Ui.Special;
+using YMCL.Views.Main.Drawers.MsgHistory;
 
 namespace YMCL.Public.Classes;
 
 public sealed class UiProperty : ReactiveObject
 {
     private static UiProperty? _instance;
-    public static ObservableCollection<VersionManifestEntry> AllInstallableGames { get; set; } = [];
+    public static ObservableCollection<VersionManifestEntry> AllInstallableGames { get; } = [];
     public static ObservableCollection<VersionManifestEntry> FilteredAllInstallableGames { get; set; } = [];
     public static ObservableCollection<VersionManifestEntry> ReleaseInstallableGames { get; set; } = [];
     public static ObservableCollection<VersionManifestEntry> SnapshotInstallableGames { get; set; } = [];
@@ -39,6 +40,7 @@ public sealed class UiProperty : ReactiveObject
     [Reactive] public string InstallableGameSearchFilter { get; set; } = string.Empty;
     [Reactive] public RecordSongEntry? SelectedRecordSong { get; set; } 
     [Reactive] public RecordSongEntry? SelectedSearchSong { get; set; }
+    public MsgHistoryViewModel MsgHistoryViewModel { get; } = new();
 
     public UiProperty()
     {

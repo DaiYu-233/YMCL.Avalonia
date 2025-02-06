@@ -72,7 +72,6 @@
                         <DockPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Border
-                                    Background="Aqua"
                                     ClipToBounds="True"
                                     CornerRadius="5"
                                     DockPanel.Dock="Left"

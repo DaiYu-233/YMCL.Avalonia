@@ -164,7 +164,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MinWidth="200" Width="*" />
                     <ColumnDefinition Width="10" />
-                    <ColumnDefinition MinWidth="280" Width="280" />
+                    <ColumnDefinition MinWidth="300" Width="300" />
                 </Grid.ColumnDefinitions>
                 <Border
                     ClipToBounds="True"

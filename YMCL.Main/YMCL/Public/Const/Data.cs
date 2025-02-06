@@ -21,9 +21,8 @@ namespace YMCL.Public.Const;
 public sealed class Data : ReactiveObject
 {
     private static Data? _instance;
-    public static RunnerType RunnerType { get; set; }
     public static ObservableCollection<Language> Langs => LangHelper.Langs;
-    public static DesktopRunnerType DesktopType { get; set; } = DesktopRunnerType.NotDesktop;
+    public static DesktopRunnerType DesktopType { get; set; } = DesktopRunnerType.Unknown;
     public static WindowNotificationManager Notification { get; set; }
     public static ObservableCollection<Classes.MinecraftFolder> MinecraftFolders { get; set; }
     public static ObservableCollection<JavaEntry> JavaRuntimes { get; set; }

@@ -10,7 +10,6 @@ public enum RunnerType
 
 public enum DesktopRunnerType
 {
-    NotDesktop,
     Windows,
     MacOs,
     Linux,

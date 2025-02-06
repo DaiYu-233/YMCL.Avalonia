@@ -5,6 +5,7 @@ using Avalonia.Markup.Xaml;
 using MinecraftLaunch.Classes.Models.Install;
 using YMCL.Public.Classes;
 using YMCL.Public.Langs;
+using YMCL.Public.Module.Init.SubModule.GetDataFromNetwork;
 using YMCL.ViewModels;
 
 namespace YMCL.Views.Main.Pages.DownloadPages;
@@ -35,6 +36,15 @@ public partial class InstallableGames : UserControl
             {
                 Filter();
             }
+        };
+        ReloadInstallableGameListBtn.Click += (_, _) =>
+        {
+            LoadInstallableVersionListErrorInfoBar.IsVisible = false;
+            _ = InstallableGame.Load();
+            UiProperty.Instance.LatestReleaseGame = new VersionManifestEntry
+                { ReleaseTime = new DateTime(1970, 1, 1, 0, 0, 0), Id = MainLang.Loading, Type = null };
+            UiProperty.Instance.LatestSnapshotGame = new VersionManifestEntry
+                { ReleaseTime = new DateTime(1970, 1, 1, 0, 0, 0), Id = MainLang.Loading, Type = null };
         };
     }
 

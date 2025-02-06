@@ -71,7 +71,7 @@ public class AggregateSearchUi
             UiProperty.Instance.FilteredAggregateSearchEntries.Add(new AggregateSearchEntry
                 {
                     Tag = "jump", Text = $"{MainLang.SearchInTip.Replace("{target}", "CurseForge")} : {filter.Trim()}",
-                    Type = MainLang.JumpSearch,
+                    Type = MainLang.JumpSearch, Keyword = filter.Trim(),
                     Summary = $"{MainLang.JumpToSearchTip.Replace("{target}", $"{MainLang.Download}-CurseForge")}",
                     Target = "curse-forge", Order = 10
                 }
@@ -79,7 +79,7 @@ public class AggregateSearchUi
             UiProperty.Instance.FilteredAggregateSearchEntries.Add(new AggregateSearchEntry
             {
                 Tag = "jump", Text = $"{MainLang.SearchInTip.Replace("{target}", MainLang.Music)} : {filter.Trim()}",
-                Type = MainLang.JumpSearch,
+                Type = MainLang.JumpSearch, Keyword = filter.Trim(),
                 Summary = $"{MainLang.JumpToSearchTip.Replace("{target}", $"{MainLang.Music}")}", Target = "music",
                 Order = 10
             });
@@ -96,14 +96,17 @@ public class AggregateSearchUi
         if (entry.Tag == "jump" && !string.IsNullOrWhiteSpace(entry.Target))
         {
             var key = UiProperty.Instance.AggregateSearchFilter;
-            if (string.IsNullOrWhiteSpace(key)) return;
             if (entry.Target == "curse-forge")
             {
+                if (string.IsNullOrWhiteSpace(key)) return;
                 // TODO CurseForge Search
             }
             else if (entry.Target == "music")
             {
-                // TODO Music Search
+                if (string.IsNullOrWhiteSpace(key)) return;
+                if (string.IsNullOrWhiteSpace(entry.Keyword)) return;
+                YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavMusic;
+                YMCL.App.UiRoot.ViewModel.Music.SearchFormCall(entry.Keyword);
             }
             else if (entry.Target == "auto-install")
             {
@@ -127,7 +130,8 @@ public class AggregateSearchUi
                         Data.MinecraftFolders.FirstOrDefault(x => x.Path == entry.GameEntry.GameFolderPath);
                     Const.Data.Setting.SelectedGame = new GameDataEntry(entry.GameEntry);
                     YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavLaunch;
-                    Toast($"{MainLang.SwitchedTo} : {entry.GameEntry.Id}\n( {Path.GetDirectoryName(entry.GameEntry.JarPath)} )",
+                    Toast(
+                        $"{MainLang.SwitchedTo} : {entry.GameEntry.Id}\n( {Path.GetDirectoryName(entry.GameEntry.JarPath)} )",
                         type: NotificationType.Success);
                 }
             }

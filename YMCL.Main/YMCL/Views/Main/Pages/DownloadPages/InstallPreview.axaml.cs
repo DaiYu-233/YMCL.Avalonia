@@ -7,7 +7,7 @@ using Avalonia.Markup.Xaml;
 using MinecraftLaunch.Classes.Models.Install;
 using ReactiveUI;
 using YMCL.Public.Langs;
-using YMCL.Public.Module.Init.SubModule.NetAndUiLoader;
+using YMCL.Public.Module.Init.SubModule.GetDataFromNetwork;
 using YMCL.ViewModels;
 using Dispatcher = YMCL.Public.Module.Mc.Installer.InstallJavaClientByMinecraftLauncher.Dispatcher;
 using String = System.String;

@@ -25,11 +25,11 @@ public sealed class UiProperty : ReactiveObject
 
     [Reactive]
     public VersionManifestEntry LatestReleaseGame { get; set; } = new()
-        { ReleaseTime = new DateTime(1970, 1, 1, 0, 0, 0), Id = MainLang.Loading, Type = "null" };
+        { ReleaseTime = new DateTime(1970, 1, 1, 0, 0, 0), Id = MainLang.Loading, Type = null };
 
     [Reactive]
     public VersionManifestEntry LatestSnapshotGame { get; set; } = new()
-        { ReleaseTime = new DateTime(1970, 1, 1, 0, 0, 0), Id = MainLang.Loading, Type = "null" };
+        { ReleaseTime = new DateTime(1970, 1, 1, 0, 0, 0), Id = MainLang.Loading, Type = null };
 
     [Reactive] public bool InstallableRingIsVisible { get; set; } = true;
     [Reactive] public double TaskEntryHeaderWidth { get; set; }

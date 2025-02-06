@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using YMCL.Public.Module.Init.SubModule;
-using YMCL.Public.Module.Init.SubModule.NetAndUiLoader;
+using YMCL.Public.Module.Init.SubModule.GetDataFromNetwork;
 using String = System.String;
 
 namespace YMCL.Public.Module.Init;

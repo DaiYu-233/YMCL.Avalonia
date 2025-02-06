@@ -14,6 +14,10 @@ public class NeteaseMusic
     {
         var json = await Http.Get.GetStringAsync(
             $"{Value.Converter.StandardizeUrl(Data.Setting.MusicApi)}cloudsearch?keywords={keyword}&offset={(page - 1) * 30}&realIP=116.25.146.177");
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            return [];
+        }
         var entry = JsonConvert.DeserializeObject<SearchSingleSong.Root>(json);
         if (entry is { code: 200 }) return entry.result.songCount == 0 ? [] : entry.result.songs;
         Toast(MainLang.ApiError, NotificationType.Error);
@@ -24,6 +28,10 @@ public class NeteaseMusic
     {
         var json = await Http.Get.GetStringAsync(
             $"{Value.Converter.StandardizeUrl(Const.Data.Setting.MusicApi)}search/default?realIP=116.25.146.177");
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            return (string.Empty, string.Empty);
+        }
         var entry = JsonConvert.DeserializeObject<DefaultKeyword.Root>(json);
         if (entry is { code: 200 }) return (entry.data.showKeyword, entry.data.realkeyword);
         Toast(MainLang.ApiError, NotificationType.Error);
@@ -34,6 +42,10 @@ public class NeteaseMusic
     {
         var json = await Http.Get.GetStringAsync(
             $"{Value.Converter.StandardizeUrl(Const.Data.Setting.MusicApi)}check/music?id={id}&realIP=116.25.146.177");
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            return false;
+        }
         var entry = JsonConvert.DeserializeObject<Availability.Root>(json);
         if (entry is { code: 200 }) return entry.success;
         Toast(MainLang.ApiError, NotificationType.Error);
@@ -44,6 +56,10 @@ public class NeteaseMusic
     {
         var json = await Http.Get.GetStringAsync(
             $"{Value.Converter.StandardizeUrl(Const.Data.Setting.MusicApi)}song/url/v1?id={id}&level={level}&realIP=116.25.146.177");
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            return (string.Empty, 0);
+        }
         var entry = JsonConvert.DeserializeObject<SongUrl.Root>(json);
         if (entry is { code: 200 }) return (entry.data[0].url, entry.data[0].time);
         Toast(MainLang.ApiError, NotificationType.Error);
@@ -54,6 +70,10 @@ public class NeteaseMusic
     {
         var json = await Http.Get.GetStringAsync(
             $"{Value.Converter.StandardizeUrl(Const.Data.Setting.MusicApi)}lyric?id={id}");
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            return null;
+        }
         var entry = JsonConvert.DeserializeObject<Lyric.Root>(json);
         if (entry is { code: 200 }) return entry;
         Toast(MainLang.ApiError, NotificationType.Error);

@@ -51,7 +51,7 @@ public partial class Search : UserControl
         };
     }
 
-    private async System.Threading.Tasks.Task SearchAction()
+    public async System.Threading.Tasks.Task SearchAction()
     {
         var key = !string.IsNullOrWhiteSpace(SearchBox.Text) ? SearchBox.Text : _realDefaultKeyword;
         if (string.IsNullOrWhiteSpace(key)) return;

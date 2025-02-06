@@ -8,7 +8,7 @@ namespace YMCL.Public.Module.IO.Network.Http;
 
 public class Get
 {
-    public static async Task<string> GetStringAsync(string url)
+    public static async Task<string?> GetStringAsync(string url)
     {
         try
         {

@@ -73,10 +73,19 @@ public partial class Music : UserControl
                 if (!ava)
                 {
                     Toast(MainLang.MusicNotAvailable, NotificationType.Error);
+                    Data.UiProperty.SelectedRecordSong = null;
+                    ToggleLoadingUi(false);
                     return;
                 }
 
                 var url = await NeteaseMusic.GetSongUrlByIdAndLevel(song.SongId);
+                if (string.IsNullOrWhiteSpace(url.url))
+                {
+                    Toast(MainLang.NetWorkError, NotificationType.Error);
+                    Data.UiProperty.SelectedRecordSong = null;
+                    ToggleLoadingUi(false);
+                    return;
+                }
                 Data.UiProperty.MusicTotalTime = url.ms;
                 await AudioPlayer.Instance.PlayNetwork(url.url);
                 ToggleLoadingUi(false);
@@ -284,5 +293,16 @@ public partial class Music : UserControl
             PlayerSlider.IsVisible = true;
             ControlPlayerSlider.IsVisible = true;
         }
+    }
+
+    public void SearchFormCall(string query)
+    {
+        if (_isLyric)
+        {
+            LeftControl.Content = Search;
+            _isLyric = false;
+        }
+        Search.SearchBox.Text = query;
+        _ = Search.SearchAction();
     }
 }

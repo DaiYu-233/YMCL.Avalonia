@@ -12,5 +12,6 @@ public class AggregateSearchEntry()
     public string? Target { get; set; }
     public GameEntry? GameEntry { get; set; }
     public string? InstallVersionId { get; set; }
+    public string? Keyword { get; set; }
     public AccountInfo? Account { get; set; }
 }

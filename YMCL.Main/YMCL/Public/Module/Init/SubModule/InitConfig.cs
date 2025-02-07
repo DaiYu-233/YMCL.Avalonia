@@ -28,9 +28,7 @@ public static class InitConfig
         if (!File.Exists(ConfigPath.SettingDataPath))
             File.WriteAllText(ConfigPath.SettingDataPath,
                 JsonConvert.SerializeObject(new Setting(), Formatting.Indented));
-        if (!File.Exists(ConfigPath.MinecraftFolderDataPath) || JsonConvert
-                .DeserializeObject<List<MinecraftFolder>>(
-                    File.ReadAllText(ConfigPath.MinecraftFolderDataPath)).Count == 0)
+        if (!File.Exists(ConfigPath.MinecraftFolderDataPath))
         {
             var path = Path.Combine(ConfigPath.UserDataRootPath, ".minecraft");
             IO.Disk.Setter.TryCreateFolder(path);

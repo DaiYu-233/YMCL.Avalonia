@@ -54,3 +54,7 @@ Ymcl 使用 **GPL - 3** 开放源代码，此协议要求在修改和分发软�
 **[StarLight_Core](https://github.com/Ink-Marks-Studio/StarLight.Core)**
 **[MinecraftLaunch](https://github.com/Blessing-Studio/MinecraftLaunch)**
 **[Newtonsoft.Json](https://www.newtonsoft.com/json)**
+
+## 企鹅群
+
+→ **475032328**

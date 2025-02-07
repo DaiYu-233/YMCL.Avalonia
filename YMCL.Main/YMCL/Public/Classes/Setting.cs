@@ -68,10 +68,6 @@ public class Setting : ReactiveObject
 
     [Reactive]
     [JsonProperty]
-    public Enum.Setting.WindowTitleBarStyle WindowTitleBarStyle { get; set; } = Enum.Setting.WindowTitleBarStyle.Unset;
-
-    [Reactive]
-    [JsonProperty]
     public Enum.Setting.CustomHomePageWay CustomHomePage { get; set; } = Enum.Setting.CustomHomePageWay.None;
 
     [Reactive] [JsonProperty] public Color AccentColor { get; set; } = Color.Parse("#d64eff");

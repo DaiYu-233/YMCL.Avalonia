@@ -4,6 +4,7 @@ using ReactiveUI;
 using Ursa.Common;
 using Ursa.Controls;
 using Ursa.Controls.Options;
+using YMCL.Public.Enum;
 using YMCL.Public.Module.Init;
 using YMCL.ViewModels;
 using YMCL.Views.Main.Drawers.MsgHistory;
@@ -19,6 +20,10 @@ public partial class MainView : UserControl
         InitializeComponent();
         DataContext = ViewModel;
         BindingEvent();
+        if (Data.DesktopType == DesktopRunnerType.Windows)
+        {
+            NavMusic.IsVisible = true;
+        }
     }
 
     private void BindingEvent()

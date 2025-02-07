@@ -11,7 +11,6 @@ namespace YMCL.Views.Initialize;
 public partial class InitializeView : UserControl
 {
     private readonly Language _language = new();
-    private readonly TitleBarStyle _titleBarStyle = new();
     private readonly MinecraftFolder _minecraftFolder = new();
     private readonly JavaRuntime _javaRuntime = new();
     private readonly Account _account = new();
@@ -39,10 +38,9 @@ public partial class InitializeView : UserControl
         Frame.Content = page switch
         {
             1 => _language,
-            2 => _titleBarStyle,
-            3 => _minecraftFolder,
-            4 => _javaRuntime,
-            5 => _account,
+            2 => _minecraftFolder,
+            3 => _javaRuntime,
+            4 => _account,
             _ => Frame.Content
         };
         if (page == 1 && Data.Setting.Language == new Public.Classes.Language())
@@ -60,25 +58,19 @@ public partial class InitializeView : UserControl
             File.WriteAllText(ConfigPath.SettingDataPath,
                 JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
         }
-        if (page == 3 && Data.Setting.WindowTitleBarStyle == Setting.WindowTitleBarStyle.Unset)
-        {
-            Data.Setting.WindowTitleBarStyle = Setting.WindowTitleBarStyle.System;
-            File.WriteAllText(ConfigPath.SettingDataPath,
-                JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
-        }
-        if (page == 4)
+        if (page == 3)
         {
             Data.Setting.IsCompleteMinecraftFolderInitialize = true;
             File.WriteAllText(ConfigPath.SettingDataPath,
                 JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
         }
-        if (page == 5)
+        if (page == 4)
         {
             Data.Setting.IsCompleteJavaInitialize = true;
             File.WriteAllText(ConfigPath.SettingDataPath,
                 JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
         }
-        if (page == 6)
+        if (page == 5)
         {
             Data.Setting.IsCompleteAccountInitialize = true;
             File.WriteAllText(ConfigPath.SettingDataPath,
@@ -89,7 +81,7 @@ public partial class InitializeView : UserControl
 
     private void BindingEvent()
     {
-        Next.Click += (_, _) => { UpdatePageAnimation(int.Min(_page + 1, 6)); };
+        Next.Click += (_, _) => { UpdatePageAnimation(int.Min(_page + 1, 5)); };
         Precious.Click += (_, _) => { UpdatePageAnimation(int.Max(_page - 1, 1)); };
     }
 }

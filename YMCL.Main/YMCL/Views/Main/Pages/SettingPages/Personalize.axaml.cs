@@ -21,8 +21,7 @@ public partial class Personalize : UserControl
             LauncherVisibilityComboBox,
             LyricAlignComboBox,
             CustomHomePageComboBox,
-            CustomBackGroundImgComboBox,
-            WindowTitleBarStyleComboBox
+            CustomBackGroundImgComboBox
         ];
         EditCustomBackGroundImgBtn.Click += async (_, _) =>
         {

@@ -1,25 +1,18 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Ursa.Controls;
 using YMCL.Public.Classes;
 using YMCL.Public.Module;
 
 namespace YMCL.Views.Crash;
 
-public partial class CrashWindow : Window
+public partial class CrashWindow : UrsaWindow
 {
     public CrashWindow(string exception)
     {
         InitializeComponent();
         Public.Module.Ui.Setter.UpdateWindowStyle(this);
-        if (Data.Setting != null)
-        {
-            Data.Setting.PropertyChanged += (_, e) =>
-            {
-                if (e.PropertyName != nameof(Setting.WindowTitleBarStyle)) return;
-                Public.Module.Ui.Setter.UpdateWindowStyle(this);
-            };
-        }
         
         View.Info.Text = exception;
         View.Copy.Click += async (_, _) =>

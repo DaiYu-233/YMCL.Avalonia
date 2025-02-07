@@ -252,31 +252,6 @@
                         FontFamily="{DynamicResource Font}"
                         FontSize="14"
                         Margin="10,0,20,0"
-                        Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.WindowTitleBarStyle}"
-                        VerticalAlignment="Center" />
-                    <ComboBox
-                        DockPanel.Dock="Left"
-                        FontFamily="{DynamicResource Font}"
-                        HorizontalAlignment="Stretch"
-                        SelectedIndex="{Binding Setting.WindowTitleBarStyle}"
-                        x:Name="WindowTitleBarStyleComboBox">
-                        <ComboBox.Items>
-                            <ComboBoxItem Content="System" />
-                            <ComboBoxItem Content="Ymcl" />
-                        </ComboBox.Items>
-                    </ComboBox>
-                </DockPanel>
-            </Border>
-            <Border
-                Background="{DynamicResource 1x}"
-                CornerRadius="5"
-                Opacity="{DynamicResource MainOpacity}"
-                Padding="6.5">
-                <DockPanel>
-                    <TextBlock
-                        FontFamily="{DynamicResource Font}"
-                        FontSize="14"
-                        Margin="10,0,20,0"
                         Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.CustomHomePage}"
                         VerticalAlignment="Center" />
                     <Button

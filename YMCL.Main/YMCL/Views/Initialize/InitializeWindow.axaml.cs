@@ -1,8 +1,9 @@
 ﻿using Avalonia.Interactivity;
+using Ursa.Controls;
 
 namespace YMCL.Views.Initialize;
 
-public partial class InitializeWindow : Window
+public partial class InitializeWindow : UrsaWindow
 {
     public InitializeWindow(int page)
     {

@@ -2,16 +2,19 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using MinecraftLaunch.Classes.Enums;
+using Ursa.Controls;
 using YMCL.Public.Classes;
 using YMCL.Public.Controls;
+using YMCL.Public.Enum;
 using LogType = YMCL.Public.Enum.LogType;
+using Setting = YMCL.Public.Classes.Setting;
 
 namespace YMCL.Views.Log;
 
-public partial class LogWindow : Window
+public partial class LogWindow : UrsaWindow
 {
     public LogViewer Viewer { get; set; }
-    public bool CanClose { get; set; }
+    public new bool CanClose { get; set; }
     public LogWindow()
     {
         InitializeComponent();
@@ -19,8 +22,6 @@ public partial class LogWindow : Window
         ContentControl.Content = Viewer;
         PropertyChanged += (_, e) =>
         {
-            if (Data.Setting.WindowTitleBarStyle != Public.Enum.Setting.WindowTitleBarStyle.Ymcl ||
-                e.Property.Name != nameof(WindowState)) return;
             switch (WindowState)
             {
                 case WindowState.Normal:
@@ -31,13 +32,6 @@ public partial class LogWindow : Window
                     Root.Margin = new Thickness(20);
                     Root.BorderThickness = new Thickness(2);
                     break;
-            }
-        };
-        Data.Setting.PropertyChanged += (_, e) =>
-        {
-            if (e.PropertyName == nameof(Setting.WindowTitleBarStyle))
-            {
-                Public.Module.Ui.Setter.UpdateWindowStyle(this);
             }
         };
         Application.Current.ActualThemeVariantChanged += (_, _) =>

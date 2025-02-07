@@ -11,24 +11,19 @@ public class Decision
             return (true, 1);
         }
 
-        if (Data.Setting.WindowTitleBarStyle == Setting.WindowTitleBarStyle.Unset)
+        if (!Data.Setting.IsCompleteMinecraftFolderInitialize)
         {
             return (true, 2);
         }
 
-        if (!Data.Setting.IsCompleteMinecraftFolderInitialize)
+        if (!Data.Setting.IsCompleteJavaInitialize)
         {
             return (true, 3);
         }
 
-        if (!Data.Setting.IsCompleteJavaInitialize)
-        {
-            return (true, 4);
-        }
-
         if (!Data.Setting.IsCompleteAccountInitialize)
         {
-            return (true, 5);
+            return (true, 4);
         } 
         
         return (false, 0);

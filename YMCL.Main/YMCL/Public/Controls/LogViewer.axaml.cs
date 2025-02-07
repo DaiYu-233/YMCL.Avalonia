@@ -29,10 +29,11 @@ public partial class LogViewer : UserControl
         var path = (await TopLevel.GetTopLevel(App.UiRoot).StorageProvider.SaveFilePickerAsync(
             new FilePickerSaveOptions
             {
-                Title = MainLang.SaveAudioFile,
+                Title = MainLang.ExportLogFile,
                 SuggestedFileName = $"{time:yyyy-MM-ddTHH-mm-sszz}.log",
                 DefaultExtension = "log"
-            })).Path.LocalPath;
+            }))?.Path.LocalPath;
+        if (string.IsNullOrWhiteSpace(path)) return;
         _ = File.WriteAllTextAsync(path,
             $"---- Exported By Yu Minecraft Launcher (http://ymcl.daiyu.fun) ----\n" +
             $"---- Exported Time : {time:yyyy-MM-ddTHH:mm:sszzz} ----\n\n\n" +

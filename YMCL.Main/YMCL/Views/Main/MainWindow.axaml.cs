@@ -1,15 +1,15 @@
+using Ursa.Controls;
 using YMCL.Public.Enum;
 
 namespace YMCL.Views.Main;
 
-public partial class MainWindow : Window
+public partial class MainWindow : UrsaWindow
 {
     public MainWindow(out MainView view)
     {
         InitializeComponent();
         view = View;
-        Public.Module.Ui.Setter.UpdateWindowStyle(this, systemAction: () => { TitleRoot.IsVisible = false; },
-            launcherAction: () => { TitleRoot.IsVisible = true; });
+        Public.Module.Ui.Setter.UpdateWindowStyle(this, action: () => { TitleRoot.IsVisible = true; });
         BindingEvent();
     }
 
@@ -17,8 +17,6 @@ public partial class MainWindow : Window
     {
         PropertyChanged += (_, e) =>
         {
-            if (Data.Setting.WindowTitleBarStyle != Setting.WindowTitleBarStyle.Ymcl ||
-                e.Property.Name != nameof(WindowState)) return;
             switch (WindowState)
             {
                 case WindowState.Normal:
@@ -29,15 +27,6 @@ public partial class MainWindow : Window
                     Root.Margin = new Thickness(20);
                     Root.BorderThickness = new Thickness(2);
                     break;
-            }
-        };
-        Data.Setting.PropertyChanged += (_, e) =>
-        {
-            if (e.PropertyName == nameof(Setting.WindowTitleBarStyle))
-            {
-                Public.Module.Ui.Setter.UpdateWindowStyle(this, Data.Setting.WindowTitleBarStyle,
-                    systemAction: () => { TitleRoot.IsVisible = false; },
-                    launcherAction: () => { TitleRoot.IsVisible = true; });
             }
         };
     }

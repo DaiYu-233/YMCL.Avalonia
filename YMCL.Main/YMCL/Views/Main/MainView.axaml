@@ -196,6 +196,7 @@
                         </ui:NavigationViewItem>
                         <ui:NavigationViewItem
                             FontFamily="{DynamicResource Font}"
+                            IsVisible="False"
                             Name="NavMusic"
                             Tag="music">
                             <DockPanel>

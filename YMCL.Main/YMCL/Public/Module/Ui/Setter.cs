@@ -7,6 +7,7 @@ using Avalonia.Platform;
 using Avalonia.Styling;
 using Avalonia.Threading;
 using Newtonsoft.Json;
+using Ursa.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Value;
@@ -46,30 +47,21 @@ public class Setter
         }
     }
 
-    public static void UpdateWindowStyle(Window window, Setting.WindowTitleBarStyle? windowTitleBarStyle = null,
-        Action? systemAction = null, Action? launcherAction = null)
+    public static void UpdateWindowStyle(UrsaWindow window, Action? action = null)
     {
         if (window == null) return;
-        var style = windowTitleBarStyle ?? (Data.Setting != null ? Data.Setting.WindowTitleBarStyle : Setting.WindowTitleBarStyle.System);
-        if (style == Setting.WindowTitleBarStyle.System)
+        if (Data.DesktopType != DesktopRunnerType.Windows && Data.DesktopType != DesktopRunnerType.MacOs)
         {
-            window.FindControl<Controls.TitleBar>("TitleBar").IsVisible = false;
-            window.FindControl<Border>("Root").CornerRadius = new CornerRadius(0, 0, 8, 8);
-            window.FindControl<Border>("Root").Margin = new Thickness(0);
-            window.ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.Default;
-            window.ExtendClientAreaToDecorationsHint = false;
-            systemAction?.Invoke();
+            window.IsManagedResizerVisible = true;
+            window.SystemDecorations = SystemDecorations.None;
         }
-        else if (style == Setting.WindowTitleBarStyle.Ymcl)
-        {
-            window.FindControl<Controls.TitleBar>("TitleBar").IsVisible = true;
-            window.FindControl<Border>("Root").CornerRadius = new CornerRadius(8);
-            window.WindowState = WindowState.Maximized;
-            window.WindowState = WindowState.Normal;
-            window.ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
-            window.ExtendClientAreaToDecorationsHint = true;
-            launcherAction?.Invoke();
-        }
+        window.FindControl<Controls.TitleBar>("TitleBar").IsVisible = true;
+        window.FindControl<Border>("Root").CornerRadius = new CornerRadius(8);
+        window.WindowState = WindowState.Maximized;
+        window.WindowState = WindowState.Normal;
+        window.ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
+        window.ExtendClientAreaToDecorationsHint = true;
+        action?.Invoke();
     }
 
     public static void ToggleTheme(Setting.Theme theme)

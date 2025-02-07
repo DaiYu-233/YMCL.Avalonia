@@ -4,6 +4,7 @@ using Avalonia.Controls.Notifications;
 using MinecraftLaunch.Components.Resolver;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
+using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 
 namespace YMCL.Public.Module.Ui.Special;
@@ -76,13 +77,14 @@ public class AggregateSearchUi
                     Target = "curse-forge", Order = 10
                 }
             );
-            UiProperty.Instance.FilteredAggregateSearchEntries.Add(new AggregateSearchEntry
-            {
-                Tag = "jump", Text = $"{MainLang.SearchInTip.Replace("{target}", MainLang.Music)} : {filter.Trim()}",
-                Type = MainLang.JumpSearch, Keyword = filter.Trim(),
-                Summary = $"{MainLang.JumpToSearchTip.Replace("{target}", $"{MainLang.Music}")}", Target = "music",
-                Order = 10
-            });
+            if(Data.DesktopType == DesktopRunnerType.Windows)
+                UiProperty.Instance.FilteredAggregateSearchEntries.Add(new AggregateSearchEntry
+                {
+                    Tag = "jump", Text = $"{MainLang.SearchInTip.Replace("{target}", MainLang.Music)} : {filter.Trim()}",
+                    Type = MainLang.JumpSearch, Keyword = filter.Trim(),
+                    Summary = $"{MainLang.JumpToSearchTip.Replace("{target}", $"{MainLang.Music}")}", Target = "music",
+                    Order = 10
+                });
         }
 
         Data.AllAggregateSearchEntries.Where(item =>

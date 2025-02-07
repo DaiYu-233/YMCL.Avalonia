@@ -1,7 +1,12 @@
-﻿<Window
+﻿<u:UrsaWindow
     FontFamily="{DynamicResource Font}"
     FontWeight="{DynamicResource FontWeight}"
+    IsCloseButtonVisible="False"
+    IsFullScreenButtonVisible="False"
     IsHitTestVisible="True"
+    IsMinimizeButtonVisible="False"
+    IsRestoreButtonVisible="False"
+    IsTitleBarVisible="False"
     MinHeight="310"
     MinWidth="450"
     SystemDecorations="Full"
@@ -46,4 +51,4 @@
             <crash:CrashView Name="View" />
         </DockPanel>
     </Border>
-</Window>
+</u:UrsaWindow>

@@ -1,5 +1,5 @@
 <p align="center">
-<img height="400" width="400" src="https://ymcl.daiyu.fun/YMCL-Icon.svg"/>
+<img height="400" width="400" src="https://ymcl.daiyu.fun/YMCL-Icon.svg" alt="pic"/>
 </p>
 
 
@@ -28,11 +28,11 @@ Ymcl uses **GPL - 3** open source code, which requires **to retain the original 
 ## Platform Support
 
 |       | Windows | Linux | Mac OS |
-| ----- | :------ | :---- | :----- |
-| x64   | ✅️     | ✅️   | ✅     |
-| x86   | ✅️     | ❌    | ❌     |
-| ARM64 | ❌      | ❔    | ❔     |
-| ARM32 | ❌      | ❔    | ❌     |
+|-------|:--------|:------|:-------|
+| x64   | ✅️      | ✅️    | ✅      |
+| x86   | ✅️      | ❌     | ❌      |
+| ARM64 | ❔       | ❔     | ❔      |
+| ARM32 | ❌       | ❔     | ❌      |
 
 - ✅: Supported platform
 - ❔: Supported but Untested platform

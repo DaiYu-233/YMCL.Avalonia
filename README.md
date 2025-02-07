@@ -1,5 +1,5 @@
 <p align="center">
-<img height="400" width="400" src="https://ymcl.daiyu.fun/YMCL-Icon.svg"/>
+<img height="400" width="400" src="https://ymcl.daiyu.fun/YMCL-Icon.svg" alt="pic"/>
 </p>
 
 <div align="center">
@@ -27,11 +27,11 @@ Ymcl 使用 **GPL - 3** 开放源代码，此协议要求在修改和分发软�
 ## 平台支持情况
 
 |       | Windows | Linux | Mac OS |
-| ----- | :------ | :---- | :----- |
-| x64   | ✅️     | ✅️   | ✅     |
-| x86   | ✅️     | ❌    | ❌     |
-| ARM64 | ❔      | ❔    | ❔     |
-| ARM32 | ❌      | ❔    | ❌     |
+|-------|:--------|:------|:-------|
+| x64   | ✅️      | ✅️    | ✅      |
+| x86   | ✅️      | ❌     | ❌      |
+| ARM64 | ❔       | ❔     | ❔      |
+| ARM32 | ❌       | ❔     | ❌      |
 
 - ✅: 支持的平台
 

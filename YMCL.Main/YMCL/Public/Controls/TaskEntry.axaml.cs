@@ -32,6 +32,11 @@ public partial class TaskEntry : UserControl
         Model.ButtonAction = action;
     }
     
+    public void UpdateDestoryAction(Action action)
+    {
+        Model.DestoryAction = action;
+    }
+    
     public void AddOperateButton(TaskEntryOperateButtonEntry entry)
     {
         Model.OperateButtons.Add(entry);

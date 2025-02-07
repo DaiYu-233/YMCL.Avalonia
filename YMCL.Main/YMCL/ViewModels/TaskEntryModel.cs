@@ -26,6 +26,7 @@ public class TaskEntryModel : ReactiveObject
     [Reactive] public bool DisplayIsIndeterminate { get; set; }
     [Reactive] public string ButtonDisplay { get; set; }
     [Reactive] public Action ButtonAction { get; set; }
+    [Reactive] public Action DestoryAction { get; set; }
     [Reactive] public TaskEntry Instance { get; set; }
 
 
@@ -88,7 +89,11 @@ public class TaskEntryModel : ReactiveObject
         ButtonDisplay = CanRemove ? MainLang.Remove : MainLang.Cancel;
         if (CanRemove)
         {
-            ButtonAction = () => { Instance.Destory(); };
+            ButtonAction = () =>
+            {
+                Instance.Destory();
+                DestoryAction?.Invoke();
+            };
         }
     }
 

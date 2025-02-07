@@ -1093,4 +1093,13 @@ MacOs 不支持自动更新
   <data name="FixLoadDataFailTip" xml:space="preserve">
     <value>在加载数据时遇到异常，这可能是由于数据发生损坏导致的。是否重置YMCL数据以解决此问题？</value>
   </data>
+  <data name="Export" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="ExportLogFile" xml:space="preserve">
+    <value>导出日志文件</value>
+  </data>
+  <data name="AutoScrollToEnd" xml:space="preserve">
+    <value>自动滚动到末尾</value>
+  </data>
 </root>

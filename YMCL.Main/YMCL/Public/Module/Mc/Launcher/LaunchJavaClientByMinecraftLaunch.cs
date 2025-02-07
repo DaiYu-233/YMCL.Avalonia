@@ -12,11 +12,13 @@ using MinecraftLaunch.Classes.Models.Launch;
 using MinecraftLaunch.Components.Analyzer;
 using MinecraftLaunch.Components.Authenticator;
 using MinecraftLaunch.Components.Resolver;
+using MinecraftLaunch.Extensions;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
+using YMCL.Views.Log;
 using Setting = YMCL.Public.Enum.Setting;
 using String = YMCL.Public.Const.String;
 
@@ -168,7 +170,9 @@ public class LaunchJavaClientByMinecraftLaunch
         MinecraftLaunch.Components.Launcher.Launcher launcher = new(resolver, config);
 
         var isKillByYmcl = false;
-
+        var window = new LogWindow();
+        task.UpdateDestoryAction(() => { window.Destory(); });
+        
         try
         {
             await Task.Run(async () =>
@@ -237,7 +241,10 @@ public class LaunchJavaClientByMinecraftLaunch
 
                     watcher.OutputLogReceived += (_, eventArgs) =>
                     {
-                        //Console.WriteLine(eventArgs.Log);
+                        Dispatcher.UIThread.Invoke(() =>
+                        {
+                            window.Append(eventArgs.Log, eventArgs.Time , (LogType)eventArgs.LogType);
+                        }, DispatcherPriority.ApplicationIdle);
                     };
 
                     await Dispatcher.UIThread.InvokeAsync(() =>
@@ -268,6 +275,11 @@ public class LaunchJavaClientByMinecraftLaunch
                             catch
                             {
                             }
+                        }));
+                        task.AddOperateButton(new TaskEntryOperateButtonEntry("显示Minecraft日志", async () =>
+                        {
+                            window.Show();
+                            window.Activate();
                         }));
                     });
                     _ = Task.Run(async () =>

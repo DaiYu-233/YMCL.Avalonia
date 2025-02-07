@@ -114,6 +114,7 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
+                IsVisible="False"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
@@ -231,6 +232,7 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Height="40"
+                IsVisible="False"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>

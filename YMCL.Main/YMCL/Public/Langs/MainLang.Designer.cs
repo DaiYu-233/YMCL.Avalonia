@@ -357,6 +357,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 自动滚动到末尾.
+        /// </summary>
+        public static string AutoScrollToEnd {
+            get {
+                return ResourceManager.GetString("AutoScrollToEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 自动更新.
         /// </summary>
         public static string AutoUpdate {
@@ -1074,6 +1083,24 @@ namespace YMCL.Public.Langs {
         public static string ExitApp {
             get {
                 return ResourceManager.GetString("ExitApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 导出.
+        /// </summary>
+        public static string Export {
+            get {
+                return ResourceManager.GetString("Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 导出日志文件.
+        /// </summary>
+        public static string ExportLogFile {
+            get {
+                return ResourceManager.GetString("ExportLogFile", resourceCulture);
             }
         }
         

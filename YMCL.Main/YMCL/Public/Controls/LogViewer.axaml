@@ -1,0 +1,98 @@
+﻿<UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="YMCL.Public.Controls.LogViewer"
+    x:DataType="viewModels:LogViewerModel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:classes="clr-namespace:YMCL.Public.Classes"
+    xmlns:controls="clr-namespace:YMCL.Public.Controls"
+    xmlns:converter="clr-namespace:YMCL.Public.Module.Ui.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Public.Langs"
+    xmlns:viewModels="clr-namespace:YMCL.ViewModels"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <converter:LogTypeToColorConverter x:Key="LogTypeColorConverter" />
+    </UserControl.Resources>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <WrapPanel
+                DockPanel.Dock="Top"
+                HorizontalAlignment="Right"
+                Margin="0,10,10,0"
+                Orientation="Horizontal"
+                VerticalAlignment="Top">
+                <ToggleButton
+                    Content="Error"
+                    IsChecked="{Binding Error}"
+                    Margin="4" />
+                <ToggleButton
+                    Content="Info"
+                    IsChecked="{Binding Info}"
+                    Margin="4" />
+                <ToggleButton
+                    Content="Debug"
+                    IsChecked="{Binding Debug}"
+                    Margin="4" />
+                <ToggleButton
+                    Content="Fatal"
+                    IsChecked="{Binding Fatal}"
+                    Margin="4" />
+                <ToggleButton
+                    Content="Warning"
+                    IsChecked="{Binding Warning}"
+                    Margin="4" />
+                <ToggleButton
+                    Content="Exception"
+                    IsChecked="{Binding Exception}"
+                    Margin="4" />
+                <ToggleButton
+                    Content="StackTrace"
+                    IsChecked="{Binding StackTrace}"
+                    Margin="4" />
+                <ToggleButton
+                    Content="Unknown"
+                    IsChecked="{Binding Unknown}"
+                    Margin="4" />
+            </WrapPanel>
+            <DockPanel
+                Dock="Bottom"
+                LastChildFill="False"
+                Margin="10,0,10,10"
+                VerticalAlignment="Bottom">
+                <Button
+                    Click="Button_OnClick"
+                    Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.ExportLogFile}"
+                    DockPanel.Dock="Left" />
+                <CheckBox
+                    Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.AutoScrollToEnd}"
+                    DockPanel.Dock="Right"
+                    IsChecked="{Binding AutoScrollToEnd}"
+                    Margin="0,5,10,0" />
+            </DockPanel>
+            <ScrollViewer Margin="0,10,0,10" Name="ScrollViewer">
+                <ItemsControl ItemsSource="{Binding DisplayLogItems}" Margin="10,10,10,10">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="classes:LogItemEntry">
+                            <SelectableTextBlock TextWrapping="Wrap">
+                                <Run Text="[" />
+                                <Run Foreground="#6a9955" Text="{Binding Time}" />
+                                <Run Text="] [" />
+                                <Run Foreground="{Binding Type, Converter={StaticResource LogTypeColorConverter}}" Text="{Binding Type}" />
+                                <Run Text="]" />
+                                <Run Text="{Binding Message}" />
+                            </SelectableTextBlock>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </DockPanel>
+    </DockPanel>
+</UserControl>

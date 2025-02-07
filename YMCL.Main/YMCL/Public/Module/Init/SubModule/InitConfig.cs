@@ -72,6 +72,5 @@ public static class InitConfig
         using var reader = new StreamReader(stream!);
         var result = reader.ReadToEnd();
         File.WriteAllText(ConfigPath.CustomHomePageXamlDataPath, result);
-        
     }
 }

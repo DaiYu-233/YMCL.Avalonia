@@ -16,7 +16,8 @@ namespace YMCL.Public.Module.Mc.Installer.InstallJavaClientByMinecraftLauncher;
 public class Dispatcher
 {
     public static async Task<bool> Install(VersionManifestEntry versionManifestEntry, string? customId = null,
-        ForgeInstallEntry? forgeInstallEntry = null, FabricInstallEntry? fabricInstallEntry = null,
+        ForgeInstallEntry? forgeInstallEntry = null, ForgeInstallEntry? neoForgeInstallEntry = null,
+        FabricInstallEntry? fabricInstallEntry = null,
         QuiltInstallEntry? quiltBuildEntry = null, OptifineInstallEntry? optiFineInstallEntity = null,
         TaskEntry? p_task = null, bool closeTaskWhenFinish = true)
     {
@@ -63,12 +64,16 @@ public class Dispatcher
         });
 
         var forgeTask = new SubTask($"{MainLang.Install}: Forge");
+        var neoForgeTask = new SubTask($"{MainLang.Install}: NeoForge");
         var optiFineTask = new SubTask($"{MainLang.Install}: OptiFine");
         var fabricTask = new SubTask($"{MainLang.Install}: Fabric");
         var quiltTask = new SubTask($"{MainLang.Install}: Quilt");
 
         if (forgeInstallEntry != null)
             task.AddSubTask(forgeTask);
+        
+        if (neoForgeInstallEntry != null)
+            task.AddSubTask(neoForgeTask);
 
         if (optiFineInstallEntity != null)
             task.AddSubTask(optiFineTask);
@@ -102,7 +107,20 @@ public class Dispatcher
 
             forgeTask.Finish();
         }
-        
+
+        if (neoForgeInstallEntry != null)
+        {
+            var neoForge = await Forge.Install(neoForgeInstallEntry, customId!, mcPath, neoForgeTask, task,
+                cancellationToken);
+            if (!neoForge)
+            {
+                task.FinishWithError();
+                return false;
+            }
+
+            neoForgeTask.Finish();
+        }
+
         if (optiFineInstallEntity != null)
         {
             var optifine = await OptiFine.Install(optiFineInstallEntity, customId!, mcPath, optiFineTask, task,
@@ -115,7 +133,7 @@ public class Dispatcher
 
             optiFineTask.Finish();
         }
-        
+
         if (fabricInstallEntry != null)
         {
             var fabric = await Fabric.Install(fabricInstallEntry, customId!, mcPath, fabricTask, task,
@@ -128,7 +146,7 @@ public class Dispatcher
 
             fabricTask.Finish();
         }
-        
+
         if (quiltBuildEntry != null)
         {
             var quilt = await Quilt.Install(quiltBuildEntry, customId!, mcPath, quiltTask, task,
@@ -141,7 +159,7 @@ public class Dispatcher
 
             quiltTask.Finish();
         }
-        
+
         if (!closeTaskWhenFinish || cancellationToken.IsCancellationRequested) return true;
         task.FinishWithSuccess();
         Toast($"{MainLang.InstallFinish} - {customId ?? versionManifestEntry.Id}", NotificationType.Success);

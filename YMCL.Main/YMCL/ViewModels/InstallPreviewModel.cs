@@ -32,14 +32,17 @@ public sealed class InstallPreviewModel : ReactiveObject
     [Reactive] public bool IsDisplaceId { get; set; }
     [Reactive] public bool OptifineLoading { get; set; } = true;
     [Reactive] public bool ForgeLoading { get; set; } = true;
+    [Reactive] public bool NeoForgeLoading { get; set; } = true;
     [Reactive] public bool QuiltLoading { get; set; } = true;
     [Reactive] public bool FabricLoading { get; set; } = true;
     [Reactive] public string SelectedOptiFine { get; set; }
     [Reactive] public string SelectedForge { get; set; }
+    [Reactive] public string SelectedNeoForge { get; set; }
     [Reactive] public string SelectedQuilt { get; set; }
     [Reactive] public string SelectedFabric { get; set; }
     [Reactive] public ObservableCollection<OptifineInstallEntry> OptiFines { get; set; } = [];
     [Reactive] public ObservableCollection<ForgeInstallEntry> Forges { get; set; } = [];
+    [Reactive] public ObservableCollection<ForgeInstallEntry> NeoForges { get; set; } = [];
     [Reactive] public ObservableCollection<QuiltInstallEntry> Quilts { get; set; } = [];
     [Reactive] public ObservableCollection<FabricInstallEntry> Fabrics { get; set; } = [];
 
@@ -59,6 +62,7 @@ public sealed class InstallPreviewModel : ReactiveObject
     private bool ShouldUpdateCustomId()
     {
         return (entry.ForgeListView.SelectedIndex >= 0 ||
+                entry.NeoForgeListView.SelectedIndex >= 0 ||
                 entry.FabricListView.SelectedIndex >= 0 ||
                 entry.QuiltListView.SelectedIndex >= 0 ||
                 entry.OptiFineListView.SelectedIndex >= 0) &&
@@ -78,6 +82,12 @@ public sealed class InstallPreviewModel : ReactiveObject
         {
             var forge = (ForgeInstallEntry)entry.ForgeListView.SelectedItem;
             return $"{GameId}-Forge {forge.ForgeVersion}";
+        }
+
+        if (entry.NeoForgeListView.SelectedIndex >= 0)
+        {
+            var neoforge = (ForgeInstallEntry)entry.NeoForgeListView.SelectedItem;
+            return $"{GameId}-NeoForge {neoforge.ForgeVersion}";
         }
 
         if (entry.OptiFineListView.SelectedIndex >= 0)
@@ -107,6 +117,9 @@ public sealed class InstallPreviewModel : ReactiveObject
             : "Null";
         SelectedForge = entry.ForgeListView.SelectedItem as ForgeInstallEntry != null
             ? (entry.ForgeListView.SelectedItem as ForgeInstallEntry).ForgeVersion
+            : "Null";
+        SelectedNeoForge = entry.NeoForgeListView.SelectedItem as ForgeInstallEntry != null
+            ? (entry.NeoForgeListView.SelectedItem as ForgeInstallEntry).ForgeVersion
             : "Null";
         SelectedOptiFine = entry.OptiFineListView.SelectedItem as OptifineInstallEntry != null
             ? $"{(entry.OptiFineListView.SelectedItem as OptifineInstallEntry).Type} {(entry.OptiFineListView.SelectedItem as OptifineInstallEntry).Patch}"

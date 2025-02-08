@@ -19,140 +19,146 @@
         <converter:TaskStateToTip x:Key="TaskStateToTip" />
         <converter:MsToTimeConverter x:Key="MsToTimeConverter" />
     </UserControl.Resources>
-    <Expander IsExpanded="True">
-        <Expander.Styles>
-            <Style Selector="Expander /template/ ToggleButton#ExpanderHeader /template/ ContentPresenter#ContentPresenter">
-                <Setter Property="Width" Value="{x:Static x:Double.NaN}" />
-                <Setter Property="HorizontalAlignment" Value="Stretch" />
-            </Style>
-        </Expander.Styles>
-        <Expander.Header>
-            <Border Width="{Binding UiProperty.TaskEntryHeaderWidth}" x:DataType="da:Data">
-                <DockPanel
-                    HorizontalAlignment="Stretch"
-                    Margin="5,10,0,10"
-                    Name="HeaderContent"
-                    Width="{x:Static x:Double.NaN}"
-                    x:DataType="ta:TaskEntryModel">
-                    <ContentControl DockPanel.Dock="Left">
-                        <PathIcon Data="F1 M 18.75 10 C 18.75 9.84375 18.719074 9.692383 18.657227 9.545898 C 18.595377 9.399414 18.512369 9.272461 18.408203 9.165039 C 18.304035 9.057617 18.181965 8.971354 18.041992 8.90625 C 17.902018 8.841146 17.75065 8.808594 17.587891 8.808594 L 17.519531 8.808594 L 12.929688 8.964844 L 8.017578 1.591797 C 7.972005 1.526693 7.906901 1.494141 7.822266 1.494141 C 7.763671 1.494141 7.714843 1.516928 7.675781 1.5625 C 7.636718 1.608074 7.617187 1.660156 7.617188 1.71875 L 7.617188 1.757812 L 9.189453 9.091797 L 3.095703 9.296875 L 1.875 6.445312 C 1.822917 6.315104 1.72526 6.25 1.582031 6.25 C 1.490885 6.25 1.414388 6.280925 1.352539 6.342773 C 1.29069 6.404623 1.259766 6.481121 1.259766 6.572266 C 1.259766 6.598309 1.276042 6.673178 1.308594 6.796875 C 1.341146 6.920573 1.381836 7.070312 1.430664 7.246094 C 1.479492 7.421875 1.534831 7.613933 1.59668 7.822266 C 1.658529 8.0306 1.715495 8.225912 1.767578 8.408203 C 1.819661 8.590495 1.866862 8.753256 1.90918 8.896484 C 1.951497 9.039714 1.979167 9.134115 1.992188 9.179688 C 1.901042 9.231771 1.811523 9.282227 1.723633 9.331055 C 1.635742 9.379883 1.557617 9.433594 1.489258 9.492188 C 1.420898 9.550781 1.363932 9.620769 1.318359 9.702148 C 1.272786 9.783529 1.25 9.882812 1.25 10 C 1.25 10.117188 1.272786 10.216472 1.318359 10.297852 C 1.363932 10.379232 1.420898 10.449219 1.489258 10.507812 C 1.557617 10.566406 1.635742 10.620117 1.723633 10.668945 C 1.811523 10.717773 1.901042 10.768229 1.992188 10.820312 C 1.979167 10.865886 1.951497 10.958659 1.90918 11.098633 C 1.866862 11.238607 1.819661 11.402995 1.767578 11.591797 C 1.715495 11.7806 1.658529 11.977539 1.59668 12.182617 C 1.534831 12.387695 1.479492 12.578125 1.430664 12.753906 C 1.381836 12.929688 1.341146 13.081055 1.308594 13.208008 C 1.276042 13.334961 1.259766 13.408203 1.259766 13.427734 C 1.259766 13.518881 1.29069 13.595378 1.352539 13.657227 C 1.414388 13.719076 1.490885 13.75 1.582031 13.75 C 1.72526 13.75 1.822917 13.684896 1.875 13.554688 L 3.095703 10.703125 L 9.189453 10.908203 L 7.617188 18.242188 L 7.617188 18.28125 C 7.617187 18.339844 7.636718 18.391928 7.675781 18.4375 C 7.714843 18.483072 7.763671 18.505859 7.822266 18.505859 C 7.906901 18.505859 7.972005 18.473307 8.017578 18.408203 L 12.929688 11.035156 L 17.519531 11.191406 L 17.587891 11.191406 C 17.75065 11.191406 17.902018 11.158854 18.041992 11.09375 C 18.181965 11.028646 18.304035 10.942383 18.408203 10.834961 C 18.512369 10.727539 18.595377 10.600586 18.657227 10.454102 C 18.719074 10.307617 18.75 10.15625 18.75 10 Z M 17.568359 7.568359 C 17.900391 7.568359 18.214518 7.631836 18.510742 7.758789 C 18.806965 7.885742 19.065754 8.059896 19.287109 8.28125 C 19.508463 8.502604 19.682617 8.761394 19.80957 9.057617 C 19.936523 9.353842 20 9.667969 20 10 C 20 10.338542 19.934895 10.655925 19.804688 10.952148 C 19.674479 11.248373 19.498697 11.507162 19.277344 11.728516 C 19.055988 11.94987 18.797199 12.124023 18.500977 12.250977 C 18.204752 12.37793 17.887369 12.441406 17.548828 12.441406 C 16.891275 12.441406 16.232096 12.425131 15.571289 12.392578 C 14.910481 12.360026 14.248047 12.330729 13.583984 12.304688 L 9.052734 19.101562 C 8.916016 19.303385 8.740234 19.462891 8.525391 19.580078 C 8.310547 19.697266 8.079427 19.755859 7.832031 19.755859 C 7.630208 19.755859 7.439778 19.716797 7.260742 19.638672 C 7.081706 19.560547 6.927083 19.454752 6.796875 19.321289 C 6.666667 19.187826 6.5625 19.031576 6.484375 18.852539 C 6.40625 18.673502 6.367188 18.483072 6.367188 18.28125 C 6.367188 18.177084 6.376953 18.076172 6.396484 17.978516 L 7.65625 12.109375 L 3.90625 11.982422 L 3.017578 14.052734 C 2.89388 14.345703 2.701823 14.576823 2.441406 14.746094 C 2.18099 14.915365 1.894531 15 1.582031 15 C 1.367188 15 1.163737 14.959311 0.97168 14.87793 C 0.779622 14.79655 0.611979 14.684245 0.46875 14.541016 C 0.325521 14.397787 0.213216 14.230144 0.131836 14.038086 C 0.050456 13.846029 0.009766 13.642578 0.009766 13.427734 C 0.009766 13.310547 0.030924 13.15918 0.073242 12.973633 C 0.11556 12.788086 0.166016 12.594401 0.224609 12.392578 C 0.283203 12.190756 0.341797 11.995443 0.400391 11.806641 C 0.458984 11.617839 0.507812 11.461589 0.546875 11.337891 C 0.371094 11.162109 0.236003 10.957031 0.141602 10.722656 C 0.047201 10.488281 0 10.247396 0 10 C 0 9.752604 0.047201 9.511719 0.141602 9.277344 C 0.236003 9.042969 0.371094 8.837891 0.546875 8.662109 C 0.507812 8.538412 0.458984 8.382162 0.400391 8.193359 C 0.341797 8.004558 0.283203 7.810873 0.224609 7.612305 C 0.166016 7.413738 0.11556 7.220053 0.073242 7.03125 C 0.030924 6.842448 0.009766 6.689453 0.009766 6.572266 C 0.009766 6.357422 0.050456 6.153972 0.131836 5.961914 C 0.213216 5.769857 0.325521 5.602215 0.46875 5.458984 C 0.611979 5.315756 0.779622 5.203451 0.97168 5.12207 C 1.163737 5.040691 1.367188 5.000001 1.582031 5 C 1.894531 5.000001 2.18099 5.084637 2.441406 5.253906 C 2.701823 5.423178 2.89388 5.654297 3.017578 5.947266 L 3.90625 8.017578 L 7.65625 7.890625 L 6.396484 2.021484 C 6.376953 1.923828 6.367188 1.822918 6.367188 1.71875 C 6.367188 1.516928 6.40625 1.326498 6.484375 1.147461 C 6.5625 0.968426 6.666667 0.812176 6.796875 0.678711 C 6.927083 0.545248 7.081706 0.439453 7.260742 0.361328 C 7.439778 0.283203 7.630208 0.244141 7.832031 0.244141 C 8.079427 0.244141 8.310547 0.302734 8.525391 0.419922 C 8.740234 0.537109 8.916016 0.696615 9.052734 0.898438 L 13.583984 7.695312 C 14.248047 7.675782 14.912109 7.64974 15.576172 7.617188 C 16.240234 7.584636 16.904297 7.568359 17.568359 7.568359 Z " />
-                    </ContentControl>
-                    <Button
-                        Command="{Binding ButtonActionCommand}"
-                        Content="{Binding ButtonDisplay}"
-                        DockPanel.Dock="Right"
-                        IsEnabled="{Binding ButtonIsEnable}" />
-                    <StackPanel Margin="10,0">
-                        <DockPanel>
-                            <TextBlock
-                                DockPanel.Dock="Left"
-                                HorizontalAlignment="Left"
-                                Margin="1,0,0,0"
-                                Text="{Binding Name}" />
-                            <StackPanel
-                                DockPanel.Dock="Right"
-                                HorizontalAlignment="Right"
-                                Orientation="Horizontal">
+    <Border
+        Background="{DynamicResource 2x}"
+        ClipToBounds="True"
+        CornerRadius="5"
+        Opacity="{DynamicResource MainOpacity}">
+        <Expander IsExpanded="True">
+            <Expander.Styles>
+                <Style Selector="Expander /template/ ToggleButton#ExpanderHeader /template/ ContentPresenter#ContentPresenter">
+                    <Setter Property="Width" Value="{x:Static x:Double.NaN}" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                </Style>
+            </Expander.Styles>
+            <Expander.Header>
+                <Border Width="{Binding UiProperty.TaskEntryHeaderWidth}" x:DataType="da:Data">
+                    <DockPanel
+                        HorizontalAlignment="Stretch"
+                        Margin="5,10,0,10"
+                        Name="HeaderContent"
+                        Width="{x:Static x:Double.NaN}"
+                        x:DataType="ta:TaskEntryModel">
+                        <ContentControl DockPanel.Dock="Left">
+                            <PathIcon Data="F1 M 18.75 10 C 18.75 9.84375 18.719074 9.692383 18.657227 9.545898 C 18.595377 9.399414 18.512369 9.272461 18.408203 9.165039 C 18.304035 9.057617 18.181965 8.971354 18.041992 8.90625 C 17.902018 8.841146 17.75065 8.808594 17.587891 8.808594 L 17.519531 8.808594 L 12.929688 8.964844 L 8.017578 1.591797 C 7.972005 1.526693 7.906901 1.494141 7.822266 1.494141 C 7.763671 1.494141 7.714843 1.516928 7.675781 1.5625 C 7.636718 1.608074 7.617187 1.660156 7.617188 1.71875 L 7.617188 1.757812 L 9.189453 9.091797 L 3.095703 9.296875 L 1.875 6.445312 C 1.822917 6.315104 1.72526 6.25 1.582031 6.25 C 1.490885 6.25 1.414388 6.280925 1.352539 6.342773 C 1.29069 6.404623 1.259766 6.481121 1.259766 6.572266 C 1.259766 6.598309 1.276042 6.673178 1.308594 6.796875 C 1.341146 6.920573 1.381836 7.070312 1.430664 7.246094 C 1.479492 7.421875 1.534831 7.613933 1.59668 7.822266 C 1.658529 8.0306 1.715495 8.225912 1.767578 8.408203 C 1.819661 8.590495 1.866862 8.753256 1.90918 8.896484 C 1.951497 9.039714 1.979167 9.134115 1.992188 9.179688 C 1.901042 9.231771 1.811523 9.282227 1.723633 9.331055 C 1.635742 9.379883 1.557617 9.433594 1.489258 9.492188 C 1.420898 9.550781 1.363932 9.620769 1.318359 9.702148 C 1.272786 9.783529 1.25 9.882812 1.25 10 C 1.25 10.117188 1.272786 10.216472 1.318359 10.297852 C 1.363932 10.379232 1.420898 10.449219 1.489258 10.507812 C 1.557617 10.566406 1.635742 10.620117 1.723633 10.668945 C 1.811523 10.717773 1.901042 10.768229 1.992188 10.820312 C 1.979167 10.865886 1.951497 10.958659 1.90918 11.098633 C 1.866862 11.238607 1.819661 11.402995 1.767578 11.591797 C 1.715495 11.7806 1.658529 11.977539 1.59668 12.182617 C 1.534831 12.387695 1.479492 12.578125 1.430664 12.753906 C 1.381836 12.929688 1.341146 13.081055 1.308594 13.208008 C 1.276042 13.334961 1.259766 13.408203 1.259766 13.427734 C 1.259766 13.518881 1.29069 13.595378 1.352539 13.657227 C 1.414388 13.719076 1.490885 13.75 1.582031 13.75 C 1.72526 13.75 1.822917 13.684896 1.875 13.554688 L 3.095703 10.703125 L 9.189453 10.908203 L 7.617188 18.242188 L 7.617188 18.28125 C 7.617187 18.339844 7.636718 18.391928 7.675781 18.4375 C 7.714843 18.483072 7.763671 18.505859 7.822266 18.505859 C 7.906901 18.505859 7.972005 18.473307 8.017578 18.408203 L 12.929688 11.035156 L 17.519531 11.191406 L 17.587891 11.191406 C 17.75065 11.191406 17.902018 11.158854 18.041992 11.09375 C 18.181965 11.028646 18.304035 10.942383 18.408203 10.834961 C 18.512369 10.727539 18.595377 10.600586 18.657227 10.454102 C 18.719074 10.307617 18.75 10.15625 18.75 10 Z M 17.568359 7.568359 C 17.900391 7.568359 18.214518 7.631836 18.510742 7.758789 C 18.806965 7.885742 19.065754 8.059896 19.287109 8.28125 C 19.508463 8.502604 19.682617 8.761394 19.80957 9.057617 C 19.936523 9.353842 20 9.667969 20 10 C 20 10.338542 19.934895 10.655925 19.804688 10.952148 C 19.674479 11.248373 19.498697 11.507162 19.277344 11.728516 C 19.055988 11.94987 18.797199 12.124023 18.500977 12.250977 C 18.204752 12.37793 17.887369 12.441406 17.548828 12.441406 C 16.891275 12.441406 16.232096 12.425131 15.571289 12.392578 C 14.910481 12.360026 14.248047 12.330729 13.583984 12.304688 L 9.052734 19.101562 C 8.916016 19.303385 8.740234 19.462891 8.525391 19.580078 C 8.310547 19.697266 8.079427 19.755859 7.832031 19.755859 C 7.630208 19.755859 7.439778 19.716797 7.260742 19.638672 C 7.081706 19.560547 6.927083 19.454752 6.796875 19.321289 C 6.666667 19.187826 6.5625 19.031576 6.484375 18.852539 C 6.40625 18.673502 6.367188 18.483072 6.367188 18.28125 C 6.367188 18.177084 6.376953 18.076172 6.396484 17.978516 L 7.65625 12.109375 L 3.90625 11.982422 L 3.017578 14.052734 C 2.89388 14.345703 2.701823 14.576823 2.441406 14.746094 C 2.18099 14.915365 1.894531 15 1.582031 15 C 1.367188 15 1.163737 14.959311 0.97168 14.87793 C 0.779622 14.79655 0.611979 14.684245 0.46875 14.541016 C 0.325521 14.397787 0.213216 14.230144 0.131836 14.038086 C 0.050456 13.846029 0.009766 13.642578 0.009766 13.427734 C 0.009766 13.310547 0.030924 13.15918 0.073242 12.973633 C 0.11556 12.788086 0.166016 12.594401 0.224609 12.392578 C 0.283203 12.190756 0.341797 11.995443 0.400391 11.806641 C 0.458984 11.617839 0.507812 11.461589 0.546875 11.337891 C 0.371094 11.162109 0.236003 10.957031 0.141602 10.722656 C 0.047201 10.488281 0 10.247396 0 10 C 0 9.752604 0.047201 9.511719 0.141602 9.277344 C 0.236003 9.042969 0.371094 8.837891 0.546875 8.662109 C 0.507812 8.538412 0.458984 8.382162 0.400391 8.193359 C 0.341797 8.004558 0.283203 7.810873 0.224609 7.612305 C 0.166016 7.413738 0.11556 7.220053 0.073242 7.03125 C 0.030924 6.842448 0.009766 6.689453 0.009766 6.572266 C 0.009766 6.357422 0.050456 6.153972 0.131836 5.961914 C 0.213216 5.769857 0.325521 5.602215 0.46875 5.458984 C 0.611979 5.315756 0.779622 5.203451 0.97168 5.12207 C 1.163737 5.040691 1.367188 5.000001 1.582031 5 C 1.894531 5.000001 2.18099 5.084637 2.441406 5.253906 C 2.701823 5.423178 2.89388 5.654297 3.017578 5.947266 L 3.90625 8.017578 L 7.65625 7.890625 L 6.396484 2.021484 C 6.376953 1.923828 6.367188 1.822918 6.367188 1.71875 C 6.367188 1.516928 6.40625 1.326498 6.484375 1.147461 C 6.5625 0.968426 6.666667 0.812176 6.796875 0.678711 C 6.927083 0.545248 7.081706 0.439453 7.260742 0.361328 C 7.439778 0.283203 7.630208 0.244141 7.832031 0.244141 C 8.079427 0.244141 8.310547 0.302734 8.525391 0.419922 C 8.740234 0.537109 8.916016 0.696615 9.052734 0.898438 L 13.583984 7.695312 C 14.248047 7.675782 14.912109 7.64974 15.576172 7.617188 C 16.240234 7.584636 16.904297 7.568359 17.568359 7.568359 Z " />
+                        </ContentControl>
+                        <Button
+                            Command="{Binding ButtonActionCommand}"
+                            Content="{Binding ButtonDisplay}"
+                            DockPanel.Dock="Right"
+                            IsEnabled="{Binding ButtonIsEnable}" />
+                        <StackPanel Margin="10,0">
+                            <DockPanel>
                                 <TextBlock
-                                    FontSize="12"
-                                    Foreground="{DynamicResource GrayColor}"
-                                    Margin="0,0,10,0"
-                                    Text="{Binding TopRightInfo}" />
-                                <TextBlock
-                                    HorizontalAlignment="Right"
-                                    IsVisible="{Binding NumberValue}"
-                                    Margin="0,0,1,0">
-                                    <Run Text="{Binding DisplayProgress}" />
-                                    <Run Text="%" />
-                                </TextBlock>
-                            </StackPanel>
-                        </DockPanel>
-                        <ProgressBar
-                            Foreground="{Binding State, Converter={StaticResource TaskStateToColor}}"
-                            IsIndeterminate="{Binding DisplayIsIndeterminate}"
-                            MinWidth="0"
-                            Value="{Binding DisplayProgress}" />
-                        <DockPanel>
-                            <StackPanel
-                                DockPanel.Dock="Left"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-                                <TextBlock
-                                    FontSize="12"
-                                    Foreground="{DynamicResource GrayColor}"
+                                    DockPanel.Dock="Left"
+                                    HorizontalAlignment="Left"
                                     Margin="1,0,0,0"
-                                    Text="{Binding State, Converter={StaticResource TaskStateToTip}}" />
-                                <TextBlock
-                                    FontSize="12"
-                                    Foreground="{DynamicResource GrayColor}"
-                                    Margin="10,0,0,0"
-                                    Text="{Binding BottomLeftInfo}" />
-                            </StackPanel>
-                            <StackPanel
-                                DockPanel.Dock="Right"
-                                HorizontalAlignment="Right"
-                                Orientation="Horizontal">
-                                <TextBlock
-                                    FontSize="12"
-                                    Foreground="{DynamicResource GrayColor}"
+                                    Text="{Binding Name}" />
+                                <StackPanel
+                                    DockPanel.Dock="Right"
                                     HorizontalAlignment="Right"
-                                    Text="{Binding Time, Converter={StaticResource MsToTimeConverter}}" />
+                                    Orientation="Horizontal">
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{DynamicResource GrayColor}"
+                                        Margin="0,0,10,0"
+                                        Text="{Binding TopRightInfo}" />
+                                    <TextBlock
+                                        HorizontalAlignment="Right"
+                                        IsVisible="{Binding NumberValue}"
+                                        Margin="0,0,1,0">
+                                        <Run Text="{Binding DisplayProgress}" />
+                                        <Run Text="%" />
+                                    </TextBlock>
+                                </StackPanel>
+                            </DockPanel>
+                            <ProgressBar
+                                Foreground="{Binding State, Converter={StaticResource TaskStateToColor}}"
+                                IsIndeterminate="{Binding DisplayIsIndeterminate}"
+                                MinWidth="0"
+                                Value="{Binding DisplayProgress}" />
+                            <DockPanel>
+                                <StackPanel
+                                    DockPanel.Dock="Left"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{DynamicResource GrayColor}"
+                                        Margin="1,0,0,0"
+                                        Text="{Binding State, Converter={StaticResource TaskStateToTip}}" />
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{DynamicResource GrayColor}"
+                                        Margin="10,0,0,0"
+                                        Text="{Binding BottomLeftInfo}" />
+                                </StackPanel>
+                                <StackPanel
+                                    DockPanel.Dock="Right"
+                                    HorizontalAlignment="Right"
+                                    Orientation="Horizontal">
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{DynamicResource GrayColor}"
+                                        HorizontalAlignment="Right"
+                                        Text="{Binding Time, Converter={StaticResource MsToTimeConverter}}" />
+                                </StackPanel>
+                            </DockPanel>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+            </Expander.Header>
+            <StackPanel>
+                <Border Name="TopContainer" />
+                <ItemsControl
+                    ItemsSource="{Binding OperateButtons}"
+                    Margin="0,0,0,10"
+                    Name="OperateButtonContainer"
+                    x:DataType="ta:TaskEntryModel">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Left" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="classes:TaskEntryOperateButtonEntry">
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <Button
+                                    Command="{Binding ActionInvoke}"
+                                    Content="{Binding Content}"
+                                    Margin="5" />
                             </StackPanel>
-                        </DockPanel>
-                    </StackPanel>
-                </DockPanel>
-            </Border>
-        </Expander.Header>
-        <StackPanel>
-            <Border Name="TopContainer" />
-            <ItemsControl
-                ItemsSource="{Binding OperateButtons}"
-                Margin="0,0,0,10"
-                Name="OperateButtonContainer"
-                x:DataType="ta:TaskEntryModel">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel HorizontalAlignment="Left" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="classes:TaskEntryOperateButtonEntry">
-                        <StackPanel Orientation="Horizontal" Spacing="5">
-                            <Button
-                                Command="{Binding ActionInvoke}"
-                                Content="{Binding Content}"
-                                Margin="5" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <ItemsControl
-                ItemsSource="{Binding SubTasks}"
-                Name="SubTaskContainer"
-                x:DataType="ta:TaskEntryModel">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Spacing="10" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="classes:SubTask">
-                        <StackPanel Orientation="Horizontal" Spacing="5">
-                            <ContentControl
-                                Content="{Binding Icon}"
-                                Height="16"
-                                Width="16" />
-                            <TextBlock Margin="3,0,0,0">
-                                <Run Text="{Binding FinishedTask}" />
-                                <Run Text="/" />
-                                <Run Text="{Binding TotalTask}" />
-                            </TextBlock>
-                            <TextBlock Margin="2,0,0,0" Text="{Binding Name}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <Border Name="BottomContainer" />
-        </StackPanel>
-    </Expander>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <ItemsControl
+                    ItemsSource="{Binding SubTasks}"
+                    Name="SubTaskContainer"
+                    x:DataType="ta:TaskEntryModel">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Spacing="10" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="classes:SubTask">
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <ContentControl
+                                    Content="{Binding Icon}"
+                                    Height="16"
+                                    Width="16" />
+                                <TextBlock Margin="3,0,0,0">
+                                    <Run Text="{Binding FinishedTask}" />
+                                    <Run Text="/" />
+                                    <Run Text="{Binding TotalTask}" />
+                                </TextBlock>
+                                <TextBlock Margin="2,0,0,0" Text="{Binding Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Border Name="BottomContainer" />
+            </StackPanel>
+        </Expander>
+    </Border>
 </UserControl>

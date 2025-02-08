@@ -42,6 +42,23 @@ public class InstallPreviewModLoaders
                 });
             }
         });
+        _ = Task.Run(async () => // NeoForge
+        {
+            try
+            {
+                var list = await ForgeInstaller.EnumerableForgeAsync(id, true).ToListAsync();
+                view.Model.NeoForgeLoading = false;
+                list.ForEach(item => { view.Model.NeoForges.Add(item); });
+            }
+            catch (Exception ex)
+            {
+                await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    ShowShortException($"{MainLang.GetFail}: NeoForge", ex);
+                    view.Model.NeoForgeLoading = false;
+                });
+            }
+        });
         _ = Task.Run(async () => // Quilt
         {
             try

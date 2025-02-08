@@ -33,6 +33,7 @@ public sealed partial class InstallPreview : UserControl
         FabricListView.SelectionChanged += OnSelectionChanged;
         OptiFineListView.SelectionChanged += OnSelectionChanged;
         ForgeListView.SelectionChanged += OnSelectionChanged;
+        NeoForgeListView.SelectionChanged += OnSelectionChanged;
         QuiltListView.SelectionChanged += OnSelectionChanged;
         ViewUpdatedContentBtn.Click += (_, _) =>
         {
@@ -42,8 +43,10 @@ public sealed partial class InstallPreview : UserControl
         };
         BeginInstallBtn.Click += (_, _) =>
         {
-            _ = Dispatcher.Install(entry, Model.IsDisplaceId ? Model.DisplaceId : Model.CustomId, ForgeListView.SelectedItem as ForgeInstallEntry,
-                FabricListView.SelectedItem as FabricInstallEntry, QuiltListView.SelectedItem as QuiltInstallEntry, OptiFineListView.SelectedItem as OptifineInstallEntry);
+            _ = Dispatcher.Install(entry, Model.IsDisplaceId ? Model.DisplaceId : Model.CustomId,
+                ForgeListView.SelectedItem as ForgeInstallEntry, NeoForgeListView.SelectedItem as ForgeInstallEntry,
+                FabricListView.SelectedItem as FabricInstallEntry, QuiltListView.SelectedItem as QuiltInstallEntry,
+                OptiFineListView.SelectedItem as OptifineInstallEntry);
         };
     }
 
@@ -54,20 +57,32 @@ public sealed partial class InstallPreview : UserControl
         {
             QuiltListView.SelectedItem = null;
             FabricListView.SelectedItem = null;
+            NeoForgeListView.SelectedItem = null;
         }
-        else if (e.AddedItems[0] is ForgeInstallEntry)
+        else if (e.AddedItems[0] is ForgeInstallEntry { IsNeoforge: false })
         {
             QuiltListView.SelectedItem = null;
             FabricListView.SelectedItem = null;
+            NeoForgeListView.SelectedItem = null;
         }
         else if (e.AddedItems[0] is QuiltInstallEntry)
         {
             ForgeListView.SelectedItem = null;
             OptiFineListView.SelectedItem = null;
             FabricListView.SelectedItem = null;
+            NeoForgeListView.SelectedItem = null;
         }
         else if (e.AddedItems[0] is FabricInstallEntry)
         {
+            ForgeListView.SelectedItem = null;
+            OptiFineListView.SelectedItem = null;
+            QuiltListView.SelectedItem = null;
+            NeoForgeListView.SelectedItem = null;
+        }
+        else if (e.AddedItems[0] is ForgeInstallEntry { IsNeoforge: true })
+        {
+            QuiltListView.SelectedItem = null;
+            FabricListView.SelectedItem = null;
             ForgeListView.SelectedItem = null;
             OptiFineListView.SelectedItem = null;
             QuiltListView.SelectedItem = null;

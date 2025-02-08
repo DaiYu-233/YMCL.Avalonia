@@ -205,6 +205,48 @@
                         <Expander>
                             <Expander.Header>
                                 <TextBlock>
+                                    <Run Text="NeoForge" />
+                                    <Run Text=" - " />
+                                    <Run Name="SelectedNeoForge" Text="{Binding SelectedNeoForge}" />
+                                </TextBlock>
+                            </Expander.Header>
+                            <Grid>
+                                <ListBox
+                                    Height="250"
+                                    ItemsSource="{Binding NeoForges}"
+                                    Name="NeoForgeListView"
+                                    Tag="neoforge">
+                                    <ListBox.Styles>
+                                        <Style Selector="ListBoxItem">
+                                            <Setter Property="Margin" Value="5,1" />
+                                        </Style>
+                                    </ListBox.Styles>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate DataType="network:ForgeInstallEntry">
+                                            <TextBlock Margin="0,2" Text="{Binding ForgeVersion}" />
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <TextBlock
+                                    Foreground="{DynamicResource GrayColor}"
+                                    IsVisible="{Binding NeoForges, Converter={StaticResource ListCountToBoolConverter}}"
+                                    Name="NoNeoForge"
+                                    Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.NoAvailableItem}" />
+                                <ui:ProgressRing
+                                    Height="50"
+                                    IsVisible="{Binding NeoForgeLoading}"
+                                    Name="NeoForgeLoading"
+                                    Width="50" />
+                            </Grid>
+                        </Expander>
+                    </Border>
+                    <Border
+                        Background="{DynamicResource 1x}"
+                        CornerRadius="5"
+                        Opacity="{DynamicResource MainOpacity}">
+                        <Expander>
+                            <Expander.Header>
+                                <TextBlock>
                                     <Run Text="Fabric" />
                                     <Run Text=" - " />
                                     <Run Name="SelectedFabric" Text="{Binding SelectedFabric}" />

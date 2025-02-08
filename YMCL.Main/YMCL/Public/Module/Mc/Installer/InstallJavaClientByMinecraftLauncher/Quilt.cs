@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MinecraftLaunch.Base.Models.Network;
 using MinecraftLaunch.Components.Downloader;
@@ -11,19 +10,18 @@ using YMCL.Public.Langs;
 
 namespace YMCL.Public.Module.Mc.Installer.InstallJavaClientByMinecraftLauncher;
 
-public class Forge
+public class Quilt
 {
-    public static async Task<bool> Install(ForgeInstallEntry entry, string customId, string mcPath, SubTask forgeTask,
+    public static async Task<bool> Install(QuiltInstallEntry entry, string customId, string mcPath, SubTask subTask,
         TaskEntry task, CancellationToken cancellationToken)
     {
         var isSuccess = false;
-        forgeTask.State = TaskState.Running;
+        subTask.State = TaskState.Running;
         await Task.Run(async () =>
         {
             try
             {
-                var installer = ForgeInstaller.Create(mcPath,
-                    Data.JavaRuntimes.FirstOrDefault(x => x.MajorVersion != 0).JavaPath, entry, customId);
+                var installer = QuiltInstaller.Create(mcPath, entry, customId);
                 installer.ProgressChanged += (_, x) =>
                 {
                     Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
@@ -34,11 +32,11 @@ public class Forge
                         task.Model.BottomLeftInfo = x.StepName.ToString();
 
                         if (!x.IsStepSupportSpeed) return;
-                        forgeTask.FinishedTask = x.FinishedStepTaskCount;
-                        forgeTask.TotalTask = x.TotalStepTaskCount;
+                        subTask.FinishedTask = x.FinishedStepTaskCount;
+                        subTask.TotalTask = x.TotalStepTaskCount;
                     });
                 };
-                
+
                 await installer.InstallAsync(cancellationToken);
                 isSuccess = true;
             }
@@ -56,7 +54,7 @@ public class Forge
                 {
                     await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        ShowShortException($"{MainLang.InstallFail}: Forge - {customId}", ex);
+                        ShowShortException($"{MainLang.InstallFail}: Quilt - {customId}", ex);
                     });
                     task.FinishWithError();
                 }

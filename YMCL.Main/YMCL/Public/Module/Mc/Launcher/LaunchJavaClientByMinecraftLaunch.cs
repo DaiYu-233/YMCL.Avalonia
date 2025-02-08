@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
-using MinecraftLaunch.Classes.Models.Auth;
-using MinecraftLaunch.Classes.Models.Launch;
-using MinecraftLaunch.Components.Analyzer;
+using MinecraftLaunch.Base.Models.Authentication;
+using MinecraftLaunch.Base.Models.Game;
 using MinecraftLaunch.Components.Authenticator;
-using MinecraftLaunch.Components.Resolver;
+using MinecraftLaunch.Components.Parser;
 using MinecraftLaunch.Extensions;
+using MinecraftLaunch.Launch;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
 using YMCL.Public.Controls;
@@ -26,7 +26,7 @@ namespace YMCL.Public.Module.Mc.Launcher;
 
 public class LaunchJavaClientByMinecraftLaunch
 {
-    public static async Task<bool> Launch(string p_id, string p_mcPath, double p_maxMem, string p_javaPath,
+    public static async Task<bool> Launch(string p_id, string p_mcPath, double p_maxMem, MinecraftLaunch.Base.Models.Game.JavaEntry p_javaPath,
         string? p_fullUrl = null, bool p_enableIndependencyCore = true, bool p_isDebug = false)
     {
         var cts = new CancellationTokenSource();
@@ -41,15 +41,15 @@ public class LaunchJavaClientByMinecraftLaunch
             return false;
         }
 
-        var resolver = new GameResolver(p_mcPath);
-        var entry = resolver.GetGameEntity(p_id);
+        var parser = new MinecraftParser(p_mcPath);
+        var entry = parser.GetMinecraft(p_id);
         if (entry == null)
         {
             Toast(MainLang.CreateGameEntryFail, NotificationType.Error);
             return false;
         }
 
-        if (string.IsNullOrWhiteSpace(entry.JarPath) || !File.Exists(entry.JarPath))
+        if (string.IsNullOrWhiteSpace(entry.ClientJarPath) || !File.Exists(entry.ClientJarPath))
         {
             Toast(MainLang.GameMainFileDeletion, NotificationType.Error);
             return false;
@@ -106,8 +106,8 @@ public class LaunchJavaClientByMinecraftLaunch
             case Setting.AccountType.Offline:
                 if (!string.IsNullOrWhiteSpace(Data.Setting.Account.Name))
                 {
-                    OfflineAuthenticator authenticator1 = new(Data.Setting.Account.Name);
-                    account = authenticator1.Authenticate();
+                    OfflineAuthenticator authenticator1 = new();
+                    account = authenticator1.Authenticate(Data.Setting.Account.Name);
                 }
                 else
                 {
@@ -119,10 +119,10 @@ public class LaunchJavaClientByMinecraftLaunch
                 break;
             case Setting.AccountType.Microsoft:
                 var profile = JsonConvert.DeserializeObject<MicrosoftAccount>(Data.Setting.Account.Data!);
-                MicrosoftAuthenticator authenticator2 = new(profile, String.AzureClientId, true);
+                MicrosoftAuthenticator authenticator2 = new(String.AzureClientId);
                 try
                 {
-                    account = await authenticator2.AuthenticateAsync();
+                    account = await authenticator2.RefreshAsync(profile, token);
                 }
                 catch (Exception ex)
                 {
@@ -156,95 +156,92 @@ public class LaunchJavaClientByMinecraftLaunch
         var config = new LaunchConfig
         {
             Account = account,
-            JvmConfig = new JvmConfig(p_javaPath)
-            {
-                MaxMemory = Convert.ToInt32(p_maxMem)
-            },
-            IsEnableIndependencyCore = p_isDebug,
+            JavaPath = p_javaPath,
+            MaxMemorySize = Convert.ToInt32(p_maxMem),
+            MinMemorySize = 512,
+            IsEnableIndependencyCore = p_enableIndependencyCore,
+            JvmArguments = [],
             LauncherName = "YMCL",
-            ServerConfig = new ServerConfig(port, host)
         };
 
         task.AdvanceSubTask();
 
-        MinecraftLaunch.Components.Launcher.Launcher launcher = new(resolver, config);
+        MinecraftRunner runner = new(config, parser);
 
         var isKillByYmcl = false;
         var window = new LogWindow();
         task.UpdateDestoryAction(() => { window.Destory(); });
-        
+
         try
         {
             await Task.Run(async () =>
             {
                 try
                 {
-                    var watcher = await launcher.LaunchAsync(p_id);
-                    var copyArguments = string.Join(" ", watcher.Arguments);
-                    watcher.Exited += async (_, eventArgs) =>
+                    var process = await runner.RunAsync(p_id, token);
+                    var copyArguments = string.Join(" ", process.ArgumentList);
+                    process.Exited += async (_, _) =>
                     {
                         await Dispatcher.UIThread.InvokeAsync(async () =>
                         {
                             if (Data.Setting.LauncherVisibility !=
                                 Setting.LauncherVisibility.AfterLaunchMakeLauncherMinimize)
                             {
-                                if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window)
+                                if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window1)
                                 {
-                                    window.Show();
-                                    window.WindowState = WindowState.Normal;
-                                    window.Activate();
+                                    window1.Show();
+                                    window1.WindowState = WindowState.Normal;
+                                    window1.Activate();
                                 }
                             }
 
-                            Toast($"{MainLang.GameExited} - {p_id} : {eventArgs.ExitCode}");
-
-
-                            if (eventArgs.ExitCode == 0)
+                            Toast($"{MainLang.GameExited} - {p_id}");
+                            
+                            // if (eventArgs.ExitCode == 0)
+                            // {
+                            task.FinishWithSuccess();
+                            await Task.Delay(2000);
+                            if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window2)
                             {
-                                task.FinishWithSuccess();
-                                await Task.Delay(2000);
-                                if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window)
-                                {
-                                    window.Activate();
-                                    window.Focus();
-                                }
+                                window2.Activate();
+                                window2.Focus();
                             }
-                            else
-                            {
-                                if (!isKillByYmcl)
-                                {
-                                    var crashAnalyzer = new GameCrashAnalyzer(entry, p_enableIndependencyCore);
-                                    var reports = crashAnalyzer.AnalysisLogs();
-                                    var msg = string.Empty;
-                                    try
-                                    {
-                                        var crashReports = reports.ToList();
-                                        if (reports == null || crashReports.Count == 0)
-                                            msg = MainLang.NoCrashInfo;
-                                        else
-                                            msg = crashReports.Aggregate(msg,
-                                                (current, report) => current + $"\n{report.CrashCauses}");
-                                    }
-                                    catch
-                                    {
-                                        msg = MainLang.NoCrashInfo;
-                                    }
-
-                                    task.FinishWithError();
-                                    await ShowDialogAsync(MainLang.MineratCrashed, msg,
-                                        b_primary: MainLang.Ok);
-                                    task.FinishWithError();
-                                }
-                            }
+                            // }
+                            // else
+                            // {
+                            //     if (!isKillByYmcl)
+                            //     {
+                            //         var crashAnalyzer = new GameCrashAnalyzer(entry, p_enableIndependencyCore);
+                            //         var reports = crashAnalyzer.AnalysisLogs();
+                            //         var msg = string.Empty;
+                            //         try
+                            //         {
+                            //             var crashReports = reports.ToList();
+                            //             if (reports == null || crashReports.Count == 0)
+                            //                 msg = MainLang.NoCrashInfo;
+                            //             else
+                            //                 msg = crashReports.Aggregate(msg,
+                            //                     (current, report) => current + $"\n{report.CrashCauses}");
+                            //         }
+                            //         catch
+                            //         {
+                            //             msg = MainLang.NoCrashInfo;
+                            //         }
+                            //
+                            //         task.FinishWithError();
+                            //         await ShowDialogAsync(MainLang.MineratCrashed, msg,
+                            //             b_primary: MainLang.Ok);
+                            //         task.FinishWithError();
+                            //     }
+                            // }
                         });
                     };
 
-                    watcher.OutputLogReceived += (_, eventArgs) =>
+                    process.OutputLogReceived += (_, eventArgs) =>
                     {
-                        Dispatcher.UIThread.Invoke(() =>
-                        {
-                            window.Append(eventArgs.Log, eventArgs.Time , (LogType)eventArgs.LogType);
-                        }, DispatcherPriority.ApplicationIdle);
+                        Dispatcher.UIThread.Invoke(
+                            () => { window.Append(eventArgs.Data, DateTime.Now.ToString("HH:mm:ss"), LogType.Info); },
+                            DispatcherPriority.ApplicationIdle);
                     };
 
                     await Dispatcher.UIThread.InvokeAsync(() =>
@@ -255,9 +252,9 @@ public class LaunchJavaClientByMinecraftLaunch
                             async () =>
                             {
                                 var dialog = await ShowDialogAsync(MainLang.LaunchArguments,
-                                    string.Join(" \n", watcher.Arguments), b_cancel: MainLang.Ok,
+                                    string.Join(" \n", process.ArgumentList), b_cancel: MainLang.Ok,
                                     b_primary: MainLang.Copy);
-                                if(dialog != ContentDialogResult.Primary) return;
+                                if (dialog != ContentDialogResult.Primary) return;
                                 var clipboard = TopLevel.GetTopLevel(App.UiRoot)?.Clipboard;
                                 await clipboard.SetTextAsync(copyArguments);
                                 Toast(MainLang.AlreadyCopyToClipBoard, NotificationType.Success);
@@ -268,7 +265,7 @@ public class LaunchJavaClientByMinecraftLaunch
                             {
                                 canceled = true;
                                 isKillByYmcl = true;
-                                watcher.Process.Kill(true);
+                                process.Process.Kill(true);
                                 task.CancelWithSuccess();
                                 await cts.CancelAsync();
                             }
@@ -276,7 +273,7 @@ public class LaunchJavaClientByMinecraftLaunch
                             {
                             }
                         }));
-                        task.AddOperateButton(new TaskEntryOperateButtonEntry("显示Minecraft日志", async () =>
+                        task.AddOperateButton(new TaskEntryOperateButtonEntry("显示Minecraft日志", () =>
                         {
                             window.Show();
                             window.Activate();
@@ -291,7 +288,7 @@ public class LaunchJavaClientByMinecraftLaunch
                             {
                                 canceled = true;
                                 isKillByYmcl = true;
-                                watcher.Process.Kill(true);
+                                process.Process.Kill(true);
                                 task.CancelWithSuccess();
                                 cts.Cancel();
                             }
@@ -309,9 +306,9 @@ public class LaunchJavaClientByMinecraftLaunch
                                     break;
                                 case Setting.LauncherVisibility.AfterLaunchMakeLauncherMinimize:
                                 case Setting.LauncherVisibility.AfterLaunchMinimizeAndShowWhenGameExit:
-                                    if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window)
+                                    if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window2)
                                     {
-                                        window.WindowState = WindowState.Minimized;
+                                        window2.WindowState = WindowState.Minimized;
                                     }
 
                                     break;
@@ -346,7 +343,6 @@ public class LaunchJavaClientByMinecraftLaunch
             return false;
         }
 
-        await Dispatcher.UIThread.InvokeAsync(() => { });
         await Task.Delay(20);
         return true;
     }

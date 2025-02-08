@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using MinecraftLaunch.Classes.Models.Install;
+using MinecraftLaunch.Base.Models.Network;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using YMCL.Views.Main.Pages.DownloadPages;
@@ -38,10 +38,10 @@ public sealed class InstallPreviewModel : ReactiveObject
     [Reactive] public string SelectedForge { get; set; }
     [Reactive] public string SelectedQuilt { get; set; }
     [Reactive] public string SelectedFabric { get; set; }
-    [Reactive] public ObservableCollection<OptiFineInstallEntity> OptiFines { get; set; } = [];
+    [Reactive] public ObservableCollection<OptifineInstallEntry> OptiFines { get; set; } = [];
     [Reactive] public ObservableCollection<ForgeInstallEntry> Forges { get; set; } = [];
-    [Reactive] public ObservableCollection<QuiltBuildEntry> Quilts { get; set; } = [];
-    [Reactive] public ObservableCollection<FabricBuildEntry> Fabrics { get; set; } = [];
+    [Reactive] public ObservableCollection<QuiltInstallEntry> Quilts { get; set; } = [];
+    [Reactive] public ObservableCollection<FabricInstallEntry> Fabrics { get; set; } = [];
 
     public void HandleCustomId()
     {
@@ -70,46 +70,46 @@ public sealed class InstallPreviewModel : ReactiveObject
         if (entry.ForgeListView.SelectedIndex >= 0 && entry.OptiFineListView.SelectedIndex >= 0)
         {
             var forge = (ForgeInstallEntry)entry.ForgeListView.SelectedItem;
-            var optifine = (OptiFineInstallEntity)entry.OptiFineListView.SelectedItem;
+            var optifine = (OptifineInstallEntry)entry.OptiFineListView.SelectedItem;
             return $"{GameId}-Forge_{forge.ForgeVersion}-Optifine_{optifine.Type}_{optifine.Patch}";
         }
 
         if (entry.ForgeListView.SelectedIndex >= 0)
         {
             var forge = (ForgeInstallEntry)entry.ForgeListView.SelectedItem;
-            return $"{GameId}-Forge_{forge.ForgeVersion}";
+            return $"{GameId}-Forge {forge.ForgeVersion}";
         }
 
         if (entry.OptiFineListView.SelectedIndex >= 0)
         {
-            var optifine = (OptiFineInstallEntity)entry.OptiFineListView.SelectedItem;
-            return $"{GameId}-Optifine_{optifine.Type}_{optifine.Patch}";
+            var optifine = (OptifineInstallEntry)entry.OptiFineListView.SelectedItem;
+            return $"{GameId}-Optifine {optifine.Type} {optifine.Patch}";
         }
 
         if (entry.FabricListView.SelectedIndex >= 0)
         {
-            var fabric = (FabricBuildEntry)entry.FabricListView.SelectedItem;
+            var fabric = (FabricInstallEntry)entry.FabricListView.SelectedItem;
             return $"{GameId}-Fabric {fabric.BuildVersion}";
         }
 
         if (entry.QuiltListView.SelectedIndex < 0) return string.Empty;
-        var quilt = (QuiltBuildEntry)entry.QuiltListView.SelectedItem;
+        var quilt = (QuiltInstallEntry)entry.QuiltListView.SelectedItem;
         return $"{GameId}-Quilt {quilt.BuildVersion}";
     }
 
     public void UpdateSelection()
     {
-        SelectedFabric = entry.FabricListView.SelectedItem as FabricBuildEntry != null
-            ? (entry.FabricListView.SelectedItem as FabricBuildEntry).BuildVersion
+        SelectedFabric = entry.FabricListView.SelectedItem as FabricInstallEntry != null
+            ? (entry.FabricListView.SelectedItem as FabricInstallEntry).BuildVersion
             : "Null";
-        SelectedQuilt = entry.QuiltListView.SelectedItem as QuiltBuildEntry != null
-            ? (entry.QuiltListView.SelectedItem as QuiltBuildEntry).BuildVersion
+        SelectedQuilt = entry.QuiltListView.SelectedItem as QuiltInstallEntry != null
+            ? (entry.QuiltListView.SelectedItem as QuiltInstallEntry).BuildVersion
             : "Null";
         SelectedForge = entry.ForgeListView.SelectedItem as ForgeInstallEntry != null
             ? (entry.ForgeListView.SelectedItem as ForgeInstallEntry).ForgeVersion
             : "Null";
-        SelectedOptiFine = entry.OptiFineListView.SelectedItem as OptiFineInstallEntity != null
-            ? $"{(entry.OptiFineListView.SelectedItem as OptiFineInstallEntity).Type} {(entry.OptiFineListView.SelectedItem as OptiFineInstallEntity).Patch}"
+        SelectedOptiFine = entry.OptiFineListView.SelectedItem as OptifineInstallEntry != null
+            ? $"{(entry.OptiFineListView.SelectedItem as OptifineInstallEntry).Type} {(entry.OptiFineListView.SelectedItem as OptifineInstallEntry).Patch}"
             : "Null";
     }
 }

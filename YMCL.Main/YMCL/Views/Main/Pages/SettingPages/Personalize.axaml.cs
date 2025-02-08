@@ -39,7 +39,7 @@ public partial class Personalize : UserControl
         };
         LanguageComboBox.SelectionChanged += (_, _) =>
         {
-            Data.JavaRuntimes.FirstOrDefault(java => java.JavaVersion == "Auto").JavaPath = MainLang.LetYMCLChooseJava;
+            Data.JavaRuntimes.FirstOrDefault(java => java.JavaStringVersion == "Auto").JavaPath = MainLang.LetYMCLChooseJava;
         };
     }
 }

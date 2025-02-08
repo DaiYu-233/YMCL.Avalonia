@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using Avalonia.Controls.Notifications;
-using MinecraftLaunch.Components.Resolver;
+using MinecraftLaunch.Components.Parser;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
 using YMCL.Public.Enum;
@@ -22,21 +22,24 @@ public class AggregateSearchUi
                 Type = MainLang.InstallVersion, Target = "auto-install",
                 Summary =
                     $"{MainLang.JumpToSearchTip.Replace("{target}", $"{MainLang.Download}-{MainLang.AutoInstall}")}",
-                Order = 70, InstallVersionId = entry.Id
+                Order = 70, VersionManifestEntry = entry
             });
         }
 
         foreach (var folder in Data.MinecraftFolders)
         {
-            var resolver = new GameResolver(folder.Path);
-            var entries = resolver.GetGameEntitys();
+            var parser = new MinecraftParser(folder.Path);
+            var entries = parser.GetMinecrafts();
             foreach (var game in entries)
             {
                 Data.AllAggregateSearchEntries.Add(new AggregateSearchEntry
                 {
                     Tag = "change-selection", Text = $"{MainLang.GameVersion} - {game.Id}",
                     Type = MainLang.LocalResource, Target = "mc-version",
-                    Summary = Path.GetDirectoryName(game.JarPath) ?? "Unknown", GameEntry = game, Order = 30
+                    Summary = string.IsNullOrWhiteSpace(game.ClientJarPath)
+                        ? "Unknown"
+                        : Mc.GameSetting.GetGameSpecialFolder(game, GameSpecialFolder.GameFolder),
+                    MinecraftEntry = game, Order = 30
                 });
             }
         }
@@ -55,7 +58,7 @@ public class AggregateSearchUi
         {
             Data.AllAggregateSearchEntries.Add(new AggregateSearchEntry
             {
-                Tag = "change-selection", Text = $"Java - {java.JavaVersion}", Type = MainLang.LocalResource,
+                Tag = "change-selection", Text = $"Java - {java.JavaStringVersion}", Type = MainLang.LocalResource,
                 Summary = java.JavaPath, Order = 50
             });
         }
@@ -77,10 +80,11 @@ public class AggregateSearchUi
                     Target = "curse-forge", Order = 10
                 }
             );
-            if(Data.DesktopType == DesktopRunnerType.Windows)
+            if (Data.DesktopType == DesktopRunnerType.Windows)
                 UiProperty.Instance.FilteredAggregateSearchEntries.Add(new AggregateSearchEntry
                 {
-                    Tag = "jump", Text = $"{MainLang.SearchInTip.Replace("{target}", MainLang.Music)} : {filter.Trim()}",
+                    Tag = "jump",
+                    Text = $"{MainLang.SearchInTip.Replace("{target}", MainLang.Music)} : {filter.Trim()}",
                     Type = MainLang.JumpSearch, Keyword = filter.Trim(),
                     Summary = $"{MainLang.JumpToSearchTip.Replace("{target}", $"{MainLang.Music}")}", Target = "music",
                     Order = 10
@@ -112,15 +116,15 @@ public class AggregateSearchUi
             }
             else if (entry.Target == "auto-install")
             {
-                if (string.IsNullOrWhiteSpace(entry.InstallVersionId)) return;
+                if (string.IsNullOrWhiteSpace(entry.VersionManifestEntry.Id)) return;
                 YMCL.App.UiRoot.ViewModel.Download.Nav.SelectedItem = YMCL.App.UiRoot.ViewModel.Download.NavAuto;
                 YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavDownload;
-                YMCL.App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview(entry.InstallVersionId);
+                YMCL.App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview(entry.VersionManifestEntry);
             }
         }
         else if (entry.Tag == "change-selection" && !string.IsNullOrWhiteSpace(entry.Target))
         {
-            if (entry is { Target: "mc-version", GameEntry: not null })
+            if (entry is { Target: "mc-version", MinecraftEntry: not null })
             {
                 if (entry.Summary == "Unknown")
                 {
@@ -129,11 +133,12 @@ public class AggregateSearchUi
                 else
                 {
                     Const.Data.Setting.MinecraftFolder =
-                        Data.MinecraftFolders.FirstOrDefault(x => x.Path == entry.GameEntry.GameFolderPath);
-                    Const.Data.Setting.SelectedGame = new GameDataEntry(entry.GameEntry);
+                        Data.MinecraftFolders.FirstOrDefault(x => x.Path == entry.MinecraftEntry.MinecraftFolderPath);
+                    Const.Data.UiProperty.SelectedMinecraft = new MinecraftDataEntry(entry.MinecraftEntry);
                     YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavLaunch;
                     Toast(
-                        $"{MainLang.SwitchedTo} : {entry.GameEntry.Id}\n( {Path.GetDirectoryName(entry.GameEntry.JarPath)} )",
+                        $"{MainLang.SwitchedTo} : {entry.MinecraftEntry.Id}\n" +
+                        $"( {Mc.GameSetting.GetGameSpecialFolder(entry.MinecraftEntry, GameSpecialFolder.GameFolder, true)} )",
                         type: NotificationType.Success);
                 }
             }

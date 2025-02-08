@@ -1249,6 +1249,16 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 获取Java信息失败
+        ///可能此Java不正确/已损坏/无执行权限.
+        /// </summary>
+        public static string GetJavaInfoFail {
+            get {
+                return ResourceManager.GetString("GetJavaInfoFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 获取整合包信息.
         /// </summary>
         public static string GetModPackInfo {

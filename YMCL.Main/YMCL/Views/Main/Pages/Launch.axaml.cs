@@ -2,7 +2,8 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using MinecraftLaunch.Classes.Models.Game;
+using MinecraftLaunch.Base.Models.Game;
+using YMCL.Public.Classes;
 
 namespace YMCL.Views.Main.Pages;
 
@@ -22,13 +23,16 @@ public partial class Launch : UserControl
     {
         GameListBtn.Click += (_, _) => { _ = OpenGameList(); };
         GameSettingBtn.Click += (_, _) => { _ = OpenGameSetting(); };
-        Data.Setting.PropertyChanged += (o, e) =>
+        Data.UiProperty.PropertyChanged += (o, e) =>
         {
-            if (e.PropertyName != nameof(Public.Classes.Setting.SelectedGame)) return;
+            if (e.PropertyName != nameof(UiProperty.SelectedMinecraft)) return;
             if (!_gameList.CanCloseGameList) return;
             _ = CloseGameList();
         };
-        LaunchBtn.Click += (_, _) => { Data.Setting.SelectedGame.LaunchAction?.Invoke(); };
+        LaunchBtn.Click += (_, _) =>
+        {
+            Data.UiProperty.SelectedMinecraft.LaunchAction?.Invoke();
+        };
         Loaded += async (_, _) =>
         {
             if (!GameSettingFrame.IsVisible && !GameListFrame.IsVisible) return;
@@ -57,7 +61,7 @@ public partial class Launch : UserControl
         GameListFrame.IsVisible = false;
     }
 
-    public async System.Threading.Tasks.Task OpenGameSetting(GameEntry? entry = null)
+    public async System.Threading.Tasks.Task OpenGameSetting(MinecraftEntry? entry = null)
     {
         GameSettingFrame.Content = new LaunchPages.GameSetting(entry);
         GameSettingFrame.IsVisible = true;

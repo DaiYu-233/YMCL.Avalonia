@@ -12,7 +12,7 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
 using FluentAvalonia.UI.Controls;
 using Microsoft.VisualBasic.FileIO;
-using MinecraftLaunch.Classes.Models.Game;
+using MinecraftLaunch.Base.Models.Game;
 using Newtonsoft.Json.Linq;
 using YMCL.Public.Classes;
 using YMCL.Public.Enum;
@@ -24,7 +24,7 @@ public partial class ShaderPack : UserControl, INotifyPropertyChanged
 {
     private readonly ObservableCollection<LocalResourcePackEntry> _items = [];
     public ObservableCollection<LocalResourcePackEntry> FilteredItems { get; set; } = [];
-    private readonly GameEntry _entry;
+    private readonly MinecraftEntry _entry;
     private string _filter = string.Empty;
 
     public string Filter
@@ -33,7 +33,7 @@ public partial class ShaderPack : UserControl, INotifyPropertyChanged
         set => SetField(ref _filter, value);
     }
 
-    public ShaderPack(GameEntry entry)
+    public ShaderPack(MinecraftEntry entry)
     {
         _entry = entry;
         _entry = entry;

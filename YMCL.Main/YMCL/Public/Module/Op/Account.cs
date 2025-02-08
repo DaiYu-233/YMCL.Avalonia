@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices.JavaScript;
 using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
@@ -7,7 +8,7 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
-using MinecraftLaunch.Classes.Models.Auth;
+using MinecraftLaunch.Base.Models.Authentication;
 using MinecraftLaunch.Components.Authenticator;
 using MinecraftLaunch.Skin;
 using MinecraftLaunch.Skin.Class.Fetchers;
@@ -159,7 +160,7 @@ public class Account
                     _ = microsoftDialog.ShowAsync(TopLevel.GetTopLevel(sender));
                     try
                     {
-                        await authenticator.DeviceFlowAuthAsync(device =>
+                        var token = await authenticator.DeviceFlowAuthAsync(device =>
                         {
                             textBlock.Text = device.UserCode;
                             verificationUrl = device.VerificationUrl;
@@ -167,7 +168,7 @@ public class Account
                             microsoftDialog.IsPrimaryButtonEnabled = true;
                             microsoftDialog.IsSecondaryButtonEnabled = true;
                         });
-                        userProfile = await authenticator.AuthenticateAsync();
+                        userProfile = await authenticator.AuthenticateAsync(token);
                     }
                     catch (Exception ex)
                     {
@@ -208,6 +209,7 @@ public class Account
                     YggdrasilLogin(sender);
                     break;
             }
+
         Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
     }
 
@@ -281,7 +283,7 @@ public class Account
                 {
                     YggdrasilAuthenticator authenticator = new(server, email, password);
                     Toast(MainLang.VerifyingAccount);
-                    yggdrasilAccounts = await authenticator.AuthenticateAsync();
+                    yggdrasilAccounts = await authenticator.AuthenticateAsync().ToListAsync();
                 }
                 catch (Exception ex)
                 {

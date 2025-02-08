@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -26,8 +27,11 @@ public class App : Application
 
     public override async void OnFrameworkInitializationCompleted()
     {
-        AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-        Dispatcher.UIThread.UnhandledException += UIThread_UnhandledException;
+        if (!Debugger.IsAttached)
+        {
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            Dispatcher.UIThread.UnhandledException += UIThread_UnhandledException;
+        }
         try
         {
             if (!await InitDispatcher.BeforeCreateUi()) return;

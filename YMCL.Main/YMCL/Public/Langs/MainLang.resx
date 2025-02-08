@@ -1102,4 +1102,8 @@ MacOs 不支持自动更新
   <data name="AutoScrollToEnd" xml:space="preserve">
     <value>自动滚动到末尾</value>
   </data>
+  <data name="GetJavaInfoFail" xml:space="preserve">
+    <value>获取Java信息失败
+可能此Java不正确/已损坏/无执行权限</value>
+  </data>
 </root>

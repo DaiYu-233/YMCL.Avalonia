@@ -8,11 +8,11 @@ public class InstallPreviewModLoaders
 {
     public static void Load(YMCL.Views.Main.Pages.DownloadPages.InstallPreview view, string id)
     {
-        _ = Task.Run(async () =>
+        _ = Task.Run(async () => // OptiFine
         {
             try
             {
-                var list = (await OptifineInstaller.EnumerableFromVersionAsync(id)).ToList();
+                var list = await OptifineInstaller.EnumerableOptifineAsync(id).ToListAsync();
                 view.Model.OptifineLoading = false;
                 list.ForEach(item => { view.Model.OptiFines.Add(item); });
             }
@@ -25,11 +25,11 @@ public class InstallPreviewModLoaders
                 });
             }
         });
-        _ = Task.Run(async () =>
+        _ = Task.Run(async () => // Forge
         {
             try
             {
-                var list = (await ForgeInstaller.EnumerableFromVersionAsync(id)).ToList();
+                var list = await ForgeInstaller.EnumerableForgeAsync(id).ToListAsync();
                 view.Model.ForgeLoading = false;
                 list.ForEach(item => { view.Model.Forges.Add(item); });
             }
@@ -42,11 +42,11 @@ public class InstallPreviewModLoaders
                 });
             }
         });
-        _ = Task.Run(async () =>
+        _ = Task.Run(async () => // Quilt
         {
             try
             {
-                var list = (await QuiltInstaller.EnumerableFromVersionAsync(id)).ToList();
+                var list = await QuiltInstaller.EnumerableQuiltAsync(id).ToListAsync();
                 view.Model.QuiltLoading = false;
                 list.ForEach(item => { view.Model.Quilts.Add(item); });
             }
@@ -59,11 +59,11 @@ public class InstallPreviewModLoaders
                 });
             }
         });
-        _ = Task.Run(async () =>
+        _ = Task.Run(async () => // Fabric
         {
             try
             {
-                var list = (await FabricInstaller.EnumerableFromVersionAsync(id)).ToList();
+                var list = await FabricInstaller.EnumerableFabricAsync(id).ToListAsync();
                 view.Model.FabricLoading = false;
                 list.ForEach(item => { view.Model.Fabrics.Add(item); });
             }

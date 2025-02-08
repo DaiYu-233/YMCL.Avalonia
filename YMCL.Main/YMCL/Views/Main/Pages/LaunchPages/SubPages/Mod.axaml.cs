@@ -11,7 +11,7 @@ using Avalonia.Media;
 using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using Microsoft.VisualBasic.FileIO;
-using MinecraftLaunch.Classes.Models.Game;
+using MinecraftLaunch.Base.Models.Game;
 using YMCL.Public.Classes;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
@@ -23,10 +23,10 @@ public sealed partial class Mod : UserControl, INotifyPropertyChanged
 {
     private readonly ObservableCollection<LocalModEntry> _mods = [];
     public ObservableCollection<LocalModEntry> FilteredMods { get; set; } = [];
-    private readonly GameEntry _entry;
+    private readonly MinecraftEntry _entry;
     private string _filter = string.Empty;
 
-    public Mod(GameEntry entry)
+    public Mod(MinecraftEntry entry)
     {
         _entry = entry;
         InitializeComponent();

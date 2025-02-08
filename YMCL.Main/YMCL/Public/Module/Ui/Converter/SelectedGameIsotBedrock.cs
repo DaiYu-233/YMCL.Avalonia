@@ -4,12 +4,12 @@ using YMCL.Public.Classes;
 
 namespace YMCL.Public.Module.Ui.Converter;
 
-public class SelectedGameIsBedrock: IValueConverter
+public class SelectedGameIsotBedrock: IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is not GameDataEntry entry) return false;
-        return entry.Entry.Type != "bedrock";
+        if (value is not MinecraftDataEntry entry) return false;
+        return entry.Type != "bedrock";
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

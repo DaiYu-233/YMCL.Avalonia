@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using MinecraftLaunch;
-using MinecraftLaunch.Classes.Models.Install;
+using MinecraftLaunch.Base.Models.Network;
 using YMCL.Public.Classes;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
@@ -15,34 +15,39 @@ namespace YMCL.Public.Module.Mc.Installer.InstallJavaClientByMinecraftLauncher;
 
 public class Dispatcher
 {
-    public static async Task<bool> Install(string versionId, string? customId = null,
-        ForgeInstallEntry? forgeInstallEntry = null, FabricBuildEntry? fabricBuildEntry = null,
-        QuiltBuildEntry? quiltBuildEntry = null, OptiFineInstallEntity? optiFineInstallEntity = null,
+    public static async Task<bool> Install(VersionManifestEntry versionManifestEntry, string? customId = null,
+        ForgeInstallEntry? forgeInstallEntry = null, FabricInstallEntry? fabricInstallEntry = null,
+        QuiltInstallEntry? quiltBuildEntry = null, OptifineInstallEntry? optiFineInstallEntity = null,
         TaskEntry? p_task = null, bool closeTaskWhenFinish = true)
     {
         var cts = new CancellationTokenSource();
-        var token = cts.Token;
-
-        var regex = new Regex(@"[\\/:*?""<>|]");
-        var matches = regex.Matches(customId ?? versionId);
-        if (matches.Count > 0)
-        {
-            var str = string.Empty;
-            foreach (Match match in matches) str += match.Value;
-            Toast($"{MainLang.IncludeSpecialWord}: {str}", NotificationType.Error);
-            return false;
-        }
-
+        var cancellationToken = cts.Token;
         var setting = Const.Data.Setting;
-        MirrorDownloadManager.IsUseMirrorDownloadSource = setting.DownloadSource == Setting.DownloadSource.BmclApi;
 
-        if (Directory.Exists(Path.Combine(setting.MinecraftFolder.Path, "versions", customId ?? versionId)))
+        if (optiFineInstallEntity != null || quiltBuildEntry != null || fabricInstallEntry != null ||
+            forgeInstallEntry != null)
         {
-            Toast($"{MainLang.FolderAlreadyExists}: {customId ?? versionId}", NotificationType.Error);
-            return false;
+            var regex = new Regex(@"[\\/:*?""<>|]");
+            var matches = regex.Matches(customId ?? versionManifestEntry.Id);
+            if (matches.Count > 0)
+            {
+                var str = string.Empty;
+                foreach (Match match in matches) str += match.Value;
+                Toast($"{MainLang.IncludeSpecialWord}: {str}", NotificationType.Error);
+                return false;
+            }
+
+            if (Directory.Exists(Path.Combine(setting.MinecraftFolder.Path, "versions",
+                    customId ?? versionManifestEntry.Id)))
+            {
+                Toast($"{MainLang.FolderAlreadyExists}: {customId ?? versionManifestEntry.Id}", NotificationType.Error);
+                return false;
+            }
         }
 
-        var task = p_task ?? new TaskEntry($"{MainLang.Install}: {customId}(Minecraft {versionId})",
+        var mcPath = Data.Setting.MinecraftFolder.Path;
+
+        var task = p_task ?? new TaskEntry($"{MainLang.Install}: {customId}(Minecraft {versionManifestEntry.Id})",
             state: TaskState.Running);
         YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavTask;
         SubTask[] subTasks =
@@ -68,37 +73,78 @@ public class Dispatcher
         if (optiFineInstallEntity != null)
             task.AddSubTask(optiFineTask);
 
-        if (fabricBuildEntry != null)
+        if (fabricInstallEntry != null)
             task.AddSubTask(fabricTask);
 
         if (quiltBuildEntry != null)
             task.AddSubTask(quiltTask);
 
-        var vanllia = await Vanllia.Install(versionId, task, subTasks[0], subTasks[1], token);
+        var vanllia = await Vanllia.Install(versionManifestEntry, mcPath, task, subTasks[0], subTasks[1],
+            cancellationToken);
         if (!vanllia)
         {
             task.FinishWithError();
             return false;
         }
 
-        subTasks[1].State = TaskState.Finished;
-        
+        subTasks[0].Finish();
+        subTasks[1].Finish();
+
         if (forgeInstallEntry != null)
         {
-            var forge = await Forge.Install(versionId, customId ?? versionId, forgeInstallEntry, forgeTask, task, token);
+            var forge = await Forge.Install(forgeInstallEntry, customId!, mcPath, forgeTask, task,
+                cancellationToken);
             if (!forge)
             {
                 task.FinishWithError();
                 return false;
             }
 
-            forgeTask.State = TaskState.Finished;
+            forgeTask.Finish();
         }
-
-        if (closeTaskWhenFinish)
+        
+        if (optiFineInstallEntity != null)
         {
-            task.FinishWithSuccess();
+            var optifine = await OptiFine.Install(optiFineInstallEntity, customId!, mcPath, optiFineTask, task,
+                cancellationToken);
+            if (!optifine)
+            {
+                task.FinishWithError();
+                return false;
+            }
+
+            optiFineTask.Finish();
         }
+        
+        if (fabricInstallEntry != null)
+        {
+            var fabric = await Fabric.Install(fabricInstallEntry, customId!, mcPath, fabricTask, task,
+                cancellationToken);
+            if (!fabric)
+            {
+                task.FinishWithError();
+                return false;
+            }
+
+            fabricTask.Finish();
+        }
+        
+        if (quiltBuildEntry != null)
+        {
+            var quilt = await Quilt.Install(quiltBuildEntry, customId!, mcPath, quiltTask, task,
+                cancellationToken);
+            if (!quilt)
+            {
+                task.FinishWithError();
+                return false;
+            }
+
+            quiltTask.Finish();
+        }
+        
+        if (!closeTaskWhenFinish || cancellationToken.IsCancellationRequested) return true;
+        task.FinishWithSuccess();
+        Toast($"{MainLang.InstallFinish} - {customId ?? versionManifestEntry.Id}", NotificationType.Success);
 
         return true;
     }

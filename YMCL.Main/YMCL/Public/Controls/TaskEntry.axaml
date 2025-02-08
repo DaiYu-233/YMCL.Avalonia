@@ -49,14 +49,23 @@
                                 HorizontalAlignment="Left"
                                 Margin="1,0,0,0"
                                 Text="{Binding Name}" />
-                            <TextBlock
+                            <StackPanel
                                 DockPanel.Dock="Right"
                                 HorizontalAlignment="Right"
-                                IsVisible="{Binding NumberValue}"
-                                Margin="0,0,1,0">
-                                <Run Text="{Binding DisplayProgress}" />
-                                <Run Text="%" />
-                            </TextBlock>
+                                Orientation="Horizontal">
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource GrayColor}"
+                                    Margin="0,0,10,0"
+                                    Text="{Binding TopRightInfo}" />
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    IsVisible="{Binding NumberValue}"
+                                    Margin="0,0,1,0">
+                                    <Run Text="{Binding DisplayProgress}" />
+                                    <Run Text="%" />
+                                </TextBlock>
+                            </StackPanel>
                         </DockPanel>
                         <ProgressBar
                             Foreground="{Binding State, Converter={StaticResource TaskStateToColor}}"
@@ -64,19 +73,31 @@
                             MinWidth="0"
                             Value="{Binding DisplayProgress}" />
                         <DockPanel>
-                            <TextBlock
+                            <StackPanel
                                 DockPanel.Dock="Left"
-                                FontSize="12"
-                                Foreground="{DynamicResource GrayColor}"
                                 HorizontalAlignment="Left"
-                                Margin="1,0,0,0"
-                                Text="{Binding State, Converter={StaticResource TaskStateToTip}}" />
-                            <TextBlock
+                                Orientation="Horizontal">
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource GrayColor}"
+                                    Margin="1,0,0,0"
+                                    Text="{Binding State, Converter={StaticResource TaskStateToTip}}" />
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource GrayColor}"
+                                    Margin="10,0,0,0"
+                                    Text="{Binding BottomLeftInfo}" />
+                            </StackPanel>
+                            <StackPanel
                                 DockPanel.Dock="Right"
-                                FontSize="12"
-                                Foreground="{DynamicResource GrayColor}"
                                 HorizontalAlignment="Right"
-                                Text="{Binding Time, Converter={StaticResource MsToTimeConverter}}" />
+                                Orientation="Horizontal">
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="{DynamicResource GrayColor}"
+                                    HorizontalAlignment="Right"
+                                    Text="{Binding Time, Converter={StaticResource MsToTimeConverter}}" />
+                            </StackPanel>
                         </DockPanel>
                     </StackPanel>
                 </DockPanel>

@@ -22,6 +22,8 @@ public class TaskEntryModel : ReactiveObject
     [Reactive] public bool ButtonIsEnable { get; set; } = true;
     [Reactive] public double Value { get; set; }
     [Reactive] public string Name { get; set; }
+    [Reactive] public string TopRightInfo { get; set; }
+    [Reactive] public string BottomLeftInfo { get; set; }
     [Reactive] public double DisplayProgress { get; set; }
     [Reactive] public bool DisplayIsIndeterminate { get; set; }
     [Reactive] public string ButtonDisplay { get; set; }

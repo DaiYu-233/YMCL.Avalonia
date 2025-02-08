@@ -1,8 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using FluentAvalonia.UI.Controls;
+using MinecraftLaunch;
+using MinecraftLaunch.Components.Parser;
+using MinecraftLaunch.Components.Provider;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
 using YMCL.Public.Langs;
@@ -28,14 +32,13 @@ public class InitData
                     await File.ReadAllTextAsync(ConfigPath.AccountDataPath));
             Data.Setting =
                 JsonConvert.DeserializeObject<Setting>(await File.ReadAllTextAsync(ConfigPath.SettingDataPath));
-            return true;
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             try
             {
-                var win = new CrashWindow(e.ToString()!);
+                var win = new CrashWindow(e.ToString());
                 win.Show();
                 var dialog = await ShowDialogAsync(MainLang.ResetData, MainLang.FixLoadDataFailTip,
                     b_primary: MainLang.Ok, b_cancel: MainLang.Cancel, p_host: TopLevel.GetTopLevel(win));
@@ -48,19 +51,42 @@ public class InitData
             catch
             {
             }
+
             return false;
         }
+
+        try
+        {
+            if (Data.Setting.SelectedMinecraftId == "bedrock")
+            {
+                Data.UiProperty.SelectedMinecraft = new MinecraftDataEntry(null, true, true)
+                    { IsSettingVisible = false, Type = "bedrock" };
+            }
+            else
+            {
+                var parser = new MinecraftParser(Data.Setting.MinecraftFolder.Path);
+                Data.UiProperty.SelectedMinecraft = new MinecraftDataEntry(parser.GetMinecraft(Data.Setting.SelectedMinecraftId));
+            }
+        }
+        catch
+        {
+        }
+
+        return true;
     }
 
     public static void InitCollection()
     {
-        if (!Data.JavaRuntimes.Contains(new JavaEntry { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "Auto" }))
+        if (!Data.JavaRuntimes.Contains(new JavaEntry
+                { JavaPath = MainLang.LetYMCLChooseJava, JavaStringVersion = "Auto" }))
         {
-            Data.JavaRuntimes.Insert(0, new JavaEntry { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "Auto" });
+            Data.JavaRuntimes.Insert(0,
+                new JavaEntry { JavaPath = MainLang.LetYMCLChooseJava, JavaStringVersion = "Auto" });
         }
         else
         {
-            Data.JavaRuntimes.FirstOrDefault(java => java.JavaVersion == "Auto").JavaPath = MainLang.LetYMCLChooseJava;
+            Data.JavaRuntimes.FirstOrDefault(java => java.JavaStringVersion == "Auto").JavaPath =
+                MainLang.LetYMCLChooseJava;
         }
     }
 
@@ -79,5 +105,12 @@ public class InitData
             UiProperty.Instance.SystemMaxMem = Math.Floor(totalMemory / 1024);
         else
             UiProperty.Instance.SystemMaxMem = 65536;
+    }
+    
+    public static void InitMl()
+    {
+        DownloadMirrorManager.MaxThread = Data.Setting.MaxDownloadThread;
+        DownloadMirrorManager.IsEnableMirror = Data.Setting.DownloadSource == Enum.Setting.DownloadSource.BmclApi;
+        ServicePointManager.DefaultConnectionLimit = int.MaxValue;
     }
 }

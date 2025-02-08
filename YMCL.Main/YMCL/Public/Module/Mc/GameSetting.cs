@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using MinecraftLaunch.Classes.Models.Game;
+using MinecraftLaunch.Base.Models.Game;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
 using YMCL.Public.Enum;
@@ -8,22 +8,33 @@ namespace YMCL.Public.Module.Mc;
 
 public class GameSetting
 {
-    public static void InitGameSetting(GameEntry entry)
+    public static void InitGameSetting(MinecraftEntry entry)
     {
-        File.WriteAllText(Path.Combine(entry.GameFolderPath, "versions", entry.Id, "YMCL.GameSetting.DaiYu"),
+        File.WriteAllText(Path.Combine(entry.MinecraftFolderPath, "versions", entry.Id, "YMCL.GameSetting.DaiYu"),
             JsonConvert.SerializeObject(new GameSettingEntry(), Formatting.Indented));
     }
 
-    public static GameSettingEntry GetGameSetting(GameEntry entry)
+    public static GameSettingEntry GetGameSetting(MinecraftEntry entry)
     {
-        if (!File.Exists(Path.Combine(entry.GameFolderPath, "versions", entry.Id, "YMCL.GameSetting.DaiYu")))
+        if (!File.Exists(Path.Combine(entry.MinecraftFolderPath, "versions", entry.Id, "YMCL.GameSetting.DaiYu")))
         {
             InitGameSetting(entry);
         }
 
-        return JsonConvert.DeserializeObject<GameSettingEntry>(File.ReadAllText(Path.Combine(
-            entry.GameFolderPath, "versions",
-            entry.Id, "YMCL.GameSetting.DaiYu")));
+        try
+        {
+            return JsonConvert.DeserializeObject<GameSettingEntry>(File.ReadAllText(Path.Combine(
+                entry.MinecraftFolderPath, "versions",
+                entry.Id, "YMCL.GameSetting.DaiYu")));
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            File.Delete(Path.Combine(
+                entry.MinecraftFolderPath, "versions",
+                entry.Id, "YMCL.GameSetting.DaiYu"));
+            return GetGameSetting(entry);
+        }
     }
 
     public static void HandleGameSetting(GameSettingEntry entry)
@@ -43,19 +54,21 @@ public class GameSetting
             entry.MaxMem = Data.Setting.MaxMem;
         }
 
-        if (entry.Java.JavaVersion == "Global")
+        if (entry.Java.JavaStringVersion == "Global")
         {
             entry.Java = Data.Setting.Java;
         }
     }
 
-    public static string GetGameSpecialFolder(GameEntry entry, GameSpecialFolder folder)
+    public static string GetGameSpecialFolder(MinecraftEntry entry, GameSpecialFolder folder,
+        bool isForceEnableIndependencyCore = false)
     {
         var setting = GetGameSetting(entry);
         HandleGameSetting(setting);
-        var basePath = setting.IsEnableIndependencyCore
-            ? Path.Combine(entry.GameFolderPath, "versions", entry.Id)
-            : entry.GameFolderPath;
+        var isEnableIndependencyCore = isForceEnableIndependencyCore || setting.IsEnableIndependencyCore;
+        var basePath = isEnableIndependencyCore
+            ? Path.Combine(entry.MinecraftFolderPath, "versions", entry.Id)
+            : entry.MinecraftFolderPath;
         var path = folder switch
         {
             GameSpecialFolder.GameFolder => basePath,

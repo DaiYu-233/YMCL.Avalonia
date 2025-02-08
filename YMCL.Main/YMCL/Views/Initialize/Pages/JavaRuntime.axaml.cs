@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using Avalonia.Controls.Notifications;
 using Avalonia.Platform.Storage;
-using MinecraftLaunch.Components.Fetcher;
 using MinecraftLaunch.Utilities;
 using Newtonsoft.Json;
 using YMCL.Public.Langs;

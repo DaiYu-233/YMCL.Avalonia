@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using MinecraftLaunch.Classes.Models.Auth;
+using MinecraftLaunch.Base.Models.Network;
 using YMCL.Public.Module.Ui;
 using YMCL.ViewModels;
 
@@ -17,13 +17,13 @@ public partial class AutoInstall : UserControl
         Frame.Content = InstallableGames;
     }
 
-    public void JumpToInstallPreview(string id)
+    public void JumpToInstallPreview(VersionManifestEntry entry)
     {
         var page = new InstallPreview(() =>
         {
             Frame.Content = InstallableGames;
             _ = Animator.PageLoading.LevelTwoPage(InstallableGames);
-        }, id);
+        }, entry);
         Frame.Content = page;
         _ = Animator.PageLoading.LevelTwoPage(page);
     }

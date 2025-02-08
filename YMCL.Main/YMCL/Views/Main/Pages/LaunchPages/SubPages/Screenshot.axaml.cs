@@ -13,7 +13,7 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
 using FluentAvalonia.UI.Controls;
 using Microsoft.VisualBasic.FileIO;
-using MinecraftLaunch.Classes.Models.Game;
+using MinecraftLaunch.Base.Models.Game;
 using YMCL.Public.Classes;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
@@ -23,7 +23,7 @@ namespace YMCL.Views.Main.Pages.LaunchPages.SubPages;
 public partial class Screenshot : UserControl, INotifyPropertyChanged
 {
     private readonly ObservableCollection<LocalResourcePackEntry> _items = [];
-    private readonly GameEntry _entry;
+    private readonly MinecraftEntry _entry;
     private string _filter = string.Empty;
 
     public string Filter
@@ -32,7 +32,7 @@ public partial class Screenshot : UserControl, INotifyPropertyChanged
         set => SetField(ref _filter, value);
     }
 
-    public Screenshot(GameEntry entry)
+    public Screenshot(MinecraftEntry entry)
     {
         _entry = entry;
         InitializeComponent();

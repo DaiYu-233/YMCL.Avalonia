@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Avalonia.Media;
-using MinecraftLaunch.Classes.Models.Game;
+using MinecraftLaunch.Base.Models.Game;
+using MinecraftLaunch.Extensions;
 using MinecraftLaunch.Utilities;
 
 namespace YMCL.Public.Module.Value;
@@ -28,24 +29,16 @@ public class Calculator
         return Color.FromArgb(color.A, (byte)r, (byte)g, (byte)b);
     }
 
-    public static JavaEntry? GetCurrentJava(List<JavaEntry> javaEntries, GameEntry game)
+    public static JavaEntry? GetCurrentJava(List<JavaEntry> javaEntries, MinecraftEntry game)
     {
-        JavaEntry? result = null;
-        try
+        var list = new List<MinecraftLaunch.Base.Models.Game.JavaEntry>();
+        javaEntries.ForEach(x =>
         {
-            List<MinecraftLaunch.Classes.Models.Game.JavaEntry> list = [];
-            list.AddRange(javaEntries.Select(JavaEntry.YmclToMl));
-            result = JavaEntry.MlToYmcl(JavaUtil.GetCurrentJava(list, game));
-        }
-        catch
-        {
-            foreach (var javaEntry in javaEntries)
+            if (x.JavaStringVersion != "Auto")
             {
-                if (javaEntry.JavaSlugVersion != game.JavaVersion) continue;
-                result = javaEntry;
-                break;
+                list.Add(JavaEntry.YmclToMl(x));
             }
-        }
-        return result;
+        });
+        return JavaEntry.MlToYmcl(game.GetAppropriateJava(list));
     }
 }

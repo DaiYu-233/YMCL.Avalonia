@@ -13,7 +13,7 @@ using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using Microsoft.VisualBasic.FileIO;
-using MinecraftLaunch.Classes.Models.Game;
+using MinecraftLaunch.Base.Models.Game;
 using Newtonsoft.Json.Linq;
 using YMCL.Public.Classes;
 using YMCL.Public.Enum;
@@ -25,7 +25,7 @@ public partial class Save : UserControl, INotifyPropertyChanged
 {
     private readonly ObservableCollection<LocalSaveEntry> _items = [];
     public ObservableCollection<LocalSaveEntry> FilteredItems { get; set; } = [];
-    private readonly GameEntry _entry;
+    private readonly MinecraftEntry _entry;
     private string _filter = string.Empty;
 
     public string Filter
@@ -34,9 +34,8 @@ public partial class Save : UserControl, INotifyPropertyChanged
         set => SetField(ref _filter, value);
     }
 
-    public Save(GameEntry entry)
+    public Save(MinecraftEntry entry)
     {
-        _entry = entry;
         _entry = entry;
         InitializeComponent();
         LoadItems();

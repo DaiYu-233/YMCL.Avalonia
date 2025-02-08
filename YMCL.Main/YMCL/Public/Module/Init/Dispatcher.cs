@@ -16,6 +16,7 @@ public static class InitDispatcher
         InitLang.Dispatch();
         InitData.InitCollection();
         InitData.VerifyData();
+        InitData.InitMl();
         TranslateToken.RefreshToken();
         Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
         Public.Module.Ui.Special.AggregateSearchUi.Filter(string.Empty);

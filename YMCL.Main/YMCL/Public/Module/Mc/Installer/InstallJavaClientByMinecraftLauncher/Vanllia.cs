@@ -1,53 +1,57 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
-using MinecraftLaunch.Classes.Models.Download;
+using MinecraftLaunch.Base.Models.Network;
+using MinecraftLaunch.Components.Downloader;
 using MinecraftLaunch.Components.Installer;
-using MinecraftLaunch.Components.Resolver;
+using MinecraftLaunch.Components.Parser;
 using YMCL.Public.Classes;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using Setting = YMCL.Public.Enum.Setting;
+using String = System.String;
 
 namespace YMCL.Public.Module.Mc.Installer.InstallJavaClientByMinecraftLauncher;
 
 public class Vanllia
 {
-    public static async Task<bool> Install(string id, TaskEntry task, SubTask checkSubTask = null,
+    public static async Task<bool> Install(VersionManifestEntry entry, string mcPath, TaskEntry task,
+        SubTask checkSubTask = null,
         SubTask downloadSubTask = null, CancellationToken cancellationToken = default)
     {
-        var shouldReturn = false;
-        var resolver = new GameResolver(Data.Setting.MinecraftFolder.Path);
-        var vanlliaInstaller = new VanlliaInstaller(resolver, id,
-            new DownloaderConfiguration
-            {
-                MaxThread = Data.Setting.MaximumDownloadThread,
-                IsEnableFragmentedDownload = Data.Setting.DownloadSource != Setting.DownloadSource.Mojang
-            });
+        var isSuccess = false;
+        var installer = VanillaInstaller.Create(mcPath, entry);
+        checkSubTask.State = TaskState.Running;
         await Task.Run(async () =>
         {
             try
             {
-                vanlliaInstaller.ProgressChanged += (_, x) =>
+                var checkFinished = false;
+                installer.ProgressChanged += (_, x) =>
                 {
                     Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
                     {
                         task.UpdateValue(x.Progress * 100);
-                        ParseOutputAndHandle(x.ProgressStatus, checkSubTask, downloadSubTask);
+                        task.Model.TopRightInfo =
+                            x.IsStepSupportSpeed ? FileDownloader.GetSpeedText(x.Speed) : string.Empty;
+                        task.Model.BottomLeftInfo = x.StepName.ToString();
+
+                        if (x.IsStepSupportSpeed && !checkFinished)
+                        {
+                            checkSubTask.Finish();
+                            downloadSubTask.State = TaskState.Running;
+                            checkFinished = true;
+                        }
+
+                        if (!x.IsStepSupportSpeed) return;
+                        downloadSubTask.FinishedTask = x.FinishedStepTaskCount;
+                        downloadSubTask.TotalTask = x.TotalStepTaskCount;
                     });
                 };
 
-                var result = await vanlliaInstaller.InstallAsync(cancellationToken);
-
-                if (!result)
-                {
-                    await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
-                    {
-                        Toast($"{MainLang.InstallFail}: Vanllia - {id}", NotificationType.Error);
-                    });
-                    shouldReturn = true;
-                }
+                await installer.InstallAsync(cancellationToken);
+                isSuccess = true;
             }
             catch (OperationCanceledException)
             {
@@ -55,33 +59,20 @@ public class Vanllia
             }
             catch (Exception ex)
             {
-                await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
+                if (cancellationToken.IsCancellationRequested)
                 {
-                    ShowShortException($"{MainLang.InstallFail}: Vanllia - {id}", ex);
-                });
-                task.FinishWithError();
-                shouldReturn = true;
+                    task.CancelFinish();
+                }
+                else
+                {
+                    await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
+                    {
+                        ShowShortException($"{MainLang.InstallFail}: Vanllia - {entry.Id}", ex);
+                    });
+                    task.FinishWithError();
+                }
             }
-        });
-        return !shouldReturn;
-    }
-
-    static void ParseOutputAndHandle(string output, SubTask checkSubTask, SubTask downloadSubTask)
-    {
-        if (output.Contains("Start downloading dependent resources"))
-        {
-            checkSubTask.Finish();
-            downloadSubTask.State = TaskState.Running;
-        }
-        else if (output.StartsWith("Downloading dependent resources："))
-        {
-            var parts = output.Split("：");
-            if (parts.Length != 2) return;
-            var progress = parts[1].Split('/');
-            if (progress.Length != 2 || !int.TryParse(progress[0], out var current) ||
-                !int.TryParse(progress[1], out var total)) return;
-            downloadSubTask.FinishedTask = current;
-            downloadSubTask.TotalTask = total;
-        }
+        }, cancellationToken);
+        return isSuccess;
     }
 }

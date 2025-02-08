@@ -1,7 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using MinecraftLaunch.Classes.Enums;
 using Ursa.Controls;
 using YMCL.Public.Classes;
 using YMCL.Public.Controls;
@@ -20,7 +19,7 @@ public partial class LogWindow : UrsaWindow
         InitializeComponent();
         Viewer = new LogViewer();
         ContentControl.Content = Viewer;
-        PropertyChanged += (_, e) =>
+        PropertyChanged += (_, _) =>
         {
             switch (WindowState)
             {

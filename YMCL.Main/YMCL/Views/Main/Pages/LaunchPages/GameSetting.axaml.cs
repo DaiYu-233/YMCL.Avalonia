@@ -2,8 +2,8 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using FluentAvalonia.UI.Controls;
-using MinecraftLaunch.Classes.Models.Game;
-using MinecraftLaunch.Components.Resolver;
+using MinecraftLaunch.Base.Models.Game;
+using MinecraftLaunch.Components.Parser;
 using YMCL.Public.Module.Ui;
 using YMCL.ViewModels;
 
@@ -20,7 +20,7 @@ public partial class GameSetting : UserControl
     private readonly SubPages.Save _save;
     private readonly SubPages.Screenshot _screenshot;
 
-    public GameSetting(GameEntry? entry = null)
+    public GameSetting(MinecraftEntry? entry = null)
     {
         InitializeComponent();
         if (entry != null)
@@ -29,17 +29,17 @@ public partial class GameSetting : UserControl
         }
         else
         {
-            var resolver = new GameResolver(Data.Setting.MinecraftFolder.Path);
-            Model = new GameSettingModel(resolver.GetGameEntity(Data.Setting.SelectedGame.Id));
+            var resolver = new MinecraftParser(Data.Setting.MinecraftFolder.Path);
+            Model = new GameSettingModel(resolver.GetMinecraft(Data.UiProperty.SelectedMinecraft.Id));
         }
         DataContext = Model;
         _setting = new SubPages.Setting(Model);
-        _mod = new SubPages.Mod(Model.GameEntry);
+        _mod = new SubPages.Mod(Model.MinecraftEntry);
         _overView = new SubPages.OverView(Model);
-        _resourcePack = new SubPages.ResourcePack(Model.GameEntry);
-        _save = new SubPages.Save(Model.GameEntry);
-        _shaderPack = new SubPages.ShaderPack(Model.GameEntry);
-        _screenshot = new SubPages.Screenshot(Model.GameEntry);
+        _resourcePack = new SubPages.ResourcePack(Model.MinecraftEntry);
+        _save = new SubPages.Save(Model.MinecraftEntry);
+        _shaderPack = new SubPages.ShaderPack(Model.MinecraftEntry);
+        _screenshot = new SubPages.Screenshot(Model.MinecraftEntry);
         Nav.SelectionChanged += (o, e) =>
         {
             var tag = ((e.SelectedItem as NavigationViewItem).Tag as string)!;

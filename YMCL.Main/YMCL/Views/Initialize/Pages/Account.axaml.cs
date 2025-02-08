@@ -8,7 +8,6 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
-using MinecraftLaunch.Classes.Models.Auth;
 using MinecraftLaunch.Components.Authenticator;
 using MinecraftLaunch.Skin;
 using MinecraftLaunch.Skin.Class.Fetchers;

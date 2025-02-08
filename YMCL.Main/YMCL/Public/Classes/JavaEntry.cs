@@ -1,45 +1,49 @@
-﻿namespace YMCL.Public.Classes;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace YMCL.Public.Classes;
 
 public sealed record JavaEntry
 {
-    public bool Is64Bit { get; init; }
+    public bool Is64bit { get; init; }
     public string JavaPath { get; set; }
-    public string JavaVersion { get; init; }
-
-    public int JavaSlugVersion { get; init; }
-
-    public string JavaDirectoryPath { get; init; }
+    public string JavaType { get; init; }
+    public string JavaStringVersion { get; init; }
+    public Version JavaVersion { get; init; }
+    public string JavaFolder { get; init; }
+    public int MajorVersion { get; init; }
 
     public bool Equals(JavaEntry? other)
     {
         if (other == null) return false;
-        if (other.JavaVersion == "Auto" && JavaVersion == "Auto") return true;
-        if (other.JavaVersion == "Global" && JavaVersion == "Global") return true;
-        return Is64Bit == other.Is64Bit && JavaVersion == other.JavaVersion && JavaPath == other.JavaPath &&
-               JavaSlugVersion == other.JavaSlugVersion && JavaDirectoryPath == other.JavaDirectoryPath;
+        if (other.JavaStringVersion == "Auto" && JavaStringVersion == "Auto") return true;
+        if (other.JavaStringVersion == "Global" && JavaStringVersion == "Global") return true;
+        return Is64bit == other.Is64bit && JavaPath == other.JavaPath && JavaType == other.JavaType;
     }
 
-    public static JavaEntry MlToYmcl(MinecraftLaunch.Classes.Models.Game.JavaEntry entry)
+    public static JavaEntry MlToYmcl(MinecraftLaunch.Base.Models.Game.JavaEntry entry)
     {
         return new JavaEntry
         {
-            Is64Bit = entry.Is64Bit,
-            JavaDirectoryPath = entry.JavaDirectoryPath,
-            JavaVersion = entry.JavaVersion,
+            Is64bit = entry.Is64bit,
+            JavaStringVersion = entry.JavaVersion.ToString(),
             JavaPath = entry.JavaPath,
-            JavaSlugVersion = entry.JavaSlugVersion
+            JavaType = entry.JavaType,
+            JavaVersion = entry.JavaVersion,
+            JavaFolder = entry.JavaFolder,
+            MajorVersion = entry.MajorVersion
         };
     }
-    
-    public static MinecraftLaunch.Classes.Models.Game.JavaEntry YmclToMl(JavaEntry entry)
+
+    public static MinecraftLaunch.Base.Models.Game.JavaEntry YmclToMl(JavaEntry entry)
     {
-        return new MinecraftLaunch.Classes.Models.Game.JavaEntry
+        return new MinecraftLaunch.Base.Models.Game.JavaEntry
         {
-            Is64Bit = entry.Is64Bit,
-            JavaDirectoryPath = entry.JavaDirectoryPath,
+            Is64bit = entry.Is64bit,
             JavaVersion = entry.JavaVersion,
             JavaPath = entry.JavaPath,
-            JavaSlugVersion = entry.JavaSlugVersion
+            JavaType = entry.JavaType
         };
     }
 }

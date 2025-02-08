@@ -8,7 +8,6 @@
     xmlns:classes="clr-namespace:YMCL.Public.Classes"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:da="clr-namespace:YMCL.Public.Const"
-    xmlns:game="clr-namespace:MinecraftLaunch.Classes.Models.Game;assembly=MinecraftLaunch"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
@@ -101,8 +100,9 @@
                         <ComboBox.ItemTemplate>
                             <DataTemplate DataType="classes:JavaEntry">
                                 <TextBlock>
-                                    <Run Text="[ Java" />
-                                    <Run Text="{Binding JavaVersion}" />
+                                    <Run Text="[" />
+                                    <Run Text="{Binding JavaType}" />
+                                    <Run Text="{Binding JavaStringVersion}" />
                                     <Run Text="]" />
                                     <Run Text="{Binding JavaPath}" />
                                 </TextBlock>

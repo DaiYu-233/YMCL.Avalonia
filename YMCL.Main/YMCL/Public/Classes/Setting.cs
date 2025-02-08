@@ -1,5 +1,5 @@
 ﻿using Avalonia.Media;
-using MinecraftLaunch.Classes.Models.Game;
+using MinecraftLaunch;
 using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -17,7 +17,7 @@ public class Setting : ReactiveObject
     [Reactive] [JsonProperty] public MinecraftFolder MinecraftFolder { get; set; }
     [Reactive] [JsonProperty] public string SkipUpdateVersion { get; set; } = string.Empty;
     [Reactive] [JsonProperty] public bool EnableAutoCheckUpdate { get; set; } = true;
-    [Reactive] [JsonProperty] public int MaximumDownloadThread { get; set; } = 64;
+    [Reactive] [JsonProperty] public int MaxDownloadThread { get; set; } = 64;
     [Reactive] [JsonProperty] public bool IsCompleteJavaInitialize { get; set; }
     [Reactive] [JsonProperty] public bool IsCompleteMinecraftFolderInitialize { get; set; }
     [Reactive] [JsonProperty] public bool IsCompleteAccountInitialize { get; set; }
@@ -53,7 +53,7 @@ public class Setting : ReactiveObject
     [JsonProperty]
     public Enum.Setting.LaunchCore LaunchCore { get; set; } = Enum.Setting.LaunchCore.MinecraftLaunch;
 
-    [Reactive] [JsonProperty] public GameDataEntry SelectedGame { get; set; }
+    [Reactive] [JsonProperty] public string SelectedMinecraftId { get; set; }
     [Reactive] [JsonProperty] public bool EnableIndependencyCore { get; set; } = true;
     [Reactive] [JsonProperty] public bool EnableCustomUpdateUrl { get; set; }
     [Reactive] [JsonProperty] public string CustomUpdateUrl { get; set; } = "https://github.moeyy.xyz/{%url%}";
@@ -75,7 +75,7 @@ public class Setting : ReactiveObject
 
     [Reactive]
     [JsonProperty]
-    public JavaEntry Java { get; set; } = new() { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "Auto" };
+    public JavaEntry Java { get; set; } = new() { JavaPath = MainLang.LetYMCLChooseJava, JavaStringVersion = "Auto" };
 
     [Reactive] [JsonProperty] public string WindowBackGroundImgData { get; set; } = string.Empty;
 
@@ -112,6 +112,11 @@ public class Setting : ReactiveObject
             if (e.PropertyName == nameof(Theme))
             {
                 Public.Module.Ui.Setter.ToggleTheme(Theme);
+            }
+            
+            if (e.PropertyName == nameof(MaxDownloadThread))
+            {
+                DownloadMirrorManager.MaxThread = MaxDownloadThread;
             }
 
             AppMethod.SaveSetting();

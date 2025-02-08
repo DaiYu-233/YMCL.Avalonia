@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using MinecraftLaunch.Classes.Models.Install;
+using MinecraftLaunch.Base.Models.Network;
 using MinecraftLaunch.Components.Installer;
 using YMCL.Public.Classes;
 using YMCL.Public.Langs;
@@ -15,8 +15,8 @@ public class InstallableGame
         {
             try
             {
-                var gameCoreList = await VanlliaInstaller.EnumerableGameCoreAsync();
-                var manifestEntries = gameCoreList.ToList();
+                var mcCoreList = await VanillaInstaller.EnumerableMinecraftAsync().ToListAsync();
+                var manifestEntries = mcCoreList.ToList();
                 UiProperty.Instance.LatestReleaseGame = manifestEntries.FirstOrDefault(item => item.Type == "release");
                 UiProperty.Instance.LatestSnapshotGame =
                     manifestEntries.FirstOrDefault(item => item.Type == "snapshot");

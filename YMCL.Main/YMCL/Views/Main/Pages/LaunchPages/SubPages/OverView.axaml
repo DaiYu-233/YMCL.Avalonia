@@ -33,18 +33,15 @@
                         <Image Source="{Binding Icon}" />
                     </Border>
                     <StackPanel Margin="2,0,0,0" VerticalAlignment="Center">
-                        <TextBlock FontFamily="{DynamicResource Font}" Text="{Binding GameEntry.Id}" />
+                        <TextBlock FontFamily="{DynamicResource Font}" Text="{Binding MinecraftEntry.Id}" />
                         <TextBlock
                             FontFamily="{DynamicResource Font}"
                             FontSize="12"
                             Foreground="{DynamicResource GrayColor}">
-                            <Run Text="{Binding GameEntry.Type}" />
-                            <Run Text="{Binding GameEntry.Version}" />
+                            <Run Text="{Binding MinecraftEntry.Version.Type}" />
+                            <Run Text="{Binding MinecraftEntry.Version.VersionId}" />
                             <Run Text="," />
-                            <Run Text="{Binding GameEntry.MainLoaderType}" />
-                            <Run Text="," />
-                            <Run Text="Java" />
-                            <Run Text="{Binding GameEntry.JavaVersion}" />
+                            <Run Text="{Binding LoaderType}" />
                         </TextBlock>
                     </StackPanel>
                 </StackPanel>

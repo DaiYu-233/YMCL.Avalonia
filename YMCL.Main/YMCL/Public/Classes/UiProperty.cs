@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Avalonia.Media;
-using MinecraftLaunch.Classes.Models.Game;
-using MinecraftLaunch.Classes.Models.Install;
+using MinecraftLaunch.Base.Models.Network;
 using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -34,6 +33,7 @@ public sealed class UiProperty : ReactiveObject
     [Reactive] public bool InstallableRingIsVisible { get; set; } = true;
     [Reactive] public double TaskEntryHeaderWidth { get; set; }
     [Reactive] public double SystemMaxMem { get; set; }
+    [Reactive] public MinecraftDataEntry SelectedMinecraft { get; set; }
     [Reactive] public string AggregateSearchFilter { get; set; } = string.Empty;
     [Reactive] public double MusicTotalTime { get; set; } 
     [Reactive] public double MusicCurrentTime { get; set; } 

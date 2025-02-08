@@ -13,7 +13,7 @@
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
-        <converter:SelectedGameIsBedrock x:Key="SelectedGameIsBedrock" />
+        <converter:SelectedGameIsotBedrock x:Key="SelectedGameIsNotBedrock" />
     </UserControl.Resources>
     <Grid>
         <DockPanel>
@@ -80,7 +80,7 @@
                                         FontSize="12"
                                         HorizontalAlignment="Center"
                                         Margin="0,2,0,3"
-                                        Text="{Binding Setting.SelectedGame.Id}"
+                                        Text="{Binding UiProperty.SelectedMinecraft.Id}"
                                         TextAlignment="Center"
                                         TextWrapping="Wrap"
                                         VerticalAlignment="Center"
@@ -103,7 +103,7 @@
                                     Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.VersionSetting}"
                                     FontFamily="{DynamicResource Font}"
                                     HorizontalAlignment="Stretch"
-                                    IsEnabled="{Binding Setting.SelectedGame, Converter={StaticResource SelectedGameIsBedrock}}"
+                                    IsEnabled="{Binding UiProperty.SelectedMinecraft, Converter={StaticResource SelectedGameIsNotBedrock}}"
                                     Margin="3.25,0,0,0"
                                     Name="GameSettingBtn"
                                     VerticalAlignment="Stretch" />

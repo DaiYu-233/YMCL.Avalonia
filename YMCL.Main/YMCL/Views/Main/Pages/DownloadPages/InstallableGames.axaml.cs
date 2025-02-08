@@ -2,7 +2,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using MinecraftLaunch.Classes.Models.Install;
+using MinecraftLaunch.Base.Models.Network;
 using YMCL.Public.Classes;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Init.SubModule.GetDataFromNetwork;
@@ -23,12 +23,12 @@ public partial class InstallableGames : UserControl
         LatestPreviewVersionRoot.PointerPressed += (_, _) =>
         {
             if (UiProperty.Instance.LatestSnapshotGame.Type == null) return;
-            App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview(UiProperty.Instance.LatestSnapshotGame.Id);
+            App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview(UiProperty.Instance.LatestSnapshotGame);
         };
         LatestReleaseVersionRoot.PointerPressed += (_, _) =>
         {
             if (UiProperty.Instance.LatestReleaseGame.Type == null) return;
-            App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview(UiProperty.Instance.LatestReleaseGame.Id);
+            App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview(UiProperty.Instance.LatestReleaseGame);
         };
         UiProperty.Instance.PropertyChanged += (_, e) =>
         {
@@ -53,7 +53,7 @@ public partial class InstallableGames : UserControl
         if (e.AddedItems.Count <= 0) return;
         (sender as ListBox).SelectedItem = null;
         Console.WriteLine(e.AddedItems[0]);
-        App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview((e.AddedItems[0] as VersionManifestEntry).Id);
+        App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview((e.AddedItems[0] as VersionManifestEntry)!);
     }
 
     public void Filter()

@@ -4,13 +4,13 @@ using System.Runtime.CompilerServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using MinecraftLaunch.Classes.Models.Install;
+using MinecraftLaunch.Base.Models.Network;
 using ReactiveUI;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Init.SubModule.GetDataFromNetwork;
 using YMCL.ViewModels;
 using Dispatcher = YMCL.Public.Module.Mc.Installer.InstallJavaClientByMinecraftLauncher.Dispatcher;
-using String = System.String;
+using String = string;
 
 namespace YMCL.Views.Main.Pages.DownloadPages;
 
@@ -18,17 +18,17 @@ public sealed partial class InstallPreview : UserControl
 {
     public readonly InstallPreviewModel Model;
 
-    public InstallPreview(Action action, string id)
+    public InstallPreview(Action action, VersionManifestEntry entry)
     {
         InitializeComponent();
-        InstallPreviewModLoaders.Load(this, id);
+        InstallPreviewModLoaders.Load(this, entry.Id);
         Model = new InstallPreviewModel(this);
         DataContext = Model;
         ReturnToListRoot.PointerPressed += (_, _) => action();
-        InstallPreviewIdText.Text = id;
-        MinecraftPreviewGameId.Text = id;
-        Model.CustomId = id;
-        Model.GameId = id;
+        InstallPreviewIdText.Text = entry.Id;
+        MinecraftPreviewGameId.Text = entry.Id;
+        Model.CustomId = entry.Id;
+        Model.GameId = entry.Id;
         CustomIdWarning.IsVisible = false;
         FabricListView.SelectionChanged += OnSelectionChanged;
         OptiFineListView.SelectionChanged += OnSelectionChanged;
@@ -38,19 +38,19 @@ public sealed partial class InstallPreview : UserControl
         {
             //$"https://minecraft.wiki/w/Java_Edition_{id}"
             var launcher = TopLevel.GetTopLevel(this).Launcher;
-            launcher.LaunchUriAsync(new Uri($"https://minecraft.wiki/w/Java_Edition_{id}"));
+            launcher.LaunchUriAsync(new Uri($"https://minecraft.wiki/w/Java_Edition_{entry.Id}"));
         };
         BeginInstallBtn.Click += (_, _) =>
         {
-            _ = Dispatcher.Install(Model.GameId, Model.IsDisplaceId ? Model.DisplaceId : Model.CustomId, ForgeListView.SelectedItem as ForgeInstallEntry,
-                FabricListView.SelectedItem as FabricBuildEntry, QuiltListView.SelectedItem as QuiltBuildEntry, OptiFineListView.SelectedItem as OptiFineInstallEntity);
+            _ = Dispatcher.Install(entry, Model.IsDisplaceId ? Model.DisplaceId : Model.CustomId, ForgeListView.SelectedItem as ForgeInstallEntry,
+                FabricListView.SelectedItem as FabricInstallEntry, QuiltListView.SelectedItem as QuiltInstallEntry, OptiFineListView.SelectedItem as OptifineInstallEntry);
         };
     }
 
     private void OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (e.AddedItems.Count <= 0) return;
-        if (e.AddedItems[0] is OptiFineInstallEntity)
+        if (e.AddedItems[0] is OptifineInstallEntry)
         {
             QuiltListView.SelectedItem = null;
             FabricListView.SelectedItem = null;
@@ -60,13 +60,13 @@ public sealed partial class InstallPreview : UserControl
             QuiltListView.SelectedItem = null;
             FabricListView.SelectedItem = null;
         }
-        else if (e.AddedItems[0] is QuiltBuildEntry)
+        else if (e.AddedItems[0] is QuiltInstallEntry)
         {
             ForgeListView.SelectedItem = null;
             OptiFineListView.SelectedItem = null;
             FabricListView.SelectedItem = null;
         }
-        else if (e.AddedItems[0] is FabricBuildEntry)
+        else if (e.AddedItems[0] is FabricInstallEntry)
         {
             ForgeListView.SelectedItem = null;
             OptiFineListView.SelectedItem = null;

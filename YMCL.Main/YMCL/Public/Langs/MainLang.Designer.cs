@@ -1868,6 +1868,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 云母.
+        /// </summary>
+        public static string Mica {
+            get {
+                return ResourceManager.GetString("Mica", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 微软登录.
         /// </summary>
         public static string MicrosoftLogin {
@@ -3017,6 +3026,15 @@ namespace YMCL.Public.Langs {
         public static string TotalNumberOfMod {
             get {
                 return ResourceManager.GetString("TotalNumberOfMod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 半透明背景透明度.
+        /// </summary>
+        public static string TranslucentBackgroundOpacity {
+            get {
+                return ResourceManager.GetString("TranslucentBackgroundOpacity", resourceCulture);
             }
         }
         

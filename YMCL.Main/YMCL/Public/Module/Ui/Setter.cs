@@ -93,6 +93,9 @@ public class Setter
         YMCL.App.UiRoot.FrameView.Background = Data.Setting.CustomBackGround == Setting.CustomBackGroundWay.Default
             ? (SolidColorBrush)c2
             : null;
+        
+        var setting = Const.Data.Setting;
+        
         if (topLevel is MainWindow window)
         {
             window.TransparencyLevelHint = [WindowTransparencyLevel.Mica];
@@ -112,19 +115,18 @@ public class Setter
             {
                 Console.WriteLine(e);
             }
-        }
-
-
-        var setting = Const.Data.Setting;
-        if (setting.CustomBackGround == Setting.CustomBackGroundWay.Default)
-        {
-            return;
+            
+            if (setting.CustomBackGround == Setting.CustomBackGroundWay.Default)
+            {
+                window.TransparencyLevelHint = [WindowTransparencyLevel.None];
+                return;
+            }
         }
 
         if (setting.CustomBackGround == Setting.CustomBackGroundWay.Image &&
             !string.IsNullOrWhiteSpace(setting.WindowBackGroundImgData))
         {
-            Application.Current.Resources["MainOpacity"] = 0.875;
+            Application.Current.Resources["MainOpacity"] = Data.Setting.TranslucentBackgroundOpacity;
             try
             {
                 var bitmap = Value.Converter.Base64ToBitmap(setting.WindowBackGroundImgData);
@@ -154,7 +156,7 @@ public class Setter
 
         if (topLevel is not MainWindow window2) return;
         window2.Background = Brushes.Transparent;
-        Application.Current.Resources["MainOpacity"] = 0.75;
+        Application.Current.Resources["MainOpacity"] = Data.Setting.TranslucentBackgroundOpacity;
         window2.Root.Background = Brushes.Transparent;
         window2.TitleBar.Root.Background =
             Application.Current.ActualThemeVariant == ThemeVariant.Dark
@@ -171,6 +173,11 @@ public class Setter
         if (setting.CustomBackGround == Setting.CustomBackGroundWay.Transparent)
         {
             window2.TransparencyLevelHint = [WindowTransparencyLevel.Transparent];
+        }
+        
+        if (setting.CustomBackGround == Setting.CustomBackGroundWay.Mica)
+        {
+            window2.TransparencyLevelHint = [WindowTransparencyLevel.Mica];
         }
     }
 

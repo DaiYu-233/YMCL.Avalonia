@@ -1121,4 +1121,10 @@ MacOs 不支持自动更新
   <data name="NoDescription" xml:space="preserve">
     <value>无描述信息</value>
   </data>
+  <data name="Mica" xml:space="preserve">
+    <value>云母</value>
+  </data>
+  <data name="TranslucentBackgroundOpacity" xml:space="preserve">
+    <value>半透明背景透明度</value>
+  </data>
 </root>

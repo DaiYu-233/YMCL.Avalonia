@@ -18,6 +18,7 @@ public class Setting : ReactiveObject
     [Reactive] [JsonProperty] public string SkipUpdateVersion { get; set; } = string.Empty;
     [Reactive] [JsonProperty] public bool EnableAutoCheckUpdate { get; set; } = true;
     [Reactive] [JsonProperty] public int MaxDownloadThread { get; set; } = 64;
+    [Reactive] [JsonProperty] public double TranslucentBackgroundOpacity { get; set; } = 0.75;
     [Reactive] [JsonProperty] public bool IsCompleteJavaInitialize { get; set; }
     [Reactive] [JsonProperty] public bool IsCompleteMinecraftFolderInitialize { get; set; }
     [Reactive] [JsonProperty] public bool IsCompleteAccountInitialize { get; set; }
@@ -104,7 +105,7 @@ public class Setting : ReactiveObject
                 _ = InitUi.SetCustomHomePage();
             }
 
-            if (e.PropertyName == nameof(CustomBackGround))
+            if (e.PropertyName is nameof(CustomBackGround) or nameof(TranslucentBackgroundOpacity))
             {
                 Public.Module.Ui.Setter.SetBackGround();
             }
@@ -113,7 +114,7 @@ public class Setting : ReactiveObject
             {
                 Public.Module.Ui.Setter.ToggleTheme(Theme);
             }
-            
+
             if (e.PropertyName == nameof(MaxDownloadThread))
             {
                 DownloadMirrorManager.MaxThread = MaxDownloadThread;

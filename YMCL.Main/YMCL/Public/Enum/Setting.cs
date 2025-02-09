@@ -65,7 +65,8 @@ public class Setting
         Default,
         Image,
         AcrylicBlur,
-        Transparent
+        Transparent,
+        Mica
     }
     
     public enum AccountType

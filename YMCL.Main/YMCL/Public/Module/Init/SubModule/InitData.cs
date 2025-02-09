@@ -7,6 +7,7 @@ using FluentAvalonia.UI.Controls;
 using MinecraftLaunch;
 using MinecraftLaunch.Components.Parser;
 using MinecraftLaunch.Components.Provider;
+using MinecraftLaunch.Utilities;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
 using YMCL.Public.Langs;
@@ -109,6 +110,7 @@ public class InitData
     
     public static void InitMl()
     {
+        HttpUtil.Initialize();
         DownloadMirrorManager.MaxThread = Data.Setting.MaxDownloadThread;
         DownloadMirrorManager.IsEnableMirror = Data.Setting.DownloadSource == Enum.Setting.DownloadSource.BmclApi;
         ServicePointManager.DefaultConnectionLimit = int.MaxValue;

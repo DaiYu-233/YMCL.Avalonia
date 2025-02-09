@@ -83,6 +83,8 @@ public class Dispatcher
 
         if (quiltBuildEntry != null)
             task.AddSubTask(quiltTask);
+        
+        Console.WriteLine($"MaxThread: {DownloadMirrorManager.MaxThread}");
 
         var vanllia = await Vanllia.Install(versionManifestEntry, mcPath, task, subTasks[0], subTasks[1],
             cancellationToken);

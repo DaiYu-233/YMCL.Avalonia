@@ -164,7 +164,7 @@
                         Width="65" />
                     <Slider
                         IsSnapToTickEnabled="True"
-                        Maximum="256"
+                        Maximum="8192"
                         Minimum="8"
                         Name="MaximumDownloadThreadSlider"
                         TickFrequency="1"

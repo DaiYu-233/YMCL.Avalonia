@@ -10,10 +10,11 @@ namespace YMCL.Public.Module.IO.Network;
 
 public class NeteaseMusic
 {
+    public static string realIP => "120.230.112.69";
     public static async Task<List<SearchSingleSong.SongsItem>> SearchForSingleSong(string keyword, int page = 1)
     {
         var json = await Http.Get.GetStringAsync(
-            $"{Value.Converter.StandardizeUrl(Data.Setting.MusicApi)}cloudsearch?keywords={keyword}&offset={(page - 1) * 30}&realIP=116.25.146.177");
+            $"{Value.Converter.StandardizeUrl(Data.Setting.MusicApi)}cloudsearch?keywords={keyword}&offset={(page - 1) * 30}&realIP={realIP}");
         if (string.IsNullOrWhiteSpace(json))
         {
             return [];
@@ -27,7 +28,7 @@ public class NeteaseMusic
     public static async Task<(string show, string real)> GetDefaultKeyword()
     {
         var json = await Http.Get.GetStringAsync(
-            $"{Value.Converter.StandardizeUrl(Const.Data.Setting.MusicApi)}search/default?realIP=116.25.146.177");
+            $"{Value.Converter.StandardizeUrl(Const.Data.Setting.MusicApi)}search/default?realIP={realIP}");
         if (string.IsNullOrWhiteSpace(json))
         {
             return (string.Empty, string.Empty);
@@ -41,7 +42,7 @@ public class NeteaseMusic
     public static async Task<bool> GetMusicAvailabilityById(double id)
     {
         var json = await Http.Get.GetStringAsync(
-            $"{Value.Converter.StandardizeUrl(Const.Data.Setting.MusicApi)}check/music?id={id}&realIP=116.25.146.177");
+            $"{Value.Converter.StandardizeUrl(Const.Data.Setting.MusicApi)}check/music?id={id}&realIP={realIP}");
         if (string.IsNullOrWhiteSpace(json))
         {
             return false;
@@ -55,7 +56,7 @@ public class NeteaseMusic
     public static async Task<(string url, double ms)> GetSongUrlByIdAndLevel(double id, string level = "standard")
     {
         var json = await Http.Get.GetStringAsync(
-            $"{Value.Converter.StandardizeUrl(Const.Data.Setting.MusicApi)}song/url/v1?id={id}&level={level}&realIP=116.25.146.177");
+            $"{Value.Converter.StandardizeUrl(Const.Data.Setting.MusicApi)}song/url/v1?id={id}&level={level}&realIP={realIP}");
         if (string.IsNullOrWhiteSpace(json))
         {
             return (string.Empty, 0);
@@ -69,7 +70,7 @@ public class NeteaseMusic
     public static async Task<Lyric.Root?> GetSongLyricById(double id)
     {
         var json = await Http.Get.GetStringAsync(
-            $"{Value.Converter.StandardizeUrl(Const.Data.Setting.MusicApi)}lyric?id={id}");
+            $"{Value.Converter.StandardizeUrl(Const.Data.Setting.MusicApi)}lyric?id={id}&realIP={realIP}");
         if (string.IsNullOrWhiteSpace(json))
         {
             return null;

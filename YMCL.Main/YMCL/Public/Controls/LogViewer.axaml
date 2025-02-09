@@ -73,10 +73,13 @@
                     Margin="0,5,10,0" />
             </DockPanel>
             <ScrollViewer Margin="0,10,0,10" Name="ScrollViewer">
-                <ItemsControl ItemsSource="{Binding DisplayLogItems}" Margin="10,10,10,10">
+                <ItemsControl
+                    ItemsSource="{Binding DisplayLogItems}"
+                    Margin="10,10,10,10"
+                    Name="Control">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel />
+                            <VirtualizingStackPanel />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
@@ -85,6 +88,8 @@
                                 <Run Text="[" />
                                 <Run Foreground="#6a9955" Text="{Binding Time}" />
                                 <Run Text="] [" />
+                                <Run Foreground="#48a8ff" Text="{Binding Source}" />
+                                <Run Text="/" />
                                 <Run Foreground="{Binding Type, Converter={StaticResource LogTypeColorConverter}}" Text="{Binding Type}" />
                                 <Run Text="]" />
                                 <Run Text="{Binding Message}" />

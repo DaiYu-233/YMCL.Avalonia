@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
@@ -26,7 +27,8 @@ namespace YMCL.Public.Module.Mc.Launcher;
 
 public class LaunchJavaClientByMinecraftLaunch
 {
-    public static async Task<bool> Launch(string p_id, string p_mcPath, double p_maxMem, MinecraftLaunch.Base.Models.Game.JavaEntry p_javaPath,
+    public static async Task<bool> Launch(string p_id, string p_mcPath, double p_maxMem,
+        MinecraftLaunch.Base.Models.Game.JavaEntry p_javaPath,
         string? p_fullUrl = null, bool p_enableIndependencyCore = true, bool p_isDebug = false)
     {
         var cts = new CancellationTokenSource();
@@ -159,7 +161,7 @@ public class LaunchJavaClientByMinecraftLaunch
             JavaPath = p_javaPath,
             MaxMemorySize = Convert.ToInt32(p_maxMem),
             MinMemorySize = 512,
-            IsEnableIndependencyCore = p_enableIndependencyCore,
+            IsEnableIndependency = p_enableIndependencyCore,
             JvmArguments = [],
             LauncherName = "YMCL",
         };
@@ -180,7 +182,7 @@ public class LaunchJavaClientByMinecraftLaunch
                 {
                     var process = await runner.RunAsync(p_id, token);
                     var copyArguments = string.Join(" ", process.ArgumentList);
-                    process.Exited += async (_, _) =>
+                    process.Exited += async (_, arg) =>
                     {
                         await Dispatcher.UIThread.InvokeAsync(async () =>
                         {
@@ -196,8 +198,8 @@ public class LaunchJavaClientByMinecraftLaunch
                             }
 
                             Toast($"{MainLang.GameExited} - {p_id}");
-                            
-                            // if (eventArgs.ExitCode == 0)
+
+                            // if (process.Process.ExitCode == 0)
                             // {
                             task.FinishWithSuccess();
                             await Task.Delay(2000);
@@ -237,10 +239,17 @@ public class LaunchJavaClientByMinecraftLaunch
                         });
                     };
 
-                    process.OutputLogReceived += (_, eventArgs) =>
+                    process.OutputLogReceived += (_, arg) =>
                     {
+                        var regex = new Regex(@"^\[[^\]]*\]\s*\[([^\]]*?)(\]|$)(\s*.*)");
+                        var match = regex.Match(arg.Data.Source);
+                        var regStr = match.Groups[1].Value + match.Groups[3].Value;
                         Dispatcher.UIThread.Invoke(
-                            () => { window.Append(eventArgs.Data, DateTime.Now.ToString("HH:mm:ss"), LogType.Info); },
+                            () =>
+                            {
+                                window.Append(arg.Data.Log, arg.Data.Time, (LogType)arg.Data.LogLevel,
+                                    string.IsNullOrWhiteSpace(regStr) ? arg.Data.Source : regStr);
+                            },
                             DispatcherPriority.ApplicationIdle);
                     };
 

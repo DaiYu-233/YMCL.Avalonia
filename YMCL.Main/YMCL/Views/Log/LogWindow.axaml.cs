@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Platform;
 using Ursa.Controls;
 using YMCL.Public.Classes;
 using YMCL.Public.Controls;
@@ -14,6 +15,7 @@ public partial class LogWindow : UrsaWindow
 {
     public LogViewer Viewer { get; set; }
     public new bool CanClose { get; set; }
+
     public LogWindow()
     {
         InitializeComponent();
@@ -40,13 +42,14 @@ public partial class LogWindow : UrsaWindow
         };
     }
     
-    public void Append(string message, string time, LogType logType)
+    public void Append(string message, string time, LogType logType , string source)
     {
         var log = new LogItemEntry
         {
-            Time = time,
-            Message = message,
-            Type = logType,
+            Time = string.IsNullOrWhiteSpace(time) ? DateTime.Now.ToString("HH:mm:ss") : time,
+            Message = string.IsNullOrWhiteSpace(message) ? "Empty Message" : message,
+            Source = string.IsNullOrWhiteSpace(source) ? "Unknown" : source,
+            Type = string.IsNullOrWhiteSpace(logType.ToString()) ? LogType.Unknown : logType,
         };
         log.SetOriginal();
         Viewer.Model.LogItems.Add(log);
@@ -77,28 +80,20 @@ public partial class LogWindow : UrsaWindow
         Close();
     }
     
-    private bool _disposed;
-
     protected override void OnClosed(EventArgs e)
     {
-        base.OnClosed(e);
         Dispose();
+        base.OnClosed(e);
     }
 
     public void Dispose()
     {
-        if (_disposed) return;
+        Viewer.Dispose();
         
-        // 1. 释放托管资源
-        Content = null; // 清空内容
-        DataContext = null; // 解除数据绑定
+        Content = null; 
+        DataContext = null; 
 
-        // 2. 释放原生资源
         PlatformImpl?.Dispose();
-
-        // 3. 标记为已释放
-        _disposed = true;
-        GC.SuppressFinalize(this);
     }
 
     ~LogWindow()

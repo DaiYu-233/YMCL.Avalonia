@@ -8,9 +8,10 @@ public class LogItemEntry
     public string Original { get; set; }
     public string Time { get; set; }
     public LogType Type { get; set; }
+    public string Source { get; set; }
 
     public void SetOriginal()
     {
-        Original = $"[{Time}] [{Type}] {Message}";
+        Original = $"[{Time}] [{Source}/{Type}] {Message}";
     }
 }

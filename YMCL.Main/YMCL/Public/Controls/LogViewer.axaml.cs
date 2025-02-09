@@ -39,4 +39,13 @@ public partial class LogViewer : UserControl
             $"---- Exported Time : {time:yyyy-MM-ddTHH:mm:sszzz} ----\n\n\n" +
             $"{string.Join("\n", Model.LogItems.Select(a => a.Original))}");
     }
+    
+    public void Dispose()
+    {
+        Model.LogItems.Clear();
+        Model.DisplayLogItems.Clear();
+        Control.ItemsSource = null;
+        Control.Items.Clear();
+        ScrollViewer.Content = null;
+    }
 }

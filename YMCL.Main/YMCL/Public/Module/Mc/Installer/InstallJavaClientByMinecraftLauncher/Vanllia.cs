@@ -55,21 +55,22 @@ public class Vanllia
             }
             catch (OperationCanceledException)
             {
-                task.CancelFinish();
+                await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(task.CancelFinish);
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 if (cancellationToken.IsCancellationRequested)
                 {
-                    task.CancelFinish();
+                    await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(task.CancelFinish);
                 }
                 else
                 {
                     await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
                     {
                         ShowShortException($"{MainLang.InstallFail}: Vanllia - {entry.Id}", ex);
+                        task.FinishWithError();
                     });
-                    task.FinishWithError();
                 }
             }
         }, cancellationToken);

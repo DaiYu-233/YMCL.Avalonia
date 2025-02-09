@@ -2021,6 +2021,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 音乐Api附带IP地址.
+        /// </summary>
+        public static string MusicApiWithIP {
+            get {
+                return ResourceManager.GetString("MusicApiWithIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 音乐获取失败.
         /// </summary>
         public static string MusicGetFail {

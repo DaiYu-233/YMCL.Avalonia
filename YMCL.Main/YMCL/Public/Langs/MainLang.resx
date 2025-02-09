@@ -1127,4 +1127,7 @@ MacOs 不支持自动更新
   <data name="TranslucentBackgroundOpacity" xml:space="preserve">
     <value>半透明背景透明度</value>
   </data>
+  <data name="MusicApiWithIP" xml:space="preserve">
+    <value>音乐Api附带IP地址</value>
+  </data>
 </root>

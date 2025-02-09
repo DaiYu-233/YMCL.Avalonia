@@ -10,7 +10,7 @@ namespace YMCL.Public.Module.IO.Network;
 
 public class NeteaseMusic
 {
-    public static string realIP => "120.230.112.69";
+    public static string realIP => Data.Setting.MusicApiWithIPAddress;
     public static async Task<List<SearchSingleSong.SongsItem>> SearchForSingleSong(string keyword, int page = 1)
     {
         var json = await Http.Get.GetStringAsync(

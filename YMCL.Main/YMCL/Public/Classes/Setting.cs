@@ -79,6 +79,7 @@ public class Setting : ReactiveObject
     public JavaEntry Java { get; set; } = new() { JavaPath = MainLang.LetYMCLChooseJava, JavaStringVersion = "Auto" };
 
     [Reactive] [JsonProperty] public string WindowBackGroundImgData { get; set; } = string.Empty;
+    [Reactive] [JsonProperty] public string MusicApiWithIPAddress { get; set; } = "120.230.112.69";
 
     public Setting()
     {

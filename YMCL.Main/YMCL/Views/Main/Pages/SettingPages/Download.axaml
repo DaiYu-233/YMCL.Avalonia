@@ -107,6 +107,26 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
+                Opacity="{DynamicResource MainOpacity}"
+                Padding="6.5">
+                <DockPanel>
+                    <TextBlock
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="14"
+                        Margin="10,0,20,0"
+                        Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.MusicApiWithIP}"
+                        VerticalAlignment="Center" />
+                    <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Stretch">
+                        <TextBox
+                            FontFamily="{DynamicResource Font}"
+                            HorizontalAlignment="Stretch"
+                            Text="{Binding Setting.MusicApiWithIPAddress}" />
+                    </DockPanel>
+                </DockPanel>
+            </Border>
+            <Border
+                Background="{DynamicResource 1x}"
+                CornerRadius="5"
                 Height="40"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">

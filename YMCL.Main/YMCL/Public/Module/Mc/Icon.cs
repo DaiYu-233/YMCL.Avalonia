@@ -35,6 +35,12 @@ public class Icon
                 "YMCL.Public.Assets.McIcons.furnace_front.png");
         }
 
+        if (e.ModLoaders.Any(a => a.Type == ModLoaderType.NeoForge))
+        {
+            return Public.Module.IO.Disk.Getter.LoadBitmapFromAppFile(
+                "YMCL.Public.Assets.McIcons.NeoForgeIcon.png");
+        }
+
         if (e.ModLoaders.Any(a => a.Type == ModLoaderType.Fabric))
         {
             return Public.Module.IO.Disk.Getter.LoadBitmapFromAppFile(

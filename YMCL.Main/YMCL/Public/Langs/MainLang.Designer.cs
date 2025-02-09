@@ -258,6 +258,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 允许命令.
+        /// </summary>
+        public static string AllowCommands {
+            get {
+                return ResourceManager.GetString("AllowCommands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 所有类型.
         /// </summary>
         public static string AllType {
@@ -1204,6 +1213,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 游戏类型.
+        /// </summary>
+        public static string GameType {
+            get {
+                return ResourceManager.GetString("GameType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 更新日志.
         /// </summary>
         public static string GameUpdateLog {
@@ -1519,6 +1537,15 @@ namespace YMCL.Public.Langs {
         public static string LastModifiedTime {
             get {
                 return ResourceManager.GetString("LastModifiedTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 最后游玩时间.
+        /// </summary>
+        public static string LastPlayTime {
+            get {
+                return ResourceManager.GetString("LastPlayTime", resourceCulture);
             }
         }
         
@@ -2120,6 +2147,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 无描述信息.
+        /// </summary>
+        public static string NoDescription {
+            get {
+                return ResourceManager.GetString("NoDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 无匹配结果.
         /// </summary>
         public static string NoMatchResult {
@@ -2611,6 +2647,15 @@ namespace YMCL.Public.Langs {
         public static string SearchNoResult {
             get {
                 return ResourceManager.GetString("SearchNoResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 种子.
+        /// </summary>
+        public static string Seed {
+            get {
+                return ResourceManager.GetString("Seed", resourceCulture);
             }
         }
         

@@ -4,6 +4,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:semi="https://irihi.tech/semi"
     xmlns:sty="using:FluentAvalonia.Styling"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:u-semi="https://irihi.tech/ursa/themes/semi"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
@@ -25,6 +26,7 @@
             <Color x:Key="SystemAccentColorDark3">#00feff</Color>
             <FontFamily x:Key="Font">avares://YMCL/Public/Assets#MiSans</FontFamily>
             <FontWeight x:Key="FontWeight">Bold</FontWeight>
+            <system:Double x:Key="MainOpacity">1</system:Double>
         </ResourceDictionary>
     </Application.Resources>
     <Application.Styles>

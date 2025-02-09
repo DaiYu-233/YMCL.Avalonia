@@ -1106,4 +1106,19 @@ MacOs 不支持自动更新
     <value>获取Java信息失败
 可能此Java不正确/已损坏/无执行权限</value>
   </data>
+  <data name="Seed" xml:space="preserve">
+    <value>种子</value>
+  </data>
+  <data name="AllowCommands" xml:space="preserve">
+    <value>允许命令</value>
+  </data>
+  <data name="GameType" xml:space="preserve">
+    <value>游戏类型</value>
+  </data>
+  <data name="LastPlayTime" xml:space="preserve">
+    <value>最后游玩时间</value>
+  </data>
+  <data name="NoDescription" xml:space="preserve">
+    <value>无描述信息</value>
+  </data>
 </root>

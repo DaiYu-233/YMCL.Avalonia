@@ -274,10 +274,12 @@ public partial class GameUpdateLog : UserControl
             _bList.ForEach(a => { a.Background = color1!; });
             _translateList.ForEach(a => { a.Foreground = color!; });
         };
-        CloseButton.Click += async (_, _) =>
+        CloseButton.Click += (_, _) =>
         {
-            await Public.Module.Ui.Animator.PageLoading.ReversalLevelTwoPage(Detail);
-            await Public.Module.Ui.Animator.PageLoading.LevelTwoPage(Container);
+            _ = Public.Module.Ui.Animator.PageLoading.LevelTwoPage(Container);
+            Container.IsVisible = true;
+            Container.Opacity = (double)Application.Current.Resources["MainOpacity"]!;
+            Detail.Opacity = 0;
             Detail.IsVisible = false;
         };
         ReloadBtn.Click += (_, _) => { _ = LoadNews(); };

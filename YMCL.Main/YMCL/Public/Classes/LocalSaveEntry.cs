@@ -46,8 +46,15 @@ public class LocalSaveEntry : ReactiveObject
     public async Task ShowInfo()
     {
         var text =
-            $"{MainLang.Name}: {SaveInfo.FolderName}\n{MainLang.CreateTime}: {SaveInfo.CreationTime}\n" +
-            $"{MainLang.LastModifiedTime}: {SaveInfo.LastWriteTime}\n{MainLang.PlayerCount}: {SaveInfo.DatFileCount}\n" +
+            $"{MainLang.Name}: {SaveInfo.FolderName}\n" +
+            $"{MainLang.Seed}: {SaveInfo.Seed}\n" +
+            $"{MainLang.GameVersion}: {SaveInfo.Version}\n" +
+            $"{MainLang.AllowCommands}: {SaveInfo.AllowCommands}\n" +
+            $"{MainLang.GameType}: {SaveInfo.GameType}\n" +
+            $"{MainLang.CreateTime}: {SaveInfo.CreationTime}\n" +
+            $"{MainLang.LastPlayTime}: {SaveInfo.LastPlayTime}\n" +
+            $"{MainLang.LastModifiedTime}: {SaveInfo.LastWriteTime}\n" +
+            $"{MainLang.PlayerCount}: {SaveInfo.DatFileCount}\n" +
             $"{MainLang.DataPackCount}: {SaveInfo.ZipFileCount}";
         await ShowDialogAsync(MainLang.SaveInfo, text, b_primary: MainLang.Ok);
         Callback?.Invoke();

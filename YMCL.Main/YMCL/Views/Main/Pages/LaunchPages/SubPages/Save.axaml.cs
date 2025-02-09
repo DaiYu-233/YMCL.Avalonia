@@ -5,6 +5,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -14,6 +15,8 @@ using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using Microsoft.VisualBasic.FileIO;
 using MinecraftLaunch.Base.Models.Game;
+using MinecraftLaunch.Components.Parser;
+using MinecraftLaunch.Extensions;
 using Newtonsoft.Json.Linq;
 using YMCL.Public.Classes;
 using YMCL.Public.Enum;
@@ -94,12 +97,11 @@ public partial class Save : UserControl, INotifyPropertyChanged
         SelectedModCount.Text = $"{MainLang.SelectedItem} 0";
     }
 
-    private void LoadItems()
+    private async void LoadItems()
     {
         _items.Clear();
 
-        var saves = GetSaves(
-            Public.Module.Mc.GameSetting.GetGameSpecialFolder(_entry, GameSpecialFolder.SavesFolder));
+        var saves = await GetSaves(_entry);
         saves.ForEach(save =>
         {
             _items.Add(new LocalSaveEntry
@@ -123,70 +125,98 @@ public partial class Save : UserControl, INotifyPropertyChanged
         SelectedModCount.Text = $"{MainLang.SelectedItem} {ModManageList.SelectedItems.Count}";
     }
 
-    public static List<SaveInfo> GetSaves(string parentPath)
+    public static async Task<List<SaveInfo>> GetSaves(MinecraftEntry entry)
     {
         var folderInfos = new List<SaveInfo>();
+        var parentPath = Public.Module.Mc.GameSetting.GetGameSpecialFolder(entry, GameSpecialFolder.SavesFolder);
         var folders = Directory.GetDirectories(parentPath);
         foreach (var folderPath in folders)
         {
             try
             {
-                var folderName = Path.GetFileName(folderPath);
-                var creationTime = Directory.GetCreationTime(folderPath);
-                var lastWriteTime = Directory.GetLastWriteTime(folderPath);
-                Avalonia.Media.Imaging.Bitmap iconBitmap = null;
-                var iconPath = Path.Combine(folderPath, "icon.png");
-                if (File.Exists(iconPath))
-                {
-                    try
-                    {
-                        using var stream = new System.IO.MemoryStream(File.ReadAllBytes(iconPath));
-                        iconBitmap = new Avalonia.Media.Imaging.Bitmap(stream);
-                    }
-                    catch
-                    {
-                        iconBitmap = null;
-                    }
-                }
+            var folderName = Path.GetFileName(folderPath);
+            if (!File.Exists(Path.Combine(folderPath, "level.dat"))) continue;
+            var creationTime = Directory.GetCreationTime(folderPath);
+            var lastWriteTime = Directory.GetLastWriteTime(folderPath);
+            Avalonia.Media.Imaging.Bitmap iconBitmap = null;
+            SaveEntry? saveNBTEntry = null;
+            string iconPath = null;
+            try
+            {
+                saveNBTEntry = await entry.GetNBTParser().ParseSaveAsync(folderName);
+                iconPath = saveNBTEntry.IconFilePath;
+            }
+            catch
+            {
+            }
 
-                var datFileCount = 0;
-                var playerDataPath = Path.Combine(folderPath, "playerdata");
-                if (Directory.Exists(playerDataPath))
+            if (File.Exists(iconPath ?? Path.Combine(folderPath, "icon.png")))
+            {
+                try
                 {
-                    try
-                    {
-                        datFileCount = Directory.GetFiles(playerDataPath, "*.dat").Length;
-                    }
-                    catch
-                    {
-                        datFileCount = 0;
-                    }
+                    using var stream = new System.IO.MemoryStream(await File.ReadAllBytesAsync(iconPath ?? Path.Combine(folderPath, "icon.png")));
+                    iconBitmap = new Avalonia.Media.Imaging.Bitmap(stream);
                 }
-
-                var zipFileCount = 0;
-                var datapacksPath = Path.Combine(folderPath, "datapacks");
-                if (Directory.Exists(datapacksPath))
+                catch
                 {
-                    try
-                    {
-                        zipFileCount = Directory.GetFiles(datapacksPath, "*.zip").Length;
-                    }
-                    catch
-                    {
-                        zipFileCount = 0;
-                    }
+                    iconBitmap = null;
                 }
+            }
 
-                folderInfos.Add(new SaveInfo
+            var datFileCount = 0;
+            var playerDataPath = Path.Combine(folderPath, "playerdata");
+            if (Directory.Exists(playerDataPath))
+            {
+                try
                 {
-                    FolderName = folderName,
-                    CreationTime = creationTime,
-                    LastWriteTime = lastWriteTime,
-                    IconBitmap = iconBitmap,
-                    DatFileCount = datFileCount,
-                    ZipFileCount = zipFileCount,
-                    FolderPath = folderPath
-                });
+                    datFileCount = Directory.GetFiles(playerDataPath, "*.dat").Length;
+                }
+                catch
+                {
+                    datFileCount = 0;
+                }
+            }
+
+            var zipFileCount = 0;
+            var datapacksPath = Path.Combine(folderPath, "datapacks");
+            if (Directory.Exists(datapacksPath))
+            {
+                try
+                {
+                    zipFileCount = Directory.GetFiles(datapacksPath, "*.zip").Length;
+                }
+                catch
+                {
+                    zipFileCount = 0;
+                }
+            }
+
+            if (saveNBTEntry == null)
+            {
+                saveNBTEntry = new SaveEntry
+                {
+                    LastPlayed = new DateTime(1970, 1, 1, 0, 0, 0),
+                    Version = "Unknown",
+                    AllowCommands = false,
+                    GameType = -1,
+                };
+            }
+
+            folderInfos.Add(new SaveInfo
+            {
+                FolderName = folderName,
+                CreationTime = creationTime,
+                LastWriteTime = lastWriteTime,
+                LastPlayTime = saveNBTEntry.LastPlayed,
+                Version = saveNBTEntry.Version,
+                Seed = saveNBTEntry.Seed,
+                AllowCommands = saveNBTEntry.AllowCommands,
+                GameType = saveNBTEntry.GameType,
+                IconBitmap = iconBitmap,
+                DatFileCount = datFileCount,
+                ZipFileCount = zipFileCount,
+                FolderPath = folderPath
+            });
             }
             catch (Exception ex)
             {
@@ -218,8 +248,13 @@ public partial class Save : UserControl, INotifyPropertyChanged
         public string FolderPath { get; set; }
         public DateTime CreationTime { get; set; }
         public DateTime LastWriteTime { get; set; }
+        public DateTime LastPlayTime { get; set; }
         public Avalonia.Media.Imaging.Bitmap IconBitmap { get; set; }
         public int DatFileCount { get; set; }
         public int ZipFileCount { get; set; }
+        public string Version { get; set; }
+        public long Seed { get; set; }
+        public int GameType { get; set; }
+        public bool AllowCommands { get; set; }
     }
 }

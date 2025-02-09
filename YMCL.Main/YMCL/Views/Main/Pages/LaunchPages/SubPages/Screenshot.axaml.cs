@@ -15,6 +15,7 @@ using FluentAvalonia.UI.Controls;
 using Microsoft.VisualBasic.FileIO;
 using MinecraftLaunch.Base.Models.Game;
 using YMCL.Public.Classes;
+using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 
@@ -44,7 +45,13 @@ public partial class Screenshot : UserControl, INotifyPropertyChanged
                 FilterItems();
             }
         };
-        Loaded += (_, _) => { LoadItems(); };
+        Loaded += (_, _) =>
+        {
+            LoadItems();
+            Viewer.TranslateY = 0;
+            Viewer.TranslateX = 0;
+            Viewer.Scale = 0.6;
+        };
         DataContext = this;
         RefreshModBtn.Click += (_, _) => { LoadItems(); };
         OpenFolderBtn.Click += (_, _) =>
@@ -53,6 +60,14 @@ public partial class Screenshot : UserControl, INotifyPropertyChanged
             YMCL.Public.Module.IO.Disk.Setter.TryCreateFolder(path);
             var launcher = TopLevel.GetTopLevel(this).Launcher;
             launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(path));
+        };
+        CloseButton.Click += (_, _) =>
+        {
+            _ = Public.Module.Ui.Animator.PageLoading.LevelTwoPage(ListView);
+            ListView.IsVisible = true;
+            ListView.Opacity = (double)Application.Current.Resources["MainOpacity"]!;
+            ViewerRoot.Opacity = 0;
+            ViewerRoot.IsVisible = false;
         };
     }
 
@@ -68,7 +83,7 @@ public partial class Screenshot : UserControl, INotifyPropertyChanged
             if (Path.GetExtension(file) == ".png")
                 _items.Add(new LocalResourcePackEntry
                 {
-                    Name = Path.GetFileName(file)[..(Path.GetFileName(file).Length - 4)], Path = file,
+                    Name = Path.GetFileName(file), Path = file,
                     Icon = null, Description = $"{MainLang.ImportTime}: {new FileInfo(file).CreationTime}"
                 });
 
@@ -78,38 +93,9 @@ public partial class Screenshot : UserControl, INotifyPropertyChanged
     private void FilterItems()
     {
         Container.Children.Clear();
-        Application.Current.TryGetResource("1x", Application.Current.ActualThemeVariant,
-            out var c1);
         _items.Where(item => item.Name.Contains(Filter, StringComparison.OrdinalIgnoreCase))
-            .ToList().OrderBy(mod => mod.Name).ToList().ForEach(mod => Container.Children.Add(new Border
-            {
-                CornerRadius = new CornerRadius(5),
-                Margin = new Thickness(10, 5, 10, 5),
-                Background = (SolidColorBrush)c1,
-                Child = new StackPanel
-                {
-                    Children =
-                    {
-                        new TextBlock
-                        {
-                            HorizontalAlignment = HorizontalAlignment.Center,
-                            Text = mod.Name, Margin = new Thickness(5, 3, 5, 3),
-                        },
-                        new Border
-                        {
-                            ClipToBounds = true,
-                            Margin = new Thickness(10, 0, 10, 10),
-                            CornerRadius = new CornerRadius(5),
-                            Width = 197, Height = 120,
-                            Child = new Image
-                            {
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                Source = new Bitmap(mod.Path),
-                            }
-                        }
-                    }
-                }
-            }));
+            .ToList().OrderBy(mod => mod.Name).ToList().ForEach(mod => Container.Children.Add(
+                new ScreenshotEntry(mod.Name, mod.Path, LoadItems, () => { ShowImageViewer(mod.Path); })));
         NoMatchResultTip.IsVisible = Container.Children.Count == 0;
     }
 
@@ -126,5 +112,18 @@ public partial class Screenshot : UserControl, INotifyPropertyChanged
         if (EqualityComparer<T>.Default.Equals(field, value)) return;
         field = value;
         OnPropertyChanged(propertyName);
+    }
+
+    private void ShowImageViewer(string path)
+    {
+        FileName.Text = Path.GetFileName(path);
+        Viewer.Source = new Bitmap(path);
+        Viewer.TranslateY = 0;
+        Viewer.TranslateX = 0;
+        Viewer.Scale = 0.6;
+        _ = Public.Module.Ui.Animator.PageLoading.LevelTwoPage(ViewerRoot);
+        ViewerRoot.IsVisible = true;
+        ViewerRoot.Opacity = (double)Application.Current.Resources["MainOpacity"]!;
+        ListView.Opacity = 0;
     }
 }

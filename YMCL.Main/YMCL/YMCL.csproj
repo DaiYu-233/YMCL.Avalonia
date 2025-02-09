@@ -68,6 +68,7 @@
     <PackageReference Include="Semi.Avalonia" />
     <PackageReference Include="Semi.Avalonia.ColorPicker" />
     <PackageReference Include="System.Management" />
+    <PackageReference Include="Tomlyn" />
   </ItemGroup>
 
   <ItemGroup>

@@ -10,5 +10,9 @@ public partial class InitializeWindow : UrsaWindow
         InitializeComponent();
         InitializeView.UpdatePageAnimation(page);
         Public.Module.Ui.Setter.UpdateWindowStyle(this);
+        Loaded += (_, _) =>
+        {
+            Public.Module.Ui.Setter.UpdateWindowStyle(this);
+        };
     }
 }

@@ -24,6 +24,10 @@ public partial class CrashWindow : UrsaWindow
         View.Restart.Click += (_, _) => { AppMethod.RestartApp(); };
         View.Exit.Click += (_, _) => { Environment.Exit(0); };
         Topmost = true;
+        Loaded += (_, _) =>
+        {
+            Public.Module.Ui.Setter.UpdateWindowStyle(this);
+        };
         Show();
         Activate();
     }

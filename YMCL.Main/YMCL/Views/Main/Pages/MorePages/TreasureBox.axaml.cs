@@ -12,7 +12,7 @@ public partial class TreasureBox : UserControl
     public TreasureBox()
     {
         InitializeComponent();
-        BindingEvent();
+        BindingEvent(); 
         _ = LoadHitokoto();
         _ = LoadCodeLife();
     }

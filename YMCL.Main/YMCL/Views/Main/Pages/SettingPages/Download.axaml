@@ -21,7 +21,6 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -47,7 +46,6 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Name="CustomUpdateUrlRoot"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -82,7 +80,6 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Name="MusicApiRoot"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -107,7 +104,6 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -128,7 +124,6 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Height="40"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <DockPanel>
@@ -163,7 +158,6 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Height="40"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -199,13 +193,11 @@
                 IsVisible="{Binding Setting.MaxDownloadThread, Converter={StaticResource MaxThreadOverSafeConverter}}"
                 Message="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.DownloadThreadTooBigTip}"
                 Name="DownloadThreadWarning"
-                Opacity="{DynamicResource MainOpacity}"
                 Severity="Warning" />
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Height="40"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock

@@ -23,7 +23,6 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Name="ColorPickerRoot"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -51,7 +50,6 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -83,7 +81,6 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -109,7 +106,6 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -143,7 +139,6 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <StackPanel Margin="0,5" Spacing="5">
                     <DockPanel>
@@ -177,7 +172,6 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 Name="LyricRoot"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <StackPanel Margin="0,1" Spacing="6">
                     <DockPanel>
@@ -251,7 +245,6 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -279,7 +272,6 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock
@@ -324,7 +316,6 @@
                 CornerRadius="5"
                 Height="40"
                 IsVisible="False"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
                     <TextBlock

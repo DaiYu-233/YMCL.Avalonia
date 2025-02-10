@@ -21,6 +21,10 @@ public partial class LogWindow : UrsaWindow
         InitializeComponent();
         Viewer = new LogViewer();
         ContentControl.Content = Viewer;
+        Loaded += (_, _) =>
+        {
+            Public.Module.Ui.Setter.UpdateWindowStyle(this);
+        };
         PropertyChanged += (_, _) =>
         {
             switch (WindowState)

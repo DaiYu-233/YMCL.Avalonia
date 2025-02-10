@@ -117,6 +117,7 @@
                         DockPanel.Dock="Top"
                         Height="90"
                         HorizontalAlignment="Center"
+                        Opacity="{DynamicResource MainOpacity}"
                         VerticalAlignment="Center"
                         Width="90">
                         <Image Name="Head" Source="{Binding Setting.Account.Bitmap}" />

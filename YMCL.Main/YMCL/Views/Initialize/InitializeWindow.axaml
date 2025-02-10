@@ -34,7 +34,7 @@
         <Style Selector="Window">
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Color="White" Opacity="0" />
+                    <SolidColorBrush Color="#00ACFF00" Opacity="0" />
                 </Setter.Value>
             </Setter>
         </Style>
@@ -42,8 +42,7 @@
     <Border
         Background="{DynamicResource 1x}"
         ClipToBounds="True"
-        CornerRadius="0,0,8,8"
-        Opacity="{DynamicResource MainOpacity}"
+        CornerRadius="8"
         x:Name="Root">
         <Grid>
             <DockPanel>

@@ -20,11 +20,6 @@
     <Grid>
         <Border CornerRadius="0,0,8,8" Margin="0">
             <Grid>
-                <Border ClipToBounds="True" CornerRadius="0,0,8,8">
-                    <Viewbox Stretch="UniformToFill">
-                        <Image Name="BackGroundImg" />
-                    </Viewbox>
-                </Border>
                 <ui:NavigationView
                     AlwaysShowHeader="False"
                     FontFamily="{DynamicResource Font}"

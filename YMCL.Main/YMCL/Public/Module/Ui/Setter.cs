@@ -50,11 +50,15 @@ public class Setter
     public static void UpdateWindowStyle(UrsaWindow window, Action? action = null)
     {
         if (window == null) return;
-        if (Data.DesktopType != DesktopRunnerType.Windows && Data.DesktopType != DesktopRunnerType.MacOs)
+        if (Data.DesktopType == DesktopRunnerType.Linux ||
+            Data.DesktopType == DesktopRunnerType.FreeBSD ||
+            (Data.DesktopType == DesktopRunnerType.Windows &&
+             Environment.OSVersion.Version.Major <= 10))
         {
             window.IsManagedResizerVisible = true;
             window.SystemDecorations = SystemDecorations.None;
         }
+
         window.FindControl<Controls.TitleBar>("TitleBar").IsVisible = true;
         window.FindControl<Border>("Root").CornerRadius = new CornerRadius(8);
         window.WindowState = WindowState.Maximized;
@@ -82,9 +86,11 @@ public class Setter
 
     public static void SetBackGround()
     {
-        Application.Current.Resources["MainOpacity"] = 1.0;
+        Application.Current.Resources["MainOpacity"] =
+            Data.Setting.CustomBackGround == Setting.CustomBackGroundWay.Default
+                ? 1.0
+                : Data.Setting.TranslucentBackgroundOpacity;
         if (YMCL.App.UiRoot == null) return;
-        YMCL.App.UiRoot.BackGroundImg.Source = null;
         var topLevel = TopLevel.GetTopLevel(YMCL.App.UiRoot);
         Application.Current.TryGetResource("2x", Application.Current.ActualThemeVariant,
             out var c2);
@@ -93,91 +99,71 @@ public class Setter
         YMCL.App.UiRoot.FrameView.Background = Data.Setting.CustomBackGround == Setting.CustomBackGroundWay.Default
             ? (SolidColorBrush)c2
             : null;
-        
+
         var setting = Const.Data.Setting;
-        
-        if (topLevel is MainWindow window)
+
+        if (topLevel is not MainWindow window) return;
+
+        window.BackGroundImg.Source = null;
+
+        window.TransparencyLevelHint = [WindowTransparencyLevel.Mica];
+        window.Root.Background = (SolidColorBrush)c1;
+        try
         {
-            window.TransparencyLevelHint = [WindowTransparencyLevel.Mica];
-            /*Const.Window.main.Root.Background = Application.Current.ActualThemeVariant == ThemeVariant.Dark
-                ? SolidColorBrush.Parse("#262626")
-                : SolidColorBrush.Parse("#f6fafd");*/
-            window.TitleBar.Root.Background = Application.Current.ActualThemeVariant == ThemeVariant.Dark
-                ? SolidColorBrush.Parse("#2c2c2c")
-                : SolidColorBrush.Parse("#FFE9F6FF");
-            window.Root.Background = (SolidColorBrush)c1;
-            try
-            {
-                (Ui.Getter.FindControlByName(window, "PART_PaneRoot") as Panel).Opacity =
-                    (double)Application.Current.Resources["MainOpacity"]!;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            
-            if (setting.CustomBackGround == Setting.CustomBackGroundWay.Default)
-            {
-                window.TransparencyLevelHint = [WindowTransparencyLevel.None];
-                return;
-            }
+            (Ui.Getter.FindControlByName(window, "PART_PaneRoot") as Panel).Opacity =
+                (double)Application.Current.Resources["MainOpacity"]!;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
+        if (setting.CustomBackGround == Setting.CustomBackGroundWay.Default)
+        {
+            window.TransparencyLevelHint = [WindowTransparencyLevel.None];
+            App.UiRoot.Nav.Background = (SolidColorBrush)c1;
+        }
+        else
+        {
+            App.UiRoot.Nav.Background = Brushes.Transparent;
         }
 
         if (setting.CustomBackGround == Setting.CustomBackGroundWay.Image &&
             !string.IsNullOrWhiteSpace(setting.WindowBackGroundImgData))
         {
-            Application.Current.Resources["MainOpacity"] = Data.Setting.TranslucentBackgroundOpacity;
             try
             {
                 var bitmap = Value.Converter.Base64ToBitmap(setting.WindowBackGroundImgData);
-                YMCL.App.UiRoot.BackGroundImg.Source = bitmap;
+                window.BackGroundImg.Source = bitmap;
             }
             catch
             {
                 Const.Data.Setting.WindowBackGroundImgData = null;
                 Toast(MainLang.LoadBackGroudFromPicFailTip, type: NotificationType.Error);
-                Application.Current.Resources["MainOpacity"] = 1.0;
-                YMCL.App.UiRoot.BackGroundImg.Source = null;
-            }
-
-            if (topLevel is not MainWindow window1) return;
-            try
-            {
-                (Ui.Getter.FindControlByName(window1, "PART_PaneRoot") as Panel).Opacity =
-                    (double)Application.Current.Resources["MainOpacity"]!;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
+                window.BackGroundImg.Source = null;
             }
 
             return;
         }
 
-        if (topLevel is not MainWindow window2) return;
-        window2.Background = Brushes.Transparent;
-        Application.Current.Resources["MainOpacity"] = Data.Setting.TranslucentBackgroundOpacity;
-        window2.Root.Background = Brushes.Transparent;
-        window2.TitleBar.Root.Background =
-            Application.Current.ActualThemeVariant == ThemeVariant.Dark
-                ? SolidColorBrush.Parse("#a8242424")
-                : SolidColorBrush.Parse("#a8e7f5ff");
-        (Ui.Getter.FindControlByName(window2, "PART_PaneRoot") as Panel).Opacity =
+        window.Background = Brushes.Transparent;
+        window.Root.Background = Brushes.Transparent;
+        (Ui.Getter.FindControlByName(window, "PART_PaneRoot") as Panel).Opacity =
             (double)Application.Current.Resources["MainOpacity"]!;
 
         if (setting.CustomBackGround == Setting.CustomBackGroundWay.AcrylicBlur)
         {
-            window2.TransparencyLevelHint = [WindowTransparencyLevel.AcrylicBlur];
+            window.TransparencyLevelHint = [WindowTransparencyLevel.AcrylicBlur];
         }
 
         if (setting.CustomBackGround == Setting.CustomBackGroundWay.Transparent)
         {
-            window2.TransparencyLevelHint = [WindowTransparencyLevel.Transparent];
+            window.TransparencyLevelHint = [WindowTransparencyLevel.Transparent];
         }
-        
+
         if (setting.CustomBackGround == Setting.CustomBackGroundWay.Mica)
         {
-            window2.TransparencyLevelHint = [WindowTransparencyLevel.Mica];
+            window.TransparencyLevelHint = [WindowTransparencyLevel.Mica];
         }
     }
 
@@ -206,36 +192,39 @@ public class Setter
                 double velocityY = 20; // 垂直速度
 
                 // 使用DispatcherTimer来周期性地更新窗口位置
-                DispatcherTimer timer = new DispatcherTimer
+                var timer = new DispatcherTimer
                 {
                     Interval = TimeSpan.FromMilliseconds(10) // 设置定时器的时间间隔
                 };
-                var _screenBounds = window.Screens.All.FirstOrDefault()?.WorkingArea ??
+                Screen? first = window.Screens.All.FirstOrDefault();
+
+                var _screenBounds = first?.WorkingArea ??
                                     new PixelRect(0, 0, 800, 600);
                 timer.Tick += Timer_Tick!;
                 timer.Start();
+                return;
 
                 void Timer_Tick(object sender, EventArgs e)
                 {
-                    if (TopLevel.GetTopLevel(App.UiRoot) is not MainWindow window) return;
-                    var newPosition = new PixelPoint((int)(window.Position.X + velocityX),
-                        (int)(window.Position.Y + velocityY));
+                    if (TopLevel.GetTopLevel(App.UiRoot) is not MainWindow mainWindow) return;
+                    var newPosition = new PixelPoint((int)(mainWindow.Position.X + velocityX),
+                        (int)(mainWindow.Position.Y + velocityY));
 
                     // 检查窗口是否即将超出屏幕边界
-                    if (newPosition.X < _screenBounds.X || newPosition.X + window.Width >
+                    if (newPosition.X < _screenBounds.X || newPosition.X + mainWindow.Width >
                         _screenBounds.X + _screenBounds.Width)
                     {
                         velocityX = -velocityX; // 改变水平方向
                     }
 
-                    if (newPosition.Y < _screenBounds.Y || newPosition.Y + window.Height >
+                    if (newPosition.Y < _screenBounds.Y || newPosition.Y + mainWindow.Height >
                         _screenBounds.Y + _screenBounds.Height)
                     {
                         velocityY = -velocityY; // 改变垂直方向
                     }
 
                     // 设置新位置
-                    window.Position = newPosition;
+                    mainWindow.Position = newPosition;
                 }
             },
             //KeepSpinning

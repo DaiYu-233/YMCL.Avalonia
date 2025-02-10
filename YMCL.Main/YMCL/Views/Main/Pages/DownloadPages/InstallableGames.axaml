@@ -24,7 +24,6 @@
                 DockPanel.Dock="Top"
                 IsVisible="False"
                 Name="BedrockRoot"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="10"
                 VerticalAlignment="Top">
                 <DockPanel HorizontalAlignment="Stretch">
@@ -74,7 +73,6 @@
                 ClipToBounds="True"
                 CornerRadius="5"
                 DockPanel.Dock="Top"
-                Opacity="{DynamicResource MainOpacity}"
                 VerticalAlignment="Top">
                 <DockPanel>
                     <TextBlock
@@ -179,7 +177,6 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 DockPanel.Dock="Top"
-                Opacity="{DynamicResource MainOpacity}"
                 VerticalAlignment="Top">
                 <Expander Header="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.AllVersion}">
                     <Grid Height="300">
@@ -232,7 +229,6 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 DockPanel.Dock="Top"
-                Opacity="{DynamicResource MainOpacity}"
                 VerticalAlignment="Top">
                 <Expander Header="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.ReleaseVersion}">
                     <Grid Height="300">
@@ -276,7 +272,6 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 DockPanel.Dock="Top"
-                Opacity="{DynamicResource MainOpacity}"
                 VerticalAlignment="Top">
                 <Expander Header="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.PreviewVersion}">
                     <Grid Height="300">
@@ -320,7 +315,6 @@
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
                 DockPanel.Dock="Top"
-                Opacity="{DynamicResource MainOpacity}"
                 VerticalAlignment="Top">
                 <Expander Header="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.OldVersion}">
                     <Grid Height="300">

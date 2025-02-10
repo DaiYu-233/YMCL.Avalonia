@@ -30,7 +30,7 @@
         <Style Selector="Window">
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Color="White" Opacity="0" />
+                    <SolidColorBrush Color="#00ACFF00" Opacity="0" />
                 </Setter.Value>
             </Setter>
         </Style>

@@ -26,7 +26,6 @@
                 IsBackEnabled="False"
                 IsPaneToggleButtonVisible="False"
                 IsSettingsVisible="False"
-                Opacity="{DynamicResource MainOpacity}"
                 PaneDisplayMode="Top"
                 SelectionFollowsFocus="False"
                 x:Name="Nav">

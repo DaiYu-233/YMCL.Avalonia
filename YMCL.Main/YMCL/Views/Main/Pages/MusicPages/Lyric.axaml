@@ -13,8 +13,7 @@
         Background="{DynamicResource 1x}"
         ClipToBounds="True"
         CornerRadius="5"
-        Name="LyricRoot"
-        Opacity="{DynamicResource MainOpacity}">
+        Name="LyricRoot">
         <Border.Transitions>
             <Transitions>
                 <DoubleTransition Duration="0:0:0.25" Property="Opacity" />

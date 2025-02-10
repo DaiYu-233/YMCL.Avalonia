@@ -15,8 +15,7 @@
         Background="{DynamicResource 1x}"
         ClipToBounds="True"
         CornerRadius="5"
-        DockPanel.Dock="Right"
-        Opacity="{DynamicResource MainOpacity}">
+        DockPanel.Dock="Right">
         <DockPanel Margin="10">
             <DockPanel DockPanel.Dock="Top">
                 <TextBlock

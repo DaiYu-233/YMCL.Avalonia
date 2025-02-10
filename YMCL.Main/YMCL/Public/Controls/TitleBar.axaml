@@ -6,15 +6,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Border
-        Background="{DynamicResource TitleBarColor}"
+        Background="{DynamicResource 1x}"
         CornerRadius="8,8,0,0"
         Height="30"
         Name="Root"
+        Opacity="{DynamicResource MainOpacity}"
         VerticalAlignment="Top">
         <Grid
             Background="#00242424"
             Margin="8,0,8,0"
-            Name="MoveDragArea">
+            Name="MoveDragArea"
+            Opacity="{DynamicResource MainOpacity}">
             <TextBlock />
             <TextBlock
                 FontFamily="{DynamicResource Font}"

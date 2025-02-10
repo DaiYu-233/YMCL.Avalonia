@@ -11,6 +11,10 @@ public partial class MainWindow : UrsaWindow
         view = View;
         Public.Module.Ui.Setter.UpdateWindowStyle(this, action: () => { TitleRoot.IsVisible = true; });
         BindingEvent();
+        Loaded += (_, _) =>
+        {
+            Public.Module.Ui.Setter.UpdateWindowStyle(this);
+        };
     }
 
     private void BindingEvent()

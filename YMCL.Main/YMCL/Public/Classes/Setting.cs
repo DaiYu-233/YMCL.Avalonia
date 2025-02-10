@@ -1,4 +1,6 @@
 ﻿using Avalonia.Media;
+using Avalonia.Styling;
+using Avalonia.Threading;
 using MinecraftLaunch;
 using Newtonsoft.Json;
 using ReactiveUI;
@@ -8,6 +10,7 @@ using YMCL.Public.Module;
 using YMCL.Public.Module.Init.SubModule;
 using YMCL.Public.Module.Ui.Special;
 using YMCL.Views.Initialize.Pages;
+using YMCL.Views.Main;
 
 namespace YMCL.Public.Classes;
 
@@ -18,7 +21,7 @@ public class Setting : ReactiveObject
     [Reactive] [JsonProperty] public string SkipUpdateVersion { get; set; } = string.Empty;
     [Reactive] [JsonProperty] public bool EnableAutoCheckUpdate { get; set; } = true;
     [Reactive] [JsonProperty] public int MaxDownloadThread { get; set; } = 64;
-    [Reactive] [JsonProperty] public double TranslucentBackgroundOpacity { get; set; } = 0.75;
+    [Reactive] [JsonProperty] public double TranslucentBackgroundOpacity { get; set; } = 0.68;
     [Reactive] [JsonProperty] public bool IsCompleteJavaInitialize { get; set; }
     [Reactive] [JsonProperty] public bool IsCompleteMinecraftFolderInitialize { get; set; }
     [Reactive] [JsonProperty] public bool IsCompleteAccountInitialize { get; set; }
@@ -84,6 +87,7 @@ public class Setting : ReactiveObject
     public Setting()
     {
         var accentColorSetter = new Debouncer(() => { Public.Module.Ui.Setter.SetAccentColor(AccentColor); }, 5);
+        var _debouncer = new Debouncer(() => { Dispatcher.UIThread.Invoke(Public.Module.Ui.Setter.SetBackGround); }, 500);
         PropertyChanged += (o, e) =>
         {
             if (e.PropertyName == nameof(Language))
@@ -108,7 +112,19 @@ public class Setting : ReactiveObject
 
             if (e.PropertyName is nameof(CustomBackGround) or nameof(TranslucentBackgroundOpacity))
             {
-                Public.Module.Ui.Setter.SetBackGround();
+                Application.Current.Resources["MainOpacity"] = TranslucentBackgroundOpacity;
+                if (TopLevel.GetTopLevel(App.UiRoot) is MainWindow window)
+                {
+                    try
+                    {
+                        (Public.Module.Ui.Getter.FindControlByName(window, "PART_PaneRoot") as Panel).Opacity =
+                            (double)Application.Current.Resources["MainOpacity"]!;
+                    }
+                    catch 
+                    {
+                    }
+                }
+                _debouncer.Trigger();
             }
 
             if (e.PropertyName == nameof(Theme))

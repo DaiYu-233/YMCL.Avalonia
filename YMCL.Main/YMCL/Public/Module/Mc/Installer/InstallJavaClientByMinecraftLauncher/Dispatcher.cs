@@ -63,6 +63,12 @@ public class Dispatcher
             cts.Cancel();
         });
 
+        if (versionManifestEntry == null)
+        {
+            task.FinishWithError();
+            return false;
+        }
+
         var forgeTask = new SubTask($"{MainLang.Install}: Forge");
         var neoForgeTask = new SubTask($"{MainLang.Install}: NeoForge");
         var optiFineTask = new SubTask($"{MainLang.Install}: OptiFine");
@@ -71,7 +77,7 @@ public class Dispatcher
 
         if (forgeInstallEntry != null)
             task.AddSubTask(forgeTask);
-        
+
         if (neoForgeInstallEntry != null)
             task.AddSubTask(neoForgeTask);
 
@@ -83,19 +89,38 @@ public class Dispatcher
 
         if (quiltBuildEntry != null)
             task.AddSubTask(quiltTask);
-        
+
         Console.WriteLine($"MaxThread: {DownloadMirrorManager.MaxThread}");
 
-        var vanllia = await Vanllia.Install(versionManifestEntry, mcPath, task, subTasks[0], subTasks[1],
+        subTasks[0].Finish();
+        subTasks[1].Finish();
+
+        if (optiFineInstallEntity != null && versionManifestEntry != null && forgeInstallEntry != null)
+        {
+            var composite = await Composite.Install(versionManifestEntry, forgeInstallEntry, optiFineInstallEntity,
+                customId!, mcPath,
+                forgeTask, optiFineTask, task, cancellationToken);
+            
+            if (!composite)
+            {
+                task.FinishWithError();
+                return false;
+            }
+
+            if (!closeTaskWhenFinish || cancellationToken.IsCancellationRequested) return true;
+            task.FinishWithSuccess();
+            Toast($"{MainLang.InstallFinish} - {customId ?? versionManifestEntry.Id}", NotificationType.Success);
+
+            return true;
+        }
+
+        var vanllia = await Vanllia.Install(versionManifestEntry!, mcPath, task, subTasks[0], subTasks[1],
             cancellationToken);
         if (!vanllia)
         {
             task.FinishWithError();
             return false;
         }
-
-        subTasks[0].Finish();
-        subTasks[1].Finish();
 
         if (forgeInstallEntry != null)
         {
@@ -110,19 +135,6 @@ public class Dispatcher
             forgeTask.Finish();
         }
 
-        if (neoForgeInstallEntry != null)
-        {
-            var neoForge = await Forge.Install(neoForgeInstallEntry, customId!, mcPath, neoForgeTask, task,
-                cancellationToken);
-            if (!neoForge)
-            {
-                task.FinishWithError();
-                return false;
-            }
-
-            neoForgeTask.Finish();
-        }
-
         if (optiFineInstallEntity != null)
         {
             var optifine = await OptiFine.Install(optiFineInstallEntity, customId!, mcPath, optiFineTask, task,
@@ -134,6 +146,20 @@ public class Dispatcher
             }
 
             optiFineTask.Finish();
+        }
+
+
+        if (neoForgeInstallEntry != null)
+        {
+            var neoForge = await Forge.Install(neoForgeInstallEntry, customId!, mcPath, neoForgeTask, task,
+                cancellationToken);
+            if (!neoForge)
+            {
+                task.FinishWithError();
+                return false;
+            }
+
+            neoForgeTask.Finish();
         }
 
         if (fabricInstallEntry != null)

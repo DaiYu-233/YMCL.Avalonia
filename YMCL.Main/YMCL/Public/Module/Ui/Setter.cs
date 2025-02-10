@@ -53,7 +53,7 @@ public class Setter
         if (Data.DesktopType == DesktopRunnerType.Linux ||
             Data.DesktopType == DesktopRunnerType.FreeBSD ||
             (Data.DesktopType == DesktopRunnerType.Windows &&
-             Environment.OSVersion.Version.Major <= 10))
+             Environment.OSVersion.Version.Major < 10))
         {
             window.IsManagedResizerVisible = true;
             window.SystemDecorations = SystemDecorations.None;

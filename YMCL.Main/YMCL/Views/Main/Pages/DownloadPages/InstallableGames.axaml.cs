@@ -52,7 +52,6 @@ public partial class InstallableGames : UserControl
     {
         if (e.AddedItems.Count <= 0) return;
         (sender as ListBox).SelectedItem = null;
-        Console.WriteLine(e.AddedItems[0]);
         App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview((e.AddedItems[0] as VersionManifestEntry)!);
     }
 

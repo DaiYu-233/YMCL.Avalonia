@@ -16,7 +16,8 @@
         Background="{DynamicResource 1x}"
         ClipToBounds="True"
         CornerRadius="5"
-        Name="SearchRoot">
+        Name="SearchRoot"
+        Opacity="{DynamicResource MainOpacity}">
         <Border.Transitions>
             <Transitions>
                 <DoubleTransition Duration="0:0:0.25" Property="Opacity" />

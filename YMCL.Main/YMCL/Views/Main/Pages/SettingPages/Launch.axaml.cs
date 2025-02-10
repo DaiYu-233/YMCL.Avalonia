@@ -30,7 +30,7 @@ public partial class Launch : UserControl
                 foreach (var mo in instances)
                 {
                     var size = long.Parse(mo.Properties["AvailableMBytes"].Value.ToString()!);
-                    var used = Math.Round(size / UiProperty.Instance.SystemMaxMem * 100, 2);
+                    var used = Math.Round(100 - size / UiProperty.Instance.SystemMaxMem * 100, 2);
                     Dispatcher.UIThread.Invoke(() =>
                     {
                         var free = Math.Round(100 - size / UiProperty.Instance.SystemMaxMem * 100 -

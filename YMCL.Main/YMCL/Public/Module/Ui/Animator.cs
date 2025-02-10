@@ -58,7 +58,7 @@ public class Animator
                 });
                 control.IsVisible = true;
                 control.Margin = new Thickness(0);
-                control.Opacity = (double)Application.Current.Resources["MainOpacity"]!;
+                control.Opacity = 1;
                 await Task.Delay(TimeSpan.FromSeconds(0.45));
             }
         }

@@ -20,6 +20,7 @@
         ClipToBounds="True"
         CornerRadius="5"
         Margin="10,0,10,10"
+        Opacity="{DynamicResource MainOpacity}"
         Padding="0,10,0,0">
         <ScrollViewer>
             <StackPanel Margin="5,0,10,10" Spacing="10">

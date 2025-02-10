@@ -27,7 +27,7 @@
                             ClipToBounds="True"
                             CornerRadius="5"
                             Margin="0,0,0,10"
-                            Opacity="{DynamicResource Opacity}"
+                            Opacity="{DynamicResource MainOpacity}"
                             Padding="10">
                             <Grid>
                                 <TextBlock IsVisible="False" Name="PluginPath" />

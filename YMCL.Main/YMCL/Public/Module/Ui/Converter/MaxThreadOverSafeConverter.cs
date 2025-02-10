@@ -7,9 +7,9 @@ public class MaxThreadOverSafeConverter: IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is double intValue)
+        if (value is int intValue)
         {
-            return intValue > 64;
+            return intValue > 128;
         }
         return false;
     }

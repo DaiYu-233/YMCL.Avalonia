@@ -65,7 +65,7 @@ public partial class Screenshot : UserControl, INotifyPropertyChanged
         {
             _ = Public.Module.Ui.Animator.PageLoading.LevelTwoPage(ListView);
             ListView.IsVisible = true;
-            ListView.Opacity = (double)Application.Current.Resources["MainOpacity"]!;
+            ListView.Opacity = 1.0;
             ViewerRoot.Opacity = 0;
             ViewerRoot.IsVisible = false;
         };
@@ -123,7 +123,7 @@ public partial class Screenshot : UserControl, INotifyPropertyChanged
         Viewer.Scale = 0.6;
         _ = Public.Module.Ui.Animator.PageLoading.LevelTwoPage(ViewerRoot);
         ViewerRoot.IsVisible = true;
-        ViewerRoot.Opacity = (double)Application.Current.Resources["MainOpacity"]!;
+        ViewerRoot.Opacity = 1.0;
         ListView.Opacity = 0;
     }
 }

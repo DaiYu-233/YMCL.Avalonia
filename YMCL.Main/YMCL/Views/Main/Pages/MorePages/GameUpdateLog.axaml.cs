@@ -18,10 +18,10 @@ namespace YMCL.Views.Main.Pages.MorePages;
 
 public partial class GameUpdateLog : UserControl
 {
-    List<SelectableTextBlock> _translateList = [];
-    List<SelectableTextBlock> _tbList = [];
-    List<Border> _bList = [];
-    string _nowJsonPath = "";
+    private readonly List<SelectableTextBlock> _translateList = [];
+    private readonly List<SelectableTextBlock> _tbList = [];
+    private readonly List<Border> _bList = [];
+    private string _nowJsonPath = "";
 
     public GameUpdateLog()
     {
@@ -53,7 +53,7 @@ public partial class GameUpdateLog : UserControl
                         Width = 200, Height = 235, Tag = item.contentPath,
                         Background = c as SolidColorBrush, Margin = new Thickness(0, 0, 10, 10),
                         CornerRadius = new CornerRadius(8), ClipToBounds = true,
-                        Opacity = (double)Application.Current.Resources["MainOpacity"]!
+                        Opacity = 1.0
                     };
                     _bList.Add(root);
                     root.PointerPressed += NewsEntryClick;
@@ -148,7 +148,7 @@ public partial class GameUpdateLog : UserControl
             DetailLoading.IsVisible = true;
             _ = Public.Module.Ui.Animator.PageLoading.LevelTwoPage(Detail);
             Detail.IsVisible = true;
-            Detail.Opacity = (double)Application.Current.Resources["MainOpacity"]!;
+            Detail.Opacity = 1.0;
             Container.Opacity = 0;
             _translateList.Clear();
             DataPanel.Children.Clear();
@@ -278,7 +278,7 @@ public partial class GameUpdateLog : UserControl
         {
             _ = Public.Module.Ui.Animator.PageLoading.LevelTwoPage(Container);
             Container.IsVisible = true;
-            Container.Opacity = (double)Application.Current.Resources["MainOpacity"]!;
+            Container.Opacity = 1.0;
             Detail.Opacity = 0;
             Detail.IsVisible = false;
         };

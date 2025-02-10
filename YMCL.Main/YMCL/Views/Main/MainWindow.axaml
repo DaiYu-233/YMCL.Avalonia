@@ -58,7 +58,7 @@
                     Title="" />
                 <main:MainView Name="View" />
             </DockPanel>
-            <DockPanel Name="TitleRoot">
+            <DockPanel Name="TitleRoot" Opacity="{DynamicResource MainOpacity}">
                 <Image
                     Height="20"
                     Margin="10,6,2,0"

@@ -14,7 +14,6 @@
         Height="160"
         Margin="10,5,10,5"
         Name="Root"
-        Opacity="{DynamicResource MainOpacity}"
         Width="230">
         <DockPanel>
             <StackPanel
@@ -45,6 +44,7 @@
                 </StackPanel>
                 <TextBlock
                     HorizontalAlignment="Center"
+                    Margin="0,0,10,0"
                     Name="FileNameTextBlock"
                     TextTrimming="LeadingCharacterEllipsis"
                     VerticalAlignment="Center" />

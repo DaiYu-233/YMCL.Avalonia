@@ -21,6 +21,7 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="5"
+                Opacity="{DynamicResource MainOpacity}"
                 VerticalAlignment="Stretch">
                 <StackPanel Margin="10" Spacing="10">
                     <Border

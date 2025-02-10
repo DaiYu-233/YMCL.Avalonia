@@ -54,6 +54,12 @@ Ymcl 使用 **GPL - 3** 开放源代码，此协议要求在修改和分发软�
 **[StarLight_Core](https://github.com/Ink-Marks-Studio/StarLight.Core)**
 **[MinecraftLaunch](https://github.com/Blessing-Studio/MinecraftLaunch)**
 **[Newtonsoft.Json](https://www.newtonsoft.com/json)**
+**[Afdian.Sdk](https://github.com/yiyungent/Afdian.Sdk)**
+**[AsyncImageLoader.Avalonia](https://github.com/AvaloniaUtils/AsyncImageLoader.Avalonia)**
+**[CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet)**
+**[HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack)**
+**[ReactiveUI](https://github.com/reactiveui/reactiveui)**
+**[Tomlyn](https://github.com/xoofx/Tomlyn)**
 
 ## 企鹅群
 

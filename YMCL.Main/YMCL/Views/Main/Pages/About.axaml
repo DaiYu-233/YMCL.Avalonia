@@ -572,6 +572,42 @@
                                     Text=" Newtonsoft.Json "
                                     TextDecorations="{x:Null}" />
                             </HyperlinkButton>
+                            <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/yiyungent/Afdian.Sdk">
+                                <TextBlock
+                                    Foreground="{DynamicResource SystemAccentColor}"
+                                    Text=" Afdian.Sdk "
+                                    TextDecorations="{x:Null}" />
+                            </HyperlinkButton>
+                            <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/AvaloniaUtils/AsyncImageLoader.Avalonia">
+                                <TextBlock
+                                    Foreground="{DynamicResource SystemAccentColor}"
+                                    Text=" AsyncImageLoader.Avalonia "
+                                    TextDecorations="{x:Null}" />
+                            </HyperlinkButton>
+                            <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/CommunityToolkit/dotnet">
+                                <TextBlock
+                                    Foreground="{DynamicResource SystemAccentColor}"
+                                    Text=" CommunityToolkit.Mvvm "
+                                    TextDecorations="{x:Null}" />
+                            </HyperlinkButton>
+                            <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/zzzprojects/html-agility-pack">
+                                <TextBlock
+                                    Foreground="{DynamicResource SystemAccentColor}"
+                                    Text=" HtmlAgilityPack "
+                                    TextDecorations="{x:Null}" />
+                            </HyperlinkButton>
+                            <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/reactiveui/reactiveui">
+                                <TextBlock
+                                    Foreground="{DynamicResource SystemAccentColor}"
+                                    Text=" ReactiveUI "
+                                    TextDecorations="{x:Null}" />
+                            </HyperlinkButton>
+                            <HyperlinkButton FontFamily="{DynamicResource Font}" NavigateUri="https://github.com/xoofx/Tomlyn">
+                                <TextBlock
+                                    Foreground="{DynamicResource SystemAccentColor}"
+                                    Text=" Tomlyn "
+                                    TextDecorations="{x:Null}" />
+                            </HyperlinkButton>
                         </WrapPanel>
                     </Grid>
                 </DockPanel>

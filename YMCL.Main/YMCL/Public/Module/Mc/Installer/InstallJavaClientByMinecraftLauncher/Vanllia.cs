@@ -23,6 +23,7 @@ public class Vanllia
         var isSuccess = false;
         var installer = VanillaInstaller.Create(mcPath, entry);
         checkSubTask.State = TaskState.Running;
+        downloadSubTask.State = TaskState.Waiting;
         await Task.Run(async () =>
         {
             try

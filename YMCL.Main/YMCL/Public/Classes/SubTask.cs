@@ -26,6 +26,8 @@ public sealed class SubTask : ReactiveObject
                 GetIcon();
             }
         };
+        State = TaskState.Waiting;
+        GetIcon();
     }
 
     [Reactive] public string Name { get; set; }

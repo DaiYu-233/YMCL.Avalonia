@@ -48,13 +48,13 @@ public class Dispatcher
 
         var mcPath = Data.Setting.MinecraftFolder.Path;
 
-        var task = p_task ?? new TaskEntry($"{MainLang.Install}: {customId}(Minecraft {versionManifestEntry.Id})",
+        var task = p_task ?? new TaskEntry($"{MainLang.Install}: {customId} (Minecraft {versionManifestEntry.Id})",
             state: TaskState.Running);
         YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavTask;
         SubTask[] subTasks =
         [
             new(MainLang.CheckVersionResource),
-            new($"{MainLang.DownloadResource}(Vanllia)")
+            new($"{MainLang.DownloadResource} (Vanllia)")
         ];
         task.AddSubTaskRange(subTasks);
         task.UpdateAction(() =>
@@ -97,10 +97,10 @@ public class Dispatcher
 
         if (optiFineInstallEntity != null && versionManifestEntry != null && forgeInstallEntry != null)
         {
-            var composite = await Composite.Install(versionManifestEntry, forgeInstallEntry, optiFineInstallEntity,
-                customId!, mcPath,
+            var composite = await CompositeForgeAndOptiFine.Install(versionManifestEntry, forgeInstallEntry, optiFineInstallEntity,
+                customId!, mcPath, subTasks[0], subTasks[1],
                 forgeTask, optiFineTask, task, cancellationToken);
-            
+
             if (!composite)
             {
                 task.FinishWithError();

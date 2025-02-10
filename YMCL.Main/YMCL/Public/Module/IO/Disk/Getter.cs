@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Management;
 using System.Net.NetworkInformation;
@@ -54,7 +55,6 @@ public class Getter
                 var memTotalValue = long.Parse(memTotalValueStr);
 
                 return memTotalValue;
-
             }
             catch (Exception ex)
             {
@@ -64,7 +64,7 @@ public class Getter
 
         return 0;
     }
-    
+
     public static string GetMacAddress()
     {
         var macAddress = string.Empty;
@@ -77,7 +77,7 @@ public class Getter
 
         return macAddress.Replace("-", "").ToLower(); // 移除MAC地址中的"-"并转为小写
     }
-    
+
     public static double GetDirectoryLength(string dirPath)
     {
         //判断给定的路径是否存在,如果不存在则退出
@@ -96,7 +96,7 @@ public class Getter
         len += dis.Sum(t => GetDirectoryLength(t.FullName));
         return len;
     }
-    
+
     public static Bitmap LoadBitmapFromAppFile(string uri)
     {
         var memoryStream = new MemoryStream();
@@ -105,7 +105,7 @@ public class Getter
         memoryStream.Position = 0;
         return new Bitmap(memoryStream);
     }
-    
+
     public static string GetCurrentPlatformAndArchitecture()
     {
         // 检测操作系统  
@@ -136,5 +136,41 @@ public class Getter
 
         // 如果没有匹配项，返回未知或默认字符串  
         return "unknown";
+    }
+
+    public static List<string> GetAllFilesByExtension(string folderPath, string fileExtension)
+    {
+        List<string> files = [];
+
+        // 检查路径是否存在
+        if (!Directory.Exists(folderPath))
+        {
+            Console.WriteLine("指定的文件夹路径不存在！");
+            return files;
+        }
+
+        // 使用递归方法获取所有文件
+        var dirInfo = new DirectoryInfo(folderPath);
+        files.AddRange(GetFilesRecursive(dirInfo, fileExtension));
+
+        return files;
+
+        static List<string> GetFilesRecursive(DirectoryInfo dirInfo, string fileExtension)
+        {
+            List<string> files = [];
+
+            // 获取当前目录中的所有指定后缀的文件
+            var fileInfos = dirInfo.GetFiles(fileExtension, SearchOption.TopDirectoryOnly);
+            files.AddRange(fileInfos.Select(fileInfo => fileInfo.FullName));
+
+            // 递归获取子目录中的文件
+            var subDirs = dirInfo.GetDirectories();
+            foreach (var subDir in subDirs)
+            {
+                files.AddRange(GetFilesRecursive(subDir, fileExtension));
+            }
+
+            return files;
+        }
     }
 }

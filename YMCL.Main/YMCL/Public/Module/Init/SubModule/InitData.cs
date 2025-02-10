@@ -31,6 +31,9 @@ public class InitData
             Data.Accounts =
                 JsonConvert.DeserializeObject<ObservableCollection<AccountInfo>>(
                     await File.ReadAllTextAsync(ConfigPath.AccountDataPath));
+            Data.EnablePlugins =
+                JsonConvert.DeserializeObject<ObservableCollection<string>>(
+                    await File.ReadAllTextAsync(ConfigPath.PluginDataPath));
             Data.Setting =
                 JsonConvert.DeserializeObject<Setting>(await File.ReadAllTextAsync(ConfigPath.SettingDataPath));
         }

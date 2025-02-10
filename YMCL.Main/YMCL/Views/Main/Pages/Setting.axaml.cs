@@ -9,6 +9,7 @@ public partial class Setting : UserControl
     public readonly SettingPages.Account _account = new();
     public readonly SettingPages.Personalize _personalize = new();
     public readonly SettingPages.Download _download = new();
+    public readonly SettingPages.Plugin _plugin = new();
 
     public Setting()
     {
@@ -28,6 +29,7 @@ public partial class Setting : UserControl
                 "account" => _account,
                 "personalize" => _personalize,
                 "download" => _download,
+                "plugin" => _plugin,
                 _ => FrameView.Content as UserControl
             };
             FrameView.Content = page;

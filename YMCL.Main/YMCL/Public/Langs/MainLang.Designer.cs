@@ -1721,6 +1721,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 加载插件错误.
+        /// </summary>
+        public static string LoadPluginError {
+            get {
+                return ResourceManager.GetString("LoadPluginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 本地资源.
         /// </summary>
         public static string LocalResource {
@@ -2170,6 +2179,15 @@ namespace YMCL.Public.Langs {
         public static string NoDescription {
             get {
                 return ResourceManager.GetString("NoDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 暂无已识别插件.
+        /// </summary>
+        public static string NoIdentifiedPlugins {
+            get {
+                return ResourceManager.GetString("NoIdentifiedPlugins", resourceCulture);
             }
         }
         

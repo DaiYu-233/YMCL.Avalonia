@@ -1130,4 +1130,10 @@ MacOs 不支持自动更新
   <data name="MusicApiWithIP" xml:space="preserve">
     <value>音乐Api附带IP地址</value>
   </data>
+  <data name="NoIdentifiedPlugins" xml:space="preserve">
+    <value>暂无已识别插件</value>
+  </data>
+  <data name="LoadPluginError" xml:space="preserve">
+    <value>加载插件错误</value>
+  </data>
 </root>

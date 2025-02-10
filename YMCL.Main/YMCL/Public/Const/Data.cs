@@ -21,6 +21,8 @@ public sealed class Data : ReactiveObject
     public static WindowNotificationManager Notification { get; set; }
     public static ObservableCollection<MinecraftFolder> MinecraftFolders { get; set; }
     public static ObservableCollection<JavaEntry> JavaRuntimes { get; set; }
+    public static ObservableCollection<string> EnablePlugins { get; set; } = [];
+    public static ObservableCollection<PluginInfoEntry> IdentifiedPlugins { get; set; } = [];
     public static ObservableCollection<AccountInfo> Accounts { get; set; }
     public static ObservableCollection<MinecraftDataEntry> CurrentFolderGames { get; set; } = [];
     public static ObservableCollection<TaskEntry> TaskEntries { get; set; } = [];

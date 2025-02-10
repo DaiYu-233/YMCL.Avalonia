@@ -27,5 +27,7 @@ public static class InitDispatcher
     {
         _ = InitUi.Dispatch();
         Dispatcher.Dispatch();
+        var a = Data.Setting;
+        InitPlugin.Dispatch();
     }
 }

@@ -149,4 +149,9 @@
   <ItemGroup>
     <AdditionalFiles Include="Public\Controls\Drawers\MsgHistory\MsgHistory.axaml" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\YMCL.PluginBase\YMCL.PluginBase.csproj" />
+    <ProjectReference Include="..\..\YMCL.Plugin\YMCL.Plugin.Base\YMCL.Plugin.Base.csproj" />
+  </ItemGroup>
 </Project>

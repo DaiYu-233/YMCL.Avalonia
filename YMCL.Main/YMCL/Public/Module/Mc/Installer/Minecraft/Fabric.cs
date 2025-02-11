@@ -8,11 +8,11 @@ using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 
-namespace YMCL.Public.Module.Mc.Installer.InstallJavaClientByMinecraftLauncher;
+namespace YMCL.Public.Module.Mc.Installer.Minecraft;
 
-public class Quilt
+public class Fabric
 {
-    public static async Task<bool> Install(QuiltInstallEntry entry, string customId, string mcPath, SubTask subTask,
+    public static async Task<bool> Install(FabricInstallEntry entry, string customId, string mcPath, SubTask subTask,
         TaskEntry task, CancellationToken cancellationToken)
     {
         var isSuccess = false;
@@ -21,7 +21,7 @@ public class Quilt
         {
             try
             {
-                var installer = QuiltInstaller.Create(mcPath, entry, customId);
+                var installer = FabricInstaller.Create(mcPath, entry, customId);
                 installer.ProgressChanged += (_, x) =>
                 {
                     Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
@@ -54,12 +54,16 @@ public class Quilt
                 {
                     await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        ShowShortException($"{MainLang.InstallFail}: Quilt - {customId}", ex);
+                        ShowShortException($"{MainLang.InstallFail}: Fabric - {customId}", ex);
                     });
                     task.FinishWithError();
                 }
             }
         }, cancellationToken);
+        if (isSuccess)
+        {
+            subTask.Finish();
+        }
         return isSuccess;
     }
 }

@@ -25,7 +25,7 @@ using String = YMCL.Public.Const.String;
 
 namespace YMCL.Public.Module.Mc.Launcher;
 
-public class LaunchJavaClientByMinecraftLaunch
+public class JavaClient
 {
     public static async Task<bool> Launch(string p_id, string p_mcPath, double p_maxMem,
         MinecraftLaunch.Base.Models.Game.JavaEntry p_javaPath,

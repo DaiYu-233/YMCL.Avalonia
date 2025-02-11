@@ -7,7 +7,6 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Semi.Avalonia;
 using YMCL.Public.Enum;
-using YMCL.Public.Module.Mc.Installer.InstallJavaClientByMinecraftLauncher;
 using Dispatcher = Avalonia.Threading.Dispatcher;
 
 namespace YMCL.Public.Classes;

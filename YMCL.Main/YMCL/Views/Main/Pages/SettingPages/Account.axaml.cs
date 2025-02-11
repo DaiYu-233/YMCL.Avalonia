@@ -16,11 +16,11 @@ public partial class Account : UserControl
 
     private void BindingEvent()
     {
-        AddAccountBtn.Click += (_, _) => { _ = Public.Module.Operate.Account.AddByUi(this); };
-        DelSelectedAccountBtn.Click += (_, _) => { Public.Module.Operate.Account.RemoveSelected(); };
+        AddAccountBtn.Click += (_, _) => { _ = Public.Module.Op.Account.AddByUi(this); };
+        DelSelectedAccountBtn.Click += (_, _) => { Public.Module.Op.Account.RemoveSelected(); };
         RefreshMicrosoftSkinBtn.Click += (_, _) =>
         {
-            _ = Public.Module.Operate.Account.RefreshSelectedMicrosoftAccountSkin();
+            _ = Public.Module.Op.Account.RefreshSelectedMicrosoftAccountSkin();
         };
     }
 }

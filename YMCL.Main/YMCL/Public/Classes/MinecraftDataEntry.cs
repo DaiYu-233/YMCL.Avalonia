@@ -96,7 +96,7 @@ public sealed record MinecraftDataEntry
             LaunchAction = () =>
             {
                 if (App.UiRoot != null)
-                    YMCL.Public.Module.Mc.Launcher.LaunchBedRockByUrlScheme.Launch(App.UiRoot);
+                    YMCL.Public.Module.Mc.Launcher.BedRock.Launch(App.UiRoot);
             };
         }
         else
@@ -118,7 +118,7 @@ public sealed record MinecraftDataEntry
                     return;
                 }
 
-                _ = LaunchJavaClientByMinecraftLaunch.Launch(Id, entry.MinecraftFolderPath, setting.MaxMem,
+                _ = JavaClient.Launch(Id, entry.MinecraftFolderPath, setting.MaxMem,
                     JavaEntry.YmclToMl(setting.Java));
             };
         }

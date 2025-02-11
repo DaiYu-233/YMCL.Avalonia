@@ -1,4 +1,5 @@
 <UserControl
+    DragDrop.AllowDrop="True"
     FontFamily="{DynamicResource Font}"
     FontWeight="{DynamicResource FontWeight}"
     d:DesignHeight="450"

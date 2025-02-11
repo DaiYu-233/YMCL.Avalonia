@@ -14,6 +14,7 @@ using ReactiveUI;
 using YMCL.Public.Classes.Netease;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
+using YMCL.Public.Module;
 using YMCL.Public.Module.IO.Network;
 
 namespace YMCL.Views.Main.Pages.MusicPages;

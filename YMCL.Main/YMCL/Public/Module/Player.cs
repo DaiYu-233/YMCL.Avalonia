@@ -1,9 +1,10 @@
-using NAudio.Wave;
-using System;
 using System.IO;
 using System.Net.Http;
 using System.Timers;
+using NAudio.Wave;
 using YMCL.Public.Classes;
+
+namespace YMCL.Public.Module;
 
 public class AudioPlayer : IDisposable
 {

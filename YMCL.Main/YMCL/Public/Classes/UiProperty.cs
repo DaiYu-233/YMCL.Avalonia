@@ -5,10 +5,10 @@ using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using YMCL.Public.Classes.Netease;
+using YMCL.Public.Controls.Drawers.MsgHistory;
 using YMCL.Public.Langs;
 using YMCL.Public.Module;
 using YMCL.Public.Module.Ui.Special;
-using YMCL.Views.Main.Drawers.MsgHistory;
 
 namespace YMCL.Public.Classes;
 

@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Avalonia.Threading;
 using YMCL.Public.Classes;
 using YMCL.Public.Module.IO;
-using YMCL.Public.Module.Operate;
-using MinecraftFolder = YMCL.Public.Module.Operate.MinecraftFolder;
+using YMCL.Public.Module.Op;
+using MinecraftFolder = YMCL.Public.Module.Op.MinecraftFolder;
 
 namespace YMCL.Views.Main.Pages.SettingPages;
 

@@ -1,5 +1,4 @@
 <u:UrsaWindow
-    DragDrop.AllowDrop="True"
     FontFamily="{DynamicResource Font}"
     FontWeight="{DynamicResource FontWeight}"
     IsCloseButtonVisible="False"

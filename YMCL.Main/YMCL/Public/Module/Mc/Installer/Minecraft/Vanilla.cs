@@ -1,20 +1,16 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Avalonia.Controls.Notifications;
 using MinecraftLaunch.Base.Models.Network;
 using MinecraftLaunch.Components.Downloader;
 using MinecraftLaunch.Components.Installer;
-using MinecraftLaunch.Components.Parser;
 using YMCL.Public.Classes;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
-using Setting = YMCL.Public.Enum.Setting;
-using String = System.String;
 
-namespace YMCL.Public.Module.Mc.Installer.InstallJavaClientByMinecraftLauncher;
+namespace YMCL.Public.Module.Mc.Installer.Minecraft;
 
-public class Vanllia
+public class Vanilla
 {
     public static async Task<bool> Install(VersionManifestEntry entry, string mcPath, TaskEntry task,
         SubTask checkSubTask = null,
@@ -69,12 +65,15 @@ public class Vanllia
                 {
                     await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        ShowShortException($"{MainLang.InstallFail}: Vanllia - {entry.Id}", ex);
+                        ShowShortException($"{MainLang.InstallFail}: Vanilla - {entry.Id}", ex);
                         task.FinishWithError();
                     });
                 }
             }
         }, cancellationToken);
+        if (!isSuccess) return isSuccess;
+        checkSubTask.Finish();
+        downloadSubTask.Finish();
         return isSuccess;
     }
 }

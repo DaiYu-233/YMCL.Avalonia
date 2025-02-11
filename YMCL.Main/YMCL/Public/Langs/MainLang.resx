@@ -1136,4 +1136,22 @@ MacOs 不支持自动更新
   <data name="LoadPluginError" xml:space="preserve">
     <value>加载插件错误</value>
   </data>
+  <data name="Unrecognized" xml:space="preserve">
+    <value>无法识别</value>
+  </data>
+  <data name="ImportModPack" xml:space="preserve">
+    <value>导入整合包</value>
+  </data>
+  <data name="Prepare" xml:space="preserve">
+    <value>准备</value>
+  </data>
+  <data name="VersionIdCannotBeEmpty" xml:space="preserve">
+    <value>版本 Id 不可为空</value>
+  </data>
+  <data name="InstallModPack" xml:space="preserve">
+    <value>安装整合包</value>
+  </data>
+  <data name="PrepareInstall" xml:space="preserve">
+    <value>准备安装</value>
+  </data>
 </root>

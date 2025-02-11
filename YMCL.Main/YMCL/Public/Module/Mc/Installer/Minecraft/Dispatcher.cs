@@ -9,9 +9,8 @@ using YMCL.Public.Classes;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
-using Setting = YMCL.Public.Enum.Setting;
 
-namespace YMCL.Public.Module.Mc.Installer.InstallJavaClientByMinecraftLauncher;
+namespace YMCL.Public.Module.Mc.Installer.Minecraft;
 
 public class Dispatcher
 {
@@ -21,23 +20,29 @@ public class Dispatcher
         QuiltInstallEntry? quiltBuildEntry = null, OptifineInstallEntry? optiFineInstallEntity = null,
         TaskEntry? p_task = null, bool closeTaskWhenFinish = true)
     {
+        if (string.IsNullOrWhiteSpace(customId ?? versionManifestEntry.Id))
+        {
+            Toast($"{MainLang.VersionIdCannotBeEmpty}", NotificationType.Error);
+            return false;
+        }
+        
         var cts = new CancellationTokenSource();
         var cancellationToken = cts.Token;
         var setting = Const.Data.Setting;
+        
+        var regex = new Regex(@"[\\/:*?""<>|]");
+        var matches = regex.Matches(customId ?? versionManifestEntry.Id);
+        if (matches.Count > 0)
+        {
+            var str = string.Empty;
+            foreach (Match match in matches) str += match.Value;
+            Toast($"{MainLang.IncludeSpecialWord}: {str}", NotificationType.Error);
+            return false;
+        }
 
         if (optiFineInstallEntity != null || quiltBuildEntry != null || fabricInstallEntry != null ||
             forgeInstallEntry != null)
         {
-            var regex = new Regex(@"[\\/:*?""<>|]");
-            var matches = regex.Matches(customId ?? versionManifestEntry.Id);
-            if (matches.Count > 0)
-            {
-                var str = string.Empty;
-                foreach (Match match in matches) str += match.Value;
-                Toast($"{MainLang.IncludeSpecialWord}: {str}", NotificationType.Error);
-                return false;
-            }
-
             if (Directory.Exists(Path.Combine(setting.MinecraftFolder.Path, "versions",
                     customId ?? versionManifestEntry.Id)))
             {
@@ -54,7 +59,7 @@ public class Dispatcher
         SubTask[] subTasks =
         [
             new(MainLang.CheckVersionResource),
-            new($"{MainLang.DownloadResource} (Vanllia)")
+            new($"{MainLang.Install}: Vanilla {versionManifestEntry.Id}")
         ];
         task.AddSubTaskRange(subTasks);
         task.UpdateAction(() =>
@@ -114,9 +119,9 @@ public class Dispatcher
             return true;
         }
 
-        var vanllia = await Vanllia.Install(versionManifestEntry!, mcPath, task, subTasks[0], subTasks[1],
+        var vanilla = await Vanilla.Install(versionManifestEntry!, mcPath, task, subTasks[0], subTasks[1],
             cancellationToken);
-        if (!vanllia)
+        if (!vanilla)
         {
             task.FinishWithError();
             return false;

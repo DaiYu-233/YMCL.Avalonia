@@ -20,11 +20,11 @@ public partial class JavaRuntime : UserControl
     {
         AutoScanJavaRuntimeBtn.Click += (_, _) =>
         {
-            Public.Module.Operate.JavaRuntime.AddByAutoScan();
+            Public.Module.Op.JavaRuntime.AddByAutoScan();
         };
         ManualAddJavaRuntimeBtn.Click += async (_, _) =>
         {
-            await Public.Module.Operate.JavaRuntime.AddByUi(this);
+            await Public.Module.Op.JavaRuntime.AddByUi(this);
         };
     }
 }

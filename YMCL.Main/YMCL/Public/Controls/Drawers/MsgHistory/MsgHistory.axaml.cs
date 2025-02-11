@@ -1,8 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-
-namespace YMCL.Views.Main.Drawers.MsgHistory;
+﻿namespace YMCL.Public.Controls.Drawers.MsgHistory;
 
 public partial class MsgHistory : UserControl
 {

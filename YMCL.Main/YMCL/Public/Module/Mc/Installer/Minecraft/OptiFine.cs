@@ -9,11 +9,11 @@ using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 
-namespace YMCL.Public.Module.Mc.Installer.InstallJavaClientByMinecraftLauncher;
+namespace YMCL.Public.Module.Mc.Installer.Minecraft;
 
-public class Fabric
+public class OptiFine
 {
-    public static async Task<bool> Install(FabricInstallEntry entry, string customId, string mcPath, SubTask subTask,
+    public static async Task<bool> Install(OptifineInstallEntry entry, string customId, string mcPath, SubTask subTask,
         TaskEntry task, CancellationToken cancellationToken)
     {
         var isSuccess = false;
@@ -22,7 +22,8 @@ public class Fabric
         {
             try
             {
-                var installer = FabricInstaller.Create(mcPath, entry, customId);
+                var installer = OptifineInstaller.Create(mcPath,
+                    Data.JavaRuntimes.FirstOrDefault(x => x.MajorVersion != 0).JavaPath, entry, customId);
                 installer.ProgressChanged += (_, x) =>
                 {
                     Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
@@ -37,7 +38,7 @@ public class Fabric
                         subTask.TotalTask = x.TotalStepTaskCount;
                     });
                 };
-
+                
                 await installer.InstallAsync(cancellationToken);
                 isSuccess = true;
             }
@@ -55,12 +56,16 @@ public class Fabric
                 {
                     await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        ShowShortException($"{MainLang.InstallFail}: Fabric - {customId}", ex);
+                        ShowShortException($"{MainLang.InstallFail}: OptiFine - {customId}", ex);
                     });
                     task.FinishWithError();
                 }
             }
         }, cancellationToken);
+        if (isSuccess)
+        {
+            subTask.Finish();
+        }
         return isSuccess;
     }
 }

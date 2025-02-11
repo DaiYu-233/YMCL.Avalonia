@@ -1,6 +1,6 @@
 ﻿namespace YMCL.Public.Module.Mc.Launcher;
 
-public class LaunchBedRockByUrlScheme
+public class BedRock
 {
     public static void Launch(Control sender)
     {

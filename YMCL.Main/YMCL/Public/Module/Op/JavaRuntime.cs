@@ -1,17 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using Avalonia.Platform.Storage;
 using MinecraftLaunch.Utilities;
 using Newtonsoft.Json;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
-using ImmutableArrayExtensions = System.Linq.ImmutableArrayExtensions;
 
-namespace YMCL.Public.Module.Operate;
+namespace YMCL.Public.Module.Op;
 
 public class JavaRuntime
 {

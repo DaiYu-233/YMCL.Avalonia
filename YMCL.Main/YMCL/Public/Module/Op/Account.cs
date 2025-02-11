@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.JavaScript;
-using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using Avalonia.Layout;
 using Avalonia.Media;
@@ -10,7 +8,6 @@ using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using MinecraftLaunch.Base.Models.Authentication;
 using MinecraftLaunch.Components.Authenticator;
-using MinecraftLaunch.Skin;
 using MinecraftLaunch.Skin.Class.Fetchers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -20,7 +17,7 @@ using YMCL.Public.Module.Value;
 using Setting = YMCL.Public.Enum.Setting;
 using String = YMCL.Public.Const.String;
 
-namespace YMCL.Public.Module.Operate;
+namespace YMCL.Public.Module.Op;
 
 public class Account
 {

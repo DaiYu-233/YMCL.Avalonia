@@ -9,7 +9,7 @@ using ReactiveUI;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Init.SubModule.GetDataFromNetwork;
 using YMCL.ViewModels;
-using Dispatcher = YMCL.Public.Module.Mc.Installer.InstallJavaClientByMinecraftLauncher.Dispatcher;
+using Dispatcher = YMCL.Public.Module.Mc.Installer.Minecraft.Dispatcher;
 using String = string;
 
 namespace YMCL.Views.Main.Pages.DownloadPages;

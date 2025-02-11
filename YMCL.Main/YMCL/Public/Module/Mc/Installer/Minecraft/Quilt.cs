@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MinecraftLaunch.Base.Models.Network;
 using MinecraftLaunch.Components.Downloader;
@@ -9,11 +8,11 @@ using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 
-namespace YMCL.Public.Module.Mc.Installer.InstallJavaClientByMinecraftLauncher;
+namespace YMCL.Public.Module.Mc.Installer.Minecraft;
 
-public class OptiFine
+public class Quilt
 {
-    public static async Task<bool> Install(OptifineInstallEntry entry, string customId, string mcPath, SubTask subTask,
+    public static async Task<bool> Install(QuiltInstallEntry entry, string customId, string mcPath, SubTask subTask,
         TaskEntry task, CancellationToken cancellationToken)
     {
         var isSuccess = false;
@@ -22,8 +21,7 @@ public class OptiFine
         {
             try
             {
-                var installer = OptifineInstaller.Create(mcPath,
-                    Data.JavaRuntimes.FirstOrDefault(x => x.MajorVersion != 0).JavaPath, entry, customId);
+                var installer = QuiltInstaller.Create(mcPath, entry, customId);
                 installer.ProgressChanged += (_, x) =>
                 {
                     Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
@@ -38,7 +36,7 @@ public class OptiFine
                         subTask.TotalTask = x.TotalStepTaskCount;
                     });
                 };
-                
+
                 await installer.InstallAsync(cancellationToken);
                 isSuccess = true;
             }
@@ -56,12 +54,16 @@ public class OptiFine
                 {
                     await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        ShowShortException($"{MainLang.InstallFail}: OptiFine - {customId}", ex);
+                        ShowShortException($"{MainLang.InstallFail}: Quilt - {customId}", ex);
                     });
                     task.FinishWithError();
                 }
             }
         }, cancellationToken);
+        if (isSuccess)
+        {
+            subTask.Finish();
+        }
         return isSuccess;
     }
 }

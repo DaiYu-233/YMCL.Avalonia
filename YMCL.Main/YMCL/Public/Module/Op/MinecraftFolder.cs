@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json;
 using YMCL.Public.Langs;
-using YMCL.Public.Module.IO;
 
-namespace YMCL.Public.Module.Operate;
+namespace YMCL.Public.Module.Op;
 
 public class MinecraftFolder
 {

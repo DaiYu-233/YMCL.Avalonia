@@ -18,7 +18,7 @@ public partial class MinecraftFolder : UserControl
         MinecraftFolderListBox.ItemsSource = Data.MinecraftFolders;
         ManualAddMinecraftFolderBtn.Click += async (_, _) =>
         {
-            await Public.Module.Operate.MinecraftFolder.AddByUi(this);
+            await Public.Module.Op.MinecraftFolder.AddByUi(this);
         };
         MinecraftFolderListBox.SelectionChanged += (_, _) =>
         {

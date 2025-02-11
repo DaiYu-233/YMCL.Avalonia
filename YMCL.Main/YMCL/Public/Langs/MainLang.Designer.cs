@@ -1331,6 +1331,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 导入整合包.
+        /// </summary>
+        public static string ImportModPack {
+            get {
+                return ResourceManager.GetString("ImportModPack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 导入成功.
         /// </summary>
         public static string ImportSuccess {
@@ -1426,6 +1435,15 @@ namespace YMCL.Public.Langs {
         public static string InstallFinish {
             get {
                 return ResourceManager.GetString("InstallFinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 安装整合包.
+        /// </summary>
+        public static string InstallModPack {
+            get {
+                return ResourceManager.GetString("InstallModPack", resourceCulture);
             }
         }
         
@@ -2390,6 +2408,24 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 准备.
+        /// </summary>
+        public static string Prepare {
+            get {
+                return ResourceManager.GetString("Prepare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 准备安装.
+        /// </summary>
+        public static string PrepareInstall {
+            get {
+                return ResourceManager.GetString("PrepareInstall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 预览版本.
         /// </summary>
         public static string PreviewVersion {
@@ -3130,6 +3166,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 无法识别.
+        /// </summary>
+        public static string Unrecognized {
+            get {
+                return ResourceManager.GetString("Unrecognized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 不支持的文件类型.
         /// </summary>
         public static string UnsupportedFileType {
@@ -3270,6 +3315,15 @@ namespace YMCL.Public.Langs {
         public static string VersionFolder {
             get {
                 return ResourceManager.GetString("VersionFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 版本 Id 不可为空.
+        /// </summary>
+        public static string VersionIdCannotBeEmpty {
+            get {
+                return ResourceManager.GetString("VersionIdCannotBeEmpty", resourceCulture);
             }
         }
         

@@ -2,7 +2,7 @@
 using Avalonia.Controls.Notifications;
 using YMCL.ViewModels;
 
-namespace YMCL.Views.Main.Drawers.MsgHistory;
+namespace YMCL.Public.Controls.Drawers.MsgHistory;
 
 public class MsgHistoryViewModel : NotifyPropertyModelBase
 {

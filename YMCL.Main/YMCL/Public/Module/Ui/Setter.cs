@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
@@ -228,6 +228,17 @@ public class Setter
                 }
             },
             //KeepSpinning
+            async () =>
+            {
+                if (TopLevel.GetTopLevel(App.UiRoot) is not MainWindow window) return;
+                int e =20;
+
+                while (e>0)
+                {
+                   var result=await ShowDialogAsync(title: "Oh!DaiYu!", msg: "你喜欢YMCL这款启动器吗？", b_primary:"喜欢",b_cancel:"不是不喜欢");
+                    e--;
+                }
+            },
             async () =>
             {
                 var deg = 0;

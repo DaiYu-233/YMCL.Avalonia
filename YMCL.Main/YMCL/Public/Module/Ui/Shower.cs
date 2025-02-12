@@ -26,7 +26,7 @@ public class Shower
             NotificationType = notification.Type,
             Classes = { "Light" }
         });
-        Data.Notification.Show(notification, notification.Type,TimeSpan.FromSeconds(80), classes: ["Light"]);
+        Data.Notification.Show(notification, notification.Type, classes: ["Light"]);
     }
 
     public static void ShowShortException(string msg, Exception ex)

@@ -19,20 +19,20 @@ public class Animator
                 control.Opacity = 0;
                 control.Transitions.Add(new ThicknessTransition
                 {
-                    Duration = TimeSpan.FromSeconds(0.45),
+                    Duration = TimeSpan.FromSeconds(0.35),
                     Easing = new SineEaseInOut(),
                     Property = Layoutable.MarginProperty
                 });
                 control.Transitions.Add(new DoubleTransition
                 {
-                    Duration = TimeSpan.FromSeconds(0.45),
+                    Duration = TimeSpan.FromSeconds(0.35),
                     Easing = new SineEaseInOut(),
                     Property = Visual.OpacityProperty
                 });
                 control.IsVisible = true;
                 control.Margin = new Thickness(0);
                 control.Opacity = 1;
-                await Task.Delay(TimeSpan.FromSeconds(0.45));
+                await Task.Delay(TimeSpan.FromSeconds(0.35));
             }
         }
         
@@ -46,20 +46,20 @@ public class Animator
                 control.Opacity = 0;
                 control.Transitions.Add(new ThicknessTransition
                 {
-                    Duration = TimeSpan.FromSeconds(0.45),
+                    Duration = TimeSpan.FromSeconds(0.35),
                     Easing = new SineEaseInOut(),
                     Property = Layoutable.MarginProperty
                 });
                 control.Transitions.Add(new DoubleTransition
                 {
-                    Duration = TimeSpan.FromSeconds(0.45),
+                    Duration = TimeSpan.FromSeconds(0.35),
                     Easing = new SineEaseInOut(),
                     Property = Visual.OpacityProperty
                 });
                 control.IsVisible = true;
                 control.Margin = new Thickness(0);
                 control.Opacity = 1;
-                await Task.Delay(TimeSpan.FromSeconds(0.45));
+                await Task.Delay(TimeSpan.FromSeconds(0.35));
             }
         }
         

@@ -10,6 +10,7 @@ using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using Language = YMCL.Public.Classes.Language;
 using Setting = YMCL.Public.Classes.Setting;
+using WindowNotificationManager = Ursa.Controls.WindowNotificationManager;
 
 namespace YMCL.Public.Const;
 

@@ -51,14 +51,14 @@ public class App : Application
             if (ifShowInit.ifShow)
             {
                 var view = new InitializeWindow(ifShowInit.page);
-                Data.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
+                Data.Notification = new Ursa.Controls.WindowNotificationManager(TopLevel.GetTopLevel(view));
                 desktop.MainWindow = view;
             }
             else
             {
                 var view = new MainWindow(out var mainView);
                 UiRoot = mainView;
-                Data.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
+                Data.Notification = new Ursa.Controls.WindowNotificationManager(TopLevel.GetTopLevel(view));
                 desktop.MainWindow = view;
                 view.Show();
             }
@@ -68,14 +68,14 @@ public class App : Application
             if (ifShowInit.ifShow)
             {
                 var view = new InitializeView(ifShowInit.page);
-                Data.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
+                Data.Notification = new Ursa.Controls.WindowNotificationManager(TopLevel.GetTopLevel(view));
                 singleViewPlatform.MainView = view;
             }
             else
             {
                 var view = new MainView();
                 UiRoot = view;
-                Data.Notification = new WindowNotificationManager(TopLevel.GetTopLevel(view));
+                Data.Notification = new Ursa.Controls.WindowNotificationManager(TopLevel.GetTopLevel(view));
                 singleViewPlatform.MainView = view;
             }
         }

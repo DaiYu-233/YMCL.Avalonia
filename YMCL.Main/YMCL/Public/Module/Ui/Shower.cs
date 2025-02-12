@@ -6,6 +6,7 @@ using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using YMCL.Public.Classes;
 using YMCL.Public.Langs;
+using Notification = Ursa.Controls.Notification;
 
 namespace YMCL.Public.Module.Ui;
 

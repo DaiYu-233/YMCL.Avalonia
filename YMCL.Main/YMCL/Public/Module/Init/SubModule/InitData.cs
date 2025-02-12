@@ -114,6 +114,7 @@ public class InitData
     public static void InitMl()
     {
         HttpUtil.Initialize();
+        CurseforgeProvider.CurseforgeApiKey = Const.String.CurseForgeApiKey;
         DownloadMirrorManager.MaxThread = Data.Setting.MaxDownloadThread;
         DownloadMirrorManager.IsEnableMirror = Data.Setting.DownloadSource == Enum.Setting.DownloadSource.BmclApi;
         ServicePointManager.DefaultConnectionLimit = int.MaxValue;

@@ -116,7 +116,7 @@ public class CurseForge
                 }
             }
 
-
+            installTask.State = TaskState.Running;
             
             var cfModpackInstaller = CurseforgeModpackInstaller.Create(mcPath, path, modpackEntry,
                 new MinecraftParser(mcPath).GetMinecraft(id));
@@ -134,17 +134,13 @@ public class CurseForge
 
             isSuccess = true;
         }
-        catch (OperationCanceledException)
-        {
-            task.CancelFinish();
-            task.Cancel();
-        }
         catch (Exception e)
         {
             if (cancellationToken.IsCancellationRequested)
             {
                 task.CancelFinish();
                 task.Cancel();
+                Directory.Delete(mcPath, true);
             }
             else
             {

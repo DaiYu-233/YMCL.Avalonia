@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Avalonia.Controls.Notifications;
 using MinecraftLaunch.Components.Parser;
 using ReactiveUI;
 using YMCL.Public.Classes;
@@ -10,6 +9,7 @@ using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using Language = YMCL.Public.Classes.Language;
 using Setting = YMCL.Public.Classes.Setting;
+using WindowNotificationManager = Ursa.Controls.WindowNotificationManager;
 
 namespace YMCL.Public.Const;
 

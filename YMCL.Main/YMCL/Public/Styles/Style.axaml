@@ -83,6 +83,6 @@
         <Setter Property="Opacity" Value="{DynamicResource MainOpacity}" />
     </Style>
     <Style Selector="u|NotificationCard">
-        <Setter Property="Opacity" Value="{DynamicResource MainOpacity}" />
+        <Setter Property="Opacity" Value="{StaticResource MainOpacity}" />
     </Style>
 </Styles>

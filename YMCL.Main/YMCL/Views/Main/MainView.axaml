@@ -20,6 +20,8 @@
 
     <Grid>
         <Border CornerRadius="0,0,8,8" Margin="0">
+            <StackPanel>
+                
             <Grid>
                 <ui:NavigationView
                     AlwaysShowHeader="False"
@@ -325,6 +327,8 @@
                         Name="FrameView" />
                 </ui:NavigationView>
             </Grid>
+                <Button Command="{Binding TestCommand}">Test Button</Button>
+            </StackPanel>
         </Border>
     </Grid>
 </UserControl>

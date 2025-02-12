@@ -1,11 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using YMCL.Public.Module.Ui;
 using YMCL.Views.Main.Pages;
 
 namespace YMCL.ViewModels;
 
-public class MainViewModel : ReactiveObject
+public partial class MainViewModel : ReactiveObject
 {
     public static Rect _frameBounds = new();
     public static readonly About _about = new();
@@ -42,5 +44,12 @@ public class MainViewModel : ReactiveObject
             _ => null
         };
         _ = Public.Module.Ui.Animator.PageLoading.LevelOnePage(CurrentPage);
+    }
+
+
+    [RelayCommand]
+    public void Test()
+    {
+        Shower.Toast("Test Msg");
     }
 }

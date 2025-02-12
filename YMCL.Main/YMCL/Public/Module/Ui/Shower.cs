@@ -5,6 +5,7 @@ using Avalonia.Media;
 using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using YMCL.Public.Classes;
+using Notification = Ursa.Controls.Notification;
 using YMCL.Public.Langs;
 
 namespace YMCL.Public.Module.Ui;
@@ -18,13 +19,14 @@ public class Shower
         if (!string.IsNullOrWhiteSpace(title)) showTitle = title;
         if (time) showTitle += $" - {DateTime.Now:HH:mm:ss}";
         var notification = new Notification(showTitle, msg, type);
+        
         Data.UiProperty.MsgHistoryViewModel.NotificationCards.Insert(0, new NotificationCard()
         {
             Content = notification,
             NotificationType = notification.Type,
             Classes = { "Light" }
         });
-        Data.Notification.Show(notification, notification.Type, classes: ["Light"]);
+        Data.Notification.Show(notification, notification.Type,TimeSpan.FromSeconds(80), classes: ["Light"]);
     }
 
     public static void ShowShortException(string msg, Exception ex)

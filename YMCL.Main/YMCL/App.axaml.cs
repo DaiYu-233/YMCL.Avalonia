@@ -6,6 +6,7 @@ using Avalonia.Controls.Notifications;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Threading;
 using YMCL.Public.Module.Init;
+using WindowNotificationManager = Ursa.Controls.WindowNotificationManager;
 using YMCL.Public.Module.Init.SubModule;
 using YMCL.ViewModels;
 using YMCL.Views;

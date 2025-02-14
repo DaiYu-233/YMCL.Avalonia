@@ -1154,4 +1154,10 @@ MacOs 不支持自动更新
   <data name="PrepareInstall" xml:space="preserve">
     <value>准备安装</value>
   </data>
+  <data name="SaveSkinFile" xml:space="preserve">
+    <value>保存皮肤文件</value>
+  </data>
+  <data name="SaveFinish" xml:space="preserve">
+    <value>保存完成</value>
+  </data>
 </root>

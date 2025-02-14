@@ -199,7 +199,10 @@ public partial class Music : UserControl
                 {
                     Title = MainLang.SaveAudioFile,
                     SuggestedFileName = $"{song.SongName}.mp3",
-                    DefaultExtension = "mp3"
+                    FileTypeChoices =
+                    [
+                        new FilePickerFileType("Audio File") { Patterns = ["*.mp3"] }
+                    ]
                 })).Path.LocalPath;
             if (string.IsNullOrWhiteSpace(path)) return;
             if (song.Type == SongType.Local)

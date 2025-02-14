@@ -31,7 +31,10 @@ public partial class LogViewer : UserControl
             {
                 Title = MainLang.ExportLogFile,
                 SuggestedFileName = $"{time:yyyy-MM-ddTHH-mm-sszz}.log",
-                DefaultExtension = "log"
+                FileTypeChoices =
+                [
+                    new FilePickerFileType("Log File") { Patterns = ["*.log"] }
+                ]
             }))?.Path.LocalPath;
         if (string.IsNullOrWhiteSpace(path)) return;
         _ = File.WriteAllTextAsync(path,

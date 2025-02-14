@@ -11,6 +11,12 @@ public class Converter
         return base64String;
     }
     
+    public static byte[] Base64ToBytes(string base64String)
+    {
+        var bytes = Convert.FromBase64String(base64String);
+        return bytes;
+    }
+    
     public static string StandardizeUrl(string url)
     {
         // 检查字符串是否以协议开始，如果没有，则添加http协议

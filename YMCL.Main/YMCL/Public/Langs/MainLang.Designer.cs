@@ -2633,6 +2633,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 保存完成.
+        /// </summary>
+        public static string SaveFinish {
+            get {
+                return ResourceManager.GetString("SaveFinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 存档信息.
         /// </summary>
         public static string SaveInfo {
@@ -2656,6 +2665,15 @@ namespace YMCL.Public.Langs {
         public static string SavesFolder {
             get {
                 return ResourceManager.GetString("SavesFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 保存皮肤文件.
+        /// </summary>
+        public static string SaveSkinFile {
+            get {
+                return ResourceManager.GetString("SaveSkinFile", resourceCulture);
             }
         }
         

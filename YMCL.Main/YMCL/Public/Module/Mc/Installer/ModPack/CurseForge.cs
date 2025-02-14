@@ -24,14 +24,15 @@ public class CurseForge
         var task = new TaskEntry($"{MainLang.Install}: {id}", state: TaskState.Running);
         var cts = new CancellationTokenSource();
         var cancellationToken = cts.Token;
+        var mcPath = Data.Setting.MinecraftFolder.Path;
         task.UpdateAction(() =>
         {
             cts.Cancel();
             task.CancelWaitFinish();
+            if (Directory.Exists(Path.Combine(mcPath, "versions", id)))
+                Directory.Delete(Path.Combine(mcPath, "versions", id), true);
         });
-        var mcPath = Data.Setting.MinecraftFolder.Path;
         var installTask = new SubTask($"{MainLang.InstallModPack}: {id}");
-
         var prepareTask = new SubTask($"{MainLang.PrepareInstall}");
         var vanillaTask = new SubTask($"{MainLang.Install}: Vanilla {modpackEntry.McVersion}");
         var checkTask = new SubTask(MainLang.CheckVersionResource);
@@ -83,10 +84,10 @@ public class CurseForge
                     task.AddSubTask(fabricTask);
                 }
             });
-            
+
             task.AddSubTask(installTask);
             prepareTask.Finish();
-            
+
             foreach (var entry in installEntrys)
             {
                 if (entry is VersionManifestEntry versionManifestEntry)
@@ -97,7 +98,7 @@ public class CurseForge
                 else if (entry is ForgeInstallEntry forgeInstallEntry)
                 {
                     await Installer.Minecraft.Forge.Install(forgeInstallEntry, id, mcPath,
-                        forgeTask, task, cancellationToken);
+                        forgeInstallEntry.IsNeoforge ? neoForgeTask : forgeTask, task, cancellationToken);
                 }
                 else if (entry is OptifineInstallEntry optifineInstallEntry)
                 {
@@ -117,7 +118,7 @@ public class CurseForge
             }
 
             installTask.State = TaskState.Running;
-            
+
             var cfModpackInstaller = CurseforgeModpackInstaller.Create(mcPath, path, modpackEntry,
                 new MinecraftParser(mcPath).GetMinecraft(id));
             task.Model.BottomLeftInfo = string.Empty;
@@ -126,12 +127,39 @@ public class CurseForge
                 task.UpdateValue(x.Progress * 100);
                 task.Model.TopRightInfo =
                     x.IsStepSupportSpeed ? FileDownloader.GetSpeedText(x.Speed) : string.Empty;
-                installTask.Name = $"{MainLang.Install}: {id} (Installing ModPack)";
+                task.Model.BottomLeftInfo = x.StepName.ToString();
+                installTask.Name = $"{MainLang.Install}: {id} ({x.StepName})";
                 installTask.FinishedTask = x.FinishedStepTaskCount;
                 installTask.TotalTask = x.TotalStepTaskCount;
             };
-            await cfModpackInstaller.InstallAsync(cancellationToken);
-
+            cancellationToken.ThrowIfCancellationRequested();
+            await Task.Run(async () =>
+            {
+                try
+                {
+                    await cfModpackInstaller.InstallAsync(cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    Dispatcher.UIThread.Invoke(() =>
+                    {
+                        if (cancellationToken.IsCancellationRequested)
+                        {
+                            task.CancelFinish();
+                            task.Cancel();
+                            if (Directory.Exists(Path.Combine(mcPath, "versions", id)))
+                                Directory.Delete(Path.Combine(mcPath, "versions", id), true);
+                        }
+                        else
+                        {
+                            ShowShortException($"{MainLang.InstallFail}: {id}", e);
+                        }
+                    });
+                    isSuccess = false;
+                }
+            });
+            cancellationToken.ThrowIfCancellationRequested();
             isSuccess = true;
         }
         catch (Exception e)
@@ -140,7 +168,8 @@ public class CurseForge
             {
                 task.CancelFinish();
                 task.Cancel();
-                Directory.Delete(mcPath, true);
+                if (Directory.Exists(Path.Combine(mcPath, "versions", id)))
+                    Directory.Delete(Path.Combine(mcPath, "versions", id), true);
             }
             else
             {
@@ -151,7 +180,7 @@ public class CurseForge
         }
 
 
-        if (cancellationToken.IsCancellationRequested) return isSuccess;
+        if (cancellationToken.IsCancellationRequested) return false;
         if (isSuccess)
         {
             Toast($"{MainLang.InstallFinish}: {id}");

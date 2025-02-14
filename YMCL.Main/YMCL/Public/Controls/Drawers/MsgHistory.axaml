@@ -2,23 +2,29 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d"
-    x:Class="YMCL.Public.Controls.Drawers.MsgHistory.MsgHistory"
-    x:DataType="msgHistory:MsgHistoryViewModel"
+    x:Class="YMCL.Public.Controls.Drawers.MsgHistory"
+    x:DataType="da:Data"
     xmlns="https://github.com/avaloniaui"
+    xmlns:classes="clr-namespace:YMCL.Public.Classes"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:da="clr-namespace:YMCL.Public.Const"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:msgHistory="clr-namespace:YMCL.Public.Controls.Drawers.MsgHistory"
+    xmlns:u="https://irihi.tech/ursa"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid>
-        <ItemsControl ItemsSource="{Binding NotificationCards}">
+        <ItemsControl ItemsSource="{Binding UiProperty.NotificationCards}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Spacing="0" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="NotificationCard">
-                    <NotificationCard Content="{Binding Content}" NotificationType="{Binding NotificationType}" />
+                <DataTemplate DataType="classes:NotificationEntry">
+                    <u:NotificationCard
+                        Classes="Light"
+                        Content="{Binding Content}"
+                        MessageClosed="MessageCard_OnMessageClosed"
+                        NotificationType="{Binding Type}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

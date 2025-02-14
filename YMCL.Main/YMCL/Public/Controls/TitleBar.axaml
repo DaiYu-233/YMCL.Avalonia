@@ -26,25 +26,40 @@
                 Text=""
                 VerticalAlignment="Center" />
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                <Button
-                    Classes="icon-button"
-                    Content="{DynamicResource Minimize}"
+                <StackPanel
                     HorizontalAlignment="Right"
-                    Margin="0,6,0,0"
-                    Name="MinimizeButton"
-                    VerticalAlignment="Center" />
-                <Button
-                    Classes="icon-button"
-                    Content="{DynamicResource Maximize}"
-                    HorizontalAlignment="Right"
-                    Name="MaximizeButton"
-                    VerticalAlignment="Center" />
-                <Button
-                    Classes="icon-button"
-                    Content="{DynamicResource Close}"
-                    HorizontalAlignment="Right"
-                    Name="CloseButton"
-                    VerticalAlignment="Center" />
+                    Name="Panel"
+                    Orientation="Horizontal" />
+                <Separator
+                    Background="{DynamicResource TextColor}"
+                    Foreground="{DynamicResource TextColor}"
+                    Height="16"
+                    IsVisible="False"
+                    Margin="5,0,5,0"
+                    Name="Separator"
+                    VerticalAlignment="Center"
+                    Width="1" />
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button
+                        Classes="icon-button"
+                        Content="{DynamicResource Minimize}"
+                        HorizontalAlignment="Right"
+                        Margin="0,5,0,0"
+                        Name="MinimizeButton"
+                        VerticalAlignment="Center" />
+                    <Button
+                        Classes="icon-button"
+                        Content="{DynamicResource Maximize}"
+                        HorizontalAlignment="Right"
+                        Name="MaximizeButton"
+                        VerticalAlignment="Center" />
+                    <Button
+                        Classes="icon-button"
+                        Content="{DynamicResource Close}"
+                        HorizontalAlignment="Right"
+                        Name="CloseButton"
+                        VerticalAlignment="Center" />
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Border>

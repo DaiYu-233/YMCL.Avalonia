@@ -139,4 +139,10 @@ public partial class TitleBar : UserControl
             }
         }
     }
+
+    public void AddButton(Button btn)
+    {
+        Panel.Children.Add(btn);
+        Separator.IsVisible = true;
+    }
 }

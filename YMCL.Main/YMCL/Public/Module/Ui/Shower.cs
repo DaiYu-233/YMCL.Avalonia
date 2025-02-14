@@ -19,12 +19,7 @@ public class Shower
         if (!string.IsNullOrWhiteSpace(title)) showTitle = title;
         if (time) showTitle += $" - {DateTime.Now:HH:mm:ss}";
         var notification = new Notification(showTitle, msg, type);
-        Data.UiProperty.MsgHistoryViewModel.NotificationCards.Insert(0, new NotificationCard()
-        {
-            Content = notification,
-            NotificationType = notification.Type,
-            Classes = { "Light" }
-        });
+        UiProperty.NotificationCards.Insert(0, new NotificationEntry(notification, notification.Type));
         Data.Notification.Show(notification, notification.Type, classes: ["Light"]);
     }
 

@@ -5,12 +5,11 @@ using ReactiveUI;
 using Ursa.Common;
 using Ursa.Controls;
 using Ursa.Controls.Options;
-using YMCL.Public.Controls.Drawers.MsgHistory;
+using YMCL.Public.Controls.Drawers;
 using YMCL.Public.Enum;
 using YMCL.Public.Module.Init;
 using YMCL.Public.Module.Ui.Special;
 using YMCL.ViewModels;
-using MsgHistory = YMCL.Public.Controls.Drawers.MsgHistory.MsgHistory;
 
 namespace YMCL.Views.Main;
 
@@ -27,6 +26,8 @@ public partial class MainView : UserControl
         {
             NavMusic.IsVisible = true;
         }
+
+        
     }
 
     private void BindingEvent()
@@ -53,19 +54,5 @@ public partial class MainView : UserControl
                 await Public.Module.Ui.Special.DropHandler.Handle(item.Path.LocalPath);
             }
         }
-    }
-
-    private async void FocusButton_OnClick(object? sender, RoutedEventArgs e)
-    {
-        var options = new DrawerOptions()
-        {
-            Position = Position.Right,
-            Buttons = DialogButton.None,
-            CanLightDismiss = true,
-            IsCloseButtonVisible = true,
-            Title = "消息历史",
-            CanResize = true,
-        };
-        await Drawer.ShowModal<MsgHistory, MsgHistoryViewModel>(Data.UiProperty.MsgHistoryViewModel, null, options);
     }
 }

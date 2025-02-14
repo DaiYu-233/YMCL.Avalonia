@@ -308,6 +308,44 @@ public sealed partial class Mod : UserControl, INotifyPropertyChanged
                         Console.WriteLine(e);
                     }
                 }
+                
+                var type4 = archive.GetEntry("META-INF/neoforge.mods.toml");
+                if (type4 != null)
+                {
+                    try
+                    {
+                        await using var entryStream = type4.Open();
+                        using var memoryStream = new MemoryStream();
+                        await entryStream.CopyToAsync(memoryStream);
+                        memoryStream.Position = 0;
+                        var reader = new StreamReader(memoryStream);
+                        var text = await reader.ReadToEndAsync();
+                        var result = Toml.ToModel(text);
+
+                        if (result.TryGetValue("mods", out var modsObj))
+                        {
+                            if (modsObj is TomlTableArray modsList)
+                                foreach (var modTable in modsList.OfType<TomlTable>())
+                                {
+                                    var displayName = modTable.TryGetValue("displayName", out var nameObj)
+                                        ? !string.IsNullOrWhiteSpace(nameObj.ToString()) ? nameObj.ToString() : null
+                                        : null;
+                                    var description = modTable.TryGetValue("description", out var descObj)
+                                        ? !string.IsNullOrWhiteSpace(descObj.ToString()) ? descObj.ToString() : null
+                                        : null;
+                                    if (!string.IsNullOrWhiteSpace(displayName) ||
+                                        !string.IsNullOrWhiteSpace(description))
+                                    {
+                                        return (displayName, description);
+                                    }
+                                }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                }
 
                 return (null, null);
             }

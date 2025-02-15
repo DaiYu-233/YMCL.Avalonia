@@ -21,7 +21,7 @@ public class NeteaseMusic
         }
         var entry = JsonConvert.DeserializeObject<SearchSingleSong.Root>(json);
         if (entry is { code: 200 }) return entry.result.songCount == 0 ? [] : entry.result.songs;
-        Toast(MainLang.ApiError, NotificationType.Error);
+        Notice(MainLang.ApiError, NotificationType.Error);
         return [];
     }
 
@@ -35,7 +35,7 @@ public class NeteaseMusic
         }
         var entry = JsonConvert.DeserializeObject<DefaultKeyword.Root>(json);
         if (entry is { code: 200 }) return (entry.data.showKeyword, entry.data.realkeyword);
-        Toast(MainLang.ApiError, NotificationType.Error);
+        Notice(MainLang.ApiError, NotificationType.Error);
         return (string.Empty, string.Empty);
     }
 
@@ -49,7 +49,7 @@ public class NeteaseMusic
         }
         var entry = JsonConvert.DeserializeObject<Availability.Root>(json);
         if (entry is { code: 200 }) return entry.success;
-        Toast(MainLang.ApiError, NotificationType.Error);
+        Notice(MainLang.ApiError, NotificationType.Error);
         return false;
     }
 
@@ -63,7 +63,7 @@ public class NeteaseMusic
         }
         var entry = JsonConvert.DeserializeObject<SongUrl.Root>(json);
         if (entry is { code: 200 }) return (entry.data[0].url, entry.data[0].time);
-        Toast(MainLang.ApiError, NotificationType.Error);
+        Notice(MainLang.ApiError, NotificationType.Error);
         return (string.Empty, 0);
     }
     
@@ -77,7 +77,7 @@ public class NeteaseMusic
         }
         var entry = JsonConvert.DeserializeObject<Lyric.Root>(json);
         if (entry is { code: 200 }) return entry;
-        Toast(MainLang.ApiError, NotificationType.Error);
+        Notice(MainLang.ApiError, NotificationType.Error);
         return null;
     }
 }

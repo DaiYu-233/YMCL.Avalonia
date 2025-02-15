@@ -15,7 +15,7 @@ public class DropHandler
                 await Main.Import(path);
                 return;
             default:
-                Toast($"{MainLang.UnsupportedFileType}: {Path.GetFileName(path)}");
+                Notice($"{MainLang.UnsupportedFileType}: {Path.GetFileName(path)}");
                 return;
         }
     }

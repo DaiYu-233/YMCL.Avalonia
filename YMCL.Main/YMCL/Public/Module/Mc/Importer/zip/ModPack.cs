@@ -24,12 +24,12 @@ public class ModPack
         catch (Exception e)
         {
             Console.WriteLine(e);
-            Toast($"{MainLang.Unrecognized}: {Path.GetFileName(path)}");
+            Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}");
         }
 
         if (entry is null)
         {
-            Toast($"{MainLang.Unrecognized}: {Path.GetFileName(path)}");
+            Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}");
             return;
         }
 
@@ -64,7 +64,7 @@ public class ModPack
             {
                 var str = string.Empty;
                 foreach (Match match in matches) str += match.Value;
-                Toast($"{MainLang.IncludeSpecialWord}: {str}", NotificationType.Error);
+                Notice($"{MainLang.IncludeSpecialWord}: {str}", NotificationType.Error);
                 var dr = await ShowDialog(textbox.Text);
                 if (!dr)
                     return false;
@@ -73,7 +73,7 @@ public class ModPack
             {
                 if (string.IsNullOrWhiteSpace(textbox.Text))
                 {
-                    Toast($"{MainLang.VersionIdCannotBeEmpty}", NotificationType.Error);
+                    Notice($"{MainLang.VersionIdCannotBeEmpty}", NotificationType.Error);
                     var dr = await ShowDialog(string.Empty);
                     if (!dr)
                         return false;
@@ -81,7 +81,7 @@ public class ModPack
 
                 if (Directory.Exists(Path.Combine(Data.Setting.MinecraftFolder.Path, "versions", textbox.Text)))
                 {
-                    Toast($"{MainLang.FolderAlreadyExists}: {textbox.Text}",
+                    Notice($"{MainLang.FolderAlreadyExists}: {textbox.Text}",
                         NotificationType.Error);
                     var dr = await ShowDialog(textbox.Text);
                     if (!dr)

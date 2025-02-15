@@ -1166,4 +1166,16 @@ MacOs 不支持自动更新
   <data name="EnableTranslucentSpecialControlList" xml:space="preserve">
     <value>启用半透明特殊控件列表</value>
   </data>
+  <data name="NoticeWay" xml:space="preserve">
+    <value>通知方式</value>
+  </data>
+  <data name="NotificationCard" xml:space="preserve">
+    <value>通知卡片</value>
+  </data>
+  <data name="NotificationBubble" xml:space="preserve">
+    <value>通知气泡</value>
+  </data>
+  <data name="ExampleNotification" xml:space="preserve">
+    <value>示例通知</value>
+  </data>
 </root>

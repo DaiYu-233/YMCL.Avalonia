@@ -66,7 +66,7 @@ public partial class Search : UserControl
         var songs = await NeteaseMusic.SearchForSingleSong(key);
         if (songs.Count == 0)
         {
-            Toast(MainLang.SearchNoResult, NotificationType.Warning);
+            Notice(MainLang.SearchNoResult, NotificationType.Warning);
         }
 
         songs.ForEach(song =>
@@ -111,7 +111,7 @@ public partial class Search : UserControl
         var songs = await NeteaseMusic.SearchForSingleSong(_lastKeyword, _page);
         if (songs.Count == 0)
         {
-            Toast(MainLang.SearchNoResult, NotificationType.Warning);
+            Notice(MainLang.SearchNoResult, NotificationType.Warning);
         }
 
         songs.ForEach(song =>

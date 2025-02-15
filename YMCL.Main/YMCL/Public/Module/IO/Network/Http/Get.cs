@@ -23,7 +23,7 @@ public class Get
             Console.WriteLine(e);
             Dispatcher.UIThread.Invoke(() =>
             {
-                Toast(MainLang.NetWorkError, NotificationType.Error);
+                Notice(MainLang.NetWorkError, NotificationType.Error);
             });
             return null!;
         }

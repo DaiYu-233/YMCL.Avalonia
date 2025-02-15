@@ -98,6 +98,6 @@ public partial class Launch : UserControl
             }))?.Path.LocalPath;
         if (string.IsNullOrWhiteSpace(path)) return;
         await File.WriteAllBytesAsync(path, Converter.Base64ToBytes(Data.Setting.Account.Skin));
-        Toast($"{MainLang.SaveFinish} - {Path.GetFileName(path)}", NotificationType.Success);
+        Notice($"{MainLang.SaveFinish} - {Path.GetFileName(path)}", NotificationType.Success);
     }
 }

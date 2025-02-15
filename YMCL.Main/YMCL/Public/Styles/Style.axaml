@@ -109,4 +109,7 @@
     <Style Selector="u|NotificationCard">
         <Setter Property="Opacity" Value="{DynamicResource MainOpacity}" />
     </Style>
+    <Style Selector="u|ToastCard">
+        <Setter Property="Opacity" Value="{DynamicResource MainOpacity}" />
+    </Style>
 </Styles>

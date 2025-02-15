@@ -22,7 +22,7 @@ public class Dispatcher
     {
         if (string.IsNullOrWhiteSpace(customId ?? versionManifestEntry.Id))
         {
-            Toast($"{MainLang.VersionIdCannotBeEmpty}", NotificationType.Error);
+            Notice($"{MainLang.VersionIdCannotBeEmpty}", NotificationType.Error);
             return false;
         }
         
@@ -36,7 +36,7 @@ public class Dispatcher
         {
             var str = string.Empty;
             foreach (Match match in matches) str += match.Value;
-            Toast($"{MainLang.IncludeSpecialWord}: {str}", NotificationType.Error);
+            Notice($"{MainLang.IncludeSpecialWord}: {str}", NotificationType.Error);
             return false;
         }
 
@@ -46,7 +46,7 @@ public class Dispatcher
             if (Directory.Exists(Path.Combine(setting.MinecraftFolder.Path, "versions",
                     customId ?? versionManifestEntry.Id)))
             {
-                Toast($"{MainLang.FolderAlreadyExists}: {customId ?? versionManifestEntry.Id}", NotificationType.Error);
+                Notice($"{MainLang.FolderAlreadyExists}: {customId ?? versionManifestEntry.Id}", NotificationType.Error);
                 return false;
             }
         }
@@ -114,7 +114,7 @@ public class Dispatcher
 
             if (!closeTaskWhenFinish || cancellationToken.IsCancellationRequested) return true;
             task.FinishWithSuccess();
-            Toast($"{MainLang.InstallFinish} - {customId ?? versionManifestEntry.Id}", NotificationType.Success);
+            Notice($"{MainLang.InstallFinish} - {customId ?? versionManifestEntry.Id}", NotificationType.Success);
 
             return true;
         }
@@ -195,7 +195,7 @@ public class Dispatcher
 
         if (!closeTaskWhenFinish || cancellationToken.IsCancellationRequested) return true;
         task.FinishWithSuccess();
-        Toast($"{MainLang.InstallFinish} - {customId ?? versionManifestEntry.Id}", NotificationType.Success);
+        Notice($"{MainLang.InstallFinish} - {customId ?? versionManifestEntry.Id}", NotificationType.Success);
 
         return true;
     }

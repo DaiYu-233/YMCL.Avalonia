@@ -38,11 +38,6 @@ public partial class Personalize : UserControl
             var launcher = TopLevel.GetTopLevel(this).Launcher;
             launcher.LaunchFileInfoAsync(new FileInfo(ConfigPath.CustomHomePageXamlDataPath));
         };
-        LanguageComboBox.SelectionChanged += (_, _) =>
-        {
-            Data.JavaRuntimes.FirstOrDefault(java => java.JavaStringVersion == "Auto").JavaPath =
-                MainLang.LetYMCLChooseJava;
-        };
     }
 }
 

@@ -211,6 +211,31 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="{DynamicResource MainCornerRadius}"
+                Opacity="{DynamicResource MainOpacity}"
+                Padding="6.5">
+                <DockPanel>
+                    <TextBlock
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="14"
+                        Margin="10,0,20,0"
+                        Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.NoticeWay}"
+                        VerticalAlignment="Center" />
+                    <ComboBox
+                        DockPanel.Dock="Left"
+                        FontFamily="{DynamicResource Font}"
+                        HorizontalAlignment="Stretch"
+                        Name="NotificationComboBox"
+                        SelectedIndex="{Binding Setting.NoticeWay}">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.NotificationBubble}" />
+                            <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.NotificationCard}" />
+                        </ComboBox.Items>
+                    </ComboBox>
+                </DockPanel>
+            </Border>
+            <Border
+                Background="{DynamicResource 1x}"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Name="LyricRoot"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">

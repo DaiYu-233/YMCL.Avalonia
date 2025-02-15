@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using Avalonia.Controls.Notifications;
 using MinecraftLaunch.Components.Parser;
 using ReactiveUI;
+using Ursa.Controls;
 using YMCL.Public.Classes;
 using YMCL.Public.Classes.Netease;
 using YMCL.Public.Controls;
@@ -20,6 +21,7 @@ public sealed class Data : ReactiveObject
     public static ObservableCollection<Language> Langs => LangHelper.Langs;
     public static DesktopRunnerType DesktopType { get; set; } = DesktopRunnerType.Unknown;
     public static WindowNotificationManager Notification { get; set; }
+    public static WindowToastManager Toast { get; set; }
     public static ObservableCollection<MinecraftFolder> MinecraftFolders { get; set; }
     public static ObservableCollection<JavaEntry> JavaRuntimes { get; set; }
     public static ObservableCollection<string> EnablePlugins { get; set; } = [];

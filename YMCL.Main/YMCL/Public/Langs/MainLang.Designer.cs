@@ -1087,6 +1087,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 示例通知.
+        /// </summary>
+        public static string ExampleNotification {
+            get {
+                return ResourceManager.GetString("ExampleNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 现存账户.
         /// </summary>
         public static string ExistAccount {
@@ -2251,6 +2260,33 @@ namespace YMCL.Public.Langs {
         public static string NoSupportNow {
             get {
                 return ResourceManager.GetString("NoSupportNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 通知方式.
+        /// </summary>
+        public static string NoticeWay {
+            get {
+                return ResourceManager.GetString("NoticeWay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 通知气泡.
+        /// </summary>
+        public static string NotificationBubble {
+            get {
+                return ResourceManager.GetString("NotificationBubble", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 通知卡片.
+        /// </summary>
+        public static string NotificationCard {
+            get {
+                return ResourceManager.GetString("NotificationCard", resourceCulture);
             }
         }
         

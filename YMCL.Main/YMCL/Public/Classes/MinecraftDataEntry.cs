@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using Avalonia.Controls.Notifications;
 using Avalonia.Media.Imaging;
 using MinecraftLaunch.Base.Enums;
 using MinecraftLaunch.Base.Models.Game;
@@ -114,7 +115,7 @@ public sealed record MinecraftDataEntry
 
                 if (setting.Java == null)
                 {
-                    Toast(MainLang.CannotFandRightJava);
+                    Notice(MainLang.CannotFandRightJava, NotificationType.Error);
                     return;
                 }
 

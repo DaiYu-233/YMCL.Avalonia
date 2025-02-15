@@ -128,7 +128,7 @@ public class AggregateSearchUi
             {
                 if (entry.Summary == "Unknown")
                 {
-                    Toast(MainLang.CannotRecognitionTheVersion, NotificationType.Error);
+                    Notice(MainLang.CannotRecognitionTheVersion, NotificationType.Error);
                 }
                 else
                 {
@@ -136,7 +136,7 @@ public class AggregateSearchUi
                         Data.MinecraftFolders.FirstOrDefault(x => x.Path == entry.MinecraftEntry.MinecraftFolderPath);
                     Const.Data.UiProperty.SelectedMinecraft = new MinecraftDataEntry(entry.MinecraftEntry);
                     YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavLaunch;
-                    Toast(
+                    Notice(
                         $"{MainLang.SwitchedTo} : {entry.MinecraftEntry.Id}\n" +
                         $"( {Mc.GameSetting.GetGameSpecialFolder(entry.MinecraftEntry, GameSpecialFolder.GameFolder, true)} )",
                         type: NotificationType.Success);
@@ -145,7 +145,7 @@ public class AggregateSearchUi
             else if (entry is { Target: "account" })
             {
                 Const.Data.Setting.Account = entry.Account;
-                Toast($"{MainLang.SwitchedTo} : {entry.Text}\n{entry.Summary}",
+                Notice($"{MainLang.SwitchedTo} : {entry.Text}\n{entry.Summary}",
                     type: NotificationType.Success);
             }
         }

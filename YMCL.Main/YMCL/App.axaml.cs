@@ -52,6 +52,7 @@ public class App : Application
             {
                 var view = new InitializeWindow(ifShowInit.page);
                 Data.Notification = new Ursa.Controls.WindowNotificationManager(TopLevel.GetTopLevel(view));
+                Data.Toast = new Ursa.Controls.WindowToastManager(TopLevel.GetTopLevel(view));
                 desktop.MainWindow = view;
             }
             else
@@ -59,6 +60,7 @@ public class App : Application
                 var view = new MainWindow(out var mainView);
                 UiRoot = mainView;
                 Data.Notification = new Ursa.Controls.WindowNotificationManager(TopLevel.GetTopLevel(view));
+                Data.Toast = new Ursa.Controls.WindowToastManager(TopLevel.GetTopLevel(view));
                 desktop.MainWindow = view;
                 view.Show();
             }
@@ -69,6 +71,7 @@ public class App : Application
             {
                 var view = new InitializeView(ifShowInit.page);
                 Data.Notification = new Ursa.Controls.WindowNotificationManager(TopLevel.GetTopLevel(view));
+                Data.Toast = new Ursa.Controls.WindowToastManager(TopLevel.GetTopLevel(view));
                 singleViewPlatform.MainView = view;
             }
             else
@@ -76,6 +79,7 @@ public class App : Application
                 var view = new MainView();
                 UiRoot = view;
                 Data.Notification = new Ursa.Controls.WindowNotificationManager(TopLevel.GetTopLevel(view));
+                Data.Toast = new Ursa.Controls.WindowToastManager(TopLevel.GetTopLevel(view));
                 singleViewPlatform.MainView = view;
             }
         }

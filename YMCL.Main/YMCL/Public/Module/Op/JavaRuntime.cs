@@ -32,7 +32,7 @@ public class JavaRuntime
             }
         });
 
-        Toast(
+        Notice(
             $"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}: {successAddCount}\n{MainLang.RepeatItem}: {repeatJavaCount}",
             NotificationType.Success);
         File.WriteAllText(ConfigPath.JavaDataPath, JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
@@ -66,16 +66,16 @@ public class JavaRuntime
         catch (Exception e)
         {
             Console.WriteLine(e);
-            Toast(MainLang.GetJavaInfoFail, NotificationType.Error);
+            Notice(MainLang.GetJavaInfoFail, NotificationType.Error);
         }
         if (javaInfo == null)
         {
-            Toast(MainLang.GetJavaInfoFail, NotificationType.Error);
+            Notice(MainLang.GetJavaInfoFail, NotificationType.Error);
         }
         else
         {
             if (Data.JavaRuntimes.Contains(JavaEntry.MlToYmcl(javaInfo!)))
-                Toast(MainLang.TheItemAlreadyExist, NotificationType.Error);
+                Notice(MainLang.TheItemAlreadyExist, NotificationType.Error);
             else
                 Data.JavaRuntimes.Add(JavaEntry.MlToYmcl(javaInfo!));
         }

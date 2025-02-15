@@ -72,7 +72,7 @@ public partial class Music : UserControl
                 var ava = await NeteaseMusic.GetMusicAvailabilityById(song.SongId);
                 if (!ava)
                 {
-                    Toast(MainLang.MusicNotAvailable, NotificationType.Error);
+                    Notice(MainLang.MusicNotAvailable, NotificationType.Error);
                     Data.UiProperty.SelectedRecordSong = null;
                     ToggleLoadingUi(false);
                     return;
@@ -81,7 +81,7 @@ public partial class Music : UserControl
                 var url = await NeteaseMusic.GetSongUrlByIdAndLevel(song.SongId);
                 if (string.IsNullOrWhiteSpace(url.url))
                 {
-                    Toast(MainLang.NetWorkError, NotificationType.Error);
+                    Notice(MainLang.NetWorkError, NotificationType.Error);
                     Data.UiProperty.SelectedRecordSong = null;
                     ToggleLoadingUi(false);
                     return;
@@ -209,26 +209,26 @@ public partial class Music : UserControl
             {
                 try
                 {
-                    Toast($"{MainLang.BeginDownload}: {song.SongName}.mp3");
+                    Notice($"{MainLang.BeginDownload}: {song.SongName}.mp3");
                     File.Copy(song.Path, path);
-                    Toast($"{MainLang.DownloadFinish}: {song.SongName}.mp3");
+                    Notice($"{MainLang.DownloadFinish}: {song.SongName}.mp3");
                 }
                 catch
                 {
-                    Toast($"{MainLang.DownloadFail}: {song.SongName}.mp3");
+                    Notice($"{MainLang.DownloadFail}: {song.SongName}.mp3");
                 }
             }
             else
             {
                 var task = new TaskEntry($"{MainLang.Download} - {song.SongName}.mp3",
                     [new SubTask($"{MainLang.Download} - {song.SongName}.mp3")]);
-                Toast($"{MainLang.BeginDownload}: {song.SongName}.mp3");
+                Notice($"{MainLang.BeginDownload}: {song.SongName}.mp3");
                 try
                 {
                     var ava = await NeteaseMusic.GetMusicAvailabilityById(song.SongId);
                     if (!ava)
                     {
-                        Toast(MainLang.MusicNotAvailable, NotificationType.Error);
+                        Notice(MainLang.MusicNotAvailable, NotificationType.Error);
                         task.FinishWithError();
                         return;
                     }
@@ -253,13 +253,13 @@ public partial class Music : UserControl
                         task.UpdateValue(progressPercentage);
                     }
 
-                    Toast($"{MainLang.DownloadFinish}: {song.SongName}.mp3");
+                    Notice($"{MainLang.DownloadFinish}: {song.SongName}.mp3");
                     task.AdvanceSubTask();
                     task.FinishWithSuccess();
                 }
                 catch
                 {
-                    Toast($"{MainLang.DownloadFail}: {song.SongName}.mp3");
+                    Notice($"{MainLang.DownloadFail}: {song.SongName}.mp3");
                     task.FinishWithError();
                 }
             }

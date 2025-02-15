@@ -31,6 +31,7 @@ public class Setting : ReactiveObject
     [Reactive] [JsonProperty] public bool IsCompleteAccountInitialize { get; set; }
     [Reactive] [JsonProperty] public string CustomHomePageUrl { get; set; }
     [Reactive] [JsonProperty] public Enum.Setting.OpenFileWay OpenFileWay { get; set; }
+    [Reactive] [JsonProperty] public Enum.Setting.NoticeWay NoticeWay { get; set; } = Enum.Setting.NoticeWay.Bubble;
 
     [Reactive]
     [JsonProperty]

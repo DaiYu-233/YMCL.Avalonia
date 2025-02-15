@@ -1,31 +1,58 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
+using Ursa.Controls;
 using YMCL.Public.Classes;
 using YMCL.Public.Langs;
 using Notification = Ursa.Controls.Notification;
+using Setting = YMCL.Public.Enum.Setting;
 
 namespace YMCL.Public.Module.Ui;
 
 public class Shower
 {
-    public static void Toast(string msg, NotificationType type = NotificationType.Information,
+    public static void Notice(string msg, NotificationType type = NotificationType.Information,
         bool time = true, string title = "Yu Minecraft Launcher")
     {
         var showTitle = Const.String.AppTitle;
         if (!string.IsNullOrWhiteSpace(title)) showTitle = title;
         if (time) showTitle += $" - {DateTime.Now:HH:mm:ss}";
+        
         var notification = new Notification(showTitle, msg, type);
+        UiProperty.NotificationCards.Insert(0, new NotificationEntry(notification, notification.Type));
+
+        switch (Data.Setting.NoticeWay)
+        {
+            case Setting.NoticeWay.Bubble:
+                NotificationBubble(msg, type);
+                break;
+            case Setting.NoticeWay.Card:
+                NotificationCard(msg, type, showTitle);
+                break;
+        }
+    }
+
+    public static void NotificationBubble(string msg, NotificationType type)
+    {
+        var toast = new Toast(msg, type);
+        UiProperty.NotificationCards.Insert(0, new NotificationEntry(toast, toast.Type));
+        Data.Toast.Show(toast, toast.Type, classes: ["Light"]);
+    }
+    
+    public static void NotificationCard(string msg, NotificationType type, string title)
+    {
+        var notification = new Notification(title, msg, type);
         UiProperty.NotificationCards.Insert(0, new NotificationEntry(notification, notification.Type));
         Data.Notification.Show(notification, notification.Type, classes: ["Light"]);
     }
 
     public static void ShowShortException(string msg, Exception ex)
     {
-        Toast($"{msg}\n{ex.Message}", NotificationType.Error);
+        Notice($"{msg}\n{ex.Message}", NotificationType.Error);
     }
 
     public static async Task<ContentDialogResult> ShowDialogAsync(string title = "Title", string msg = "Content",
@@ -83,14 +110,14 @@ public class Shower
         if (dialog == ContentDialogResult.Primary)
         {
             var updateAppAsync = await IO.Network.Update.UpdateAppAsync();
-            if (!updateAppAsync) Toast(MainLang.UpdateFail);
+            if (!updateAppAsync) Notice(MainLang.UpdateFail);
         }
         else if (dialog == ContentDialogResult.Secondary)
         {
             Dispatcher.UIThread.Invoke(() =>
             {
                 Const.Data.Setting.SkipUpdateVersion = info.NewVersion;
-                Toast(MainLang.SkipVersionTip.Replace("{version}", info.NewVersion));
+                Notice(MainLang.SkipVersionTip.Replace("{version}", info.NewVersion));
             });
         }
     }

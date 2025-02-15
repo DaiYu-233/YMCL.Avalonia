@@ -54,7 +54,7 @@ public partial class About : UserControl
             {
                 CheckUpdateBtn.IsEnabled = true;
                 CheckUpdateBtn.Content = MainLang.CheckUpdate;
-                Toast(MainLang.CheckUpdateFail);
+                Notice(MainLang.CheckUpdateFail);
                 return;
             }
 
@@ -62,7 +62,7 @@ public partial class About : UserControl
             {
                 CheckUpdateBtn.IsEnabled = true;
                 CheckUpdateBtn.Content = MainLang.CheckUpdate;
-                Toast(MainLang.CurrentlyTheLatestVersion);
+                Notice(MainLang.CurrentlyTheLatestVersion);
                 return;
             }
 
@@ -103,7 +103,7 @@ public partial class About : UserControl
                 else
                 {
                     var updateAppAsync = await Public.Module.IO.Network.Update.UpdateAppAsync();
-                    if (!updateAppAsync) Toast(MainLang.UpdateFail);
+                    if (!updateAppAsync) Notice(MainLang.UpdateFail);
                 }
             }
             else if (dialog == ContentDialogResult.Secondary)
@@ -111,7 +111,7 @@ public partial class About : UserControl
                 Dispatcher.UIThread.Invoke(() =>
                 {
                     Data.Setting.SkipUpdateVersion = updateAvailable.NewVersion;
-                    Toast(MainLang.SkipVersionTip.Replace("{version}", updateAvailable.NewVersion));
+                    Notice(MainLang.SkipVersionTip.Replace("{version}", updateAvailable.NewVersion));
                 });
             }
         };

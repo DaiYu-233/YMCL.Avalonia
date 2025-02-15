@@ -139,7 +139,7 @@ public class Setter
             catch
             {
                 Const.Data.Setting.WindowBackGroundImgData = null;
-                Toast(MainLang.LoadBackGroudFromPicFailTip, type: NotificationType.Error);
+                Notice(MainLang.LoadBackGroudFromPicFailTip, type: NotificationType.Error);
                 window.BackGroundImg.Source = null;
             }
 

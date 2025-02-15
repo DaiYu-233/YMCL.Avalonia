@@ -191,7 +191,7 @@ public class Update
                         await Task.Delay(1000);
                         var clipboard = TopLevel.GetTopLevel(App.UiRoot)?.Clipboard;
                         await clipboard.SetTextAsync(Path.Combine(ConfigPath.UpdateFolderPath, fileName));
-                        Toast(MainLang.AlreadyCopyToClipBoard +
+                        Notice(MainLang.AlreadyCopyToClipBoard +
                               $" : {Path.Combine(ConfigPath.UpdateFolderPath, fileName)}");
                     }
                 }
@@ -199,7 +199,7 @@ public class Update
             catch (OperationCanceledException)
             {
                 task.Cancel();
-                Toast(MainLang.CanceledUpdate);
+                Notice(MainLang.CanceledUpdate);
                 return true;
             }
             catch (Exception ex)
@@ -213,7 +213,7 @@ public class Update
         catch (OperationCanceledException)
         {
             task.Cancel();
-            Toast(MainLang.CanceledUpdate);
+            Notice(MainLang.CanceledUpdate);
             return true;
         }
         catch

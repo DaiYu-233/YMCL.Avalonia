@@ -68,18 +68,24 @@ public class Setting
         Transparent,
         Mica
     }
-    
+
     public enum AccountType
     {
         Offline,
         Microsoft,
         ThirdParty
     }
-    
+
     public enum VersionSettingEnableIndependencyCore
     {
         Global,
         Off,
         On
+    }
+
+    public enum NoticeWay
+    {
+        Bubble,
+        Card
     }
 }

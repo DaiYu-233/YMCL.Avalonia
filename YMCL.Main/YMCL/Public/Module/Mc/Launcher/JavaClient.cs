@@ -39,7 +39,7 @@ public class JavaClient
         {
             if (t != null) continue;
             var exception = new ArgumentNullException(nameof(t), $"{nameof(t)} cannot be null.");
-            Toast($"{MainLang.LaunchFail}\n{exception.Message}", NotificationType.Error);
+            Notice($"{MainLang.LaunchFail}\n{exception.Message}", NotificationType.Error);
             return false;
         }
 
@@ -47,13 +47,13 @@ public class JavaClient
         var entry = parser.GetMinecraft(p_id);
         if (entry == null)
         {
-            Toast(MainLang.CreateGameEntryFail, NotificationType.Error);
+            Notice(MainLang.CreateGameEntryFail, NotificationType.Error);
             return false;
         }
 
         if (string.IsNullOrWhiteSpace(entry.ClientJarPath) || !File.Exists(entry.ClientJarPath))
         {
-            Toast(MainLang.GameMainFileDeletion, NotificationType.Error);
+            Notice(MainLang.GameMainFileDeletion, NotificationType.Error);
             return false;
         }
 
@@ -72,14 +72,14 @@ public class JavaClient
             }
             catch (UriFormatException)
             {
-                Toast(MainLang.ServerUrlError, NotificationType.Error);
+                Notice(MainLang.ServerUrlError, NotificationType.Error);
                 return false;
             }
         }
 
         if (Data.Setting.Account == null)
         {
-            Toast(MainLang.AccountError);
+            Notice(MainLang.AccountError);
             return false;
         }
 
@@ -113,7 +113,7 @@ public class JavaClient
                 }
                 else
                 {
-                    Toast(MainLang.AccountError);
+                    Notice(MainLang.AccountError);
                     task.FinishWithError();
                     return false;
                 }
@@ -141,14 +141,14 @@ public class JavaClient
 
         if (canceled)
         {
-            Toast($"{MainLang.Canceled}: {MainLang.Launch} - {entry.Id}");
+            Notice($"{MainLang.Canceled}: {MainLang.Launch} - {entry.Id}");
             task.CancelFinish();
             return false;
         }
 
         if (account == null)
         {
-            Toast(MainLang.AccountError);
+            Notice(MainLang.AccountError);
             task.FinishWithError();
             return false;
         }
@@ -197,7 +197,7 @@ public class JavaClient
                                 }
                             }
 
-                            Toast($"{MainLang.GameExited} - {p_id}");
+                            Notice($"{MainLang.GameExited} - {p_id}");
 
                             // if (process.Process.ExitCode == 0)
                             // {
@@ -256,7 +256,7 @@ public class JavaClient
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
                         task.AdvanceSubTask();
-                        Toast($"{MainLang.LaunchFinish} - {p_id}");
+                        Notice($"{MainLang.LaunchFinish} - {p_id}");
                         task.AddOperateButton(new TaskEntryOperateButtonEntry(MainLang.DisplayLaunchArguments,
                             async () =>
                             {
@@ -266,7 +266,7 @@ public class JavaClient
                                 if (dialog != ContentDialogResult.Primary) return;
                                 var clipboard = TopLevel.GetTopLevel(App.UiRoot)?.Clipboard;
                                 await clipboard.SetTextAsync(copyArguments);
-                                Toast(MainLang.AlreadyCopyToClipBoard, NotificationType.Success);
+                                Notice(MainLang.AlreadyCopyToClipBoard, NotificationType.Success);
                             }));
                         task.AddOperateButton(new TaskEntryOperateButtonEntry(MainLang.KillProcess, async () =>
                         {
@@ -347,7 +347,7 @@ public class JavaClient
         }
         catch (OperationCanceledException)
         {
-            Toast($"{MainLang.Canceled}: {MainLang.Launch} - {entry.Id}");
+            Notice($"{MainLang.Canceled}: {MainLang.Launch} - {entry.Id}");
             task.CancelFinish();
             return false;
         }

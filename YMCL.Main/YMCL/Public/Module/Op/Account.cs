@@ -78,7 +78,7 @@ public class Account
                         }
                         else
                         {
-                            Toast(MainLang.AccountNameCannotBeNull, NotificationType.Error);
+                            Notice(MainLang.AccountNameCannotBeNull, NotificationType.Error);
                         }
                     }
 
@@ -114,7 +114,7 @@ public class Account
                         await clipboard.SetTextAsync(textBlock.Text);
                         var launcher = TopLevel.GetTopLevel(sender).Launcher;
                         await launcher.LaunchUriAsync(new Uri(verificationUrl));
-                        Toast(MainLang.WaitForMicrosoftVerification);
+                        Notice(MainLang.WaitForMicrosoftVerification);
                     };
                     microsoftDialog.SecondaryButtonClick += (_, _) =>
                     {
@@ -175,7 +175,7 @@ public class Account
 
                     try
                     {
-                        Toast(MainLang.VerifyingAccount);
+                        Notice(MainLang.VerifyingAccount);
                         MicrosoftSkinFetcher skinFetcher = new(userProfile.Uuid.ToString());
                         var bytes = await skinFetcher.GetSkinAsync();
                         var now = DateTime.Now;
@@ -253,19 +253,19 @@ public class Account
             var reInput = false;
             if (string.IsNullOrWhiteSpace(server) && string.IsNullOrWhiteSpace(server))
             {
-                Toast(MainLang.YggdrasilServerUrlIsEmpty, NotificationType.Error);
+                Notice(MainLang.YggdrasilServerUrlIsEmpty, NotificationType.Error);
                 reInput = true;
             }
 
             if (string.IsNullOrWhiteSpace(email) && string.IsNullOrWhiteSpace(email))
             {
-                Toast(MainLang.YggdrasilEmailIsEmpty, NotificationType.Error);
+                Notice(MainLang.YggdrasilEmailIsEmpty, NotificationType.Error);
                 reInput = true;
             }
 
             if (string.IsNullOrWhiteSpace(password) && string.IsNullOrWhiteSpace(password))
             {
-                Toast(MainLang.YggdrasilPasswordIsEmpty, NotificationType.Error);
+                Notice(MainLang.YggdrasilPasswordIsEmpty, NotificationType.Error);
                 reInput = true;
             }
 
@@ -279,7 +279,7 @@ public class Account
                 try
                 {
                     YggdrasilAuthenticator authenticator = new(server, email, password);
-                    Toast(MainLang.VerifyingAccount);
+                    Notice(MainLang.VerifyingAccount);
                     yggdrasilAccounts = await authenticator.AuthenticateAsync().ToListAsync();
                 }
                 catch (Exception ex)

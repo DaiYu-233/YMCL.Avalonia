@@ -16,6 +16,6 @@ public class Main
             return;
         }
 
-        Toast($"{MainLang.Unrecognized}: {Path.GetFileName(path)}");
+        Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}");
     }
 }

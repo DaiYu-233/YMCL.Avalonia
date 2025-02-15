@@ -52,7 +52,7 @@ public class CurseForge
                     .ToListAsync(cancellationToken: cancellationToken);
             if (installEntrys == null)
             {
-                Toast($"{MainLang.Unrecognized}: {Path.GetFileName(path)}");
+                Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}");
                 return false;
             }
 
@@ -183,12 +183,12 @@ public class CurseForge
         if (cancellationToken.IsCancellationRequested) return false;
         if (isSuccess)
         {
-            Toast($"{MainLang.InstallFinish}: {id}");
+            Notice($"{MainLang.InstallFinish}: {id}");
             task.FinishWithSuccess();
         }
         else
         {
-            Toast($"{MainLang.InstallFail}: {id}");
+            Notice($"{MainLang.InstallFail}: {id}");
             task.FinishWithError();
         }
 

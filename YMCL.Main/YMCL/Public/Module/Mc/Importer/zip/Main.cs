@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.IO.Compression;
+using Avalonia.Controls.Notifications;
 using YMCL.Public.Langs;
 
 namespace YMCL.Public.Module.Mc.Importer.zip;
@@ -16,6 +17,6 @@ public class Main
             return;
         }
 
-        Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}");
+        Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}", NotificationType.Warning);
     }
 }

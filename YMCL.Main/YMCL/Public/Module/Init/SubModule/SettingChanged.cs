@@ -20,7 +20,6 @@ public class SettingChanged
             {
                 Notice(MainLang.ExampleNotification);
             }
-            
         };
     }
 }

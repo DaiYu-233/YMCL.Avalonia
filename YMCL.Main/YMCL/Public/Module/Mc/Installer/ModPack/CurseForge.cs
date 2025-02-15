@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Avalonia.Controls.Notifications;
 using Avalonia.Threading;
 using MinecraftLaunch.Base.Models.Network;
 using MinecraftLaunch.Components.Downloader;
@@ -52,7 +53,7 @@ public class CurseForge
                     .ToListAsync(cancellationToken: cancellationToken);
             if (installEntrys == null)
             {
-                Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}");
+                Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}",NotificationType.Warning);
                 return false;
             }
 
@@ -183,12 +184,12 @@ public class CurseForge
         if (cancellationToken.IsCancellationRequested) return false;
         if (isSuccess)
         {
-            Notice($"{MainLang.InstallFinish}: {id}");
+            Notice($"{MainLang.InstallFinish}: {id}",NotificationType.Success);
             task.FinishWithSuccess();
         }
         else
         {
-            Notice($"{MainLang.InstallFail}: {id}");
+            Notice($"{MainLang.InstallFail}: {id}",NotificationType.Success);
             task.FinishWithError();
         }
 

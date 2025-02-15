@@ -211,11 +211,11 @@ public partial class Music : UserControl
                 {
                     Notice($"{MainLang.BeginDownload}: {song.SongName}.mp3");
                     File.Copy(song.Path, path);
-                    Notice($"{MainLang.DownloadFinish}: {song.SongName}.mp3");
+                    Notice($"{MainLang.DownloadFinish}: {song.SongName}.mp3", NotificationType.Success);
                 }
                 catch
                 {
-                    Notice($"{MainLang.DownloadFail}: {song.SongName}.mp3");
+                    Notice($"{MainLang.DownloadFail}: {song.SongName}.mp3", NotificationType.Error);
                 }
             }
             else
@@ -253,13 +253,13 @@ public partial class Music : UserControl
                         task.UpdateValue(progressPercentage);
                     }
 
-                    Notice($"{MainLang.DownloadFinish}: {song.SongName}.mp3");
+                    Notice($"{MainLang.DownloadFinish}: {song.SongName}.mp3", NotificationType.Success);
                     task.AdvanceSubTask();
                     task.FinishWithSuccess();
                 }
                 catch
                 {
-                    Notice($"{MainLang.DownloadFail}: {song.SongName}.mp3");
+                    Notice($"{MainLang.DownloadFail}: {song.SongName}.mp3", NotificationType.Error);
                     task.FinishWithError();
                 }
             }

@@ -5,6 +5,7 @@ using System.Reflection;
 using Afdian.Sdk;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
@@ -54,7 +55,7 @@ public partial class About : UserControl
             {
                 CheckUpdateBtn.IsEnabled = true;
                 CheckUpdateBtn.Content = MainLang.CheckUpdate;
-                Notice(MainLang.CheckUpdateFail);
+                Notice(MainLang.CheckUpdateFail, NotificationType.Error);
                 return;
             }
 
@@ -62,7 +63,7 @@ public partial class About : UserControl
             {
                 CheckUpdateBtn.IsEnabled = true;
                 CheckUpdateBtn.Content = MainLang.CheckUpdate;
-                Notice(MainLang.CurrentlyTheLatestVersion);
+                Notice(MainLang.CurrentlyTheLatestVersion, NotificationType.Success);
                 return;
             }
 
@@ -103,7 +104,7 @@ public partial class About : UserControl
                 else
                 {
                     var updateAppAsync = await Public.Module.IO.Network.Update.UpdateAppAsync();
-                    if (!updateAppAsync) Notice(MainLang.UpdateFail);
+                    if (!updateAppAsync) Notice(MainLang.UpdateFail, NotificationType.Error);
                 }
             }
             else if (dialog == ContentDialogResult.Secondary)
@@ -111,7 +112,7 @@ public partial class About : UserControl
                 Dispatcher.UIThread.Invoke(() =>
                 {
                     Data.Setting.SkipUpdateVersion = updateAvailable.NewVersion;
-                    Notice(MainLang.SkipVersionTip.Replace("{version}", updateAvailable.NewVersion));
+                    Notice(MainLang.SkipVersionTip.Replace("{version}", updateAvailable.NewVersion), NotificationType.Success);
                 });
             }
         };

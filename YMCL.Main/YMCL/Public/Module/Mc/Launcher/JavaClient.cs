@@ -79,7 +79,7 @@ public class JavaClient
 
         if (Data.Setting.Account == null)
         {
-            Notice(MainLang.AccountError);
+            Notice(MainLang.AccountError, NotificationType.Error);
             return false;
         }
 
@@ -113,7 +113,7 @@ public class JavaClient
                 }
                 else
                 {
-                    Notice(MainLang.AccountError);
+                    Notice(MainLang.AccountError, NotificationType.Error);
                     task.FinishWithError();
                     return false;
                 }
@@ -141,14 +141,14 @@ public class JavaClient
 
         if (canceled)
         {
-            Notice($"{MainLang.Canceled}: {MainLang.Launch} - {entry.Id}");
+            Notice($"{MainLang.Canceled}: {MainLang.Launch} - {entry.Id}", NotificationType.Success);
             task.CancelFinish();
             return false;
         }
 
         if (account == null)
         {
-            Notice(MainLang.AccountError);
+            Notice(MainLang.AccountError, NotificationType.Error);
             task.FinishWithError();
             return false;
         }
@@ -197,7 +197,7 @@ public class JavaClient
                                 }
                             }
 
-                            Notice($"{MainLang.GameExited} - {p_id}");
+                            Notice($"{MainLang.GameExited} - {p_id}", NotificationType.Warning);
 
                             // if (process.Process.ExitCode == 0)
                             // {
@@ -256,7 +256,7 @@ public class JavaClient
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
                         task.AdvanceSubTask();
-                        Notice($"{MainLang.LaunchFinish} - {p_id}");
+                        Notice($"{MainLang.LaunchFinish} - {p_id}", NotificationType.Success);
                         task.AddOperateButton(new TaskEntryOperateButtonEntry(MainLang.DisplayLaunchArguments,
                             async () =>
                             {
@@ -347,7 +347,7 @@ public class JavaClient
         }
         catch (OperationCanceledException)
         {
-            Notice($"{MainLang.Canceled}: {MainLang.Launch} - {entry.Id}");
+            Notice($"{MainLang.Canceled}: {MainLang.Launch} - {entry.Id}", NotificationType.Warning);
             task.CancelFinish();
             return false;
         }

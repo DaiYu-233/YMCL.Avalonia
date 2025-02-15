@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.InteropServices.JavaScript;
 using System.Threading;
 using System.Threading.Tasks;
+using Avalonia.Controls.Notifications;
 using Avalonia.Platform.Storage;
 using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json.Linq;
@@ -192,14 +193,14 @@ public class Update
                         var clipboard = TopLevel.GetTopLevel(App.UiRoot)?.Clipboard;
                         await clipboard.SetTextAsync(Path.Combine(ConfigPath.UpdateFolderPath, fileName));
                         Notice(MainLang.AlreadyCopyToClipBoard +
-                              $" : {Path.Combine(ConfigPath.UpdateFolderPath, fileName)}");
+                              $": {Path.Combine(ConfigPath.UpdateFolderPath, fileName)}", NotificationType.Success);
                     }
                 }
             }
             catch (OperationCanceledException)
             {
                 task.Cancel();
-                Notice(MainLang.CanceledUpdate);
+                Notice(MainLang.CanceledUpdate, NotificationType.Warning);
                 return true;
             }
             catch (Exception ex)
@@ -213,7 +214,7 @@ public class Update
         catch (OperationCanceledException)
         {
             task.Cancel();
-            Notice(MainLang.CanceledUpdate);
+            Notice(MainLang.CanceledUpdate, NotificationType.Warning);
             return true;
         }
         catch

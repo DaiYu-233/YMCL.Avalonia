@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Avalonia.Controls.Notifications;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Mc.Importer.zip;
 
@@ -15,7 +16,7 @@ public class DropHandler
                 await Main.Import(path);
                 return;
             default:
-                Notice($"{MainLang.UnsupportedFileType}: {Path.GetFileName(path)}");
+                Notice($"{MainLang.UnsupportedFileType}: {Path.GetFileName(path)}", NotificationType.Warning);
                 return;
         }
     }

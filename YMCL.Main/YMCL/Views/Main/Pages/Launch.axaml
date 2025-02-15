@@ -20,7 +20,7 @@
             <Border
                 Background="{DynamicResource 1x}"
                 ClipToBounds="True"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 DockPanel.Dock="Right"
                 HorizontalAlignment="Right"
                 Margin="10"
@@ -113,7 +113,7 @@
                     <Border
                         Background="{DynamicResource 2x}"
                         ClipToBounds="True"
-                        CornerRadius="5"
+                        CornerRadius="{DynamicResource MainCornerRadius}"
                         DockPanel.Dock="Top"
                         Height="90"
                         HorizontalAlignment="Center"
@@ -144,7 +144,7 @@
                     VerticalAlignment="Top" />
                 <Border
                     ClipToBounds="True"
-                    CornerRadius="5"
+                    CornerRadius="{DynamicResource MainCornerRadius}"
                     HorizontalAlignment="Stretch"
                     Margin="10,0,0,10"
                     Name="CustomPageRoot"

@@ -61,8 +61,8 @@ public class Setter
 
         window.FindControl<Controls.TitleBar>("TitleBar").IsVisible = true;
         window.FindControl<Border>("Root").CornerRadius = new CornerRadius(8);
-        window.WindowState = WindowState.Maximized;
-        window.WindowState = WindowState.Normal;
+        // window.WindowState = WindowState.Maximized;
+        // window.WindowState = WindowState.Normal;
         window.ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.NoChrome;
         window.ExtendClientAreaToDecorationsHint = true;
         action?.Invoke();

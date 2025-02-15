@@ -12,16 +12,18 @@
     xmlns:da="clr-namespace:YMCL.Public.Const"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
+    xmlns:u="https://irihi.tech/ursa"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
-        <converter:IndexIsTwoConverter x:Key="IndexIsTwoConverter" />
-        <converter:IndexIsOneConverter x:Key="IndexIsOneConverter" />
+        <converter:DoubleToPercentageConverter x:Key="DoubleToPercentageConverter" />
+        <converter:BoolReversalConverter x:Key="BoolReversalConverter" />
+        <converter:EnumIndexToBoolConverter x:Key="EnumIndexToBoolConverter" />
     </UserControl.Resources>
     <ScrollViewer>
         <StackPanel Margin="10,0,10,10" Spacing="10">
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Name="ColorPickerRoot"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
@@ -50,7 +52,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
@@ -82,7 +84,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
@@ -108,45 +110,47 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
-                <DockPanel>
-                    <TextBlock
-                        FontFamily="{DynamicResource Font}"
-                        FontSize="14"
-                        Margin="10,0,20,0"
-                        Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.CustomBackground}"
-                        VerticalAlignment="Center" />
-                    <Button
-                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.SelectImgFile}"
-                        DockPanel.Dock="Right"
-                        IsVisible="{Binding Setting.CustomBackGround, Converter={StaticResource IndexIsOneConverter}}"
-                        Margin="5,0,0,0"
-                        Name="EditCustomBackGroundImgBtn" />
-                    <ComboBox
-                        DockPanel.Dock="Left"
-                        FontFamily="{DynamicResource Font}"
-                        HorizontalAlignment="Stretch"
-                        SelectedIndex="{Binding Setting.CustomBackGround}"
-                        x:Name="CustomBackGroundImgComboBox">
-                        <ComboBox.Items>
-                            <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Default}" />
-                            <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.BackGroundImg}" />
-                            <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.AcrylicBlur}" />
-                            <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Transparent}" />
-                            <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Mica}" />
-                        </ComboBox.Items>
-                    </ComboBox>
-                </DockPanel>
-            </Border>
-            <Border
-                Background="{DynamicResource 1x}"
-                CornerRadius="5"
-                Opacity="{DynamicResource MainOpacity}"
-                Padding="6.5">
-                <StackPanel Margin="0,5" Spacing="5">
+                <StackPanel Margin="0,5" Spacing="7">
                     <DockPanel>
+                        <TextBlock
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="14"
+                            Margin="10,0,20,0"
+                            Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.CustomBackground}"
+                            VerticalAlignment="Center" />
+                        <Button
+                            Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.SelectImgFile}"
+                            DockPanel.Dock="Right"
+                            IsVisible="{Binding Setting.CustomBackGround, Converter={StaticResource EnumIndexToBoolConverter}, ConverterParameter=1}"
+                            Margin="5,0,0,0"
+                            Name="EditCustomBackGroundImgBtn" />
+                        <ComboBox
+                            DockPanel.Dock="Left"
+                            FontFamily="{DynamicResource Font}"
+                            HorizontalAlignment="Stretch"
+                            SelectedIndex="{Binding Setting.CustomBackGround}"
+                            x:Name="CustomBackGroundImgComboBox">
+                            <ComboBox.Items>
+                                <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Default}" />
+                                <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.BackGroundImg}" />
+                                <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.AcrylicBlur}" />
+                                <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Transparent}" />
+                                <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Mica}" />
+                            </ComboBox.Items>
+                        </ComboBox>
+                    </DockPanel>
+                    <DockPanel>
+                        <DockPanel.IsVisible>
+                            <MultiBinding Converter="{StaticResource BoolReversalConverter}">
+                                <Binding
+                                    Converter="{StaticResource EnumIndexToBoolConverter}"
+                                    ConverterParameter="0"
+                                    Path="Setting.CustomBackGround" />
+                            </MultiBinding>
+                        </DockPanel.IsVisible>
                         <TextBlock
                             FontFamily="{DynamicResource Font}"
                             FontSize="14"
@@ -158,12 +162,10 @@
                             FontFamily="{DynamicResource Font}"
                             FontSize="14"
                             Margin="6.5,0,6.5,0"
+                            Text="{Binding Setting.TranslucentBackgroundOpacity, Converter={StaticResource DoubleToPercentageConverter}}"
                             TextAlignment="Center"
-                            TextTrimming="CharacterEllipsis"
                             VerticalAlignment="Center"
-                            Width="60">
-                            <Run Text="{Binding Setting.TranslucentBackgroundOpacity}" />
-                        </TextBlock>
+                            Width="60" />
                         <Slider
                             Margin="0,0,0,0"
                             Maximum="1"
@@ -175,11 +177,44 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
+                Opacity="{DynamicResource MainOpacity}"
+                Padding="6.5">
+                <StackPanel Margin="0,5" Spacing="5">
+                    <DockPanel>
+                        <TextBlock
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="14"
+                            Margin="10,0,20,0"
+                            Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.CornerRadius}"
+                            VerticalAlignment="Center" />
+                        <TextBlock
+                            DockPanel.Dock="Right"
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="14"
+                            Margin="6.5,0,6.5,0"
+                            Text="{Binding Setting.CornerRadius}"
+                            TextAlignment="Center"
+                            VerticalAlignment="Center"
+                            Width="60" />
+                        <Slider
+                            IsSnapToTickEnabled="True"
+                            Margin="0,0,0,0"
+                            Maximum="100"
+                            Minimum="0"
+                            TickFrequency="1"
+                            Value="{Binding Setting.CornerRadius}"
+                            VerticalAlignment="Center" />
+                    </DockPanel>
+                </StackPanel>
+            </Border>
+            <Border
+                Background="{DynamicResource 1x}"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Name="LyricRoot"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
-                <StackPanel Margin="0,1" Spacing="6">
+                <StackPanel Margin="0,5" Spacing="6">
                     <DockPanel>
                         <TextBlock
                             FontFamily="{DynamicResource Font}"
@@ -219,7 +254,7 @@
                             </ComboBox.Items>
                         </ComboBox>
                     </DockPanel>
-                    <DockPanel>
+                    <DockPanel Margin="0,2,0,0">
                         <TextBlock
                             FontFamily="{DynamicResource Font}"
                             FontSize="14"
@@ -250,7 +285,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
@@ -278,7 +313,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
@@ -291,14 +326,14 @@
                     <Button
                         Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Edit}"
                         DockPanel.Dock="Right"
-                        IsVisible="{Binding Setting.CustomHomePage, Converter={StaticResource IndexIsOneConverter}}"
+                        IsVisible="{Binding Setting.CustomHomePage, Converter={StaticResource EnumIndexToBoolConverter}, ConverterParameter=1}"
                         Margin="5,0,0,0"
                         Name="EditCustomHomePageBtn" />
                     <TextBox
                         DockPanel.Dock="Right"
                         FontFamily="{DynamicResource Font}"
                         FontSize="14"
-                        IsVisible="{Binding Setting.CustomHomePage, Converter={StaticResource IndexIsTwoConverter}}"
+                        IsVisible="{Binding Setting.CustomHomePage, Converter={StaticResource EnumIndexToBoolConverter}, ConverterParameter=2}"
                         Margin="5,0,0,0"
                         Text="{Binding Setting.CustomHomePageUrl}"
                         VerticalAlignment="Center"
@@ -321,7 +356,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Height="40"
                 IsVisible="False"
                 Opacity="{DynamicResource MainOpacity}"

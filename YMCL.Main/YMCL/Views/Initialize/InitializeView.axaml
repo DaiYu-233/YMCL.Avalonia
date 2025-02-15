@@ -18,7 +18,7 @@
             </ContentControl.Transitions>
         </ContentControl>
         <Border
-            CornerRadius="5"
+            CornerRadius="{DynamicResource MainCornerRadius}"
             HorizontalAlignment="Left"
             Margin="20"
             VerticalAlignment="Bottom">

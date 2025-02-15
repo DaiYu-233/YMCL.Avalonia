@@ -38,7 +38,7 @@
     <Border
         Background="{DynamicResource 1x}"
         ClipToBounds="True"
-        CornerRadius="0,0,8,8"
+        CornerRadius="8,8,8,8"
         x:Name="Root">
         <DockPanel>
             <uc:TitleBar

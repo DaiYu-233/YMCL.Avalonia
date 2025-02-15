@@ -20,7 +20,7 @@
         <StackPanel Margin="10,0,10,10" Spacing="10">
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
@@ -45,7 +45,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Name="CustomUpdateUrlRoot"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
@@ -80,7 +80,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Name="MusicApiRoot"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
@@ -106,7 +106,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
@@ -126,7 +126,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Height="40"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
@@ -161,7 +161,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Height="40"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
@@ -203,7 +203,7 @@
                 Severity="Warning" />
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Height="40"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">

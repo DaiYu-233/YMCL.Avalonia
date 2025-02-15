@@ -12,7 +12,7 @@
         <StackPanel Margin="10" Spacing="10">
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <Grid>
@@ -111,13 +111,13 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <StackPanel Margin="5" Spacing="5">
                     <Border
                         Background="{DynamicResource 2x}"
-                        CornerRadius="5"
+                        CornerRadius="{DynamicResource MainCornerRadius}"
                         Opacity="{DynamicResource MainOpacity}"
                         Padding="8">
                         <DockPanel>
@@ -172,7 +172,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}">
                 <DockPanel>
                     <WrapPanel
@@ -189,7 +189,7 @@
                             <Border Margin="-5,0,-6,0" Padding="0,0,5,0">
                                 <DockPanel>
                                     <Border
-                                        CornerRadius="5,5,5,5"
+                                        CornerRadius="{DynamicResource MainCornerRadius}"
                                         Height="38"
                                         Margin="4,0,0,0"
                                         Width="38">
@@ -278,7 +278,7 @@
                                 <DockPanel>
                                     <Border
                                         ClipToBounds="True"
-                                        CornerRadius="5,5,5,5"
+                                        CornerRadius="{DynamicResource MainCornerRadius}"
                                         Height="35"
                                         Margin="4,0,0,0"
                                         Width="35">
@@ -345,7 +345,7 @@
                                 <DockPanel>
                                     <Border
                                         ClipToBounds="True"
-                                        CornerRadius="5,5,5,5"
+                                        CornerRadius="{DynamicResource MainCornerRadius}"
                                         Height="35"
                                         Margin="4,0,0,0"
                                         Width="35">
@@ -415,7 +415,7 @@
                             <Border Margin="-5,0,-6,0" Padding="0,0,5,0">
                                 <DockPanel>
                                     <Border
-                                        CornerRadius="5,5,5,5"
+                                        CornerRadius="{DynamicResource MainCornerRadius}"
                                         Height="36"
                                         Margin="4,0,0,0"
                                         Width="36">
@@ -614,7 +614,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="10">
                 <StackPanel

@@ -1,6 +1,11 @@
-﻿using Avalonia.Media;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
+using Avalonia.Media;
 using Avalonia.Styling;
 using Avalonia.Threading;
+using DynamicData;
 using MinecraftLaunch;
 using Newtonsoft.Json;
 using ReactiveUI;
@@ -11,13 +16,12 @@ using YMCL.Public.Module.Init.SubModule;
 using YMCL.Public.Module.Ui.Special;
 using YMCL.Views.Initialize.Pages;
 using YMCL.Views.Main;
+using Setter = YMCL.Public.Module.Ui.Setter;
 
 namespace YMCL.Public.Classes;
 
 public class Setting : ReactiveObject
 {
-    [Reactive] [JsonProperty] public Language Language { get; set; } = new();
-    [Reactive] [JsonProperty] public MinecraftFolder MinecraftFolder { get; set; }
     [Reactive] [JsonProperty] public string SkipUpdateVersion { get; set; } = string.Empty;
     [Reactive] [JsonProperty] public bool EnableAutoCheckUpdate { get; set; } = true;
     [Reactive] [JsonProperty] public int MaxDownloadThread { get; set; } = 64;
@@ -37,17 +41,10 @@ public class Setting : ReactiveObject
     public Enum.Setting.LauncherVisibility LauncherVisibility { get; set; } =
         Enum.Setting.LauncherVisibility.AfterLaunchKeepLauncherVisible;
 
-    [Reactive]
-    [JsonProperty]
-    public AccountInfo Account { get; set; } = new()
-    {
-        Name = "Steve", AccountType = Enum.Setting.AccountType.Offline,
-        AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")
-    };
-
     [Reactive] [JsonProperty] public Enum.Setting.Theme Theme { get; set; } = Enum.Setting.Theme.Light;
     [Reactive] [JsonProperty] public double MaxMem { get; set; } = 1024;
     [Reactive] [JsonProperty] public int MaxFileFragmentation { get; set; } = 8;
+    [Reactive] [JsonProperty] public int CornerRadius { get; set; } = 5;
     [Reactive] [JsonProperty] public double Volume { get; set; } = 50;
     [Reactive] [JsonProperty] public double DeskLyricSize { get; set; } = 16;
     [Reactive] [JsonProperty] public Enum.Setting.Repeat Repeat { get; set; } = Enum.Setting.Repeat.RepeatAll;
@@ -74,6 +71,11 @@ public class Setting : ReactiveObject
     [JsonProperty]
     public Enum.Setting.CustomHomePageWay CustomHomePage { get; set; } = Enum.Setting.CustomHomePageWay.None;
 
+    [Reactive] [JsonProperty] public string MusicApiWithIPAddress { get; set; } = "120.230.112.69";
+
+    [Reactive] [JsonProperty] public Language Language { get; set; } = new();
+    [Reactive] [JsonProperty] public MinecraftFolder MinecraftFolder { get; set; }
+
     [Reactive] [JsonProperty] public Color AccentColor { get; set; } = Color.Parse("#d64eff");
     [Reactive] [JsonProperty] public Color DeskLyricColor { get; set; } = Color.FromRgb(22, 233, 184);
 
@@ -81,13 +83,21 @@ public class Setting : ReactiveObject
     [JsonProperty]
     public JavaEntry Java { get; set; } = new() { JavaPath = MainLang.LetYMCLChooseJava, JavaStringVersion = "Auto" };
 
+    [Reactive]
+    [JsonProperty]
+    public AccountInfo Account { get; set; } = new()
+    {
+        Name = "Steve", AccountType = Enum.Setting.AccountType.Offline,
+        AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")
+    };
+
     [Reactive] [JsonProperty] public string WindowBackGroundImgData { get; set; } = string.Empty;
-    [Reactive] [JsonProperty] public string MusicApiWithIPAddress { get; set; } = "120.230.112.69";
 
     public Setting()
     {
         var accentColorSetter = new Debouncer(() => { Public.Module.Ui.Setter.SetAccentColor(AccentColor); }, 5);
-        var _debouncer = new Debouncer(() => { Dispatcher.UIThread.Invoke(Public.Module.Ui.Setter.SetBackGround); }, 500);
+        var _debouncer = new Debouncer(() => { Dispatcher.UIThread.Invoke(Public.Module.Ui.Setter.SetBackGround); },
+            500);
         PropertyChanged += (o, e) =>
         {
             if (e.PropertyName == nameof(Language))
@@ -110,7 +120,18 @@ public class Setting : ReactiveObject
                 _ = InitUi.SetCustomHomePage();
             }
 
-            if (e.PropertyName is nameof(CustomBackGround) or nameof(TranslucentBackgroundOpacity))
+            if (e.PropertyName == nameof(CustomBackGround))
+            {
+                try
+                {
+                    Setter.SetBackGround();
+                }
+                catch
+                {
+                }
+            }
+
+            if (e.PropertyName == nameof(TranslucentBackgroundOpacity))
             {
                 Application.Current.Resources["MainOpacity"] = TranslucentBackgroundOpacity;
                 if (TopLevel.GetTopLevel(App.UiRoot) is MainWindow window)
@@ -120,11 +141,17 @@ public class Setting : ReactiveObject
                         (Public.Module.Ui.Getter.FindControlByName(window, "PART_PaneRoot") as Panel).Opacity =
                             (double)Application.Current.Resources["MainOpacity"]!;
                     }
-                    catch 
+                    catch
                     {
                     }
                 }
+
                 _debouncer.Trigger();
+            }
+
+            if (e.PropertyName == nameof(CornerRadius))
+            {
+                Application.Current.Resources["MainCornerRadius"] = new CornerRadius(CornerRadius);
             }
 
             if (e.PropertyName == nameof(Theme))

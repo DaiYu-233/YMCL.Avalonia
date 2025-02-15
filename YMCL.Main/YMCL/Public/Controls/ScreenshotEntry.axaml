@@ -10,7 +10,7 @@
     <Border
         Background="{DynamicResource 1x}"
         ClipToBounds="True"
-        CornerRadius="5"
+        CornerRadius="{DynamicResource MainCornerRadius}"
         Height="160"
         Margin="10,5,10,5"
         Name="Root"
@@ -51,7 +51,7 @@
             </StackPanel>
             <Border
                 ClipToBounds="True"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Margin="10,0,10,10">
                 <Image HorizontalAlignment="Center" Name="Image" />
             </Border>

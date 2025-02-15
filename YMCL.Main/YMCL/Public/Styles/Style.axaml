@@ -23,7 +23,7 @@
                 <Border
                     Background="{TemplateBinding Background}"
                     BorderThickness="{TemplateBinding BorderThickness}"
-                    CornerRadius="5"
+                    CornerRadius="{DynamicResource MainCornerRadius}"
                     Name="bd">
                     <Path
                         Data="{TemplateBinding Content}"
@@ -47,7 +47,7 @@
                 <Border
                     Background="{TemplateBinding Background}"
                     BorderThickness="{TemplateBinding BorderThickness}"
-                    CornerRadius="5"
+                    CornerRadius="{DynamicResource MainCornerRadius}"
                     Name="bd">
                     <Path
                         Data="{TemplateBinding Content}"
@@ -71,7 +71,7 @@
                 <Border
                     Background="{TemplateBinding Background}"
                     BorderThickness="{TemplateBinding BorderThickness}"
-                    CornerRadius="5"
+                    CornerRadius="{DynamicResource MainCornerRadius}"
                     Name="bd">
                     <Path
                         Data="{TemplateBinding Content}"

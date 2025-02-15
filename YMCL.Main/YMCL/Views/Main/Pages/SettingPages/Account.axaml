@@ -18,7 +18,7 @@
     <Border
         Background="{DynamicResource 1x}"
         ClipToBounds="True"
-        CornerRadius="5"
+        CornerRadius="{DynamicResource MainCornerRadius}"
         Margin="10,0,10,10"
         Opacity="{DynamicResource MainOpacity}"
         Padding="0,10,0,0">

@@ -12,7 +12,7 @@
     <DockPanel>
         <Border
             Background="{DynamicResource 1x}"
-            CornerRadius="5"
+            CornerRadius="{DynamicResource MainCornerRadius}"
             DockPanel.Dock="Top"
             Height="40"
             Margin="10,10,10,0"

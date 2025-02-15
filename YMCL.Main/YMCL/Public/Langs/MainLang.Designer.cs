@@ -645,6 +645,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 圆角半径.
+        /// </summary>
+        public static string CornerRadius {
+            get {
+                return ResourceManager.GetString("CornerRadius", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 崩溃啦！ヾ(•ω•`)o.
         /// </summary>
         public static string CrashLa {
@@ -1047,6 +1056,15 @@ namespace YMCL.Public.Langs {
         public static string EnableSelect {
             get {
                 return ResourceManager.GetString("EnableSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 启用半透明特殊控件列表.
+        /// </summary>
+        public static string EnableTranslucentSpecialControlList {
+            get {
+                return ResourceManager.GetString("EnableTranslucentSpecialControlList", resourceCulture);
             }
         }
         
@@ -3111,7 +3129,7 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 半透明背景透明度.
+        ///   Looks up a localized string similar to 半透明背景不透明度.
         /// </summary>
         public static string TranslucentBackgroundOpacity {
             get {

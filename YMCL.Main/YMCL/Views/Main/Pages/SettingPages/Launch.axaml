@@ -15,7 +15,7 @@
         <StackPanel Spacing="10">
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
@@ -62,7 +62,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel>
@@ -113,7 +113,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 IsVisible="False"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
@@ -138,7 +138,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <StackPanel Margin="0,5" Spacing="5">
@@ -206,7 +206,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Height="40"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
@@ -230,7 +230,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Height="40"
                 IsVisible="False"
                 Opacity="{DynamicResource MainOpacity}"

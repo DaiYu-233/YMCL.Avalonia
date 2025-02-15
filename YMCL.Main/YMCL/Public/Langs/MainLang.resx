@@ -1125,7 +1125,7 @@ MacOs 不支持自动更新
     <value>云母</value>
   </data>
   <data name="TranslucentBackgroundOpacity" xml:space="preserve">
-    <value>半透明背景透明度</value>
+    <value>半透明背景不透明度</value>
   </data>
   <data name="MusicApiWithIP" xml:space="preserve">
     <value>音乐Api附带IP地址</value>
@@ -1159,5 +1159,11 @@ MacOs 不支持自动更新
   </data>
   <data name="SaveFinish" xml:space="preserve">
     <value>保存完成</value>
+  </data>
+  <data name="CornerRadius" xml:space="preserve">
+    <value>圆角半径</value>
+  </data>
+  <data name="EnableTranslucentSpecialControlList" xml:space="preserve">
+    <value>启用半透明特殊控件列表</value>
   </data>
 </root>

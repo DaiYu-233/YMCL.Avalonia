@@ -15,7 +15,7 @@
     <Border
         Background="{DynamicResource 1x}"
         ClipToBounds="True"
-        CornerRadius="5"
+        CornerRadius="{DynamicResource MainCornerRadius}"
         Name="VersionListRoot"
         Padding="10">
         <DockPanel>
@@ -73,7 +73,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <Border
                                     ClipToBounds="True"
-                                    CornerRadius="5"
+                                    CornerRadius="{DynamicResource MainCornerRadius}"
                                     DockPanel.Dock="Left"
                                     Height="38"
                                     Margin="0,5"

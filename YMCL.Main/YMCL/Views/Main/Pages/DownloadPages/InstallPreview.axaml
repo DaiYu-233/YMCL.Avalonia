@@ -20,13 +20,13 @@
         <DockPanel Margin="10,0,10,10">
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}"
                 VerticalAlignment="Stretch">
                 <StackPanel Margin="10" Spacing="10">
                     <Border
                         Background="{DynamicResource 2x}"
-                        CornerRadius="5"
+                        CornerRadius="{DynamicResource MainCornerRadius}"
                         Opacity="{DynamicResource MainOpacity}"
                         Padding="10"
                         VerticalAlignment="Top">
@@ -78,7 +78,7 @@
                     </Border>
                     <Border
                         Background="{DynamicResource 2x}"
-                        CornerRadius="5"
+                        CornerRadius="{DynamicResource MainCornerRadius}"
                         Name="ReturnToListRoot"
                         Opacity="{DynamicResource MainOpacity}"
                         Padding="10"
@@ -113,7 +113,7 @@
                                 Text="Minecraft" />
                         </DockPanel>
                     </Border>
-                    <Border Background="{DynamicResource 1x}" CornerRadius="5">
+                    <Border Background="{DynamicResource 1x}" CornerRadius="{DynamicResource MainCornerRadius}">
                         <Expander>
                             <Expander.Header>
                                 <TextBlock>
@@ -155,7 +155,7 @@
                             </Grid>
                         </Expander>
                     </Border>
-                    <Border Background="{DynamicResource 1x}" CornerRadius="5">
+                    <Border Background="{DynamicResource 1x}" CornerRadius="{DynamicResource MainCornerRadius}">
                         <Expander>
                             <Expander.Header>
                                 <TextBlock>
@@ -194,7 +194,7 @@
                             </Grid>
                         </Expander>
                     </Border>
-                    <Border Background="{DynamicResource 1x}" CornerRadius="5">
+                    <Border Background="{DynamicResource 1x}" CornerRadius="{DynamicResource MainCornerRadius}">
                         <Expander>
                             <Expander.Header>
                                 <TextBlock>
@@ -233,7 +233,7 @@
                             </Grid>
                         </Expander>
                     </Border>
-                    <Border Background="{DynamicResource 1x}" CornerRadius="5">
+                    <Border Background="{DynamicResource 1x}" CornerRadius="{DynamicResource MainCornerRadius}">
                         <Expander>
                             <Expander.Header>
                                 <TextBlock>
@@ -272,7 +272,7 @@
                             </Grid>
                         </Expander>
                     </Border>
-                    <Border Background="{DynamicResource 1x}" CornerRadius="5">
+                    <Border Background="{DynamicResource 1x}" CornerRadius="{DynamicResource MainCornerRadius}">
                         <Expander>
                             <Expander.Header>
                                 <TextBlock>

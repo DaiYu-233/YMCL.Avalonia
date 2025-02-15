@@ -12,7 +12,7 @@
         <StackPanel Margin="10,0,10,10" Spacing="10">
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <StackPanel Margin="5,0,5,5" Spacing="10">
@@ -36,7 +36,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <StackPanel Margin="5,0,5,5" Spacing="10">
@@ -47,7 +47,7 @@
                         Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.OneSentence}" />
                     <Border
                         Background="{DynamicResource 2x}"
-                        CornerRadius="5"
+                        CornerRadius="{DynamicResource MainCornerRadius}"
                         Opacity="{DynamicResource MainOpacity}"
                         Padding="6.5">
                         <DockPanel Margin="5,0,0,0">
@@ -71,7 +71,7 @@
                     </Border>
                     <Border
                         Background="{DynamicResource 2x}"
-                        CornerRadius="5"
+                        CornerRadius="{DynamicResource MainCornerRadius}"
                         Opacity="{DynamicResource MainOpacity}"
                         Padding="6.5">
                         <DockPanel Margin="5,0,0,0">
@@ -97,7 +97,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 IsVisible="False"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">

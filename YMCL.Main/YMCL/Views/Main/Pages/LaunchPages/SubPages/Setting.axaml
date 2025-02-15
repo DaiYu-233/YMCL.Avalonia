@@ -19,7 +19,7 @@
         <StackPanel>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Height="45"
                 Margin="0,0,0,10">
                 <DockPanel>
@@ -46,7 +46,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Height="45"
                 Margin="0,0,0,10">
                 <DockPanel>
@@ -83,7 +83,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Height="45"
                 Margin="0,0,0,10">
                 <DockPanel>
@@ -121,7 +121,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 Height="45">
                 <DockPanel>
                     <Label

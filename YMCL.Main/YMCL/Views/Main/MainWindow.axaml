@@ -37,42 +37,45 @@
     </Window.Styles>
     <Border
         Background="{DynamicResource 1x}"
+        BorderBrush="{DynamicResource 1x}"
         ClipToBounds="True"
         CornerRadius="8"
         x:Name="Root">
-        <Grid>
-            <Border ClipToBounds="True" CornerRadius="8">
-                <Viewbox Stretch="UniformToFill">
-                    <Image Name="BackGroundImg" />
-                </Viewbox>
-            </Border>
-            <DockPanel>
-                <uc:TitleBar
-                    DockPanel.Dock="Top"
-                    IsCloseBtnExitApp="True"
-                    IsCloseBtnShow="True"
-                    IsMaxBtnShow="True"
-                    IsVisible="False"
-                    Name="TitleBar"
-                    Title="" />
-                <main:MainView Name="View" />
-            </DockPanel>
-            <DockPanel Name="TitleRoot" Opacity="{DynamicResource MainOpacity}">
-                <Image
-                    Height="20"
-                    Margin="10,6,2,0"
-                    Source="/Public/Assets/TitleBar-Icon.png"
-                    VerticalAlignment="Top"
-                    Width="20" />
-                <TextBlock
-                    FontFamily="{DynamicResource Font}"
-                    FontSize="16"
-                    HorizontalAlignment="Left"
-                    Margin="0,5,0,0"
-                    Text=" Yu Minecraft Launcher"
-                    VerticalAlignment="Top"
-                    x:Name="TitleText" />
-            </DockPanel>
-        </Grid>
+        <Border ClipToBounds="True" CornerRadius="8">
+            <Grid>
+                <Border ClipToBounds="True" CornerRadius="8">
+                    <Viewbox Stretch="UniformToFill">
+                        <Image Name="BackGroundImg" />
+                    </Viewbox>
+                </Border>
+                <DockPanel>
+                    <uc:TitleBar
+                        DockPanel.Dock="Top"
+                        IsCloseBtnExitApp="True"
+                        IsCloseBtnShow="True"
+                        IsMaxBtnShow="True"
+                        IsVisible="False"
+                        Name="TitleBar"
+                        Title="" />
+                    <main:MainView Name="View" />
+                </DockPanel>
+                <DockPanel Name="TitleRoot" Opacity="{DynamicResource MainOpacity}">
+                    <Image
+                        Height="20"
+                        Margin="10,6,2,0"
+                        Source="/Public/Assets/TitleBar-Icon.png"
+                        VerticalAlignment="Top"
+                        Width="20" />
+                    <TextBlock
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="16"
+                        HorizontalAlignment="Left"
+                        Margin="0,5,0,0"
+                        Text=" Yu Minecraft Launcher"
+                        VerticalAlignment="Top"
+                        x:Name="TitleText" />
+                </DockPanel>
+            </Grid>
+        </Border>
     </Border>
 </u:UrsaWindow>

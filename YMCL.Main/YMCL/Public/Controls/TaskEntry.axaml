@@ -22,7 +22,7 @@
     <Border
         Background="{DynamicResource 2x}"
         ClipToBounds="True"
-        CornerRadius="5"
+        CornerRadius="{DynamicResource MainCornerRadius}"
         Opacity="{DynamicResource MainOpacity}">
         <Expander IsExpanded="True">
             <Expander.Styles>

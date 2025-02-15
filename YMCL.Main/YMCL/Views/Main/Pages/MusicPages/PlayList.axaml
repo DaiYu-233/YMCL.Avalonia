@@ -14,7 +14,7 @@
     <Border
         Background="{DynamicResource 1x}"
         ClipToBounds="True"
-        CornerRadius="5"
+        CornerRadius="{DynamicResource MainCornerRadius}"
         DockPanel.Dock="Right"
         Opacity="{DynamicResource MainOpacity}">
         <DockPanel Margin="10">

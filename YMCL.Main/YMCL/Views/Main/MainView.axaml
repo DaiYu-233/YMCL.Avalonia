@@ -19,7 +19,7 @@
     </Design.DataContext>
 
     <Grid>
-        <Border CornerRadius="0,0,8,8" Margin="0">
+        <Border CornerRadius="8,8,8,8" Margin="0">
             <Grid>
                 <ui:NavigationView
                     AlwaysShowHeader="False"

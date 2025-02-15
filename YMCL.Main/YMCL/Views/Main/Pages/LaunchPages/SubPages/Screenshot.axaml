@@ -16,7 +16,7 @@
             <DockPanel>
                 <Border
                     Background="{DynamicResource 1x}"
-                    CornerRadius="5"
+                    CornerRadius="{DynamicResource MainCornerRadius}"
                     DockPanel.Dock="Top"
                     Margin="0,0,0,10">
                     <DockPanel Margin="5" VerticalAlignment="Top">
@@ -62,7 +62,7 @@
         </Grid>
         <Border
             Background="{DynamicResource 1x}"
-            CornerRadius="8"
+            CornerRadius="{DynamicResource MainCornerRadius}"
             IsVisible="False"
             Margin="10,0,10,10"
             Name="ViewerRoot"

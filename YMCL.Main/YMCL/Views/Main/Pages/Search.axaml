@@ -13,7 +13,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Border
         Background="{DynamicResource 1x}"
-        CornerRadius="5"
+        CornerRadius="{DynamicResource MainCornerRadius}"
         Margin="10"
         Opacity="{DynamicResource MainOpacity}">
         <DockPanel>

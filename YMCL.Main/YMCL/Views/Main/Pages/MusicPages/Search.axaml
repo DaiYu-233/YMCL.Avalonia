@@ -15,7 +15,7 @@
     <Border
         Background="{DynamicResource 1x}"
         ClipToBounds="True"
-        CornerRadius="5"
+        CornerRadius="{DynamicResource MainCornerRadius}"
         Name="SearchRoot"
         Opacity="{DynamicResource MainOpacity}">
         <Border.Transitions>

@@ -27,6 +27,7 @@
             <FontFamily x:Key="Font">avares://YMCL/Public/Assets#MiSans</FontFamily>
             <FontWeight x:Key="FontWeight">Bold</FontWeight>
             <system:Double x:Key="MainOpacity">1</system:Double>
+            <CornerRadius x:Key="MainCornerRadius">5</CornerRadius>
         </ResourceDictionary>
     </Application.Resources>
     <Application.Styles>

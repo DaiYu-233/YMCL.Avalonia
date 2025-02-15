@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
@@ -39,7 +40,9 @@ public partial class Personalize : UserControl
         };
         LanguageComboBox.SelectionChanged += (_, _) =>
         {
-            Data.JavaRuntimes.FirstOrDefault(java => java.JavaStringVersion == "Auto").JavaPath = MainLang.LetYMCLChooseJava;
+            Data.JavaRuntimes.FirstOrDefault(java => java.JavaStringVersion == "Auto").JavaPath =
+                MainLang.LetYMCLChooseJava;
         };
     }
 }
+

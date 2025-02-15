@@ -20,7 +20,7 @@
         <StackPanel Margin="10,0,10,10" Spacing="10">
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 DockPanel.Dock="Top"
                 IsVisible="False"
                 Name="BedrockRoot"
@@ -73,7 +73,7 @@
             <Border
                 Background="{DynamicResource 1x}"
                 ClipToBounds="True"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 DockPanel.Dock="Top"
                 Opacity="{DynamicResource MainOpacity}"
                 VerticalAlignment="Top">
@@ -90,7 +90,7 @@
                         Spacing="10">
                         <Border
                             Background="{DynamicResource 2x}"
-                            CornerRadius="5"
+                            CornerRadius="{DynamicResource MainCornerRadius}"
                             Name="LatestReleaseVersionRoot"
                             Padding="5">
                             <DockPanel>
@@ -131,7 +131,7 @@
                         </Border>
                         <Border
                             Background="{DynamicResource 2x}"
-                            CornerRadius="5"
+                            CornerRadius="{DynamicResource MainCornerRadius}"
                             Name="LatestPreviewVersionRoot"
                             Padding="5">
                             <DockPanel>
@@ -178,7 +178,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 DockPanel.Dock="Top"
                 Opacity="{DynamicResource MainOpacity}"
                 VerticalAlignment="Top">
@@ -231,7 +231,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 DockPanel.Dock="Top"
                 Opacity="{DynamicResource MainOpacity}"
                 VerticalAlignment="Top">
@@ -275,7 +275,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 DockPanel.Dock="Top"
                 Opacity="{DynamicResource MainOpacity}"
                 VerticalAlignment="Top">
@@ -319,7 +319,7 @@
             </Border>
             <Border
                 Background="{DynamicResource 1x}"
-                CornerRadius="5"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 DockPanel.Dock="Top"
                 Opacity="{DynamicResource MainOpacity}"
                 VerticalAlignment="Top">

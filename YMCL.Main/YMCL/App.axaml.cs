@@ -85,6 +85,7 @@ public class App : Application
         }
 
         Data.Notification.Position = NotificationPosition.BottomRight;
+        Data.Toast.MaxItems = 2;
 
         base.OnFrameworkInitializationCompleted();
     }

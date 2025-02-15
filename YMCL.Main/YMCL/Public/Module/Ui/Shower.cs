@@ -39,14 +39,12 @@ public class Shower
     public static void NotificationBubble(string msg, NotificationType type)
     {
         var toast = new Toast(msg, type);
-        UiProperty.NotificationCards.Insert(0, new NotificationEntry(toast, toast.Type));
         Data.Toast.Show(toast, toast.Type, classes: ["Light"]);
     }
     
     public static void NotificationCard(string msg, NotificationType type, string title)
     {
         var notification = new Notification(title, msg, type);
-        UiProperty.NotificationCards.Insert(0, new NotificationEntry(notification, notification.Type));
         Data.Notification.Show(notification, notification.Type, classes: ["Light"]);
     }
 
@@ -110,14 +108,14 @@ public class Shower
         if (dialog == ContentDialogResult.Primary)
         {
             var updateAppAsync = await IO.Network.Update.UpdateAppAsync();
-            if (!updateAppAsync) Notice(MainLang.UpdateFail);
+            if (!updateAppAsync) Notice(MainLang.UpdateFail, NotificationType.Error);
         }
         else if (dialog == ContentDialogResult.Secondary)
         {
             Dispatcher.UIThread.Invoke(() =>
             {
                 Const.Data.Setting.SkipUpdateVersion = info.NewVersion;
-                Notice(MainLang.SkipVersionTip.Replace("{version}", info.NewVersion));
+                Notice(MainLang.SkipVersionTip.Replace("{version}", info.NewVersion), NotificationType.Success);
             });
         }
     }

@@ -40,6 +40,8 @@ public partial class MainWindow : UrsaWindow
                 Buttons = DialogButton.None,
                 CanLightDismiss = true,
                 IsCloseButtonVisible = true,
+                MaxWidth = 420,
+                MinWidth = 420,
                 Title = "消息历史",
                 CanResize = true,
             };

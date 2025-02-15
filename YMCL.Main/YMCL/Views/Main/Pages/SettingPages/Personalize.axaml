@@ -16,6 +16,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
         <converter:DoubleToPercentageConverter x:Key="DoubleToPercentageConverter" />
+        <converter:SpecialControlEnableListConverter x:Key="SpecialControlEnableListConverter" />
+        <converter:ListDistinctConverter x:Key="ListDistinctConverter" />
         <converter:BoolReversalConverter x:Key="BoolReversalConverter" />
         <converter:EnumIndexToBoolConverter x:Key="EnumIndexToBoolConverter" />
     </UserControl.Resources>
@@ -171,6 +173,29 @@
                             Maximum="1"
                             Minimum="0.2"
                             Value="{Binding Setting.TranslucentBackgroundOpacity}"
+                            VerticalAlignment="Center" />
+                    </DockPanel>
+                    <DockPanel>
+                        <DockPanel.IsVisible>
+                            <!-- <MultiBinding Converter="{StaticResource BoolReversalConverter}"> -->
+                            <!--  <Binding  -->
+                            <!--  Converter="{StaticResource EnumIndexToBoolConverter}"  -->
+                            <!--  ConverterParameter="0"  -->
+                            <!--  Path="Setting.CustomBackGround" />  -->
+                            <!-- </MultiBinding> -->
+                            False
+                        </DockPanel.IsVisible>
+                        <TextBlock
+                            FontFamily="{DynamicResource Font}"
+                            FontSize="14"
+                            Margin="10,0,20,0"
+                            Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.EnableTranslucentSpecialControlList}"
+                            VerticalAlignment="Center" />
+                        <u:MultiComboBox
+                            HorizontalAlignment="Stretch"
+                            Margin="0,0,0,0"
+                            Name="MultiComboBox"
+                            SelectedItems="{Binding Setting.SpecialControlEnableTranslucent, Converter={StaticResource SpecialControlEnableListConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             VerticalAlignment="Center" />
                     </DockPanel>
                 </StackPanel>

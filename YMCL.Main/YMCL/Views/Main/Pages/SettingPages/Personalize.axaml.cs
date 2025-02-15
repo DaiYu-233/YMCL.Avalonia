@@ -1,8 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
 using YMCL.Public.Langs;
@@ -38,6 +41,12 @@ public partial class Personalize : UserControl
             var launcher = TopLevel.GetTopLevel(this).Launcher;
             launcher.LaunchFileInfoAsync(new FileInfo(ConfigPath.CustomHomePageXamlDataPath));
         };
+        MultiComboBox.ItemsSource = new List<string>
+        {
+            "ContentDialog",
+            "NotificationCard",
+            "NotificationBubble",
+            "Popup"
+        };
     }
 }
-

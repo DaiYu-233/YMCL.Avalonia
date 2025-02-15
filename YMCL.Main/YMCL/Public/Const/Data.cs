@@ -56,17 +56,25 @@ public sealed class Data : ReactiveObject
         };
         Setting.PropertyChanged += (_, e) =>
         {
-            if (e.PropertyName != nameof(Setting.SelectedMinecraftId) ||
-                string.IsNullOrEmpty(Setting.SelectedMinecraftId)) return;
-            if (Setting.SelectedMinecraftId == "bedrock")
+            try
             {
-                UiProperty.SelectedMinecraft = new MinecraftDataEntry(null, true, true)
-                    { IsSettingVisible = false, Type = "bedrock" };
+                if (e.PropertyName != nameof(Setting.SelectedMinecraftId) ||
+                    string.IsNullOrEmpty(Setting.SelectedMinecraftId)) return;
+                if (Setting.SelectedMinecraftId == "bedrock")
+                {
+                    UiProperty.SelectedMinecraft = new MinecraftDataEntry(null, true, true)
+                        { IsSettingVisible = false, Type = "bedrock" };
+                }
+                else
+                {
+                    var parser = new MinecraftParser(Setting.MinecraftFolder.Path);
+                    UiProperty.SelectedMinecraft =
+                        new MinecraftDataEntry(parser.GetMinecraft(Setting.SelectedMinecraftId));
+                }
             }
-            else
+            catch (Exception exception)
             {
-                var parser = new MinecraftParser(Setting.MinecraftFolder.Path);
-                UiProperty.SelectedMinecraft = new MinecraftDataEntry(parser.GetMinecraft(Setting.SelectedMinecraftId));
+                Console.WriteLine(exception);
             }
         };
     }

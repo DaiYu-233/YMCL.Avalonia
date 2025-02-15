@@ -58,8 +58,11 @@ public class Setting : ReactiveObject
     [Reactive] [JsonProperty] public string SelectedMinecraftId { get; set; }
     [Reactive] [JsonProperty] public bool EnableIndependencyCore { get; set; } = true;
     [Reactive] [JsonProperty] public bool EnableCustomUpdateUrl { get; set; }
+    [Reactive] [JsonIgnore]  public object SpecialControlEnableTranslucentSelectedItem { get; set; }
+
     [Reactive] [JsonProperty] public string CustomUpdateUrl { get; set; } = "https://github.moeyy.xyz/{%url%}";
     [Reactive] [JsonProperty] public string MusicApi { get; set; } = "http://music.api.daiyu.fun/";
+    [Reactive] [JsonProperty] public string SpecialControlEnableTranslucent { get; set; } = "ContentDialog,NotificationCard,NotificationBubble,Popup";
 
     [Reactive]
     [JsonProperty]

@@ -86,6 +86,7 @@ public class Setter
 
     public static void SetBackGround()
     {
+        if(Data.Setting is null) return;
         Application.Current.Resources["MainOpacity"] =
             Data.Setting.CustomBackGround == Setting.CustomBackGroundWay.Default
                 ? 1.0

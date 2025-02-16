@@ -42,7 +42,7 @@ public class Setting : ReactiveObject
     public Enum.Setting.LauncherVisibility LauncherVisibility { get; set; } =
         Enum.Setting.LauncherVisibility.AfterLaunchKeepLauncherVisible;
 
-    [Reactive] [JsonProperty] public Enum.Setting.Theme Theme { get; set; } = Enum.Setting.Theme.Light;
+    [Reactive] [JsonProperty] public Enum.Setting.Theme Theme { get; set; } = Enum.Setting.Theme.Dark;
     [Reactive] [JsonProperty] public double MaxMem { get; set; } = 1024;
     [Reactive] [JsonProperty] public int MaxFileFragmentation { get; set; } = 8;
     [Reactive] [JsonProperty] public int CornerRadius { get; set; } = 5;
@@ -82,8 +82,8 @@ public class Setting : ReactiveObject
     [Reactive] [JsonProperty] public Language Language { get; set; } = new();
     [Reactive] [JsonProperty] public MinecraftFolder MinecraftFolder { get; set; }
 
-    [Reactive] [JsonProperty] public Color AccentColor { get; set; } = Color.Parse("#d64eff");
-    [Reactive] [JsonProperty] public Color DeskLyricColor { get; set; } = Color.FromRgb(22, 233, 184);
+    [Reactive] [JsonProperty] public Color AccentColor { get; set; } = Color.Parse("#2d8eca");
+    [Reactive] [JsonProperty] public Color DeskLyricColor { get; set; } = Color.Parse("#00c4ff");
 
     [Reactive]
     [JsonProperty]

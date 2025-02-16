@@ -23,6 +23,7 @@ public class InitUi
         Ui.Setter.DynamicStyle.SetDynamicStyle();
         _ = SetCustomHomePage();
         Application.Current.ActualThemeVariantChanged += (_, _) => { UpdateTheme(); };
+        Ui.Setter.ToggleTheme(Data.Setting.Theme);
         if (Data.Setting.EnableAutoCheckUpdate)
         {
             var result = await IO.Network.Update.CheckUpdateAsync();

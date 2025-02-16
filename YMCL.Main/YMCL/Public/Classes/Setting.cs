@@ -58,11 +58,13 @@ public class Setting : ReactiveObject
     [Reactive] [JsonProperty] public string SelectedMinecraftId { get; set; }
     [Reactive] [JsonProperty] public bool EnableIndependencyCore { get; set; } = true;
     [Reactive] [JsonProperty] public bool EnableCustomUpdateUrl { get; set; }
-    [Reactive] [JsonIgnore]  public object SpecialControlEnableTranslucentSelectedItem { get; set; }
-
     [Reactive] [JsonProperty] public string CustomUpdateUrl { get; set; } = "https://github.moeyy.xyz/{%url%}";
     [Reactive] [JsonProperty] public string MusicApi { get; set; } = "http://music.api.daiyu.fun/";
-    [Reactive] [JsonProperty] public string SpecialControlEnableTranslucent { get; set; } = "ContentDialog,NotificationCard,NotificationBubble,Popup";
+
+    [Reactive]
+    [JsonProperty]
+    public string SpecialControlEnableTranslucent { get; set; } =
+        "ContentDialog,NotificationCard,NotificationBubble,Popup";
 
     [Reactive]
     [JsonProperty]
@@ -100,7 +102,8 @@ public class Setting : ReactiveObject
     public Setting()
     {
         var accentColorSetter = new Debouncer(() => { Public.Module.Ui.Setter.SetAccentColor(AccentColor); }, 5);
-        var _debouncer = new Debouncer(() => { Dispatcher.UIThread.Invoke(Public.Module.Ui.Setter.SetBackGround); },
+        var _setBackGroundDebouncer = new Debouncer(
+            () => { Dispatcher.UIThread.Invoke(Public.Module.Ui.Setter.SetBackGround); },
             500);
         PropertyChanged += (o, e) =>
         {
@@ -150,12 +153,17 @@ public class Setting : ReactiveObject
                     }
                 }
 
-                _debouncer.Trigger();
+                _setBackGroundDebouncer.Trigger();
             }
 
             if (e.PropertyName == nameof(CornerRadius))
             {
                 Application.Current.Resources["MainCornerRadius"] = new CornerRadius(CornerRadius);
+            }
+
+            if (e.PropertyName == nameof(SpecialControlEnableTranslucent))
+            {
+                Public.Module.Ui.Setter.DynamicStyle.SetDynamicStyle();
             }
 
             if (e.PropertyName == nameof(Theme))

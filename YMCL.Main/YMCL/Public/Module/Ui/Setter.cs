@@ -2,16 +2,20 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
+using Avalonia.Markup.Xaml.MarkupExtensions;
+using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Styling;
 using Avalonia.Threading;
+using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json;
 using Ursa.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Value;
 using YMCL.Views.Main;
+using NotificationCard = Ursa.Controls.NotificationCard;
 
 namespace YMCL.Public.Module.Ui;
 
@@ -86,7 +90,7 @@ public class Setter
 
     public static void SetBackGround()
     {
-        if(Data.Setting is null) return;
+        if (Data.Setting is null) return;
         Application.Current.Resources["MainOpacity"] =
             Data.Setting.CustomBackGround == Setting.CustomBackGroundWay.Default
                 ? 1.0
@@ -254,5 +258,70 @@ public class Setter
         Random random = new Random();
         //methods[^1]();
         methods[random.Next(methods.Count)]();
+    }
+
+    public static class DynamicStyle
+    {
+        private static readonly StyleInclude NotificationBubbleStyle =
+            new(new Uri("avares://YMCL/Public/Styles/Dynamic/NotificationBubble.axaml"))
+                { Source = new Uri("avares://YMCL/Public/Styles/Dynamic/NotificationBubble.axaml") };
+
+        private static readonly StyleInclude NotificationCardStyle =
+            new(new Uri("avares://YMCL/Public/Styles/Dynamic/NotificationCard.axaml"))
+                { Source = new Uri("avares://YMCL/Public/Styles/Dynamic/NotificationCard.axaml") };
+
+        private static readonly StyleInclude PopupStyle =
+            new(new Uri("avares://YMCL/Public/Styles/Dynamic/Popup.axaml"))
+                { Source = new Uri("avares://YMCL/Public/Styles/Dynamic/Popup.axaml") };
+
+        private static readonly StyleInclude ContentDialogStyle =
+            new(new Uri("avares://YMCL/Public/Styles/Dynamic/ContentDialog.axaml"))
+                { Source = new Uri("avares://YMCL/Public/Styles/Dynamic/ContentDialog.axaml") };
+
+        public static void SetDynamicStyle()
+        {
+            if (Data.Setting is null) return;
+            var list = Data.Setting.SpecialControlEnableTranslucent.Split(',').ToList();
+            //NotificationBubble,NotificationCard,Popup,ContentDialog
+            if (list.Contains("NotificationBubble"))
+            {
+                if (!Application.Current.Styles.Contains(NotificationBubbleStyle))
+                    Application.Current.Styles.Add(NotificationBubbleStyle);
+            }
+            else
+            {
+                Application.Current.Styles.Remove(NotificationBubbleStyle);
+            }
+
+            if (list.Contains("NotificationCard"))
+            {
+                if (!Application.Current.Styles.Contains(NotificationCardStyle))
+                    Application.Current.Styles.Add(NotificationCardStyle);
+            }
+            else
+            {
+                Application.Current.Styles.Remove(NotificationCardStyle);
+            }
+
+            if (list.Contains("Popup"))
+            {
+                if (!Application.Current.Styles.Contains(PopupStyle))
+                    Application.Current.Styles.Add(PopupStyle);
+            }
+            else
+            {
+                Application.Current.Styles.Remove(PopupStyle);
+            }
+
+            if (list.Contains("ContentDialog"))
+            {
+                if (!Application.Current.Styles.Contains(ContentDialogStyle))
+                    Application.Current.Styles.Add(ContentDialogStyle);
+            }
+            else
+            {
+                Application.Current.Styles.Remove(ContentDialogStyle);
+            }
+        }
     }
 }

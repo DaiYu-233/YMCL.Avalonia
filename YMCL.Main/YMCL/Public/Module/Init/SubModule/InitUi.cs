@@ -20,6 +20,7 @@ public class InitUi
         Application.Current.Resources["MainOpacity"] = 1.0;
         DisplaceDefaultUi();
         Ui.Setter.SetBackGround();
+        Ui.Setter.DynamicStyle.SetDynamicStyle();
         _ = SetCustomHomePage();
         Application.Current.ActualThemeVariantChanged += (_, _) => { UpdateTheme(); };
         if (Data.Setting.EnableAutoCheckUpdate)

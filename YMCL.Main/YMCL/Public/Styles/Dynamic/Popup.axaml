@@ -1,0 +1,30 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:u="https://irihi.tech/ursa"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!--  Add Controls for Previewer Here  -->
+        </Border>
+    </Design.PreviewWith>
+
+    <!--  Add Styles Here  -->
+    <Style Selector="Border#PopupBorder">
+        <Setter Property="Opacity" Value="{DynamicResource MainOpacity}" />
+    </Style>
+    <Style Selector="u|MultiComboBox#MultiComboBox /template/ Popup">
+        <Style Selector="^ PopupRoot">
+            <Style Selector="^ LayoutTransformControl">
+                <Style Selector="^ Panel">
+                    <Style Selector="^ VisualLayerManager">
+                        <Style Selector="^ LayoutTransformControl">
+                            <Style Selector="^ ContentPresenter">
+                                <Setter Property="Opacity" Value="{DynamicResource MainOpacity}" />
+                            </Style>
+                        </Style>
+                    </Style>
+                </Style>
+            </Style>
+        </Style>
+    </Style>
+</Styles>

@@ -1125,7 +1125,7 @@ MacOs 不支持自动更新
     <value>云母</value>
   </data>
   <data name="TranslucentBackgroundOpacity" xml:space="preserve">
-    <value>半透明背景不透明度</value>
+    <value>半透明背景控件不透明度</value>
   </data>
   <data name="MusicApiWithIP" xml:space="preserve">
     <value>音乐Api附带IP地址</value>
@@ -1177,5 +1177,8 @@ MacOs 不支持自动更新
   </data>
   <data name="ExampleNotification" xml:space="preserve">
     <value>示例通知</value>
+  </data>
+  <data name="CurrentListIsmpty" xml:space="preserve">
+    <value>当前列表为空</value>
   </data>
 </root>

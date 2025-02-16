@@ -100,16 +100,4 @@
     <Style Selector="Rectangle#HCPaneBorder">
         <Setter Property="IsVisible" Value="False" />
     </Style>
-    <Style Selector="controls|ContentDialog">
-        <Setter Property="Opacity" Value="{DynamicResource MainOpacity}" />
-    </Style>
-    <Style Selector="Border#PopupBorder">
-        <Setter Property="Opacity" Value="{DynamicResource MainOpacity}" />
-    </Style>
-    <Style Selector="u|NotificationCard">
-        <Setter Property="Opacity" Value="{DynamicResource MainOpacity}" />
-    </Style>
-    <Style Selector="u|ToastCard">
-        <Setter Property="Opacity" Value="{DynamicResource MainOpacity}" />
-    </Style>
 </Styles>

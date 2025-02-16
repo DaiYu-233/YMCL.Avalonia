@@ -1,0 +1,15 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:u="https://irihi.tech/ursa"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!--  Add Controls for Previewer Here  -->
+        </Border>
+    </Design.PreviewWith>
+
+    <!--  Add Styles Here  -->
+    <Style Selector="u|NotificationCard">
+        <Setter Property="Opacity" Value="{DynamicResource MainOpacity}" />
+    </Style>
+</Styles>

@@ -700,6 +700,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 当前列表为空.
+        /// </summary>
+        public static string CurrentListIsmpty {
+            get {
+                return ResourceManager.GetString("CurrentListIsmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 当前是最新版本.
         /// </summary>
         public static string CurrentlyTheLatestVersion {
@@ -3165,7 +3174,7 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 半透明背景不透明度.
+        ///   Looks up a localized string similar to 半透明背景控件不透明度.
         /// </summary>
         public static string TranslucentBackgroundOpacity {
             get {

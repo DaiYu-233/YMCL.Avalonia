@@ -12,6 +12,7 @@
     xmlns:da="clr-namespace:YMCL.Public.Const"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
+    xmlns:settingPages="clr-namespace:YMCL.Views.Main.Pages.SettingPages"
     xmlns:u="https://irihi.tech/ursa"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
@@ -177,13 +178,13 @@
                     </DockPanel>
                     <DockPanel>
                         <DockPanel.IsVisible>
-                            <!-- <MultiBinding Converter="{StaticResource BoolReversalConverter}"> -->
-                            <!--  <Binding  -->
-                            <!--  Converter="{StaticResource EnumIndexToBoolConverter}"  -->
-                            <!--  ConverterParameter="0"  -->
-                            <!--  Path="Setting.CustomBackGround" />  -->
-                            <!-- </MultiBinding> -->
-                            False
+                            <MultiBinding Converter="{StaticResource BoolReversalConverter}">
+                                <Binding
+                                    Converter="{StaticResource EnumIndexToBoolConverter}"
+                                    ConverterParameter="0"
+                                    Path="Setting.CustomBackGround" />
+                            </MultiBinding>
+                            <!--  False  -->
                         </DockPanel.IsVisible>
                         <TextBlock
                             FontFamily="{DynamicResource Font}"
@@ -195,8 +196,10 @@
                             HorizontalAlignment="Stretch"
                             Margin="0,0,0,0"
                             Name="MultiComboBox"
-                            SelectedItems="{Binding Setting.SpecialControlEnableTranslucent, Converter={StaticResource SpecialControlEnableListConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            VerticalAlignment="Center" />
+                            SelectedItems="{Binding SelectedItems}"
+                            VerticalAlignment="Center"
+                            Watermark="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.CurrentListIsmpty}"
+                            x:DataType="settingPages:Personalize" />
                     </DockPanel>
                 </StackPanel>
             </Border>

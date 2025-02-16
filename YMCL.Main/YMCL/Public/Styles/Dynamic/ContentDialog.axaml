@@ -1,0 +1,15 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:controls="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!--  Add Controls for Previewer Here  -->
+        </Border>
+    </Design.PreviewWith>
+
+    <!--  Add Styles Here  -->
+    <Style Selector="controls|ContentDialog">
+        <Setter Property="Opacity" Value="{DynamicResource MainOpacity}" />
+    </Style>
+</Styles>

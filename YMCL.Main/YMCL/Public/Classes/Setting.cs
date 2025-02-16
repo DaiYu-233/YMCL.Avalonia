@@ -82,8 +82,8 @@ public class Setting : ReactiveObject
     [Reactive] [JsonProperty] public Language Language { get; set; } = new();
     [Reactive] [JsonProperty] public MinecraftFolder MinecraftFolder { get; set; }
 
-    [Reactive] [JsonProperty] public Color AccentColor { get; set; } = Color.Parse("#2d8eca");
-    [Reactive] [JsonProperty] public Color DeskLyricColor { get; set; } = Color.Parse("#00c4ff");
+    [Reactive] [JsonProperty] public Color AccentColor { get; set; } = Color.Parse("#00b2ff");
+    [Reactive] [JsonProperty] public Color DeskLyricColor { get; set; } = Color.Parse("#00b2ff");
 
     [Reactive]
     [JsonProperty]

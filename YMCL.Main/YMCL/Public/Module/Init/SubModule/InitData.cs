@@ -100,6 +100,14 @@ public class InitData
         {
             Data.Setting.MinecraftFolder = Data.MinecraftFolders[0];
         }
+        if (!Data.Accounts.Contains(Data.Setting.Account))
+        {
+            Data.Setting.Account = Data.Accounts[0];
+        }
+        if (!Data.JavaRuntimes.Contains(Data.Setting.Java))
+        {
+            Data.Setting.Java = Data.JavaRuntimes[0];
+        }
     }
 
     public static void InitSystemMaxMem()

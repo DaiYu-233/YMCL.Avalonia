@@ -67,7 +67,7 @@
                                 Margin="0,0,0,5"
                                 Name="LaunchBtn"
                                 Width="{Binding $parent.Bounds.Width}">
-                                <StackPanel>
+                                <StackPanel Margin="0,7">
                                     <TextBlock
                                         FontFamily="{DynamicResource Font}"
                                         FontSize="14"

@@ -125,7 +125,7 @@ public partial class Music : UserControl
             _debouncer.Trigger();
             Data.UiProperty.MusicCurrentTime = ControlPlayerSlider.Value;
         };
-        AudioPlayer.Instance.PlaybackCompleted += async (_, _) =>
+        AudioPlayer.Instance.PlaybackCompleted += (_, _) =>
         {
             if (Math.Abs(Data.UiProperty.MusicCurrentTime - Data.UiProperty.MusicTotalTime) > 1000 ||
                 Data.UiProperty.MusicTotalTime == 0) return;

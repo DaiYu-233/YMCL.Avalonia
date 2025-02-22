@@ -5,7 +5,7 @@ namespace YMCL.Public.Module.Ui.Converter;
 
 public class EnumIndexToBoolConverter : IValueConverter
 {
-    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public object? Convert(object value, Type targetType, object? parameter, CultureInfo culture)
     {
         var index = (int)value;
         return index == System.Convert.ToInt32(parameter);

@@ -32,6 +32,7 @@ public partial class GameSetting : UserControl
             var resolver = new MinecraftParser(Data.Setting.MinecraftFolder.Path);
             Model = new GameSettingModel(resolver.GetMinecraft(Data.UiProperty.SelectedMinecraft.Id));
         }
+
         DataContext = Model;
         _setting = new SubPages.Setting(Model);
         _mod = new SubPages.Mod(Model.MinecraftEntry);
@@ -63,5 +64,9 @@ public partial class GameSetting : UserControl
             FrameView.Content = page;
             _ = Animator.PageLoading.LevelTwoPage(page);
         };
+    }
+
+    public GameSetting()
+    {
     }
 }

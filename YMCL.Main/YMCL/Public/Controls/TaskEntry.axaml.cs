@@ -28,21 +28,25 @@ public partial class TaskEntry : UserControl
         App.UiRoot.ViewModel.Task.UpdateTasksTip();
     }
 
+    public TaskEntry()
+    {
+    }
+
     public void UpdateAction(Action action)
     {
         Model.ButtonAction = action;
     }
-    
+
     public void UpdateDestoryAction(Action action)
     {
         Model.DestoryAction = action;
     }
-    
+
     public void AddOperateButton(TaskEntryOperateButtonEntry entry)
     {
         Model.OperateButtons.Add(entry);
     }
-    
+
     public void UpdateButtonText(string text)
     {
         Model.ButtonDisplay = text;

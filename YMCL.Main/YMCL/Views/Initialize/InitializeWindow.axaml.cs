@@ -15,4 +15,8 @@ public partial class InitializeWindow : UrsaWindow
             Public.Module.Ui.Setter.UpdateWindowStyle(this);
         };
     }
+    
+    public InitializeWindow()
+    {
+    }
 }

@@ -143,4 +143,8 @@ public partial class ShaderPack : UserControl, INotifyPropertyChanged
         field = value;
         OnPropertyChanged(propertyName);
     }
+
+    public ShaderPack()
+    {
+    }
 }

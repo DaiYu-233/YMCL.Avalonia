@@ -15,7 +15,6 @@ public class AudioPlayer : IDisposable
     private AudioFileReader? _waveSource;
     private Mp3FileReader? _waveStream;
     private Timer? _timer;
-    private bool _isPlaying;
 
     public event EventHandler<ProgressEventArgs>? ProgressChanged;
     public event EventHandler<StoppedEventArgs>? PlaybackCompleted;
@@ -85,8 +84,6 @@ public class AudioPlayer : IDisposable
         _waveOut?.Init(waveStream);
         _waveOut?.Play();
         _waveOut.Volume = Convert.ToSingle(Data.Setting.Volume / 100);
-        _isPlaying = true;
-
         _timer = new Timer(10); 
         _timer.Elapsed += OnTimedEvent;
         _timer.Start();
@@ -112,26 +109,19 @@ public class AudioPlayer : IDisposable
 
     public void Pause()
     {
-        if (_waveOut != null)
-        {
-            _waveOut.Pause();
-            _isPlaying = false;
-        }
+        _waveOut?.Pause();
     }
 
     public void Resume()
     {
-        if (_waveOut != null)
+        if (_waveOut == null) return;
+        try
         {
-            try
-            {
-                _waveOut.Play();
-                _isPlaying = true;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            _waveOut.Play();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
         }
     }
 
@@ -145,7 +135,6 @@ public class AudioPlayer : IDisposable
         _timer?.Stop();
         _timer?.Dispose();
         _timer = null;
-        _isPlaying = false;
     }
 
     public void Dispose()

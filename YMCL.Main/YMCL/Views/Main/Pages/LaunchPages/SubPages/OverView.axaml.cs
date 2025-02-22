@@ -25,7 +25,8 @@ public partial class OverView : UserControl
         var tag = ((Button)sender).Tag.ToString();
         var path = tag switch
         {
-            "mods" => Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_model.MinecraftEntry, GameSpecialFolder.ModsFolder),
+            "mods" => Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_model.MinecraftEntry,
+                GameSpecialFolder.ModsFolder),
             "saves" => Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_model.MinecraftEntry,
                 GameSpecialFolder.SavesFolder),
             "resourcepacks" => Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_model.MinecraftEntry,
@@ -34,10 +35,15 @@ public partial class OverView : UserControl
                 GameSpecialFolder.ShaderPacksFolder),
             "screenshots" => Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_model.MinecraftEntry,
                 GameSpecialFolder.ScreenshotsFolder),
-            _ => Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_model.MinecraftEntry, GameSpecialFolder.GameFolder, true)
+            _ => Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_model.MinecraftEntry, GameSpecialFolder.GameFolder,
+                true)
         };
         YMCL.Public.Module.IO.Disk.Setter.TryCreateFolder(path);
         var launcher = TopLevel.GetTopLevel(this).Launcher;
         launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(path));
+    }
+
+    public OverView()
+    {
     }
 }

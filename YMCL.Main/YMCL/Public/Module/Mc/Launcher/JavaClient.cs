@@ -171,7 +171,6 @@ public class JavaClient
 
         MinecraftRunner runner = new(config, parser);
 
-        var isKillByYmcl = false;
         var window = new LogWindow();
         task.UpdateDestoryAction(() => { window.Destory(); });
 
@@ -199,9 +198,7 @@ public class JavaClient
                             }
 
                             Notice($"{MainLang.GameExited} - {p_id}", NotificationType.Warning);
-
-                            // if (process.Process.ExitCode == 0)
-                            // {
+                            
                             task.FinishWithSuccess();
                             await Task.Delay(2000);
                             if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window2)
@@ -209,34 +206,6 @@ public class JavaClient
                                 window2.Activate();
                                 window2.Focus();
                             }
-                            // }
-                            // else
-                            // {
-                            //     if (!isKillByYmcl)
-                            //     {
-                            //         var crashAnalyzer = new GameCrashAnalyzer(entry, p_enableIndependencyCore);
-                            //         var reports = crashAnalyzer.AnalysisLogs();
-                            //         var msg = string.Empty;
-                            //         try
-                            //         {
-                            //             var crashReports = reports.ToList();
-                            //             if (reports == null || crashReports.Count == 0)
-                            //                 msg = MainLang.NoCrashInfo;
-                            //             else
-                            //                 msg = crashReports.Aggregate(msg,
-                            //                     (current, report) => current + $"\n{report.CrashCauses}");
-                            //         }
-                            //         catch
-                            //         {
-                            //             msg = MainLang.NoCrashInfo;
-                            //         }
-                            //
-                            //         task.FinishWithError();
-                            //         await ShowDialogAsync(MainLang.MineratCrashed, msg,
-                            //             b_primary: MainLang.Ok);
-                            //         task.FinishWithError();
-                            //     }
-                            // }
                         });
                     };
 
@@ -274,7 +243,6 @@ public class JavaClient
                             try
                             {
                                 canceled = true;
-                                isKillByYmcl = true;
                                 process.Process.Kill(true);
                                 task.CancelWithSuccess();
                                 await cts.CancelAsync();
@@ -297,7 +265,6 @@ public class JavaClient
                             try
                             {
                                 canceled = true;
-                                isKillByYmcl = true;
                                 process.Process.Kill(true);
                                 task.CancelWithSuccess();
                                 cts.Cancel();

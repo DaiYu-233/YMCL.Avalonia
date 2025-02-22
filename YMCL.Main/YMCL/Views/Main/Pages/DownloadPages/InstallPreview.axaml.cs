@@ -50,6 +50,10 @@ public sealed partial class InstallPreview : UserControl
         };
     }
 
+    public InstallPreview()
+    {
+    }
+
     private void OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (e.AddedItems.Count <= 0) return;

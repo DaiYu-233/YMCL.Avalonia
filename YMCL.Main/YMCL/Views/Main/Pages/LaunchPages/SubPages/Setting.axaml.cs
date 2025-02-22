@@ -12,4 +12,8 @@ public partial class Setting : UserControl
         InitializeComponent();
         DataContext = model;
     }
+
+    public Setting()
+    {
+    }
 }

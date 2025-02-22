@@ -309,7 +309,7 @@ public sealed partial class Mod : UserControl, INotifyPropertyChanged
                         Console.WriteLine(e);
                     }
                 }
-                
+
                 var type4 = archive.GetEntry("META-INF/neoforge.mods.toml");
                 if (type4 != null)
                 {
@@ -442,5 +442,9 @@ public sealed partial class Mod : UserControl, INotifyPropertyChanged
                 Console.WriteLine(e);
             }
         });
+    }
+
+    public Mod()
+    {
     }
 }

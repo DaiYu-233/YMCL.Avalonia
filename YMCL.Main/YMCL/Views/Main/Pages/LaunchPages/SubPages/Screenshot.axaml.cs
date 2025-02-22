@@ -127,4 +127,8 @@ public partial class Screenshot : UserControl, INotifyPropertyChanged
         ViewerRoot.Opacity = 1.0;
         ListView.Opacity = 0;
     }
+
+    public Screenshot()
+    {
+    }
 }

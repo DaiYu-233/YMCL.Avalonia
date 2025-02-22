@@ -28,6 +28,10 @@ public partial class ScreenshotEntry : UserControl
         Image.PointerPressed += (_, _) => { selectedAction.Invoke(); };
     }
 
+    public ScreenshotEntry()
+    {
+    }
+
     private void OpenFileInFileExplore(object? sender, RoutedEventArgs e)
     {
         var launcher = TopLevel.GetTopLevel(this).Launcher;

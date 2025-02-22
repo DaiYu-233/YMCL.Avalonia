@@ -197,4 +197,8 @@ public partial class ResourcePack : UserControl, INotifyPropertyChanged
 
         return "string.Empty";
     }
+
+    public ResourcePack()
+    {
+    }
 }

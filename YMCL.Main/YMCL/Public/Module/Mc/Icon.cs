@@ -3,6 +3,7 @@ using Avalonia.Media.Imaging;
 using MinecraftLaunch.Base.Enums;
 using MinecraftLaunch.Base.Models.Game;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Operate;
 
 namespace YMCL.Public.Module.Mc;
 

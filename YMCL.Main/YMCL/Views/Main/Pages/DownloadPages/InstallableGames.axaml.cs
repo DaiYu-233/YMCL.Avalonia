@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using MinecraftLaunch.Base.Models.Network;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Setting;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Init.SubModule.GetDataFromNetwork;
 using YMCL.ViewModels;

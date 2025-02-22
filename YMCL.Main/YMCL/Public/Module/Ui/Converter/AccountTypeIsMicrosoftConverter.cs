@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using Avalonia.Data.Converters;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Setting;
 using Setting = YMCL.Public.Enum.Setting;
 
 namespace YMCL.Public.Module.Ui.Converter;

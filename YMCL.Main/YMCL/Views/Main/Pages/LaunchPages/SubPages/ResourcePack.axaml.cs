@@ -17,6 +17,7 @@ using MinecraftLaunch.Base.Models.Game;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Data;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using JsonElement = System.Text.Json.JsonElement;

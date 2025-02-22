@@ -7,4 +7,4 @@ global using Avalonia.Markup.Xaml;
 global using YMCL.Public.Const;
 global using static YMCL.Public.Module.Ui.Shower;
 global using Task = System.Threading.Tasks.Task;
-global using JavaEntry = YMCL.Public.Classes.JavaEntry;
+global using JavaEntry = YMCL.Public.Classes.Data.JavaEntry;

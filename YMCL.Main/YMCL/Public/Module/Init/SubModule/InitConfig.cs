@@ -3,7 +3,9 @@ using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Data;
 using YMCL.Public.Classes.Netease;
+using YMCL.Public.Classes.Setting;
 
 namespace YMCL.Public.Module.Init.SubModule;
 

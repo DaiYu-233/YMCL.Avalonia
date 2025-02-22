@@ -12,6 +12,8 @@ using HtmlAgilityPack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Data;
+using YMCL.Public.Classes.Json;
 using YMCL.Public.Module;
 
 namespace YMCL.Views.Main.Pages.MorePages;

@@ -11,6 +11,7 @@
     xmlns:da="clr-namespace:YMCL.Public.Const"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
+    xmlns:setting="clr-namespace:YMCL.Public.Classes.Setting"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
         <converters:AccountTypeIsMicrosoftConverter x:Key="AccountTypeIsMicrosoftConverter" />
@@ -49,7 +50,7 @@
                     SelectedItem="{Binding Setting.Account}"
                     x:Name="AccountsListView">
                     <ListBox.ItemTemplate>
-                        <DataTemplate DataType="classes:AccountInfo">
+                        <DataTemplate DataType="setting:AccountInfo">
                             <Border Margin="0,6">
                                 <DockPanel>
                                     <Border

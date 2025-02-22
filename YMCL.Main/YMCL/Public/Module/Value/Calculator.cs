@@ -36,9 +36,9 @@ public class Calculator
         {
             if (x.JavaStringVersion != "Auto")
             {
-                list.Add(JavaEntry.YmclToMl(x));
+                list.Add(Classes.Data.JavaEntry.YmclToMl(x));
             }
         });
-        return JavaEntry.MlToYmcl(game.GetAppropriateJava(list));
+        return Classes.Data.JavaEntry.MlToYmcl(game.GetAppropriateJava(list));
     }
 }

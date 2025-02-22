@@ -1,7 +1,8 @@
 ﻿using MinecraftLaunch.Base.Models.Game;
 using MinecraftLaunch.Base.Models.Network;
+using YMCL.Public.Classes.Setting;
 
-namespace YMCL.Public.Classes;
+namespace YMCL.Public.Classes.Data;
 
 public class AggregateSearchEntry()
 {

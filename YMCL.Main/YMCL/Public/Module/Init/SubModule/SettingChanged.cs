@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Setting;
 using YMCL.Public.Langs;
 
 namespace YMCL.Public.Module.Init.SubModule;

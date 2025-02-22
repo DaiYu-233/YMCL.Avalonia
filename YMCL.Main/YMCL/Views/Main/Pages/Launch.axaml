@@ -11,6 +11,7 @@
     xmlns:da="clr-namespace:YMCL.Public.Const"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
+    xmlns:setting="clr-namespace:YMCL.Public.Classes.Setting"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
         <converter:SelectedGameIsotBedrock x:Key="SelectedGameIsNotBedrock" />
@@ -47,7 +48,7 @@
                             Name="AccountComboBox"
                             SelectedItem="{Binding Setting.Account}">
                             <ComboBox.ItemTemplate>
-                                <DataTemplate DataType="classes:AccountInfo">
+                                <DataTemplate DataType="setting:AccountInfo">
                                     <TextBlock>
                                         <Run Text="[" />
                                         <Run Text="{Binding AccountType}" />

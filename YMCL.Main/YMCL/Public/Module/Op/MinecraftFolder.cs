@@ -69,7 +69,7 @@ public class MinecraftFolder
             };
             var result = await dialog.ShowAsync();
             if (result != ContentDialogResult.Primary) return;
-            var entry = new Public.Classes.MinecraftFolder
+            var entry = new Classes.Data.MinecraftFolder
                 { Name = textbox.Text, Path = path };
             Data.MinecraftFolders.Add(entry);
             Data.Setting.MinecraftFolder = entry;
@@ -89,7 +89,7 @@ public class MinecraftFolder
         {
             var path = Path.Combine(ConfigPath.UserDataRootPath, ".minecraft");
             IO.Disk.Setter.TryCreateFolder(path);
-            var folder = new Classes.MinecraftFolder { Name = "Minecraft Folder", Path = path };
+            var folder = new Classes.Data.MinecraftFolder { Name = "Minecraft Folder", Path = path };
             Data.MinecraftFolders.Add(folder);
             Data.Setting.MinecraftFolder = folder;
         }

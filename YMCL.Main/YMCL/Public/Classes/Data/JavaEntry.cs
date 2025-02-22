@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-namespace YMCL.Public.Classes;
+﻿namespace YMCL.Public.Classes.Data;
 
 public sealed record JavaEntry
 {

@@ -11,6 +11,8 @@ using Avalonia.Platform.Storage;
 using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json.Linq;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Data;
+using YMCL.Public.Classes.Operate;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;

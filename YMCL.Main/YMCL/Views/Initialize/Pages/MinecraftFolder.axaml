@@ -6,6 +6,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:cl="clr-namespace:YMCL.Public.Classes"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:data="clr-namespace:YMCL.Public.Classes.Data"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
@@ -84,7 +85,7 @@
                         SelectedIndex="0"
                         VerticalAlignment="Top">
                         <ListBox.ItemTemplate>
-                            <DataTemplate DataType="cl:MinecraftFolder">
+                            <DataTemplate DataType="data:MinecraftFolder">
                                 <TextBlock
                                     FontFamily="{DynamicResource Font}"
                                     Margin="0,5"

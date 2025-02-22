@@ -8,6 +8,7 @@
     xmlns:classes="clr-namespace:YMCL.Public.Classes"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:da="clr-namespace:YMCL.Public.Const"
+    xmlns:data="clr-namespace:YMCL.Public.Classes.Data"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
@@ -45,7 +46,7 @@
                         SelectedItem="{Binding Setting.MinecraftFolder}"
                         x:Name="MinecraftFolderComboBox">
                         <ComboBox.ItemTemplate>
-                            <DataTemplate DataType="classes:MinecraftFolder">
+                            <DataTemplate DataType="data:MinecraftFolder">
                                 <TextBlock
                                     FontFamily="{DynamicResource Font}"
                                     Margin="0,5"
@@ -98,7 +99,7 @@
                         Name="JavaComboBox"
                         SelectedItem="{Binding Setting.Java}">
                         <ComboBox.ItemTemplate>
-                            <DataTemplate DataType="classes:JavaEntry">
+                            <DataTemplate DataType="data:JavaEntry">
                                 <TextBlock>
                                     <Run Text="[" />
                                     <Run Text="{Binding JavaType}" />

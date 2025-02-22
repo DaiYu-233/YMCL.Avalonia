@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Data;
 using YMCL.Public.Module.Ui.Special;
 
 namespace YMCL.Views.Main.Pages;

@@ -9,6 +9,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
 using MinecraftLaunch.Base.Models.Game;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Setting;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Value;
 

@@ -2,6 +2,7 @@
 using MinecraftLaunch.Base.Models.Network;
 using MinecraftLaunch.Components.Installer;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Setting;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Ui.Special;
 

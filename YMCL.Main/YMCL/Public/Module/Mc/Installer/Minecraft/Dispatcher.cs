@@ -6,6 +6,7 @@ using Avalonia.Controls.Notifications;
 using MinecraftLaunch;
 using MinecraftLaunch.Base.Models.Network;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Operate;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;

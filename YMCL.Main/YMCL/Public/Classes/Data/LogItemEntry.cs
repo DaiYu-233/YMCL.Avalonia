@@ -1,6 +1,6 @@
 ﻿using YMCL.Public.Enum;
 
-namespace YMCL.Public.Classes;
+namespace YMCL.Public.Classes.Data;
 
 public class LogItemEntry
 {

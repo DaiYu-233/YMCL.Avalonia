@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace YMCL.Public.Classes;
+namespace YMCL.Public.Classes.Json;
 
 public class MojangJavaNews()
 {

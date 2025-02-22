@@ -43,7 +43,7 @@ public partial class InitializeView : UserControl
             4 => _account,
             _ => Frame.Content
         };
-        if (page == 1 && Data.Setting.Language == new Public.Classes.Language())
+        if (page == 1 && Data.Setting.Language == new Public.Classes.Data.Language())
             Data.Setting.Language = Data.Langs[0];
         Frame.Transitions.Add(animation);
         Frame.Opacity = 1;

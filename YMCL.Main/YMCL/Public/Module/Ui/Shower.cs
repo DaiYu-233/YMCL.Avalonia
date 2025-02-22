@@ -7,6 +7,8 @@ using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using Ursa.Controls;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Data;
+using YMCL.Public.Classes.Setting;
 using YMCL.Public.Langs;
 using Notification = Ursa.Controls.Notification;
 using Setting = YMCL.Public.Enum.Setting;

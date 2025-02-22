@@ -1,15 +1,10 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Avalonia.Media;
+﻿using Avalonia.Media;
 using FluentAvalonia.UI.Controls;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Semi.Avalonia;
 using YMCL.Public.Enum;
-using Dispatcher = Avalonia.Threading.Dispatcher;
 
-namespace YMCL.Public.Classes;
+namespace YMCL.Public.Classes.Operate;
 
 public sealed class SubTask : ReactiveObject
 {

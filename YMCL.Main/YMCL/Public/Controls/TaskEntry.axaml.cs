@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Splat.ModeDetection;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Operate;
 using YMCL.Public.Enum;
 using YMCL.ViewModels;
 

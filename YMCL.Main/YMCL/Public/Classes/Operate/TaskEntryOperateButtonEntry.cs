@@ -1,7 +1,7 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-namespace YMCL.Public.Classes;
+namespace YMCL.Public.Classes.Operate;
 
 public class TaskEntryOperateButtonEntry : ReactiveObject
 {

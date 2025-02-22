@@ -13,6 +13,7 @@ using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Json;
 using YMCL.Public.Langs;
 using YMCL.Public.Module;
 

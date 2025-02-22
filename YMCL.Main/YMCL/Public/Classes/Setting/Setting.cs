@@ -1,11 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Linq;
-using Avalonia.Media;
-using Avalonia.Styling;
+﻿using Avalonia.Media;
 using Avalonia.Threading;
-using DynamicData;
 using MinecraftLaunch;
 using Newtonsoft.Json;
 using ReactiveUI;
@@ -14,11 +8,12 @@ using YMCL.Public.Langs;
 using YMCL.Public.Module;
 using YMCL.Public.Module.Init.SubModule;
 using YMCL.Public.Module.Ui.Special;
-using YMCL.Views.Initialize.Pages;
 using YMCL.Views.Main;
+using Language = YMCL.Public.Classes.Data.Language;
+using MinecraftFolder = YMCL.Public.Classes.Data.MinecraftFolder;
 using Setter = YMCL.Public.Module.Ui.Setter;
 
-namespace YMCL.Public.Classes;
+namespace YMCL.Public.Classes.Setting;
 
 public class Setting : ReactiveObject
 {
@@ -109,7 +104,7 @@ public class Setting : ReactiveObject
         {
             if (e.PropertyName == nameof(Language))
             {
-                LangHelper.Current.ChangedCulture(Data.Setting.Language.Code);
+                LangHelper.Current.ChangedCulture(Const.Data.Setting.Language.Code);
             }
 
             if (e.PropertyName == nameof(AccentColor))

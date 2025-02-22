@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Timers;
 using NAudio.Wave;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Setting;
 
 namespace YMCL.Public.Module;
 

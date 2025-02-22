@@ -8,6 +8,7 @@
     xmlns:classes="clr-namespace:YMCL.Public.Classes"
     xmlns:converter="clr-namespace:YMCL.Public.Module.Ui.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:data="clr-namespace:YMCL.Public.Classes.Data"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
     xmlns:viewModels="clr-namespace:YMCL.ViewModels"
@@ -68,7 +69,7 @@
                         VerticalAlignment="Stretch"
                         x:Name="JavaComboBox">
                         <ComboBox.ItemTemplate>
-                            <DataTemplate DataType="classes:JavaEntry">
+                            <DataTemplate DataType="data:JavaEntry">
                                 <TextBlock>
                                     <Run Text="[" />
                                     <Run Text="{Binding JavaType}" />

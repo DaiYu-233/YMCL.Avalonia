@@ -7,7 +7,7 @@ using ReactiveUI.Fody.Helpers;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 
-namespace YMCL.Public.Classes;
+namespace YMCL.Public.Classes.Data;
 
 public class LocalModEntry : ReactiveObject
 {

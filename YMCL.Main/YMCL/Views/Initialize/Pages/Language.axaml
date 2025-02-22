@@ -8,6 +8,7 @@
     xmlns:cl="clr-namespace:YMCL.Public.Classes"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:da="clr-namespace:YMCL.Public.Const"
+    xmlns:data="clr-namespace:YMCL.Public.Classes.Data"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
@@ -42,7 +43,7 @@
                 Name="LanguageListBox"
                 SelectedItem="{Binding Setting.Language}">
                 <ListBox.ItemTemplate>
-                    <DataTemplate DataType="cl:Language">
+                    <DataTemplate DataType="data:Language">
                         <StackPanel Margin="0,7,0,7">
                             <TextBlock
                                 FontFamily="{DynamicResource Font}"

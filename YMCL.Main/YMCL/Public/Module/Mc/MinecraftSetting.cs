@@ -2,6 +2,7 @@
 using MinecraftLaunch.Base.Models.Game;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Setting;
 using YMCL.Public.Enum;
 
 namespace YMCL.Public.Module.Mc;

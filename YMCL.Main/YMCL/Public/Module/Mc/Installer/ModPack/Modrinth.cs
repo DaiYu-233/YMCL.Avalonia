@@ -12,6 +12,7 @@ using MinecraftLaunch.Components.Installer;
 using MinecraftLaunch.Components.Installer.Modpack;
 using MinecraftLaunch.Components.Parser;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Operate;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;

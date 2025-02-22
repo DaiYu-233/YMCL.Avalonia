@@ -8,6 +8,7 @@
     xmlns:classes="clr-namespace:YMCL.Public.Classes"
     xmlns:converter="clr-namespace:YMCL.Public.Module.Ui.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:data="clr-namespace:YMCL.Public.Classes.Data"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:YMCL.Views.Main.Pages.LaunchPages.SubPages"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
@@ -63,7 +64,7 @@
                         </Style>
                     </ListBox.Styles>
                     <ListBox.ItemTemplate>
-                        <DataTemplate DataType="classes:LocalSaveEntry">
+                        <DataTemplate DataType="data:LocalSaveEntry">
                             <Grid>
                                 <Border Margin="0,6">
                                     <DockPanel>

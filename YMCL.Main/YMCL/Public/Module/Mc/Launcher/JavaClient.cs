@@ -16,6 +16,7 @@ using MinecraftLaunch.Extensions;
 using MinecraftLaunch.Launch;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Operate;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;

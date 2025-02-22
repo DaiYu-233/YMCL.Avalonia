@@ -9,7 +9,7 @@ using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using YMCL.Views.Main.Pages.LaunchPages.SubPages;
 
-namespace YMCL.Public.Classes;
+namespace YMCL.Public.Classes.Data;
 
 public class LocalSaveEntry : ReactiveObject
 {

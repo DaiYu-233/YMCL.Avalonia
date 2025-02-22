@@ -6,6 +6,7 @@ using Avalonia.Platform.Storage;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Data;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using String = System.String;

@@ -15,6 +15,7 @@ using FluentAvalonia.UI.Controls;
 using Microsoft.VisualBasic.FileIO;
 using MinecraftLaunch.Base.Models.Game;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Data;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;

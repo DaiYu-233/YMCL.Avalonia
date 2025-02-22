@@ -6,7 +6,7 @@ using MinecraftLaunch.Skin;
 using Newtonsoft.Json;
 using YMCL.Public.Module.Value;
 
-namespace YMCL.Public.Classes;
+namespace YMCL.Public.Classes.Setting;
 
 public sealed record AccountInfo : INotifyPropertyChanged
 {

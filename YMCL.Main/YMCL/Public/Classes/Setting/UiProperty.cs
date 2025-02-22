@@ -1,15 +1,13 @@
 ﻿using System.Collections.ObjectModel;
-using Avalonia.Media;
 using MinecraftLaunch.Base.Models.Network;
-using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using YMCL.Public.Classes.Data;
 using YMCL.Public.Classes.Netease;
+using YMCL.Public.Classes.Operate;
 using YMCL.Public.Langs;
-using YMCL.Public.Module;
-using YMCL.Public.Module.Ui.Special;
 
-namespace YMCL.Public.Classes;
+namespace YMCL.Public.Classes.Setting;
 
 public sealed class UiProperty : ReactiveObject
 {

@@ -2,7 +2,6 @@
 using System.Linq;
 using Avalonia.Controls.Notifications;
 using Avalonia.Media.Imaging;
-using MinecraftLaunch.Base.Enums;
 using MinecraftLaunch.Base.Models.Game;
 using Newtonsoft.Json;
 using YMCL.Public.Langs;
@@ -10,7 +9,7 @@ using YMCL.Public.Module.Mc;
 using YMCL.Public.Module.Mc.Launcher;
 using YMCL.Public.Module.Ui.Special;
 
-namespace YMCL.Public.Classes;
+namespace YMCL.Public.Classes.Operate;
 
 public sealed record MinecraftDataEntry
 {
@@ -110,7 +109,7 @@ public sealed record MinecraftDataEntry
                 if (setting.Java.JavaStringVersion == "Auto")
                 {
                     setting.Java =
-                        YMCL.Public.Module.Value.Calculator.GetCurrentJava(Data.JavaRuntimes.ToList(), entry);
+                        YMCL.Public.Module.Value.Calculator.GetCurrentJava(Const.Data.JavaRuntimes.ToList<JavaEntry>(), entry);
                 }
 
                 if (setting.Java == null)

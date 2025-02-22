@@ -19,6 +19,7 @@ using MinecraftLaunch.Components.Parser;
 using MinecraftLaunch.Extensions;
 using Newtonsoft.Json.Linq;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Data;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 

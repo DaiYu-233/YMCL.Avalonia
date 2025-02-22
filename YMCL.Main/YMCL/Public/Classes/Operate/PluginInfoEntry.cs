@@ -4,7 +4,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using YMCL.Plugin.Base;
 
-namespace YMCL.Public.Classes;
+namespace YMCL.Public.Classes.Operate;
 
 public class PluginInfoEntry : ReactiveObject
 {
@@ -22,15 +22,15 @@ public class PluginInfoEntry : ReactiveObject
             if (e.PropertyName != nameof(IsEnable)) return;
             if (IsEnable)
             {
-                Data.EnablePlugins.Add(Path);
+                Const.Data.EnablePlugins.Add(Path);
             }
             else
             {
-                Data.EnablePlugins.Remove(Path);
+                Const.Data.EnablePlugins.Remove(Path);
             }
 
             File.WriteAllText(ConfigPath.PluginDataPath,
-                JsonConvert.SerializeObject(Data.EnablePlugins, Formatting.Indented));
+                JsonConvert.SerializeObject(Const.Data.EnablePlugins, Formatting.Indented));
 
             try
             {

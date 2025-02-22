@@ -7,6 +7,7 @@ using MinecraftLaunch.Base.Enums;
 using MinecraftLaunch.Base.Models.Game;
 using MinecraftLaunch.Components.Parser;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Operate;
 using YMCL.Public.Langs;
 
 namespace YMCL.Public.Module.Ui.Special;

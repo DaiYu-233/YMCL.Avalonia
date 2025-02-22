@@ -10,6 +10,7 @@
     xmlns:converter="clr-namespace:YMCL.Public.Module.Ui.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:da="clr-namespace:YMCL.Public.Const"
+    xmlns:data="clr-namespace:YMCL.Public.Classes.Data"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
     xmlns:settingPages="clr-namespace:YMCL.Views.Main.Pages.SettingPages"
@@ -73,7 +74,7 @@
                         SelectedItem="{Binding Setting.Language}"
                         x:Name="LanguageComboBox">
                         <ComboBox.ItemTemplate>
-                            <DataTemplate DataType="classes:Language">
+                            <DataTemplate DataType="data:Language">
                                 <TextBlock>
                                     <Run Text="[" />
                                     <Run Text="{Binding Code}" />

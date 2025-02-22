@@ -10,6 +10,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:da="clr-namespace:YMCL.Public.Const"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:operate="clr-namespace:YMCL.Public.Classes.Operate"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
     xmlns:ta="clr-namespace:YMCL.ViewModels"
     xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
@@ -121,7 +122,7 @@
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="classes:TaskEntryOperateButtonEntry">
+                        <DataTemplate DataType="operate:TaskEntryOperateButtonEntry">
                             <StackPanel Orientation="Horizontal" Spacing="5">
                                 <Button
                                     Command="{Binding ActionInvoke}"
@@ -141,7 +142,7 @@
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="classes:SubTask">
+                        <DataTemplate DataType="operate:SubTask">
                             <StackPanel Orientation="Horizontal" Spacing="5">
                                 <ContentControl
                                     Content="{Binding Icon}"

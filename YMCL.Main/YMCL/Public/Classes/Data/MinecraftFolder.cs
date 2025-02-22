@@ -1,4 +1,4 @@
-﻿namespace YMCL.Public.Classes;
+﻿namespace YMCL.Public.Classes.Data;
 
 public sealed record MinecraftFolder
 {

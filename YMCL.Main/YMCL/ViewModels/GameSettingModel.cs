@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Operate;
+using YMCL.Public.Classes.Setting;
 using YMCL.Public.Langs;
 using YMCL.Public.Module;
 

@@ -1,6 +1,6 @@
 ﻿using Avalonia.Controls.Notifications;
 
-namespace YMCL.Public.Classes;
+namespace YMCL.Public.Classes.Data;
 
 public record NotificationEntry(object Content, NotificationType Type)
 {

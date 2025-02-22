@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Avalonia.Media;
 using Avalonia.VisualTree;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Data;
 
 namespace YMCL.Public.Langs;
 

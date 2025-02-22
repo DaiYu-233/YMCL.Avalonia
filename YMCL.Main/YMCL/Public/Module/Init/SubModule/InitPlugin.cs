@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Windows.Input;
 using YMCL.Plugin.Base;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Operate;
 using YMCL.Public.Controls;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.IO.Disk;

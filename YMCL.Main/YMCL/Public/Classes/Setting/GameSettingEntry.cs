@@ -1,10 +1,9 @@
-﻿using System.IO;
-using MinecraftLaunch.Base.Models.Game;
+﻿using MinecraftLaunch.Base.Models.Game;
 using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-namespace YMCL.Public.Classes;
+namespace YMCL.Public.Classes.Setting;
 
 public sealed class GameSettingEntry : ReactiveObject
 {

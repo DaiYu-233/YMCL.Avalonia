@@ -5,12 +5,15 @@ using MinecraftLaunch.Components.Parser;
 using ReactiveUI;
 using Ursa.Controls;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Data;
 using YMCL.Public.Classes.Netease;
+using YMCL.Public.Classes.Operate;
+using YMCL.Public.Classes.Setting;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
-using Language = YMCL.Public.Classes.Language;
-using Setting = YMCL.Public.Classes.Setting;
+using Language = YMCL.Public.Classes.Data.Language;
+using Setting = YMCL.Public.Classes.Setting.Setting;
 using WindowNotificationManager = Ursa.Controls.WindowNotificationManager;
 
 namespace YMCL.Public.Const;

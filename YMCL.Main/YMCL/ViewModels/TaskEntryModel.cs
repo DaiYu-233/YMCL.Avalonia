@@ -3,6 +3,7 @@ using System.Timers;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using YMCL.Public.Classes;
+using YMCL.Public.Classes.Operate;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;

@@ -22,7 +22,7 @@ public partial class MinecraftFolder : UserControl
         };
         MinecraftFolderListBox.SelectionChanged += (_, _) =>
         {
-            Data.Setting.MinecraftFolder = MinecraftFolderListBox.SelectedItem as Public.Classes.MinecraftFolder;
+            Data.Setting.MinecraftFolder = MinecraftFolderListBox.SelectedItem as Public.Classes.Data.MinecraftFolder;
         };
     }
 }

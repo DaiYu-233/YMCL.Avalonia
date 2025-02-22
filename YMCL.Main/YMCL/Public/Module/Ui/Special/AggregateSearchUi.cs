@@ -38,7 +38,7 @@ public class AggregateSearchUi
                     Type = MainLang.LocalResource, Target = "mc-version",
                     Summary = string.IsNullOrWhiteSpace(game.ClientJarPath)
                         ? "Unknown"
-                        : Mc.GameSetting.GetGameSpecialFolder(game, GameSpecialFolder.GameFolder),
+                        : Mc.Utils.GetMinecraftSpecialFolder(game, GameSpecialFolder.GameFolder),
                     MinecraftEntry = game, Order = 30
                 });
             }
@@ -138,7 +138,7 @@ public class AggregateSearchUi
                     YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavLaunch;
                     Notice(
                         $"{MainLang.SwitchedTo} : {entry.MinecraftEntry.Id}\n" +
-                        $"( {Mc.GameSetting.GetGameSpecialFolder(entry.MinecraftEntry, GameSpecialFolder.GameFolder, true)} )",
+                        $"( {Mc.Utils.GetMinecraftSpecialFolder(entry.MinecraftEntry, GameSpecialFolder.GameFolder, true)} )",
                         type: NotificationType.Success);
                 }
             }

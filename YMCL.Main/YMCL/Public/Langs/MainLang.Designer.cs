@@ -330,6 +330,24 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 作为资源包导入.
+        /// </summary>
+        public static string AsResourcePackImport {
+            get {
+                return ResourceManager.GetString("AsResourcePackImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 作为光影包导入.
+        /// </summary>
+        public static string AsShaderPackImport {
+            get {
+                return ResourceManager.GetString("AsShaderPackImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 作者.
         /// </summary>
         public static string Author {
@@ -618,6 +636,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 冲突.
+        /// </summary>
+        public static string Conflict {
+            get {
+                return ResourceManager.GetString("Conflict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 复制.
         /// </summary>
         public static string Copy {
@@ -650,6 +677,15 @@ namespace YMCL.Public.Langs {
         public static string CornerRadius {
             get {
                 return ResourceManager.GetString("CornerRadius", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 覆盖.
+        /// </summary>
+        public static string Cover {
+            get {
+                return ResourceManager.GetString("Cover", resourceCulture);
             }
         }
         
@@ -1150,6 +1186,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 文件冲突，目标文件夹已存在相同名称文件，希望如何处理复制操作？.
+        /// </summary>
+        public static string FileConflictTip {
+            get {
+                return ResourceManager.GetString("FileConflictTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 文件不存在.
         /// </summary>
         public static string FileNotExist {
@@ -1340,6 +1385,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 希望如何处理此文件.
+        /// </summary>
+        public static string HopeHowToHandleTheFile {
+            get {
+                return ResourceManager.GetString("HopeHowToHandleTheFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 如未安装基岩版则无法启动.
         /// </summary>
         public static string IfInstallBedRock {
@@ -1358,11 +1412,29 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 导入.
+        /// </summary>
+        public static string Import {
+            get {
+                return ResourceManager.GetString("Import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 导入失败.
         /// </summary>
         public static string ImportFailed {
             get {
                 return ResourceManager.GetString("ImportFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 导入完成.
+        /// </summary>
+        public static string ImportFinish {
+            get {
+                return ResourceManager.GetString("ImportFinish", resourceCulture);
             }
         }
         
@@ -2566,6 +2638,15 @@ namespace YMCL.Public.Langs {
         public static string Remove {
             get {
                 return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 重命名.
+        /// </summary>
+        public static string Rename {
+            get {
+                return ResourceManager.GetString("Rename", resourceCulture);
             }
         }
         

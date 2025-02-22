@@ -56,7 +56,7 @@ public partial class ResourcePack : UserControl, INotifyPropertyChanged
         SelectAllModBtn.Click += (_, _) => { ModManageList.SelectAll(); };
         OpenFolderBtn.Click += (_, _) =>
         {
-            var path = Public.Module.Mc.GameSetting.GetGameSpecialFolder(_entry, GameSpecialFolder.ResourcePacksFolder);
+            var path = Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_entry, GameSpecialFolder.ResourcePacksFolder);
             YMCL.Public.Module.IO.Disk.Setter.TryCreateFolder(path);
             var launcher = TopLevel.GetTopLevel(this).Launcher;
             launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(path));
@@ -108,7 +108,7 @@ public partial class ResourcePack : UserControl, INotifyPropertyChanged
         _items.Clear();
 
         var files = Directory.GetFiles(
-            Public.Module.Mc.GameSetting.GetGameSpecialFolder(_entry, GameSpecialFolder.ResourcePacksFolder)
+            Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_entry, GameSpecialFolder.ResourcePacksFolder)
             , "*.*", System.IO.SearchOption.AllDirectories);
         foreach (var file in files)
 

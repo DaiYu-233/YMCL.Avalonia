@@ -105,8 +105,8 @@ public sealed record MinecraftDataEntry
             if (entry == null) return;
             LaunchAction = () =>
             {
-                var setting = GameSetting.GetGameSetting(entry);
-                GameSetting.HandleGameSetting(setting);
+                var setting = MinecraftSetting.GetGameSetting(entry);
+                MinecraftSetting.HandleGameSetting(setting);
                 if (setting.Java.JavaStringVersion == "Auto")
                 {
                     setting.Java =

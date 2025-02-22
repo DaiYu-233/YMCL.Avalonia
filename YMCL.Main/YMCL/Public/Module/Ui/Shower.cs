@@ -21,7 +21,7 @@ public class Shower
         var showTitle = Const.String.AppTitle;
         if (!string.IsNullOrWhiteSpace(title)) showTitle = title;
         if (time) showTitle += $" - {DateTime.Now:HH:mm:ss}";
-        
+
         var notification = new Notification(showTitle, msg, type);
         UiProperty.NotificationCards.Insert(0, new NotificationEntry(notification, notification.Type));
 
@@ -41,7 +41,7 @@ public class Shower
         var toast = new Toast(msg, type);
         Data.Toast.Show(toast, toast.Type, classes: ["Light"]);
     }
-    
+
     public static void NotificationCard(string msg, NotificationType type, string title)
     {
         var notification = new Notification(title, msg, type);
@@ -118,5 +118,49 @@ public class Shower
                 Notice(MainLang.SkipVersionTip.Replace("{version}", info.NewVersion), NotificationType.Success);
             });
         }
+    }
+
+    public static async Task<int> ShowDialogWithComboBox(string[] items, string title = "Title", string? msg = null, TopLevel? p_host = null)
+    {
+        var comboBox = new ComboBox
+        {
+            FontFamily = (FontFamily)Application.Current.Resources["Font"],
+            HorizontalAlignment = HorizontalAlignment.Stretch
+        };
+        foreach (var item in items)
+        {
+            comboBox.Items.Add(item);
+        }
+
+        comboBox.SelectedIndex = 0;
+        Control content = string.IsNullOrWhiteSpace(msg)
+            ? comboBox
+            : new StackPanel
+            {
+                Spacing = 15,
+                Children =
+                {
+                    new TextBlock
+                    {
+                        FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                        TextWrapping = TextWrapping.Wrap,
+                        Text = msg
+                    },
+                    comboBox
+                }
+            };
+        ContentDialog dialog = new()
+        {
+            FontFamily = (FontFamily)Application.Current.Resources["Font"],
+            Title = title,
+            PrimaryButtonText = MainLang.Ok,
+            CloseButtonText = MainLang.Cancel,
+            DefaultButton = ContentDialogButton.Primary,
+            Content = content
+        };
+        var dialogResult = await dialog.ShowAsync(TopLevel.GetTopLevel(p_host ?? TopLevel.GetTopLevel(YMCL.App.UiRoot)));
+        if (dialogResult == ContentDialogResult.Primary)
+            return comboBox.SelectedIndex;
+        return -1;
     }
 }

@@ -53,7 +53,7 @@ public partial class ShaderPack : UserControl, INotifyPropertyChanged
         SelectAllModBtn.Click += (_, _) => { ModManageList.SelectAll(); };
         OpenFolderBtn.Click += (_, _) =>
         {
-            var path = Public.Module.Mc.GameSetting.GetGameSpecialFolder(_entry, GameSpecialFolder.ShaderPacksFolder);
+            var path = Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_entry, GameSpecialFolder.ShaderPacksFolder);
             YMCL.Public.Module.IO.Disk.Setter.TryCreateFolder(path);
             var launcher = TopLevel.GetTopLevel(this).Launcher;
             launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(path));
@@ -105,7 +105,7 @@ public partial class ShaderPack : UserControl, INotifyPropertyChanged
         _items.Clear();
 
         var files = Directory.GetFiles(
-            Public.Module.Mc.GameSetting.GetGameSpecialFolder(_entry, GameSpecialFolder.ShaderPacksFolder)
+            Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_entry, GameSpecialFolder.ShaderPacksFolder)
             , "*.*", System.IO.SearchOption.AllDirectories);
         foreach (var file in files)
 

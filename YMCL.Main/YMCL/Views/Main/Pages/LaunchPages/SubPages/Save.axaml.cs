@@ -56,7 +56,7 @@ public partial class Save : UserControl, INotifyPropertyChanged
         SelectAllModBtn.Click += (_, _) => { ModManageList.SelectAll(); };
         OpenFolderBtn.Click += (_, _) =>
         {
-            var path = Public.Module.Mc.GameSetting.GetGameSpecialFolder(_entry, GameSpecialFolder.SavesFolder);
+            var path = Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_entry, GameSpecialFolder.SavesFolder);
             YMCL.Public.Module.IO.Disk.Setter.TryCreateFolder(path);
             var launcher = TopLevel.GetTopLevel(this).Launcher;
             launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(path));
@@ -106,7 +106,7 @@ public partial class Save : UserControl, INotifyPropertyChanged
         {
             _items.Add(new LocalSaveEntry
             {
-                Name = save.FolderName, Path = Path.Combine(Public.Module.Mc.GameSetting.GetGameSpecialFolder
+                Name = save.FolderName, Path = Path.Combine(Public.Module.Mc.Utils.GetMinecraftSpecialFolder
                     (_entry, GameSpecialFolder.SavesFolder), save.FolderName),
                 Icon = save.IconBitmap, Callback = LoadItems, SaveInfo = save,
                 Description =
@@ -128,7 +128,7 @@ public partial class Save : UserControl, INotifyPropertyChanged
     public static async Task<List<SaveInfo>> GetSaves(MinecraftEntry entry)
     {
         var folderInfos = new List<SaveInfo>();
-        var parentPath = Public.Module.Mc.GameSetting.GetGameSpecialFolder(entry, GameSpecialFolder.SavesFolder);
+        var parentPath = Public.Module.Mc.Utils.GetMinecraftSpecialFolder(entry, GameSpecialFolder.SavesFolder);
         var folders = Directory.GetDirectories(parentPath);
         foreach (var folderPath in folders)
         {

@@ -136,7 +136,7 @@ public sealed partial class Mod : UserControl, INotifyPropertyChanged
         FilterMods();
 
         var mods = Directory.GetFiles(
-            Public.Module.Mc.GameSetting.GetGameSpecialFolder(_entry, GameSpecialFolder.ModsFolder)
+            Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_entry, GameSpecialFolder.ModsFolder)
             , "*.*", SearchOption.AllDirectories);
         foreach (var mod in mods)
         {

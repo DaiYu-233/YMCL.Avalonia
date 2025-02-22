@@ -1181,4 +1181,31 @@ MacOs 不支持自动更新
   <data name="CurrentListIsmpty" xml:space="preserve">
     <value>当前列表为空</value>
   </data>
+  <data name="Import" xml:space="preserve">
+    <value>导入</value>
+  </data>
+  <data name="HopeHowToHandleTheFile" xml:space="preserve">
+    <value>希望如何处理此文件</value>
+  </data>
+  <data name="AsResourcePackImport" xml:space="preserve">
+    <value>作为资源包导入</value>
+  </data>
+  <data name="AsShaderPackImport" xml:space="preserve">
+    <value>作为光影包导入</value>
+  </data>
+  <data name="Conflict" xml:space="preserve">
+    <value>冲突</value>
+  </data>
+  <data name="FileConflictTip" xml:space="preserve">
+    <value>文件冲突，目标文件夹已存在相同名称文件，希望如何处理复制操作？</value>
+  </data>
+  <data name="Cover" xml:space="preserve">
+    <value>覆盖</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>重命名</value>
+  </data>
+  <data name="ImportFinish" xml:space="preserve">
+    <value>导入完成</value>
+  </data>
 </root>

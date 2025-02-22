@@ -56,7 +56,7 @@ public partial class Screenshot : UserControl, INotifyPropertyChanged
         RefreshModBtn.Click += (_, _) => { LoadItems(); };
         OpenFolderBtn.Click += (_, _) =>
         {
-            var path = Public.Module.Mc.GameSetting.GetGameSpecialFolder(_entry, GameSpecialFolder.ScreenshotsFolder);
+            var path = Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_entry, GameSpecialFolder.ScreenshotsFolder);
             YMCL.Public.Module.IO.Disk.Setter.TryCreateFolder(path);
             var launcher = TopLevel.GetTopLevel(this).Launcher;
             launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(path));
@@ -76,7 +76,7 @@ public partial class Screenshot : UserControl, INotifyPropertyChanged
         _items.Clear();
 
         var files = Directory.GetFiles(
-            Public.Module.Mc.GameSetting.GetGameSpecialFolder(_entry, GameSpecialFolder.ScreenshotsFolder)
+            Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_entry, GameSpecialFolder.ScreenshotsFolder)
             , "*.*", System.IO.SearchOption.AllDirectories);
         foreach (var file in files)
 

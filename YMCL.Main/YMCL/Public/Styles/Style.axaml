@@ -93,9 +93,26 @@
         <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
         <Setter Property="FontFamily" Value="{DynamicResource Font}" />
         <Setter Property="FontWeight" Value="{DynamicResource FontWeight}" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="0:0:0.3" Property="Foreground" />
+            </Transitions>
+        </Setter>
     </Style>
     <Style Selector="TextBox">
         <Setter Property="FontFamily" Value="{DynamicResource Font}" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="0:0:0.3" Property="Foreground" />
+            </Transitions>
+        </Setter>
+    </Style>
+    <Style Selector="PathIcon">
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="0:0:0.3" Property="Foreground" />
+            </Transitions>
+        </Setter>
     </Style>
     <Style Selector="Rectangle#HCPaneBorder">
         <Setter Property="IsVisible" Value="False" />
@@ -104,5 +121,19 @@
         <Style Selector="^ SelectableTextBlock">
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
+    </Style>
+    <Style Selector="Border">
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="0:0:0.3" Property="Background" />
+            </Transitions>
+        </Setter>
+    </Style>
+    <Style Selector="Panel#PART_PaneRoot">
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="0:0:0.3" Property="Background" />
+            </Transitions>
+        </Setter>
     </Style>
 </Styles>

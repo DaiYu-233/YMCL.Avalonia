@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using Avalonia.Animation;
 using Avalonia.Controls.Notifications;
 using Avalonia.Media;
 using Avalonia.Styling;
@@ -40,10 +41,20 @@ public class InitUi
         try
         {
             if (YMCL.App.UiRoot != null)
-                (Ui.Getter.FindControlByName(YMCL.App.UiRoot, "PART_PaneRoot") as Panel).Background =
+            {
+                (Ui.Getter.FindControlByName(YMCL.App.UiRoot, "PART_PaneRoot") as Panel).Transitions =
+                    [
+                        new BrushTransition()
+                        {
+                            Duration = TimeSpan.FromSeconds(0.3),
+                            Property = Panel.BackgroundProperty
+                        }
+                    ];
+                    (Ui.Getter.FindControlByName(YMCL.App.UiRoot, "PART_PaneRoot") as Panel).Background =
                     Application.Current.ActualThemeVariant == ThemeVariant.Dark
                         ? SolidColorBrush.Parse("#2c2c2c")
                         : SolidColorBrush.Parse("#FFE9F6FF");
+            }
             var visuals = new Queue<Visual>();
             if (YMCL.App.UiRoot != null) visuals.Enqueue(YMCL.App.UiRoot);
 

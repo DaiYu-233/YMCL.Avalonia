@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.IO.Compression;
+using Avalonia.Controls.Notifications;
 using FluentAvalonia.UI.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
@@ -13,12 +14,16 @@ public class Main
     {
         if (Data.Setting.SelectedMinecraftId == "bedrock") return;
 
-        var cr = await ShowDialogAsync(
-            $"{MainLang.Import} → {Data.Setting.SelectedMinecraftId}",
-            $"{MainLang.SureToImportTheFile}: {Path.GetFileName(path)}", b_primary: MainLang.Ok,
-            b_cancel: MainLang.Cancel);
+        if (!Data.UiProperty.IsAllImport)
+        {
+            var cr = await ShowDialogAsync(
+                $"{MainLang.Import} → {Data.Setting.SelectedMinecraftId}",
+                $"{MainLang.SureToImportTheFile}: {Path.GetFileName(path)}", b_primary: MainLang.Ok,
+                b_cancel: MainLang.Cancel, b_secondary: MainLang.AllImport);
 
-        if (cr != ContentDialogResult.Primary) return;
+            if (cr == ContentDialogResult.None) return;
+            if (cr == ContentDialogResult.Secondary) Data.UiProperty.IsAllImport = true;
+        }
 
         await IO.Disk.Setter.CopyFileWithDialog(path,
             Path.Combine(Mc.Utils.GetMinecraftSpecialFolder(Mc.Utils.GetCurrentMinecraft()!,

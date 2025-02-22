@@ -258,6 +258,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 全部导入.
+        /// </summary>
+        public static string AllImport {
+            get {
+                return ResourceManager.GetString("AllImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 允许命令.
         /// </summary>
         public static string AllowCommands {

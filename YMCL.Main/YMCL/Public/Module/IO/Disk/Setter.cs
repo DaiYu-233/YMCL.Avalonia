@@ -42,13 +42,14 @@ public class Setter
         var path = target;
         if (File.Exists(target))
         {
-            var cr = await ShowDialogAsync(MainLang.Conflict, MainLang.FileConflictTip, b_primary: MainLang.Cover,
+            var cr = await ShowDialogAsync($"{MainLang.Conflict}: {Path.GetFileName(source)}", MainLang.FileConflictTip, b_primary: MainLang.Cover,
                 b_secondary: MainLang.Rename, b_cancel: MainLang.Cancel);
             if (cr == ContentDialogResult.Primary)
             {
                 if (source == path) return false;
                 File.Copy(source, target, true);
-            }else if (cr == ContentDialogResult.None)
+            }
+            else if (cr == ContentDialogResult.None)
             {
                 return false;
             }
@@ -72,7 +73,8 @@ public class Setter
             File.Copy(source, path, true);
         }
 
-        Notice(MainLang.ImportFinish, NotificationType.Success);
+        if (!Data.UiProperty.IsAllImport)
+            Notice(MainLang.ImportFinish, NotificationType.Success);
         return true;
     }
 }

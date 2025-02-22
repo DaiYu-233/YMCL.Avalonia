@@ -1,3 +1,4 @@
+using Avalonia.Controls.Notifications;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using FluentAvalonia.UI.Controls;
@@ -7,6 +8,7 @@ using Ursa.Controls;
 using Ursa.Controls.Options;
 using YMCL.Public.Controls.Drawers;
 using YMCL.Public.Enum;
+using YMCL.Public.Langs;
 using YMCL.Public.Module.Init;
 using YMCL.Public.Module.Ui.Special;
 using YMCL.ViewModels;
@@ -53,6 +55,10 @@ public partial class MainView : UserControl
             {
                 await Public.Module.Ui.Special.DropHandler.Handle(item.Path.LocalPath);
             }
+
+            if (Data.UiProperty.IsAllImport)
+                Notice(MainLang.ImportFinish, NotificationType.Success);
+            Data.UiProperty.IsAllImport = false;
         }
     }
 }

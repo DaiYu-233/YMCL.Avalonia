@@ -1211,4 +1211,7 @@ MacOs 不支持自动更新
   <data name="SureToImportTheFile" xml:space="preserve">
     <value>确定导入此文件</value>
   </data>
+  <data name="AllImport" xml:space="preserve">
+    <value>全部导入</value>
+  </data>
 </root>

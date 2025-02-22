@@ -31,6 +31,7 @@ public sealed class UiProperty : ReactiveObject
         { ReleaseTime = new DateTime(1970, 1, 1, 0, 0, 0), Id = MainLang.Loading, Type = null };
 
     [Reactive] public bool InstallableRingIsVisible { get; set; } = true;
+    [Reactive] public bool IsAllImport { get; set; } = false;
     [Reactive] public double TaskEntryHeaderWidth { get; set; }
     [Reactive] public double SystemMaxMem { get; set; }
     [Reactive] public MinecraftDataEntry SelectedMinecraft { get; set; }

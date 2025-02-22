@@ -24,7 +24,8 @@
                         Classes="Light"
                         Content="{Binding Content}"
                         MessageClosed="MessageCard_OnMessageClosed"
-                        NotificationType="{Binding Type}" />
+                        NotificationType="{Binding Type}"
+                        Width="350" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Avalonia.Controls.Notifications;
 using YMCL.Public.Langs;
-using YMCL.Public.Module.Mc.Importer.zip;
+using YMCL.Public.Module.Mc.Importer;
 
 namespace YMCL.Public.Module.Ui.Special;
 
@@ -12,8 +12,11 @@ public class DropHandler
         var type = Path.GetExtension(path);
         switch (type)
         {
+            case ".mrpack":
+                await Mc.Importer.mrpack.Main.Import(path);
+                return;
             case ".zip":
-                await Main.Import(path);
+                await Mc.Importer.zip.Main.Import(path);
                 return;
             default:
                 Notice($"{MainLang.UnsupportedFileType}: {Path.GetFileName(path)}", NotificationType.Warning);

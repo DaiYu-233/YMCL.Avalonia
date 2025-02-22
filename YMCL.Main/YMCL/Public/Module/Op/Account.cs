@@ -210,7 +210,7 @@ public class Account
         Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
     }
 
-    private static async void YggdrasilLogin(Control sender, string server1 = "", string email1 = "",
+    public static async void YggdrasilLogin(Control sender, string server1 = "", string email1 = "",
         string password1 = "")
     {
         var stackPanel = new StackPanel { Spacing = 10, Width = 580 };

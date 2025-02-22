@@ -53,12 +53,17 @@ public partial class MainView : UserControl
         {
             foreach (var item in e.Data.GetFiles())
             {
-                await Public.Module.Ui.Special.DropHandler.Handle(item.Path.LocalPath);
+                await Public.Module.Ui.Special.DropHandler.HandleFiles(item.Path.LocalPath);
             }
 
             if (Data.UiProperty.IsAllImport)
                 Notice(MainLang.ImportFinish, NotificationType.Success);
             Data.UiProperty.IsAllImport = false;
+        }
+        if (e.Data.Contains(DataFormats.Text))
+        {
+            var text = e.Data.GetText(); 
+            Public.Module.Ui.Special.DropHandler.HandleText(text!);
         }
     }
 }

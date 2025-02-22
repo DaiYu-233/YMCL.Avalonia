@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using Avalonia.Layout;
 using Avalonia.Media;
@@ -36,7 +37,7 @@ public class Setter
         }
     }
 
-    public static async Task CopyFileWithDialog(string source, string target)
+    public static async Task<bool> CopyFileWithDialog(string source, string target)
     {
         var path = target;
         if (File.Exists(target))
@@ -45,8 +46,11 @@ public class Setter
                 b_secondary: MainLang.Rename, b_cancel: MainLang.Cancel);
             if (cr == ContentDialogResult.Primary)
             {
-                if (source == path) return;
+                if (source == path) return false;
                 File.Copy(source, target, true);
+            }else if (cr == ContentDialogResult.None)
+            {
+                return false;
             }
             else
             {
@@ -57,19 +61,18 @@ public class Setter
                 };
                 var cr1 = await ShowDialogAsync(MainLang.Rename, p_content: textBox, b_cancel: MainLang.Cancel,
                     b_primary: MainLang.Ok);
-                if (cr1 != ContentDialogResult.Primary) return;
+                if (cr1 != ContentDialogResult.Primary) return false;
                 path = Path.Combine(Path.GetDirectoryName(target)!, textBox.Text);
-                if (source == path) return;
-                File.Copy(source, path, true);
+                return await CopyFileWithDialog(source, path);
             }
-
-            Notice(MainLang.ImportFinish, NotificationType.Success);
         }
         else
         {
-            if (source == path) return;
+            if (source == path) return false;
             File.Copy(source, path, true);
-            Notice(MainLang.ImportFinish, NotificationType.Success);
         }
+
+        Notice(MainLang.ImportFinish, NotificationType.Success);
+        return true;
     }
 }

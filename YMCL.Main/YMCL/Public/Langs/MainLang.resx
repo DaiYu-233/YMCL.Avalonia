@@ -1208,4 +1208,7 @@ MacOs 不支持自动更新
   <data name="ImportFinish" xml:space="preserve">
     <value>导入完成</value>
   </data>
+  <data name="SureToImportTheFile" xml:space="preserve">
+    <value>确定导入此文件</value>
+  </data>
 </root>

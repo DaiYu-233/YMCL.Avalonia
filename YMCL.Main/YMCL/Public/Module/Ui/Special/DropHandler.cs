@@ -15,6 +15,9 @@ public class DropHandler
             case ".mrpack":
                 await Mc.Importer.mrpack.Main.Import(path);
                 return;
+            case ".jar":
+                await Mc.Importer.jar.Main.Import(path);
+                return;
             case ".zip":
                 await Mc.Importer.zip.Main.Import(path);
                 return;

@@ -3084,6 +3084,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 确定导入此文件.
+        /// </summary>
+        public static string SureToImportTheFile {
+            get {
+                return ResourceManager.GetString("SureToImportTheFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 确定要安装 Java : {Java}？.
         /// </summary>
         public static string SureToInstallTheJava {

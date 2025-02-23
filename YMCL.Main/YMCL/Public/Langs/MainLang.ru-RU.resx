@@ -1069,4 +1069,345 @@ MacO не поддерживают автоматические обновлен
   <data name="DownloadUrl" xml:space="preserve">
     <value>Ссылка для скачивания</value>
   </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Отображаемое имя</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Task" xml:space="preserve">
+    <value>Миссии</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="More" xml:space="preserve">
+    <value>Больше</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>ПО ВОПРОСАМ БЕЗОПАСНОСТИ В ЦЕНТРАЛЬНОЙ АФРИКЕ</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Personalize" xml:space="preserve">
+    <value>Персонализация</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Launcher" xml:space="preserve">
+    <value>Пусковая установка</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ServerUrlError" xml:space="preserve">
+    <value>Ошибка URL-адреса сервера</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>Ожидание</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>В процессе</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Paused" xml:space="preserve">
+    <value>Пауза</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>Завершено</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Убрать</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="BuildLaunchConfig" xml:space="preserve">
+    <value>Создайте элемент конфигурации запуска</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CheckLaunchArg" xml:space="preserve">
+    <value>Проверьте параметры запуска</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="RefreshAccountToken" xml:space="preserve">
+    <value>Обновить маркер пользователя</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="LaunchMinecraftProcess" xml:space="preserve">
+    <value>Начните процесс Minecraft</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>Отменено</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Canceling" xml:space="preserve">
+    <value>Отмена</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CheckVersionResource" xml:space="preserve">
+    <value>Проверьте ресурсы версии</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DownloadResource" xml:space="preserve">
+    <value>Загрузите ресурсы</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Назад</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ScreenshotsFolder" xml:space="preserve">
+    <value>Папка скриншотов</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Saves" xml:space="preserve">
+    <value>файл сохранения</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Screenshots" xml:space="preserve">
+    <value>Скриншот</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ResourcePacks" xml:space="preserve">
+    <value>Набор ресурсов</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NoMatchResult" xml:space="preserve">
+    <value>Нет подходящих результатов</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CreateTime" xml:space="preserve">
+    <value>Время создания</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="LastModifiedTime" xml:space="preserve">
+    <value>Последнее изменение&amp;#xA0;%s</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SaveInfo" xml:space="preserve">
+    <value>Архивировать информацию</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Название</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="PlayerCount" xml:space="preserve">
+    <value>Количество игроков</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DataPackCount" xml:space="preserve">
+    <value>Количество пакетов</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ImportTime" xml:space="preserve">
+    <value>Импортировать время</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CanceledUpdate" xml:space="preserve">
+    <value>Обновление отменено</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ApiError" xml:space="preserve">
+    <value>Ошибка API</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NetWorkError" xml:space="preserve">
+    <value>Ошибка сети</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="KillProcess" xml:space="preserve">
+    <value>Завершите процесс</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="LaunchArguments" xml:space="preserve">
+    <value>Параметры запуска</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DisplayLaunchArguments" xml:space="preserve">
+    <value>Показать параметры запуска</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ResetData" xml:space="preserve">
+    <value>Сбросить данные</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="FixLoadDataFailTip" xml:space="preserve">
+    <value>При загрузке данных возникло исключение, которое может быть связано с повреждением данных. Вы хотите сбросить данные YMCL, чтобы исправить это?</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Экспорт</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExportLogFile" xml:space="preserve">
+    <value>Экспортировать файл журнала</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AutoScrollToEnd" xml:space="preserve">
+    <value>Автоматически прокручивать до конца</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="GetJavaInfoFail" xml:space="preserve">
+    <value>Не удалось получить информацию о Java
+Возможно, эта Java неверна/повреждена/не имеет прав на выполнение</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Seed" xml:space="preserve">
+    <value>Семена</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AllowCommands" xml:space="preserve">
+    <value>Разрешить команды</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="GameType" xml:space="preserve">
+    <value>Тип игры</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="LastPlayTime" xml:space="preserve">
+    <value>Время последней игры</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NoDescription" xml:space="preserve">
+    <value>Нет описания</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Mica" xml:space="preserve">
+    <value>Слюда</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="TranslucentBackgroundOpacity" xml:space="preserve">
+    <value>Непрозрачность полупрозрачного элемента управления фоном</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="MusicApiWithIP" xml:space="preserve">
+    <value>Music Api поставляется с IP-адресом</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NoIdentifiedPlugins" xml:space="preserve">
+    <value>Плагины еще не определены</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="LoadPluginError" xml:space="preserve">
+    <value>Ошибка загрузки плагина</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Unrecognized" xml:space="preserve">
+    <value>Неизвестно</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ImportModPack" xml:space="preserve">
+    <value>Импортируйте интеграционный пакет</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Prepare" xml:space="preserve">
+    <value>Приготовиться</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="VersionIdCannotBeEmpty" xml:space="preserve">
+    <value>Идентификатор версии не может быть пустым</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="InstallModPack" xml:space="preserve">
+    <value>Установите интеграционный пакет</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="PrepareInstall" xml:space="preserve">
+    <value>Готово к установке</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SaveSkinFile" xml:space="preserve">
+    <value>Сохранить файл скина</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SaveFinish" xml:space="preserve">
+    <value>Сохранено</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CornerRadius" xml:space="preserve">
+    <value>Радиус закругления</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="EnableTranslucentSpecialControlList" xml:space="preserve">
+    <value>Включить полупрозрачный специальный контрольный список</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NoticeWay" xml:space="preserve">
+    <value>Способ уведомления</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NotificationCard" xml:space="preserve">
+    <value>Карта уведомлений</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NotificationBubble" xml:space="preserve">
+    <value>Пузыри уведомлений</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExampleNotification" xml:space="preserve">
+    <value>Примеры уведомлений</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CurrentListIsmpty" xml:space="preserve">
+    <value>Текущий список пуст</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Импорт</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="HopeHowToHandleTheFile" xml:space="preserve">
+    <value>Что вы хотите сделать с этим файлом</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AsResourcePackImport" xml:space="preserve">
+    <value>Импортировать как пакет активов</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AsShaderPackImport" xml:space="preserve">
+    <value>Импортируется как легкий пакет</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Conflict" xml:space="preserve">
+    <value>Противоречит</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="FileConflictTip" xml:space="preserve">
+    <value>Конфликт файлов, в папке назначения уже есть файл с таким именем, как вы хотите обработать операцию копирования?</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Cover" xml:space="preserve">
+    <value>Перезаписать</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>&amp;Переименовать</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ImportFinish" xml:space="preserve">
+    <value>Импорт завершен</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SureToImportTheFile" xml:space="preserve">
+    <value>ОК для импорта этого файла</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AllImport" xml:space="preserve">
+    <value>Импортировать все</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="MinecraftVersion" xml:space="preserve">
+    <value>Версия Minecraft</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Стартовая страница</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="HotResource" xml:space="preserve">
+    <value>Лучшие ресурсы</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

@@ -1069,4 +1069,345 @@ to manually open the following directory to copy the latest version and replace 
   <data name="DownloadUrl" xml:space="preserve">
     <value>Download link</value>
   </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Display name</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Task" xml:space="preserve">
+    <value>Mission</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="More" xml:space="preserve">
+    <value>More</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>about</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Personalize" xml:space="preserve">
+    <value>Customization</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Launcher" xml:space="preserve">
+    <value>Starter</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ServerUrlError" xml:space="preserve">
+    <value>Server Url Error</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>Waiting</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>Running</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Paused" xml:space="preserve">
+    <value>Paused</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Incorrect</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>Completed</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="BuildLaunchConfig" xml:space="preserve">
+    <value>Build startup configuration item</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CheckLaunchArg" xml:space="preserve">
+    <value>Check startup parameters</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="RefreshAccountToken" xml:space="preserve">
+    <value>Refresh user token</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="LaunchMinecraftProcess" xml:space="preserve">
+    <value>Start the Minecraft process</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>Cancelled</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Canceling" xml:space="preserve">
+    <value>Cancelling</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CheckVersionResource" xml:space="preserve">
+    <value>Check version resources</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DownloadResource" xml:space="preserve">
+    <value>downloadResources</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Back</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ScreenshotsFolder" xml:space="preserve">
+    <value>Screenshot Folder</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Saves" xml:space="preserve">
+    <value>Archive</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Screenshots" xml:space="preserve">
+    <value>Screenshot</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ResourcePacks" xml:space="preserve">
+    <value>AssetBundle</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NoMatchResult" xml:space="preserve">
+    <value>No matching results</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CreateTime" xml:space="preserve">
+    <value>Creation Time</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="LastModifiedTime" xml:space="preserve">
+    <value>last modified on</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SaveInfo" xml:space="preserve">
+    <value>Archive information</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="PlayerCount" xml:space="preserve">
+    <value>No. of players</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DataPackCount" xml:space="preserve">
+    <value>Number of packets</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ImportTime" xml:space="preserve">
+    <value>Import Time</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CanceledUpdate" xml:space="preserve">
+    <value>Update was canceled</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ApiError" xml:space="preserve">
+    <value>Api Error</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NetWorkError" xml:space="preserve">
+    <value>Network error</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="KillProcess" xml:space="preserve">
+    <value>End Process</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="LaunchArguments" xml:space="preserve">
+    <value>Bootargs</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DisplayLaunchArguments" xml:space="preserve">
+    <value>Show startup parameters</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ResetData" xml:space="preserve">
+    <value>Reset Data</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="FixLoadDataFailTip" xml:space="preserve">
+    <value>An exception was encountered while loading data, which may be due to data corruption. Do you want to reset YMCL data to fix this?</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExportLogFile" xml:space="preserve">
+    <value>Export log file</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AutoScrollToEnd" xml:space="preserve">
+    <value>Automatically scroll to the end</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="GetJavaInfoFail" xml:space="preserve">
+    <value>Failed to get Java information
+Possibly this Java is incorrect/corrupted/has no execute permissions</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Seed" xml:space="preserve">
+    <value>Seed pool</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AllowCommands" xml:space="preserve">
+    <value>Allow commands</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="GameType" xml:space="preserve">
+    <value>Game types</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="LastPlayTime" xml:space="preserve">
+    <value>Last Play Time</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NoDescription" xml:space="preserve">
+    <value>No description</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Mica" xml:space="preserve">
+    <value>Mica</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="TranslucentBackgroundOpacity" xml:space="preserve">
+    <value>Semi-transparent background control opacity</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="MusicApiWithIP" xml:space="preserve">
+    <value>Music Api comes with IP address</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NoIdentifiedPlugins" xml:space="preserve">
+    <value>No plugins identified yet</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="LoadPluginError" xml:space="preserve">
+    <value>Error loading plugin</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Unrecognized" xml:space="preserve">
+    <value>Not recognize</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ImportModPack" xml:space="preserve">
+    <value>Import Integration Package</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Prepare" xml:space="preserve">
+    <value>Prepare</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="VersionIdCannotBeEmpty" xml:space="preserve">
+    <value>Version Id cannot be empty</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="InstallModPack" xml:space="preserve">
+    <value>Install the Integration Pack</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="PrepareInstall" xml:space="preserve">
+    <value>Preparing for Installation</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SaveSkinFile" xml:space="preserve">
+    <value>Save skin file</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SaveFinish" xml:space="preserve">
+    <value>Save Completed</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CornerRadius" xml:space="preserve">
+    <value>Fillet radius</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="EnableTranslucentSpecialControlList" xml:space="preserve">
+    <value>Enable translucent special control list</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NoticeWay" xml:space="preserve">
+    <value>Inform the way</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NotificationCard" xml:space="preserve">
+    <value>Notification card</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NotificationBubble" xml:space="preserve">
+    <value>Notification Bubbles</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExampleNotification" xml:space="preserve">
+    <value>Example Notice</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CurrentListIsmpty" xml:space="preserve">
+    <value>Current list is empty</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="HopeHowToHandleTheFile" xml:space="preserve">
+    <value>What do you want to do with this file</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AsResourcePackImport" xml:space="preserve">
+    <value>Import as Asset Package</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AsShaderPackImport" xml:space="preserve">
+    <value>Imported as a Light Package</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Conflict" xml:space="preserve">
+    <value>CONFLICT</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="FileConflictTip" xml:space="preserve">
+    <value>File conflict, there is already a file with the same name in the destination folder, how do you want to handle the copy operation?</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Cover" xml:space="preserve">
+    <value>Overlay</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>Rename</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ImportFinish" xml:space="preserve">
+    <value>Imported</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SureToImportTheFile" xml:space="preserve">
+    <value>OK to import this file</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AllImport" xml:space="preserve">
+    <value>Full Import</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="MinecraftVersion" xml:space="preserve">
+    <value>Minecraft)</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="HotResource" xml:space="preserve">
+    <value>Top Resources</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

@@ -1069,4 +1069,345 @@ MacOsは自動更新をサポートしていません
   <data name="DownloadUrl" xml:space="preserve">
     <value>ダウンロードリンク： &lt;link&gt;</value>
   </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>表示名</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Task" xml:space="preserve">
+    <value>クエスト</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="More" xml:space="preserve">
+    <value>より多く</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>について</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Personalize" xml:space="preserve">
+    <value>パーソナライズ</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Launcher" xml:space="preserve">
+    <value>ランチャー</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ServerUrlError" xml:space="preserve">
+    <value>サーバーURLエラー</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>待っています</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>走っています</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Paused" xml:space="preserve">
+    <value>一時停止</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>不正解</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>完了済み</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>削除</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="BuildLaunchConfig" xml:space="preserve">
+    <value>スタートアップコンフィギュレーションアイテムを構築</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CheckLaunchArg" xml:space="preserve">
+    <value>起動パラメータを確認してください</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="RefreshAccountToken" xml:space="preserve">
+    <value>ユーザートークンを更新してください</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="LaunchMinecraftProcess" xml:space="preserve">
+    <value>Minecraftプロセスを開始してください</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Canceled" xml:space="preserve">
+    <value>キャンセルしました</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Canceling" xml:space="preserve">
+    <value>キャンセルしています</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CheckVersionResource" xml:space="preserve">
+    <value>バージョンリソースを確認してください</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DownloadResource" xml:space="preserve">
+    <value>資源をダウンロード</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>戻る</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ScreenshotsFolder" xml:space="preserve">
+    <value>スクリーンショットフォルダ</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Saves" xml:space="preserve">
+    <value>アーカイブ</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Screenshots" xml:space="preserve">
+    <value>スクリーンショット</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ResourcePacks" xml:space="preserve">
+    <value>資源パック</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NoMatchResult" xml:space="preserve">
+    <value>一致する結果はありません</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CreateTime" xml:space="preserve">
+    <value>作成日時</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="LastModifiedTime" xml:space="preserve">
+    <value>最終更新日</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SaveInfo" xml:space="preserve">
+    <value>アーカイブ情報</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>名前</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="PlayerCount" xml:space="preserve">
+    <value>プレイヤー数</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DataPackCount" xml:space="preserve">
+    <value>パケット数</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ImportTime" xml:space="preserve">
+    <value>インポート日時</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CanceledUpdate" xml:space="preserve">
+    <value>更新がキャンセルされました</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ApiError" xml:space="preserve">
+    <value>APIエラー</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NetWorkError" xml:space="preserve">
+    <value>ネットワークにエラーが発生しました</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="KillProcess" xml:space="preserve">
+    <value>プロセスを終了します</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="LaunchArguments" xml:space="preserve">
+    <value>スタートアップパラメータ</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DisplayLaunchArguments" xml:space="preserve">
+    <value>スタートアップパラメータを表示</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ResetData" xml:space="preserve">
+    <value>データをリセット</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="FixLoadDataFailTip" xml:space="preserve">
+    <value>データの読み込み中に例外が発生しました。データが破損している可能性があります。これを修正するためにYMCLデータをリセットしますか？</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>エクスポート</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExportLogFile" xml:space="preserve">
+    <value>ログファイルをエクスポート</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AutoScrollToEnd" xml:space="preserve">
+    <value>最後まで自動的にスクロール</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="GetJavaInfoFail" xml:space="preserve">
+    <value>Java情報の取得に失敗しました
+このJavaが正しくない/破損している/実行権限がない可能性があります</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Seed" xml:space="preserve">
+    <value>種</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AllowCommands" xml:space="preserve">
+    <value>コマンドを許可してください</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="GameType" xml:space="preserve">
+    <value>ゲームタイプ</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="LastPlayTime" xml:space="preserve">
+    <value>ラストプレイタイム</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NoDescription" xml:space="preserve">
+    <value>説明がありません</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Mica" xml:space="preserve">
+    <value>雲母</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="TranslucentBackgroundOpacity" xml:space="preserve">
+    <value>半透明の背景コントロールの不透明度</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="MusicApiWithIP" xml:space="preserve">
+    <value>Music ApiにはIPアドレスが付属しています</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NoIdentifiedPlugins" xml:space="preserve">
+    <value>プラグインがまだ識別されていません</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="LoadPluginError" xml:space="preserve">
+    <value>プラグインの読み込み中にエラーが発生しました</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Unrecognized" xml:space="preserve">
+    <value>認識されません</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ImportModPack" xml:space="preserve">
+    <value>インテグレーションパッケージをインポート</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Prepare" xml:space="preserve">
+    <value>準備</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="VersionIdCannotBeEmpty" xml:space="preserve">
+    <value>バージョンIDを空にすることはできません</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="InstallModPack" xml:space="preserve">
+    <value>インテグレーションパックをインストールしてください</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="PrepareInstall" xml:space="preserve">
+    <value>インストールの準備ができました</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SaveSkinFile" xml:space="preserve">
+    <value>スキンファイルを保存</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SaveFinish" xml:space="preserve">
+    <value>保存しました</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CornerRadius" xml:space="preserve">
+    <value>丸みを帯びた半径</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="EnableTranslucentSpecialControlList" xml:space="preserve">
+    <value>半透明の特別なコントロールリストを有効にします</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NoticeWay" xml:space="preserve">
+    <value>通知方法</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NotificationCard" xml:space="preserve">
+    <value>通知カード</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NotificationBubble" xml:space="preserve">
+    <value>通知バブル</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExampleNotification" xml:space="preserve">
+    <value>通知のサンプル</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CurrentListIsmpty" xml:space="preserve">
+    <value>現在のリストは空です</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>導入</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="HopeHowToHandleTheFile" xml:space="preserve">
+    <value>このファイルをどうしますか</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AsResourcePackImport" xml:space="preserve">
+    <value>アセットパッケージとしてインポート</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AsShaderPackImport" xml:space="preserve">
+    <value>軽量パッケージとしてインポートされました</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Conflict" xml:space="preserve">
+    <value>衝突</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="FileConflictTip" xml:space="preserve">
+    <value>ファイルが競合しています。コピー先フォルダーに同じ名前のファイルがすでにあります。コピー操作をどのように処理しますか？</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Cover" xml:space="preserve">
+    <value>重ね合わせ</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>名前を変更</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ImportFinish" xml:space="preserve">
+    <value>インポートが完了しました</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SureToImportTheFile" xml:space="preserve">
+    <value>このファイルをインポートできます</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AllImport" xml:space="preserve">
+    <value>すべてインポート</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="MinecraftVersion" xml:space="preserve">
+    <value>Minecraftバージョン</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>ホームページ</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="HotResource" xml:space="preserve">
+    <value>トップ資源</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

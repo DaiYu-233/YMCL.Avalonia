@@ -969,258 +969,343 @@ MacOs 不支持自动更新
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>显示名称</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Task" xml:space="preserve">
     <value>任务</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="More" xml:space="preserve">
     <value>更多</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="About" xml:space="preserve">
     <value>关于</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Personalize" xml:space="preserve">
     <value>个性化</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Launcher" xml:space="preserve">
     <value>启动器</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ServerUrlError" xml:space="preserve">
     <value>服务器Url错误</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Waiting" xml:space="preserve">
     <value>等待中</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Running" xml:space="preserve">
     <value>运行中</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Paused" xml:space="preserve">
     <value>已暂停</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Error" xml:space="preserve">
     <value>错误</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Finished" xml:space="preserve">
     <value>已完成</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Remove" xml:space="preserve">
     <value>移除</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="BuildLaunchConfig" xml:space="preserve">
     <value>构建启动配置项</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="CheckLaunchArg" xml:space="preserve">
     <value>检查启动参数</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="RefreshAccountToken" xml:space="preserve">
     <value>刷新用户令牌</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="LaunchMinecraftProcess" xml:space="preserve">
     <value>启动 Minecraft 进程</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Canceled" xml:space="preserve">
     <value>已取消</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Canceling" xml:space="preserve">
     <value>取消中</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="CheckVersionResource" xml:space="preserve">
     <value>检查版本资源</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="DownloadResource" xml:space="preserve">
     <value>下载资源</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Return" xml:space="preserve">
     <value>返回</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ScreenshotsFolder" xml:space="preserve">
     <value>截图文件夹</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Saves" xml:space="preserve">
     <value>存档</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Screenshots" xml:space="preserve">
     <value>截图</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ResourcePacks" xml:space="preserve">
     <value>资源包</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="NoMatchResult" xml:space="preserve">
     <value>无匹配结果</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="CreateTime" xml:space="preserve">
     <value>创建时间</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="LastModifiedTime" xml:space="preserve">
     <value>最后修改时间</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="SaveInfo" xml:space="preserve">
     <value>存档信息</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Name" xml:space="preserve">
     <value>名称</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="PlayerCount" xml:space="preserve">
     <value>玩家数量</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="DataPackCount" xml:space="preserve">
     <value>数据包数量</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ImportTime" xml:space="preserve">
     <value>导入时间</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="CanceledUpdate" xml:space="preserve">
     <value>更新已取消</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ApiError" xml:space="preserve">
     <value>Api错误</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="NetWorkError" xml:space="preserve">
     <value>网络错误</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="KillProcess" xml:space="preserve">
     <value>结束进程</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="LaunchArguments" xml:space="preserve">
     <value>启动参数</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="DisplayLaunchArguments" xml:space="preserve">
     <value>显示启动参数</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ResetData" xml:space="preserve">
     <value>重置数据</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="FixLoadDataFailTip" xml:space="preserve">
     <value>在加载数据时遇到异常，这可能是由于数据发生损坏导致的。是否重置YMCL数据以解决此问题？</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Export" xml:space="preserve">
     <value>导出</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ExportLogFile" xml:space="preserve">
     <value>导出日志文件</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="AutoScrollToEnd" xml:space="preserve">
     <value>自动滚动到末尾</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="GetJavaInfoFail" xml:space="preserve">
     <value>获取Java信息失败
 可能此Java不正确/已损坏/无执行权限</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Seed" xml:space="preserve">
     <value>种子</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="AllowCommands" xml:space="preserve">
     <value>允许命令</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="GameType" xml:space="preserve">
     <value>游戏类型</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="LastPlayTime" xml:space="preserve">
     <value>最后游玩时间</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="NoDescription" xml:space="preserve">
     <value>无描述信息</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Mica" xml:space="preserve">
     <value>云母</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="TranslucentBackgroundOpacity" xml:space="preserve">
     <value>半透明背景控件不透明度</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="MusicApiWithIP" xml:space="preserve">
     <value>音乐Api附带IP地址</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="NoIdentifiedPlugins" xml:space="preserve">
     <value>暂无已识别插件</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="LoadPluginError" xml:space="preserve">
     <value>加载插件错误</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Unrecognized" xml:space="preserve">
     <value>无法识别</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ImportModPack" xml:space="preserve">
     <value>导入整合包</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Prepare" xml:space="preserve">
     <value>准备</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="VersionIdCannotBeEmpty" xml:space="preserve">
     <value>版本 Id 不可为空</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="InstallModPack" xml:space="preserve">
     <value>安装整合包</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="PrepareInstall" xml:space="preserve">
     <value>准备安装</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="SaveSkinFile" xml:space="preserve">
     <value>保存皮肤文件</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="SaveFinish" xml:space="preserve">
     <value>保存完成</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="CornerRadius" xml:space="preserve">
     <value>圆角半径</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="EnableTranslucentSpecialControlList" xml:space="preserve">
     <value>启用半透明特殊控件列表</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="NoticeWay" xml:space="preserve">
     <value>通知方式</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="NotificationCard" xml:space="preserve">
     <value>通知卡片</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="NotificationBubble" xml:space="preserve">
     <value>通知气泡</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ExampleNotification" xml:space="preserve">
     <value>示例通知</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="CurrentListIsmpty" xml:space="preserve">
     <value>当前列表为空</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Import" xml:space="preserve">
     <value>导入</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="HopeHowToHandleTheFile" xml:space="preserve">
     <value>希望如何处理此文件</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="AsResourcePackImport" xml:space="preserve">
     <value>作为资源包导入</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="AsShaderPackImport" xml:space="preserve">
     <value>作为光影包导入</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Conflict" xml:space="preserve">
     <value>冲突</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="FileConflictTip" xml:space="preserve">
     <value>文件冲突，目标文件夹已存在相同名称文件，希望如何处理复制操作？</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Cover" xml:space="preserve">
     <value>覆盖</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Rename" xml:space="preserve">
     <value>重命名</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ImportFinish" xml:space="preserve">
     <value>导入完成</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="SureToImportTheFile" xml:space="preserve">
     <value>确定导入此文件</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="AllImport" xml:space="preserve">
     <value>全部导入</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="MinecraftVersion" xml:space="preserve">
     <value>Minecraft 版本</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Home" xml:space="preserve">
     <value>主页</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="HotResource" xml:space="preserve">
     <value>热门资源</value>
+    <comment>#TODO#_</comment>
   </data>
 </root>

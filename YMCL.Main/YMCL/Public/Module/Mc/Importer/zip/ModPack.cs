@@ -39,7 +39,7 @@ public class ModPack
         if (result)
         {
             YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavTask;
-            _ = CurseForge.Install(path, entry, id ?? entry.Id);
+            _ = Installer.ModPack.CurseForge.Install(path, entry, id ?? entry.Id);
         }
 
         

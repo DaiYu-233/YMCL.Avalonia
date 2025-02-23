@@ -5,7 +5,7 @@ using YMCL.Public.Langs;
 
 namespace YMCL.Public.Module.Ui.Converter;
 
-public class TaskStateToTip : IValueConverter
+public class TaskStateToTipConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {

@@ -1394,11 +1394,29 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 主页.
+        /// </summary>
+        public static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 希望如何处理此文件.
         /// </summary>
         public static string HopeHowToHandleTheFile {
             get {
                 return ResourceManager.GetString("HopeHowToHandleTheFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 热门资源.
+        /// </summary>
+        public static string HotResource {
+            get {
+                return ResourceManager.GetString("HotResource", resourceCulture);
             }
         }
         
@@ -2044,6 +2062,15 @@ namespace YMCL.Public.Langs {
         public static string MinecraftFolderTip {
             get {
                 return ResourceManager.GetString("MinecraftFolderTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minecraft 版本.
+        /// </summary>
+        public static string MinecraftVersion {
+            get {
+                return ResourceManager.GetString("MinecraftVersion", resourceCulture);
             }
         }
         

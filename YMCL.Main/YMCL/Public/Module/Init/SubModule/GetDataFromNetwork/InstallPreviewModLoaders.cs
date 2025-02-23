@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using MinecraftLaunch.Components.Installer;
 using YMCL.Public.Langs;
+using YMCL.Views.Main.Pages.DownloadPages.AutoInstallPages;
 
 namespace YMCL.Public.Module.Init.SubModule.GetDataFromNetwork;
 
 public class InstallPreviewModLoaders
 {
-    public static void Load(YMCL.Views.Main.Pages.DownloadPages.InstallPreview view, string id)
+    public static void Load(InstallPreview view, string id)
     {
         _ = Task.Run(async () => // OptiFine
         {

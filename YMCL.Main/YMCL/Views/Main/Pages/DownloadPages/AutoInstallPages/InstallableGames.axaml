@@ -2,7 +2,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d"
-    x:Class="YMCL.Views.Main.Pages.DownloadPages.InstallableGames"
+    x:Class="YMCL.Views.Main.Pages.DownloadPages.AutoInstallPages.InstallableGames"
     x:DataType="setting:UiProperty"
     xmlns="https://github.com/avaloniaui"
     xmlns:converter="clr-namespace:YMCL.Public.Module.Ui.Converter"

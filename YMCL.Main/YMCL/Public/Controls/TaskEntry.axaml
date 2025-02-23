@@ -17,7 +17,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
         <converter:TaskStateToColorConverter x:Key="TaskStateToColor" />
-        <converter:TaskStateToTip x:Key="TaskStateToTip" />
+        <converter:TaskStateToTipConverter x:Key="TaskStateToTip" />
         <converter:MsToTimeConverter x:Key="MsToTimeConverter" />
     </UserControl.Resources>
     <Border

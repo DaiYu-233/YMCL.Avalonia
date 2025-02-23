@@ -99,6 +99,16 @@
             </Transitions>
         </Setter>
     </Style>
+    <Style Selector="SelectableTextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Font}" />
+        <Setter Property="FontWeight" Value="{DynamicResource FontWeight}" />
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="0:0:0.3" Property="Foreground" />
+            </Transitions>
+        </Setter>
+    </Style>
     <Style Selector="TextBox">
         <Setter Property="FontFamily" Value="{DynamicResource Font}" />
         <Setter Property="Transitions">
@@ -123,6 +133,13 @@
         </Style>
     </Style>
     <Style Selector="Border">
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Duration="0:0:0.3" Property="Background" />
+            </Transitions>
+        </Setter>
+    </Style>
+    <Style Selector="Button">
         <Setter Property="Transitions">
             <Transitions>
                 <BrushTransition Duration="0:0:0.3" Property="Background" />

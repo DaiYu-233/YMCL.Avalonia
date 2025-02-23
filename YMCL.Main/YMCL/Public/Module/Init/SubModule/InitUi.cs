@@ -7,6 +7,7 @@ using Avalonia.Media;
 using Avalonia.Styling;
 using Avalonia.VisualTree;
 using FluentAvalonia.Core;
+using NAudio.MediaFoundation;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Ui;
@@ -25,6 +26,7 @@ public class InitUi
         _ = SetCustomHomePage();
         Application.Current.ActualThemeVariantChanged += (_, _) => { UpdateTheme(); };
         Ui.Setter.ToggleTheme(Data.Setting.Theme);
+        // App.UiRoot.ViewModel.Download.CurseForgeFetcher.SearchAction();
         if (Data.Setting.EnableAutoCheckUpdate)
         {
             var result = await IO.Network.Update.CheckUpdateAsync();

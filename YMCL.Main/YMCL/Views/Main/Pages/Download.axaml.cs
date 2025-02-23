@@ -8,6 +8,7 @@ namespace YMCL.Views.Main.Pages;
 public partial class Download : UserControl
 {
     public readonly DownloadPages.AutoInstall _autoInstall = new();
+    public readonly DownloadPages.CurseForge _curseForge = new();
     public Download()
     {
         InitializeComponent();FrameView.Content = _autoInstall;
@@ -22,6 +23,7 @@ public partial class Download : UserControl
             var page = tag switch
             {
                 "autoInstall" => _autoInstall,
+                "curseForge" => _curseForge,
                 _ => FrameView.Content as UserControl
             };
             FrameView.Content = page;

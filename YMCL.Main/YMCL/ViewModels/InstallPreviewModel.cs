@@ -6,6 +6,7 @@ using MinecraftLaunch.Base.Models.Network;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using YMCL.Views.Main.Pages.DownloadPages;
+using InstallPreview = YMCL.Views.Main.Pages.DownloadPages.AutoInstallPages.InstallPreview;
 
 namespace YMCL.ViewModels;
 

@@ -9,7 +9,7 @@ namespace YMCL.Views.Main.Pages.DownloadPages;
 
 public partial class AutoInstall : UserControl
 {
-    public readonly DownloadPages.InstallableGames InstallableGames = new();
+    public readonly AutoInstallPages.InstallableGames InstallableGames = new();
 
     public AutoInstall()
     {
@@ -19,7 +19,7 @@ public partial class AutoInstall : UserControl
 
     public void JumpToInstallPreview(VersionManifestEntry entry)
     {
-        var page = new InstallPreview(() =>
+        var page = new AutoInstallPages.InstallPreview(() =>
         {
             Frame.Content = InstallableGames;
             _ = Animator.PageLoading.LevelTwoPage(InstallableGames);

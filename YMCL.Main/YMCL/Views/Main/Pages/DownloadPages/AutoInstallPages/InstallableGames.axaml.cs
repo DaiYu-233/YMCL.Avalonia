@@ -1,15 +1,11 @@
 ﻿using System.Linq;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 using MinecraftLaunch.Base.Models.Network;
 using YMCL.Public.Classes;
 using YMCL.Public.Classes.Setting;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Init.SubModule.GetDataFromNetwork;
-using YMCL.ViewModels;
 
-namespace YMCL.Views.Main.Pages.DownloadPages;
+namespace YMCL.Views.Main.Pages.DownloadPages.AutoInstallPages;
 
 public partial class InstallableGames : UserControl
 {

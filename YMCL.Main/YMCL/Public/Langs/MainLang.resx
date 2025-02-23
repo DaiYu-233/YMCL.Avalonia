@@ -1214,4 +1214,13 @@ MacOs 不支持自动更新
   <data name="AllImport" xml:space="preserve">
     <value>全部导入</value>
   </data>
+  <data name="MinecraftVersion" xml:space="preserve">
+    <value>Minecraft 版本</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>主页</value>
+  </data>
+  <data name="HotResource" xml:space="preserve">
+    <value>热门资源</value>
+  </data>
 </root>

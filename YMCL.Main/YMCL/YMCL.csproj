@@ -55,12 +55,15 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="CurseForge.APIClient" />
+    <PackageReference Include="F23.StringSimilarity" />
     <PackageReference Include="FluentAvaloniaUI" />
     <PackageReference Include="HtmlAgilityPack" />
     <PackageReference Include="Irihi.Ursa" />
     <PackageReference Include="Irihi.Ursa.Themes.Semi" />
     <PackageReference Include="MinecraftLaunch" />
     <PackageReference Include="MinecraftLaunch.Skin" />
+    <PackageReference Include="Modrinth.Net" />
     <PackageReference Include="NAudio" />
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="ReactiveUI" />
@@ -140,6 +143,22 @@
       <DependentUpon>MsgHistory.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Main\Pages\DownloadPages\AutoInstallPages\InstallableGames.axaml.cs">
+      <DependentUpon>InstallableGames.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Main\Pages\DownloadPages\AutoInstallPages\InstallPreview.axaml.cs">
+      <DependentUpon>InstallPreview.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Main\Pages\DownloadPages\CurseForge.axaml.cs">
+      <DependentUpon>CurseForge.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Main\Pages\DownloadPages\CurseForgePages\Fetcher.axaml.cs">
+      <DependentUpon>CurseForgeFetcher.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -152,5 +171,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\YMCL.Plugin\YMCL.Plugin.Base\YMCL.Plugin.Base.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Public\Module\Mc\Fetcher\CurseForge\" />
   </ItemGroup>
 </Project>

@@ -39,7 +39,7 @@ public class ModPack
         if (result)
         {
             YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavTask;
-            _ = Modrinth.Install(path, entry, id ?? entry.Name);
+            _ = Installer.ModPack.Modrinth.Install(path, entry, id ?? entry.Name);
         }
 
         

@@ -1,18 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using MinecraftLaunch.Base.Models.Network;
-using ReactiveUI;
-using YMCL.Public.Langs;
+﻿using MinecraftLaunch.Base.Models.Network;
 using YMCL.Public.Module.Init.SubModule.GetDataFromNetwork;
 using YMCL.ViewModels;
 using Dispatcher = YMCL.Public.Module.Mc.Installer.Minecraft.Dispatcher;
-using String = string;
 
-namespace YMCL.Views.Main.Pages.DownloadPages;
+namespace YMCL.Views.Main.Pages.DownloadPages.AutoInstallPages;
 
 public sealed partial class InstallPreview : UserControl
 {

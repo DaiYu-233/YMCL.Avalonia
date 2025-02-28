@@ -1078,6 +1078,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 下载链接解析失败.
+        /// </summary>
+        public static string DownloadUrlParserFail {
+            get {
+                return ResourceManager.GetString("DownloadUrlParserFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 编辑.
         /// </summary>
         public static string Edit {

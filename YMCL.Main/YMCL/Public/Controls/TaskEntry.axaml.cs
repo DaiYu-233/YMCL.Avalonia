@@ -41,6 +41,11 @@ public partial class TaskEntry : UserControl
     {
         Model.DestoryAction = action;
     }
+    
+    public void Rename(string name)
+    {
+        Model.Name = name;
+    }
 
     public void AddOperateButton(TaskEntryOperateButtonEntry entry)
     {
@@ -88,7 +93,7 @@ public partial class TaskEntry : UserControl
         Model.SubTasks.Remove(task);
     }
 
-    public void Destory()
+    public void Destroy()
     {
         Data.TaskEntries.Remove(this);
         App.UiRoot.ViewModel.Task.UpdateTasksTip();

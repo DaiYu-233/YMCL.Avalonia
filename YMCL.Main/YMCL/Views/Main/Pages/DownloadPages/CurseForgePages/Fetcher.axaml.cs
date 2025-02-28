@@ -40,10 +40,7 @@ public partial class CurseForgeFetcher : UserControl
             SearchAction();
             e.Handled = true;
         };
-        Loaded += (_, _) =>
-        {
-            _ = Animator.PageLoading.LevelTwoPage(this);
-        };
+        Loaded += (_, _) => { _ = Animator.PageLoading.LevelTwoPage(this); };
     }
 
     private void SearchAction()
@@ -54,7 +51,9 @@ public partial class CurseForgeFetcher : UserControl
             Content = new SearchResult(string.IsNullOrWhiteSpace(SearchKey.Text) ? string.Empty : SearchKey.Text,
                 string.IsNullOrWhiteSpace(SearchMcVersion.Text) ? string.Empty : SearchMcVersion.Text,
                 SearchType.SelectedIndex, SearchLoaderType.SelectedIndex),
-            Title = string.IsNullOrWhiteSpace(SearchKey.Text) ?  $"{MainLang.Search}: {MainLang.HotResource}" : $"{MainLang.Search}: {SearchKey.Text}"
+            Title = string.IsNullOrWhiteSpace(SearchKey.Text)
+                ? $"{MainLang.Search}({(SearchType.SelectedItem as ComboBoxItem).Content}): {MainLang.HotResource}"
+                : $"{MainLang.Search}({(SearchType.SelectedItem as ComboBoxItem).Content}): {SearchKey.Text}"
         });
     }
 }

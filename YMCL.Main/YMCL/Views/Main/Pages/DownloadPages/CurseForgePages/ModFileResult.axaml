@@ -28,7 +28,6 @@
                 Background="{DynamicResource 2x}"
                 CornerRadius="{DynamicResource MainCornerRadius}"
                 DockPanel.Dock="Top"
-                Opacity="{DynamicResource MainOpacity}"
                 Padding="10,5,10,5"
                 VerticalAlignment="Top">
                 <DockPanel
@@ -55,7 +54,7 @@
                             DockPanel.Dock="Top"
                             FontSize="12"
                             Foreground="{DynamicResource GrayColor}">
-                            <Run Text="{Binding Type, Mode=OneWay}" />
+                            <Run Text="{Binding DisplayType, Mode=OneWay}" />
                             <Run Text="," />
                             <Run Text="{Binding DownloadCount, Mode=OneWay, Converter={StaticResource CountToUnitConverter}}" />
                             <Run Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Download}" />
@@ -73,7 +72,6 @@
                 DockPanel.Dock="Top"
                 Margin="0,10,0,0"
                 Name="InfoBorder"
-                Opacity="{DynamicResource MainOpacity}"
                 VerticalAlignment="Top"
                 x:DataType="curseForgePages:ModFileResult">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">

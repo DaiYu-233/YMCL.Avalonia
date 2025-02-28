@@ -20,10 +20,12 @@ namespace YMCL.Public.Module.Mc.Installer.ModPack;
 
 public class CurseForge
 {
-    public static async Task<bool> Install(string path, CurseforgeModpackInstallEntry modpackEntry, string id)
+    public static async Task<bool> Install(string path, CurseforgeModpackInstallEntry modpackEntry, string id,
+        TaskEntry? p_task = null)
     {
         var isSuccess = false;
-        var task = new TaskEntry($"{MainLang.Install}: {id}", state: TaskState.Running);
+        p_task?.Rename($"{MainLang.Install}: {id}");
+        var task = p_task ?? new TaskEntry($"{MainLang.Install}: {id}", state: TaskState.Running);
         var cts = new CancellationTokenSource();
         var cancellationToken = cts.Token;
         var mcPath = Data.Setting.MinecraftFolder.Path;
@@ -54,7 +56,7 @@ public class CurseForge
                     .ToListAsync(cancellationToken: cancellationToken);
             if (installEntrys == null)
             {
-                Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}",NotificationType.Warning);
+                Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}", NotificationType.Warning);
                 return false;
             }
 
@@ -185,12 +187,12 @@ public class CurseForge
         if (cancellationToken.IsCancellationRequested) return false;
         if (isSuccess)
         {
-            Notice($"{MainLang.InstallFinish}: {id}",NotificationType.Success);
+            Notice($"{MainLang.InstallFinish}: {id}", NotificationType.Success);
             task.FinishWithSuccess();
         }
         else
         {
-            Notice($"{MainLang.InstallFail}: {id}",NotificationType.Success);
+            Notice($"{MainLang.InstallFail}: {id}", NotificationType.Success);
             task.FinishWithError();
         }
 

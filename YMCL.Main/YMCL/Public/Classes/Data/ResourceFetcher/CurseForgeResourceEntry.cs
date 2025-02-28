@@ -3,6 +3,7 @@ using CurseForge.APIClient.Models;
 using CurseForge.APIClient.Models.Files;
 using CurseForge.APIClient.Models.Mods;
 using YMCL.Public.Enum;
+using YMCL.Public.Langs;
 
 namespace YMCL.Public.Classes.Data.ResourceFetcher;
 
@@ -12,7 +13,19 @@ public class CurseForgeResourceEntry : IResourceEntry
     string IResourceEntry.Name => Name;
     ResourceSource IResourceEntry.Source => ResourceSource.CurseForge;
     DateTime IResourceEntry.LastUpdateTime => DateModified.DateTime;
-    public string Type { get; set; } = "Unknown";
+
+    public string DisplayType => Type switch
+    {
+        ResourceType.Mod => MainLang.Mod,
+        ResourceType.Map => MainLang.Map,
+        ResourceType.DataPack => MainLang.DataPack,
+        ResourceType.ResourcePack => MainLang.MaterialPack,
+        ResourceType.ShaderPack => MainLang.ShaderPack,
+        ResourceType.ModPack => MainLang.ModPack,
+        _ => MainLang.Unknown,
+    };
+
+    public ResourceType Type { get; set; } = ResourceType.Unknown;
     ulong IResourceEntry.DownloadCount => Convert.ToUInt64(DownloadCount);
     public int Id { get; set; }
     public int GameId { get; set; }

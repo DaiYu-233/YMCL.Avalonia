@@ -2,6 +2,7 @@
 using System.Linq;
 using Avalonia.Controls.Notifications;
 using MinecraftLaunch.Components.Parser;
+using Modrinth.Models;
 using Newtonsoft.Json;
 using YMCL.Public.Classes;
 using YMCL.Public.Classes.Data;
@@ -9,6 +10,7 @@ using YMCL.Public.Classes.Operate;
 using YMCL.Public.Classes.Setting;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
+using SearchResult = YMCL.Views.Main.Pages.DownloadPages.CurseForgePages.SearchResult;
 
 namespace YMCL.Public.Module.Ui.Special;
 
@@ -108,7 +110,15 @@ public class AggregateSearchUi
             if (entry.Target == "curse-forge")
             {
                 if (string.IsNullOrWhiteSpace(key)) return;
-                // TODO CurseForge Search
+                if (string.IsNullOrWhiteSpace(entry.Keyword)) return;
+                YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavDownload;
+                YMCL.App.UiRoot.ViewModel.Download.Nav.SelectedItem = YMCL.App.UiRoot.ViewModel.Download.NavCf;
+                App.UiRoot.ViewModel.Download._curseForge.CreateNewPage(new SearchTabViewItemEntry()
+                {
+                    CanClose = true,
+                    Content = new SearchResult(entry.Keyword, string.Empty, 0, 0),
+                    Title = $"{MainLang.Search}({MainLang.AllType}): {entry.Keyword}"
+                });
             }
             else if (entry.Target == "music")
             {

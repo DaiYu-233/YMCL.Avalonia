@@ -258,6 +258,7 @@ public partial class Music : UserControl
                     Notice($"{MainLang.DownloadFinish}: {song.SongName}.mp3", NotificationType.Success);
                     task.AdvanceSubTask();
                     task.FinishWithSuccess();
+                    task.Destroy();
                 }
                 catch
                 {

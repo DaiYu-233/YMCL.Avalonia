@@ -12,21 +12,34 @@ namespace YMCL.Public.Controls;
 
 public partial class CourseForgeModFileExpander : UserControl
 {
+    private bool _firstLoad = true;
     public ObservableCollection<File> Files { get; } = [];
 
-    public CourseForgeModFileExpander(string version, int id, string name, ModLoaderType? type)
+    public CourseForgeModFileExpander(string version, int id, string name, ModLoaderType? loader, ResourceType type)
     {
         InitializeComponent();
         Expander.Header = name;
         DataContext = this;
-        _ = Init(version, id, type);
+        Loaded += (_, _) =>
+        {
+            if (!_firstLoad) return;
+            _firstLoad = false;
+            _ = Init(version, id, loader);
+        };
+        ListView.SelectionChanged += async (_, _) =>
+        {
+            if (ListView.SelectedItem == null) return;
+            Public.Module.Op.DownloadResource.SaveCourseForge(type, ListView.SelectedItem as File);
+            await Task.Delay(300);
+            ListView.SelectedItem = null;
+        };
     }
 
     private async Task Init(string version, int id, ModLoaderType? type)
     {
         ApiClient apiClient = new(Const.String.CurseForgeApiKey);
         var data = await apiClient.GetModFilesAsync(id, version, type ?? null);
-        Files.AddRange(data.Data);
+        data.Data.ForEach(x => { Files.Add(x); });
         Ring.IsVisible = false;
     }
 }

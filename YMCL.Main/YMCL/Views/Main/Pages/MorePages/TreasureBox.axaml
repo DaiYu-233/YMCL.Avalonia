@@ -48,7 +48,6 @@
                     <Border
                         Background="{DynamicResource 2x}"
                         CornerRadius="{DynamicResource MainCornerRadius}"
-                        Opacity="{DynamicResource MainOpacity}"
                         Padding="6.5">
                         <DockPanel Margin="5,0,0,0">
                             <DockPanel DockPanel.Dock="Top">
@@ -72,7 +71,6 @@
                     <Border
                         Background="{DynamicResource 2x}"
                         CornerRadius="{DynamicResource MainCornerRadius}"
-                        Opacity="{DynamicResource MainOpacity}"
                         Padding="6.5">
                         <DockPanel Margin="5,0,0,0">
                             <DockPanel DockPanel.Dock="Top">

@@ -94,7 +94,7 @@ public class TaskEntryModel : ReactiveObject
         {
             ButtonAction = () =>
             {
-                Instance.Destory();
+                Instance.Destroy();
                 DestoryAction?.Invoke();
             };
         }

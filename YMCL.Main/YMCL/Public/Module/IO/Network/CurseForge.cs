@@ -5,7 +5,9 @@ using CurseForge.APIClient;
 using CurseForge.APIClient.Models.Files;
 using CurseForge.APIClient.Models.Mods;
 using YMCL.Public.Classes.Data.ResourceFetcher;
+using YMCL.Public.Enum;
 using YMCL.Public.Langs;
+using ModLoaderType = CurseForge.APIClient.Models.Mods.ModLoaderType;
 using String = System.String;
 
 namespace YMCL.Public.Module.IO.Network;
@@ -112,13 +114,13 @@ public class CurseForge
                 };
                 entry.Type = item.ClassId switch
                 {
-                    6 => MainLang.Mod,
-                    12 => MainLang.MaterialPack,
-                    17 => MainLang.Map,
-                    6552 => MainLang.ShaderPack,
-                    6945 => MainLang.DataPack,
-                    4471 => MainLang.ModPack,
-                    _ => MainLang.Unknown
+                    6 => ResourceType.Mod,
+                    12 => ResourceType.ResourcePack,
+                    17 => ResourceType.Map,
+                    6552 => ResourceType.ShaderPack,
+                    6945 => ResourceType.DataPack,
+                    4471 => ResourceType.ModPack,
+                    _ => ResourceType.Unknown
                 };
                 return entry;
             })

@@ -7,6 +7,7 @@ using Avalonia.Media;
 using FluentAvalonia.UI.Controls;
 using MinecraftLaunch.Base.Models.Network;
 using MinecraftLaunch.Components.Installer.Modpack;
+using YMCL.Public.Controls;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Mc.Installer.ModPack;
 
@@ -14,7 +15,7 @@ namespace YMCL.Public.Module.Mc.Importer.zip;
 
 public class ModPack
 {
-    public static async Task Import(string path)
+    public static async Task Import(string path, TaskEntry? p_task = null)
     {
         CurseforgeModpackInstallEntry? entry = null;
         try
@@ -24,26 +25,27 @@ public class ModPack
         catch (Exception e)
         {
             Console.WriteLine(e);
-            Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}",NotificationType.Warning);
+            Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}", NotificationType.Warning);
         }
 
         if (entry is null)
         {
-            Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}",NotificationType.Warning);
+            Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}", NotificationType.Warning);
             return;
         }
 
         string? id = null;
         var result = await ShowDialog(entry.Id);
-        
+
         if (result)
         {
             YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavTask;
-            _ = Installer.ModPack.CurseForge.Install(path, entry, id ?? entry.Id);
+            _ = Installer.ModPack.CurseForge.Install(path, entry, id ?? entry.Id, p_task);
         }
-
-        
-
+        else
+        {
+            p_task?.Cancel();
+        }
 
         return;
 

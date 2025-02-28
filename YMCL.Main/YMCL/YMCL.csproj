@@ -172,8 +172,4 @@
   <ItemGroup>
     <ProjectReference Include="..\..\YMCL.Plugin\YMCL.Plugin.Base\YMCL.Plugin.Base.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Public\Module\Mc\Fetcher\CurseForge\" />
-  </ItemGroup>
 </Project>

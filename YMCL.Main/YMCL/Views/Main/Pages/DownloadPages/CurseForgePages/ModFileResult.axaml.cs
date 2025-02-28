@@ -35,7 +35,7 @@ public partial class ModFileResult : UserControl, INotifyPropertyChanged
     }
 
 
-    public ModFileResult(CurseForgeResourceEntry entry)
+    public ModFileResult(CurseForgeResourceEntry entry, int type)
     {
         _entry = entry;
         InitializeComponent();
@@ -53,13 +53,15 @@ public partial class ModFileResult : UserControl, INotifyPropertyChanged
             {
                 Version = x.GameVersion,
                 Loader = loader,
-                Expander = new CourseForgeModFileExpander(x.GameVersion, entry.Id, $"{x.GameVersion} {loader}",
-                    x.ModLoader)
+                Expander = new CourseForgeModFileExpander(x.GameVersion, entry.Id,
+                    type is 6 or 0 ? $"{x.GameVersion} {loader}" : x.GameVersion,
+                    x.ModLoader, entry.Type)
             };
             if (!Versions[0].VersionEntries.Any(z => z.Version == x.GameVersion && z.Loader == loader))
             {
                 Versions[0].VersionEntries.Add(fileGroup);
             }
+
             if (Versions.Any(y => y.Version == shortVersion)) return;
             var shortEntry = new ShortVersionEntry { Version = shortVersion, DisplayVersion = shortVersion };
             Versions.Add(shortEntry);
@@ -81,8 +83,9 @@ public partial class ModFileResult : UserControl, INotifyPropertyChanged
                 {
                     Version = y.GameVersion,
                     Loader = loader,
-                    Expander = new CourseForgeModFileExpander(y.GameVersion, entry.Id, $"{y.GameVersion} {loader}",
-                        y.ModLoader)
+                    Expander = new CourseForgeModFileExpander(y.GameVersion, entry.Id,
+                        type is 6 or 0 ? $"{y.GameVersion} {loader}" : y.GameVersion,
+                        y.ModLoader, entry.Type)
                 };
                 if (x.Version != shortVersion) return;
                 if (x.VersionEntries.Any(z =>

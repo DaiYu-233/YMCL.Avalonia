@@ -19,10 +19,9 @@
         <converter:CountToUnitConverter x:Key="CountToUnitConverter" />
     </UserControl.Resources>
     <Border
-        Background="{DynamicResource 1x}"
+        Background="{DynamicResource 2x}"
         CornerRadius="{DynamicResource MainCornerRadius}"
         DockPanel.Dock="Top"
-        Opacity="{DynamicResource MainOpacity}"
         VerticalAlignment="Top">
         <Expander Name="Expander">
             <Grid>

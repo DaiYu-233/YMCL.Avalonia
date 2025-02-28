@@ -48,7 +48,7 @@ public partial class SearchResult : UserControl
             App.UiRoot.ViewModel.Download._curseForge.CreateNewPage(new SearchTabViewItemEntry()
             {
                 CanClose = true,
-                Content = new FileResult(item),
+                Content = new ModFileResult(item!),
                 Title = $"{item.Type}: {item.Name}"
             });
             ListBox.SelectedItem = null;

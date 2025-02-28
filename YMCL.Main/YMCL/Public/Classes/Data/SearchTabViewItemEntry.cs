@@ -9,10 +9,12 @@ public record SearchTabViewItemEntry
 
     public void Close()
     {
-        if(App.UiRoot.ViewModel.Download._curseForge.SelectedItem == this)
+        if (App.UiRoot.ViewModel.Download._curseForge.SelectedItem == this)
         {
-            App.UiRoot.ViewModel.Download._curseForge.SelectedItem = App.UiRoot.ViewModel.Download._curseForge.Items[0];
+            App.UiRoot.ViewModel.Download._curseForge.SelectedItem =
+                App.UiRoot.ViewModel.Download._curseForge.Items[^2];
         }
+
         App.UiRoot.ViewModel.Download._curseForge.Items.Remove(this);
         GC.Collect(2, GCCollectionMode.Aggressive, true);
     }

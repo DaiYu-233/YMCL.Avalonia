@@ -9,7 +9,7 @@ public class MainViewModel : ReactiveObject
 {
     public static Rect _frameBounds = new();
     public static readonly About _about = new();
-    public static readonly Search _search = new();
+    public static readonly Search _search = new(false);
     public static readonly Download _download = new();
     public static readonly More _more = new();
     public static readonly Music _music = new();

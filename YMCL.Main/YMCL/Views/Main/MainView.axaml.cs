@@ -12,6 +12,7 @@ using YMCL.Public.Langs;
 using YMCL.Public.Module.Init;
 using YMCL.Public.Module.Ui.Special;
 using YMCL.ViewModels;
+using YMCL.Views.Main.Pages;
 
 namespace YMCL.Views.Main;
 
@@ -28,8 +29,6 @@ public partial class MainView : UserControl
         {
             NavMusic.IsVisible = true;
         }
-
-        
     }
 
     private void BindingEvent()
@@ -65,5 +64,10 @@ public partial class MainView : UserControl
             var text = e.Data.GetText(); 
             Public.Module.Ui.Special.DropHandler.HandleText(text!);
         }
+    }
+
+    private void Button_OnClick(object? sender, RoutedEventArgs e)
+    {
+        
     }
 }

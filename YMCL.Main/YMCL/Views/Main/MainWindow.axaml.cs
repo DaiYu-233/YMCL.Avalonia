@@ -9,11 +9,14 @@ using Ursa.Controls;
 using Ursa.Controls.Options;
 using YMCL.Public.Controls.Drawers;
 using YMCL.Public.Enum;
+using YMCL.Views.Main.Pages;
 
 namespace YMCL.Views.Main;
 
 public partial class MainWindow : UrsaWindow
 {
+    private DateTime _lastShiftPressTime;
+
     public MainWindow(out MainView view)
     {
         InitializeComponent();
@@ -72,5 +75,23 @@ public partial class MainWindow : UrsaWindow
             }
         };
         Loaded += (_, _) => { Public.Module.Ui.Setter.UpdateWindowStyle(this); };
+        KeyDown += (_, e) =>
+        {
+            if (e.Key is not (Key.LeftShift or Key.RightShift)) return;
+            if ((DateTime.Now - _lastShiftPressTime).TotalMilliseconds < 300)
+            {
+                var options = new DialogOptions()
+                {
+                    ShowInTaskBar = true,
+                    IsCloseButtonVisible = true,
+                    StartupLocation = WindowStartupLocation.CenterOwner,
+                    CanDragMove = true,
+                    CanResize = true,
+                };
+                Dialog.ShowCustom<Search, Data>(Data.Instance, options: options);
+            }
+
+            _lastShiftPressTime = DateTime.Now;
+        };
     }
 }

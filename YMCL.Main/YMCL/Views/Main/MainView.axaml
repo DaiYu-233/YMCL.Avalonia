@@ -326,5 +326,9 @@
                 </ui:NavigationView>
             </Grid>
         </Border>
+        <Button
+            Click="Button_OnClick"
+            Content="Test"
+            IsVisible="False" />
     </Grid>
 </UserControl>

@@ -28,7 +28,7 @@ public partial class Search : UserControl
     public Search()
     {
         InitializeComponent();
-        AggregateSearchListBox.SelectionChanged += async (_, e) =>
+        AggregateSearchListBox.SelectionChanged += (_, e) =>
         {
             if (e.AddedItems.Count <= 0) return;
             if (e.AddedItems[0] is AggregateSearchEntry entry)

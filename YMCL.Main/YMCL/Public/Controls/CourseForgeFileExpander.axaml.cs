@@ -35,6 +35,10 @@ public partial class CurseForgeFileExpander : UserControl
         };
     }
 
+    public CurseForgeFileExpander()
+    {
+    }
+
     private async Task Init(string version, int id, ModLoaderType? type)
     {
         ApiClient apiClient = new(Const.String.CurseForgeApiKey);

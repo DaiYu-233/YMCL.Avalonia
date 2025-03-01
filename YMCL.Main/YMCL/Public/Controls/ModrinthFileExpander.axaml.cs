@@ -26,4 +26,8 @@ public partial class ModrinthFileExpander : UserControl
             ListView.SelectedItem = null;
         };
     }
+
+    public ModrinthFileExpander()
+    {
+    }
 }

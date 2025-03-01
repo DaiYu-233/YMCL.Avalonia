@@ -25,11 +25,13 @@ public class ModPack
         catch (Exception e)
         {
             Console.WriteLine(e);
+            p_task?.FinishWithError();
             Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}", NotificationType.Warning);
         }
 
         if (entry is null)
         {
+            p_task?.FinishWithError();
             Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}", NotificationType.Warning);
             return;
         }

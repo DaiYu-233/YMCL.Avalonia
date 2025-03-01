@@ -3,15 +3,15 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
 using YMCL.Public.Classes.Data;
-using YMCL.Public.Classes.Data.ResourceFetcher;
 using YMCL.Public.Langs;
-using YMCL.Public.Module.Ui;
-using YMCL.Views.Main.Pages.DownloadPages.CurseForgePages;
 
 namespace YMCL.Views.Main.Pages.DownloadPages;
 
-public sealed partial class CurseForge : UserControl, INotifyPropertyChanged
+public partial class Modrinth : UserControl, INotifyPropertyChanged
 {
     private SearchTabViewItemEntry _selectedItem;
 
@@ -19,10 +19,11 @@ public sealed partial class CurseForge : UserControl, INotifyPropertyChanged
     [
         new()
         {
-            Content = new CurseForgeFetcher(),
+            Content = new ModrinthPages.ModrinthFetcher(),
             Title = $"{MainLang.Search}: {MainLang.Home}",
-            Tag = "Home", Host = nameof(CurseForge),
-            CanClose = false
+            Tag = "Home",
+            CanClose = false,
+            Host = nameof(Modrinth)
         }
     ];
 
@@ -38,13 +39,13 @@ public sealed partial class CurseForge : UserControl, INotifyPropertyChanged
         SelectedItem = entry;
     }
 
-    public CurseForge()
+    public Modrinth()
     {
         InitializeComponent();
         DataContext = this;
         SelectedItem = Items.FirstOrDefault();
     }
-    
+
     public new event PropertyChangedEventHandler? PropertyChanged;
 
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null)

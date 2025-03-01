@@ -7,7 +7,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using YMCL.Public.Classes.Data.ResourceFetcher;
-using YMCL.Public.Classes.Data.ResourceFetcher.CourseForgeModFileUiEntry;
+using YMCL.Public.Classes.Data.ResourceFetcher.CurseForgeModFileUiEntry;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
@@ -52,12 +52,12 @@ public partial class ModFileResult : UserControl, INotifyPropertyChanged
             var fileGroup = new VersionEntry
             {
                 Version = x.GameVersion,
-                Loader = loader,
-                Expander = new CourseForgeModFileExpander(x.GameVersion, entry.Id,
+                Loader = loader.ToString(),
+                Expander = new CurseForgeFileExpander(x.GameVersion, entry.Id,
                     type is 6 or 0 ? $"{x.GameVersion} {loader}" : x.GameVersion,
                     x.ModLoader, entry.Type)
             };
-            if (!Versions[0].VersionEntries.Any(z => z.Version == x.GameVersion && z.Loader == loader))
+            if (!Versions[0].VersionEntries.Any(z => z.Version == x.GameVersion && z.Loader == loader.ToString()))
             {
                 Versions[0].VersionEntries.Add(fileGroup);
             }
@@ -82,14 +82,14 @@ public partial class ModFileResult : UserControl, INotifyPropertyChanged
                 var fileGroup = new VersionEntry
                 {
                     Version = y.GameVersion,
-                    Loader = loader,
-                    Expander = new CourseForgeModFileExpander(y.GameVersion, entry.Id,
+                    Loader = loader.ToString(),
+                    Expander = new CurseForgeFileExpander(y.GameVersion, entry.Id,
                         type is 6 or 0 ? $"{y.GameVersion} {loader}" : y.GameVersion,
                         y.ModLoader, entry.Type)
                 };
                 if (x.Version != shortVersion) return;
                 if (x.VersionEntries.Any(z =>
-                        z.Version == y.GameVersion && z.Loader == loader)) return;
+                        z.Version == y.GameVersion && z.Loader == loader.ToString())) return;
                 x.VersionEntries.Add(fileGroup);
             });
             var list = x.VersionEntries.OrderByDescending(v => new Version(v.Version))
@@ -124,7 +124,7 @@ public partial class ModFileResult : UserControl, INotifyPropertyChanged
     //     mcVersions.Reverse();
     //     mcVersions.ForEach(x =>
     //     {
-    //         var control = new CourseForgeModFileExpander();
+    //         var control = new CurseForgeModFileExpander();
     //         control.Expander.Header = x;
     //         files.ForEach(y =>
     //         {

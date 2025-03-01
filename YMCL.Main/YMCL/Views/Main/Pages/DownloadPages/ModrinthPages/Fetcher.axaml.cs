@@ -3,11 +3,11 @@ using YMCL.Public.Classes.Data;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Ui;
 
-namespace YMCL.Views.Main.Pages.DownloadPages.CurseForgePages;
+namespace YMCL.Views.Main.Pages.DownloadPages.ModrinthPages;
 
-public partial class CurseForgeFetcher : UserControl
+public partial class ModrinthFetcher : UserControl
 {
-    public CurseForgeFetcher()
+    public ModrinthFetcher()
     {
         InitializeComponent();
         DataContext = this;
@@ -34,12 +34,12 @@ public partial class CurseForgeFetcher : UserControl
 
     private void SearchAction()
     {
-        App.UiRoot.ViewModel.Download._curseForge.CreateNewPage(new SearchTabViewItemEntry()
+        App.UiRoot.ViewModel.Download._modrinth.CreateNewPage(new SearchTabViewItemEntry()
         {
-            CanClose = true, Host = nameof(DownloadPages.CurseForge),
+            CanClose = true,Host = nameof(Modrinth),
             Content = new SearchResult(string.IsNullOrWhiteSpace(SearchKey.Text) ? string.Empty : SearchKey.Text,
                 string.IsNullOrWhiteSpace(SearchMcVersion.Text) ? string.Empty : SearchMcVersion.Text,
-                SearchType.SelectedIndex, SearchLoaderType.SelectedIndex),
+                SearchType.SelectedIndex),
             Title = string.IsNullOrWhiteSpace(SearchKey.Text)
                 ? $"{MainLang.Search}({(SearchType.SelectedItem as ComboBoxItem).Content}): {MainLang.HotResource}"
                 : $"{MainLang.Search}({(SearchType.SelectedItem as ComboBoxItem).Content}): {SearchKey.Text}"

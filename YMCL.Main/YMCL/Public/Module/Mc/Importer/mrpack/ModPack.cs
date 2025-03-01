@@ -7,6 +7,7 @@ using Avalonia.Media;
 using FluentAvalonia.UI.Controls;
 using MinecraftLaunch.Base.Models.Network;
 using MinecraftLaunch.Components.Installer.Modpack;
+using YMCL.Public.Controls;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Mc.Installer.ModPack;
 
@@ -14,7 +15,7 @@ namespace YMCL.Public.Module.Mc.Importer.mrpack;
 
 public class ModPack
 {
-    public static async Task Import(string path)
+    public static async Task Import(string path, TaskEntry? p_task = null)
     {
         ModrinthModpackInstallEntry? entry = null;
         try
@@ -24,11 +25,13 @@ public class ModPack
         catch (Exception e)
         {
             Console.WriteLine(e);
+            p_task?.FinishWithError();
             Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}",NotificationType.Warning);
         }
 
         if (entry is null)
         {
+            p_task?.FinishWithError();
             Notice($"{MainLang.Unrecognized}: {Path.GetFileName(path)}",NotificationType.Warning);
             return;
         }
@@ -39,11 +42,12 @@ public class ModPack
         if (result)
         {
             YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavTask;
-            _ = Installer.ModPack.Modrinth.Install(path, entry, id ?? entry.Name);
+            _ = Installer.ModPack.Modrinth.Install(path, entry, id ?? entry.Name, p_task);
         }
-
-        
-
+        else
+        {
+            p_task?.Cancel();
+        }
 
         return;
 

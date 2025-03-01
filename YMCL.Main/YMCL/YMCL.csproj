@@ -159,6 +159,30 @@
       <DependentUpon>CurseForgeFetcher.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Main\Pages\DownloadPages\ModrinthPages\Fetcher.axaml.cs">
+      <DependentUpon>Fetcher.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Main\Pages\DownloadPages\ModrinthPages\Fetcher.axaml.cs">
+      <DependentUpon>Fetcher.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Main\Pages\DownloadPages\ModrinthPages\SearchResult.axaml.cs">
+      <DependentUpon>SearchResult.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Main\Pages\DownloadPages\ModrinthPages\SearchResult.axaml.cs">
+      <DependentUpon>SearchResult.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Main\Pages\DownloadPages\ModrinthPages\ModFileResult.axaml.cs">
+      <DependentUpon>ModFileResult.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Main\Pages\DownloadPages\ModrinthPages\ModFileResult.axaml.cs">
+      <DependentUpon>ModFileResult.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -171,5 +195,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\YMCL.Plugin\YMCL.Plugin.Base\YMCL.Plugin.Base.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Views\Main\Pages\DownloadPages\ModrinthPages\Fetcher.axaml" />
+    <AdditionalFiles Include="Views\Main\Pages\DownloadPages\ModrinthPages\ModFileResult.axaml" />
+    <AdditionalFiles Include="Views\Main\Pages\DownloadPages\ModrinthPages\SearchResult.axaml" />
   </ItemGroup>
 </Project>

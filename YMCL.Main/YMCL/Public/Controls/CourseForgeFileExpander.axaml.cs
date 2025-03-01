@@ -10,12 +10,12 @@ using ModLoaderType = CurseForge.APIClient.Models.Mods.ModLoaderType;
 
 namespace YMCL.Public.Controls;
 
-public partial class CourseForgeModFileExpander : UserControl
+public partial class CurseForgeFileExpander : UserControl
 {
     private bool _firstLoad = true;
     public ObservableCollection<File> Files { get; } = [];
 
-    public CourseForgeModFileExpander(string version, int id, string name, ModLoaderType? loader, ResourceType type)
+    public CurseForgeFileExpander(string version, int id, string name, ModLoaderType? loader, ResourceType type)
     {
         InitializeComponent();
         Expander.Header = name;
@@ -29,7 +29,7 @@ public partial class CourseForgeModFileExpander : UserControl
         ListView.SelectionChanged += async (_, _) =>
         {
             if (ListView.SelectedItem == null) return;
-            Public.Module.Op.DownloadResource.SaveCourseForge(type, ListView.SelectedItem as File);
+            Public.Module.Op.DownloadResource.SaveCurseForge(type, ListView.SelectedItem as File);
             await Task.Delay(300);
             ListView.SelectedItem = null;
         };

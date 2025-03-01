@@ -2,15 +2,17 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d"
-    x:Class="YMCL.Views.Main.Pages.DownloadPages.CurseForgePages.ModFileResult"
+    x:Class="YMCL.Views.Main.Pages.DownloadPages.ModrinthPages.ModFileResult"
     xmlns="https://github.com/avaloniaui"
     xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:controls="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+    xmlns:controls1="clr-namespace:YMCL.Public.Controls"
     xmlns:converter="clr-namespace:YMCL.Public.Module.Ui.Converter"
     xmlns:curseForgePages="clr-namespace:YMCL.Views.Main.Pages.DownloadPages.CurseForgePages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:modFileUiEntry="clr-namespace:YMCL.Public.Classes.Data.ResourceFetcher.CurseForgeModFileUiEntry"
+    xmlns:modrinthPages="clr-namespace:YMCL.Views.Main.Pages.DownloadPages.ModrinthPages"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
     xmlns:resourceFetcher="clr-namespace:YMCL.Public.Classes.Data.ResourceFetcher"
     xmlns:u="https://irihi.tech/ursa"
@@ -73,7 +75,7 @@
                 Margin="0,10,0,0"
                 Name="InfoBorder"
                 VerticalAlignment="Top"
-                x:DataType="curseForgePages:ModFileResult">
+                x:DataType="modrinthPages:ModFileResult">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                     <u:SelectionList
                         AutoScrollToSelectedItem="True"
@@ -112,20 +114,28 @@
                     </u:SelectionList>
                 </ScrollViewer>
             </Border>
-            <ScrollViewer Margin="0,10,0,0">
-                <ItemsControl Name="ItemsControl" x:DataType="curseForgePages:ModFileResult">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="modFileUiEntry:VersionEntry">
-                            <ContentControl Content="{Binding Expander}" Margin="0,0,0,10" />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
+            <Grid>
+                <ScrollViewer Margin="0,10,0,0">
+                    <ItemsControl Name="ItemsControl" x:DataType="modrinthPages:ModFileResult">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="modFileUiEntry:VersionEntry">
+                                <ContentControl Content="{Binding Expander}" Margin="0,0,0,10" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+                <controls:ProgressRing
+                    Height="50"
+                    IsVisible="True"
+                    Margin="0,50,0,50"
+                    Name="Ring"
+                    Width="50" />
+            </Grid>
         </DockPanel>
     </Border>
 </UserControl>

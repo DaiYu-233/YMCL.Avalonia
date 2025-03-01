@@ -73,7 +73,10 @@
                                 Text="CurseForge" />
                         </DockPanel>
                     </ui:NavigationViewItem>
-                    <ui:NavigationViewItem Margin="0,0,0,7" Tag="modrinch">
+                    <ui:NavigationViewItem
+                        Margin="0,0,0,7"
+                        Name="NavMr"
+                        Tag="modrinch">
                         <DockPanel>
                             <Image Margin="0,0,5,0" Width="16">
                                 <Image.Source>

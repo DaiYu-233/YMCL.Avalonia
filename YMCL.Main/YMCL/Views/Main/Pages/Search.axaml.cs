@@ -58,6 +58,7 @@ public partial class Search : UserControl
         Loaded += (_, _) =>
         {
             AggregateSearchBox.Focus();
+            AggregateSearchBox.Text = "";
         };
     }
 }

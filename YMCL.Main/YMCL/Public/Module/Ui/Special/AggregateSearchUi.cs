@@ -10,7 +10,7 @@ using YMCL.Public.Classes.Operate;
 using YMCL.Public.Classes.Setting;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
-using SearchResult = YMCL.Views.Main.Pages.DownloadPages.CurseForgePages.SearchResult;
+using SearchResult = YMCL.Views.Main.Pages.DownloadPages.ModrinthPages.SearchResult;
 
 namespace YMCL.Public.Module.Ui.Special;
 
@@ -85,6 +85,14 @@ public class AggregateSearchUi
                     Target = "curse-forge", Order = 10
                 }
             );
+            UiProperty.Instance.FilteredAggregateSearchEntries.Add(new AggregateSearchEntry
+                {
+                    Tag = "jump", Text = $"{MainLang.SearchInTip.Replace("{target}", "Modrinth")} : {filter.Trim()}",
+                    Type = MainLang.JumpSearch, Keyword = filter.Trim(),
+                    Summary = $"{MainLang.JumpToSearchTip.Replace("{target}", $"{MainLang.Download}-Modrinth")}",
+                    Target = "modrinth", Order = 10
+                }
+            );
             if (Data.DesktopType == DesktopRunnerType.Windows)
                 UiProperty.Instance.FilteredAggregateSearchEntries.Add(new AggregateSearchEntry
                 {
@@ -115,8 +123,24 @@ public class AggregateSearchUi
                 YMCL.App.UiRoot.ViewModel.Download.Nav.SelectedItem = YMCL.App.UiRoot.ViewModel.Download.NavCf;
                 App.UiRoot.ViewModel.Download._curseForge.CreateNewPage(new SearchTabViewItemEntry()
                 {
-                    CanClose = true,
-                    Content = new SearchResult(entry.Keyword, string.Empty, 0, 0),
+                    CanClose = true, Host = nameof(Views.Main.Pages.DownloadPages.CurseForge),
+                    Content = new Views.Main.Pages.DownloadPages.CurseForgePages.SearchResult(entry.Keyword,
+                        string.Empty, 0, 0),
+                    Title = $"{MainLang.Search}({MainLang.AllType}): {entry.Keyword}"
+                });
+            }
+
+            if (entry.Target == "modrinth")
+            {
+                if (string.IsNullOrWhiteSpace(key)) return;
+                if (string.IsNullOrWhiteSpace(entry.Keyword)) return;
+                YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavDownload;
+                YMCL.App.UiRoot.ViewModel.Download.Nav.SelectedItem = YMCL.App.UiRoot.ViewModel.Download.NavMr;
+                App.UiRoot.ViewModel.Download._modrinth.CreateNewPage(new SearchTabViewItemEntry()
+                {
+                    CanClose = true, Host = nameof(Views.Main.Pages.DownloadPages.Modrinth),
+                    Content = new Views.Main.Pages.DownloadPages.ModrinthPages.SearchResult(entry.Keyword, string.Empty,
+                        0),
                     Title = $"{MainLang.Search}({MainLang.AllType}): {entry.Keyword}"
                 });
             }

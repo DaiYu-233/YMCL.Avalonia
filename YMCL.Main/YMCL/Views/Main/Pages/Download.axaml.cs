@@ -9,6 +9,7 @@ public partial class Download : UserControl
 {
     public readonly DownloadPages.AutoInstall _autoInstall = new();
     public readonly DownloadPages.CurseForge _curseForge = new();
+    public readonly DownloadPages.Modrinth _modrinth = new();
     public Download()
     {
         InitializeComponent();FrameView.Content = _autoInstall;
@@ -24,6 +25,7 @@ public partial class Download : UserControl
             {
                 "autoInstall" => _autoInstall,
                 "curseForge" => _curseForge,
+                "modrinch" => _modrinth,
                 _ => FrameView.Content as UserControl
             };
             FrameView.Content = page;

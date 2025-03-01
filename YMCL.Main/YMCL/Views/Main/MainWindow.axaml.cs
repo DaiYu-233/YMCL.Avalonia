@@ -85,8 +85,7 @@ public partial class MainWindow : UrsaWindow
                     ShowInTaskBar = true,
                     IsCloseButtonVisible = true,
                     StartupLocation = WindowStartupLocation.CenterOwner,
-                    CanDragMove = true,
-                    CanResize = true,
+                    CanDragMove = true
                 };
                 Dialog.ShowCustom<Search, Data>(Data.Instance, options: options);
             }

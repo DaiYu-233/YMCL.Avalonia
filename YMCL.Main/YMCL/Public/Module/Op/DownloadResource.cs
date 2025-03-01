@@ -4,6 +4,7 @@ using System.Threading;
 using Avalonia.Controls.Notifications;
 using Avalonia.Platform.Storage;
 using FluentAvalonia.UI.Controls;
+using YMCL.Public.Classes.Data;
 using YMCL.Public.Classes.Operate;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
@@ -15,7 +16,7 @@ namespace YMCL.Public.Module.Op;
 
 public class DownloadResource
 {
-    public static void SaveCourseForge(ResourceType type, File? entry)
+    public static void SaveCurseForge(ResourceType type, File? entry)
     {
         if (entry is null) return;
         switch (type)
@@ -33,6 +34,24 @@ public class DownloadResource
         }
     }
 
+    public static void SaveModrinth(ResourceType type, ModrinthFile? entry)
+    {
+        if (entry is null) return;
+        switch (type)
+        {
+            case ResourceType.ModPack:
+                _ = ModPack(entry.Url, ".mrpack");
+                break;
+            case ResourceType.Mod:
+            case ResourceType.ShaderPack:
+            case ResourceType.ResourcePack:
+            case ResourceType.DataPack:
+            case ResourceType.Map:
+                _ = DownloadFile(entry.Url, entry.FileName, type);
+                break;
+        }
+    }
+
     public static async Task DownloadFile(string url, string fileName, ResourceType type)
     {
         string folderPath = null;
@@ -41,6 +60,7 @@ public class DownloadResource
             Notice($"{MainLang.DownloadUrlParserFail}", NotificationType.Error);
             return;
         }
+
         if (Data.Setting.SelectedMinecraftId != "bedrock")
         {
             folderPath = type switch
@@ -73,7 +93,7 @@ public class DownloadResource
         if (string.IsNullOrWhiteSpace(path)) return;
         var name = Path.GetFileName(path);
         var task = new TaskEntry($"{MainLang.Download} - {name}",
-            [new SubTask($"{MainLang.Download} - {name}")]);
+            [new SubTask($"{MainLang.Download} - {name}") { State = TaskState.Running }]);
         var cts = new CancellationTokenSource();
         var cancellationToken = cts.Token;
         task.UpdateAction(() =>
@@ -116,7 +136,7 @@ public class DownloadResource
             cts.Cancel();
             task.CancelWaitFinish();
         });
-        var subTask = new SubTask($"{MainLang.Download}: {url}");
+        var subTask = new SubTask($"{MainLang.Download}: {url}") { State = TaskState.Running };
         task.AddSubTask(subTask);
         var path = Path.Combine(ConfigPath.TempFolderPath, $"{DateTime.Now:yyyy-MM-dd-hh-mm-ss}{extension}");
         subTask.State = TaskState.Running;
@@ -134,6 +154,13 @@ public class DownloadResource
         }
 
         subTask.Finish();
-        _ = Mc.Importer.zip.ModPack.Import(path, task);
+        if (extension == ".zip")
+        {
+            _ = Mc.Importer.zip.ModPack.Import(path, task);
+        }
+        else if (extension == ".mrpack")
+        {
+            _ = Mc.Importer.mrpack.ModPack.Import(path, task);
+        }
     }
 }

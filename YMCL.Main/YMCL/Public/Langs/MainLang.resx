@@ -1317,4 +1317,7 @@ MacOs 不支持自动更新
   <data name="DownloadUrlParserFail" xml:space="preserve">
     <value>下载链接解析失败</value>
   </data>
+  <data name="Destroy" xml:space="preserve">
+    <value>销毁</value>
+  </data>
 </root>

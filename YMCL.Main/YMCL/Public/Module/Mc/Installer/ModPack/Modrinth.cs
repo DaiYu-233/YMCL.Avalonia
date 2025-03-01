@@ -21,10 +21,12 @@ namespace YMCL.Public.Module.Mc.Installer.ModPack;
 
 public class Modrinth
 {
-    public static async Task<bool> Install(string path, ModrinthModpackInstallEntry modpackEntry, string id)
+    public static async Task<bool> Install(string path, ModrinthModpackInstallEntry modpackEntry, string id,
+        TaskEntry? p_task = null)
     {
         bool isSuccess;
-        var task = new TaskEntry($"{MainLang.Install}: {id}", state: TaskState.Running);
+        var task = p_task ?? new TaskEntry($"{MainLang.Install}: {id}", state: TaskState.Running);
+        task.Rename($"{MainLang.Install}: {id}");
         var cts = new CancellationTokenSource();
         var cancellationToken = cts.Token;
         var mcPath = Data.Setting.MinecraftFolder.Path;

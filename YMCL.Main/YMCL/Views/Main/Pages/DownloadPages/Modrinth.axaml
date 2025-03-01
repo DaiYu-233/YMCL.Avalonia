@@ -1,0 +1,78 @@
+﻿<UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="YMCL.Views.Main.Pages.DownloadPages.Modrinth"
+    x:DataType="downloadPages:Modrinth"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:data="clr-namespace:YMCL.Public.Classes.Data"
+    xmlns:downloadPages="clr-namespace:YMCL.Views.Main.Pages.DownloadPages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:u="https://irihi.tech/ursa"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel>
+        <Border
+            Background="{DynamicResource 1x}"
+            ClipToBounds="True"
+            CornerRadius="{DynamicResource MainCornerRadius}"
+            DockPanel.Dock="Top"
+            Margin="10,0,10,0"
+            Opacity="{DynamicResource MainOpacity}"
+            VerticalAlignment="Top">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <u:SelectionList
+                    AutoScrollToSelectedItem="True"
+                    ItemsSource="{Binding Items}"
+                    Margin="5"
+                    Name="NavMenu"
+                    SelectedItem="{Binding SelectedItem}"
+                    VerticalAlignment="Top">
+                    <u:SelectionList.Styles>
+                        <Style Selector="u|SelectionListItem:not(:selected)">
+                            <Style Selector="^ TextBlock">
+                                <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
+                            </Style>
+                        </Style>
+                    </u:SelectionList.Styles>
+                    <u:SelectionList.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </u:SelectionList.ItemsPanel>
+                    <u:SelectionList.Indicator>
+                        <Border
+                            Background="{DynamicResource 2x}"
+                            CornerRadius="{DynamicResource MainCornerRadius}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch" />
+                    </u:SelectionList.Indicator>
+                    <u:SelectionList.ItemTemplate>
+                        <DataTemplate DataType="data:SearchTabViewItemEntry">
+                            <StackPanel Margin="3,0,1,0" Orientation="Horizontal">
+                                <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding Title}" />
+                                <Button
+                                    Classes="icon-button"
+                                    Command="{Binding Close}"
+                                    Content="{DynamicResource Close}"
+                                    HorizontalAlignment="Right"
+                                    IsVisible="{Binding CanClose}"
+                                    Margin="3,1,0,0"
+                                    MaxHeight="14"
+                                    MaxWidth="16"
+                                    MinHeight="14"
+                                    Name="CloseButton"
+                                    VerticalAlignment="Center" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </u:SelectionList.ItemTemplate>
+                </u:SelectionList>
+            </ScrollViewer>
+        </Border>
+        <ContentControl
+            Content="{Binding SelectedItem.Content}"
+            DockPanel.Dock="Bottom"
+            Margin="10"
+            Name="ContentControl" />
+    </DockPanel>
+</UserControl>

@@ -9,4 +9,5 @@ public enum ResourceType
     ResourcePack,
     ShaderPack,
     ModPack,
+    Plugin
 }

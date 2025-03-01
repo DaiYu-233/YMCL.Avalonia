@@ -934,6 +934,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 销毁.
+        /// </summary>
+        public static string Destroy {
+            get {
+                return ResourceManager.GetString("Destroy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 详细信息.
         /// </summary>
         public static string DetailedInfo {

@@ -4,7 +4,7 @@ using CurseForge.APIClient.Models.Files;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 
-namespace YMCL.Public.Classes.Data.ResourceFetcher.CourseForgeModFileUiEntry;
+namespace YMCL.Public.Classes.Data.ResourceFetcher.CurseForgeModFileUiEntry;
 
 public record ShortVersionEntry
 {
@@ -17,8 +17,8 @@ public record VersionEntry
 {
     public string Name => $"{Version} {Loader}";
     public string Version { get; set; }
-    public ModLoaderType? Loader { get; set; }
-    public CourseForgeModFileExpander Expander { get; set; }
+    public string Loader { get; set; }
+    public Control Expander { get; set; }
 }
 
 public record ModFile

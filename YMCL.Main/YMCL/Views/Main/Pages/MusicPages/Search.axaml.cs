@@ -45,7 +45,7 @@ public partial class Search : UserControl
             Data.RecordSongEntries.Add((item as RecordSongEntry)!);
             await System.Threading.Tasks.Task.Delay(200);
             SearchSongListView.SelectedItem = null;
-            Data.UiProperty.SelectedRecordSong = Data.RecordSongEntries.Last();
+            Data.UiProperty.SelectedRecordSong = Data.RecordSongEntries.LastOrDefault();
             _ = File.WriteAllTextAsync(ConfigPath.PlayerDataPath,
                 JsonConvert.SerializeObject(Data.RecordSongEntries, Formatting.Indented));
         };

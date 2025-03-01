@@ -22,8 +22,10 @@
         <DockPanel>
             <Border
                 Background="{DynamicResource 1x}"
+                CornerRadius="{DynamicResource MainCornerRadius}"
                 DockPanel.Dock="Bottom"
                 Height="60"
+                Margin="10,0,10,10"
                 Opacity="{DynamicResource MainOpacity}">
                 <Grid>
                     <ProgressBar

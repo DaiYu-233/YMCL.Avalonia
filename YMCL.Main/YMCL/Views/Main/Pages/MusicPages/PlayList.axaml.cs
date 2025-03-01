@@ -60,7 +60,7 @@ public partial class PlayList : UserControl
             Data.RecordSongEntries.RemoveAt(PlayListView.SelectedIndex);
             File.WriteAllText(ConfigPath.PlayerDataPath,
                 JsonConvert.SerializeObject(Data.RecordSongEntries, Formatting.Indented));
-            Data.UiProperty.SelectedRecordSong = Data.RecordSongEntries.Last();
+            Data.UiProperty.SelectedRecordSong = Data.RecordSongEntries.LastOrDefault();
         };
         AddLocalSong.Click += async (_, _) =>
         {
@@ -107,7 +107,7 @@ public partial class PlayList : UserControl
 
             await File.WriteAllTextAsync(ConfigPath.PlayerDataPath,
                 JsonConvert.SerializeObject(Data.RecordSongEntries, Formatting.Indented));
-            Data.UiProperty.SelectedRecordSong = Data.RecordSongEntries.Last();
+            Data.UiProperty.SelectedRecordSong = Data.RecordSongEntries.LastOrDefault();
         };
     }
 
@@ -123,7 +123,7 @@ public partial class PlayList : UserControl
     {
         if (Data.RecordSongEntries.Count <= 1) return;
         Data.UiProperty.SelectedRecordSong = PlayListView.SelectedIndex == 0
-            ? Data.RecordSongEntries.Last()
+            ? Data.RecordSongEntries.LastOrDefault()
             : Data.RecordSongEntries[PlayListView.SelectedIndex - 1];
     }
 }

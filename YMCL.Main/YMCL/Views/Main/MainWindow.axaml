@@ -49,31 +49,33 @@
                     </Viewbox>
                 </Border>
                 <DockPanel>
-                    <uc:TitleBar
+                    <Border
+                        ClipToBounds="True"
+                        CornerRadius="{DynamicResource MainCornerRadius}"
                         DockPanel.Dock="Top"
-                        IsCloseBtnExitApp="True"
-                        IsCloseBtnShow="True"
-                        IsMaxBtnShow="True"
-                        IsVisible="False"
-                        Name="TitleBar"
-                        Title="" />
-                    <main:MainView Name="View" />
-                </DockPanel>
-                <DockPanel Name="TitleRoot" Opacity="{DynamicResource MainOpacity}">
-                    <Image
-                        Height="20"
-                        Margin="10,6,2,0"
-                        Source="/Public/Assets/TitleBar-Icon.png"
-                        VerticalAlignment="Top"
-                        Width="20" />
-                    <TextBlock
-                        FontFamily="{DynamicResource Font}"
-                        FontSize="16"
-                        HorizontalAlignment="Left"
-                        Margin="0,5,0,0"
-                        Text=" Yu Minecraft Launcher"
-                        VerticalAlignment="Top"
-                        x:Name="TitleText" />
+                        Margin="10,10,10,0">
+                        <Grid>
+                            <uc:TitleBar
+                                DockPanel.Dock="Top"
+                                IsCloseBtnExitApp="True"
+                                IsCloseBtnShow="True"
+                                IsMaxBtnShow="True"
+                                IsVisible="False"
+                                Name="TitleBar"
+                                Title="" />
+                            <DockPanel Name="TitleRoot" Opacity="{DynamicResource MainOpacity}">
+                                <TextBlock
+                                    FontFamily="{DynamicResource Font}"
+                                    FontSize="16"
+                                    HorizontalAlignment="Left"
+                                    Margin="4,0,0,0"
+                                    Text=" Yu Minecraft Launcher"
+                                    VerticalAlignment="Center"
+                                    x:Name="TitleText" />
+                            </DockPanel>
+                        </Grid>
+                    </Border>
+                    <main:MainView Margin="0,0,0,0" Name="View" />
                 </DockPanel>
             </Grid>
         </Border>

@@ -5,6 +5,7 @@
             <SolidColorBrush Color="#941E1E1E" x:Key="2x" />
             <SolidColorBrush Color="#ffffff" x:Key="TextColor" />
             <SolidColorBrush Color="#242424" x:Key="TitleBarColor" />
+            <SolidColorBrush Color="#1e1e1e" x:Key="WindowBg" />
             <SolidColorBrush Color="#7e7e7e" x:Key="GrayColor" />
             <SolidColorBrush Color="#e1e9f0" x:Key="BorderBrushColor" />
             <SolidColorBrush Color="#383838" x:Key="ListBoxItemSelectedBackground" />
@@ -12,6 +13,7 @@
         <ResourceDictionary x:Key="Light">
             <SolidColorBrush Color="#FFE9F6FF" x:Key="1x" />
             <SolidColorBrush Color="#f6fafd" x:Key="2x" />
+            <SolidColorBrush Color="#f6fafd" x:Key="WindowBg" />
             <SolidColorBrush Color="#333333" x:Key="TextColor" />
             <SolidColorBrush Color="#e7f5ff" x:Key="TitleBarColor" />
             <SolidColorBrush Color="#7e7e7e" x:Key="GrayColor" />

@@ -97,17 +97,18 @@ public class Setter
                 : Data.Setting.TranslucentBackgroundOpacity;
         if (YMCL.App.UiRoot == null) return;
         var topLevel = TopLevel.GetTopLevel(YMCL.App.UiRoot);
-        Application.Current.TryGetResource("2x", Application.Current.ActualThemeVariant,
-            out var c2);
+        Application.Current.TryGetResource("WindowBg", Application.Current.ActualThemeVariant,
+            out var bg);
         Application.Current.TryGetResource("1x", Application.Current.ActualThemeVariant,
             out var c1);
-        YMCL.App.UiRoot.FrameView.Background = Data.Setting.CustomBackGround == Setting.CustomBackGroundWay.Default
-            ? (SolidColorBrush)c2
-            : null;
 
         var setting = Const.Data.Setting;
 
         if (topLevel is not MainWindow window) return;
+
+        window.BackGroundBorder.Background =
+            Data.Setting.CustomBackGround == Setting.CustomBackGroundWay.Default
+                ? (SolidColorBrush)bg : null;
 
         window.BackGroundImg.Source = null;
 

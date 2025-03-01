@@ -43,7 +43,10 @@
         x:Name="Root">
         <Border ClipToBounds="True" CornerRadius="8">
             <Grid>
-                <Border ClipToBounds="True" CornerRadius="8">
+                <Border
+                    ClipToBounds="True"
+                    CornerRadius="8"
+                    Name="BackGroundBorder">
                     <Viewbox Stretch="UniformToFill">
                         <Image Name="BackGroundImg" />
                     </Viewbox>

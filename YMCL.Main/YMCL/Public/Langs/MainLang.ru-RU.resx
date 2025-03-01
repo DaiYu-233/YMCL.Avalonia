@@ -1410,4 +1410,20 @@ MacO не поддерживают автоматические обновлен
     <value>Лучшие ресурсы</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="All" xml:space="preserve">
+    <value>полностью</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ServerPack" xml:space="preserve">
+    <value>Пакет сервера</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DownloadUrlParserFail" xml:space="preserve">
+    <value>Не удалось выполнить разбор ссылок для загрузки</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Destroy" xml:space="preserve">
+    <value>Уничтожить</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

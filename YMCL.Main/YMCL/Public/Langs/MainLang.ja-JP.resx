@@ -1410,4 +1410,20 @@ MacOsは自動更新をサポートしていません
     <value>トップ資源</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="All" xml:space="preserve">
+    <value>すべて</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ServerPack" xml:space="preserve">
+    <value>サーバーパッケージ</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DownloadUrlParserFail" xml:space="preserve">
+    <value>ダウンロードリンクの解析に失敗しました</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Destroy" xml:space="preserve">
+    <value>破壊しろ</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

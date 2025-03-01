@@ -1399,7 +1399,7 @@ Possibly this Java is incorrect/corrupted/has no execute permissions</value>
     <comment>#TODO#_</comment>
   </data>
   <data name="MinecraftVersion" xml:space="preserve">
-    <value>Minecraft)</value>
+    <value>Minecraft Version</value>
     <comment>#TODO#_</comment>
   </data>
   <data name="Home" xml:space="preserve">
@@ -1408,6 +1408,22 @@ Possibly this Java is incorrect/corrupted/has no execute permissions</value>
   </data>
   <data name="HotResource" xml:space="preserve">
     <value>Top Resources</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ServerPack" xml:space="preserve">
+    <value>Server Package</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DownloadUrlParserFail" xml:space="preserve">
+    <value>Download link parsing failed</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Destroy" xml:space="preserve">
+    <value>Destroy</value>
     <comment>#TODO#_</comment>
   </data>
 </root>

@@ -1310,14 +1310,18 @@ MacOs 不支持自动更新
   </data>
   <data name="All" xml:space="preserve">
     <value>全部</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ServerPack" xml:space="preserve">
     <value>服务器包</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="DownloadUrlParserFail" xml:space="preserve">
     <value>下载链接解析失败</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Destroy" xml:space="preserve">
     <value>销毁</value>
+    <comment>#TODO#_</comment>
   </data>
 </root>

@@ -1066,7 +1066,7 @@ win10 以下系統(不包括10)不支援自動更新
     <value>下載連結</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
-    <value></value>
+    <value>顯示名稱</value>
     <comment>#TODO#_</comment>
   </data>
   <data name="Task" xml:space="preserve">
@@ -1403,6 +1403,22 @@ win10 以下系統(不包括10)不支援自動更新
   </data>
   <data name="HotResource" xml:space="preserve">
     <value>熱門資源</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>全部</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ServerPack" xml:space="preserve">
+    <value>伺服器包</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DownloadUrlParserFail" xml:space="preserve">
+    <value>下載連結解析失敗</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Destroy" xml:space="preserve">
+    <value>銷毀</value>
     <comment>#TODO#_</comment>
   </data>
 </root>

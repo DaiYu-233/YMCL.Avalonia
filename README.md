@@ -6,8 +6,6 @@
 
 # ⛏️ Yu Minecraft Launcher 🐳
 
-简体中文 | [English](https://github.com/DaiYu-233/YMCL.Avalonia/blob/main/README_en.md)
-
 免费、跨平台、完全开源的 Minecraft 启动器
 
 ![Downloads](https://img.shields.io/github/downloads/DaiYu-233/YMCL.Avalonia/total?logo=github&label=%E4%B8%8B%E8%BD%BD%E9%87%8F&style=for-the-badge&color=44cc11)
@@ -20,7 +18,7 @@
 
 Yu Minecraft Launcher 是一个跨平台 Minecraft 启动器，支持 Windows，MacOS，Linux 等操作系统，兼容 x64、Arm 架构。
 
-Ymcl 支持 Mod 管理, 游戏自定义, 游戏自动安装 (Forge,Fabric, Quilt, OptiFine), 界面自定义等功能。<del>甚至可以激活 Windows !</del>
+Ymcl 支持 Mod 管理, 游戏自定义, 游戏自动安装 (Forge, NeoForge, Fabric, Quilt, OptiFine), 界面自定义等功能。
 
 Ymcl 使用 **GPL - 3** 开放源代码，此协议要求在修改和分发软件时保留原始的版权声明、许可证声明和免责声明；允许用户自由地使用、修改、复制和分发 GPL - 3 许可的软件，无论是用于商业用途还是非商业用途；但对于修改后的软件，整个软件（包括修改部分和未修改部分）都必须依然采用 GPL - 3 许可证进行发布；GPL - 3 许可证没有提供任何形式的保证，用户对使用软件所造成的任何损害负有全部责任。
 

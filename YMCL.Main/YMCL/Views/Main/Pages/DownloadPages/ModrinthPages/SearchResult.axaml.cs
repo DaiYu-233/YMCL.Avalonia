@@ -53,7 +53,7 @@ public partial class SearchResult : UserControl
     {
         Ring.IsVisible = true;
         LoadMoreBtn.IsVisible = false;
-        var data = await Public.Module.IO.Network.Modrinch.Search(_keyword, _page, _mcVersion,_type);
+        var data = await Public.Module.IO.Network.Modrinth.Search(_keyword, _page, _mcVersion,_type);
         Ring.IsVisible = false;
         if (!data.success)
         {

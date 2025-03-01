@@ -64,7 +64,7 @@ public partial class ModFileResult : UserControl, INotifyPropertyChanged
 
     private async System.Threading.Tasks.Task GetFiles()
     {
-        var versions = await Modrinch.GetVersionsById(_entry.ProjectId);
+        var versions = await Public.Module.IO.Network.Modrinth.GetVersionsById(_entry.ProjectId);
         Ring.IsVisible = false;
         versions.data.ForEach(y =>
         {

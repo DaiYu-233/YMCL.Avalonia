@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace YMCL.Public.Classes.Json;
 
-public class ModrinchVersionEntry
+public class ModrinthVersionEntry
 {
     public class Root
     {

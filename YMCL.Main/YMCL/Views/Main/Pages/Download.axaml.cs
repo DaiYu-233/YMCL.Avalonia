@@ -25,7 +25,7 @@ public partial class Download : UserControl
             {
                 "autoInstall" => _autoInstall,
                 "curseForge" => _curseForge,
-                "modrinch" => _modrinth,
+                "modrinth" => _modrinth,
                 _ => FrameView.Content as UserControl
             };
             FrameView.Content = page;

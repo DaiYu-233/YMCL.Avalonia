@@ -76,7 +76,7 @@
                     <ui:NavigationViewItem
                         Margin="0,0,0,7"
                         Name="NavMr"
-                        Tag="modrinch">
+                        Tag="modrinth">
                         <DockPanel>
                             <Image Margin="0,0,5,0" Width="16">
                                 <Image.Source>
@@ -106,7 +106,7 @@
                             <TextBlock
                                 FontFamily="{DynamicResource Font}"
                                 FontSize="14"
-                                Text="Modrinch" />
+                                Text="Modrinth" />
                         </DockPanel>
                     </ui:NavigationViewItem>
                 </ui:NavigationView.MenuItems>

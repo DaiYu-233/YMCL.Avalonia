@@ -13,7 +13,7 @@ using Index = Modrinth.Models.Enums.Index;
 
 namespace YMCL.Public.Module.IO.Network;
 
-public class Modrinch
+public class Modrinth
 {
     private static readonly ModrinthClient apiClient = new();
 
@@ -68,13 +68,13 @@ public class Modrinch
         }
     }
 
-    public static async Task<(List<ModrinchVersionEntry.Root>? data, bool success)> GetVersionsById(string id)
+    public static async Task<(List<ModrinthVersionEntry.Root>? data, bool success)> GetVersionsById(string id)
     {
         try
         {
             using var client = new HttpClient();
             var json = await client.GetStringAsync($"https://api.modrinth.com/v2/project/{id}/version");
-            var obj = JsonConvert.DeserializeObject<List<ModrinchVersionEntry.Root>>(json);
+            var obj = JsonConvert.DeserializeObject<List<ModrinthVersionEntry.Root>>(json);
             return (obj, true);
         }
         catch (Exception e)

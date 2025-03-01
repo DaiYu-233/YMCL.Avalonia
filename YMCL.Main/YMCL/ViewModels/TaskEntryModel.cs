@@ -19,6 +19,7 @@ public class TaskEntryModel : ReactiveObject
     [Reactive] public double Time { get; set; }
     [Reactive] public TaskState State { get; set; }
     [Reactive] public bool NumberValue { get; set; }
+    [Reactive] public bool IsDestroyButtonVisible { get; set; }
     [Reactive] public bool CanRemove { get; set; }
     [Reactive] public bool ButtonIsEnable { get; set; } = true;
     [Reactive] public double Value { get; set; }
@@ -79,6 +80,7 @@ public class TaskEntryModel : ReactiveObject
                 _timer.Stop();
                 break;
         }
+        IsDestroyButtonVisible = State is TaskState.Canceling or TaskState.Paused or TaskState.Canceled or TaskState.Error;
     }
 
     private void OnTimerElapsed(object sender, ElapsedEventArgs e)
@@ -150,5 +152,9 @@ public class TaskEntryModel : ReactiveObject
     public void ButtonActionCommand()
     {
         ButtonAction?.Invoke();
+    }
+    public void DestroyCommand()
+    {
+        Instance.Destroy();
     }
 }

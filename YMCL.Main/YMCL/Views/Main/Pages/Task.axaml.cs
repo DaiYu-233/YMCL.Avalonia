@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System.Linq;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using YMCL.Public.Classes;
@@ -16,6 +17,6 @@ public partial class Task : UserControl
 
     public void UpdateTasksTip()
     {
-        NoTasksTip.IsVisible = Data.TaskEntries.Count == 0;
+        NoTasksTip.IsVisible = !Data.TaskEntries.Any(x => x.IsVisible);
     }
 }

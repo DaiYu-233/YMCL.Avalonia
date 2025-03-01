@@ -48,6 +48,12 @@
                             Content="{Binding ButtonDisplay}"
                             DockPanel.Dock="Right"
                             IsEnabled="{Binding ButtonIsEnable}" />
+                        <Button
+                            Command="{Binding DestroyCommand}"
+                            Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Destroy}"
+                            DockPanel.Dock="Right"
+                            IsVisible="{Binding IsDestroyButtonVisible}"
+                            Margin="0,0,10,0" />
                         <StackPanel Margin="10,0">
                             <DockPanel>
                                 <TextBlock

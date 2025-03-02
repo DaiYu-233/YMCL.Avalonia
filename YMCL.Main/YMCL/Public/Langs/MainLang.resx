@@ -1336,4 +1336,7 @@ MacOs 不支持自动更新
     <value>收藏夹</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="DependencyItems" xml:space="preserve">
+    <value>依赖项</value>
+  </data>
 </root>

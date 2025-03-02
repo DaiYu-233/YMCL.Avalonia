@@ -33,7 +33,7 @@ public class CurseForgeResourceEntry : IResourceEntry
     public string Slug { get; set; }
     public ModLinks Links { get; set; }
     public string Summary { get; set; }
-    string IResourceEntry.Pic => Logo.Url;
+    string IResourceEntry.Pic => Logo?.Url;
     public ModStatus Status { get; set; }
     public double DownloadCount { get; set; }
     public bool IsFeatured { get; set; }

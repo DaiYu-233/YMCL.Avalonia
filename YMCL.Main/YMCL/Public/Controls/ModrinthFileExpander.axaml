@@ -5,6 +5,7 @@
     x:Class="YMCL.Public.Controls.ModrinthFileExpander"
     x:DataType="controls1:ModrinthFileExpander"
     xmlns="https://github.com/avaloniaui"
+    xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:controls="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
     xmlns:controls1="clr-namespace:YMCL.Public.Controls"
     xmlns:converter="clr-namespace:YMCL.Public.Module.Ui.Converter"
@@ -12,6 +13,7 @@
     xmlns:data="clr-namespace:YMCL.Public.Classes.Data"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
+    xmlns:resourceFetcher="clr-namespace:YMCL.Public.Classes.Data.ResourceFetcher"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
         <converter:BoolToStringConverter x:Key="BoolToStringConverter" />
@@ -24,8 +26,70 @@
         VerticalAlignment="Top">
         <Expander Name="Expander">
             <Grid>
-                <StackPanel>
-                    <StackPanel Name="Dependencies" />
+                <StackPanel Spacing="10">
+                    <Border
+                        Background="{DynamicResource 2x}"
+                        CornerRadius="{DynamicResource MainCornerRadius}"
+                        IsVisible="False"
+                        Name="Dependencies">
+                        <DockPanel>
+                            <TextBlock
+                                DockPanel.Dock="Top"
+                                HorizontalAlignment="Left"
+                                Margin="10"
+                                Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.DependencyItems}"
+                                VerticalAlignment="Top" />
+                            <Grid>
+                                <controls:ProgressRing
+                                    Height="50"
+                                    IsVisible="True"
+                                    Margin="0,50,0,50"
+                                    Name="DependenciesRing"
+                                    Width="50" />
+                                <ListBox
+                                    IsVisible="False"
+                                    ItemsSource="{Binding DependencyItems}"
+                                    Margin="10,0,10,10"
+                                    Name="ListBox">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate DataType="resourceFetcher:IResourceEntry">
+                                            <DockPanel Margin="0,5,0,5">
+                                                <Border
+                                                    ClipToBounds="True"
+                                                    CornerRadius="{DynamicResource MainCornerRadius}"
+                                                    Height="42"
+                                                    Margin="0,0,10,0"
+                                                    Width="42">
+                                                    <asyncImageLoader:AdvancedImage Source="{Binding Pic}" />
+                                                </Border>
+                                                <DockPanel LastChildFill="False" VerticalAlignment="Center">
+                                                    <SelectableTextBlock DockPanel.Dock="Top" Text="{Binding Name}" />
+                                                    <TextBlock
+                                                        DockPanel.Dock="Top"
+                                                        FontSize="12"
+                                                        Foreground="{DynamicResource GrayColor}"
+                                                        Text="{Binding Summary}"
+                                                        TextWrapping="Wrap" />
+                                                    <TextBlock
+                                                        DockPanel.Dock="Top"
+                                                        FontSize="12"
+                                                        Foreground="{DynamicResource GrayColor}">
+                                                        <Run Text="{Binding DisplayType, Mode=OneWay}" />
+                                                        <Run Text="," />
+                                                        <Run Text="{Binding DownloadCount, Mode=OneWay, Converter={StaticResource CountToUnitConverter}}" />
+                                                        <Run Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Download}" />
+                                                        <Run Text="," />
+                                                        <Run Text="{Binding LastUpdateTime, Mode=OneWay}" />
+                                                        <Run Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Update}" />
+                                                    </TextBlock>
+                                                </DockPanel>
+                                            </DockPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
+                        </DockPanel>
+                    </Border>
                     <ListBox ItemsSource="{Binding Files}" Name="ListView">
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="data:ModrinthFile">

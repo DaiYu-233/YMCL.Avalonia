@@ -192,8 +192,9 @@ public partial class ModFileResult : UserControl, INotifyPropertyChanged
                      {
                          Version = version,
                          Loader = loader,
-                         Expander = new ModrinthFileExpander($"{version} {loader}",
-                             _projectToResourceMapping.GetValueOrDefault(_entry.ProjectType, ResourceType.Unknown))
+                         Expander = new ModrinthFileExpander($"{version} {loader}", version,
+                             _projectToResourceMapping.GetValueOrDefault(_entry.ProjectType, ResourceType.Unknown),
+                             _entry)
                      }
                      where !Versions[0].VersionEntries.Any(z =>
                          z.Version == version && z.Loader == loader)
@@ -251,8 +252,9 @@ public partial class ModFileResult : UserControl, INotifyPropertyChanged
                         {
                             Version = version,
                             Loader = loader,
-                            Expander = new ModrinthFileExpander($"{version} {disLoader}",
-                                _projectToResourceMapping.GetValueOrDefault(_entry.ProjectType, ResourceType.Unknown))
+                            Expander = new ModrinthFileExpander($"{version} {disLoader}", version,
+                                _projectToResourceMapping.GetValueOrDefault(_entry.ProjectType, ResourceType.Unknown),
+                                _entry)
                         };
                         if (!x.VersionEntries.Any(z =>
                                 z.Version == version && z.Loader == loader))

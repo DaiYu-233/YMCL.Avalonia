@@ -1421,4 +1421,16 @@ win10 以下系統(不包括10)不支援自動更新
     <value>銷毀</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="Favourite" xml:space="preserve">
+    <value>收藏</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Favourted" xml:space="preserve">
+    <value>已收藏</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Favourites" xml:space="preserve">
+    <value>收藏夾</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

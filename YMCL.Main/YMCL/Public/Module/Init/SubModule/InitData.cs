@@ -31,6 +31,9 @@ public class InitData
             Data.JavaRuntimes =
                 JsonConvert.DeserializeObject<ObservableCollection<JavaEntry>>(
                     await File.ReadAllTextAsync(ConfigPath.JavaDataPath));
+            Data.FavouriteResources =
+                JsonConvert.DeserializeObject<ObservableCollection<FavouriteResource>>(
+                    await File.ReadAllTextAsync(ConfigPath.FavouriteResourceDataPath));
             Data.Accounts =
                 JsonConvert.DeserializeObject<ObservableCollection<AccountInfo>>(
                     await File.ReadAllTextAsync(ConfigPath.AccountDataPath));

@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using Avalonia.Controls.Notifications;
 using MinecraftLaunch.Components.Parser;
+using Newtonsoft.Json;
 using ReactiveUI;
 using Ursa.Controls;
 using YMCL.Public.Classes;
@@ -30,6 +32,7 @@ public sealed class Data : ReactiveObject
     public static ObservableCollection<string> EnablePlugins { get; set; } = [];
     public static ObservableCollection<PluginInfoEntry> IdentifiedPlugins { get; set; } = [];
     public static ObservableCollection<AccountInfo> Accounts { get; set; }
+    public static ObservableCollection<FavouriteResource> FavouriteResources { get; set; } = [];
     public static ObservableCollection<MinecraftDataEntry> CurrentFolderGames { get; set; } = [];
     public static ObservableCollection<TaskEntry> TaskEntries { get; set; } = [];
     public static List<AggregateSearchEntry> AllAggregateSearchEntries { get; set; } = [];
@@ -56,6 +59,11 @@ public sealed class Data : ReactiveObject
                     ? "bedrock"
                     : UiProperty.SelectedMinecraft.Id;
             }
+        };
+        FavouriteResources.CollectionChanged += (_, _) =>
+        {
+            File.WriteAllText(ConfigPath.FavouriteResourceDataPath,
+                JsonConvert.SerializeObject(FavouriteResources, Formatting.Indented));
         };
         Setting.PropertyChanged += (_, e) =>
         {

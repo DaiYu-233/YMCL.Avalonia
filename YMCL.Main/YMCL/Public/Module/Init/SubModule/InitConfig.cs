@@ -30,6 +30,9 @@ public static class InitConfig
         if (!File.Exists(ConfigPath.SettingDataPath))
             File.WriteAllText(ConfigPath.SettingDataPath,
                 JsonConvert.SerializeObject(new Setting(), Formatting.Indented));
+        if (!File.Exists(ConfigPath.FavouriteResourceDataPath))
+            File.WriteAllText(ConfigPath.FavouriteResourceDataPath,
+                JsonConvert.SerializeObject(new List<FavouriteResource>(), Formatting.Indented));
         if (!File.Exists(ConfigPath.MinecraftFolderDataPath))
         {
             var path = Path.Combine(ConfigPath.UserDataRootPath, ".minecraft");

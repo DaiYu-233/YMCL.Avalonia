@@ -1426,4 +1426,16 @@ Possibly this Java is incorrect/corrupted/has no execute permissions</value>
     <value>Destroy</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="Favourite" xml:space="preserve">
+    <value>Favourite</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Favourted" xml:space="preserve">
+    <value>Favourited</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Favourites" xml:space="preserve">
+    <value>Favorites</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

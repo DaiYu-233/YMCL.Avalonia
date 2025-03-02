@@ -1324,4 +1324,16 @@ MacOs 不支持自动更新
     <value>销毁</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="Favourite" xml:space="preserve">
+    <value>收藏</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Favourted" xml:space="preserve">
+    <value>已收藏</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Favourites" xml:space="preserve">
+    <value>收藏夹</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

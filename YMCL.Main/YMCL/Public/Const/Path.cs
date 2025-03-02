@@ -13,6 +13,7 @@ public class ConfigPath
     public static string CustomHomePageXamlDataPath { get; protected set; }
     public static string AccountDataPath { get; protected set; }
     public static string PluginDataPath { get; protected set; }
+    public static string FavouriteResourceDataPath { get; protected set; }
     public static string PluginFolderPath { get; protected set; }
     public static string TempFolderPath { get; protected set; }
     public static string UpdateFolderPath { get; protected set; }
@@ -32,5 +33,6 @@ public class ConfigPath
         PluginFolderPath = Path.Combine(UserDataRootPath, "Plugin");
         TempFolderPath = Path.Combine(UserDataRootPath, "Temp");
         UpdateFolderPath = Path.Combine(UserDataRootPath, "Update");
+        FavouriteResourceDataPath = Path.Combine(UserDataRootPath, "YMCL.FavouriteResource.DaiYu");
     }
 }

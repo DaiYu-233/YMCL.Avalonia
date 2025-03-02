@@ -1426,4 +1426,16 @@ MacOsは自動更新をサポートしていません
     <value>破壊しろ</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="Favourite" xml:space="preserve">
+    <value>コレクション</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Favourted" xml:space="preserve">
+    <value>お気に入り</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Favourites" xml:space="preserve">
+    <value>お気に入り</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

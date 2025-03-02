@@ -1426,4 +1426,16 @@ MacO не поддерживают автоматические обновлен
     <value>Уничтожить</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="Favourite" xml:space="preserve">
+    <value>Коллекционирование</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Favourted" xml:space="preserve">
+    <value>Сохранено</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Favourites" xml:space="preserve">
+    <value>Закладка</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

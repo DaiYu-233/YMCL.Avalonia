@@ -1,0 +1,58 @@
+﻿<UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="YMCL.Views.Main.Pages.DownloadPages.Favourites"
+    x:DataType="da:Data"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:da="clr-namespace:YMCL.Public.Const"
+    xmlns:data="clr-namespace:YMCL.Public.Classes.Data"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:YMCL.Public.Langs"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border
+        Background="{DynamicResource 1x}"
+        ClipToBounds="True"
+        CornerRadius="{DynamicResource MainCornerRadius}"
+        Margin="10,0,10,10"
+        Opacity="{DynamicResource MainOpacity}">
+        <ListBox
+            ItemsSource="{Binding FavouriteResources}"
+            Margin="10"
+            x:Name="ListView">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="data:FavouriteResource">
+                    <DockPanel Margin="0,5,0,5">
+                        <Border
+                            ClipToBounds="True"
+                            CornerRadius="{DynamicResource MainCornerRadius}"
+                            Height="42"
+                            Margin="0,0,10,0"
+                            Width="42">
+                            <asyncImageLoader:AdvancedImage Source="{Binding Icon}" />
+                        </Border>
+                        <DockPanel LastChildFill="False" VerticalAlignment="Center">
+                            <SelectableTextBlock DockPanel.Dock="Top" Text="{Binding Title}" />
+                            <TextBlock
+                                DockPanel.Dock="Top"
+                                FontSize="12"
+                                Foreground="{DynamicResource GrayColor}"
+                                Text="{Binding Summary}"
+                                TextWrapping="Wrap" />
+                            <TextBlock
+                                DockPanel.Dock="Top"
+                                FontSize="12"
+                                Foreground="{DynamicResource GrayColor}">
+                                <Run Text="{Binding DisplayType, Mode=OneWay}" />
+                                <Run Text="," />
+                                <Run Text="{Binding Source, Mode=OneWay}" />
+                            </TextBlock>
+                        </DockPanel>
+                    </DockPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Border>
+</UserControl>

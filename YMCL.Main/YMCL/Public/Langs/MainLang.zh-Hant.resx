@@ -1345,7 +1345,7 @@ win10 以下系統(不包括10)不支援自動更新
     <value>範例通知</value>
     <comment>#TODO#_</comment>
   </data>
-  <data name="CurrentListIsmpty" xml:space="preserve">
+  <data name="CurrentListIsEmpty" xml:space="preserve">
     <value>目前列表為空</value>
     <comment>#TODO#_</comment>
   </data>

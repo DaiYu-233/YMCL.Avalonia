@@ -1350,7 +1350,7 @@ MacO не поддерживают автоматические обновлен
     <value>Примеры уведомлений</value>
     <comment>#TODO#_</comment>
   </data>
-  <data name="CurrentListIsmpty" xml:space="preserve">
+  <data name="CurrentListIsEmpty" xml:space="preserve">
     <value>Текущий список пуст</value>
     <comment>#TODO#_</comment>
   </data>

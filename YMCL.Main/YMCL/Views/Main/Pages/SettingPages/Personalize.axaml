@@ -199,7 +199,7 @@
                             Name="MultiComboBox"
                             SelectedItems="{Binding SelectedItems}"
                             VerticalAlignment="Center"
-                            Watermark="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.CurrentListIsmpty}"
+                            Watermark="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.CurrentListIsEmpty}"
                             x:DataType="settingPages:Personalize" />
                     </DockPanel>
                 </StackPanel>
@@ -383,12 +383,27 @@
                         IsVisible="{Binding Setting.CustomHomePage, Converter={StaticResource EnumIndexToBoolConverter}, ConverterParameter=1}"
                         Margin="5,0,0,0"
                         Name="EditCustomHomePageBtn" />
+                    <Button
+                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Refresh}"
+                        DockPanel.Dock="Right"
+                        Margin="5,0,0,0"
+                        Name="RefreshCustomHomePageBtn">
+                        <Button.IsVisible>
+                            <MultiBinding Converter="{StaticResource BoolReversalConverter}">
+                                <Binding
+                                    Converter="{StaticResource EnumIndexToBoolConverter}"
+                                    ConverterParameter="0"
+                                    Path="Setting.CustomBackGround" />
+                            </MultiBinding>
+                        </Button.IsVisible>
+                    </Button>
                     <TextBox
                         DockPanel.Dock="Right"
                         FontFamily="{DynamicResource Font}"
                         FontSize="14"
                         IsVisible="{Binding Setting.CustomHomePage, Converter={StaticResource EnumIndexToBoolConverter}, ConverterParameter=2}"
                         Margin="5,0,0,0"
+                        MinWidth="200"
                         Text="{Binding Setting.CustomHomePageUrl}"
                         VerticalAlignment="Center"
                         Watermark="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.DownloadUrl}" />

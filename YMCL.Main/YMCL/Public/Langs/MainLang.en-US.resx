@@ -1350,7 +1350,7 @@ Possibly this Java is incorrect/corrupted/has no execute permissions</value>
     <value>Example Notice</value>
     <comment>#TODO#_</comment>
   </data>
-  <data name="CurrentListIsmpty" xml:space="preserve">
+  <data name="CurrentListIsEmpty" xml:space="preserve">
     <value>Current list is empty</value>
     <comment>#TODO#_</comment>
   </data>

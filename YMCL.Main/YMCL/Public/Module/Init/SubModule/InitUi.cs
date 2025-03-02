@@ -45,18 +45,19 @@ public class InitUi
             if (YMCL.App.UiRoot != null)
             {
                 (Ui.Getter.FindControlByName(YMCL.App.UiRoot, "PART_PaneRoot") as Panel).Transitions =
-                    [
-                        new BrushTransition()
-                        {
-                            Duration = TimeSpan.FromSeconds(0.3),
-                            Property = Panel.BackgroundProperty
-                        }
-                    ];
-                    (Ui.Getter.FindControlByName(YMCL.App.UiRoot, "PART_PaneRoot") as Panel).Background =
+                [
+                    new BrushTransition()
+                    {
+                        Duration = TimeSpan.FromSeconds(0.3),
+                        Property = Panel.BackgroundProperty
+                    }
+                ];
+                (Ui.Getter.FindControlByName(YMCL.App.UiRoot, "PART_PaneRoot") as Panel).Background =
                     Application.Current.ActualThemeVariant == ThemeVariant.Dark
                         ? SolidColorBrush.Parse("#2c2c2c")
                         : SolidColorBrush.Parse("#FFE9F6FF");
             }
+
             var visuals = new Queue<Visual>();
             if (YMCL.App.UiRoot != null) visuals.Enqueue(YMCL.App.UiRoot);
 
@@ -135,12 +136,13 @@ public class InitUi
             }
             catch (Exception ex)
             {
-                ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
+                //ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
             }
         }
 
         if (Data.Setting.CustomHomePage == Setting.CustomHomePageWay.Network)
         {
+            if (!Uri.TryCreate(Data.Setting.CustomUpdateUrl, UriKind.Absolute, out _)) return;
             try
             {
                 using var client = new HttpClient();
@@ -151,7 +153,7 @@ public class InitUi
             }
             catch (Exception ex)
             {
-                ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
+                //ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
             }
         }
     }

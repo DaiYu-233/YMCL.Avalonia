@@ -11,6 +11,7 @@ using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using YMCL.Public.Langs;
 using YMCL.Public.Module;
+using YMCL.Public.Module.Init.SubModule;
 
 namespace YMCL.Views.Main.Pages.SettingPages;
 
@@ -69,6 +70,10 @@ public partial class Personalize : UserControl
             Data.Setting.SpecialControlEnableTranslucent =
                 SelectedItems.Count == 0 ? "" : string.Join(",", SelectedItems.Distinct());
             debouncer.Trigger();
+        };
+        RefreshCustomHomePageBtn.Click += (_, _) =>
+        {
+            _ = InitUi.SetCustomHomePage();
         };
     }
 }

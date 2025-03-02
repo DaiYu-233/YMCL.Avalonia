@@ -1350,7 +1350,7 @@ MacOsは自動更新をサポートしていません
     <value>通知のサンプル</value>
     <comment>#TODO#_</comment>
   </data>
-  <data name="CurrentListIsmpty" xml:space="preserve">
+  <data name="CurrentListIsEmpty" xml:space="preserve">
     <value>現在のリストは空です</value>
     <comment>#TODO#_</comment>
   </data>

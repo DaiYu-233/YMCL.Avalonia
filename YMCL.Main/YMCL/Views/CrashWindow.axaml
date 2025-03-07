@@ -17,7 +17,6 @@
     mc:Ignorable="d"
     x:Class="YMCL.Views.CrashWindow"
     xmlns="https://github.com/avaloniaui"
-    xmlns:crash="clr-namespace:YMCL.Views.Crash"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"

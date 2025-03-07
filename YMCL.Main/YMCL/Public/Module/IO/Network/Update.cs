@@ -61,7 +61,7 @@ public class Update
             var architecture = IO.Disk.Getter.GetCurrentPlatformAndArchitecture();
             if (string.IsNullOrWhiteSpace(architecture))
                 return false;
-            if (false)
+            if (architecture is "win-x64" or "win-arm64" or "win-x86" && Environment.OSVersion.Version.Major >= 10)
             {
                 return await UpdateByAutoInstaller(architecture);
             }
@@ -176,7 +176,7 @@ public class Update
                 task.FinishWithError();
                 return false;
             }
-            
+
             var setting = Const.Data.Setting;
             var trueUrl = url;
             if (setting.EnableCustomUpdateUrl)

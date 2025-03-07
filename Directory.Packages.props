@@ -8,23 +8,23 @@
     <!-- Important: keep version in sync! -->
     <PackageVersion Include="Afdian.Sdk" Version="0.3.1" />
     <PackageVersion Include="AsyncImageLoader.Avalonia" Version="3.3.0" />
-    <PackageVersion Include="Avalonia" Version="11.2.4" />
-    <PackageVersion Include="Avalonia.Markup.Xaml.Loader" Version="11.2.4" />
-    <PackageVersion Include="Avalonia.Themes.Fluent" Version="11.2.4" />
-    <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.2.4" />
-    <PackageVersion Include="Avalonia.Diagnostics" Version="11.2.4" />
-    <PackageVersion Include="Avalonia.Desktop" Version="11.2.4" />
+    <PackageVersion Include="Avalonia" Version="11.2.5" />
+    <PackageVersion Include="Avalonia.Markup.Xaml.Loader" Version="11.2.5" />
+    <PackageVersion Include="Avalonia.Themes.Fluent" Version="11.2.5" />
+    <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.2.5" />
+    <PackageVersion Include="Avalonia.Diagnostics" Version="11.2.5" />
+    <PackageVersion Include="Avalonia.Desktop" Version="11.2.5" />
     <PackageVersion Include="Avalonia.iOS" Version="11.2.3" />
     <PackageVersion Include="Avalonia.Browser" Version="11.2.3" />
     <PackageVersion Include="Avalonia.Android" Version="11.2.3" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageVersion Include="CurseForge.APIClient" Version="3.0.0" />
+    <PackageVersion Include="CurseForge.APIClient" Version="4.0.0" />
     <PackageVersion Include="Dotnet.Bundle" Version="0.9.13" />
     <PackageVersion Include="F23.StringSimilarity" Version="6.0.0" />
     <PackageVersion Include="FluentAvaloniaUI" Version="2.2.0" />
-    <PackageVersion Include="HtmlAgilityPack" Version="1.11.72" />
-    <PackageVersion Include="Irihi.Ursa" Version="1.8.1" />
-    <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="1.8.1" />
+    <PackageVersion Include="HtmlAgilityPack" Version="1.11.74" />
+    <PackageVersion Include="Irihi.Ursa" Version="1.9.0" />
+    <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="1.9.0" />
     <PackageVersion Include="MinecraftLaunch" Version="4.0.0" />
     <PackageVersion Include="MinecraftLaunch.Skin" Version="1.0.1" />
     <PackageVersion Include="Modrinth.Net" Version="3.5.0" />
@@ -32,8 +32,8 @@
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageVersion Include="ReactiveUI" Version="20.1.63" />
     <PackageVersion Include="ReactiveUI.Fody" Version="19.5.41" />
-    <PackageVersion Include="Semi.Avalonia" Version="11.2.1.4" />
-    <PackageVersion Include="Semi.Avalonia.ColorPicker" Version="11.2.1.4" />
+    <PackageVersion Include="Semi.Avalonia" Version="11.2.1.5" />
+    <PackageVersion Include="Semi.Avalonia.ColorPicker" Version="11.2.1.5" />
     <PackageVersion Include="System.Management" Version="9.0.2" />
     <PackageVersion Include="Tomlyn" Version="0.18.0" />
     <PackageVersion Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.13" />

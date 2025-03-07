@@ -20,7 +20,7 @@ using YMCL.Public.Classes.Operate;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
-using YMCL.Views.Log;
+using LogWindow = YMCL.Views.LogWindow;
 using Setting = YMCL.Public.Enum.Setting;
 using String = YMCL.Public.Const.String;
 

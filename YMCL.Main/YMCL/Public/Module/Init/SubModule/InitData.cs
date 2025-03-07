@@ -14,7 +14,7 @@ using YMCL.Public.Classes.Data;
 using YMCL.Public.Classes.Operate;
 using YMCL.Public.Classes.Setting;
 using YMCL.Public.Langs;
-using YMCL.Views.Crash;
+using CrashWindow = YMCL.Views.CrashWindow;
 using Setting = YMCL.Public.Classes.Setting.Setting;
 
 namespace YMCL.Public.Module.Init.SubModule;

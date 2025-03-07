@@ -1,16 +1,9 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using Avalonia.Platform;
-using Ursa.Controls;
-using YMCL.Public.Classes;
+﻿using Ursa.Controls;
 using YMCL.Public.Classes.Data;
 using YMCL.Public.Controls;
-using YMCL.Public.Enum;
 using LogType = YMCL.Public.Enum.LogType;
-using Setting = YMCL.Public.Classes.Setting.Setting;
 
-namespace YMCL.Views.Log;
+namespace YMCL.Views;
 
 public partial class LogWindow : UrsaWindow
 {

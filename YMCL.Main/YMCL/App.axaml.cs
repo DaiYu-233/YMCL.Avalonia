@@ -9,8 +9,8 @@ using YMCL.Public.Module.Init;
 using YMCL.Public.Module.Init.SubModule;
 using YMCL.ViewModels;
 using YMCL.Views;
-using YMCL.Views.Crash;
 using YMCL.Views.Initialize;
+using CrashWindow = YMCL.Views.CrashWindow;
 using MainView = YMCL.Views.Main.MainView;
 using MainWindow = YMCL.Views.Main.MainWindow;
 

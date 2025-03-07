@@ -75,8 +75,6 @@ public class Update
             Console.WriteLine(e);
             return false;
         }
-
-        return false;
     }
 
     public static async Task<bool> UpdateByReplaceFile(string architecture)

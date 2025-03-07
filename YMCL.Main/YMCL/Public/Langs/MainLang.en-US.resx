@@ -951,10 +951,6 @@ macOS can't auto updates.
 Go to "{url}" download new version.
 Go to Settings-Download-Auto Update can disable auto check update</value>
   </data>
-  <data name="CurrectSystemNoSupportAutoUpdateTip" xml:space="preserve">
-    <value>Auto-update is not supported by current system
-to manually open the following directory to copy the latest version and replace the current version</value>
-  </data>
   <data name="AlreadyCopyToClipBoard" xml:space="preserve">
     <value>Copied to clipboard</value>
   </data>
@@ -1436,6 +1432,16 @@ Possibly this Java is incorrect/corrupted/has no execute permissions</value>
   </data>
   <data name="Favourites" xml:space="preserve">
     <value>Favorites</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CurrectSystemNoSupportAutoUpdateTip" xml:space="preserve">
+    <value>Automatic updates are not supported on the current system
+Go to Settings - Downloads to turn off automatic updates
+You can manually download the latest version and replace the program file</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DependencyItems" xml:space="preserve">
+    <value>dependent</value>
     <comment>#TODO#_</comment>
   </data>
 </root>

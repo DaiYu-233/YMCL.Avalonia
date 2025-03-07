@@ -51,8 +51,8 @@ public partial class About : UserControl
             CheckUpdateBtn.Content = ring;
             ring.Height = 17;
             ring.Width = 17;
-            var updateAvailable = await Public.Module.IO.Network.Update.CheckUpdateAsync();
-            if (!updateAvailable.Success)
+            var info = await Public.Module.IO.Network.Update.CheckUpdateAsync();
+            if (!info.Success)
             {
                 CheckUpdateBtn.IsEnabled = true;
                 CheckUpdateBtn.Content = MainLang.CheckUpdate;
@@ -60,7 +60,7 @@ public partial class About : UserControl
                 return;
             }
 
-            if (!updateAvailable.IsNeedUpdate)
+            if (!info.IsNeedUpdate)
             {
                 CheckUpdateBtn.IsEnabled = true;
                 CheckUpdateBtn.Content = MainLang.CheckUpdate;
@@ -71,49 +71,26 @@ public partial class About : UserControl
             CheckUpdateBtn.IsEnabled = true;
             CheckUpdateBtn.Content = MainLang.CheckUpdate;
             var dialog = ContentDialogResult.None;
-            if (Environment.OSVersion.Version.Major < 10)
+
+            await Dispatcher.UIThread.Invoke(async () =>
             {
-                await Dispatcher.UIThread.Invoke(async () =>
-                {
-                    dialog = await ShowDialogAsync(MainLang.FoundNewVersion,
-                        $"{MainLang.WinSevenAutoUpdateTip.Replace("{url}", updateAvailable.GithubUrl).Replace("{version}", updateAvailable.NewVersion)}"
-                        , b_cancel: MainLang.Cancel,
-                        b_primary: MainLang.OpenBrowser);
-                });
-            }
-            else
-            {
-                await Dispatcher.UIThread.Invoke(async () =>
-                {
-                    dialog = await ShowDialogAsync(MainLang.FoundNewVersion,
-                        $"{updateAvailable.NewVersion}\n\n{updateAvailable.GithubUrl}"
-                        , b_cancel: MainLang.Cancel,
-                        b_primary: MainLang.Update);
-                });
-            }
+                dialog = await ShowDialogAsync(MainLang.FoundNewVersion,
+                    $"{info.NewVersion}\n\n{info.GithubUrl}"
+                    , b_cancel: MainLang.Cancel, b_secondary: MainLang.SkipThisVersion,
+                    b_primary: MainLang.Update);
+            });
 
             if (dialog == ContentDialogResult.Primary)
             {
-                if (Environment.OSVersion.Version.Major < 10)
-                {
-                    await Dispatcher.UIThread.Invoke(async () =>
-                    {
-                        var launcher = TopLevel.GetTopLevel(App.UiRoot).Launcher;
-                        await launcher.LaunchUriAsync(new Uri(updateAvailable.GithubUrl));
-                    });
-                }
-                else
-                {
-                    var updateAppAsync = await Public.Module.IO.Network.Update.UpdateAppAsync();
-                    if (!updateAppAsync) Notice(MainLang.UpdateFail, NotificationType.Error);
-                }
+                var updateAppAsync = await Public.Module.IO.Network.Update.UpdateAppAsync();
+                if (!updateAppAsync) Notice(MainLang.UpdateFail, NotificationType.Error);
             }
             else if (dialog == ContentDialogResult.Secondary)
             {
                 Dispatcher.UIThread.Invoke(() =>
                 {
-                    Data.Setting.SkipUpdateVersion = updateAvailable.NewVersion;
-                    Notice(MainLang.SkipVersionTip.Replace("{version}", updateAvailable.NewVersion), NotificationType.Success);
+                    Public.Const.Data.Setting.SkipUpdateVersion = info.NewVersion;
+                    Notice(MainLang.SkipVersionTip.Replace("{version}", info.NewVersion), NotificationType.Success);
                 });
             }
         };

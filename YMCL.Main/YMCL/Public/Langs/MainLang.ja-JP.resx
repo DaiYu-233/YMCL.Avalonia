@@ -951,10 +951,6 @@ MacOsは自動更新をサポートしていません
 次のリンクに移動して新しいバージョンをダウンロードします:「{url}」
 設定へ移動-ダウンロード-自動更新により自動チェック更新をオフにする</value>
   </data>
-  <data name="CurrectSystemNoSupportAutoUpdateTip" xml:space="preserve">
-    <value>現在のシステムでは自動更新はサポートされていません
-次のディレクトリを手動で開いて最新バージョンをコピーし、現在のバージョンを置き換えることができます</value>
-  </data>
   <data name="AlreadyCopyToClipBoard" xml:space="preserve">
     <value>クリップボードにコピーしました</value>
   </data>
@@ -1436,6 +1432,16 @@ MacOsは自動更新をサポートしていません
   </data>
   <data name="Favourites" xml:space="preserve">
     <value>お気に入り</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CurrectSystemNoSupportAutoUpdateTip" xml:space="preserve">
+    <value>自動更新は現在のシステムではサポートされていません
+[設定] - [ダウンロード]に移動して自動更新をオフにします
+最新バージョンを手動でダウンロードして、プログラムファイルを置き換えることができます</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DependencyItems" xml:space="preserve">
+    <value>依存関係</value>
     <comment>#TODO#_</comment>
   </data>
 </root>

@@ -104,6 +104,10 @@ public partial class TaskEntry : UserControl
         Model.CanRemove = true;
         Model.ButtonIsEnable = true;
         Model.State = TaskState.Finished;
+        foreach (var task in Model.SubTasks)
+        {
+            task.Finish();
+        }
     }
 
     public void FinishWithError()

@@ -951,10 +951,6 @@ MacO не поддерживают автоматические обновлен
 Скачайте новую версию по ссылке: «{url}»
 Перейдите в Настройки - Загрузки - Автоматические обновления, чтобы отключить автоматическую проверку обновлений</value>
   </data>
-  <data name="CurrectSystemNoSupportAutoUpdateTip" xml:space="preserve">
-    <value>Автоматические обновления не поддерживаются в текущей системе
-Вы можете вручную открыть следующий каталог, чтобы скопировать последнюю версию и заменить текущую версию</value>
-  </data>
   <data name="AlreadyCopyToClipBoard" xml:space="preserve">
     <value>Скопировано в буфер обмена</value>
   </data>
@@ -1436,6 +1432,16 @@ MacO не поддерживают автоматические обновлен
   </data>
   <data name="Favourites" xml:space="preserve">
     <value>Закладка</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CurrectSystemNoSupportAutoUpdateTip" xml:space="preserve">
+    <value>Автоматические обновления не поддерживаются в текущей системе
+Откройте Настройки - Загрузки, чтобы отключить автоматические обновления.
+Вы можете вручную загрузить последнюю версию и заменить файл программы</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DependencyItems" xml:space="preserve">
+    <value>Зависимости</value>
     <comment>#TODO#_</comment>
   </data>
 </root>

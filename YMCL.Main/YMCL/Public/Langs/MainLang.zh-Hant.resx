@@ -948,9 +948,6 @@ win10 以下系統(不包括10)不支援自動更新
   <data name="MacOsUpdateTip" xml:space="preserve">
     <value>發現新版本: {version}&amp;#10; MacOs 不支援自動更新前往以下連結下載新版本: “{url}”&amp;#10;前往設定-下載-自動更新可關閉自動檢查更新</value>
   </data>
-  <data name="CurrectSystemNoSupportAutoUpdateTip" xml:space="preserve">
-    <value>目前系統不支援自動更新可手動開啟以下目錄複製最新版本並取代目前版本</value>
-  </data>
   <data name="AlreadyCopyToClipBoard" xml:space="preserve">
     <value>已複製到剪切板</value>
   </data>
@@ -1431,6 +1428,16 @@ win10 以下系統(不包括10)不支援自動更新
   </data>
   <data name="Favourites" xml:space="preserve">
     <value>收藏夾</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CurrectSystemNoSupportAutoUpdateTip" xml:space="preserve">
+    <value>目前系統不支援自動更新
+可前往 設定-下載 關閉自動更新
+可手動下載最新版本並取代程式檔案</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="DependencyItems" xml:space="preserve">
+    <value>依賴項</value>
     <comment>#TODO#_</comment>
   </data>
 </root>

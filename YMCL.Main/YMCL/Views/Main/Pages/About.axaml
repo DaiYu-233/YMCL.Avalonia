@@ -118,7 +118,6 @@
                     <Border
                         Background="{DynamicResource 2x}"
                         CornerRadius="{DynamicResource MainCornerRadius}"
-                        Opacity="{DynamicResource MainOpacity}"
                         Padding="8">
                         <DockPanel>
                             <Image

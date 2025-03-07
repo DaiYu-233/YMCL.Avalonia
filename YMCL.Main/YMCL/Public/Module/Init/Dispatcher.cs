@@ -12,6 +12,7 @@ public static class InitDispatcher
         DetectPlatform.Main();
         InitData.InitSystemMaxMem();
         InitConfig.Dispatch();
+        InitData.ClearTempFolder();
         if(!await InitData.GetSettingData()) return false;
         InitLang.Dispatch();
         InitData.InitCollection();

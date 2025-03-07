@@ -133,4 +133,16 @@ public class InitData
         DownloadMirrorManager.IsEnableMirror = Data.Setting.DownloadSource == Enum.Setting.DownloadSource.BmclApi;
         ServicePointManager.DefaultConnectionLimit = int.MaxValue;
     }
+    
+    public static void ClearTempFolder()
+    {
+        try
+        {
+            IO.Disk.Setter.ClearFolder(ConfigPath.TempFolderPath);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
 }

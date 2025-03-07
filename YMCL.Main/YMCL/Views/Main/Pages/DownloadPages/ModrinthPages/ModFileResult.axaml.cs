@@ -44,7 +44,7 @@ public partial class ModFileResult : UserControl, INotifyPropertyChanged
         InitializeComponent();
         InfoBorder.DataContext = this;
         ItemsControl.DataContext = this;
-        Init(entry);
+        _ = Init(entry);
     }
 
     public ModFileResult(string id, (string name, string icon, string summary) tuple)

@@ -134,7 +134,7 @@ public class InitUi
                     await File.ReadAllTextAsync(ConfigPath.CustomHomePageXamlDataPath));
                 YMCL.App.UiRoot.ViewModel.Launch.CustomPageRoot.Child = c;
             }
-            catch (Exception ex)
+            catch
             {
                 //ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
             }
@@ -151,7 +151,7 @@ public class InitUi
                 var c = (Control)AvaloniaRuntimeXamlLoader.Load(code);
                 YMCL.App.UiRoot.ViewModel.Launch.CustomPageRoot.Child = c;
             }
-            catch (Exception ex)
+            catch
             {
                 //ShowLongException(MainLang.CustomHomePageSourceCodeError, ex);
             }

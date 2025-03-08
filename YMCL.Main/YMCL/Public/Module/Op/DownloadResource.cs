@@ -61,7 +61,7 @@ public class DownloadResource
             return;
         }
 
-        if (Data.Setting.SelectedMinecraftId != "bedrock")
+        if (Data.SettingEntry.SelectedMinecraftId != "bedrock")
         {
             folderPath = type switch
             {

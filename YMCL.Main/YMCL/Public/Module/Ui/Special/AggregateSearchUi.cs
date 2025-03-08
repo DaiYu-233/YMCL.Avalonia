@@ -169,7 +169,7 @@ public class AggregateSearchUi
                 }
                 else
                 {
-                    Const.Data.Setting.MinecraftFolder =
+                    Const.Data.SettingEntry.MinecraftFolder =
                         Data.MinecraftFolders.FirstOrDefault(x => x.Path == entry.MinecraftEntry.MinecraftFolderPath);
                     Const.Data.UiProperty.SelectedMinecraft = new MinecraftDataEntry(entry.MinecraftEntry);
                     YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavLaunch;
@@ -181,7 +181,7 @@ public class AggregateSearchUi
             }
             else if (entry is { Target: "account" })
             {
-                Const.Data.Setting.Account = entry.Account;
+                Const.Data.SettingEntry.Account = entry.Account;
                 Notice($"{MainLang.SwitchedTo} : {entry.Text}\n{entry.Summary}",
                     type: NotificationType.Success);
             }

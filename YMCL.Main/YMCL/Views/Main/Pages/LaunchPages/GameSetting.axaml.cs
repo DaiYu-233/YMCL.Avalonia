@@ -29,7 +29,7 @@ public partial class GameSetting : UserControl
         }
         else
         {
-            var resolver = new MinecraftParser(Data.Setting.MinecraftFolder.Path);
+            var resolver = new MinecraftParser(Data.SettingEntry.MinecraftFolder.Path);
             Model = new GameSettingModel(resolver.GetMinecraft(Data.UiProperty.SelectedMinecraft.Id));
         }
 

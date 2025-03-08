@@ -15,7 +15,6 @@ using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using Language = YMCL.Public.Classes.Data.Language;
-using Setting = YMCL.Public.Classes.Setting.Setting;
 using WindowNotificationManager = Ursa.Controls.WindowNotificationManager;
 
 namespace YMCL.Public.Const;
@@ -39,7 +38,7 @@ public sealed class Data : ReactiveObject
     public static ObservableCollection<RecordSongEntry> RecordSongEntries { get; set; } = [];
     public static ObservableCollection<RecordSongEntry> SearchSongEntries { get; set; } = [];
     public static List<NewsDataListEntry> NewsDataList { get; set; } = [];
-    public static Setting Setting { get; set; }
+    public static SettingEntry SettingEntry { get; set; }
     public static UiProperty UiProperty { get; } = new();
     public static string TranslateToken { get; set; }
 
@@ -55,7 +54,7 @@ public sealed class Data : ReactiveObject
             if (e.PropertyName == nameof(UiProperty.SelectedMinecraft) &&
                 !string.IsNullOrEmpty(UiProperty.SelectedMinecraft?.Id))
             {
-                Setting.SelectedMinecraftId = UiProperty.SelectedMinecraft.Type == "bedrock"
+                SettingEntry.SelectedMinecraftId = UiProperty.SelectedMinecraft.Type == "bedrock"
                     ? "bedrock"
                     : UiProperty.SelectedMinecraft.Id;
             }
@@ -65,22 +64,22 @@ public sealed class Data : ReactiveObject
             File.WriteAllText(ConfigPath.FavouriteResourceDataPath,
                 JsonConvert.SerializeObject(FavouriteResources, Formatting.Indented));
         };
-        Setting.PropertyChanged += (_, e) =>
+        SettingEntry.PropertyChanged += (_, e) =>
         {
             try
             {
-                if (e.PropertyName != nameof(Setting.SelectedMinecraftId) ||
-                    string.IsNullOrEmpty(Setting.SelectedMinecraftId)) return;
-                if (Setting.SelectedMinecraftId == "bedrock")
+                if (e.PropertyName != nameof(SettingEntry.SelectedMinecraftId) ||
+                    string.IsNullOrEmpty(SettingEntry.SelectedMinecraftId)) return;
+                if (SettingEntry.SelectedMinecraftId == "bedrock")
                 {
                     UiProperty.SelectedMinecraft = new MinecraftDataEntry(null, true, true)
                         { IsSettingVisible = false, Type = "bedrock" };
                 }
                 else
                 {
-                    var parser = new MinecraftParser(Setting.MinecraftFolder.Path);
+                    var parser = new MinecraftParser(SettingEntry.MinecraftFolder.Path);
                     UiProperty.SelectedMinecraft =
-                        new MinecraftDataEntry(parser.GetMinecraft(Setting.SelectedMinecraftId));
+                        new MinecraftDataEntry(parser.GetMinecraft(SettingEntry.SelectedMinecraftId));
                 }
             }
             catch (Exception exception)

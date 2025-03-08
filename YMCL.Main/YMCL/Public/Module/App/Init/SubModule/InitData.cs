@@ -14,7 +14,6 @@ using YMCL.Public.Classes.Operate;
 using YMCL.Public.Classes.Setting;
 using YMCL.Public.Langs;
 using CrashWindow = YMCL.Views.CrashWindow;
-using Setting = YMCL.Public.Classes.Setting.Setting;
 
 namespace YMCL.Public.Module.App.Init.SubModule;
 
@@ -39,8 +38,8 @@ public class InitData
             Data.EnablePlugins =
                 JsonConvert.DeserializeObject<ObservableCollection<string>>(
                     await File.ReadAllTextAsync(ConfigPath.PluginDataPath));
-            Data.Setting =
-                JsonConvert.DeserializeObject<Setting>(await File.ReadAllTextAsync(ConfigPath.SettingDataPath));
+            Data.SettingEntry =
+                JsonConvert.DeserializeObject<SettingEntry>(await File.ReadAllTextAsync(ConfigPath.SettingDataPath));
         }
         catch (Exception e)
         {
@@ -66,15 +65,15 @@ public class InitData
 
         try
         {
-            if (Data.Setting.SelectedMinecraftId == "bedrock")
+            if (Data.SettingEntry.SelectedMinecraftId == "bedrock")
             {
                 Data.UiProperty.SelectedMinecraft = new MinecraftDataEntry(null, true, true)
                     { IsSettingVisible = false, Type = "bedrock" };
             }
             else
             {
-                var parser = new MinecraftParser(Data.Setting.MinecraftFolder.Path);
-                Data.UiProperty.SelectedMinecraft = new MinecraftDataEntry(parser.GetMinecraft(Data.Setting.SelectedMinecraftId));
+                var parser = new MinecraftParser(Data.SettingEntry.MinecraftFolder.Path);
+                Data.UiProperty.SelectedMinecraft = new MinecraftDataEntry(parser.GetMinecraft(Data.SettingEntry.SelectedMinecraftId));
             }
         }
         catch
@@ -101,17 +100,17 @@ public class InitData
 
     public static void VerifyData()
     {
-        if (!Data.MinecraftFolders.Contains(Data.Setting.MinecraftFolder))
+        if (!Data.MinecraftFolders.Contains(Data.SettingEntry.MinecraftFolder))
         {
-            Data.Setting.MinecraftFolder = Data.MinecraftFolders[0];
+            Data.SettingEntry.MinecraftFolder = Data.MinecraftFolders[0];
         }
-        if (!Data.Accounts.Contains(Data.Setting.Account))
+        if (!Data.Accounts.Contains(Data.SettingEntry.Account))
         {
-            Data.Setting.Account = Data.Accounts[0];
+            Data.SettingEntry.Account = Data.Accounts[0];
         }
-        if (!Data.JavaRuntimes.Contains(Data.Setting.Java))
+        if (!Data.JavaRuntimes.Contains(Data.SettingEntry.Java))
         {
-            Data.Setting.Java = Data.JavaRuntimes[0];
+            Data.SettingEntry.Java = Data.JavaRuntimes[0];
         }
     }
 
@@ -128,8 +127,8 @@ public class InitData
     {
         HttpUtil.Initialize();
         CurseforgeProvider.CurseforgeApiKey = Const.String.CurseForgeApiKey;
-        DownloadMirrorManager.MaxThread = Data.Setting.MaxDownloadThread;
-        DownloadMirrorManager.IsEnableMirror = Data.Setting.DownloadSource == Enum.Setting.DownloadSource.BmclApi;
+        DownloadMirrorManager.MaxThread = Data.SettingEntry.MaxDownloadThread;
+        DownloadMirrorManager.IsEnableMirror = Data.SettingEntry.DownloadSource == Enum.Setting.DownloadSource.BmclApi;
         ServicePointManager.DefaultConnectionLimit = int.MaxValue;
     }
     

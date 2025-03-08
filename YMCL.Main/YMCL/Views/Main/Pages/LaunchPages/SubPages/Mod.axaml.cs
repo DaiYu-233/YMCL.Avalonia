@@ -404,7 +404,7 @@ public sealed partial class Mod : UserControl, INotifyPropertyChanged
                 client.DefaultRequestHeaders.Add("Authorization", Data.TranslateToken);
                 var response =
                     await client.PostAsync(
-                        $"https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to={Data.Setting.Language.Code}&textType=plain",
+                        $"https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to={Data.SettingEntry.Language.Code}&textType=plain",
                         new StringContent($"[{{\"Text\": \"{entry.ModInfoName}\"}}]", Encoding.UTF8,
                             "application/json"));
                 var responseContent = await response.Content.ReadAsStringAsync();
@@ -429,7 +429,7 @@ public sealed partial class Mod : UserControl, INotifyPropertyChanged
                 client.DefaultRequestHeaders.Add("Authorization", Data.TranslateToken);
                 var response =
                     await client.PostAsync(
-                        $"https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to={Data.Setting.Language.Code}&textType=plain",
+                        $"https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to={Data.SettingEntry.Language.Code}&textType=plain",
                         new StringContent($"[{{\"Text\": \"{entry.ModInfoName}\"}}]", Encoding.UTF8,
                             "application/json"));
                 var responseContent = await response.Content.ReadAsStringAsync();

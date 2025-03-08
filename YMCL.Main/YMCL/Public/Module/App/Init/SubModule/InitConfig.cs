@@ -30,7 +30,7 @@ public static class InitConfig
             System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
         if (!File.Exists(ConfigPath.SettingDataPath))
             File.WriteAllText(ConfigPath.SettingDataPath,
-                JsonConvert.SerializeObject(new Setting(), Formatting.Indented));
+                JsonConvert.SerializeObject(new SettingEntry(), Formatting.Indented));
         if (!File.Exists(ConfigPath.FavouriteResourceDataPath))
             File.WriteAllText(ConfigPath.FavouriteResourceDataPath,
                 JsonConvert.SerializeObject(new List<FavouriteResource>(), Formatting.Indented));
@@ -43,7 +43,7 @@ public static class InitConfig
                     new List<MinecraftFolder>([
                         new MinecraftFolder { Name = "Minecraft Folder", Path = path }
                     ]), Formatting.Indented));
-            var setting1 = JsonConvert.DeserializeObject<Setting>(File.ReadAllText(ConfigPath.SettingDataPath));
+            var setting1 = JsonConvert.DeserializeObject<SettingEntry>(File.ReadAllText(ConfigPath.SettingDataPath));
             setting1.MinecraftFolder = new MinecraftFolder { Name = "Minecraft Folder", Path = path };
             File.WriteAllText(ConfigPath.SettingDataPath,
                 JsonConvert.SerializeObject(setting1, Formatting.Indented));

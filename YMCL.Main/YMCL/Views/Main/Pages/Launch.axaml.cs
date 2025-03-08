@@ -91,14 +91,14 @@ public partial class Launch : UserControl
             new FilePickerSaveOptions
             {
                 Title = MainLang.ExportLogFile,
-                SuggestedFileName = $"{Data.Setting.Account.Name}.png",
+                SuggestedFileName = $"{Data.SettingEntry.Account.Name}.png",
                 FileTypeChoices =
                 [
                     new FilePickerFileType("Image File") { Patterns = ["*.png"] }
                 ]
             }))?.Path.LocalPath;
         if (string.IsNullOrWhiteSpace(path)) return;
-        await File.WriteAllBytesAsync(path, Converter.Base64ToBytes(Data.Setting.Account.Skin));
+        await File.WriteAllBytesAsync(path, Converter.Base64ToBytes(Data.SettingEntry.Account.Skin));
         Notice($"{MainLang.SaveFinish} - {Path.GetFileName(path)}", NotificationType.Success);
     }
 }

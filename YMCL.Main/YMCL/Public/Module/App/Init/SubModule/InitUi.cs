@@ -15,16 +15,16 @@ public class InitUi
 {
     public static async Task Dispatch()
     {
-        Ui.Setter.SetAccentColor(Data.Setting.AccentColor);
+        Ui.Setter.SetAccentColor(Data.SettingEntry.AccentColor);
         Application.Current.Resources["MainOpacity"] = 1.0;
         DisplaceDefaultUi();
         Ui.Setter.SetBackGround();
         Ui.Setter.DynamicStyle.SetDynamicStyle();
         _ = SetCustomHomePage();
         Application.Current.ActualThemeVariantChanged += (_, _) => { UpdateTheme(); };
-        Ui.Setter.ToggleTheme(Data.Setting.Theme);
+        Ui.Setter.ToggleTheme(Data.SettingEntry.Theme);
         // YMCL.App.UiRoot.ViewModel.Download.CurseForgeFetcher.SearchAction();
-        if (Data.Setting.EnableAutoCheckUpdate)
+        if (Data.SettingEntry.EnableAutoCheckUpdate)
         {
             var result = await IO.Network.Update.CheckUpdateAsync();
             if (result is { Success: true, IsNeedUpdate: true })
@@ -118,12 +118,12 @@ public class InitUi
     public static async Task SetCustomHomePage()
     {
         if (YMCL.App.UiRoot is null) return;
-        if (Data.Setting.CustomHomePage == Setting.CustomHomePageWay.None)
+        if (Data.SettingEntry.CustomHomePage == Setting.CustomHomePageWay.None)
         {
             YMCL.App.UiRoot.ViewModel.Launch.CustomPageRoot.Child = null;
         }
 
-        if (Data.Setting.CustomHomePage == Setting.CustomHomePageWay.Local)
+        if (Data.SettingEntry.CustomHomePage == Setting.CustomHomePageWay.Local)
         {
             try
             {
@@ -137,13 +137,13 @@ public class InitUi
             }
         }
 
-        if (Data.Setting.CustomHomePage == Setting.CustomHomePageWay.Network)
+        if (Data.SettingEntry.CustomHomePage == Setting.CustomHomePageWay.Network)
         {
-            if (!Uri.TryCreate(Data.Setting.CustomUpdateUrl, UriKind.Absolute, out _)) return;
+            if (!Uri.TryCreate(Data.SettingEntry.CustomUpdateUrl, UriKind.Absolute, out _)) return;
             try
             {
                 using var client = new HttpClient();
-                var code = await client.GetStringAsync(Data.Setting.CustomUpdateUrl);
+                var code = await client.GetStringAsync(Data.SettingEntry.CustomUpdateUrl);
                 if (code is null) throw new ArgumentNullException("CustomHomePageSourceCode");
                 var c = (Control)AvaloniaRuntimeXamlLoader.Load(code);
                 YMCL.App.UiRoot.ViewModel.Launch.CustomPageRoot.Child = c;

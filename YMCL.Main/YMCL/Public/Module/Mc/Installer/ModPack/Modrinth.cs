@@ -29,7 +29,7 @@ public class Modrinth
         task.Rename($"{MainLang.Install}: {id}");
         var cts = new CancellationTokenSource();
         var cancellationToken = cts.Token;
-        var mcPath = Data.Setting.MinecraftFolder.Path;
+        var mcPath = Data.SettingEntry.MinecraftFolder.Path;
         task.UpdateAction(() =>
         {
             cts.Cancel();

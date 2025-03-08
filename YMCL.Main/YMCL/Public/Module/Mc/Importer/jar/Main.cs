@@ -12,12 +12,12 @@ public class Main
 {
     public static async Task Import(string path)
     {
-        if (Data.Setting.SelectedMinecraftId == "bedrock") return;
+        if (Data.SettingEntry.SelectedMinecraftId == "bedrock") return;
 
         if (!Data.UiProperty.IsAllImport)
         {
             var cr = await ShowDialogAsync(
-                $"{MainLang.Import} → {Data.Setting.SelectedMinecraftId}",
+                $"{MainLang.Import} → {Data.SettingEntry.SelectedMinecraftId}",
                 $"{MainLang.SureToImportTheFile}: {Path.GetFileName(path)}", b_primary: MainLang.Ok,
                 b_cancel: MainLang.Cancel, b_secondary: MainLang.AllImport);
 

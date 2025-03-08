@@ -16,7 +16,7 @@ using Setter = YMCL.Public.Module.Ui.Setter;
 
 namespace YMCL.Public.Classes.Setting;
 
-public class Setting : ReactiveObject
+public class SettingEntry : ReactiveObject
 {
     [Reactive] [JsonProperty] public string SkipUpdateVersion { get; set; } = string.Empty;
     [Reactive] [JsonProperty] public bool EnableAutoCheckUpdate { get; set; } = true;
@@ -95,7 +95,7 @@ public class Setting : ReactiveObject
 
     [Reactive] [JsonProperty] public string? WindowBackGroundImgData { get; set; } = string.Empty;
 
-    public Setting()
+    public SettingEntry()
     {
         var accentColorSetter = new Debouncer(() => { Public.Module.Ui.Setter.SetAccentColor(AccentColor); }, 5);
         var _setBackGroundDebouncer = new Debouncer(
@@ -105,7 +105,7 @@ public class Setting : ReactiveObject
         {
             if (e.PropertyName == nameof(Language))
             {
-                LangHelper.Current.ChangedCulture(Const.Data.Setting.Language.Code);
+                LangHelper.Current.ChangedCulture(Const.Data.SettingEntry.Language.Code);
             }
 
             if (e.PropertyName == nameof(AccentColor))

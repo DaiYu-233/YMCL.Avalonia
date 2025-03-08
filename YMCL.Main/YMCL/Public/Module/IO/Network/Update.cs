@@ -175,7 +175,7 @@ public class Update
                 return false;
             }
 
-            var setting = Const.Data.Setting;
+            var setting = Const.Data.SettingEntry;
             var trueUrl = url;
             if (setting.EnableCustomUpdateUrl)
             {
@@ -316,7 +316,7 @@ public class Update
 
             IO.Disk.Setter.ClearFolder(ConfigPath.UpdateFolderPath);
 
-            var setting = Const.Data.Setting;
+            var setting = Const.Data.SettingEntry;
             var trueUrl = url;
             if (setting.EnableCustomUpdateUrl)
             {

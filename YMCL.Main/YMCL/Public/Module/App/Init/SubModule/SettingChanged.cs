@@ -8,15 +8,15 @@ public class SettingChanged
 {
     public static void Binding()
     {
-        Data.Setting.PropertyChanged += (_, e) =>
+        Data.SettingEntry.PropertyChanged += (_, e) =>
         {
-            if (e.PropertyName == nameof(Setting.Language))
+            if (e.PropertyName == nameof(SettingEntry.Language))
             {
                 Data.JavaRuntimes.FirstOrDefault(java => java.JavaStringVersion == "Auto").JavaPath =
                     MainLang.LetYMCLChooseJava;
             }
             
-            if (e.PropertyName == nameof(Setting.NoticeWay))
+            if (e.PropertyName == nameof(SettingEntry.NoticeWay))
             {
                 Notice(MainLang.ExampleNotification);
             }

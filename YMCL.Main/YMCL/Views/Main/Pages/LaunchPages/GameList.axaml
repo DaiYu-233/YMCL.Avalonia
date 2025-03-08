@@ -42,7 +42,7 @@
                     HorizontalAlignment="Stretch"
                     ItemsSource="{Binding MinecraftFolders}"
                     Name="MinecraftFolderComboBox"
-                    SelectedItem="{Binding Setting.MinecraftFolder}">
+                    SelectedItem="{Binding SettingEntry.MinecraftFolder}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate DataType="data:MinecraftFolder">
                             <TextBlock

@@ -89,7 +89,7 @@ public partial class About : UserControl
             {
                 Dispatcher.UIThread.Invoke(() =>
                 {
-                    Public.Const.Data.Setting.SkipUpdateVersion = info.NewVersion;
+                    Public.Const.Data.SettingEntry.SkipUpdateVersion = info.NewVersion;
                     Notice(MainLang.SkipVersionTip.Replace("{version}", info.NewVersion), NotificationType.Success);
                 });
             }
@@ -135,7 +135,7 @@ public partial class About : UserControl
                         {
                             FontFamily = (FontFamily)Application.Current.Resources["Font"], FontSize = 14,
                             TextWrapping = TextWrapping.Wrap, TextDecorations = null,
-                            Foreground = new SolidColorBrush(Data.Setting.AccentColor),
+                            Foreground = new SolidColorBrush(Data.SettingEntry.AccentColor),
                             Text = $"{x.user.name} ￥{x.all_sum_amount}"
                         };
                         var link = new HyperlinkButton
@@ -154,7 +154,7 @@ public partial class About : UserControl
                     {
                         FontFamily = (FontFamily)Application.Current.Resources["Font"], FontSize = 14,
                         TextWrapping = TextWrapping.Wrap, TextDecorations = null,
-                        Foreground = new SolidColorBrush(Data.Setting.AccentColor),
+                        Foreground = new SolidColorBrush(Data.SettingEntry.AccentColor),
                         Text = MainLang.LoadFail
                     };
                     var link = new HyperlinkButton

@@ -41,7 +41,7 @@
                 ItemsSource="{Binding Langs}"
                 Margin="0,25,50,0"
                 Name="LanguageListBox"
-                SelectedItem="{Binding Setting.Language}">
+                SelectedItem="{Binding SettingEntry.Language}">
                 <ListBox.ItemTemplate>
                     <DataTemplate DataType="data:Language">
                         <StackPanel Margin="0,7,0,7">

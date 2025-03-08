@@ -28,7 +28,7 @@ public class CurseForge
         var task = p_task ?? new TaskEntry($"{MainLang.Install}: {id}", state: TaskState.Running);
         var cts = new CancellationTokenSource();
         var cancellationToken = cts.Token;
-        var mcPath = Data.Setting.MinecraftFolder.Path;
+        var mcPath = Data.SettingEntry.MinecraftFolder.Path;
         task.UpdateAction(() =>
         {
             cts.Cancel();

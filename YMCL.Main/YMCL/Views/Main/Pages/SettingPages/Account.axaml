@@ -38,15 +38,15 @@
                 <Button
                     Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.RefreshMicrosoftSkin}"
                     FontFamily="{DynamicResource Font}"
-                    IsEnabled="{Binding Setting.Account, Converter={StaticResource AccountTypeIsMicrosoftConverter}}"
-                    IsVisible="{Binding Setting.Account, Converter={StaticResource AccountTypeIsMicrosoftConverter}}"
+                    IsEnabled="{Binding SettingEntry.Account, Converter={StaticResource AccountTypeIsMicrosoftConverter}}"
+                    IsVisible="{Binding SettingEntry.Account, Converter={StaticResource AccountTypeIsMicrosoftConverter}}"
                     Margin="6.5,0,0,0"
                     x:Name="RefreshMicrosoftSkinBtn" />
             </DockPanel>
             <ListBox
                 ItemsSource="{Binding Accounts}"
                 Margin="0,-5,0,0"
-                SelectedItem="{Binding Setting.Account}"
+                SelectedItem="{Binding SettingEntry.Account}"
                 x:Name="AccountsListView">
                 <ListBox.ItemTemplate>
                     <DataTemplate DataType="setting:AccountInfo">

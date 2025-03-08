@@ -83,7 +83,7 @@ public class ModPack
                         return false;
                 }
 
-                if (Directory.Exists(Path.Combine(Data.Setting.MinecraftFolder.Path, "versions", textbox.Text)))
+                if (Directory.Exists(Path.Combine(Data.SettingEntry.MinecraftFolder.Path, "versions", textbox.Text)))
                 {
                     Notice($"{MainLang.FolderAlreadyExists}: {textbox.Text}",
                         NotificationType.Error);

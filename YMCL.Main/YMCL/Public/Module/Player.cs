@@ -21,13 +21,13 @@ public class AudioPlayer : IDisposable
 
     private AudioPlayer()
     {
-        Data.Setting.PropertyChanged += (_, e) =>
+        Data.SettingEntry.PropertyChanged += (_, e) =>
         {
-            if (e.PropertyName != nameof(Setting.Volume)) return;
+            if (e.PropertyName != nameof(SettingEntry.Volume)) return;
             if (_waveOut == null) return;
             try
             {
-                _waveOut.Volume = Convert.ToSingle(Data.Setting.Volume / 100);
+                _waveOut.Volume = Convert.ToSingle(Data.SettingEntry.Volume / 100);
             }
             catch (Exception exception)
             {
@@ -83,7 +83,7 @@ public class AudioPlayer : IDisposable
         _waveOut = new WaveOutEvent();
         _waveOut?.Init(waveStream);
         _waveOut?.Play();
-        _waveOut.Volume = Convert.ToSingle(Data.Setting.Volume / 100);
+        _waveOut.Volume = Convert.ToSingle(Data.SettingEntry.Volume / 100);
         _timer = new Timer(10); 
         _timer.Elapsed += OnTimedEvent;
         _timer.Start();

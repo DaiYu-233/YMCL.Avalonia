@@ -72,7 +72,7 @@ public class MinecraftFolder
             var entry = new Classes.Data.MinecraftFolder
                 { Name = textbox.Text, Path = path };
             Data.MinecraftFolders.Add(entry);
-            Data.Setting.MinecraftFolder = entry;
+            Data.SettingEntry.MinecraftFolder = entry;
         }
 
         await File.WriteAllTextAsync(ConfigPath.MinecraftFolderDataPath,
@@ -82,7 +82,7 @@ public class MinecraftFolder
 
     public static void RemoveSelected()
     {
-        var item = Data.Setting.MinecraftFolder;
+        var item = Data.SettingEntry.MinecraftFolder;
         if (item == null) return;
         Data.MinecraftFolders.Remove(item);
         if (Data.MinecraftFolders.Count == 0)
@@ -91,11 +91,11 @@ public class MinecraftFolder
             IO.Disk.Setter.TryCreateFolder(path);
             var folder = new Classes.Data.MinecraftFolder { Name = "Minecraft Folder", Path = path };
             Data.MinecraftFolders.Add(folder);
-            Data.Setting.MinecraftFolder = folder;
+            Data.SettingEntry.MinecraftFolder = folder;
         }
         else
         {
-            Data.Setting.MinecraftFolder = Data.MinecraftFolders[0];
+            Data.SettingEntry.MinecraftFolder = Data.MinecraftFolders[0];
         }
 
         File.WriteAllText(ConfigPath.MinecraftFolderDataPath,

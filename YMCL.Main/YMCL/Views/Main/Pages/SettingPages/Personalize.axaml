@@ -40,7 +40,7 @@
                         Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.ThemeColor}"
                         VerticalAlignment="Center" />
                     <ColorPicker
-                        Color="{Binding Setting.AccentColor}"
+                        Color="{Binding SettingEntry.AccentColor}"
                         ColorSpectrumShape="Box"
                         HorizontalAlignment="Stretch"
                         Name="ColorPicker"
@@ -71,7 +71,7 @@
                         FontFamily="{DynamicResource Font}"
                         HorizontalAlignment="Stretch"
                         ItemsSource="{Binding Langs}"
-                        SelectedItem="{Binding Setting.Language}"
+                        SelectedItem="{Binding SettingEntry.Language}"
                         x:Name="LanguageComboBox">
                         <ComboBox.ItemTemplate>
                             <DataTemplate DataType="data:Language">
@@ -102,7 +102,7 @@
                         DockPanel.Dock="Left"
                         FontFamily="{DynamicResource Font}"
                         HorizontalAlignment="Stretch"
-                        SelectedIndex="{Binding Setting.Theme}"
+                        SelectedIndex="{Binding SettingEntry.Theme}"
                         x:Name="ThemeComboBox">
                         <ComboBox.Items>
                             <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.FollowSystem}" />
@@ -128,14 +128,14 @@
                         <Button
                             Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.SelectImgFile}"
                             DockPanel.Dock="Right"
-                            IsVisible="{Binding Setting.CustomBackGround, Converter={StaticResource EnumIndexToBoolConverter}, ConverterParameter=1}"
+                            IsVisible="{Binding SettingEntry.CustomBackGround, Converter={StaticResource EnumIndexToBoolConverter}, ConverterParameter=1}"
                             Margin="5,0,0,0"
                             Name="EditCustomBackGroundImgBtn" />
                         <ComboBox
                             DockPanel.Dock="Left"
                             FontFamily="{DynamicResource Font}"
                             HorizontalAlignment="Stretch"
-                            SelectedIndex="{Binding Setting.CustomBackGround}"
+                            SelectedIndex="{Binding SettingEntry.CustomBackGround}"
                             x:Name="CustomBackGroundImgComboBox">
                             <ComboBox.Items>
                                 <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Default}" />
@@ -152,7 +152,7 @@
                                 <Binding
                                     Converter="{StaticResource EnumIndexToBoolConverter}"
                                     ConverterParameter="0"
-                                    Path="Setting.CustomBackGround" />
+                                    Path="SettingEntry.CustomBackGround" />
                             </MultiBinding>
                         </DockPanel.IsVisible>
                         <TextBlock
@@ -166,7 +166,7 @@
                             FontFamily="{DynamicResource Font}"
                             FontSize="14"
                             Margin="6.5,0,6.5,0"
-                            Text="{Binding Setting.TranslucentBackgroundOpacity, Converter={StaticResource DoubleToPercentageConverter}}"
+                            Text="{Binding SettingEntry.TranslucentBackgroundOpacity, Converter={StaticResource DoubleToPercentageConverter}}"
                             TextAlignment="Center"
                             VerticalAlignment="Center"
                             Width="60" />
@@ -174,7 +174,7 @@
                             Margin="0,0,0,0"
                             Maximum="1"
                             Minimum="0.2"
-                            Value="{Binding Setting.TranslucentBackgroundOpacity}"
+                            Value="{Binding SettingEntry.TranslucentBackgroundOpacity}"
                             VerticalAlignment="Center" />
                     </DockPanel>
                     <DockPanel>
@@ -183,7 +183,7 @@
                                 <Binding
                                     Converter="{StaticResource EnumIndexToBoolConverter}"
                                     ConverterParameter="0"
-                                    Path="Setting.CustomBackGround" />
+                                    Path="SettingEntry.CustomBackGround" />
                             </MultiBinding>
                             <!--  False  -->
                         </DockPanel.IsVisible>
@@ -222,7 +222,7 @@
                             FontFamily="{DynamicResource Font}"
                             FontSize="14"
                             Margin="6.5,0,6.5,0"
-                            Text="{Binding Setting.CornerRadius}"
+                            Text="{Binding SettingEntry.CornerRadius}"
                             TextAlignment="Center"
                             VerticalAlignment="Center"
                             Width="60" />
@@ -232,7 +232,7 @@
                             Maximum="100"
                             Minimum="0"
                             TickFrequency="1"
-                            Value="{Binding Setting.CornerRadius}"
+                            Value="{Binding SettingEntry.CornerRadius}"
                             VerticalAlignment="Center" />
                     </DockPanel>
                 </StackPanel>
@@ -254,7 +254,7 @@
                         FontFamily="{DynamicResource Font}"
                         HorizontalAlignment="Stretch"
                         Name="NotificationComboBox"
-                        SelectedIndex="{Binding Setting.NoticeWay}">
+                        SelectedIndex="{Binding SettingEntry.NoticeWay}">
                         <ComboBox.Items>
                             <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.NotificationBubble}" />
                             <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.NotificationCard}" />
@@ -278,7 +278,7 @@
                             Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.DeskLyricColor}"
                             VerticalAlignment="Center" />
                         <ColorPicker
-                            Color="{Binding Setting.DeskLyricColor}"
+                            Color="{Binding SettingEntry.DeskLyricColor}"
                             HorizontalAlignment="Stretch"
                             Name="LyricColorPicker"
                             Width="{x:Static x:Double.NaN}">
@@ -300,7 +300,7 @@
                             FontFamily="{DynamicResource Font}"
                             HorizontalAlignment="Stretch"
                             Name="LyricAlignComboBox"
-                            SelectedIndex="{Binding Setting.DeskLyricAlignment}">
+                            SelectedIndex="{Binding SettingEntry.DeskLyricAlignment}">
                             <ComboBox.Items>
                                 <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.AlignLeft}" />
                                 <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.AlignCenter}" />
@@ -321,7 +321,7 @@
                             FontSize="14"
                             Margin="6.5,0,6.5,0"
                             Name="LyricSizeSliderText"
-                            Text="{Binding Setting.DeskLyricSize}"
+                            Text="{Binding SettingEntry.DeskLyricSize}"
                             TextAlignment="Center"
                             VerticalAlignment="Center"
                             Width="65" />
@@ -332,7 +332,7 @@
                             Minimum="1"
                             Name="LyricSizeSlider"
                             TickFrequency="1"
-                            Value="{Binding Setting.DeskLyricSize}"
+                            Value="{Binding SettingEntry.DeskLyricSize}"
                             VerticalAlignment="Center" />
                     </DockPanel>
                 </StackPanel>
@@ -353,7 +353,7 @@
                         DockPanel.Dock="Left"
                         FontFamily="{DynamicResource Font}"
                         HorizontalAlignment="Stretch"
-                        SelectedIndex="{Binding Setting.LauncherVisibility}"
+                        SelectedIndex="{Binding SettingEntry.LauncherVisibility}"
                         x:Name="LauncherVisibilityComboBox">
                         <ComboBox.Items>
                             <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.AfterLaunchKeepLauncherVisible}" />
@@ -380,7 +380,7 @@
                     <Button
                         Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Edit}"
                         DockPanel.Dock="Right"
-                        IsVisible="{Binding Setting.CustomHomePage, Converter={StaticResource EnumIndexToBoolConverter}, ConverterParameter=1}"
+                        IsVisible="{Binding SettingEntry.CustomHomePage, Converter={StaticResource EnumIndexToBoolConverter}, ConverterParameter=1}"
                         Margin="5,0,0,0"
                         Name="EditCustomHomePageBtn" />
                     <Button
@@ -393,7 +393,7 @@
                                 <Binding
                                     Converter="{StaticResource EnumIndexToBoolConverter}"
                                     ConverterParameter="0"
-                                    Path="Setting.CustomBackGround" />
+                                    Path="SettingEntry.CustomBackGround" />
                             </MultiBinding>
                         </Button.IsVisible>
                     </Button>
@@ -401,10 +401,10 @@
                         DockPanel.Dock="Right"
                         FontFamily="{DynamicResource Font}"
                         FontSize="14"
-                        IsVisible="{Binding Setting.CustomHomePage, Converter={StaticResource EnumIndexToBoolConverter}, ConverterParameter=2}"
+                        IsVisible="{Binding SettingEntry.CustomHomePage, Converter={StaticResource EnumIndexToBoolConverter}, ConverterParameter=2}"
                         Margin="5,0,0,0"
                         MinWidth="200"
-                        Text="{Binding Setting.CustomHomePageUrl}"
+                        Text="{Binding SettingEntry.CustomHomePageUrl}"
                         VerticalAlignment="Center"
                         Watermark="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.DownloadUrl}" />
                     <ComboBox
@@ -412,7 +412,7 @@
                         FontFamily="{DynamicResource Font}"
                         HorizontalAlignment="Stretch"
                         MinWidth="140"
-                        SelectedIndex="{Binding Setting.CustomHomePage}"
+                        SelectedIndex="{Binding SettingEntry.CustomHomePage}"
                         x:Name="CustomHomePageComboBox">
                         <ComboBox.Items>
                             <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Off}" />
@@ -441,7 +441,7 @@
                         FontFamily="{DynamicResource Font}"
                         Height="40"
                         HorizontalAlignment="Right"
-                        IsChecked="{Binding Setting.EnableDisplayIndependentTaskWindow}"
+                        IsChecked="{Binding SettingEntry.EnableDisplayIndependentTaskWindow}"
                         Margin="0,-10,10,0"
                         Name="DisplayIndependentTaskWindowSwitch"
                         OffContent="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Off}"

@@ -44,8 +44,8 @@ public partial class InitializeView : UserControl
             4 => _account,
             _ => Frame.Content
         };
-        if (page == 1 && Data.Setting.Language == new Public.Classes.Data.Language())
-            Data.Setting.Language = Data.Langs[0];
+        if (page == 1 && Data.SettingEntry.Language == new Public.Classes.Data.Language())
+            Data.SettingEntry.Language = Data.Langs[0];
         Frame.Transitions.Add(animation);
         Frame.Opacity = 1;
         FinishInit(page);
@@ -53,29 +53,29 @@ public partial class InitializeView : UserControl
 
     private void FinishInit(int page)
     {
-        if (page == 2 && Data.Setting.Language.Code == null)
+        if (page == 2 && Data.SettingEntry.Language.Code == null)
         {
-            Data.Setting.Language = Data.Langs[0];
+            Data.SettingEntry.Language = Data.Langs[0];
             File.WriteAllText(ConfigPath.SettingDataPath,
-                JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
+                JsonConvert.SerializeObject(Data.SettingEntry, Formatting.Indented));
         }
         if (page == 3)
         {
-            Data.Setting.IsCompleteMinecraftFolderInitialize = true;
+            Data.SettingEntry.IsCompleteMinecraftFolderInitialize = true;
             File.WriteAllText(ConfigPath.SettingDataPath,
-                JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
+                JsonConvert.SerializeObject(Data.SettingEntry, Formatting.Indented));
         }
         if (page == 4)
         {
-            Data.Setting.IsCompleteJavaInitialize = true;
+            Data.SettingEntry.IsCompleteJavaInitialize = true;
             File.WriteAllText(ConfigPath.SettingDataPath,
-                JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
+                JsonConvert.SerializeObject(Data.SettingEntry, Formatting.Indented));
         }
         if (page == 5)
         {
-            Data.Setting.IsCompleteAccountInitialize = true;
+            Data.SettingEntry.IsCompleteAccountInitialize = true;
             File.WriteAllText(ConfigPath.SettingDataPath,
-                JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
+                JsonConvert.SerializeObject(Data.SettingEntry, Formatting.Indented));
             AppMethod.RestartApp();
         }
     }

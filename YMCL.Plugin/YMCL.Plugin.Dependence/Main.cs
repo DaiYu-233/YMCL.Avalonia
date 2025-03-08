@@ -17,7 +17,7 @@ public class ExamplePluginWithDependence : IPlugin
     {
         Console.WriteLine("Example Plugin With Dependence loaded successfully !");
         Console.WriteLine("YMCL Setting Data: ");
-        var obj = YMCL.Public.Const.Data.Setting;
+        var obj = YMCL.Public.Const.Data.SettingEntry;
         var serializeObject = JsonConvert.SerializeObject(obj, Formatting.Indented);
         Console.WriteLine(serializeObject);
         return 0;

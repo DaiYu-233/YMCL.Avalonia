@@ -35,7 +35,7 @@ public partial class Account : UserControl
         AddAccountBtn.Click += async (_, _) =>
         {
             await Public.Module.Op.Account.AddByUi(this);
-            Data.Setting.Account = Data.Accounts[^1];
+            Data.SettingEntry.Account = Data.Accounts[^1];
         };
     }
 }

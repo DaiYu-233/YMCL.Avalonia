@@ -90,11 +90,11 @@ public class Setter
 
     public static void SetBackGround()
     {
-        if (Data.Setting is null) return;
+        if (Data.SettingEntry is null) return;
         Application.Current.Resources["MainOpacity"] =
-            Data.Setting.CustomBackGround == Setting.CustomBackGroundWay.Default
+            Data.SettingEntry.CustomBackGround == Setting.CustomBackGroundWay.Default
                 ? 1.0
-                : Data.Setting.TranslucentBackgroundOpacity;
+                : Data.SettingEntry.TranslucentBackgroundOpacity;
         if (YMCL.App.UiRoot == null) return;
         var topLevel = TopLevel.GetTopLevel(YMCL.App.UiRoot);
         Application.Current.TryGetResource("WindowBg", Application.Current.ActualThemeVariant,
@@ -102,12 +102,12 @@ public class Setter
         Application.Current.TryGetResource("1x", Application.Current.ActualThemeVariant,
             out var c1);
 
-        var setting = Const.Data.Setting;
+        var setting = Const.Data.SettingEntry;
 
         if (topLevel is not MainWindow window) return;
 
         window.BackGroundBorder.Background =
-            Data.Setting.CustomBackGround == Setting.CustomBackGroundWay.Default
+            Data.SettingEntry.CustomBackGround == Setting.CustomBackGroundWay.Default
                 ? (SolidColorBrush)bg : null;
 
         window.BackGroundImg.Source = null;
@@ -144,7 +144,7 @@ public class Setter
             }
             catch
             {
-                Const.Data.Setting.WindowBackGroundImgData = null;
+                Const.Data.SettingEntry.WindowBackGroundImgData = null;
                 Notice(MainLang.LoadBackGroudFromPicFailTip, type: NotificationType.Error);
                 window.BackGroundImg.Source = null;
             }
@@ -281,8 +281,8 @@ public class Setter
 
         public static void SetDynamicStyle()
         {
-            if (Data.Setting is null) return;
-            var list = Data.Setting.SpecialControlEnableTranslucent.Split(',').ToList();
+            if (Data.SettingEntry is null) return;
+            var list = Data.SettingEntry.SpecialControlEnableTranslucent.Split(',').ToList();
             //NotificationBubble,NotificationCard,Popup,ContentDialog
             if (list.Contains("NotificationBubble"))
             {

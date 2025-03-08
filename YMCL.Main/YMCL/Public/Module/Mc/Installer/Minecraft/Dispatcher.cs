@@ -29,7 +29,7 @@ public class Dispatcher
         
         var cts = new CancellationTokenSource();
         var cancellationToken = cts.Token;
-        var setting = Const.Data.Setting;
+        var setting = Const.Data.SettingEntry;
         
         var regex = new Regex(@"[\\/:*?""<>|]");
         var matches = regex.Matches(customId ?? versionManifestEntry.Id);
@@ -52,7 +52,7 @@ public class Dispatcher
             }
         }
 
-        var mcPath = Data.Setting.MinecraftFolder.Path;
+        var mcPath = Data.SettingEntry.MinecraftFolder.Path;
 
         var task = p_task ?? new TaskEntry($"{MainLang.Install}: {customId} (Minecraft {versionManifestEntry.Id})",
             state: TaskState.Running);

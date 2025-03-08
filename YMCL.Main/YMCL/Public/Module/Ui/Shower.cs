@@ -27,7 +27,7 @@ public class Shower
         var notification = new Notification(showTitle, msg, type);
         UiProperty.NotificationCards.Insert(0, new NotificationEntry(notification, notification.Type));
 
-        switch (Data.Setting.NoticeWay)
+        switch (Data.SettingEntry.NoticeWay)
         {
             case Setting.NoticeWay.Bubble:
                 NotificationBubble(msg, type);
@@ -113,7 +113,7 @@ public class Shower
 
     public static async Task ShowAutoUpdateDialog(CheckUpdateInfo info)
     {
-        if (Const.Data.Setting.SkipUpdateVersion == info.NewVersion) return;
+        if (Const.Data.SettingEntry.SkipUpdateVersion == info.NewVersion) return;
         var dialog = ContentDialogResult.None;
 
         await Dispatcher.UIThread.Invoke(async () =>
@@ -133,7 +133,7 @@ public class Shower
         {
             Dispatcher.UIThread.Invoke(() =>
             {
-                Const.Data.Setting.SkipUpdateVersion = info.NewVersion;
+                Const.Data.SettingEntry.SkipUpdateVersion = info.NewVersion;
                 Notice(MainLang.SkipVersionTip.Replace("{version}", info.NewVersion), NotificationType.Success);
             });
         }

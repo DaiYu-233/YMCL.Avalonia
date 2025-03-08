@@ -78,7 +78,7 @@ public class JavaClient
             }
         }
 
-        if (Data.Setting.Account == null)
+        if (Data.SettingEntry.Account == null)
         {
             Notice(MainLang.AccountError, NotificationType.Error);
             return false;
@@ -104,13 +104,13 @@ public class JavaClient
         task.AdvanceSubTask();
 
         Account? account = null!;
-        switch (Data.Setting.Account.AccountType)
+        switch (Data.SettingEntry.Account.AccountType)
         {
             case Setting.AccountType.Offline:
-                if (!string.IsNullOrWhiteSpace(Data.Setting.Account.Name))
+                if (!string.IsNullOrWhiteSpace(Data.SettingEntry.Account.Name))
                 {
                     OfflineAuthenticator authenticator1 = new();
-                    account = authenticator1.Authenticate(Data.Setting.Account.Name);
+                    account = authenticator1.Authenticate(Data.SettingEntry.Account.Name);
                 }
                 else
                 {
@@ -121,7 +121,7 @@ public class JavaClient
 
                 break;
             case Setting.AccountType.Microsoft:
-                var profile = JsonConvert.DeserializeObject<MicrosoftAccount>(Data.Setting.Account.Data!);
+                var profile = JsonConvert.DeserializeObject<MicrosoftAccount>(Data.SettingEntry.Account.Data!);
                 MicrosoftAuthenticator authenticator2 = new(String.AzureClientId);
                 try
                 {
@@ -136,7 +136,7 @@ public class JavaClient
 
                 break;
             case Setting.AccountType.ThirdParty:
-                account = JsonConvert.DeserializeObject<YggdrasilAccount>(Data.Setting.Account.Data!);
+                account = JsonConvert.DeserializeObject<YggdrasilAccount>(Data.SettingEntry.Account.Data!);
                 break;
         }
 
@@ -186,7 +186,7 @@ public class JavaClient
                     {
                         await Dispatcher.UIThread.InvokeAsync(async () =>
                         {
-                            if (Data.Setting.LauncherVisibility !=
+                            if (Data.SettingEntry.LauncherVisibility !=
                                 Setting.LauncherVisibility.AfterLaunchMakeLauncherMinimize)
                             {
                                 if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window1)
@@ -276,7 +276,7 @@ public class JavaClient
                         await Task.Delay(8000);
                         Dispatcher.UIThread.Invoke(() =>
                         {
-                            switch (Data.Setting.LauncherVisibility)
+                            switch (Data.SettingEntry.LauncherVisibility)
                             {
                                 case Setting.LauncherVisibility.AfterLaunchExitLauncher:
                                     Environment.Exit(0);

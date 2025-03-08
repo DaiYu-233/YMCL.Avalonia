@@ -102,7 +102,7 @@ public partial class GameUpdateLog : UserControl
 
     private void StartTranslate()
     {
-        if (Data.Setting.Language.Code == "en-US") return;
+        if (Data.SettingEntry.Language.Code == "en-US") return;
 
         async System.Threading.Tasks.Task Translate(SelectableTextBlock textBlock)
         {
@@ -116,7 +116,7 @@ public partial class GameUpdateLog : UserControl
                 client.DefaultRequestHeaders.Add("Authorization", Data.TranslateToken);
                 var response =
                     await client.PostAsync(
-                        $"https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to={Data.Setting.Language.Code}&textType=plain",
+                        $"https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to={Data.SettingEntry.Language.Code}&textType=plain",
                         new StringContent($"[{{\"Text\": \"{textBlock.Text}\"}}]", Encoding.UTF8, "application/json"));
                 var responseContent = await response.Content.ReadAsStringAsync();
                 var translatedText =

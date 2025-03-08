@@ -8,9 +8,9 @@ public class AppMethod
 {
     private static readonly Debouncer _debouncer = new(() =>
     {
-        if (Data.Setting is null) return;
+        if (Data.SettingEntry is null) return;
         File.WriteAllText(ConfigPath.SettingDataPath,
-            JsonConvert.SerializeObject(Data.Setting, Formatting.Indented));
+            JsonConvert.SerializeObject(Data.SettingEntry, Formatting.Indented));
     }, 100);
 
     public static void SaveSetting()

@@ -4,22 +4,22 @@ public class Decision
 {
     public static (bool ifShow, int page) WhetherToShowInitView()
     {
-        if (Data.Setting.Language.Code == null)
+        if (Data.SettingEntry.Language.Code == null)
         {
             return (true, 1);
         }
 
-        if (!Data.Setting.IsCompleteMinecraftFolderInitialize)
+        if (!Data.SettingEntry.IsCompleteMinecraftFolderInitialize)
         {
             return (true, 2);
         }
 
-        if (!Data.Setting.IsCompleteJavaInitialize)
+        if (!Data.SettingEntry.IsCompleteJavaInitialize)
         {
             return (true, 3);
         }
 
-        if (!Data.Setting.IsCompleteAccountInitialize)
+        if (!Data.SettingEntry.IsCompleteAccountInitialize)
         {
             return (true, 4);
         } 

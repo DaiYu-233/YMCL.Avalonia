@@ -210,7 +210,7 @@
                     VerticalAlignment="Center">
                     <TextBlock
                         Name="VolumeText"
-                        Text="{Binding Setting.Volume, Converter={StaticResource DoubleToIntByRoundConverter}}"
+                        Text="{Binding SettingEntry.Volume, Converter={StaticResource DoubleToIntByRoundConverter}}"
                         TextAlignment="Center"
                         Width="25" />
                     <TextBlock Text="%" />
@@ -219,7 +219,7 @@
                     Margin="15,0"
                     Maximum="100"
                     Name="VolumeSlider"
-                    Value="{Binding Setting.Volume}"
+                    Value="{Binding SettingEntry.Volume}"
                     Width="100" />
             </DockPanel>
         </Border>

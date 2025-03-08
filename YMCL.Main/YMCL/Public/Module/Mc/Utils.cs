@@ -32,8 +32,8 @@ public class Utils
 
     public static MinecraftEntry? GetCurrentMinecraft()
     {
-        if (Data.Setting.SelectedMinecraftId == "bedrock") return null;
-        var parser = new MinecraftParser(Data.Setting.MinecraftFolder.Path);
-        return parser.GetMinecraft(Data.Setting.SelectedMinecraftId);
+        if (Data.SettingEntry.SelectedMinecraftId == "bedrock") return null;
+        var parser = new MinecraftParser(Data.SettingEntry.MinecraftFolder.Path);
+        return parser.GetMinecraft(Data.SettingEntry.SelectedMinecraftId);
     }
 }

@@ -27,7 +27,7 @@ public partial class Personalize : UserControl
             var list = await TopLevel.GetTopLevel(this).StorageProvider.OpenFilePickerAsync(
                 new FilePickerOpenOptions { AllowMultiple = false, Title = MainLang.SelectJava });
             if (list.Count == 0) return;
-            Data.Setting.WindowBackGroundImgData =
+            Data.SettingEntry.WindowBackGroundImgData =
                 Public.Module.Value.Converter.BytesToBase64(File.ReadAllBytes(list[0].Path.LocalPath));
             Public.Module.Ui.Setter.SetBackGround();
         };
@@ -43,9 +43,9 @@ public partial class Personalize : UserControl
             "NotificationBubble",
             "Popup"
         };
-        if (!string.IsNullOrWhiteSpace(Data.Setting.SpecialControlEnableTranslucent))
+        if (!string.IsNullOrWhiteSpace(Data.SettingEntry.SpecialControlEnableTranslucent))
         {
-            Data.Setting.SpecialControlEnableTranslucent.Split(',').Select(x => x.Trim())
+            Data.SettingEntry.SpecialControlEnableTranslucent.Split(',').Select(x => x.Trim())
                 .Distinct().ToList().ForEach(x => SelectedItems.Add(x));
         }
 
@@ -56,9 +56,9 @@ public partial class Personalize : UserControl
             Dispatcher.UIThread.Invoke(() =>
             {
                 SelectedItems.Clear();
-                if (!string.IsNullOrWhiteSpace(Data.Setting.SpecialControlEnableTranslucent))
+                if (!string.IsNullOrWhiteSpace(Data.SettingEntry.SpecialControlEnableTranslucent))
                 {
-                    Data.Setting.SpecialControlEnableTranslucent.Split(',').Select(x => x.Trim())
+                    Data.SettingEntry.SpecialControlEnableTranslucent.Split(',').Select(x => x.Trim())
                         .Distinct().ToList().ForEach(x => SelectedItems.Add(x));
                 }
             });
@@ -67,7 +67,7 @@ public partial class Personalize : UserControl
         SelectedItems.CollectionChanged += (_, _) =>
         {
             if (isDistinct) return;
-            Data.Setting.SpecialControlEnableTranslucent =
+            Data.SettingEntry.SpecialControlEnableTranslucent =
                 SelectedItems.Count == 0 ? "" : string.Join(",", SelectedItems.Distinct());
             debouncer.Trigger();
         };

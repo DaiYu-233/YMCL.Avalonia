@@ -42,7 +42,7 @@ public partial class MinecraftSetting
     {
         if (entry.EnableIndependencyCore == Enum.Setting.VersionSettingEnableIndependencyCore.Global)
         {
-            entry.IsEnableIndependencyCore = Data.Setting.EnableIndependencyCore;
+            entry.IsEnableIndependencyCore = Data.SettingEntry.EnableIndependencyCore;
         }
         else
         {
@@ -52,12 +52,12 @@ public partial class MinecraftSetting
 
         if (entry.MaxMem < 0)
         {
-            entry.MaxMem = Data.Setting.MaxMem;
+            entry.MaxMem = Data.SettingEntry.MaxMem;
         }
 
         if (entry.Java.JavaStringVersion == "Global")
         {
-            entry.Java = Data.Setting.Java;
+            entry.Java = Data.SettingEntry.Java;
         }
     }
 }

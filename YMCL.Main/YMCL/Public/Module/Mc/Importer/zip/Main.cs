@@ -18,10 +18,10 @@ public class Main
             return;
         }
 
-        if (Data.Setting.SelectedMinecraftId == "bedrock") return;
+        if (Data.SettingEntry.SelectedMinecraftId == "bedrock") return;
 
         var selection = await ShowDialogWithComboBox([MainLang.AsResourcePackImport, MainLang.AsShaderPackImport],
-            $"{MainLang.Import} → {Data.Setting.SelectedMinecraftId}",
+            $"{MainLang.Import} → {Data.SettingEntry.SelectedMinecraftId}",
             $"{MainLang.HopeHowToHandleTheFile}: {Path.GetFileName(path)}");
 
         if (selection == 0)

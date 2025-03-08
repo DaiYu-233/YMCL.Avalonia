@@ -16,8 +16,8 @@ public class LaunchUi
 {
     public static void LoadGames()
     {
-        if (Data.Setting == null) return;
-        if (Data.Setting.MinecraftFolder == null) return;
+        if (Data.SettingEntry == null) return;
+        if (Data.SettingEntry.MinecraftFolder == null) return;
         MinecraftDataEntry? selected = null;
         if (Data.CurrentFolderGames.Count > 0)
         {
@@ -25,7 +25,7 @@ public class LaunchUi
         }
 
         List<MinecraftDataEntry> games = [];
-        var resolver = new MinecraftParser(Data.Setting.MinecraftFolder.Path);
+        var resolver = new MinecraftParser(Data.SettingEntry.MinecraftFolder.Path);
         resolver.GetMinecrafts().ToList().ForEach(a =>
         {
             try

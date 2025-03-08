@@ -8,6 +8,6 @@ public partial class Language : UserControl
     public Language()
     {
         InitializeComponent(); 
-        DataContext = Data.Setting;
+        DataContext = Data.SettingEntry;
     }
 }

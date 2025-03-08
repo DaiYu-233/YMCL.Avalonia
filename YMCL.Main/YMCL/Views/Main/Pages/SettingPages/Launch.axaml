@@ -43,7 +43,7 @@
                         FontFamily="{DynamicResource Font}"
                         HorizontalAlignment="Stretch"
                         ItemsSource="{Binding MinecraftFolders}"
-                        SelectedItem="{Binding Setting.MinecraftFolder}"
+                        SelectedItem="{Binding SettingEntry.MinecraftFolder}"
                         x:Name="MinecraftFolderComboBox">
                         <ComboBox.ItemTemplate>
                             <DataTemplate DataType="data:MinecraftFolder">
@@ -97,7 +97,7 @@
                         HorizontalAlignment="Stretch"
                         ItemsSource="{Binding JavaRuntimes}"
                         Name="JavaComboBox"
-                        SelectedItem="{Binding Setting.Java}">
+                        SelectedItem="{Binding SettingEntry.Java}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate DataType="data:JavaEntry">
                                 <TextBlock>
@@ -129,7 +129,7 @@
                         FontFamily="{DynamicResource Font}"
                         HorizontalAlignment="Stretch"
                         Name="LaunchCoreComboBox"
-                        SelectedIndex="{Binding Setting.LaunchCore}">
+                        SelectedIndex="{Binding SettingEntry.LaunchCore}">
                         <ComboBox.Items>
                             <ComboBoxItem>MinecraftLaunch</ComboBoxItem>
                             <ComboBoxItem>StarLight</ComboBoxItem>
@@ -168,7 +168,7 @@
                             Name="MaxMemText"
                             TextAlignment="Center"
                             VerticalAlignment="Center">
-                            <Run Text="{Binding Setting.MaxMem}" />
+                            <Run Text="{Binding SettingEntry.MaxMem}" />
                             <Run Text="Mib" />
                         </TextBlock>
                         <Slider
@@ -177,7 +177,7 @@
                             Maximum="{Binding UiProperty.Instance.SystemMaxMem}"
                             Name="MaxMemSlider"
                             TickFrequency="1"
-                            Value="{Binding Setting.MaxMem}"
+                            Value="{Binding SettingEntry.MaxMem}"
                             VerticalAlignment="Center" />
                     </DockPanel>
                     <DockPanel Name="UsedMemRoot">
@@ -222,7 +222,7 @@
                         FontFamily="{DynamicResource Font}"
                         Height="40"
                         HorizontalAlignment="Right"
-                        IsChecked="{Binding Setting.EnableIndependencyCore}"
+                        IsChecked="{Binding SettingEntry.EnableIndependencyCore}"
                         Margin="0,-10,10,0"
                         Name="IndependencyCoreSwitch"
                         OffContent="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Off}"
@@ -247,7 +247,7 @@
                         FontFamily="{DynamicResource Font}"
                         Height="40"
                         HorizontalAlignment="Right"
-                        IsChecked="{Binding Setting.ShowGameOutput}"
+                        IsChecked="{Binding SettingEntry.ShowGameOutput}"
                         Margin="0,-10,10,0"
                         Name="ShowGameOutputSwitch"
                         OffContent="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Off}"

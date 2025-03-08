@@ -342,7 +342,7 @@ public class Account
 
     public static void RemoveSelected()
     {
-        var item = Data.Setting.Account;
+        var item = Data.SettingEntry.Account;
         if (item == null) return;
         Data.Accounts.Remove(item);
         if (Data.Accounts.Count == 0)
@@ -353,11 +353,11 @@ public class Account
                 AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")
             };
             Data.Accounts.Add(account);
-            Data.Setting.Account = account;
+            Data.SettingEntry.Account = account;
         }
         else
         {
-            Data.Setting.Account = Data.Accounts[0];
+            Data.SettingEntry.Account = Data.Accounts[0];
         }
 
         File.WriteAllText(ConfigPath.AccountDataPath,
@@ -367,14 +367,14 @@ public class Account
 
     public static async Task RefreshSelectedMicrosoftAccountSkin()
     {
-        if (Data.Setting.Account is not { AccountType: Setting.AccountType.Microsoft }) return;
-        if (Data.Setting.Account.Data != null)
+        if (Data.SettingEntry.Account is not { AccountType: Setting.AccountType.Microsoft }) return;
+        if (Data.SettingEntry.Account.Data != null)
         {
-            var obj = JObject.Parse(Data.Setting.Account.Data);
+            var obj = JObject.Parse(Data.SettingEntry.Account.Data);
             var uuid = obj["Uuid"].ToString();
             MicrosoftSkinFetcher skinFetcher = new(uuid);
             var skin = await skinFetcher.GetSkinAsync();
-            Data.Setting.Account.UpdateSkin(skin);
+            Data.SettingEntry.Account.UpdateSkin(skin);
         }
     }
 }

@@ -20,7 +20,7 @@ public static class InitDispatcher
         TranslateToken.RefreshToken();
         Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
         Public.Module.Ui.Special.AggregateSearchUi.Filter(string.Empty);
-        Ui.Setter.ToggleTheme(Data.Setting.Theme);
+        Ui.Setter.ToggleTheme(Data.SettingEntry.Theme);
         return true;
     }
 

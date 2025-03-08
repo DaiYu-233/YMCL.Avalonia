@@ -46,7 +46,7 @@
                             ItemsSource="{Binding Accounts}"
                             Margin="0,0,0,5"
                             Name="AccountComboBox"
-                            SelectedItem="{Binding Setting.Account}">
+                            SelectedItem="{Binding SettingEntry.Account}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate DataType="setting:AccountInfo">
                                     <TextBlock>
@@ -122,7 +122,7 @@
                         Opacity="{DynamicResource MainOpacity}"
                         VerticalAlignment="Center"
                         Width="90">
-                        <Image Name="Head" Source="{Binding Setting.Account.Bitmap}" />
+                        <Image Name="Head" Source="{Binding SettingEntry.Account.Bitmap}" />
                         <Border.ContextFlyout>
                             <MenuFlyout Placement="BottomEdgeAlignedRight">
                                 <MenuItem Click="SaveSkin" Header="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.SaveSkinFile}">

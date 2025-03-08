@@ -87,9 +87,9 @@ public class JavaRuntime
 
     public static void RemoveSelected()
     {
-        if (Data.Setting.Java == null || Data.Setting.Java.JavaStringVersion == "Auto") return;
-        Data.JavaRuntimes.Remove(Data.Setting.Java);
-        Data.Setting.Java = new JavaEntry { JavaPath = MainLang.LetYMCLChooseJava, JavaStringVersion = "Auto" };
+        if (Data.SettingEntry.Java == null || Data.SettingEntry.Java.JavaStringVersion == "Auto") return;
+        Data.JavaRuntimes.Remove(Data.SettingEntry.Java);
+        Data.SettingEntry.Java = new JavaEntry { JavaPath = MainLang.LetYMCLChooseJava, JavaStringVersion = "Auto" };
         File.WriteAllText(ConfigPath.JavaDataPath,
             JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
         Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();

@@ -5,8 +5,8 @@ public static class Number
     public static string ToUnit(this double number)
     {
         var isChinese = false;
-        if (Data.Setting != null)
-            isChinese = Data.Setting.Language.Code == "zh-CN";
+        if (Data.SettingEntry != null)
+            isChinese = Data.SettingEntry.Language.Code == "zh-CN";
         if (isChinese)
         {
             if (number >= 100000000)

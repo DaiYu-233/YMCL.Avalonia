@@ -22,7 +22,7 @@ public partial class GameList : UserControl
         GameListView.PointerExited += (_, _) => CanCloseGameList = false;
         OpenSelectedMinecraftFolderBtn.Click+= (_, _) =>
         {
-            var path = Data.Setting.MinecraftFolder.Path;
+            var path = Data.SettingEntry.MinecraftFolder.Path;
             YMCL.Public.Module.IO.Disk.Setter.TryCreateFolder(path);
             var launcher = TopLevel.GetTopLevel(this).Launcher;
             launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(path));

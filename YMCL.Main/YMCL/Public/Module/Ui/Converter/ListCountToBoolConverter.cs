@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using Avalonia.Data.Converters;
+using FluentAvalonia.Core;
 
 namespace YMCL.Public.Module.Ui.Converter;
 
@@ -9,9 +11,10 @@ public class ListCountToBoolConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is List<object> list)
+        if (value is IEnumerable list)
         {
-            return list.Count > 0;
+            var b = list.Count() > 0;
+            return b;
         }
 
         if (value is ObservableCollection<object> collection)

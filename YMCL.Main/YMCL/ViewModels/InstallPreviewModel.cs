@@ -36,6 +36,11 @@ public sealed class InstallPreviewModel : ReactiveObject
     [Reactive] public bool NeoForgeLoading { get; set; } = true;
     [Reactive] public bool QuiltLoading { get; set; } = true;
     [Reactive] public bool FabricLoading { get; set; } = true;
+    [Reactive] public bool NoOptiFine { get; set; }
+    [Reactive] public bool NoForge { get; set; }
+    [Reactive] public bool NoQuilt { get; set; }
+    [Reactive] public bool NoFabric { get; set; }
+    [Reactive] public bool NoNeoForge { get; set; }
     [Reactive] public string SelectedOptiFine { get; set; }
     [Reactive] public string SelectedForge { get; set; }
     [Reactive] public string SelectedNeoForge { get; set; }

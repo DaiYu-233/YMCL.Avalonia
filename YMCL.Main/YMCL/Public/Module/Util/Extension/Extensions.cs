@@ -1,7 +1,10 @@
 ﻿using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.IO;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
 using Modrinth.Extensions;
 using Modrinth.Models;

@@ -84,6 +84,11 @@ public class Shower
                 }
             };
         }
+
+        if (string.IsNullOrWhiteSpace(msg) && p_content == null)
+        {
+            content = null;
+        }
         var dialog = new ContentDialog
         {
             PrimaryButtonText = b_primary,

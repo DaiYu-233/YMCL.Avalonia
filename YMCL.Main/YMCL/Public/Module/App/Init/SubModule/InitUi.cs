@@ -6,6 +6,7 @@ using Avalonia.Media;
 using Avalonia.Styling;
 using Avalonia.VisualTree;
 using FluentAvalonia.Core;
+using YMCL.Public.Classes.Setting;
 using YMCL.Public.Enum;
 using YMCL.Public.Module.Ui;
 
@@ -118,12 +119,12 @@ public class InitUi
     public static async Task SetCustomHomePage()
     {
         if (YMCL.App.UiRoot is null) return;
-        if (Data.SettingEntry.CustomHomePage == Setting.CustomHomePageWay.None)
+        if (Data.SettingEntry.CustomHomePage == Enum.Setting.CustomHomePageWay.None)
         {
             YMCL.App.UiRoot.ViewModel.Launch.CustomPageRoot.Child = null;
         }
 
-        if (Data.SettingEntry.CustomHomePage == Setting.CustomHomePageWay.Local)
+        if (Data.SettingEntry.CustomHomePage == Enum.Setting.CustomHomePageWay.Local)
         {
             try
             {
@@ -137,7 +138,7 @@ public class InitUi
             }
         }
 
-        if (Data.SettingEntry.CustomHomePage == Setting.CustomHomePageWay.Network)
+        if (Data.SettingEntry.CustomHomePage == Enum.Setting.CustomHomePageWay.Network)
         {
             if (!Uri.TryCreate(Data.SettingEntry.CustomUpdateUrl, UriKind.Absolute, out _)) return;
             try

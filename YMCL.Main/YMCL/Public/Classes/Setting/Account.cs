@@ -39,7 +39,7 @@ public sealed record AccountInfo : INotifyPropertyChanged
 
     public bool Equals(AccountInfo? other)
     {
-        return other != null && Skin == other.Skin && AddTime == other.AddTime && Name == other.Name;
+        return other != null && Skin == other.Skin && Name == other.Name && Data == other.Data;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

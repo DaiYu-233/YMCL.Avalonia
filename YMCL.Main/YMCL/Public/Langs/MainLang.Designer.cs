@@ -681,6 +681,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 复制到剪贴板.
+        /// </summary>
+        public static string CopyToClipBoard {
+            get {
+                return ResourceManager.GetString("CopyToClipBoard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ctrl + C 复制以下链接并粘贴至浏览器.
         /// </summary>
         public static string CopyUrlAndManualOpen {
@@ -1187,6 +1196,51 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 账户数据(不含微软帐户).
+        /// </summary>
+        public static string ExchangeSetting_Account {
+            get {
+                return ResourceManager.GetString("ExchangeSetting_Account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 启动设置.
+        /// </summary>
+        public static string ExchangeSetting_Launch {
+            get {
+                return ResourceManager.GetString("ExchangeSetting_Launch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 网络设置.
+        /// </summary>
+        public static string ExchangeSetting_Net {
+            get {
+                return ResourceManager.GetString("ExchangeSetting_Net", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 其他设置.
+        /// </summary>
+        public static string ExchangeSetting_Other {
+            get {
+                return ResourceManager.GetString("ExchangeSetting_Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 界面设置.
+        /// </summary>
+        public static string ExchangeSetting_Ui {
+            get {
+                return ResourceManager.GetString("ExchangeSetting_Ui", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 现存账户.
         /// </summary>
         public static string ExistAccount {
@@ -1232,11 +1286,29 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 导出成功，数据量过大无法显示，点击复制以复制所有数据.
+        /// </summary>
+        public static string ExportSettingSuccessTip {
+            get {
+                return ResourceManager.GetString("ExportSettingSuccessTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 选择需要导出的设置项.
         /// </summary>
         public static string ExportSettingTip {
             get {
                 return ResourceManager.GetString("ExportSettingTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 导出成功.
+        /// </summary>
+        public static string ExportSuccess {
+            get {
+                return ResourceManager.GetString("ExportSuccess", resourceCulture);
             }
         }
         
@@ -1553,6 +1625,15 @@ namespace YMCL.Public.Langs {
         public static string ImportOrExportSetting {
             get {
                 return ResourceManager.GetString("ImportOrExportSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 输入hex数据.
+        /// </summary>
+        public static string ImportSettingTextBoxWatermark {
+            get {
+                return ResourceManager.GetString("ImportSettingTextBoxWatermark", resourceCulture);
             }
         }
         
@@ -2571,6 +2652,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 打开文件.
+        /// </summary>
+        public static string OpenFile {
+            get {
+                return ResourceManager.GetString("OpenFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 打开文件方式.
         /// </summary>
         public static string OpenFileWay {
@@ -2693,6 +2783,15 @@ namespace YMCL.Public.Langs {
         public static string ProjectInfo {
             get {
                 return ResourceManager.GetString("ProjectInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 读取剪贴板.
+        /// </summary>
+        public static string ReadClipBoard {
+            get {
+                return ResourceManager.GetString("ReadClipBoard", resourceCulture);
             }
         }
         

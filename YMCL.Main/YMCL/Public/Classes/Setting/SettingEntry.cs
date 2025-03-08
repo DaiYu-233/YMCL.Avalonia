@@ -26,7 +26,6 @@ public class SettingEntry : ReactiveObject
     [Reactive] [JsonProperty] public bool IsCompleteMinecraftFolderInitialize { get; set; }
     [Reactive] [JsonProperty] public bool IsCompleteAccountInitialize { get; set; }
     [Reactive] [JsonProperty] public string? CustomHomePageUrl { get; set; }
-    [Reactive] [JsonProperty] public Enum.Setting.OpenFileWay OpenFileWay { get; set; }
     [Reactive] [JsonProperty] public Enum.Setting.NoticeWay NoticeWay { get; set; } = Enum.Setting.NoticeWay.Bubble;
 
     [Reactive]
@@ -46,11 +45,6 @@ public class SettingEntry : ReactiveObject
     [Reactive] [JsonProperty] public double DeskLyricSize { get; set; } = 16;
     [Reactive] [JsonProperty] public Enum.Setting.Repeat Repeat { get; set; } = Enum.Setting.Repeat.RepeatAll;
     [Reactive] [JsonProperty] public TextAlignment DeskLyricAlignment { get; set; } = TextAlignment.Center;
-
-    [Reactive]
-    [JsonProperty]
-    public Enum.Setting.LaunchCore LaunchCore { get; set; } = Enum.Setting.LaunchCore.MinecraftLaunch;
-
     [Reactive] [JsonProperty] public string? SelectedMinecraftId { get; set; }
     [Reactive] [JsonProperty] public bool EnableIndependencyCore { get; set; } = true;
     [Reactive] [JsonProperty] public bool EnableCustomUpdateUrl { get; set; }
@@ -65,10 +59,7 @@ public class SettingEntry : ReactiveObject
     [Reactive]
     [JsonProperty]
     public Enum.Setting.CustomBackGroundWay CustomBackGround { get; set; } = Enum.Setting.CustomBackGroundWay.Default;
-
-    [Reactive] [JsonProperty] public bool EnableDisplayIndependentTaskWindow { get; set; }
-    [Reactive] [JsonProperty] public bool ShowGameOutput { get; set; }
-
+    
     [Reactive]
     [JsonProperty]
     public Enum.Setting.CustomHomePageWay CustomHomePage { get; set; } = Enum.Setting.CustomHomePageWay.None;

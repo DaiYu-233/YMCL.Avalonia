@@ -17,8 +17,12 @@ public class Converter
         return bytes;
     }
     
-    public static string StandardizeUrl(string url)
+    public static string StandardizeUrl(string? url)
     {
+        if (string.IsNullOrWhiteSpace(url))
+        {
+            return string.Empty;
+        }
         // 检查字符串是否以协议开始，如果没有，则添加http协议
         if (!url.StartsWith("http://") && !url.StartsWith("https://"))
         {

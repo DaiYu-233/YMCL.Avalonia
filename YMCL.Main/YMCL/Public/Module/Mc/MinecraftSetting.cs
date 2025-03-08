@@ -50,9 +50,24 @@ public partial class MinecraftSetting
                 entry.EnableIndependencyCore == Enum.Setting.VersionSettingEnableIndependencyCore.On;
         }
 
-        if (entry.MaxMem < 0)
+        if (entry.MaxMemWay == Setting.MaxMemWay.Global)
         {
-            entry.MaxMem = Data.SettingEntry.MaxMem;
+            if (Data.SettingEntry.EnableAutoAllocateMem && Data.DesktopType == DesktopRunnerType.Windows)
+            {
+                entry.MaxMem = Data.UiProperty.AutoMaxMem;
+            }
+            else
+            {
+                entry.MaxMem = Data.SettingEntry.MaxMem;
+            }
+        }
+        else if (entry.MaxMemWay == Setting.MaxMemWay.AutoAllocate)
+        {
+            entry.MaxMem = Data.DesktopType == DesktopRunnerType.Windows ? Data.UiProperty.AutoMaxMem : Data.SettingEntry.MaxMem;
+        }
+        else if (entry.MaxMemWay == Setting.MaxMemWay.Custom)
+        {
+            entry.MaxMem = entry.MaxMem;
         }
 
         if (entry.Java.JavaStringVersion == "Global")

@@ -60,15 +60,6 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string _ {
-            get {
-                return ResourceManager.GetString("", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to 关于.
         /// </summary>
         public static string About {
@@ -398,6 +389,15 @@ namespace YMCL.Public.Langs {
         public static string Author {
             get {
                 return ResourceManager.GetString("Author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 自动分配.
+        /// </summary>
+        public static string AutoAllocate {
+            get {
+                return ResourceManager.GetString("AutoAllocate", resourceCulture);
             }
         }
         
@@ -809,6 +809,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 自定义.
+        /// </summary>
+        public static string Custom {
+            get {
+                return ResourceManager.GetString("Custom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 自定义背景.
         /// </summary>
         public static string CustomBackground {
@@ -1165,6 +1174,15 @@ namespace YMCL.Public.Langs {
         public static string EnableAll {
             get {
                 return ResourceManager.GetString("EnableAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 启用自动分配内存.
+        /// </summary>
+        public static string EnableAutoAllocateMem {
+            get {
+                return ResourceManager.GetString("EnableAutoAllocateMem", resourceCulture);
             }
         }
         

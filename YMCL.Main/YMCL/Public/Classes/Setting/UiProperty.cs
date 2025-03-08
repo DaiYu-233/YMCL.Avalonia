@@ -32,6 +32,7 @@ public sealed class UiProperty : ReactiveObject
     [Reactive] public bool IsAllImport { get; set; } = false;
     [Reactive] public double TaskEntryHeaderWidth { get; set; }
     [Reactive] public double SystemMaxMem { get; set; }
+    [Reactive] public double AutoMaxMem { get; set; }
     [Reactive] public MinecraftDataEntry SelectedMinecraft { get; set; }
     [Reactive] public string AggregateSearchFilter { get; set; } = string.Empty;
     [Reactive] public double MusicTotalTime { get; set; } 

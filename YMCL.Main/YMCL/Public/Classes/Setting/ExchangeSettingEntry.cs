@@ -30,6 +30,7 @@ public record ExchangeSettingEntry
     public record LaunchSettings
     {
         public double MaxMem { get; set; }
+        public bool EnableAutoAllocateMem { get; set; }
         public bool EnableIndependencyCore { get; set; }
     }
 

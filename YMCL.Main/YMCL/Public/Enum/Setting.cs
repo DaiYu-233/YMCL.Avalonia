@@ -82,6 +82,12 @@ public class Setting
         Off,
         On
     }
+    public enum MaxMemWay
+    {
+        Global,
+        AutoAllocate,
+        Custom
+    }
 
     public enum NoticeWay
     {

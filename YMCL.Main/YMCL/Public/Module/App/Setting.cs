@@ -31,7 +31,11 @@ public class Setting
 
             LaunchSettings = launch
                 ? new ExchangeSettingEntry.LaunchSettings()
-                    { MaxMem = s.MaxMem, EnableIndependencyCore = s.EnableIndependencyCore }
+                {
+                    MaxMem = s.MaxMem,
+                    EnableIndependencyCore = s.EnableIndependencyCore,
+                    EnableAutoAllocateMem = s.EnableAutoAllocateMem
+                }
                 : null,
 
             UiSettings = ui
@@ -151,16 +155,18 @@ public class Setting
 
         if (data.AccountSettings != null)
         {
-            data.AccountSettings.ToList().ForEach(x => {
+            data.AccountSettings.ToList().ForEach(x =>
+            {
                 if (!Data.Accounts.Contains(x))
                 {
                     Data.Accounts.Add(x);
-                } });
+                }
+            });
             File.WriteAllText(ConfigPath.AccountDataPath,
                 JsonConvert.SerializeObject(Data.Accounts, Formatting.Indented));
             Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
         }
-        
+
         _ = InitUi.Dispatch();
     }
 }

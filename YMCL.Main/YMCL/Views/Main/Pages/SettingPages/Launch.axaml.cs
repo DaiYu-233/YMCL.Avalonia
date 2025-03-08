@@ -22,6 +22,7 @@ public partial class Launch : UserControl
     private async System.Threading.Tasks.Task ControlProperty()
     {
         DataContext = Data.Instance;
+        AutoMemProgressBar.Maximum = UiProperty.Instance.SystemMaxMem;
         while (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             await System.Threading.Tasks.Task.Run(() =>
@@ -39,6 +40,10 @@ public partial class Launch : UserControl
                         UsedMemText.Text = $"{used}%";
                         UsedMemProgressBar.Value = used;
                         CanUseMemText.Text = $"{free}%";
+                        var auto = Math.Floor((100 - used) / 100 * 0.75 * UiProperty.Instance.SystemMaxMem);
+                        AutoMemProgressBar.Value = auto;
+                        AutoMemText.Text = $"{auto} Mib";
+                        Data.UiProperty.AutoMaxMem = auto;
                     });
                 }
             });
@@ -49,6 +54,7 @@ public partial class Launch : UserControl
         {
             UsedMemRoot.IsVisible = false;
             CanUseMemText.IsVisible = false;
+            AutoScanJavaBtn.IsVisible = false;
         }
     }
 

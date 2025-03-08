@@ -109,8 +109,7 @@ public class JavaClient
             case Setting.AccountType.Offline:
                 if (!string.IsNullOrWhiteSpace(Data.SettingEntry.Account.Name))
                 {
-                    OfflineAuthenticator authenticator1 = new();
-                    account = authenticator1.Authenticate(Data.SettingEntry.Account.Name);
+                    account = JsonConvert.DeserializeObject<OfflineAccount>(Data.SettingEntry.Account.Data!);
                 }
                 else
                 {

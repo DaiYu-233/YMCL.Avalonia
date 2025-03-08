@@ -60,6 +60,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string _ {
+            get {
+                return ResourceManager.GetString("", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 关于.
         /// </summary>
         public static string About {
@@ -83,6 +92,15 @@ namespace YMCL.Public.Langs {
         public static string AccountError {
             get {
                 return ResourceManager.GetString("AccountError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 账户名称.
+        /// </summary>
+        public static string AccountName {
+            get {
+                return ResourceManager.GetString("AccountName", resourceCulture);
             }
         }
         
@@ -155,6 +173,15 @@ namespace YMCL.Public.Langs {
         public static string AddNewAccount {
             get {
                 return ResourceManager.GetString("AddNewAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uuid，留空则自动生成.
+        /// </summary>
+        public static string AddNewAccountUuid {
+            get {
+                return ResourceManager.GetString("AddNewAccountUuid", resourceCulture);
             }
         }
         

@@ -50,30 +50,51 @@ public class Account
                     var textBox = new TextBox
                     {
                         FontFamily = (FontFamily)Application.Current.Resources["Font"],
-                        TextWrapping = TextWrapping.Wrap
+                        TextWrapping = TextWrapping.Wrap, Watermark = MainLang.AccountName
+                    };
+                    var uuidTextBox = new TextBox
+                    {
+                        FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                        TextWrapping = TextWrapping.Wrap, Watermark = MainLang.AddNewAccountUuid
                     };
                     ContentDialog offlineDialog = new()
                     {
                         FontFamily = (FontFamily)Application.Current.Resources["Font"],
-                        Title = MainLang.InputAccountName,
+                        Title = MainLang.AddNewAccount,
                         PrimaryButtonText = MainLang.Ok,
                         CloseButtonText = MainLang.Cancel,
                         DefaultButton = ContentDialogButton.Primary,
-                        Content = textBox
+                        Content = new StackPanel()
+                        {
+                            Spacing = 10,
+                            Children = { textBox, uuidTextBox }
+                        }
                     };
                     var dialogResult1 = await offlineDialog.ShowAsync(TopLevel.GetTopLevel(sender));
                     if (dialogResult1 == ContentDialogResult.Primary)
                     {
-                        if (!string.IsNullOrWhiteSpace(textBox.Text) && !string.IsNullOrWhiteSpace(textBox.Text))
+                        if (!string.IsNullOrWhiteSpace(textBox.Text))
                         {
                             var now = DateTime.Now;
-                            Data.Accounts.Add(new AccountInfo
+                            OfflineAuthenticator authenticator3 = new();
+                            try
                             {
-                                AccountType = Setting.AccountType.Offline,
-                                AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
-                                Data = null,
-                                Name = textBox.Text
-                            });
+                                Data.Accounts.Add(new AccountInfo
+                                {
+                                    AccountType = Setting.AccountType.Offline,
+                                    AddTime = now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
+                                    Data = JsonConvert.SerializeObject(
+                                        authenticator3.Authenticate(textBox.Text,
+                                            uuidTextBox.Text == null ? Guid.NewGuid() : Guid.Parse(uuidTextBox.Text))),
+                                    Name = textBox.Text
+                                });
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e);
+                                Notice(MainLang.OperateFailed, NotificationType.Error);
+                            }
+
                             await File.WriteAllTextAsync(ConfigPath.AccountDataPath,
                                 JsonConvert.SerializeObject(Data.Accounts, Formatting.Indented));
                         }
@@ -350,7 +371,8 @@ public class Account
             var account = new AccountInfo
             {
                 Name = "Steve", AccountType = Setting.AccountType.Offline,
-                AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")
+                AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
+                Data = JsonConvert.SerializeObject(new OfflineAuthenticator().Authenticate("Steve"))
             };
             Data.Accounts.Add(account);
             Data.SettingEntry.Account = account;

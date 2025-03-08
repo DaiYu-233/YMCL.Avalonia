@@ -1393,4 +1393,13 @@ MacOs 不支持自动更新
   <data name="NeedToManuallyOpenTheTerminalAndExecuteTheFollowingCommand" xml:space="preserve">
     <value>需要手动打开终端执行以下命令</value>
   </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>账户名称</value>
+  </data>
+  <data name="" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AddNewAccountUuid" xml:space="preserve">
+    <value>Uuid，留空则自动生成</value>
+  </data>
 </root>

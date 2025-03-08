@@ -1,6 +1,7 @@
 ﻿using Avalonia.Media;
 using Avalonia.Threading;
 using MinecraftLaunch;
+using MinecraftLaunch.Components.Authenticator;
 using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -81,7 +82,8 @@ public class SettingEntry : ReactiveObject
     public AccountInfo Account { get; set; } = new()
     {
         Name = "Steve", AccountType = Enum.Setting.AccountType.Offline,
-        AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")
+        AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"), 
+        Data = JsonConvert.SerializeObject(new OfflineAuthenticator().Authenticate("Steve"))
     };
 
     [Reactive] [JsonProperty] public string? WindowBackGroundImgData { get; set; } = string.Empty;

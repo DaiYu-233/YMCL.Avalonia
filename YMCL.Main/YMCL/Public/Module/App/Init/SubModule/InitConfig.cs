@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using MinecraftLaunch.Components.Authenticator;
 using Newtonsoft.Json;
 using YMCL.Public.Classes.Data;
 using YMCL.Public.Classes.Netease;
@@ -66,7 +67,8 @@ public static class InitConfig
                         new()
                         {
                             Name = "Steve", AccountType = Enum.Setting.AccountType.Offline,
-                            AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")
+                            AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"),
+                            Data = JsonConvert.SerializeObject(new OfflineAuthenticator().Authenticate("Steve"))
                         }
                     }, Formatting.Indented));
         if (File.Exists(ConfigPath.CustomHomePageXamlDataPath)) return;

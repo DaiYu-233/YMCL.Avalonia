@@ -18,7 +18,7 @@ public class InstallPreviewModLoaders
                 view.Model.NoOptiFine = list.Count == 0;
                 list.ForEach(item => { view.Model.OptiFines.Add(item); });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
                 {
@@ -36,7 +36,7 @@ public class InstallPreviewModLoaders
                 view.Model.NoForge = list.Count == 0;
                 list.ForEach(item => { view.Model.Forges.Add(item); });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
                 {
@@ -54,7 +54,7 @@ public class InstallPreviewModLoaders
                 view.Model.NoNeoForge = list.Count == 0;
                 list.ForEach(item => { view.Model.NeoForges.Add(item); });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
                 {
@@ -72,7 +72,7 @@ public class InstallPreviewModLoaders
                 view.Model.NoQuilt = list.Count == 0;
                 list.ForEach(item => { view.Model.Quilts.Add(item); });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
                 {
@@ -90,7 +90,7 @@ public class InstallPreviewModLoaders
                 view.Model.NoFabric = list.Count == 0;
                 list.ForEach(item => { view.Model.Fabrics.Add(item); });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
                 {

@@ -1,7 +1,12 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.CodeDom;
+using System.CodeDom.Compiler;
+using System.IO;
+using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using Modrinth.Extensions;
 using Modrinth.Models;
 using YMCL.Public.Classes.Data.ResourceFetcher;
+using String = System.String;
 
 namespace YMCL.Public.Module.Util.Extension;
 

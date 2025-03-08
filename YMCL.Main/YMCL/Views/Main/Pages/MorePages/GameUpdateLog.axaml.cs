@@ -15,6 +15,7 @@ using YMCL.Public.Classes;
 using YMCL.Public.Classes.Data;
 using YMCL.Public.Classes.Json;
 using YMCL.Public.Module;
+using YMCL.Public.Module.Util.Extension;
 
 namespace YMCL.Views.Main.Pages.MorePages;
 
@@ -118,16 +119,15 @@ public partial class GameUpdateLog : UserControl
                         $"https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to={Data.Setting.Language.Code}&textType=plain",
                         new StringContent($"[{{\"Text\": \"{textBlock.Text}\"}}]", Encoding.UTF8, "application/json"));
                 var responseContent = await response.Content.ReadAsStringAsync();
-                string translatedText =
+                var translatedText =
                     ((JObject)JArray.Parse(responseContent)[0]["translations"][0])["text"].ToString();
                 if (!string.IsNullOrWhiteSpace(translatedText))
                 {
                     textBlock.Text = translatedText;
                 }
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine(e);
             }
         }
 

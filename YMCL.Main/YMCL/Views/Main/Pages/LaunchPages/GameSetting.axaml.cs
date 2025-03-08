@@ -46,7 +46,7 @@ public partial class GameSetting : UserControl
             var tag = ((e.SelectedItem as NavigationViewItem).Tag as string)!;
             if (tag == "return")
             {
-                _ = App.UiRoot.ViewModel.Launch.CloseGameSetting();
+                _ = YMCL.App.UiRoot.ViewModel.Launch.CloseGameSetting();
                 return;
             }
 

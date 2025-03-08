@@ -26,7 +26,7 @@ public partial class LogViewer : UserControl
     private async void Button_OnClick(object? sender, RoutedEventArgs e)
     {
         var time = DateTime.Now;
-        var path = (await TopLevel.GetTopLevel(App.UiRoot).StorageProvider.SaveFilePickerAsync(
+        var path = (await TopLevel.GetTopLevel(YMCL.App.UiRoot).StorageProvider.SaveFilePickerAsync(
             new FilePickerSaveOptions
             {
                 Title = MainLang.ExportLogFile,

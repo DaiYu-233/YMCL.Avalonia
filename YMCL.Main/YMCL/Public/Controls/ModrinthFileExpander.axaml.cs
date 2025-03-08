@@ -39,7 +39,7 @@ public partial class ModrinthFileExpander : UserControl
         {
             if (ListBox.SelectedItem == null) return;
             var item = ListBox.SelectedItem as ModrinthResourceEntry;
-            App.UiRoot.ViewModel.Download._modrinth.CreateNewPage(new SearchTabViewItemEntry()
+            YMCL.App.UiRoot.ViewModel.Download._modrinth.CreateNewPage(new SearchTabViewItemEntry()
             {
                 CanClose = true, Host = nameof(Views.Main.Pages.DownloadPages.Modrinth),
                 Content = new ModFileResult(item.ProjectId, (item.Name, item.IconUrl, item.Summary)!),

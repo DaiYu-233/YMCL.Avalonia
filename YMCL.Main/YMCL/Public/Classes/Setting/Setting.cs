@@ -137,7 +137,7 @@ public class Setting : ReactiveObject
             if (e.PropertyName == nameof(TranslucentBackgroundOpacity))
             {
                 Application.Current.Resources["MainOpacity"] = TranslucentBackgroundOpacity;
-                if (TopLevel.GetTopLevel(App.UiRoot) is MainWindow window)
+                if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is MainWindow window)
                 {
                     try
                     {

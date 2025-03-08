@@ -105,7 +105,7 @@ public class Update
             _ => "File.unknown"
         };
 
-        var path = (await TopLevel.GetTopLevel(App.UiRoot).StorageProvider.SaveFilePickerAsync(
+        var path = (await TopLevel.GetTopLevel(YMCL.App.UiRoot).StorageProvider.SaveFilePickerAsync(
             new FilePickerSaveOptions
             {
                 Title = MainLang.SaveAs,
@@ -117,7 +117,7 @@ public class Update
             return true;
         }
 
-        App.UiRoot.Nav.SelectedItem = App.UiRoot.NavTask;
+        YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavTask;
         var cts = new CancellationTokenSource();
         var token = cts.Token;
 
@@ -254,7 +254,7 @@ public class Update
 
     public static async Task<bool> UpdateByAutoInstaller(string architecture)
     {
-        App.UiRoot.Nav.SelectedItem = App.UiRoot.NavTask;
+        YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavTask;
         var cts = new CancellationTokenSource();
         var token = cts.Token;
 

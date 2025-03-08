@@ -20,12 +20,12 @@ public partial class InstallableGames : UserControl
         LatestPreviewVersionRoot.PointerPressed += (_, _) =>
         {
             if (UiProperty.Instance.LatestSnapshotGame.Type == null) return;
-            App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview(UiProperty.Instance.LatestSnapshotGame);
+            YMCL.App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview(UiProperty.Instance.LatestSnapshotGame);
         };
         LatestReleaseVersionRoot.PointerPressed += (_, _) =>
         {
             if (UiProperty.Instance.LatestReleaseGame.Type == null) return;
-            App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview(UiProperty.Instance.LatestReleaseGame);
+            YMCL.App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview(UiProperty.Instance.LatestReleaseGame);
         };
         UiProperty.Instance.PropertyChanged += (_, e) =>
         {
@@ -49,7 +49,7 @@ public partial class InstallableGames : UserControl
     {
         if (e.AddedItems.Count <= 0) return;
         (sender as ListBox).SelectedItem = null;
-        App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview((e.AddedItems[0] as VersionManifestEntry)!);
+        YMCL.App.UiRoot.ViewModel.Download._autoInstall.JumpToInstallPreview((e.AddedItems[0] as VersionManifestEntry)!);
     }
 
     public void Filter()

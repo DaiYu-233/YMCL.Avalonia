@@ -45,7 +45,7 @@ public partial class SearchResult : UserControl
         {
             if (ListBox.SelectedItem == null) return;
             var item = ListBox.SelectedItem as CurseForgeResourceEntry;
-            App.UiRoot.ViewModel.Download._curseForge.CreateNewPage(new SearchTabViewItemEntry()
+            YMCL.App.UiRoot.ViewModel.Download._curseForge.CreateNewPage(new SearchTabViewItemEntry()
             {
                 CanClose = true, Host = nameof(DownloadPages.CurseForge),
                 Content = new ModFileResult(item!),

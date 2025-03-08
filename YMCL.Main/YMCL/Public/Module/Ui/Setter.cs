@@ -127,11 +127,11 @@ public class Setter
         if (setting.CustomBackGround == Setting.CustomBackGroundWay.Default)
         {
             window.TransparencyLevelHint = [WindowTransparencyLevel.None];
-            App.UiRoot.Nav.Background = (SolidColorBrush)c1;
+            YMCL.App.UiRoot.Nav.Background = (SolidColorBrush)c1;
         }
         else
         {
-            App.UiRoot.Nav.Background = Brushes.Transparent;
+            YMCL.App.UiRoot.Nav.Background = Brushes.Transparent;
         }
 
         if (setting.CustomBackGround == Setting.CustomBackGroundWay.Image &&
@@ -180,20 +180,20 @@ public class Setter
             //NeverGiveUp
             () =>
             {
-                var launcher = TopLevel.GetTopLevel(App.UiRoot).Launcher;
+                var launcher = TopLevel.GetTopLevel(YMCL.App.UiRoot).Launcher;
                 launcher.LaunchUriAsync(new Uri("https://www.bilibili.com/video/BV1GJ411x7h7/"));
             },
             //Transform180deg
             () =>
             {
-                if (TopLevel.GetTopLevel(App.UiRoot) is not MainWindow window) return;
+                if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is not MainWindow window) return;
                 var rotateTransform = new RotateTransform(180);
                 window.Root.RenderTransform = rotateTransform;
             },
             //WindowMove
             () =>
             {
-                if (TopLevel.GetTopLevel(App.UiRoot) is not MainWindow window) return;
+                if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is not MainWindow window) return;
                 double velocityX = 20; // 水平速度
                 double velocityY = 20; // 垂直速度
 
@@ -212,7 +212,7 @@ public class Setter
 
                 void Timer_Tick(object sender, EventArgs e)
                 {
-                    if (TopLevel.GetTopLevel(App.UiRoot) is not MainWindow mainWindow) return;
+                    if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is not MainWindow mainWindow) return;
                     var newPosition = new PixelPoint((int)(mainWindow.Position.X + velocityX),
                         (int)(mainWindow.Position.Y + velocityY));
 
@@ -237,7 +237,7 @@ public class Setter
             async () =>
             {
                 var deg = 0;
-                if (TopLevel.GetTopLevel(App.UiRoot) is not MainWindow window) return;
+                if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is not MainWindow window) return;
                 while (true)
                 {
                     Dispatcher.UIThread.Invoke(() =>

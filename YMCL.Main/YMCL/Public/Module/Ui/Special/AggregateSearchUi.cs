@@ -121,7 +121,7 @@ public class AggregateSearchUi
                 if (string.IsNullOrWhiteSpace(entry.Keyword)) return;
                 YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavDownload;
                 YMCL.App.UiRoot.ViewModel.Download.Nav.SelectedItem = YMCL.App.UiRoot.ViewModel.Download.NavCf;
-                App.UiRoot.ViewModel.Download._curseForge.CreateNewPage(new SearchTabViewItemEntry()
+                YMCL.App.UiRoot.ViewModel.Download._curseForge.CreateNewPage(new SearchTabViewItemEntry()
                 {
                     CanClose = true, Host = nameof(Views.Main.Pages.DownloadPages.CurseForge),
                     Content = new Views.Main.Pages.DownloadPages.CurseForgePages.SearchResult(entry.Keyword,
@@ -136,7 +136,7 @@ public class AggregateSearchUi
                 if (string.IsNullOrWhiteSpace(entry.Keyword)) return;
                 YMCL.App.UiRoot.Nav.SelectedItem = YMCL.App.UiRoot.NavDownload;
                 YMCL.App.UiRoot.ViewModel.Download.Nav.SelectedItem = YMCL.App.UiRoot.ViewModel.Download.NavMr;
-                App.UiRoot.ViewModel.Download._modrinth.CreateNewPage(new SearchTabViewItemEntry()
+                YMCL.App.UiRoot.ViewModel.Download._modrinth.CreateNewPage(new SearchTabViewItemEntry()
                 {
                     CanClose = true, Host = nameof(Views.Main.Pages.DownloadPages.Modrinth),
                     Content = new Views.Main.Pages.DownloadPages.ModrinthPages.SearchResult(entry.Keyword, string.Empty,

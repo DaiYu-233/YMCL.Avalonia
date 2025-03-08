@@ -17,8 +17,8 @@ public partial class Favourites : UserControl
             if (ListView.SelectedItem is not FavouriteResource item) return;
             if (item is { Source: ResourceSource.CurseForge })
             {
-                App.UiRoot.ViewModel.Download.Nav.SelectedItem = App.UiRoot.ViewModel.Download.NavCf;
-                App.UiRoot.ViewModel.Download._curseForge.CreateNewPage(new SearchTabViewItemEntry()
+                YMCL.App.UiRoot.ViewModel.Download.Nav.SelectedItem = YMCL.App.UiRoot.ViewModel.Download.NavCf;
+                YMCL.App.UiRoot.ViewModel.Download._curseForge.CreateNewPage(new SearchTabViewItemEntry()
                 {
                     CanClose = true, Host = nameof(DownloadPages.CurseForge),
                     Content = new ModFileResult(item.Id, (item.Title, item.Icon , item.Summary)),
@@ -27,8 +27,8 @@ public partial class Favourites : UserControl
             }
             else if (item is { Source: ResourceSource.Modrinth })
             {
-                App.UiRoot.ViewModel.Download.Nav.SelectedItem = App.UiRoot.ViewModel.Download.NavMr;
-                App.UiRoot.ViewModel.Download._modrinth.CreateNewPage(new SearchTabViewItemEntry()
+                YMCL.App.UiRoot.ViewModel.Download.Nav.SelectedItem = YMCL.App.UiRoot.ViewModel.Download.NavMr;
+                YMCL.App.UiRoot.ViewModel.Download._modrinth.CreateNewPage(new SearchTabViewItemEntry()
                 {
                     CanClose = true, Host = nameof(DownloadPages.Modrinth),
                     Content = new ModrinthPages.ModFileResult(item.Id, (item.Title, item.Icon , item.Summary)),

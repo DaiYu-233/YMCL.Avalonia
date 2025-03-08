@@ -36,7 +36,7 @@ public class DropHandler
             var match = Regex.Match(HttpUtility.UrlDecode(text.Trim()), @"https?://[^\s:]+");
             if (!match.Success) return;
             var url = match.Value;
-            Op.Account.YggdrasilLogin(App.UiRoot!, server1: url);
+            Op.Account.YggdrasilLogin(YMCL.App.UiRoot!, server1: url);
         }
     }
 }

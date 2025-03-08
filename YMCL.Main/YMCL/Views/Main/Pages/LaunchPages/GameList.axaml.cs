@@ -16,7 +16,7 @@ public partial class GameList : UserControl
     {
         InitializeComponent();
         DataContext = Data.Instance;
-        CloseBtn.Click += (_, _) => { _ = App.UiRoot.ViewModel.Launch.CloseGameList(); };
+        CloseBtn.Click += (_, _) => { _ = YMCL.App.UiRoot.ViewModel.Launch.CloseGameList(); };
         RefreshListBtn.Click += (_, _) => { LaunchUi.LoadGames(); };
         GameListView.PointerEntered += (_, _) => CanCloseGameList = true;
         GameListView.PointerExited += (_, _) => CanCloseGameList = false;

@@ -34,7 +34,7 @@ public partial class CurseForgeFetcher : UserControl
 
     private void SearchAction()
     {
-        App.UiRoot.ViewModel.Download._curseForge.CreateNewPage(new SearchTabViewItemEntry()
+        YMCL.App.UiRoot.ViewModel.Download._curseForge.CreateNewPage(new SearchTabViewItemEntry()
         {
             CanClose = true, Host = nameof(DownloadPages.CurseForge),
             Content = new SearchResult(string.IsNullOrWhiteSpace(SearchKey.Text) ? string.Empty : SearchKey.Text,

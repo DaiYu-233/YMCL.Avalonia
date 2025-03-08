@@ -23,7 +23,7 @@ public class InitUi
         _ = SetCustomHomePage();
         Application.Current.ActualThemeVariantChanged += (_, _) => { UpdateTheme(); };
         Ui.Setter.ToggleTheme(Data.Setting.Theme);
-        // App.UiRoot.ViewModel.Download.CurseForgeFetcher.SearchAction();
+        // YMCL.App.UiRoot.ViewModel.Download.CurseForgeFetcher.SearchAction();
         if (Data.Setting.EnableAutoCheckUpdate)
         {
             var result = await IO.Network.Update.CheckUpdateAsync();

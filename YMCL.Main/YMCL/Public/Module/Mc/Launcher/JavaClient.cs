@@ -234,7 +234,7 @@ public class JavaClient
                                     string.Join(" \n", process.ArgumentList), b_cancel: MainLang.Ok,
                                     b_primary: MainLang.Copy);
                                 if (dialog != ContentDialogResult.Primary) return;
-                                var clipboard = TopLevel.GetTopLevel(App.UiRoot)?.Clipboard;
+                                var clipboard = TopLevel.GetTopLevel(YMCL.App.UiRoot)?.Clipboard;
                                 await clipboard.SetTextAsync(copyArguments);
                                 Notice(MainLang.AlreadyCopyToClipBoard, NotificationType.Success);
                             }));

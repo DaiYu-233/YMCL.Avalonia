@@ -80,10 +80,10 @@ public class DownloadResource
         }
 
         var suggest = !string.IsNullOrWhiteSpace(folderPath)
-            ? await TopLevel.GetTopLevel(App.UiRoot).StorageProvider.TryGetFolderFromPathAsync
+            ? await TopLevel.GetTopLevel(YMCL.App.UiRoot).StorageProvider.TryGetFolderFromPathAsync
                 (new Uri(folderPath))
             : null;
-        var path = (await TopLevel.GetTopLevel(App.UiRoot).StorageProvider.SaveFilePickerAsync(
+        var path = (await TopLevel.GetTopLevel(YMCL.App.UiRoot).StorageProvider.SaveFilePickerAsync(
             new FilePickerSaveOptions
             {
                 Title = MainLang.Download,

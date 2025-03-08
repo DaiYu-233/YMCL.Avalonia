@@ -26,8 +26,8 @@ public sealed record MinecraftDataEntry
 
     public async Task SettingCommand()
     {
-        await App.UiRoot.ViewModel.Launch.CloseGameList();
-        _ = App.UiRoot.ViewModel.Launch.OpenGameSetting(MinecraftEntry);
+        await YMCL.App.UiRoot.ViewModel.Launch.CloseGameList();
+        _ = YMCL.App.UiRoot.ViewModel.Launch.OpenGameSetting(MinecraftEntry);
     }
 
     public void LaunchCommand()
@@ -39,7 +39,7 @@ public sealed record MinecraftDataEntry
     {
         if (string.IsNullOrWhiteSpace(MinecraftEntry.ClientJarPath)) return;
         var path = Path.Combine(MinecraftEntry.MinecraftFolderPath, "versions", MinecraftEntry.Id, "YMCL.Favourite");
-        App.UiRoot.ViewModel.Launch._gameList.CanCloseGameList = false;
+        YMCL.App.UiRoot.ViewModel.Launch._gameList.CanCloseGameList = false;
         var favourite = File.Exists(path);
         try
         {
@@ -57,7 +57,7 @@ public sealed record MinecraftDataEntry
         }
 
         LaunchUi.LoadGames();
-        App.UiRoot.ViewModel.Launch._gameList.CanCloseGameList = true;
+        YMCL.App.UiRoot.ViewModel.Launch._gameList.CanCloseGameList = true;
     }
 
     public MinecraftDataEntry(MinecraftEntry minecraftEntry, bool favourite = false, bool isBedrock = false)
@@ -95,8 +95,8 @@ public sealed record MinecraftDataEntry
         {
             LaunchAction = () =>
             {
-                if (App.UiRoot != null)
-                    YMCL.Public.Module.Mc.Launcher.BedRock.Launch(App.UiRoot);
+                if (YMCL.App.UiRoot != null)
+                    YMCL.Public.Module.Mc.Launcher.BedRock.Launch(YMCL.App.UiRoot);
             };
         }
         else

@@ -47,7 +47,7 @@ public partial class CurseForgeFileExpander : UserControl
         {
             if (ListBox.SelectedItem == null) return;
             var item = ListBox.SelectedItem as CurseForgeResourceEntry;
-            App.UiRoot.ViewModel.Download._curseForge.CreateNewPage(new SearchTabViewItemEntry()
+            YMCL.App.UiRoot.ViewModel.Download._curseForge.CreateNewPage(new SearchTabViewItemEntry()
             {
                 CanClose = true, Host = nameof(Views.Main.Pages.DownloadPages.CurseForge),
                 Content = new ModFileResult(item!),

@@ -63,7 +63,7 @@ public class LocalSaveEntry : ReactiveObject
     {
         var path = SaveInfo.FolderPath;
         YMCL.Public.Module.IO.Disk.Setter.TryCreateFolder(path);
-        var launcher = TopLevel.GetTopLevel(App.UiRoot).Launcher;
+        var launcher = TopLevel.GetTopLevel(YMCL.App.UiRoot).Launcher;
         launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(path));
     }
 }

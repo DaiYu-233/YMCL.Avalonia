@@ -14,29 +14,29 @@ public record SearchTabViewItemEntry
     {
         if (Host == nameof(Views.Main.Pages.DownloadPages.CurseForge))
         {
-            if (App.UiRoot.ViewModel.Download._curseForge.SelectedItem == this)
+            if (YMCL.App.UiRoot.ViewModel.Download._curseForge.SelectedItem == this)
             {
-                App.UiRoot.ViewModel.Download._curseForge.Items.Remove(this);
+                YMCL.App.UiRoot.ViewModel.Download._curseForge.Items.Remove(this);
 
-                App.UiRoot.ViewModel.Download._curseForge.SelectedItem =
-                    App.UiRoot.ViewModel.Download._curseForge.Items.LastOrDefault();
+                YMCL.App.UiRoot.ViewModel.Download._curseForge.SelectedItem =
+                    YMCL.App.UiRoot.ViewModel.Download._curseForge.Items.LastOrDefault();
             }
             else
             {
-                App.UiRoot.ViewModel.Download._curseForge.Items.Remove(this);
+                YMCL.App.UiRoot.ViewModel.Download._curseForge.Items.Remove(this);
             }
         }
         else if (Host == nameof(Views.Main.Pages.DownloadPages.Modrinth))
         {
-            if (App.UiRoot.ViewModel.Download._modrinth.SelectedItem == this)
+            if (YMCL.App.UiRoot.ViewModel.Download._modrinth.SelectedItem == this)
             {
-                App.UiRoot.ViewModel.Download._modrinth.Items.Remove(this);
-                App.UiRoot.ViewModel.Download._modrinth.SelectedItem =
-                    App.UiRoot.ViewModel.Download._modrinth.Items.LastOrDefault();
+                YMCL.App.UiRoot.ViewModel.Download._modrinth.Items.Remove(this);
+                YMCL.App.UiRoot.ViewModel.Download._modrinth.SelectedItem =
+                    YMCL.App.UiRoot.ViewModel.Download._modrinth.Items.LastOrDefault();
             }
             else
             {
-                App.UiRoot.ViewModel.Download._modrinth.Items.Remove(this);
+                YMCL.App.UiRoot.ViewModel.Download._modrinth.Items.Remove(this);
             }
         }
         else

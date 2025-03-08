@@ -15,7 +15,6 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="{DynamicResource MainCornerRadius}"
-                Name="ColorPickerRoot"
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <DockPanel LastChildFill="False">
@@ -23,7 +22,6 @@
                         FontFamily="{DynamicResource Font}"
                         FontSize="14"
                         Margin="10,0,20,0"
-                        Name="ColorPickerLabel"
                         Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.ImportOrExportSetting}"
                         VerticalAlignment="Center" />
                     <StackPanel
@@ -33,6 +31,28 @@
                         Spacing="10">
                         <Button Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Import}" Name="ImportButton" />
                         <Button Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Export}" Name="ExportButton" />
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+            <Border
+                Background="{DynamicResource 1x}"
+                CornerRadius="{DynamicResource MainCornerRadius}"
+                Name="UrlSchemeBorder"
+                Opacity="{DynamicResource MainOpacity}"
+                Padding="6.5">
+                <DockPanel LastChildFill="False">
+                    <TextBlock
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="14"
+                        Margin="10,0,20,0"
+                        Text="Url Scheme"
+                        VerticalAlignment="Center" />
+                    <StackPanel
+                        DockPanel.Dock="Right"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal"
+                        Spacing="10">
+                        <Button Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.WriteIn}" Name="UrlSchemeButton" />
                     </StackPanel>
                 </DockPanel>
             </Border>

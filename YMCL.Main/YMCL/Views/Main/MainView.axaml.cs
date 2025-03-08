@@ -2,6 +2,7 @@ using Avalonia.Controls.Notifications;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using FluentAvalonia.UI.Controls;
+using Microsoft.Win32;
 using ReactiveUI;
 using Ursa.Common;
 using Ursa.Controls;

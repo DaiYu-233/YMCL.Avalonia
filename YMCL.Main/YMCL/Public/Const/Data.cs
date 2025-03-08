@@ -41,6 +41,7 @@ public sealed class Data : ReactiveObject
     public static SettingEntry SettingEntry { get; set; }
     public static UiProperty UiProperty { get; } = new();
     public static string TranslateToken { get; set; }
+    public static string[] AppArgs { get; set; }
 
     public static Data Instance
     {

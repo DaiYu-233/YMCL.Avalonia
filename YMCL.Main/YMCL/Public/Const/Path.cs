@@ -17,6 +17,7 @@ public class ConfigPath
     public static string PluginFolderPath { get; protected set; }
     public static string TempFolderPath { get; protected set; }
     public static string UpdateFolderPath { get; protected set; }
+    public static string LauncherClPath  { get; protected set; }
 
     public static void InitPath()
     {
@@ -32,6 +33,7 @@ public class ConfigPath
         PluginDataPath = Path.Combine(UserDataRootPath, "YMCL.Plugin.DaiYu");
         PluginFolderPath = Path.Combine(UserDataRootPath, "Plugin");
         TempFolderPath = Path.Combine(UserDataRootPath, "Temp");
+        LauncherClPath = Path.Combine(UserDataRootPath, "LauncherCl.bat");
         UpdateFolderPath = Path.Combine(UserDataRootPath, "Update");
         FavouriteResourceDataPath = Path.Combine(UserDataRootPath, "YMCL.FavouriteResource.DaiYu");
     }

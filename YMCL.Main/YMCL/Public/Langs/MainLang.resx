@@ -1381,4 +1381,16 @@ MacOs 不支持自动更新
   <data name="OpenFile" xml:space="preserve">
     <value>打开文件</value>
   </data>
+  <data name="WriteIn" xml:space="preserve">
+    <value>写入</value>
+  </data>
+  <data name="OperateFailed" xml:space="preserve">
+    <value>操作失败</value>
+  </data>
+  <data name="OperateSuccess" xml:space="preserve">
+    <value>操作成功</value>
+  </data>
+  <data name="NeedToManuallyOpenTheTerminalAndExecuteTheFollowingCommand" xml:space="preserve">
+    <value>需要手动打开终端执行以下命令</value>
+  </data>
 </root>

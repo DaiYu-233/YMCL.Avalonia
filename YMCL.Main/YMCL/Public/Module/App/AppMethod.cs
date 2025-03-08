@@ -18,7 +18,7 @@ public class AppMethod
         _debouncer.Trigger();
     }
 
-    public static void RestartApp()
+    public static void RestartApp(bool isAdmin = false)
     {
         var startInfo = new ProcessStartInfo
         {
@@ -26,6 +26,10 @@ public class AppMethod
             WorkingDirectory = Environment.CurrentDirectory,
             FileName = Process.GetCurrentProcess().MainModule.FileName
         };
+        if (isAdmin)
+        {
+            startInfo.Verb = "runas";
+        }
         Process.Start(startInfo);
         Environment.Exit(0);
     }

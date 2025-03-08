@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Avalonia;
@@ -9,9 +10,12 @@ using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using AvaloniaEdit;
 using FluentAvalonia.UI.Controls;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using YMCL.Public.Classes.Setting;
+using YMCL.Public.Enum;
 using YMCL.Public.Langs;
+using YMCL.Public.Module.Util;
 using YMCL.Public.Module.Util.Extension;
 
 namespace YMCL.Views.Main.Pages.SettingPages;
@@ -23,6 +27,7 @@ public partial class Launcher : UserControl
         DataContext = Data.Instance;
         InitializeComponent();
         BindingEvent();
+        UrlSchemeBorder.IsVisible = Data.DesktopType == DesktopRunnerType.Windows;
     }
 
     private void BindingEvent()
@@ -139,12 +144,37 @@ public partial class Launcher : UserControl
                     a.Data = " ( ...... ) ";
                 }
             }
-            
+
             var cr1 = await ShowDialogAsync(MainLang.Import,
                 JsonConvert.SerializeObject(data, Formatting.Indented), b_primary: MainLang.Import,
                 b_cancel: MainLang.Cancel);
             if (cr1 != ContentDialogResult.Primary) return;
             Public.Module.App.Setting.Replace(Data.SettingEntry, info.data);
+        };
+        UrlSchemeButton.Click += async (_, _) =>
+        {
+            try
+            {
+                if (!await Permission.TryToUpgradePermission())
+                {
+                    Notice(MainLang.UpgradeToAdministratorPrivilegesFail, NotificationType.Error);
+                    return;
+                }
+                var keyRoot = Registry.ClassesRoot.CreateSubKey("YMCL", true);
+                keyRoot.SetValue("", "Yu Minecraft Launcher");
+                keyRoot.SetValue("URL Protocol", ConfigPath.LauncherClPath);
+                var a = Registry.ClassesRoot.OpenSubKey("YMCL", true).CreateSubKey("DefaultIcon");
+                a.SetValue("", ConfigPath.LauncherClPath);
+                var b = Registry.ClassesRoot.OpenSubKey("YMCL", true).CreateSubKey(@"shell\open\command");
+                b.SetValue("", $"\"{ConfigPath.LauncherClPath}\" \"%1\"");
+                await File.WriteAllTextAsync(ConfigPath.LauncherClPath, "set /p ymcl=<%USERPROFILE%\\AppData\\Roaming\\DaiYu.Platform.YMCL\\YMCL.AppPath.DaiYu\r\necho %ymcl%\r\necho %1\r\nstart %ymcl% %1");
+                Notice(MainLang.OperateSuccess, NotificationType.Success);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Notice(MainLang.OperateFailed, NotificationType.Error);
+            }
         };
     }
 }

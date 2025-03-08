@@ -2409,6 +2409,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 需要手动打开终端执行以下命令.
+        /// </summary>
+        public static string NeedToManuallyOpenTheTerminalAndExecuteTheFollowingCommand {
+            get {
+                return ResourceManager.GetString("NeedToManuallyOpenTheTerminalAndExecuteTheFollowingCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 需选择&apos;.minecraft&apos;文件夹.
         /// </summary>
         public static string NeedToSelectMinecraftFolder {
@@ -2684,6 +2693,24 @@ namespace YMCL.Public.Langs {
         public static string OpenSourceProjectUsageTable {
             get {
                 return ResourceManager.GetString("OpenSourceProjectUsageTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 操作失败.
+        /// </summary>
+        public static string OperateFailed {
+            get {
+                return ResourceManager.GetString("OperateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 操作成功.
+        /// </summary>
+        public static string OperateSuccess {
+            get {
+                return ResourceManager.GetString("OperateSuccess", resourceCulture);
             }
         }
         
@@ -3806,6 +3833,15 @@ namespace YMCL.Public.Langs {
         public static string WinSevenAutoUpdateTip {
             get {
                 return ResourceManager.GetString("WinSevenAutoUpdateTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 写入.
+        /// </summary>
+        public static string WriteIn {
+            get {
+                return ResourceManager.GetString("WriteIn", resourceCulture);
             }
         }
         

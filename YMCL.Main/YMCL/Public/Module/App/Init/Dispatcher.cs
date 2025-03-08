@@ -30,5 +30,6 @@ public static class InitDispatcher
         Dispatcher.Dispatch();
         InitPlugin.Dispatch();
         SettingChanged.Binding();
+        Op.Parser.Handle(Public.Const.Data.AppArgs);
     }
 }

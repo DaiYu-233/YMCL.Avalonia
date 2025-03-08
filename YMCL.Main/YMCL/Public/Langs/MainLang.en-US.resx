@@ -1444,4 +1444,92 @@ You can manually download the latest version and replace the program file</value
     <value>dependent</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="ImportOrExportSetting" xml:space="preserve">
+    <value>Import/Export settings</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExportSettingTip" xml:space="preserve">
+    <value>Select the settings you want to export</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Ui" xml:space="preserve">
+    <value>Interface Settings</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Net" xml:space="preserve">
+    <value>Network Settings</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Launch" xml:space="preserve">
+    <value>Launch Settings</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Account" xml:space="preserve">
+    <value>Account data (excluding Microsoft account)</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Other" xml:space="preserve">
+    <value>Other settings</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExportSuccess" xml:space="preserve">
+    <value>Exported Successfully</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExportSettingSuccessTip" xml:space="preserve">
+    <value>The export was successful, the amount of data is too large to display, click Copy to copy all the data</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ImportSettingTextBoxWatermark" xml:space="preserve">
+    <value>Enter hex data</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ReadClipBoard" xml:space="preserve">
+    <value>Read clipboard</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CopyToClipBoard" xml:space="preserve">
+    <value>Copy to clipboard</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="OpenFile" xml:space="preserve">
+    <value>File To Load</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="WriteIn" xml:space="preserve">
+    <value>Write in</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="OperateFailed" xml:space="preserve">
+    <value>Failed</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="OperateSuccess" xml:space="preserve">
+    <value>Success</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NeedToManuallyOpenTheTerminalAndExecuteTheFollowingCommand" xml:space="preserve">
+    <value>You need to manually open the terminal to execute the following command</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>Account Name</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AddNewAccountUuid" xml:space="preserve">
+    <value>Uuid, leave blank to auto-generate</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AutoAllocate" xml:space="preserve">
+    <value>Automatic allocation</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="EnableAutoAllocateMem" xml:space="preserve">
+    <value>Enable automatic memory allocation</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Custom</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

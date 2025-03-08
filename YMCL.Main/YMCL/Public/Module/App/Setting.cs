@@ -71,17 +71,25 @@ public class Setting
 
     public static (bool success, ExchangeSettingEntry.Data? data) Import(string hex)
     {
-        if (hex.Length % 2 != 0)
-            return (false, null);
-
-        var bytes = new byte[hex.Length / 2];
-        for (var i = 0; i < hex.Length; i += 2)
+        try
         {
-            bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
-        }
+            if (hex.Length % 2 != 0)
+                return (false, null);
 
-        var json = Encoding.UTF8.GetString(bytes);
-        return (true, JsonConvert.DeserializeObject<ExchangeSettingEntry.Data>(json));
+            var bytes = new byte[hex.Length / 2];
+            for (var i = 0; i < hex.Length; i += 2)
+            {
+                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            }
+
+            var json = Encoding.UTF8.GetString(bytes);
+            return (true, JsonConvert.DeserializeObject<ExchangeSettingEntry.Data>(json));
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return (false, null);
+        }
     }
 
     public static void Replace(SettingEntry s, ExchangeSettingEntry.Data data)

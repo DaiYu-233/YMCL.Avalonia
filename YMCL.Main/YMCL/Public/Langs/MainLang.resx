@@ -1344,68 +1344,90 @@ MacOs 不支持自动更新
   </data>
   <data name="ImportOrExportSetting" xml:space="preserve">
     <value>导入/导出设置</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ExportSettingTip" xml:space="preserve">
     <value>选择需要导出的设置项</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ExchangeSetting_Ui" xml:space="preserve">
     <value>界面设置</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ExchangeSetting_Net" xml:space="preserve">
     <value>网络设置</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ExchangeSetting_Launch" xml:space="preserve">
     <value>启动设置</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ExchangeSetting_Account" xml:space="preserve">
     <value>账户数据(不含微软帐户)</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ExchangeSetting_Other" xml:space="preserve">
     <value>其他设置</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ExportSuccess" xml:space="preserve">
     <value>导出成功</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ExportSettingSuccessTip" xml:space="preserve">
     <value>导出成功，数据量过大无法显示，点击复制以复制所有数据</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ImportSettingTextBoxWatermark" xml:space="preserve">
     <value>输入hex数据</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="ReadClipBoard" xml:space="preserve">
     <value>读取剪贴板</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="CopyToClipBoard" xml:space="preserve">
     <value>复制到剪贴板</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="OpenFile" xml:space="preserve">
     <value>打开文件</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="WriteIn" xml:space="preserve">
     <value>写入</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="OperateFailed" xml:space="preserve">
     <value>操作失败</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="OperateSuccess" xml:space="preserve">
     <value>操作成功</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="NeedToManuallyOpenTheTerminalAndExecuteTheFollowingCommand" xml:space="preserve">
     <value>需要手动打开终端执行以下命令</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="AccountName" xml:space="preserve">
     <value>账户名称</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="AddNewAccountUuid" xml:space="preserve">
     <value>Uuid，留空则自动生成</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="AutoAllocate" xml:space="preserve">
     <value>自动分配</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="EnableAutoAllocateMem" xml:space="preserve">
     <value>启用自动分配内存</value>
+    <comment>#TODO#_</comment>
   </data>
   <data name="Custom" xml:space="preserve">
     <value>自定义</value>
+    <comment>#TODO#_</comment>
   </data>
 </root>

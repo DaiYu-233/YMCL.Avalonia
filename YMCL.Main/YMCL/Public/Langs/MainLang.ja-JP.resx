@@ -1444,4 +1444,92 @@ MacOsは自動更新をサポートしていません
     <value>依存関係</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="ImportOrExportSetting" xml:space="preserve">
+    <value>インポート/エクスポート設定</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExportSettingTip" xml:space="preserve">
+    <value>エクスポートする設定を選択してください</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Ui" xml:space="preserve">
+    <value>インターフェース設定</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Net" xml:space="preserve">
+    <value>ネットワーク設定</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Launch" xml:space="preserve">
+    <value>設定を起動してください</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Account" xml:space="preserve">
+    <value>アカウントデータ（ Microsoftアカウントを除く）</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Other" xml:space="preserve">
+    <value>その他の設定</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExportSuccess" xml:space="preserve">
+    <value>エクスポートに成功しました</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExportSettingSuccessTip" xml:space="preserve">
+    <value>エクスポートに成功しました。データ量が大きすぎて表示できません。[コピー]をクリックしてすべてのデータをコピーします</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ImportSettingTextBoxWatermark" xml:space="preserve">
+    <value>16進数データを入力してください</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ReadClipBoard" xml:space="preserve">
+    <value>クリップボードを読んでください</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CopyToClipBoard" xml:space="preserve">
+    <value>クリップボードにコピーしました</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="OpenFile" xml:space="preserve">
+    <value>ファイルを開く</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="WriteIn" xml:space="preserve">
+    <value>書き込み処理</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="OperateFailed" xml:space="preserve">
+    <value>操作に失敗しました</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="OperateSuccess" xml:space="preserve">
+    <value>操作成功</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NeedToManuallyOpenTheTerminalAndExecuteTheFollowingCommand" xml:space="preserve">
+    <value>次のコマンドを実行するには、端末を手動で開く必要があります</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>アカウント名</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AddNewAccountUuid" xml:space="preserve">
+    <value>UUID、自動生成するには空白のままにしてください</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AutoAllocate" xml:space="preserve">
+    <value>自動分配</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="EnableAutoAllocateMem" xml:space="preserve">
+    <value>自動メモリ割り当てを有効にしてください</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>ユーザ設定</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

@@ -1440,4 +1440,92 @@ win10 以下系統(不包括10)不支援自動更新
     <value>依賴項</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="ImportOrExportSetting" xml:space="preserve">
+    <value>導入/匯出設定</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExportSettingTip" xml:space="preserve">
+    <value>選擇需要匯出的設定項</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Ui" xml:space="preserve">
+    <value>介面設定</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Net" xml:space="preserve">
+    <value>網路設定</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Launch" xml:space="preserve">
+    <value>啟動設定</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Account" xml:space="preserve">
+    <value>帳戶資料(不含微軟帳戶)</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Other" xml:space="preserve">
+    <value>其他設定</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExportSuccess" xml:space="preserve">
+    <value>導出成功</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExportSettingSuccessTip" xml:space="preserve">
+    <value>匯出成功，資料量過大無法顯示，點選複製以複製所有資料</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ImportSettingTextBoxWatermark" xml:space="preserve">
+    <value>輸入hex資料</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ReadClipBoard" xml:space="preserve">
+    <value>讀取剪貼簿</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CopyToClipBoard" xml:space="preserve">
+    <value>複製到剪貼簿</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="OpenFile" xml:space="preserve">
+    <value>開啟檔案</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="WriteIn" xml:space="preserve">
+    <value>寫入</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="OperateFailed" xml:space="preserve">
+    <value>操作失敗</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="OperateSuccess" xml:space="preserve">
+    <value>操作成功</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NeedToManuallyOpenTheTerminalAndExecuteTheFollowingCommand" xml:space="preserve">
+    <value>需要手動打開終端機執行以下命令</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>帳戶名稱</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AddNewAccountUuid" xml:space="preserve">
+    <value>Uuid，留空則自動產生</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AutoAllocate" xml:space="preserve">
+    <value>自動分配</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="EnableAutoAllocateMem" xml:space="preserve">
+    <value>啟用自動分配記憶體</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>自訂</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

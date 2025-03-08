@@ -1444,4 +1444,92 @@ MacO не поддерживают автоматические обновлен
     <value>Зависимости</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="ImportOrExportSetting" xml:space="preserve">
+    <value>Настройки импорта/экспорта</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExportSettingTip" xml:space="preserve">
+    <value>Выберите настройки, которые вы хотите экспортировать</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Ui" xml:space="preserve">
+    <value>Настройки интерфейса</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Net" xml:space="preserve">
+    <value>Настройки сети</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Launch" xml:space="preserve">
+    <value>Запустите настройки</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Account" xml:space="preserve">
+    <value>Данные учетной записи (за исключением учетной записи Майкрософт)</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExchangeSetting_Other" xml:space="preserve">
+    <value>Другое</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExportSuccess" xml:space="preserve">
+    <value>Экспорт выполнен успешно</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ExportSettingSuccessTip" xml:space="preserve">
+    <value>Экспорт выполнен успешно, объем данных слишком велик для отображения, нажмите «Копировать», чтобы скопировать все данные</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ImportSettingTextBoxWatermark" xml:space="preserve">
+    <value>Введите шестнадцатеричные данные</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="ReadClipBoard" xml:space="preserve">
+    <value>Читать буфер обмена</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="CopyToClipBoard" xml:space="preserve">
+    <value>Копировать в буфер обмена</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="OpenFile" xml:space="preserve">
+    <value>&amp;Открыть файл</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="WriteIn" xml:space="preserve">
+    <value>Пишите</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="OperateFailed" xml:space="preserve">
+    <value>Не удалось выполнить операцию</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="OperateSuccess" xml:space="preserve">
+    <value>Операция выполнена успешно</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="NeedToManuallyOpenTheTerminalAndExecuteTheFollowingCommand" xml:space="preserve">
+    <value>Вам необходимо вручную открыть терминал, чтобы выполнить следующую команд</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>Наименование счёта</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AddNewAccountUuid" xml:space="preserve">
+    <value>Uuid, оставьте пустым для автоматической генерации</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="AutoAllocate" xml:space="preserve">
+    <value>Автоматическое назначение</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="EnableAutoAllocateMem" xml:space="preserve">
+    <value>Включить автоматическое выделение памяти</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Пользовательское</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

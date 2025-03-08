@@ -2,12 +2,11 @@
 using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
-using YMCL.Public.Classes;
 using YMCL.Public.Classes.Data;
 using YMCL.Public.Classes.Netease;
 using YMCL.Public.Classes.Setting;
 
-namespace YMCL.Public.Module.Init.SubModule;
+namespace YMCL.Public.Module.App.Init.SubModule;
 
 public static class InitConfig
 {
@@ -27,6 +26,8 @@ public static class InitConfig
 
     public static void CreateFile()
     {
+        File.WriteAllText(ConfigPath.AppPathDataPath,
+            System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
         if (!File.Exists(ConfigPath.SettingDataPath))
             File.WriteAllText(ConfigPath.SettingDataPath,
                 JsonConvert.SerializeObject(new Setting(), Formatting.Indented));

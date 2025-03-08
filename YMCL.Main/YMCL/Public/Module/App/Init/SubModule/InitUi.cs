@@ -2,17 +2,14 @@
 using System.IO;
 using System.Net.Http;
 using Avalonia.Animation;
-using Avalonia.Controls.Notifications;
 using Avalonia.Media;
 using Avalonia.Styling;
 using Avalonia.VisualTree;
 using FluentAvalonia.Core;
-using NAudio.MediaFoundation;
 using YMCL.Public.Enum;
-using YMCL.Public.Langs;
 using YMCL.Public.Module.Ui;
 
-namespace YMCL.Public.Module.Init.SubModule;
+namespace YMCL.Public.Module.App.Init.SubModule;
 
 public class InitUi
 {

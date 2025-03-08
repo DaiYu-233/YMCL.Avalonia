@@ -1,5 +1,5 @@
 ﻿using MinecraftLaunch.Base.Models.Network;
-using YMCL.Public.Module.Init.SubModule.GetDataFromNetwork;
+using YMCL.Public.Module.App.Init.SubModule.GetDataFromNetwork;
 using YMCL.ViewModels;
 using Dispatcher = YMCL.Public.Module.Mc.Installer.Minecraft.Dispatcher;
 

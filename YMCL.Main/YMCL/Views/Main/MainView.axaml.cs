@@ -9,7 +9,7 @@ using Ursa.Controls.Options;
 using YMCL.Public.Controls.Drawers;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
-using YMCL.Public.Module.Init;
+using YMCL.Public.Module.App.Init;
 using YMCL.Public.Module.Ui.Special;
 using YMCL.ViewModels;
 using YMCL.Views.Main.Pages;

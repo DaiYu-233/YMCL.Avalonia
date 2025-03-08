@@ -1,16 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Windows.Input;
-using YMCL.Plugin.Base;
-using YMCL.Public.Classes;
+﻿using System.Linq;
 using YMCL.Public.Classes.Operate;
-using YMCL.Public.Controls;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.IO.Disk;
 using YMCL.Public.Plugin;
 
-namespace YMCL.Public.Module.Init.SubModule;
+namespace YMCL.Public.Module.App.Init.SubModule;
 
 public class InitPlugin
 {

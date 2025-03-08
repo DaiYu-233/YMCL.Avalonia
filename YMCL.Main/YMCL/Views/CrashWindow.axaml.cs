@@ -1,5 +1,6 @@
 ﻿using Ursa.Controls;
 using YMCL.Public.Module;
+using YMCL.Public.Module.App;
 
 namespace YMCL.Views;
 

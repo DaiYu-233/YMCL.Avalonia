@@ -11,7 +11,7 @@ using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using YMCL.Public.Langs;
 using YMCL.Public.Module;
-using YMCL.Public.Module.Init.SubModule;
+using YMCL.Public.Module.App.Init.SubModule;
 
 namespace YMCL.Views.Main.Pages.SettingPages;
 

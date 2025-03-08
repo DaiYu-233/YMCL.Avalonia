@@ -6,7 +6,8 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using YMCL.Public.Langs;
 using YMCL.Public.Module;
-using YMCL.Public.Module.Init.SubModule;
+using YMCL.Public.Module.App;
+using YMCL.Public.Module.App.Init.SubModule;
 using YMCL.Public.Module.Ui.Special;
 using YMCL.Views.Main;
 using Language = YMCL.Public.Classes.Data.Language;
@@ -24,7 +25,7 @@ public class Setting : ReactiveObject
     [Reactive] [JsonProperty] public bool IsCompleteJavaInitialize { get; set; }
     [Reactive] [JsonProperty] public bool IsCompleteMinecraftFolderInitialize { get; set; }
     [Reactive] [JsonProperty] public bool IsCompleteAccountInitialize { get; set; }
-    [Reactive] [JsonProperty] public string CustomHomePageUrl { get; set; }
+    [Reactive] [JsonProperty] public string? CustomHomePageUrl { get; set; }
     [Reactive] [JsonProperty] public Enum.Setting.OpenFileWay OpenFileWay { get; set; }
     [Reactive] [JsonProperty] public Enum.Setting.NoticeWay NoticeWay { get; set; } = Enum.Setting.NoticeWay.Bubble;
 
@@ -50,11 +51,11 @@ public class Setting : ReactiveObject
     [JsonProperty]
     public Enum.Setting.LaunchCore LaunchCore { get; set; } = Enum.Setting.LaunchCore.MinecraftLaunch;
 
-    [Reactive] [JsonProperty] public string SelectedMinecraftId { get; set; }
+    [Reactive] [JsonProperty] public string? SelectedMinecraftId { get; set; }
     [Reactive] [JsonProperty] public bool EnableIndependencyCore { get; set; } = true;
     [Reactive] [JsonProperty] public bool EnableCustomUpdateUrl { get; set; }
-    [Reactive] [JsonProperty] public string CustomUpdateUrl { get; set; } = "https://github.moeyy.xyz/{%url%}";
-    [Reactive] [JsonProperty] public string MusicApi { get; set; } = "http://music.api.daiyu.fun/";
+    [Reactive] [JsonProperty] public string? CustomUpdateUrl { get; set; } = "https://github.moeyy.xyz/{%url%}";
+    [Reactive] [JsonProperty] public string? MusicApi { get; set; } = "http://music.api.daiyu.fun/";
 
     [Reactive]
     [JsonProperty]
@@ -72,7 +73,7 @@ public class Setting : ReactiveObject
     [JsonProperty]
     public Enum.Setting.CustomHomePageWay CustomHomePage { get; set; } = Enum.Setting.CustomHomePageWay.None;
 
-    [Reactive] [JsonProperty] public string MusicApiWithIPAddress { get; set; } = "120.230.112.69";
+    [Reactive] [JsonProperty] public string? MusicApiWithIPAddress { get; set; } = "120.230.112.69";
 
     [Reactive] [JsonProperty] public Language Language { get; set; } = new();
     [Reactive] [JsonProperty] public MinecraftFolder MinecraftFolder { get; set; }
@@ -92,7 +93,7 @@ public class Setting : ReactiveObject
         AddTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")
     };
 
-    [Reactive] [JsonProperty] public string WindowBackGroundImgData { get; set; } = string.Empty;
+    [Reactive] [JsonProperty] public string? WindowBackGroundImgData { get; set; } = string.Empty;
 
     public Setting()
     {

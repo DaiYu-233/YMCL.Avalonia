@@ -3,7 +3,7 @@ using MinecraftLaunch.Base.Models.Network;
 using YMCL.Public.Classes;
 using YMCL.Public.Classes.Setting;
 using YMCL.Public.Langs;
-using YMCL.Public.Module.Init.SubModule.GetDataFromNetwork;
+using YMCL.Public.Module.App.Init.SubModule.GetDataFromNetwork;
 
 namespace YMCL.Views.Main.Pages.DownloadPages.AutoInstallPages;
 

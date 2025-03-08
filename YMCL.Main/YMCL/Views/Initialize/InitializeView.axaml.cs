@@ -4,6 +4,7 @@ using Irihi.Avalonia.Shared.Helpers;
 using Newtonsoft.Json;
 using YMCL.Public.Enum;
 using YMCL.Public.Module;
+using YMCL.Public.Module.App;
 using YMCL.Views.Initialize.Pages;
 
 namespace YMCL.Views.Initialize;

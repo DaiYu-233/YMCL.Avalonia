@@ -55,7 +55,7 @@ public class Shower
         Notice($"{msg}\n{ex.Message}", NotificationType.Error);
     }
 
-    public static async Task<ContentDialogResult> ShowDialogAsync(string title = "Title", string msg = "Content",
+    public static async Task<ContentDialogResult> ShowDialogAsync(string title = "Title", string msg = null,
         Control p_content = null, string b_primary = null, string b_cancel = null, string b_secondary = null,
         TopLevel? p_host = null)
     {
@@ -67,6 +67,23 @@ public class Shower
                 Text = msg
             }
             : p_content;
+        if (!string.IsNullOrWhiteSpace(msg) && p_content != null)
+        {
+            content = new StackPanel()
+            {
+                Spacing = 15,
+                Children =
+                {
+                    new SelectableTextBlock()
+                    {
+                        TextWrapping = TextWrapping.Wrap,
+                        FontFamily = (FontFamily)Application.Current.Resources["Font"],
+                        Text = msg
+                    },
+                    content
+                }
+            };
+        }
         var dialog = new ContentDialog
         {
             PrimaryButtonText = b_primary,

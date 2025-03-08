@@ -1,9 +1,8 @@
 ﻿using System.Linq;
 using MinecraftLaunch.Components.Installer;
-using YMCL.Public.Langs;
 using YMCL.Views.Main.Pages.DownloadPages.AutoInstallPages;
 
-namespace YMCL.Public.Module.Init.SubModule.GetDataFromNetwork;
+namespace YMCL.Public.Module.App.Init.SubModule.GetDataFromNetwork;
 
 public class InstallPreviewModLoaders
 {

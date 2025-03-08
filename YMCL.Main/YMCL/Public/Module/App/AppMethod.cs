@@ -2,7 +2,7 @@
 using System.IO;
 using Newtonsoft.Json;
 
-namespace YMCL.Public.Module;
+namespace YMCL.Public.Module.App;
 
 public class AppMethod
 {

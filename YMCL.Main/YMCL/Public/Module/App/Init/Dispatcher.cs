@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
-using YMCL.Public.Module.Init.SubModule;
-using YMCL.Public.Module.Init.SubModule.GetDataFromNetwork;
-using String = System.String;
+using YMCL.Public.Module.App.Init.SubModule;
+using YMCL.Public.Module.App.Init.SubModule.GetDataFromNetwork;
 
-namespace YMCL.Public.Module.Init;
+namespace YMCL.Public.Module.App.Init;
 
 public static class InitDispatcher
 {

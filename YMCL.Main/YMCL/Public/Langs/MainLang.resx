@@ -1342,4 +1342,10 @@ MacOs 不支持自动更新
     <value>依赖项</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="ImportOrExportSetting" xml:space="preserve">
+    <value>导入/导出设置</value>
+  </data>
+  <data name="ExportSettingTip" xml:space="preserve">
+    <value>选择需要导出的设置项</value>
+  </data>
 </root>

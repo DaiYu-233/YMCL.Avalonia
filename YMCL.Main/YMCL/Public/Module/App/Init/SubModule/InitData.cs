@@ -9,7 +9,6 @@ using MinecraftLaunch.Components.Parser;
 using MinecraftLaunch.Components.Provider;
 using MinecraftLaunch.Utilities;
 using Newtonsoft.Json;
-using YMCL.Public.Classes;
 using YMCL.Public.Classes.Data;
 using YMCL.Public.Classes.Operate;
 using YMCL.Public.Classes.Setting;
@@ -17,7 +16,7 @@ using YMCL.Public.Langs;
 using CrashWindow = YMCL.Views.CrashWindow;
 using Setting = YMCL.Public.Classes.Setting.Setting;
 
-namespace YMCL.Public.Module.Init.SubModule;
+namespace YMCL.Public.Module.App.Init.SubModule;
 
 public class InitData
 {

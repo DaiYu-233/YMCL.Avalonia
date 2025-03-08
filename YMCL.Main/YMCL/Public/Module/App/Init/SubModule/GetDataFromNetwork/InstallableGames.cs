@@ -1,12 +1,11 @@
 ﻿using System.Linq;
 using MinecraftLaunch.Base.Models.Network;
 using MinecraftLaunch.Components.Installer;
-using YMCL.Public.Classes;
 using YMCL.Public.Classes.Setting;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Ui.Special;
 
-namespace YMCL.Public.Module.Init.SubModule.GetDataFromNetwork;
+namespace YMCL.Public.Module.App.Init.SubModule.GetDataFromNetwork;
 
 public class InstallableGame
 {
@@ -46,7 +45,7 @@ public class InstallableGame
                 await Task.Delay(700);
                 Avalonia.Threading.Dispatcher.UIThread.Invoke(() =>
                 {
-                    App.UiRoot.ViewModel.Download._autoInstall.InstallableGames.LoadInstallableVersionListErrorInfoBar
+                    YMCL.App.UiRoot.ViewModel.Download._autoInstall.InstallableGames.LoadInstallableVersionListErrorInfoBar
                         .IsVisible = true;
                     UiProperty.Instance.LatestReleaseGame = new VersionManifestEntry
                         { ReleaseTime = new DateTime(1970, 1, 1, 0, 0, 0), Id = MainLang.LoadFail, Type = null };
@@ -55,6 +54,6 @@ public class InstallableGame
                 });
             }
         });
-        App.UiRoot.ViewModel.Download._autoInstall.InstallableGames.Filter();
+        YMCL.App.UiRoot.ViewModel.Download._autoInstall.InstallableGames.Filter();
     }
 }

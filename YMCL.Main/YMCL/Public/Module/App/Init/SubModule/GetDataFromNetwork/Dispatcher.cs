@@ -1,4 +1,4 @@
-﻿namespace YMCL.Public.Module.Init.SubModule.GetDataFromNetwork;
+﻿namespace YMCL.Public.Module.App.Init.SubModule.GetDataFromNetwork;
 
 public class Dispatcher
 {

@@ -26,7 +26,7 @@ public sealed record MinecraftDataEntry
 
     public async Task SettingCommand()
     {
-        await YMCL.App.UiRoot.ViewModel.Launch.CloseGameList();
+        await YMCL.App.UiRoot.ViewModel.Launch.CloseGameList(false);
         _ = YMCL.App.UiRoot.ViewModel.Launch.OpenGameSetting(MinecraftEntry);
     }
 

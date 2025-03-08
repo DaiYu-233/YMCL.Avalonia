@@ -27,5 +27,6 @@ public partial class GameList : UserControl
             var launcher = TopLevel.GetTopLevel(this).Launcher;
             launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(path));
         };
+        Loaded += (_, _) => { LaunchUi.LoadGames(); };
     }
 }

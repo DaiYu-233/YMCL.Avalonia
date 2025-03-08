@@ -149,7 +149,13 @@
                     HorizontalAlignment="Stretch"
                     Margin="10,0,0,10"
                     Name="CustomPageRoot"
-                    VerticalAlignment="Stretch" />
+                    VerticalAlignment="Stretch">
+                    <Border.Transitions>
+                        <Transitions>
+                            <DoubleTransition Duration="0:0:0.20" Property="Opacity" />
+                        </Transitions>
+                    </Border.Transitions>
+                </Border>
             </DockPanel>
         </DockPanel>
         <ContentControl

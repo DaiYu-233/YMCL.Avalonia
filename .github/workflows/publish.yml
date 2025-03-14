@@ -30,7 +30,7 @@ jobs:
           echo "The current time is: ${{ steps.date.outputs.time }}"
 
   linux:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: time
     steps:
       - name: Checkout
@@ -132,8 +132,39 @@ jobs:
           path: |
             ./YMCL.Main/YMCL.Desktop/Deploy/OUT/*
 
-  publish:
+  mac:
     needs: [linux, win, time]
+    runs-on: macos-latest
+    steps:
+      - name: Download-LinuxArtifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-artifacts
+          path: ./YMCL.Release/
+      - name: Unzip
+        run: |
+          unzip -n ./YMCL.Release/bin/Release/net8.0/YMCL.Desktop.osx.mac.x64.app.zip -d ./app.x64
+          unzip -n ./YMCL.Release/bin/Release/net8.0/YMCL.Desktop.osx.mac.arm64.app.zip -d ./app.arm64
+      - name: Build-MacOsDmg-x64
+        uses: L-Super/create-dmg-actions@v1.0.3
+        with:
+          dmg_name: "YMCL.Desktop.osx.mac.x64"
+          src_dir: "./app.x64/YMCL.app"
+      - name: Build-MacOsDmg-arm64
+        uses: L-Super/create-dmg-actions@v1.0.3
+        with:
+          dmg_name: "YMCL.Desktop.osx.mac.arm64"
+          src_dir: "./app.arm64/YMCL.app"
+      - name: UploadArtifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: osx-artifacts
+          path: |
+            ./YMCL.Desktop.osx.mac.arm64.dmg
+            ./YMCL.Desktop.osx.mac.x64.dmg
+
+  publish:
+    needs: [linux, win, mac, time]
     runs-on: ubuntu-latest
     steps:
       - name: Time
@@ -151,6 +182,11 @@ jobs:
         with:
           name: win-artifacts
           path: ./YMCL.Release/
+      - name: Download-MacArtifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: osx-artifacts
+          path: ./YMCL.Release/
       - name: List Files
         run: |
           ls -la ./YMCL.Release/
@@ -163,5 +199,6 @@ jobs:
           prerelease: false
           files: |
             YMCL.Release/*.exe
+            YMCL.Release/*.dmg
             YMCL.Release/Deploy/OUT/*.AppImage
             YMCL.Release/bin/Release/net8.0/*.zip

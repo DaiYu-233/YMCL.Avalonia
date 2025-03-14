@@ -60,10 +60,10 @@ jobs:
           sudo su
           dotnet restore -r osx-x64
           dotnet msbuild -t:BundleApp -p:RuntimeIdentifier=osx-x64 -property:Configuration=Release -p:SelfContained=true
-          cp ./Icon-Border.icns ./bin/Release/net8.0/osx-x64/publish/YMCL.app/Contents/Resources/Icon-Border.icns
+          cp ./Icon-Border.icns ./bin/Release/net8.0/osx-x64/publish/Yu Minecraft Launcher.app/Contents/Resources/Icon-Border.icns
           cd ./bin/Release/net8.0/
           cd ./osx-x64/publish/
-          zip -9 -r ../../YMCL.Desktop.osx.mac.x64.app.zip ./YMCL.app
+          zip -9 -r ../../YMCL.Desktop.osx.mac.x64.app.zip ./Yu Minecraft Launcher.app
       - name: Build-WinExe
         run: |
           cd ./YMCL.Main/YMCL.Desktop

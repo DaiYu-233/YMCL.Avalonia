@@ -142,7 +142,7 @@ jobs:
         uses: L-Super/create-dmg-actions@v1.0.3
         with:
           dmg_name: "YMCL.Desktop.osx.mac.x64"
-          src_dir: "./app.x64/YMCL.app"
+          src_dir: "./app.x64/Yu Minecraft Launcher.app"
       - name: UploadArtifacts
         uses: actions/upload-artifact@v4
         with:

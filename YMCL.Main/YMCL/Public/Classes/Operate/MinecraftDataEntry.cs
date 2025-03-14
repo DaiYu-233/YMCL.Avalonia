@@ -117,9 +117,8 @@ public sealed record MinecraftDataEntry
                     Notice(MainLang.CannotFandRightJava, NotificationType.Error);
                     return;
                 }
-
                 _ = JavaClient.Launch(Id, entry.MinecraftFolderPath, setting.MaxMem,
-                    JavaEntry.YmclToMl(setting.Java));
+                    JavaEntry.YmclToMl(setting.Java), p_fullUrl: setting.AutoJoinServerIp);
             };
         }
     }

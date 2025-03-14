@@ -57,26 +57,7 @@ public class JavaClient
             Notice(MainLang.GameMainFileDeletion, NotificationType.Error);
             return false;
         }
-
-        var host = string.Empty;
-        var port = 25565;
-        if (!string.IsNullOrWhiteSpace(p_fullUrl))
-        {
-            try
-            {
-                var uri = new Uri(p_fullUrl);
-                host = uri.Host;
-                if (uri.Port != -1)
-                {
-                    port = uri.Port;
-                }
-            }
-            catch (UriFormatException)
-            {
-                Notice(MainLang.ServerUrlError, NotificationType.Error);
-                return false;
-            }
-        }
+        
 
         if (Data.SettingEntry.Account == null)
         {
@@ -165,6 +146,11 @@ public class JavaClient
             JvmArguments = [],
             LauncherName = "YMCL",
         };
+
+        if (!string.IsNullOrWhiteSpace(p_fullUrl))
+        {
+            config.Server = p_fullUrl;
+        }
 
         task.AdvanceSubTask();
 

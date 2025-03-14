@@ -7,6 +7,8 @@ using System.Runtime.InteropServices.JavaScript;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
+using Avalonia.Layout;
+using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using FluentAvalonia.UI.Controls;
 using Newtonsoft.Json.Linq;
@@ -77,22 +79,41 @@ public class Update
         }
     }
 
-    public static async Task<bool> UpdateByReplaceFile(string architecture)
+    public static async Task<bool> UpdateByReplaceFile(string arch)
     {
-        var cr = await ShowDialogAsync(MainLang.Update, MainLang.CurrectSystemNoSupportAutoUpdateTip,
-            b_primary: MainLang.SaveAs, b_cancel: MainLang.Cancel);
+        ContentDialogResult cr;
+        var comboBox = new ComboBox
+        {
+            FontFamily = (FontFamily)Application.Current.Resources["Font"],
+            HorizontalAlignment = HorizontalAlignment.Stretch
+        };
+        comboBox.Items.Add(".app");
+        comboBox.Items.Add(".dmg");
+        comboBox.SelectedIndex = 0;
+        if (Const.Data.DesktopType == DesktopRunnerType.MacOs)
+        {
+            cr = await ShowDialogAsync(MainLang.Update, MainLang.CurrectSystemNoSupportAutoUpdateTip, comboBox,
+                b_primary: MainLang.SaveAs, b_cancel: MainLang.Cancel);
+        }
+        else
+        {
+            cr = await ShowDialogAsync(MainLang.Update, MainLang.CurrectSystemNoSupportAutoUpdateTip,
+                b_primary: MainLang.SaveAs, b_cancel: MainLang.Cancel);
+        }
+
         if (cr != ContentDialogResult.Primary)
         {
             return false;
         }
 
-        var fn = architecture switch
+        var fn = arch switch
         {
             "linux-arm" => "YMCL.Desktop.linux.arm.AppImage",
             "linux-arm64" => "YMCL.Desktop.linux.arm64.AppImage",
             "linux-x64" => "YMCL.Desktop.linux.x64.AppImage",
-            "osx-x64" => "YMCL.Desktop.osx.mac.x64.app.zip",
-            "osx-arm64" => "YMCL.Desktop.osx.mac.arm64.app.zip",
+            "osx" => comboBox.SelectedIndex == 0
+                ? "YMCL.Desktop.osx.mac.x64.app.zip"
+                : "YMCL.Desktop.osx.mac.x64.dmg",
             "win-x64" => Environment.OSVersion.Version.Major >= 10
                 ? "YMCL.Desktop.win.x64.installer.exe"
                 : "YMCL.Desktop.win7.x64.exe.zip",
@@ -104,6 +125,14 @@ public class Update
                 : "YMCL.Desktop.win7.arm64.exe.zip",
             _ => "File.unknown"
         };
+
+        var architecture = arch;
+        if (arch == "osx")
+        {
+            architecture = comboBox.SelectedIndex == 0
+                ? "osx-app"
+                : "osx-dmg";
+        }
 
         var path = (await TopLevel.GetTopLevel(YMCL.App.UiRoot).StorageProvider.SaveFilePickerAsync(
             new FilePickerSaveOptions
@@ -144,13 +173,13 @@ public class Update
                 var asset = (JObject)jToken;
                 var name = (string)asset["name"];
                 var browser_download_url = (string)asset["browser_download_url"];
-                switch (name)
+                switch (name.Trim())
                 {
                     case "YMCL.Desktop.linux.arm.AppImage" when architecture == "linux-arm":
                     case "YMCL.Desktop.linux.arm64.AppImage" when architecture == "linux-arm64":
                     case "YMCL.Desktop.linux.x64.AppImage" when architecture == "linux-x64":
-                    case "YMCL.Desktop.osx.mac.x64.app.zip" when architecture == "osx-x64":
-                    case "YMCL.Desktop.osx.mac.arm64.app.zip" when architecture == "osx-arm64":
+                    case "YMCL.Desktop.osx.mac.x64.app.zip" when architecture == "osx-app":
+                    case "YMCL.Desktop.osx.mac.x64.dmg" when architecture == "osx-dmg":
                     case "YMCL.Desktop.win.x64.installer.exe"
                         when architecture == "win-x64" && Environment.OSVersion.Version.Major >= 10:
                     case "YMCL.Desktop.win.x86.installer.exe"

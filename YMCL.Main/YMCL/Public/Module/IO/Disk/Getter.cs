@@ -119,10 +119,7 @@ public class Getter
         }
         else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
         {
-            if (RuntimeInformation.ProcessArchitecture == Architecture.X64)
-                return "osx-x64";
-            // 注意: OSX 上的 ARM 架构可能需要特定检测，因为目前可能是 Apple Silicon (M1/M2)  
-            if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64) return "osx-arm64";
+                return "osx";
         }
         else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {

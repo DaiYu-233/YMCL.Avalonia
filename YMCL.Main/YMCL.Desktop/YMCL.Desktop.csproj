@@ -27,7 +27,7 @@
   <CFBundlePackageType>AAPL</CFBundlePackageType>
   <CFBundleSignature>YuMinecraftLauncher</CFBundleSignature>
   <CFBundleExecutable>YMCL.Desktop</CFBundleExecutable>
-  <CFBundleIconFile>Public/Assets/YMCL-Icon.icns</CFBundleIconFile>
+  <CFBundleIconFile>YMCL-Icon.icns</CFBundleIconFile>
   <CFBundleShortVersionString>1.0</CFBundleShortVersionString>
   <NSPrincipalClass>NSApplication</NSPrincipalClass>
   <NSHighResolutionCapable>true</NSHighResolutionCapable>

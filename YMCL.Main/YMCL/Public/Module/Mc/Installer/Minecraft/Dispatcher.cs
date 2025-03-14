@@ -98,9 +98,6 @@ public class Dispatcher
 
         Console.WriteLine($"MaxThread: {DownloadMirrorManager.MaxThread}");
 
-        subTasks[0].Finish();
-        subTasks[1].Finish();
-
         if (optiFineInstallEntity != null && versionManifestEntry != null && forgeInstallEntry != null)
         {
             var composite = await CompositeForgeAndOptiFine.Install(versionManifestEntry, forgeInstallEntry, optiFineInstallEntity,
@@ -128,6 +125,9 @@ public class Dispatcher
             return false;
         }
 
+        subTasks[0].Finish();
+        subTasks[1].Finish();
+        
         if (forgeInstallEntry != null)
         {
             var forge = await Forge.Install(forgeInstallEntry, customId!, mcPath, forgeTask, task,

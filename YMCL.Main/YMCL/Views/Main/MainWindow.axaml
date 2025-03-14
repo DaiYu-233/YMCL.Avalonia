@@ -1,6 +1,7 @@
 <u:UrsaWindow
     FontFamily="{DynamicResource Font}"
     FontWeight="{DynamicResource FontWeight}"
+    Icon="../../../Public/Assets/Icon.Shadow.ico"
     IsCloseButtonVisible="False"
     IsFullScreenButtonVisible="False"
     IsHitTestVisible="True"

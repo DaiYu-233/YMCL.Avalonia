@@ -1,17 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-    <ApplicationIcon>YMCL-Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Icon.Shadow.ico</ApplicationIcon>
     <Authors>DaiYu | http://daiyu.fun</Authors>
     <Product>Yu Minecraft Launcher</Product>
     <Description>Yu Minecraft Launcher</Description>
     <Title>Yu Minecraft Launcher</Title>
     <Copyright>DaiYu | http://daiyu.fun</Copyright>
     <PackageProjectUrl>http://ymcl.daiyu.fun</PackageProjectUrl>
-    <PackageIcon>YMCL-Icon.png</PackageIcon>
+    <PackageIcon>Icon.Shadow.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/DaiYu-233/YMCL.Avalonia</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -23,20 +23,18 @@
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
     <AvaloniaResource Include="Public\Assets\MiSans-Regular.otf" />
-    <None Remove="Public\Assets\TitleBar-Icon.png" />
-    <AvaloniaResource Include="Public\Assets\TitleBar-Icon.png" />
+    <None Remove="Public\Assets\Icon.png" />
+    <AvaloniaResource Include="Public\Assets\Icon.png" />
+    <None Remove="Public\Assets\Icon.Shadow.ico" />
+    <AvaloniaResource Include="Public\Assets\Icon.Shadow.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="YMCL-Icon.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\..\..\YMCL.Avalonia\README.md">
+    <None Include="..\..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-    <None Include="..\..\Assets\YMCL-Icon.png">
+    <None Include="..\..\Assets\Icon.Shadow.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
@@ -211,5 +209,9 @@
     <AdditionalFiles Include="Views\Main\Pages\DownloadPages\ModrinthPages\Fetcher.axaml" />
     <AdditionalFiles Include="Views\Main\Pages\DownloadPages\ModrinthPages\ModFileResult.axaml" />
     <AdditionalFiles Include="Views\Main\Pages\DownloadPages\ModrinthPages\SearchResult.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Icon.Shadow.ico" />
   </ItemGroup>
 </Project>

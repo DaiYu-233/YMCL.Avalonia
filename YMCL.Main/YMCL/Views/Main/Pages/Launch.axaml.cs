@@ -38,7 +38,13 @@ public partial class Launch : UserControl
             if (!_gameList.CanCloseGameList) return;
             _ = CloseGameList();
         };
-        LaunchBtn.Click += (_, _) => { Data.UiProperty.SelectedMinecraft.LaunchAction?.Invoke(); };
+        LaunchBtn.Click += (_, _) =>
+        {
+            if (Data.UiProperty.SelectedMinecraft != null)
+            {
+                Data.UiProperty.SelectedMinecraft.LaunchAction?.Invoke();
+            }
+        };
         Loaded += async (_, _) =>
         {
             if (!GameSettingFrame.IsVisible && !GameListFrame.IsVisible) return;

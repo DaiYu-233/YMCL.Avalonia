@@ -15,7 +15,7 @@
     xmlns:setting="clr-namespace:YMCL.Public.Classes.Setting"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UserControl.Resources>
-        <converter:SelectedGameIsotBedrock x:Key="SelectedGameIsNotBedrock" />
+        <converter:SelectedGameIsNotBedrock x:Key="SelectedGameIsNotBedrock" />
     </UserControl.Resources>
     <Grid>
         <Border Name="LaunchConsoleRoot" Opacity="{DynamicResource MainOpacity}">

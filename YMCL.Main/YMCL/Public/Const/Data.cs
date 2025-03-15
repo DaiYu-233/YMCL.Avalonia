@@ -56,9 +56,17 @@ public sealed class Data : ReactiveObject
             if (e.PropertyName == nameof(UiProperty.SelectedMinecraft) &&
                 !string.IsNullOrEmpty(UiProperty.SelectedMinecraft?.Id))
             {
-                SettingEntry.SelectedMinecraftId = UiProperty.SelectedMinecraft.Type == "bedrock"
-                    ? "bedrock"
-                    : UiProperty.SelectedMinecraft.Id;
+                if (UiProperty.SelectedMinecraft.Type == "bedrock")
+                {
+                    if (DesktopType == DesktopRunnerType.Windows && Environment.OSVersion.Version.Major >= 10)
+                    {
+                        SettingEntry.SelectedMinecraftId = "bedrock";
+                    }
+                }
+                else
+                {
+                    SettingEntry.SelectedMinecraftId = UiProperty.SelectedMinecraft.Id;
+                }
             }
         };
         FavouriteResources.CollectionChanged += (_, _) =>

@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using YMCL.Public.Classes.Data;
 using YMCL.Public.Classes.Operate;
 using YMCL.Public.Classes.Setting;
+using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using CrashWindow = YMCL.Views.CrashWindow;
 
@@ -70,8 +71,11 @@ public class InitData
         {
             if (Data.SettingEntry.SelectedMinecraftId == "bedrock")
             {
-                Data.UiProperty.SelectedMinecraft = new MinecraftDataEntry(null, true, true)
-                    { IsSettingVisible = false, Type = "bedrock" };
+                if (Data.DesktopType == DesktopRunnerType.Windows && Environment.OSVersion.Version.Major >= 10)
+                {
+                    Data.UiProperty.SelectedMinecraft = new MinecraftDataEntry(null, true, true)
+                        { IsSettingVisible = false, Type = "bedrock" };
+                }
             }
             else
             {

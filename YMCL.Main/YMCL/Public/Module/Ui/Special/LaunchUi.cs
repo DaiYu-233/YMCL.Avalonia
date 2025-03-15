@@ -8,6 +8,7 @@ using MinecraftLaunch.Base.Models.Game;
 using MinecraftLaunch.Components.Parser;
 using YMCL.Public.Classes;
 using YMCL.Public.Classes.Operate;
+using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 
 namespace YMCL.Public.Module.Ui.Special;
@@ -39,8 +40,11 @@ public class LaunchUi
         });
         Data.CurrentFolderGames.Clear();
         games.OrderBy(entry => !entry.IsFavourite).ToList().ForEach(a => { Data.CurrentFolderGames.Add(a); });
-        var bedrock = new MinecraftDataEntry(null, true, true) { IsSettingVisible = false, Type = "bedrock" };
-        Data.CurrentFolderGames.Insert(0, bedrock);
+        if (Data.DesktopType == DesktopRunnerType.Windows && Environment.OSVersion.Version.Major >= 10)
+        {
+            var bedrock = new MinecraftDataEntry(null, true, true) { IsSettingVisible = false, Type = "bedrock" };
+            Data.CurrentFolderGames.Insert(0, bedrock);
+        }
         if (Data.UiProperty.SelectedMinecraft == null ||
             !Data.CurrentFolderGames.Contains(Data.UiProperty.SelectedMinecraft))
         {

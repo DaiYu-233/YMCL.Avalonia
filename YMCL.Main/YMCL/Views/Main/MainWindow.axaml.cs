@@ -67,12 +67,17 @@ public partial class MainWindow : UrsaWindow
             switch (WindowState)
             {
                 case WindowState.Normal:
-                    Root.Margin = new Thickness(0);
-                    Root.BorderThickness = new Thickness(0);
+                    Root.CornerRadius = new CornerRadius(8);
+                    if (Data.DesktopType == DesktopRunnerType.Windows && Environment.OSVersion.Version.Major < 10)
+                    {
+                        Root.CornerRadius = new CornerRadius(0);
+                    }
                     break;
                 case WindowState.Maximized:
-                    Root.Margin = new Thickness(20);
-                    Root.BorderThickness = new Thickness(2);
+                    if (Data.DesktopType != DesktopRunnerType.MacOs)
+                    {
+                        Root.CornerRadius = new CornerRadius(0);
+                    }
                     break;
             }
         };
@@ -95,6 +100,10 @@ public partial class MainWindow : UrsaWindow
             _lastShiftPressTime = DateTime.Now;
         };
         AddHandler(DragDrop.DropEvent, DropHandler);
+        if (Data.DesktopType == DesktopRunnerType.Windows && Environment.OSVersion.Version.Major < 10)
+        {
+            Root.CornerRadius = new CornerRadius(0);
+        }
     }
 
     private static async void DropHandler(object? sender, DragEventArgs e)

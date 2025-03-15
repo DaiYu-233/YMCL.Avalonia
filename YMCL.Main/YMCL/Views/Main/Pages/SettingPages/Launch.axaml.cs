@@ -54,7 +54,8 @@ public partial class Launch : UserControl
         {
             UsedMemRoot.IsVisible = false;
             CanUseMemText.IsVisible = false;
-            AutoScanJavaBtn.IsVisible = false;
+            // AutoScanJavaBtn.IsVisible = false;
+            AutoMemRoot.IsVisible = false;
         }
     }
 

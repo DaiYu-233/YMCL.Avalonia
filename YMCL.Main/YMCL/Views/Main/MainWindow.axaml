@@ -43,12 +43,9 @@
         ClipToBounds="True"
         CornerRadius="8"
         x:Name="Root">
-        <Border ClipToBounds="True" CornerRadius="8">
+        <Border ClipToBounds="True">
             <Grid>
-                <Border
-                    ClipToBounds="True"
-                    CornerRadius="8"
-                    Name="BackGroundBorder">
+                <Border ClipToBounds="True" Name="BackGroundBorder">
                     <Viewbox Stretch="UniformToFill">
                         <Image Name="BackGroundImg" />
                     </Viewbox>

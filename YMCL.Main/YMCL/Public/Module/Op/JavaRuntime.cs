@@ -7,6 +7,7 @@ using MinecraftLaunch.Utilities;
 using Newtonsoft.Json;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
+using YMCL.Public.Module.Ui.Special;
 
 namespace YMCL.Public.Module.Op;
 
@@ -14,29 +15,37 @@ public class JavaRuntime
 {
     public static async void AddByAutoScan()
     {
-        var repeatJavaCount = 0;
-        var successAddCount = 0;
-        var javaList = await JavaUtil.EnumerableJavaAsync().ToListAsync();
-        var convertedJavaList = javaList.Select(JavaEntry.MlToYmcl).ToList();
-
-        convertedJavaList.ForEach(java =>
+        try
         {
-            if (!Data.JavaRuntimes.Contains(java))
-            {
-                Data.JavaRuntimes.Add(java);
-                successAddCount++;
-            }
-            else
-            {
-                repeatJavaCount++;
-            }
-        });
+            var repeatJavaCount = 0;
+            var successAddCount = 0;
+            var javaList = await JavaUtil.EnumerableJavaAsync().ToListAsync();
+            var convertedJavaList = javaList.Select(JavaEntry.MlToYmcl).ToList();
 
-        Notice(
-            $"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}: {successAddCount}\n{MainLang.RepeatItem}: {repeatJavaCount}",
-            NotificationType.Success);
-        File.WriteAllText(ConfigPath.JavaDataPath, JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
-        Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
+            convertedJavaList.ForEach(java =>
+            {
+                if (!Data.JavaRuntimes.Contains(java))
+                {
+                    Data.JavaRuntimes.Add(java);
+                    successAddCount++;
+                }
+                else
+                {
+                    repeatJavaCount++;
+                }
+            });
+
+            Notice($"{MainLang.ScanJavaSuccess}\n{MainLang.SuccessAdd}: {successAddCount}\n{MainLang.RepeatItem}: {repeatJavaCount}",
+                NotificationType.Success);
+            await File.WriteAllTextAsync(ConfigPath.JavaDataPath,
+                JsonConvert.SerializeObject(Data.JavaRuntimes, Formatting.Indented));
+            AggregateSearchUi.UpdateAllAggregateSearchEntries();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            Notice(MainLang.OperateFailed , NotificationType.Error);
+        }
     }
 
     public static async Task AddByUi(Control sender)

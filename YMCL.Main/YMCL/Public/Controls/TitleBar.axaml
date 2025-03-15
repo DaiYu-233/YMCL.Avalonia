@@ -38,7 +38,10 @@
                     Name="Separator"
                     VerticalAlignment="Center"
                     Width="1" />
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <StackPanel
+                    HorizontalAlignment="Right"
+                    Name="FunctionRoot"
+                    Orientation="Horizontal">
                     <Button
                         Classes="icon-button"
                         Content="{DynamicResource Minimize}"

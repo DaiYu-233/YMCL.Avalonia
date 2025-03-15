@@ -3,6 +3,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
+using Avalonia.Platform;
 using FluentAvalonia.UI.Controls;
 using ReactiveUI;
 using Ursa.Common;
@@ -11,6 +12,7 @@ using Ursa.Controls.Options;
 using YMCL.Public.Controls.Drawers;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
+using YMCL.Public.Module.Util.Platform;
 using YMCL.Views.Main.Pages;
 
 namespace YMCL.Views.Main;
@@ -64,6 +66,35 @@ public partial class MainWindow : UrsaWindow
     {
         PropertyChanged += (_, e) =>
         {
+            if (Data.DesktopType == DesktopRunnerType.MacOs)
+            {
+                var platform = TryGetPlatformHandle();
+                if (platform is not null)
+                {
+                    var nsWindow = platform.Handle;
+                    if (nsWindow != IntPtr.Zero)
+                    {
+                        try
+                        {
+                            WindowHandler.RefreshTitleBarButtonPosition(nsWindow);
+                            WindowHandler.HideZoomButton(nsWindow);
+                            ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.Default;
+                            TitleBar.MaximizeButton.IsVisible = false;
+                            TitleBar.MinimizeButton.IsVisible = false;
+                            TitleBar.CloseButton.IsVisible = false;
+                            TitleText.HorizontalAlignment = HorizontalAlignment.Right;
+                            TitleText.Margin = new Thickness(0, 0, 10, 0);
+                            TitleBar.FunctionRoot.Margin = new Thickness(0, 0, 175, 0);
+                        }
+                        catch (Exception exception)
+                        {
+                            Console.WriteLine(exception);
+                        }
+                    }
+                }
+            }
+            if (e.Property.Name != nameof(WindowState)) return;
+
             switch (WindowState)
             {
                 case WindowState.Normal:
@@ -72,12 +103,14 @@ public partial class MainWindow : UrsaWindow
                     {
                         Root.CornerRadius = new CornerRadius(0);
                     }
+
                     break;
                 case WindowState.Maximized:
                     if (Data.DesktopType != DesktopRunnerType.MacOs)
                     {
                         Root.CornerRadius = new CornerRadius(0);
                     }
+
                     break;
             }
         };

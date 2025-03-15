@@ -1458,4 +1458,25 @@ MacOs 不支持自动更新
     <value>Java运行时错误</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="SavesName" xml:space="preserve">
+    <value>存档名称</value>
+  </data>
+  <data name="AutoJoinWorld" xml:space="preserve">
+    <value>自动进入存档</value>
+  </data>
+  <data name="AddFastLaunch" xml:space="preserve">
+    <value>添加快捷启动</value>
+  </data>
+  <data name="SetAutoJoinServerTip" xml:space="preserve">
+    <value>此操作将会同时关闭自动进入存档</value>
+  </data>
+  <data name="SetAutoJoinWorldTip" xml:space="preserve">
+    <value>此操作将会同时关闭自动进入服务器</value>
+  </data>
+  <data name="SetWorld" xml:space="preserve">
+    <value>设置存档</value>
+  </data>
+  <data name="CurrentVersionUnsupportOperation" xml:space="preserve">
+    <value>当前版本不支持此操作</value>
+  </data>
 </root>

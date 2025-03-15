@@ -32,7 +32,7 @@ public sealed class Data : ReactiveObject
     public static ObservableCollection<PluginInfoEntry> IdentifiedPlugins { get; set; } = [];
     public static ObservableCollection<AccountInfo> Accounts { get; set; }
     public static ObservableCollection<FavouriteResourceEntry> FavouriteResources { get; set; } = [];
-    public static ObservableCollection<FavouriteMinecraftEntry> FavouriteMinecraft { get; set; } = [];
+    public static ObservableCollection<FavouriteMinecraftEntry> FavouriteMinecraft { get; set; }
     public static ObservableCollection<MinecraftDataEntry> CurrentFolderGames { get; set; } = [];
     public static ObservableCollection<TaskEntry> TaskEntries { get; set; } = [];
     public static List<AggregateSearchEntry> AllAggregateSearchEntries { get; set; } = [];
@@ -73,11 +73,6 @@ public sealed class Data : ReactiveObject
         {
             File.WriteAllText(ConfigPath.FavouriteResourceDataPath,
                 JsonConvert.SerializeObject(FavouriteResources, Formatting.Indented));
-        };
-        FavouriteMinecraft.CollectionChanged += (_, _) =>
-        {
-            File.WriteAllText(ConfigPath.FavouriteMinecraftDataPath,
-                JsonConvert.SerializeObject(FavouriteMinecraft, Formatting.Indented));
         };
         SettingEntry.PropertyChanged += (_, e) =>
         {

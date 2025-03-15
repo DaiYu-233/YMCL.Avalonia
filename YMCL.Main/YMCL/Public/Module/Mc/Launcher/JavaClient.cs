@@ -31,7 +31,7 @@ public class JavaClient
 {
     public static async Task<bool> Launch(string p_id, string p_mcPath, double p_maxMem,
         MinecraftLaunch.Base.Models.Game.JavaEntry p_javaPath,
-        string? p_fullUrl = null, bool p_enableIndependencyCore = true, bool p_isDebug = false)
+        string? p_fullUrl = null, string? p_world = null, bool p_enableIndependencyCore = true, bool p_isDebug = false)
     {
         var cts = new CancellationTokenSource();
         var token = cts.Token;
@@ -61,7 +61,7 @@ public class JavaClient
 
         string host = null;
         int port = -1;
-        
+
         if (!string.IsNullOrWhiteSpace(p_fullUrl))
         {
             try
@@ -173,6 +173,11 @@ public class JavaClient
             };
         }
 
+        if (string.IsNullOrWhiteSpace(p_fullUrl) && !string.IsNullOrWhiteSpace(p_world))
+        {
+            config.SaveName = p_world;
+        }
+
         task.AdvanceSubTask();
 
         MinecraftRunner runner = new(config, parser);
@@ -204,7 +209,7 @@ public class JavaClient
                             }
 
                             Notice($"{MainLang.GameExited} - {p_id}", NotificationType.Warning);
-                            
+
                             task.FinishWithSuccess();
                             await Task.Delay(2000);
                             if (TopLevel.GetTopLevel(YMCL.App.UiRoot) is Window window2)

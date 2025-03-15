@@ -28,6 +28,8 @@ public sealed class FavouriteMinecraftEntry : INotifyPropertyChanged
     private string _minecraftId;
     private string _displayName;
     private string _serverUrl;
+    private string _worldName;
+    private bool _isSupportJoinWorld = true;
 
     [JsonIgnore] public Bitmap Bitmap => Converter.Base64ToBitmap(IconBase64);
 
@@ -56,6 +58,13 @@ public sealed class FavouriteMinecraftEntry : INotifyPropertyChanged
     }
 
     [JsonProperty]
+    public bool IsSupportJoinWorld
+    {
+        get => _isSupportJoinWorld;
+        set => SetField(ref _isSupportJoinWorld, value);
+    }
+
+    [JsonProperty]
     public string DisplayName
     {
         get => _displayName;
@@ -67,6 +76,13 @@ public sealed class FavouriteMinecraftEntry : INotifyPropertyChanged
     {
         get => _serverUrl;
         set => SetField(ref _serverUrl, value);
+    }
+
+    [JsonProperty]
+    public string WorldName
+    {
+        get => _worldName;
+        set => SetField(ref _worldName, value);
     }
 
     public bool Equals(FavouriteMinecraftEntry? other)
@@ -86,11 +102,17 @@ public sealed class FavouriteMinecraftEntry : INotifyPropertyChanged
             b_primary: MainLang.Ok);
         if (cr != ContentDialogResult.Primary) return;
         DisplayName = textBox.Text ?? MinecraftId;
+
+        await File.WriteAllTextAsync(ConfigPath.FavouriteMinecraftDataPath,
+            JsonConvert.SerializeObject(Const.Data.FavouriteMinecraft, Formatting.Indented));
     }
 
     public void Del()
     {
         Const.Data.FavouriteMinecraft.Remove(this);
+
+        File.WriteAllText(ConfigPath.FavouriteMinecraftDataPath,
+            JsonConvert.SerializeObject(Const.Data.FavouriteMinecraft, Formatting.Indented));
     }
 
     public async void SetIcon()
@@ -110,9 +132,8 @@ public sealed class FavouriteMinecraftEntry : INotifyPropertyChanged
             Notice(MainLang.OperateFailed);
         }
 
-        App.UiRoot.ViewModel.Launch.InvalidateVisual();
-        App.UiRoot.ViewModel.Launch.InvalidateArrange();
-        App.UiRoot.ViewModel.Launch.InvalidateMeasure();
+        await File.WriteAllTextAsync(ConfigPath.FavouriteMinecraftDataPath,
+            JsonConvert.SerializeObject(Const.Data.FavouriteMinecraft, Formatting.Indented));
     }
 
     public async void SetServer()
@@ -123,10 +144,37 @@ public sealed class FavouriteMinecraftEntry : INotifyPropertyChanged
             Text = ServerUrl, HorizontalAlignment = HorizontalAlignment.Stretch, Width = 500,
             Watermark = "example.com:25565"
         };
-        var cr = await ShowDialogAsync(MainLang.Rename, p_content: textBox, b_cancel: MainLang.Cancel,
+        var cr = await ShowDialogAsync(MainLang.Rename, MainLang.SetAutoJoinServerTip, p_content: textBox,
+            b_cancel: MainLang.Cancel,
             b_primary: MainLang.Ok);
         if (cr != ContentDialogResult.Primary) return;
         ServerUrl = textBox.Text ?? string.Empty;
+        WorldName = string.Empty;
+
+        await File.WriteAllTextAsync(ConfigPath.FavouriteMinecraftDataPath,
+            JsonConvert.SerializeObject(Const.Data.FavouriteMinecraft, Formatting.Indented));
+    }
+
+    public async void SetWorld()
+    {
+        var textBox = new TextBox
+        {
+            FontFamily = (FontFamily)Application.Current.Resources["Font"], TextWrapping = TextWrapping.Wrap,
+            Text = WorldName, HorizontalAlignment = HorizontalAlignment.Stretch, Width = 500,
+            Watermark = MainLang.SavesName
+        };
+        var cr = await ShowDialogAsync(MainLang.Rename,
+            IsSupportJoinWorld
+                ? MainLang.SetAutoJoinWorldTip
+                : $"{MainLang.CurrentVersionUnsupportOperation}\n{MainLang.SetAutoJoinWorldTip}", p_content: textBox,
+            b_cancel: MainLang.Cancel,
+            b_primary: MainLang.Ok);
+        if (cr != ContentDialogResult.Primary) return;
+        ServerUrl = string.Empty;
+        WorldName = textBox.Text ?? string.Empty;
+
+        await File.WriteAllTextAsync(ConfigPath.FavouriteMinecraftDataPath,
+            JsonConvert.SerializeObject(Const.Data.FavouriteMinecraft, Formatting.Indented));
     }
 
     public void Launch()
@@ -158,7 +206,7 @@ public sealed class FavouriteMinecraftEntry : INotifyPropertyChanged
             Notice($"{MainLang.CannotFandRightJava}\n{setting.Java.JavaVersion}", NotificationType.Error);
             return;
         }
-        
+
         if (setting.Java.JavaPath == null)
         {
             Notice(MainLang.JavaRuntimeError, NotificationType.Error);
@@ -167,7 +215,8 @@ public sealed class FavouriteMinecraftEntry : INotifyPropertyChanged
 
         _ = JavaClient.Launch(MinecraftId, entry.MinecraftFolderPath, setting.MaxMem,
             JavaEntry.YmclToMl(setting.Java),
-            p_fullUrl: !string.IsNullOrWhiteSpace(ServerUrl) ? ServerUrl : setting.AutoJoinServerIp);
+            p_fullUrl: !string.IsNullOrWhiteSpace(ServerUrl) ? ServerUrl : setting.AutoJoinServerIp,
+            p_world: WorldName);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -183,14 +232,5 @@ public sealed class FavouriteMinecraftEntry : INotifyPropertyChanged
         field = value;
         OnPropertyChanged(propertyName);
         return true;
-    }
-
-    public FavouriteMinecraftEntry()
-    {
-        PropertyChanged += (_, _) =>
-        {
-            File.WriteAllText(ConfigPath.FavouriteMinecraftDataPath,
-                JsonConvert.SerializeObject(Const.Data.FavouriteMinecraft, Formatting.Indented));
-        };
     }
 }

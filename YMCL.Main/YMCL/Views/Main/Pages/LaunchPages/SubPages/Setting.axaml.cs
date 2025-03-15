@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System.IO;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Layout;
@@ -9,6 +10,8 @@ using Avalonia.Platform.Storage;
 using FluentAvalonia.Core;
 using FluentAvalonia.UI.Controls;
 using MinecraftLaunch.Base.Models.Game;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Ursa.Controls;
 using YMCL.Public.Classes.Data;
 using YMCL.Public.Langs;
@@ -70,15 +73,51 @@ public partial class Setting : UserControl
                     Notice(MainLang.OperateFailed);
                 }
             };
+
+            TextBox world = null;
+            if (!string.IsNullOrWhiteSpace(_model.MinecraftEntry.ClientJsonPath) &&
+                File.Exists(_model.MinecraftEntry.ClientJsonPath))
+            {
+                try
+                {
+                    var obj = JObject.Parse(await File.ReadAllTextAsync(_model.MinecraftEntry.ClientJsonPath));
+                    var time = DateTime.Parse(obj["releaseTime"].ToString());
+                    if (time > new DateTime(2023, 4, 4))
+                    {
+                        world = new TextBox
+                        {
+                            FontFamily = (FontFamily)Application.Current.Resources["Font"], TextWrapping = TextWrapping.Wrap,
+                            Text = string.Empty, HorizontalAlignment = HorizontalAlignment.Stretch, Watermark = MainLang.SavesName
+                        };
+                    }
+                }
+                catch
+                {
+                }
+            }
+
+            if (world != null)
+            {
+                server.TextChanged += (_, _) => { world.IsEnabled = string.IsNullOrWhiteSpace(server.Text); };
+                world.TextChanged += (_, _) => { server.IsEnabled = string.IsNullOrWhiteSpace(world.Text); };
+            }
+            
             FormItem.SetLabel(icon, MainLang.Icon);
             var form = new Form()
             {
                 Items =
                 {
-                    name, server, icon
+                    name, server
                 },
+                MinWidth = 300,
                 FontFamily = (FontFamily)Application.Current.Resources["Font"],
             };
+            if (world != null)
+            {
+                FormItem.SetLabel(world, MainLang.AutoJoinWorld);
+                form.Items.Add(world);
+            }
+            form.Items.Add(icon);
 
             var cr = await ShowDialogAsync(MainLang.FastLaunch, p_content: form, b_cancel: MainLang.Cancel,
                 b_primary: MainLang.Ok);
@@ -86,8 +125,11 @@ public partial class Setting : UserControl
             Data.FavouriteMinecraft.Add(new FavouriteMinecraftEntry
             {
                 MinecraftPath = _model.MinecraftEntry.MinecraftFolderPath, MinecraftId = _model.MinecraftEntry.Id,
-                DisplayName = name.Text ?? _model.MinecraftEntry.Id, ServerUrl = server.Text ?? string.Empty, IconBase64 = base64
+                DisplayName = name.Text ?? _model.MinecraftEntry.Id, ServerUrl = server.Text ?? string.Empty,
+                IconBase64 = base64, WorldName = world?.Text ?? string.Empty, IsSupportJoinWorld = world != null
             });
+            await File.WriteAllTextAsync(ConfigPath.FavouriteMinecraftDataPath,
+                JsonConvert.SerializeObject(Public.Const.Data.FavouriteMinecraft, Formatting.Indented));
         };
     }
 

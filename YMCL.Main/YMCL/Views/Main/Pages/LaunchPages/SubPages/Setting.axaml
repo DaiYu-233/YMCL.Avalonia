@@ -165,9 +165,10 @@
                         Margin="18,0,0,0"
                         VerticalAlignment="Center" />
                     <Button
-                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Add}"
+                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.AddFastLaunch}"
                         DockPanel.Dock="Right"
                         HorizontalAlignment="Right"
+                        Margin="18,0,6.5,0"
                         Name="FastLaunchButton" />
                 </DockPanel>
             </Border>

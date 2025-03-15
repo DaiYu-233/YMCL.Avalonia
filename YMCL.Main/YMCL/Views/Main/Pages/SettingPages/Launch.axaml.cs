@@ -49,6 +49,14 @@ public partial class Launch : UserControl
             });
             await System.Threading.Tasks.Task.Delay(100);
         }
+        
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) return;
+        UsedMemRoot.IsVisible = false;
+        CanUseMemText.IsVisible = false;
+        // AutoScanJavaBtn.IsVisible = false;
+        AutoMemRoot.IsVisible = false;
+        DockPanel.IsEnabled = true;
+        Data.SettingEntry.EnableAutoAllocateMem = false;
     }
 
     private void BindingEvent()

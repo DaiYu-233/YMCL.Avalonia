@@ -122,7 +122,7 @@
                 Opacity="{DynamicResource MainOpacity}"
                 Padding="6.5">
                 <StackPanel Margin="0,5" Spacing="5">
-                    <DockPanel>
+                    <DockPanel Name="DockPanel">
                         <DockPanel.IsEnabled>
                             <MultiBinding Converter="{StaticResource BoolReversalConverter}">
                                 <Binding Path="SettingEntry.EnableAutoAllocateMem" />

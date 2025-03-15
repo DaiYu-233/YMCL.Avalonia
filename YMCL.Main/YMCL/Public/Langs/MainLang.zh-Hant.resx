@@ -1528,4 +1528,32 @@ win10 以下系統(不包括10)不支援自動更新
     <value>自訂</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="FastLaunch" xml:space="preserve">
+    <value>快速啟動</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>添加</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>圖標</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SetIcon" xml:space="preserve">
+    <value>設定圖標</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SetServer" xml:space="preserve">
+    <value>設定伺服器</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>刪除</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="JavaRuntimeError" xml:space="preserve">
+    <value>Java運行時錯誤</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

@@ -1532,4 +1532,32 @@ You can manually download the latest version and replace the program file</value
     <value>Custom</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="FastLaunch" xml:space="preserve">
+    <value>Quick Launch</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>Icon</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SetIcon" xml:space="preserve">
+    <value>Set Icon</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SetServer" xml:space="preserve">
+    <value>Set server</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="JavaRuntimeError" xml:space="preserve">
+    <value>Java Runtime Error</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

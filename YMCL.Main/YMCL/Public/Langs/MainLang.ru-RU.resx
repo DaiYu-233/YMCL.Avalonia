@@ -1532,4 +1532,32 @@ MacO не поддерживают автоматические обновлен
     <value>Пользовательское</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="FastLaunch" xml:space="preserve">
+    <value>Быстрый старт</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Добавить</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>Иконка</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SetIcon" xml:space="preserve">
+    <value>Задать иконку</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SetServer" xml:space="preserve">
+    <value>Настройте свой сервер</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>удалять</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="JavaRuntimeError" xml:space="preserve">
+    <value>Ошибка выполнения Java</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

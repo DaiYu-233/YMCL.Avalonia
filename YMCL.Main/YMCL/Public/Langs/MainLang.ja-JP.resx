@@ -1532,4 +1532,32 @@ MacOsは自動更新をサポートしていません
     <value>ユーザ設定</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="FastLaunch" xml:space="preserve">
+    <value>クイックスタート</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>登録</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>アイコン</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SetIcon" xml:space="preserve">
+    <value>アイコンを設定</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="SetServer" xml:space="preserve">
+    <value>サーバーを設定しましょう</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>削除</value>
+    <comment>#TODO#_</comment>
+  </data>
+  <data name="JavaRuntimeError" xml:space="preserve">
+    <value>Javaランタイムエラー</value>
+    <comment>#TODO#_</comment>
+  </data>
 </root>

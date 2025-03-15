@@ -21,7 +21,7 @@
     <PackageReleaseNotes>Yu Minecraft Launcher</PackageReleaseNotes>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
     <CFBundleName>YMCL</CFBundleName>
-    <CFBundleDisplayName>YuMinecraftLauncher</CFBundleDisplayName>
+    <CFBundleDisplayName>YMCL</CFBundleDisplayName>
     <CFBundleIdentifier>fun.daiyu.ymcl</CFBundleIdentifier>
     <CFBundleVersion>1.0.0</CFBundleVersion>
     <CFBundlePackageType>AAPL</CFBundlePackageType>

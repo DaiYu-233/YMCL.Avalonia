@@ -60,10 +60,10 @@ jobs:
           sudo su
           dotnet restore -r osx-x64
           dotnet msbuild -t:BundleApp -p:RuntimeIdentifier=osx-x64 -property:Configuration=Release -p:SelfContained=true
-          cp ./Icon-Border.icns "./bin/Release/net8.0/osx-x64/publish/YuMinecraftLauncher.app/Contents/Resources/Icon-Border.icns"
+          cp ./Icon-Border.icns "./bin/Release/net8.0/osx-x64/publish/YMCL.app/Contents/Resources/Icon-Border.icns"
           cd ./bin/Release/net8.0/
           cd ./osx-x64/publish/
-          zip -9 -r ../../YMCL.Desktop.osx.mac.x64.app.zip "./YuMinecraftLauncher.app"
+          zip -9 -r ../../YMCL.Desktop.osx.mac.x64.app.zip "./YMCL.app"
       - name: Build-WinExe
         run: |
           cd ./YMCL.Main/YMCL.Desktop
@@ -142,7 +142,7 @@ jobs:
         uses: L-Super/create-dmg-actions@v1.0.3
         with:
           dmg_name: "YMCL.Desktop.osx.mac.x64"
-          src_dir: "./app.x64/YuMinecraftLauncher.app"
+          src_dir: "./app.x64/YMCL.app"
       - name: UploadArtifacts
         uses: actions/upload-artifact@v4
         with:

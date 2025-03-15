@@ -1,5 +1,5 @@
 <p align="center">
-<img height="400" width="400" src="https://ymcl.daiyu.fun/YMCL-Icon.svg" alt="pic"/>
+<img height="400" width="400" src="https://raw.githubusercontent.com/DaiYu-233/YMCL.Avalonia/refs/heads/main/Assets/Icon.Border.png" alt="pic"/>
 </p>
 
 <div align="center">
@@ -9,7 +9,7 @@
 免费、跨平台、完全开源的 Minecraft 启动器
 
 ![Latest Release](https://img.shields.io/github/v/release/DaiYu-233/YMCL.Avalonia?logo=github&style=for-the-badge&color=007ec6&label=%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC)
-![Downloads](https://img.shields.io/github/downloads/DaiYu-233/YMCL.Avalonia/total?logo=github&label=%E4%B8%8B%E8%BD%BD%E9%87%8F&style=for-the-badge&color=44cc11)
+![Downloads](https://img.shields.io/github/downloads/DaiYu-233/YMCL.Avalonia/total?logo=github&label=%E4%B8%8B%E8%BD%BD%E9%87%8F&style=for-the-badge&color=44cc12)
 ![Star](https://img.shields.io/github/stars/DaiYu-233/YMCL.Avalonia?logo=github&label=Star&style=for-the-badge)
 ![License](https://img.shields.io/badge/GPL%203.0%20License%20-%20?logo=github&label=%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE&style=for-the-badge&color=ff7a35)
 
@@ -29,7 +29,7 @@ Ymcl 使用 **GPL - 3** 开放源代码，此协议要求在修改和分发软�
 |-------|:--------|:------|:-------|
 | x64   | ✅️      | ✅️    | ✅      |
 | x86   | ✅️      | ❌     | ❌      |
-| ARM64 | ❔       | ❔     | ❔      |
+| ARM64 | ❔       | ❔     | ❌      |
 | ARM32 | ❌       | ❔     | ❌      |
 
 - ✅: 支持的平台

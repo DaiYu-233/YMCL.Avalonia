@@ -147,7 +147,7 @@ public sealed class FavouriteMinecraftEntry : INotifyPropertyChanged
 
         var setting = MinecraftSetting.GetGameSetting(entry);
         MinecraftSetting.HandleGameSetting(setting);
-        if (setting.Java.JavaStringVersion == "Auto")
+        if (setting.Java.JavaVersion == "Auto")
         {
             setting.Java =
                 YMCL.Public.Module.Value.Calculator.GetCurrentJava(Const.Data.JavaRuntimes.ToList(), entry);
@@ -155,11 +155,11 @@ public sealed class FavouriteMinecraftEntry : INotifyPropertyChanged
 
         if (setting.Java.JavaPath == "Error")
         {
-            Notice($"{MainLang.CannotFandRightJava}\n{setting.Java.JavaStringVersion}", NotificationType.Error);
+            Notice($"{MainLang.CannotFandRightJava}\n{setting.Java.JavaVersion}", NotificationType.Error);
             return;
         }
         
-        if (setting.Java == null)
+        if (setting.Java.JavaPath == null)
         {
             Notice(MainLang.JavaRuntimeError, NotificationType.Error);
             return;

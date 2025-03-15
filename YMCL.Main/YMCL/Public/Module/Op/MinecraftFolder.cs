@@ -41,6 +41,11 @@ public class MinecraftFolder
                 TextWrapping = TextWrapping.Wrap,
                 MaxLength = 60, Text = name
             };
+            var textbox1 = new TextBox
+            {
+                Text = path,
+                TextWrapping = TextWrapping.Wrap
+            };
             var dialog = new ContentDialog
             {
                 Title = MainLang.AddFolder,
@@ -50,12 +55,7 @@ public class MinecraftFolder
                     Children =
                     {
                         textbox,
-                        new TextBox
-                        {
-                            Text = path,
-                            IsReadOnly = true,
-                            TextWrapping = TextWrapping.Wrap
-                        }
+                        textbox1
                     }
                 },
                 PrimaryButtonText = MainLang.Ok,
@@ -70,7 +70,7 @@ public class MinecraftFolder
             var result = await dialog.ShowAsync();
             if (result != ContentDialogResult.Primary) return;
             var entry = new Classes.Data.MinecraftFolder
-                { Name = textbox.Text, Path = path };
+                { Name = textbox.Text, Path = textbox1.Text };
             Data.MinecraftFolders.Add(entry);
             Data.SettingEntry.MinecraftFolder = entry;
         }

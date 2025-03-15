@@ -20,53 +20,28 @@ namespace YMCL.Public.Module.App.Init.SubModule;
 
 public class InitData
 {
-    public static async Task<bool> GetSettingData()
+    public static void GetSettingData()
     {
-        try
-        {
-            Data.MinecraftFolders =
-                JsonConvert.DeserializeObject<ObservableCollection<MinecraftFolder>>(
-                    await File.ReadAllTextAsync(ConfigPath.MinecraftFolderDataPath));
-            Data.JavaRuntimes =
-                JsonConvert.DeserializeObject<ObservableCollection<JavaEntry>>(
-                    await File.ReadAllTextAsync(ConfigPath.JavaDataPath));
-            Data.FavouriteResources =
-                JsonConvert.DeserializeObject<ObservableCollection<FavouriteResourceEntry>>(
-                    await File.ReadAllTextAsync(ConfigPath.FavouriteResourceDataPath));
-            Data.FavouriteMinecraft =
-                JsonConvert.DeserializeObject<ObservableCollection<FavouriteMinecraftEntry>>(
-                    await File.ReadAllTextAsync(ConfigPath.FavouriteMinecraftDataPath));
-            Data.Accounts =
-                JsonConvert.DeserializeObject<ObservableCollection<AccountInfo>>(
-                    await File.ReadAllTextAsync(ConfigPath.AccountDataPath));
-            Data.EnablePlugins =
-                JsonConvert.DeserializeObject<ObservableCollection<string>>(
-                    await File.ReadAllTextAsync(ConfigPath.PluginDataPath));
-            Data.SettingEntry =
-                JsonConvert.DeserializeObject<SettingEntry>(await File.ReadAllTextAsync(ConfigPath.SettingDataPath));
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            try
-            {
-                var win = new CrashWindow(e.ToString());
-                win.Show();
-                var dialog = await ShowDialogAsync(MainLang.ResetData, MainLang.FixLoadDataFailTip,
-                    b_primary: MainLang.Ok, b_cancel: MainLang.Cancel, p_host: TopLevel.GetTopLevel(win));
-                if (dialog == ContentDialogResult.Primary)
-                {
-                    IO.Disk.Setter.ClearFolder(ConfigPath.UserDataRootPath);
-                    AppMethod.RestartApp();
-                }
-            }
-            catch
-            {
-            }
-
-            return false;
-        }
-
+        Data.MinecraftFolders =
+            JsonConvert.DeserializeObject<ObservableCollection<MinecraftFolder>>(
+                File.ReadAllText(ConfigPath.MinecraftFolderDataPath));
+        Data.JavaRuntimes =
+            JsonConvert.DeserializeObject<ObservableCollection<JavaEntry>>(
+                File.ReadAllText(ConfigPath.JavaDataPath));
+        Data.FavouriteResources =
+            JsonConvert.DeserializeObject<ObservableCollection<FavouriteResourceEntry>>(
+                File.ReadAllText(ConfigPath.FavouriteResourceDataPath));
+        Data.FavouriteMinecraft =
+            JsonConvert.DeserializeObject<ObservableCollection<FavouriteMinecraftEntry>>(
+                File.ReadAllText(ConfigPath.FavouriteMinecraftDataPath));
+        Data.Accounts =
+            JsonConvert.DeserializeObject<ObservableCollection<AccountInfo>>(
+                File.ReadAllText(ConfigPath.AccountDataPath));
+        Data.EnablePlugins =
+            JsonConvert.DeserializeObject<ObservableCollection<string>>(
+                File.ReadAllText(ConfigPath.PluginDataPath));
+        Data.SettingEntry =
+            JsonConvert.DeserializeObject<SettingEntry>(File.ReadAllText(ConfigPath.SettingDataPath));
         try
         {
             if (Data.SettingEntry.SelectedMinecraftId == "bedrock")
@@ -80,27 +55,26 @@ public class InitData
             else
             {
                 var parser = new MinecraftParser(Data.SettingEntry.MinecraftFolder.Path);
-                Data.UiProperty.SelectedMinecraft = new MinecraftDataEntry(parser.GetMinecraft(Data.SettingEntry.SelectedMinecraftId));
+                Data.UiProperty.SelectedMinecraft =
+                    new MinecraftDataEntry(parser.GetMinecraft(Data.SettingEntry.SelectedMinecraftId));
             }
         }
         catch
         {
         }
-
-        return true;
     }
 
     public static void InitCollection()
     {
         if (!Data.JavaRuntimes.Contains(new JavaEntry
-                { JavaPath = MainLang.LetYMCLChooseJava, JavaStringVersion = "Auto" }))
+                { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "Auto" }))
         {
             Data.JavaRuntimes.Insert(0,
-                new JavaEntry { JavaPath = MainLang.LetYMCLChooseJava, JavaStringVersion = "Auto" });
+                new JavaEntry { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "Auto" });
         }
         else
         {
-            Data.JavaRuntimes.FirstOrDefault(java => java.JavaStringVersion == "Auto").JavaPath =
+            Data.JavaRuntimes.FirstOrDefault(java => java.JavaVersion == "Auto").JavaPath =
                 MainLang.LetYMCLChooseJava;
         }
     }
@@ -111,10 +85,12 @@ public class InitData
         {
             Data.SettingEntry.MinecraftFolder = Data.MinecraftFolders[0];
         }
+
         if (!Data.Accounts.Contains(Data.SettingEntry.Account))
         {
             Data.SettingEntry.Account = Data.Accounts[0];
         }
+
         if (!Data.JavaRuntimes.Contains(Data.SettingEntry.Java))
         {
             Data.SettingEntry.Java = Data.JavaRuntimes[0];
@@ -129,7 +105,7 @@ public class InitData
         else
             UiProperty.Instance.SystemMaxMem = 65536;
     }
-    
+
     public static void InitMl()
     {
         HttpUtil.Initialize();
@@ -138,7 +114,7 @@ public class InitData
         DownloadMirrorManager.IsEnableMirror = Data.SettingEntry.DownloadSource == Enum.Setting.DownloadSource.BmclApi;
         ServicePointManager.DefaultConnectionLimit = int.MaxValue;
     }
-    
+
     public static void ClearTempFolder()
     {
         try

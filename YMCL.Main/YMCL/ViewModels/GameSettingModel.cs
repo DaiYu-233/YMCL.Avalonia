@@ -35,7 +35,7 @@ public class GameSettingModel : ReactiveObject
             ? "Vanilla"
             : string.Join(" , ", (MinecraftEntry as ModifiedMinecraftEntry)?.ModLoaders.Select(a => $"{a.Type} {a.Version}")!);
         GameSetting = YMCL.Public.Module.Mc.MinecraftSetting.GetGameSetting(entry);
-        JavaRuntimes.Add(new JavaEntry { JavaStringVersion = "Global", JavaPath = MainLang.UseGlobalSetting });
+        JavaRuntimes.Add(new JavaEntry { JavaVersion = "Global", JavaPath = MainLang.UseGlobalSetting });
         foreach (var javaRuntime in Data.JavaRuntimes)
         {
             JavaRuntimes.Add(javaRuntime);

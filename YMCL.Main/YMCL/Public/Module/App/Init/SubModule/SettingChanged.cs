@@ -12,7 +12,7 @@ public class SettingChanged
         {
             if (e.PropertyName == nameof(SettingEntry.Language))
             {
-                Data.JavaRuntimes.FirstOrDefault(java => java.JavaStringVersion == "Auto").JavaPath =
+                Data.JavaRuntimes.FirstOrDefault(java => java.JavaVersion == "Auto").JavaPath =
                     MainLang.LetYMCLChooseJava;
             }
             

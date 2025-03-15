@@ -63,7 +63,7 @@ public class AggregateSearchUi
         {
             Data.AllAggregateSearchEntries.Add(new AggregateSearchEntry
             {
-                Tag = "change-selection", Text = $"Java - {java.JavaStringVersion}", Type = MainLang.LocalResource,
+                Tag = "change-selection", Text = $"Java - {java.JavaVersion}", Type = MainLang.LocalResource,
                 Summary = java.JavaPath, Order = 50
             });
         }

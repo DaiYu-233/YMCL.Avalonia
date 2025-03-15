@@ -20,6 +20,7 @@ using YMCL.Public.Classes.Operate;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
+using YMCL.Public.Module.Value;
 using LogWindow = YMCL.Views.LogWindow;
 using Setting = YMCL.Public.Enum.Setting;
 using String = YMCL.Public.Const.String;
@@ -57,7 +58,23 @@ public class JavaClient
             Notice(MainLang.GameMainFileDeletion, NotificationType.Error);
             return false;
         }
+
+        string host = null;
+        int port = -1;
         
+        if (!string.IsNullOrWhiteSpace(p_fullUrl))
+        {
+            try
+            {
+                (host, port) = Converter.UrlToHostAndPort(p_fullUrl);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Notice(MainLang.ServerUrlError, NotificationType.Error);
+                return false;
+            }
+        }
 
         if (Data.SettingEntry.Account == null)
         {
@@ -147,9 +164,13 @@ public class JavaClient
             LauncherName = "YMCL",
         };
 
-        if (!string.IsNullOrWhiteSpace(p_fullUrl))
+        if (!string.IsNullOrWhiteSpace(host) && port > 0)
         {
-            config.Server = p_fullUrl;
+            config.ServerInfo = new ServerInfo()
+            {
+                Address = host,
+                Port = port
+            };
         }
 
         task.AdvanceSubTask();

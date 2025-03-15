@@ -34,7 +34,7 @@ public class Calculator
         var list = new List<MinecraftLaunch.Base.Models.Game.JavaEntry>();
         javaEntries.ForEach(x =>
         {
-            if (x.JavaStringVersion != "Auto")
+            if (x.JavaVersion != "Auto")
             {
                 list.Add(Classes.Data.JavaEntry.YmclToMl(x));
             }
@@ -49,7 +49,7 @@ public class Calculator
             return new JavaEntry()
             {
                 JavaPath = "Error",
-                JavaStringVersion = e.Message,
+                JavaVersion = e.Message,
             };
         }
     }

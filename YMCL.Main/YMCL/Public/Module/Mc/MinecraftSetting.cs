@@ -70,7 +70,7 @@ public partial class MinecraftSetting
             entry.MaxMem = entry.MaxMem;
         }
 
-        if (entry.Java.JavaStringVersion == "Global")
+        if (entry.Java.JavaVersion is null or "Global")
         {
             entry.Java = Data.SettingEntry.Java;
         }

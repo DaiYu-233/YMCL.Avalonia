@@ -89,7 +89,7 @@
                                     TextWrapping="Wrap">
                                     <Run Text="[" />
                                     <Run Text="{Binding JavaType}" />
-                                    <Run Text="{Binding JavaStringVersion}" />
+                                    <Run Text="{Binding JavaVersion}" />
                                     <Run Text="]" />
                                     <Run Text="{Binding JavaPath}" />
                                 </TextBlock>

@@ -13,7 +13,7 @@ public sealed class GameSettingEntry : ReactiveObject
     public Enum.Setting.VersionSettingEnableIndependencyCore EnableIndependencyCore { get; set; } =
         Enum.Setting.VersionSettingEnableIndependencyCore.Global;
 
-    [Reactive] [JsonProperty] public JavaEntry Java { get; set; } = new() { JavaStringVersion = "Global" };
+    [Reactive] [JsonProperty] public JavaEntry Java { get; set; } = new() { JavaVersion = "Global" };
     [Reactive] [JsonProperty] public double MaxMem { get; set; } = -2;
     [Reactive] [JsonProperty] public string AutoJoinServerIp { get; set; } = string.Empty;
     [Reactive] [JsonProperty] public Enum.Setting.MaxMemWay MaxMemWay { get; set; } = Enum.Setting.MaxMemWay.Global;

@@ -61,7 +61,6 @@
     <PackageReference Include="Irihi.Ursa" />
     <PackageReference Include="Irihi.Ursa.Themes.Semi" />
     <PackageReference Include="MinecraftLaunch" />
-    <PackageReference Include="MinecraftLaunch.Base" />
     <PackageReference Include="MinecraftLaunch.Skin" />
     <PackageReference Include="Modrinth.Net" />
     <PackageReference Include="NAudio" />

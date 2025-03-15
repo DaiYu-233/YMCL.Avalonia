@@ -76,7 +76,7 @@ public class SettingEntry : ReactiveObject
 
     [Reactive]
     [JsonProperty]
-    public JavaEntry Java { get; set; } = new() { JavaPath = MainLang.LetYMCLChooseJava, JavaStringVersion = "Auto" };
+    public JavaEntry Java { get; set; } = new() { JavaPath = MainLang.LetYMCLChooseJava, JavaVersion = "Auto" };
 
     [Reactive]
     [JsonProperty]

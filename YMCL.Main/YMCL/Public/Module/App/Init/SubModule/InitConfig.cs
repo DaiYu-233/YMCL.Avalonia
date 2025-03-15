@@ -34,7 +34,7 @@ public static class InitConfig
                 JsonConvert.SerializeObject(new SettingEntry(), Formatting.Indented));
         if (!File.Exists(ConfigPath.FavouriteResourceDataPath))
             File.WriteAllText(ConfigPath.FavouriteResourceDataPath,
-                JsonConvert.SerializeObject(new List<FavouriteResource>(), Formatting.Indented));
+                JsonConvert.SerializeObject(new List<FavouriteResourceEntry>(), Formatting.Indented));
         if (!File.Exists(ConfigPath.MinecraftFolderDataPath))
         {
             var path = Path.Combine(ConfigPath.UserDataRootPath, ".minecraft");
@@ -53,6 +53,9 @@ public static class InitConfig
         if (!File.Exists(ConfigPath.JavaDataPath))
             File.WriteAllText(ConfigPath.JavaDataPath,
                 JsonConvert.SerializeObject(new List<JavaEntry>(), Formatting.Indented));
+        if (!File.Exists(ConfigPath.FavouriteMinecraftDataPath))
+            File.WriteAllText(ConfigPath.FavouriteMinecraftDataPath,
+                JsonConvert.SerializeObject(new List<FavouriteMinecraftEntry>(), Formatting.Indented));
         if (!File.Exists(ConfigPath.PluginDataPath))
             File.WriteAllText(ConfigPath.PluginDataPath,
                 JsonConvert.SerializeObject(new List<string>(), Formatting.Indented));

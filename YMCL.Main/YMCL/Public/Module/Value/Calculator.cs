@@ -39,6 +39,18 @@ public class Calculator
                 list.Add(Classes.Data.JavaEntry.YmclToMl(x));
             }
         });
-        return Classes.Data.JavaEntry.MlToYmcl(game.GetAppropriateJava(list));
+        try
+        {
+            return JavaEntry.MlToYmcl(game.GetAppropriateJava(list));
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return new JavaEntry()
+            {
+                JavaPath = "Error",
+                JavaStringVersion = e.Message,
+            };
+        }
     }
 }

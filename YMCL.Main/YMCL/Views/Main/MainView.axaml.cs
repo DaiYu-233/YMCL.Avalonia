@@ -43,28 +43,6 @@ public partial class MainView : UserControl
         {
             Data.UiProperty.TaskEntryHeaderWidth = e.NewSize.Width - 230;
         };
-        AddHandler(DragDrop.DropEvent, DropHandler);
-    }
-
-    private async void DropHandler(object? sender, DragEventArgs e)
-    {
-        if(e is null) return;
-        if (e.Data.Contains(DataFormats.Files))
-        {
-            foreach (var item in e.Data.GetFiles())
-            {
-                await Public.Module.Ui.Special.DropHandler.HandleFiles(item.Path.LocalPath);
-            }
-
-            if (Data.UiProperty.IsAllImport)
-                Notice(MainLang.ImportFinish, NotificationType.Success);
-            Data.UiProperty.IsAllImport = false;
-        }
-        if (e.Data.Contains(DataFormats.Text))
-        {
-            var text = e.Data.GetText(); 
-            Public.Module.Ui.Special.DropHandler.HandleText(text!);
-        }
     }
 
     private void Button_OnClick(object? sender, RoutedEventArgs e)

@@ -18,6 +18,7 @@ public class ConfigPath
     public static string TempFolderPath { get; protected set; }
     public static string UpdateFolderPath { get; protected set; }
     public static string LauncherClPath  { get; protected set; }
+    public static string FavouriteMinecraftDataPath  { get; protected set; }
 
     public static void InitPath()
     {
@@ -36,5 +37,6 @@ public class ConfigPath
         LauncherClPath = Path.Combine(UserDataRootPath, "LauncherCl.bat");
         UpdateFolderPath = Path.Combine(UserDataRootPath, "Update");
         FavouriteResourceDataPath = Path.Combine(UserDataRootPath, "YMCL.FavouriteResource.DaiYu");
+        FavouriteMinecraftDataPath = Path.Combine(UserDataRootPath, "YMCL.FavouriteMinecraft.DaiYu");
     }
 }

@@ -41,8 +41,12 @@ public class Converter
         }
     }
     
-    public static Bitmap Base64ToBitmap(string base64)
+    public static Bitmap? Base64ToBitmap(string base64)
     {
+        if (string.IsNullOrWhiteSpace(base64))
+        {
+            return null;
+        }
         var imageBytes = Convert.FromBase64String(base64);
         using var ms = new MemoryStream(imageBytes);
         var bitmap = new Bitmap(ms);
@@ -64,5 +68,15 @@ public class Converter
         var minuteStr = minute < 10 ? $"0{minute}" : $"{minute}";
 
         return $"{minuteStr}:{secondStr}";
+    }
+
+    public static string BitmapToBase64(Bitmap bitmap)
+    {
+        if (bitmap == null)
+            return string.Empty;
+        using var ms = new MemoryStream();
+        bitmap.Save(ms);
+        var imageBytes = ms.ToArray();
+        return Convert.ToBase64String(imageBytes);
     }
 }

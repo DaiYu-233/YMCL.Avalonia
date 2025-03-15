@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
@@ -43,19 +44,20 @@ public partial class Launch : UserControl
             if (!GameSettingFrame.IsVisible && !GameListFrame.IsVisible) return;
             LaunchConsoleRoot.IsVisible = false;
             LaunchConsoleRoot.Opacity = 0;
-            CustomPageRoot.IsVisible = false;
-            CustomPageRoot.Opacity = 0;
             await System.Threading.Tasks.Task.Delay(210);
             LaunchConsoleRoot.IsVisible = true;
-            CustomPageRoot.IsVisible = true;
         };
+        Data.FavouriteMinecraft.CollectionChanged += (_, _) =>
+        {
+            FastLaunchBorder.IsVisible = Data.FavouriteMinecraft.Count > 0;
+        };
+        FastLaunchBorder.IsVisible = Data.FavouriteMinecraft.Count > 0;
     }
 
     public async System.Threading.Tasks.Task OpenGameList()
     {
         GameListFrame.IsVisible = true;
         LaunchConsoleRoot.Opacity = 0;
-        CustomPageRoot.Opacity = 0;
         GameListFrame.Margin = new Thickness(10);
         GameListFrame.Opacity = (double)Application.Current.Resources["MainOpacity"]!;
         await System.Threading.Tasks.Task.Delay(210);
@@ -69,7 +71,6 @@ public partial class Launch : UserControl
         if (showControl)
         {
             LaunchConsoleRoot.Opacity = (double)Application.Current.Resources["MainOpacity"]!;
-            CustomPageRoot.Opacity = (double)Application.Current.Resources["MainOpacity"]!;
         }
         GameListFrame.IsVisible = false;
     }
@@ -78,12 +79,10 @@ public partial class Launch : UserControl
     {
         GameSettingFrame.Content = new LaunchPages.GameSetting(entry);
         GameSettingFrame.IsVisible = true;
-        CustomPageRoot.Opacity = 0;
         LaunchConsoleRoot.Opacity = 0;
         GameSettingFrame.Margin = new Thickness(10);
         GameSettingFrame.Opacity = (double)Application.Current.Resources["MainOpacity"]!;
         await System.Threading.Tasks.Task.Delay(210);
-        CustomPageRoot.IsVisible = false;
         LaunchConsoleRoot.IsVisible = false;
     }
 
@@ -93,10 +92,8 @@ public partial class Launch : UserControl
         GameSettingFrame.Opacity = 0;
         await System.Threading.Tasks.Task.Delay(210);
         LaunchConsoleRoot.Opacity = (double)Application.Current.Resources["MainOpacity"]!;
-        CustomPageRoot.Opacity = (double)Application.Current.Resources["MainOpacity"]!;
         GameSettingFrame.IsVisible = false;
         LaunchConsoleRoot.IsVisible = true;
-        CustomPageRoot.IsVisible = true;
     }
 
     private async void SaveSkin(object? sender, RoutedEventArgs e)

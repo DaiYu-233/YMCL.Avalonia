@@ -108,12 +108,12 @@
                                         <Run Text="{Binding ReleaseType}" />
                                         <Run Text="," />
                                         <Run Text="{Binding DownloadCount, Mode=OneWay, Converter={StaticResource CountToUnitConverter}}" />
-                                        <Run Text="{x:Static properties:MainLang.Download}" />
+                                        <Run Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Download}" />
                                         <Run Text="," />
                                         <Run Text="{Binding FileDate.DateTime}" />
-                                        <Run Text="{x:Static properties:MainLang.Update}" />
+                                        <Run Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Update}" />
                                         <Run Text="{Binding IsServerPack, Mode=OneWay, Converter={StaticResource BoolToStringConverter}, ConverterParameter=','}" />
-                                        <Run Text="{Binding IsServerPack, Mode=OneWay, Converter={StaticResource BoolToStringConverter}, ConverterParameter={x:Static properties:MainLang.ServerPack}}" />
+                                        <Run Text="{Binding IsServerPack, Mode=OneWay, Converter={StaticResource BoolToStringConverter}, ConverterParameter={Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.ServerPack}}" />
                                     </TextBlock>
                                 </StackPanel>
                             </DataTemplate>

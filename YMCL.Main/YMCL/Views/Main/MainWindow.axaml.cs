@@ -1,3 +1,4 @@
+using Avalonia.Controls.Notifications;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
@@ -9,6 +10,7 @@ using Ursa.Controls;
 using Ursa.Controls.Options;
 using YMCL.Public.Controls.Drawers;
 using YMCL.Public.Enum;
+using YMCL.Public.Langs;
 using YMCL.Views.Main.Pages;
 
 namespace YMCL.Views.Main;
@@ -92,5 +94,27 @@ public partial class MainWindow : UrsaWindow
 
             _lastShiftPressTime = DateTime.Now;
         };
+        AddHandler(DragDrop.DropEvent, DropHandler);
+    }
+
+    private static async void DropHandler(object? sender, DragEventArgs e)
+    {
+        if (e is null) return;
+        if (e.Data.Contains(DataFormats.Files))
+        {
+            foreach (var item in e.Data.GetFiles())
+            {
+                await Public.Module.Ui.Special.DropHandler.HandleFiles(item.Path.LocalPath);
+            }
+
+            if (Data.UiProperty.IsAllImport)
+                Notice(MainLang.ImportFinish, NotificationType.Success);
+            Data.UiProperty.IsAllImport = false;
+        }
+        else if (e.Data.Contains(DataFormats.Text))
+        {
+            var text = e.Data.GetText();
+            Public.Module.Ui.Special.DropHandler.HandleText(text!);
+        }
     }
 }

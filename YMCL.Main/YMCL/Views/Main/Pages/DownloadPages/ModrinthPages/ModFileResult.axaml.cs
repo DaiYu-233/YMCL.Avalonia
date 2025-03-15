@@ -103,7 +103,7 @@ public partial class ModFileResult : UserControl, INotifyPropertyChanged
         (List<ModrinthVersionEntry.Root>? data, bool success)? p_versions = null)
     {
         FileInfo.DataContext = entry;
-        var favourite = new FavouriteResource()
+        var favourite = new FavouriteResourceEntry()
         {
             Id = entry.ProjectId,
             Source = ResourceSource.Modrinth,

@@ -55,13 +55,13 @@
                         Name="SearchType"
                         SelectedIndex="0"
                         Width="210">
-                        <ComboBoxItem Content="{x:Static properties:MainLang.AllType}" FontFamily="{DynamicResource Font}" />
-                        <ComboBoxItem Content="{x:Static properties:MainLang.Mod}" FontFamily="{DynamicResource Font}" />
-                        <ComboBoxItem Content="{x:Static properties:MainLang.MaterialPack}" FontFamily="{DynamicResource Font}" />
-                        <ComboBoxItem Content="{x:Static properties:MainLang.Map}" FontFamily="{DynamicResource Font}" />
-                        <ComboBoxItem Content="{x:Static properties:MainLang.ShaderPack}" FontFamily="{DynamicResource Font}" />
-                        <ComboBoxItem Content="{x:Static properties:MainLang.DataPack}" FontFamily="{DynamicResource Font}" />
-                        <ComboBoxItem Content="{x:Static properties:MainLang.ModPack}" FontFamily="{DynamicResource Font}" />
+                        <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.AllType}" FontFamily="{DynamicResource Font}" />
+                        <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Mod}" FontFamily="{DynamicResource Font}" />
+                        <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.MaterialPack}" FontFamily="{DynamicResource Font}" />
+                        <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Map}" FontFamily="{DynamicResource Font}" />
+                        <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.ShaderPack}" FontFamily="{DynamicResource Font}" />
+                        <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.DataPack}" FontFamily="{DynamicResource Font}" />
+                        <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.ModPack}" FontFamily="{DynamicResource Font}" />
                     </ComboBox>
                     <ComboBox
                         DockPanel.Dock="Right"
@@ -71,7 +71,7 @@
                         VerticalAlignment="Center"
                         Width="160"
                         x:Name="SearchLoaderType">
-                        <ComboBoxItem Content="{x:Static properties:MainLang.AnyModLoader}" FontFamily="{DynamicResource Font}" />
+                        <ComboBoxItem Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.AnyModLoader}" FontFamily="{DynamicResource Font}" />
                         <ComboBoxItem Content="Forge" FontFamily="{DynamicResource Font}" />
                         <ComboBoxItem Content="Cauldron" FontFamily="{DynamicResource Font}" />
                         <ComboBoxItem Content="LiteLoader" FontFamily="{DynamicResource Font}" />

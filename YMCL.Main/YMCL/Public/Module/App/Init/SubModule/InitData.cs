@@ -30,8 +30,11 @@ public class InitData
                 JsonConvert.DeserializeObject<ObservableCollection<JavaEntry>>(
                     await File.ReadAllTextAsync(ConfigPath.JavaDataPath));
             Data.FavouriteResources =
-                JsonConvert.DeserializeObject<ObservableCollection<FavouriteResource>>(
+                JsonConvert.DeserializeObject<ObservableCollection<FavouriteResourceEntry>>(
                     await File.ReadAllTextAsync(ConfigPath.FavouriteResourceDataPath));
+            Data.FavouriteMinecraft =
+                JsonConvert.DeserializeObject<ObservableCollection<FavouriteMinecraftEntry>>(
+                    await File.ReadAllTextAsync(ConfigPath.FavouriteMinecraftDataPath));
             Data.Accounts =
                 JsonConvert.DeserializeObject<ObservableCollection<AccountInfo>>(
                     await File.ReadAllTextAsync(ConfigPath.AccountDataPath));

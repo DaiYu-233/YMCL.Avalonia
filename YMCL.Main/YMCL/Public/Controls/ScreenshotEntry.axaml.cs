@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media.Imaging;
@@ -36,6 +37,17 @@ public partial class ScreenshotEntry : UserControl
     {
         var launcher = TopLevel.GetTopLevel(this).Launcher;
         launcher.LaunchFileInfoAsync(new FileInfo(_path));
+    }
+    
+    private void Copy(object? sender, RoutedEventArgs e)
+    {
+        var clipboard = TopLevel.GetTopLevel(this).Clipboard;
+        var obj = new DataObject();
+        using var ms = new MemoryStream();
+        new Bitmap(_path).Save(ms);
+        obj.Set("image/png", ms);
+        // obj.Set(DataFormats.Files, _path);
+        clipboard.SetDataObjectAsync(obj);
     }
 
     private async void DelFile(object? sender, RoutedEventArgs e)

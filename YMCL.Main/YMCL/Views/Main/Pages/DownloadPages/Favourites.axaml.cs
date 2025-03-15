@@ -14,7 +14,7 @@ public partial class Favourites : UserControl
         InitializeComponent();
         ListView.SelectionChanged += (_, _) =>
         {
-            if (ListView.SelectedItem is not FavouriteResource item) return;
+            if (ListView.SelectedItem is not FavouriteResourceEntry item) return;
             if (item is { Source: ResourceSource.CurseForge })
             {
                 YMCL.App.UiRoot.ViewModel.Download.Nav.SelectedItem = YMCL.App.UiRoot.ViewModel.Download.NavCf;

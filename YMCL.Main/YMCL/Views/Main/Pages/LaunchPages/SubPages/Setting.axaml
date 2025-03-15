@@ -18,12 +18,11 @@
         <converter:EnumIndexToBoolConverter x:Key="EnumIndexToBoolConverter" />
     </UserControl.Resources>
     <ScrollViewer>
-        <StackPanel>
+        <StackPanel Spacing="10">
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="{DynamicResource MainCornerRadius}"
-                Height="45"
-                Margin="0,0,0,10">
+                Height="45">
                 <DockPanel>
                     <Label
                         Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.EnableIndependencyCore}"
@@ -49,8 +48,7 @@
             <Border
                 Background="{DynamicResource 1x}"
                 CornerRadius="{DynamicResource MainCornerRadius}"
-                Height="45"
-                Margin="0,0,0,10">
+                Height="45">
                 <DockPanel>
                     <Label
                         Content="Java"
@@ -83,10 +81,7 @@
                     </ComboBox>
                 </DockPanel>
             </Border>
-            <Border
-                Background="{DynamicResource 1x}"
-                CornerRadius="{DynamicResource MainCornerRadius}"
-                Margin="0,0,0,10">
+            <Border Background="{DynamicResource 1x}" CornerRadius="{DynamicResource MainCornerRadius}">
                 <DockPanel LastChildFill="False">
                     <DockPanel DockPanel.Dock="Top" Margin="0,6.5,6.5,6.5">
                         <Label
@@ -154,6 +149,26 @@
                         VerticalAlignment="Center"
                         Watermark="example.com:25565"
                         x:Name="AutoJoinServerTextBox" />
+                </DockPanel>
+            </Border>
+            <Border
+                Background="{DynamicResource 1x}"
+                CornerRadius="{DynamicResource MainCornerRadius}"
+                Height="45">
+                <DockPanel>
+                    <Label
+                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.FastLaunch}"
+                        FontFamily="{DynamicResource Font}"
+                        FontSize="15"
+                        Foreground="{DynamicResource TextColor}"
+                        HorizontalAlignment="Left"
+                        Margin="18,0,0,0"
+                        VerticalAlignment="Center" />
+                    <Button
+                        Content="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Add}"
+                        DockPanel.Dock="Right"
+                        HorizontalAlignment="Right"
+                        Name="FastLaunchButton" />
                 </DockPanel>
             </Border>
         </StackPanel>

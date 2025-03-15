@@ -1430,4 +1430,25 @@ MacOs 不支持自动更新
     <value>自定义</value>
     <comment>#TODO#_</comment>
   </data>
+  <data name="FastLaunch" xml:space="preserve">
+    <value>快捷启动</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>图标</value>
+  </data>
+  <data name="SetIcon" xml:space="preserve">
+    <value>设置图标</value>
+  </data>
+  <data name="SetServer" xml:space="preserve">
+    <value>设置服务器</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="JavaRuntimeError" xml:space="preserve">
+    <value>Java运行时错误</value>
+  </data>
 </root>

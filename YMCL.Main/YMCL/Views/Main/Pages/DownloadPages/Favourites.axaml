@@ -23,7 +23,7 @@
             Margin="10"
             x:Name="ListView">
             <ListBox.ItemTemplate>
-                <DataTemplate DataType="data:FavouriteResource">
+                <DataTemplate DataType="data:FavouriteResourceEntry">
                     <DockPanel Margin="0,5,0,5">
                         <Border
                             ClipToBounds="True"

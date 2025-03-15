@@ -110,10 +110,10 @@
                                         <Run Text="{Binding DisplaySize}" />
                                         <Run Text="," />
                                         <Run Text="{Binding DisplayDownloads}" />
-                                        <Run Text="{x:Static properties:MainLang.Download}" />
+                                        <Run Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Download}" />
                                         <Run Text="," />
                                         <Run Text="{Binding UpdateTime}" />
-                                        <Run Text="{x:Static properties:MainLang.Update}" />
+                                        <Run Text="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.Update}" />
 
                                     </TextBlock>
                                 </StackPanel>

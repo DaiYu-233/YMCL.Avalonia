@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using YMCL.Public.Classes.Data;
 
 namespace YMCL.Public.Classes.Setting;
 
@@ -18,4 +19,5 @@ public sealed class GameSettingEntry : ReactiveObject
     [Reactive] [JsonProperty] public Enum.Setting.MaxMemWay MaxMemWay { get; set; } = Enum.Setting.MaxMemWay.Global;
     [Reactive] [JsonIgnore] public bool IsEnableIndependencyCore { get; set; }
     [Reactive] [JsonIgnore] public MinecraftEntry MinecraftEntry { get; set; }
+
 }

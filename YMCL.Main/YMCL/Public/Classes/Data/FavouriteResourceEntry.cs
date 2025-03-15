@@ -5,7 +5,7 @@ using YMCL.Public.Langs;
 
 namespace YMCL.Public.Classes.Data;
 
-public record FavouriteResource
+public record FavouriteResourceEntry
 {
     public ResourceSource Source { get; set; } = ResourceSource.Unknown;
     public ResourceType Type { get; set; } = ResourceType.Unknown;
@@ -27,7 +27,7 @@ public record FavouriteResource
     public string Icon { get; set; }
     public string Title { get; set; }
 
-    public virtual bool Equals(FavouriteResource? other)
+    public virtual bool Equals(FavouriteResourceEntry? other)
     {
         return Source == other?.Source && Id == other?.Id;
     }

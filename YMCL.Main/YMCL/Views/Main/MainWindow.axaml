@@ -1,4 +1,5 @@
 <u:UrsaWindow
+    DragDrop.AllowDrop="True"
     FontFamily="{DynamicResource Font}"
     FontWeight="{DynamicResource FontWeight}"
     Icon="../../../Public/Assets/Icon.Shadow.ico"

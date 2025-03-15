@@ -25,7 +25,7 @@ public partial class Personalize : UserControl
         EditCustomBackGroundImgBtn.Click += async (_, _) =>
         {
             var list = await TopLevel.GetTopLevel(this).StorageProvider.OpenFilePickerAsync(
-                new FilePickerOpenOptions { AllowMultiple = false });
+                new FilePickerOpenOptions { AllowMultiple = false, FileTypeFilter = [FilePickerFileTypes.ImageAll]});
             if (list.Count == 0) return;
             Data.SettingEntry.WindowBackGroundImgData =
                 Public.Module.Value.Converter.BytesToBase64(File.ReadAllBytes(list[0].Path.LocalPath));

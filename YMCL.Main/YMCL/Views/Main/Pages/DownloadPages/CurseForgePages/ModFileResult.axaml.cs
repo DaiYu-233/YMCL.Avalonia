@@ -113,7 +113,7 @@ public partial class ModFileResult : UserControl, INotifyPropertyChanged
 
     private void Init(CurseForgeResourceEntry entry)
     {
-        var favourite = new FavouriteResource()
+        var favourite = new FavouriteResourceEntry()
         {
             Id = entry.Id.ToString(),
             Source = ResourceSource.CurseForge,

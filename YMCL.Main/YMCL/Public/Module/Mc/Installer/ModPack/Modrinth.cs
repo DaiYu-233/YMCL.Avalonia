@@ -190,7 +190,19 @@ public class Modrinth
         }
 
 
-        if (cancellationToken.IsCancellationRequested) return false;
+        if (cancellationToken.IsCancellationRequested)
+        {
+            try
+            {
+                if (Directory.Exists(Path.Combine(mcPath, "versions", id)))
+                    Directory.Delete(Path.Combine(mcPath, "versions", id), true);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return false;
+        }
         if (isSuccess)
         {
             Notice($"{MainLang.InstallFinish}: {id}", NotificationType.Success);
@@ -209,8 +221,20 @@ public class Modrinth
             }
             task.FinishWithError();
         }
-
-        if (!isSuccess) return isSuccess;
+        
+        if (!isSuccess)
+        {
+            try
+            {
+                if (Directory.Exists(Path.Combine(mcPath, "versions", id)))
+                    Directory.Delete(Path.Combine(mcPath, "versions", id), true);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return isSuccess;
+        }
         foreach (var modelSubTask in task.Model.SubTasks)
         {
             modelSubTask.Finish();

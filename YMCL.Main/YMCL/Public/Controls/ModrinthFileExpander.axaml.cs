@@ -17,6 +17,7 @@ namespace YMCL.Public.Controls;
 public partial class ModrinthFileExpander : UserControl
 {
     private readonly string _version;
+    private readonly ResourceType _type;
     public ObservableCollection<ModrinthResourceEntry> DependencyItems { get; } = [];
     public ObservableCollection<string> DependencyIds { get; } = [];
     public ObservableCollection<ModrinthFile> Files { get; } = [];
@@ -25,9 +26,14 @@ public partial class ModrinthFileExpander : UserControl
     public ModrinthFileExpander(string name, string version, ResourceType type, ModrinthResourceEntry entry)
     {
         _version = version;
+        _type = type;
         InitializeComponent();
         Expander.Header = name;
         DataContext = this;
+        if (type == ResourceType.ModPack)
+        {
+            Dependencies.IsVisible = false;
+        }
         ListView.SelectionChanged += async (_, _) =>
         {
             if (ListView.SelectedItem == null) return;
@@ -58,6 +64,10 @@ public partial class ModrinthFileExpander : UserControl
 
     private async Task Init(ModrinthResourceEntry entry)
     {
+        if (_type == ResourceType.ModPack)
+        {
+            return;
+        }
         Dependencies.IsVisible = true;
         var client = new ModrinthClient();
         var deps = await client.Project.GetDependenciesAsync(entry.ProjectId);

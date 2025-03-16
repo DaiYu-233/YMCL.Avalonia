@@ -1,4 +1,5 @@
 ﻿using FluentAvalonia.UI.Controls;
+using Modrinth.Models;
 using YMCL.Public.Module.Ui;
 
 namespace YMCL.Views.Main.Pages;
@@ -11,6 +12,8 @@ public partial class Setting : UserControl
     public readonly SettingPages.Download _download = new();
     public readonly SettingPages.Plugin _plugin = new();
     public readonly SettingPages.Launcher _launcher = new();
+    public NavigationView NavigationView => Nav;
+    public ContentControl Frame => FrameView;
 
     public Setting()
     {
@@ -24,7 +27,7 @@ public partial class Setting : UserControl
         Nav.SelectionChanged += (o, e) =>
         {
             var tag = ((e.SelectedItem as NavigationViewItem).Tag as string)!;
-            var page = tag switch
+            UserControl page = tag switch
             {
                 "launch" => _launch,
                 "account" => _account,
@@ -32,8 +35,9 @@ public partial class Setting : UserControl
                 "download" => _download,
                 "launcher" => _launcher,
                 "plugin" => _plugin,
-                _ => FrameView.Content as UserControl
+                _ => null
             };
+            if (page == null) return;
             FrameView.Content = page;
             _ = Animator.PageLoading.LevelTwoPage(page);
         };

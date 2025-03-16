@@ -11,15 +11,12 @@ using Avalonia.Platform.Storage;
 using FluentAvalonia.UI.Controls;
 using MinecraftLaunch.Components.Parser;
 using Newtonsoft.Json;
-using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Mc;
 using YMCL.Public.Module.Mc.Launcher;
 using YMCL.Public.Module.Value;
-using String = System.String;
 
-namespace YMCL.Public.Classes.Data;
+namespace YMCL.Public.Classes.Operate;
 
 public sealed class FavouriteMinecraftEntry : INotifyPropertyChanged
 {

@@ -11,7 +11,6 @@
     xmlns:curseForgePages="clr-namespace:YMCL.Views.Main.Pages.DownloadPages.CurseForgePages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:modFileUiEntry="clr-namespace:YMCL.Public.Classes.Data.ResourceFetcher.CurseForgeModFileUiEntry"
     xmlns:modrinthPages="clr-namespace:YMCL.Views.Main.Pages.DownloadPages.ModrinthPages"
     xmlns:properties="clr-namespace:YMCL.Public.Langs"
     xmlns:resourceFetcher="clr-namespace:YMCL.Public.Classes.Data.ResourceFetcher"
@@ -122,7 +121,7 @@
                                 VerticalAlignment="Stretch" />
                         </u:SelectionList.Indicator>
                         <u:SelectionList.ItemTemplate>
-                            <DataTemplate DataType="modFileUiEntry:ShortVersionEntry">
+                            <DataTemplate DataType="resourceFetcher:ShortVersionEntry">
                                 <StackPanel Margin="3,0,1,0" Orientation="Horizontal">
                                     <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding DisplayVersion}" />
                                 </StackPanel>
@@ -140,7 +139,7 @@
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
-                            <DataTemplate DataType="modFileUiEntry:VersionEntry">
+                            <DataTemplate DataType="resourceFetcher:VersionEntry">
                                 <ContentControl Content="{Binding Expander}" Margin="0,0,0,10" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

@@ -7,6 +7,8 @@ public partial class More : UserControl
 {
     public readonly MorePages.TreasureBox _treasureBox = new();
     public readonly MorePages.GameUpdateLog _gameUpdateLog = new();
+    public NavigationView NavigationView => Nav;
+    public ContentControl Frame => FrameView;
 
     public More()
     {
@@ -20,12 +22,13 @@ public partial class More : UserControl
         Nav.SelectionChanged += (o, e) =>
         {
             var tag = ((e.SelectedItem as NavigationViewItem).Tag as string)!;
-            var page = tag switch
+            UserControl page = tag switch
             {
                 "treasureBox" => _treasureBox,
                 "gameUpdateLog" => _gameUpdateLog,
-                _ => FrameView.Content as UserControl
+                _ => null
             };
+            if (page == null) return;
             FrameView.Content = page;
             _ = Animator.PageLoading.LevelTwoPage(page);
         };

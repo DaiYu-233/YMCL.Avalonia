@@ -1,0 +1,17 @@
+﻿<UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="YMCL.Plugin.Dependence.ExamplePage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer>
+        <StackPanel Margin="10" Spacing="5">
+            <TextBlock Text="This a example page" />
+            <TextBox Name="TextBox" />
+            <Button Click="Button_OnClick" Content="Click me" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Ursa.Controls;
 using YMCL.Public.Classes.Data;
+using YMCL.Public.Classes.Operate;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.Value;
 using YMCL.ViewModels;

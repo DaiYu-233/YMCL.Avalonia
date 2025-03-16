@@ -21,7 +21,8 @@ namespace YMCL.Views.Main;
 public partial class MainView : UserControl
 {
     public readonly MainViewModel ViewModel = new();
-
+    public NavigationView NavigationView => Nav;
+    public ContentControl Frame => FrameView;
     public MainView()
     {
         InitializeComponent();
@@ -45,16 +46,5 @@ public partial class MainView : UserControl
 
     private void Button_OnClick(object? sender, RoutedEventArgs e)
     {
-        NoticeWindow("Yu Minecraft Launcher",
-            "MessageMessageMessageMessageMes" +
-            "sageMessageMessageMessageMessageMessa" +
-            "geMessageMessageMessageMessageMessageMessa" +
-            "geMessageMessageMessageMessageMessageMess" +
-            "ageMessageMessageMessageMessageMessageMe" +
-            "ssageMessageMessageMessageMessageMessageMe" +
-            "ssageMessageMessageMessageMessageMessageMessag" +
-            "eMessageMessageMessageMessageMess" +
-            "ageMessageMessageMessageMessageMessageMessageMes" +
-            "sageMessageMessageMessageMessageMessageMessageMessage");
     }
 }

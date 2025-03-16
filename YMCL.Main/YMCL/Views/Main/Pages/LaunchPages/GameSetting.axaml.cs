@@ -50,7 +50,7 @@ public partial class GameSetting : UserControl
                 return;
             }
 
-            var page = tag switch
+            UserControl page = tag switch
             {
                 "overView" => _overView,
                 "setting" => _setting,
@@ -59,8 +59,9 @@ public partial class GameSetting : UserControl
                 "resourcePacks" => _resourcePack,
                 "screenshots" => _screenshot,
                 "shaderPack" => _shaderPack,
-                _ => FrameView.Content as UserControl
+                _ => null
             };
+            if (page == null) return;
             FrameView.Content = page;
             _ = Animator.PageLoading.LevelTwoPage(page);
         };

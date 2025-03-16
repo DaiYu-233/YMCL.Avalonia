@@ -11,6 +11,9 @@ public partial class Download : UserControl
     public readonly DownloadPages.CurseForge _curseForge = new();
     public readonly DownloadPages.Modrinth _modrinth = new();
     public readonly DownloadPages.Favourites _favourites = new();
+    public NavigationView NavigationView => Nav;
+    public ContentControl Frame => FrameView;
+
     public Download()
     {
         InitializeComponent();FrameView.Content = _autoInstall;
@@ -22,14 +25,15 @@ public partial class Download : UserControl
         Nav.SelectionChanged += (o, e) =>
         {
             var tag = ((e.SelectedItem as NavigationViewItem).Tag as string)!;
-            var page = tag switch
+            UserControl page = tag switch
             {
                 "autoInstall" => _autoInstall,
                 "curseForge" => _curseForge,
                 "modrinth" => _modrinth,
                 "favourite" => _favourites,
-                _ => FrameView.Content as UserControl
+                _ => null
             };
+            if (page == null) return;
             FrameView.Content = page;
             _ = Animator.PageLoading.LevelTwoPage(page);
         };

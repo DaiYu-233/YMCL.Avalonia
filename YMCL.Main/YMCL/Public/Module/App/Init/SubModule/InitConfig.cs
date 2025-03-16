@@ -5,6 +5,7 @@ using MinecraftLaunch.Components.Authenticator;
 using Newtonsoft.Json;
 using YMCL.Public.Classes.Data;
 using YMCL.Public.Classes.Netease;
+using YMCL.Public.Classes.Operate;
 using YMCL.Public.Classes.Setting;
 
 namespace YMCL.Public.Module.App.Init.SubModule;

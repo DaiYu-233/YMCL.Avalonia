@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using CurseForge.APIClient.Models.Files;
-using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 
-namespace YMCL.Public.Classes.Data.ResourceFetcher.CurseForgeModFileUiEntry;
+namespace YMCL.Public.Classes.Data.ResourceFetcher;
 
 public record ShortVersionEntry
 {

@@ -9,7 +9,6 @@ using Modrinth;
 using Modrinth.Models.Enums.Project;
 using YMCL.Public.Classes.Data;
 using YMCL.Public.Classes.Data.ResourceFetcher;
-using YMCL.Public.Classes.Data.ResourceFetcher.CurseForgeModFileUiEntry;
 using YMCL.Public.Classes.Json;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;

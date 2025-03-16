@@ -14,7 +14,6 @@ using DynamicData;
 using FluentAvalonia.Core;
 using YMCL.Public.Classes.Data;
 using YMCL.Public.Classes.Data.ResourceFetcher;
-using YMCL.Public.Classes.Data.ResourceFetcher.CurseForgeModFileUiEntry;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;

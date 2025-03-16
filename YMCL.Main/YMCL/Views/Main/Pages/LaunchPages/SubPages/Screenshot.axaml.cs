@@ -19,6 +19,7 @@ using YMCL.Public.Classes.Data;
 using YMCL.Public.Controls;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
+using YMCL.Public.Module.IO.Disk;
 
 namespace YMCL.Views.Main.Pages.LaunchPages.SubPages;
 
@@ -59,8 +60,7 @@ public partial class Screenshot : UserControl, INotifyPropertyChanged
         {
             var path = Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_entry, GameSpecialFolder.ScreenshotsFolder);
             YMCL.Public.Module.IO.Disk.Setter.TryCreateFolder(path);
-            var launcher = TopLevel.GetTopLevel(this).Launcher;
-            launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(path));
+            _ = Opener.OpenFolder(path);
         };
         CloseButton.Click += (_, _) =>
         {

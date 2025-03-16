@@ -7,6 +7,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
+using YMCL.Public.Module.IO.Disk;
 using YMCL.Views.Main.Pages.LaunchPages.SubPages;
 
 namespace YMCL.Public.Classes.Data;
@@ -63,7 +64,6 @@ public class LocalSaveEntry : ReactiveObject
     {
         var path = SaveInfo.FolderPath;
         YMCL.Public.Module.IO.Disk.Setter.TryCreateFolder(path);
-        var launcher = TopLevel.GetTopLevel(YMCL.App.UiRoot).Launcher;
-        launcher.LaunchDirectoryInfoAsync(new DirectoryInfo($"\"{path}\""));
+        _ = Opener.OpenFolder(path);
     }
 }

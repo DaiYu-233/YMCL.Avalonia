@@ -18,6 +18,7 @@ using YMCL.Public.Classes;
 using YMCL.Public.Classes.Data;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
+using YMCL.Public.Module.IO.Disk;
 
 namespace YMCL.Views.Main.Pages.LaunchPages.SubPages;
 
@@ -56,8 +57,7 @@ public partial class ShaderPack : UserControl, INotifyPropertyChanged
         {
             var path = Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_entry, GameSpecialFolder.ShaderPacksFolder);
             YMCL.Public.Module.IO.Disk.Setter.TryCreateFolder(path);
-            var launcher = TopLevel.GetTopLevel(this).Launcher;
-            launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(path));
+            _ = Opener.OpenFolder(path);
         };
         DeleteSelectModBtn.Click += async (_, _) =>
         {

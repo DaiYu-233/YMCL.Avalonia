@@ -16,6 +16,7 @@ using YMCL.Public.Classes;
 using YMCL.Public.Classes.Json;
 using YMCL.Public.Langs;
 using YMCL.Public.Module;
+using YMCL.Public.Module.IO.Disk;
 
 namespace YMCL.Views.Main.Pages;
 
@@ -40,8 +41,7 @@ public partial class About : UserControl
         };
         OpenUserDataFolderBtn.Click += async (_, _) =>
         {
-            var launcher = TopLevel.GetTopLevel(this).Launcher;
-            await launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(ConfigPath.UserDataRootPath));
+            _ = Opener.OpenFolder(ConfigPath.UserDataRootPath);
         };
         CheckUpdateBtn.Click += async (_, _) =>
         {

@@ -5,6 +5,7 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform.Storage;
 using YMCL.Public.Enum;
+using YMCL.Public.Module.IO.Disk;
 using YMCL.ViewModels;
 
 namespace YMCL.Views.Main.Pages.LaunchPages.SubPages;
@@ -39,8 +40,7 @@ public partial class OverView : UserControl
                 true)
         };
         YMCL.Public.Module.IO.Disk.Setter.TryCreateFolder(path);
-        var launcher = TopLevel.GetTopLevel(this).Launcher;
-        launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(path));
+        _ = Opener.OpenFolder(path);
     }
 
     public OverView()

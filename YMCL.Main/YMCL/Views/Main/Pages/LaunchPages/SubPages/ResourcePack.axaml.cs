@@ -20,6 +20,7 @@ using YMCL.Public.Classes;
 using YMCL.Public.Classes.Data;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
+using YMCL.Public.Module.IO.Disk;
 using JsonElement = System.Text.Json.JsonElement;
 using SearchOption = Microsoft.VisualBasic.FileIO.SearchOption;
 
@@ -59,8 +60,7 @@ public partial class ResourcePack : UserControl, INotifyPropertyChanged
         {
             var path = Public.Module.Mc.Utils.GetMinecraftSpecialFolder(_entry, GameSpecialFolder.ResourcePacksFolder);
             YMCL.Public.Module.IO.Disk.Setter.TryCreateFolder(path);
-            var launcher = TopLevel.GetTopLevel(this).Launcher;
-            launcher.LaunchDirectoryInfoAsync(new DirectoryInfo(path));
+            _ = Opener.OpenFolder(path);
         };
         DeleteSelectModBtn.Click += async (_, _) =>
         {

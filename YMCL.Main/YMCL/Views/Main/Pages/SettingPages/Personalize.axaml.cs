@@ -25,7 +25,7 @@ public partial class Personalize : UserControl
         EditCustomBackGroundImgBtn.Click += async (_, _) =>
         {
             var list = await TopLevel.GetTopLevel(this).StorageProvider.OpenFilePickerAsync(
-                new FilePickerOpenOptions { AllowMultiple = false, FileTypeFilter = [FilePickerFileTypes.ImageAll]});
+                new FilePickerOpenOptions { AllowMultiple = false, FileTypeFilter = [FilePickerFileTypes.ImageAll] });
             if (list.Count == 0) return;
             Data.SettingEntry.WindowBackGroundImgData =
                 Public.Module.Value.Converter.BytesToBase64(File.ReadAllBytes(list[0].Path.LocalPath));
@@ -71,9 +71,6 @@ public partial class Personalize : UserControl
                 SelectedItems.Count == 0 ? "" : string.Join(",", SelectedItems.Distinct());
             debouncer.Trigger();
         };
-        RefreshCustomHomePageBtn.Click += (_, _) =>
-        {
-            _ = InitUi.SetCustomHomePage();
-        };
+        RefreshCustomHomePageBtn.Click += (_, _) => { _ = InitUi.SetCustomHomePage(); };
     }
 }

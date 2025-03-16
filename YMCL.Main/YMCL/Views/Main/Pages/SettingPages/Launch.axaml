@@ -245,7 +245,6 @@
                         OnContent="{Binding Source={x:Static properties:LangHelper.Current}, Path=Resources.On}" />
                 </DockPanel>
             </Border>
-
         </StackPanel>
     </ScrollViewer>
 </UserControl>

@@ -113,6 +113,10 @@ public class Dispatcher
             if (!closeTaskWhenFinish || cancellationToken.IsCancellationRequested) return true;
             task.FinishWithSuccess();
             Notice($"{MainLang.InstallFinish} - {customId ?? versionManifestEntry.Id}", NotificationType.Success);
+            if (Data.SettingEntry.EnableIndependencyWindowNotification)
+            {
+                NoticeWindow(MainLang.InstallFinish, customId ?? versionManifestEntry.Id);
+            }
 
             return true;
         }
@@ -197,6 +201,10 @@ public class Dispatcher
         if (!closeTaskWhenFinish || cancellationToken.IsCancellationRequested) return true;
         task.FinishWithSuccess();
         Notice($"{MainLang.InstallFinish} - {customId ?? versionManifestEntry.Id}", NotificationType.Success);
+        if (Data.SettingEntry.EnableIndependencyWindowNotification)
+        {
+            NoticeWindow(MainLang.InstallFinish, customId ?? versionManifestEntry.Id);
+        }
 
         return true;
     }

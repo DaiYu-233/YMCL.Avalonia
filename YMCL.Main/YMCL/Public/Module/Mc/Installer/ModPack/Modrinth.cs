@@ -160,6 +160,10 @@ public class Modrinth
                         else
                         {
                             ShowShortException($"{MainLang.InstallFail}: {id}", e);
+                            if (Data.SettingEntry.EnableIndependencyWindowNotification)
+                            {
+                                NoticeWindow(MainLang.InstallFail, id);
+                            }
                         }
                     });
                     isSuccess = false;
@@ -190,11 +194,19 @@ public class Modrinth
         if (isSuccess)
         {
             Notice($"{MainLang.InstallFinish}: {id}", NotificationType.Success);
+            if (Data.SettingEntry.EnableIndependencyWindowNotification)
+            {
+                NoticeWindow(MainLang.InstallFinish, id);
+            }
             task.FinishWithSuccess();
         }
         else
         {
             Notice($"{MainLang.InstallFail}: {id}", NotificationType.Success);
+            if (Data.SettingEntry.EnableIndependencyWindowNotification)
+            {
+                NoticeWindow(MainLang.InstallFail, id);
+            }
             task.FinishWithError();
         }
 

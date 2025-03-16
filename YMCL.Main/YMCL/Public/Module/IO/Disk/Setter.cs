@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using Avalonia.Layout;
 using Avalonia.Media;
+using FluentAvalonia.Core;
 using FluentAvalonia.UI.Controls;
 using YMCL.Public.Langs;
 
@@ -17,8 +18,9 @@ public class Setter
         directoryInfo.Create();
     }
 
-    public static void ClearFolder(string folderPath)
+    public static void ClearFolder(string folderPath, string[]? ignore = null)
     {
+        if (ignore != null && ignore.Contains(folderPath)) return;
         if (!Directory.Exists(folderPath))
         {
             Console.WriteLine(MainLang.FolderNotExist + folderPath);
@@ -32,7 +34,7 @@ public class Setter
 
         foreach (var dir in Directory.GetDirectories(folderPath))
         {
-            ClearFolder(dir);
+            ClearFolder(dir, ignore);
             Directory.Delete(dir);
         }
     }
@@ -42,7 +44,8 @@ public class Setter
         var path = target;
         if (File.Exists(target))
         {
-            var cr = await ShowDialogAsync($"{MainLang.Conflict}: {Path.GetFileName(source)}", MainLang.FileConflictTip, b_primary: MainLang.Cover,
+            var cr = await ShowDialogAsync($"{MainLang.Conflict}: {Path.GetFileName(source)}", MainLang.FileConflictTip,
+                b_primary: MainLang.Cover,
                 b_secondary: MainLang.Rename, b_cancel: MainLang.Cancel);
             if (cr == ContentDialogResult.Primary)
             {

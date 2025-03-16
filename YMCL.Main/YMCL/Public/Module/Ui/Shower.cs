@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using Avalonia.Layout;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 using FluentAvalonia.UI.Controls;
 using Ursa.Controls;
@@ -10,6 +11,7 @@ using YMCL.Public.Classes;
 using YMCL.Public.Classes.Data;
 using YMCL.Public.Classes.Setting;
 using YMCL.Public.Langs;
+using YMCL.Views;
 using Notification = Ursa.Controls.Notification;
 using Setting = YMCL.Public.Enum.Setting;
 
@@ -38,6 +40,13 @@ public class Shower
         }
     }
 
+    public static void NoticeWindow(string title, string msg)
+    {
+        var win = new NotificationWindow(title, msg, Public.Module.IO.Disk.Getter.LoadBitmapFromAppFile(
+            "YMCL.Public.Assets.Icon.Shadow.Embedded.ico"));
+        win.Show();
+    }
+
     public static void NotificationBubble(string msg, NotificationType type)
     {
         var toast = new Toast(msg, type);
@@ -53,6 +62,10 @@ public class Shower
     public static void ShowShortException(string msg, Exception ex)
     {
         Notice($"{msg}\n{ex.Message}", NotificationType.Error);
+        if (Data.SettingEntry.EnableIndependencyWindowNotification)
+        {
+            NoticeWindow(msg, ex.Message);
+        }
     }
 
     public static async Task<ContentDialogResult> ShowDialogAsync(string title = "Title", string msg = null,
@@ -89,6 +102,7 @@ public class Shower
         {
             content = null;
         }
+
         var dialog = new ContentDialog
         {
             PrimaryButtonText = b_primary,
@@ -144,7 +158,8 @@ public class Shower
         }
     }
 
-    public static async Task<int> ShowDialogWithComboBox(string[] items, string title = "Title", string? msg = null, TopLevel? p_host = null)
+    public static async Task<int> ShowDialogWithComboBox(string[] items, string title = "Title", string? msg = null,
+        TopLevel? p_host = null)
     {
         var comboBox = new ComboBox
         {
@@ -182,7 +197,8 @@ public class Shower
             DefaultButton = ContentDialogButton.Primary,
             Content = content
         };
-        var dialogResult = await dialog.ShowAsync(TopLevel.GetTopLevel(p_host ?? TopLevel.GetTopLevel(YMCL.App.UiRoot)));
+        var dialogResult =
+            await dialog.ShowAsync(TopLevel.GetTopLevel(p_host ?? TopLevel.GetTopLevel(YMCL.App.UiRoot)));
         if (dialogResult == ContentDialogResult.Primary)
             return comboBox.SelectedIndex;
         return -1;

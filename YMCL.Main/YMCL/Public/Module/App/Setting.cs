@@ -46,6 +46,7 @@ public class Setting
                     SpecialControlEnableTranslucent = s.SpecialControlEnableTranslucent,
                     CornerRadius = s.CornerRadius,
                     CustomHomePageUrl = s.CustomHomePageUrl,
+                    EnableIndependencyWindowNotification = s.EnableIndependencyWindowNotification,
                     DeskLyricColor = s.DeskLyricColor,
                     NoticeWay = s.NoticeWay,
                     AccentColor = s.AccentColor,

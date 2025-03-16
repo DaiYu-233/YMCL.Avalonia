@@ -215,6 +215,10 @@ public class Account
                         {
                             window.Activate();
                         }
+                        if (Data.SettingEntry.EnableIndependencyWindowNotification)
+                        {
+                            NoticeWindow(MainLang.LoginSucess, userProfile.Name);
+                        }
                     }
                     catch (Exception ex)
                     {

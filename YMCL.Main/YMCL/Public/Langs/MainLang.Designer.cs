@@ -1241,6 +1241,15 @@ namespace YMCL.Public.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 启用独立窗口通知.
+        /// </summary>
+        public static string EnableIndependencyWindowNotification {
+            get {
+                return ResourceManager.GetString("EnableIndependencyWindowNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 启用选中项.
         /// </summary>
         public static string EnableSelect {
@@ -2195,6 +2204,15 @@ namespace YMCL.Public.Langs {
         public static string LoginFail {
             get {
                 return ResourceManager.GetString("LoginFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 登录成功.
+        /// </summary>
+        public static string LoginSucess {
+            get {
+                return ResourceManager.GetString("LoginSucess", resourceCulture);
             }
         }
         

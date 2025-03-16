@@ -37,6 +37,7 @@
     <None Remove="Public\Assets\Icon.png" />
     <AvaloniaResource Include="Public\Assets\Icon.png" />
     <None Remove="Public\Assets\Icon.Shadow.ico" />
+    <EmbeddedResource Include="Public\Assets\Icon.Shadow.Embedded.ico" />
     <AvaloniaResource Include="Public\Assets\Icon.Shadow.ico" />
   </ItemGroup>
 

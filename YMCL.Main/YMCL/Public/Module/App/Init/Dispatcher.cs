@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using FluentAvalonia.UI.Controls;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.App.Init.SubModule;
@@ -15,10 +16,10 @@ public static class InitDispatcher
         InitData.InitSystemMaxMem();
         InitConfig.Dispatch();
         InitData.ClearTempFolder();
-        if(!await ActionInvokeWithCrash(InitData.GetSettingData)) return false;
+        if (!await ActionInvokeWithCrash(InitData.GetSettingData)) return false;
         InitLang.Dispatch();
-        if(!await ActionInvokeWithCrash(InitData.InitCollection)) return false;
-        if(!await ActionInvokeWithCrash(InitData.VerifyData)) return false;
+        if (!await ActionInvokeWithCrash(InitData.InitCollection)) return false;
+        if (!await ActionInvokeWithCrash(InitData.VerifyData)) return false;
         InitData.InitMl();
         TranslateToken.RefreshToken();
         Public.Module.Ui.Special.AggregateSearchUi.UpdateAllAggregateSearchEntries();
@@ -53,7 +54,8 @@ public static class InitDispatcher
                     b_primary: MainLang.Ok, b_cancel: MainLang.Cancel, p_host: TopLevel.GetTopLevel(win));
                 if (dialog == ContentDialogResult.Primary)
                 {
-                    IO.Disk.Setter.ClearFolder(ConfigPath.UserDataRootPath);
+                    IO.Disk.Setter.ClearFolder(ConfigPath.UserDataRootPath,
+                        [Path.Combine(ConfigPath.UserDataRootPath, ".minecraft")]);
                     AppMethod.RestartApp();
                 }
             }
@@ -63,6 +65,7 @@ public static class InitDispatcher
 
             return false;
         }
+
         return true;
     }
 }

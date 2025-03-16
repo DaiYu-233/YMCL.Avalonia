@@ -50,6 +50,7 @@ public class SettingEntry : ReactiveObject
     [Reactive] [JsonProperty] public bool EnableIndependencyCore { get; set; } = true;
     [Reactive] [JsonProperty] public bool EnableCustomUpdateUrl { get; set; }
     [Reactive] [JsonProperty] public bool EnableAutoAllocateMem { get; set; }
+    [Reactive] [JsonProperty] public bool EnableIndependencyWindowNotification { get; set; } = true;
     [Reactive] [JsonProperty] public string? CustomUpdateUrl { get; set; } = "https://github.moeyy.xyz/{%url%}";
     [Reactive] [JsonProperty] public string? MusicApi { get; set; } = "http://music.api.daiyu.fun/";
 
@@ -125,6 +126,14 @@ public class SettingEntry : ReactiveObject
                 }
                 catch
                 {
+                }
+            }
+            
+            if (e.PropertyName == nameof(EnableIndependencyWindowNotification))
+            {
+                if (EnableIndependencyWindowNotification)
+                {
+                    NoticeWindow(MainLang.ExampleNotification, MainLang.ExampleNotification);
                 }
             }
 

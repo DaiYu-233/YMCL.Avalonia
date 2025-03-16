@@ -1479,4 +1479,10 @@ MacOs 不支持自动更新
   <data name="CurrentVersionUnsupportOperation" xml:space="preserve">
     <value>当前版本不支持此操作</value>
   </data>
+  <data name="EnableIndependencyWindowNotification" xml:space="preserve">
+    <value>启用独立窗口通知</value>
+  </data>
+  <data name="LoginSucess" xml:space="preserve">
+    <value>登录成功</value>
+  </data>
 </root>

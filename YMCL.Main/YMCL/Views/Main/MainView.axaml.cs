@@ -11,6 +11,7 @@ using YMCL.Public.Controls.Drawers;
 using YMCL.Public.Enum;
 using YMCL.Public.Langs;
 using YMCL.Public.Module.App.Init;
+using YMCL.Public.Module.Ui;
 using YMCL.Public.Module.Ui.Special;
 using YMCL.ViewModels;
 using YMCL.Views.Main.Pages;
@@ -39,14 +40,21 @@ public partial class MainView : UserControl
         {
             ViewModel.TogglePage(((e.SelectedItem as NavigationViewItem).Tag as string)!);
         };
-        SizeChanged += (_, e) =>
-        {
-            Data.UiProperty.TaskEntryHeaderWidth = e.NewSize.Width - 230;
-        };
+        SizeChanged += (_, e) => { Data.UiProperty.TaskEntryHeaderWidth = e.NewSize.Width - 230; };
     }
 
     private void Button_OnClick(object? sender, RoutedEventArgs e)
     {
-        
+        NoticeWindow("Yu Minecraft Launcher",
+            "MessageMessageMessageMessageMes" +
+            "sageMessageMessageMessageMessageMessa" +
+            "geMessageMessageMessageMessageMessageMessa" +
+            "geMessageMessageMessageMessageMessageMess" +
+            "ageMessageMessageMessageMessageMessageMe" +
+            "ssageMessageMessageMessageMessageMessageMe" +
+            "ssageMessageMessageMessageMessageMessageMessag" +
+            "eMessageMessageMessageMessageMess" +
+            "ageMessageMessageMessageMessageMessageMessageMes" +
+            "sageMessageMessageMessageMessageMessageMessageMessage");
     }
 }

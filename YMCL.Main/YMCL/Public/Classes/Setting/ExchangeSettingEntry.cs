@@ -42,6 +42,7 @@ public record ExchangeSettingEntry
         public string? SpecialControlEnableTranslucent { get; set; }
         public int CornerRadius { get; set; }
         public string? CustomHomePageUrl { get; set; }
+        public bool? EnableIndependencyWindowNotification { get; set; }
         public Color DeskLyricColor { get; set; }
         public Enum.Setting.NoticeWay NoticeWay { get; set; }
         public Color AccentColor { get; set; }

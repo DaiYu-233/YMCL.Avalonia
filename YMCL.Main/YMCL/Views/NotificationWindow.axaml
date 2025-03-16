@@ -1,0 +1,127 @@
+<Window
+    CanResize="False"
+    ExtendClientAreaChromeHints="NoChrome"
+    ExtendClientAreaToDecorationsHint="False"
+    FontFamily="{DynamicResource Font}"
+    FontWeight="{DynamicResource FontWeight}"
+    Icon="../../../Public/Assets/Icon.Shadow.ico"
+    IsHitTestVisible="True"
+    MaxHeight="96"
+    MaxWidth="312"
+    MinHeight="96"
+    MinWidth="312"
+    Opacity="1"
+    SystemDecorations="None"
+    Title="NotificationWindow"
+    Topmost="True"
+    WindowStartupLocation="Manual"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="YMCL.Views.NotificationWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:u="https://irihi.tech/ursa"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Window.Styles>
+        <Style Selector="Window">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="#00ACFF00" Opacity="0" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Styles>
+    <Border ClipToBounds="True" CornerRadius="8">
+        <Border
+            Background="{DynamicResource 1x}"
+            BorderBrush="{DynamicResource 1x}"
+            ClipToBounds="True"
+            CornerRadius="8"
+            Opacity="0"
+            x:Name="Root">
+            <DockPanel>
+                <DockPanel
+                    Dock="Top"
+                    Margin="7,5,0,0"
+                    VerticalAlignment="Top">
+                    <Image
+                        DockPanel.Dock="Left"
+                        Height="18"
+                        Margin="0,0,5,0"
+                        Name="Icon"
+                        Source="../Public/Assets/Icon.Shadow.ico"
+                        VerticalAlignment="Top"
+                        Width="18">
+                        <Image.Transitions>
+                            <Transitions>
+                                <DoubleTransition Duration="0:0:0.4" Property="Opacity" />
+                            </Transitions>
+                        </Image.Transitions>
+                    </Image>
+                    <TextBlock DockPanel.Dock="Left" Text="Yu Minecraft Launcher" />
+                    <Button
+                        Classes="icon-button"
+                        Content="{DynamicResource Close}"
+                        HorizontalAlignment="Right"
+                        Margin="0,-5,3,0"
+                        Name="CloseButton"
+                        VerticalAlignment="Center">
+                        <Button.Transitions>
+                            <Transitions>
+                                <DoubleTransition Duration="0:0:0.4" Property="Opacity" />
+                            </Transitions>
+                        </Button.Transitions>
+                    </Button>
+                </DockPanel>
+                <DockPanel Margin="0,-7,0,0">
+                    <Image
+                        Height="56"
+                        HorizontalAlignment="Left"
+                        IsVisible="False"
+                        Margin="15,-5,0,0"
+                        Name="Image"
+                        Source="../Public/Assets/Icon.Shadow.ico"
+                        Width="56">
+                        <Image.Transitions>
+                            <Transitions>
+                                <DoubleTransition Duration="0:0:0.4" Property="Opacity" />
+                            </Transitions>
+                        </Image.Transitions>
+                    </Image>
+                    <DockPanel Margin="30,10,0,0" Name="Panel">
+                        <SelectableTextBlock
+                            DockPanel.Dock="Top"
+                            FontSize="16"
+                            Name="TitleTextBlock"
+                            Text="Title"
+                            TextWrapping="Wrap">
+                            <SelectableTextBlock.Transitions>
+                                <Transitions>
+                                    <DoubleTransition Duration="0:0:0.4" Property="Opacity" />
+                                </Transitions>
+                            </SelectableTextBlock.Transitions>
+                        </SelectableTextBlock>
+                        <ScrollViewer
+                            DockPanel.Dock="Bottom"
+                            Margin="0,-2,0,0"
+                            Name="Viewer">
+                            <SelectableTextBlock
+                                Foreground="{DynamicResource GrayColor}"
+                                Margin="2,0,0,0"
+                                Name="MessageTextBlock"
+                                Text="Message"
+                                TextWrapping="Wrap" />
+                            <ScrollViewer.Transitions>
+                                <Transitions>
+                                    <DoubleTransition Duration="0:0:0.4" Property="Opacity" />
+                                </Transitions>
+                            </ScrollViewer.Transitions>
+                        </ScrollViewer>
+                    </DockPanel>
+                </DockPanel>
+            </DockPanel>
+        </Border>
+    </Border>
+</Window>

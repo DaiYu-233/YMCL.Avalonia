@@ -5,7 +5,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Notifications;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Threading;
-using HotAvalonia;
 using YMCL.Public.Module.App.Init;
 using YMCL.Public.Module.App.Init.SubModule;
 using YMCL.ViewModels;
@@ -23,7 +22,6 @@ public class App : Application
 
     public override void Initialize()
     {
-        this.EnableHotReload();
         AvaloniaXamlLoader.Load(this);
     }
 

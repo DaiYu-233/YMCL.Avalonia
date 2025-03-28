@@ -8,13 +8,13 @@ using YMCL.Public.Module.Ui;
 using YMCL.Public.Plugin;
 using YMCL.Views.Main;
 
-namespace YMCL.Plugin.Dependence;
+namespace YMCL.Plugin.Page;
 
 public class ExamplePluginWithDependence : IPlugin
 {
-    public string Name => "Example Plugin With Dependence";
+    public string Name => "Example Plugin With Page";
     public string Author => "DaiYu";
-    public string Description => "A example plugin with dependence for YMCL.";
+    public string Description => "A example plugin with page for YMCL.";
     public string Version => "1.0.0";
     private RegisteredPage _registeredPage;
     private bool _registered;

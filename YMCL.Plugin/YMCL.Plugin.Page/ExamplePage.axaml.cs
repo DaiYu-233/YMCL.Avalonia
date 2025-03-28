@@ -3,7 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 
-namespace YMCL.Plugin.Dependence;
+namespace YMCL.Plugin.Page;
 
 public partial class ExamplePage : UserControl
 {

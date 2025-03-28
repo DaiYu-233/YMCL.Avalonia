@@ -20,7 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YMCL.Plugin.Simple", "YMCL.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YMCL.Plugin.Base", "YMCL.Plugin\YMCL.Plugin.Base\YMCL.Plugin.Base.csproj", "{7E3E3637-2ABC-4864-A059-98F1030AFDCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YMCL.Plugin.Dependence", "YMCL.Plugin\YMCL.Plugin.Dependence\YMCL.Plugin.Dependence.csproj", "{D35FC608-7FCF-4CAE-97BA-891FC4C75E37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YMCL.Plugin.Page", "YMCL.Plugin\YMCL.Plugin.Page\YMCL.Plugin.Page.csproj", "{D35FC608-7FCF-4CAE-97BA-891FC4C75E37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
